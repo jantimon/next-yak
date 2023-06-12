@@ -2,6 +2,8 @@
 
 yet another CSS-in-JS library
 
+a CSS-in-JS POC with the power of "dynamic at the speed and reliability of static" 🙃
+
 ## Motivation
 
 Most of the existing CSS-in-JS libraries are either slow or have a complex api. This project tries to find a middle ground between speed and api complexity.
