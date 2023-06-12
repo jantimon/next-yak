@@ -48,8 +48,8 @@ const App = () => (
 
 The follow issues might prevent this POC from actually working:
 
- - NextJs does not support the `!=!` import syntax as it checks `this.resourcePath`: https://github.com/vercel/next.js/blob/8366f1af31d71a3e9f69ad9d53d0264f61486e7e/packages/next/src/build/webpack/loaders/next-flight-css-loader.ts#L25
- - Typescript does not allow type inherence for nested template strings.
+ - NextJs does not support the `!=!` import syntax as it checks `this.resourcePath`: https://github.com/vercel/next.js/blob/8366f1af31d71a3e9f69ad9d53d0264f61486e7e/packages/next/src/build/webpack/loaders/next-flight-css-loader.ts#L25 - Fix: https://github.com/vercel/next.js/pull/51115
+ - Typescript does not allow type inference for nested template strings.
 
 
 ## Further ideas
@@ -63,7 +63,7 @@ import { styled, styleWhen, cssVar } from "@TBD";
 
 const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
   ${classNames(() => "tw-text-lg md:tw-text-xl tw-bg-red-500")}
-  ${styleWhen(({ isAnimated }) => isAnimated % 2 === 0, `animation: spin 1s linear infinite`)}
+  ${styleWhen(({ isAnimated }) => isAnimated, `animation: spin 1s linear infinite`)}
 `;
 
 const App = () => (
