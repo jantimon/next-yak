@@ -17,7 +17,7 @@ The goal of this project is to create a proof of concept for a CSS-in-JS library
    - no processing during hydration
    - can make use of [103 early hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103)
  - api
-   - mixing css and jsx
+   - ui colocation (mixing css and jsx)
    - familiar `styled.div` api
    - composable `styled(Component)`
    - allows conditional styles
