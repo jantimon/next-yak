@@ -50,7 +50,7 @@ const App = () => (
 
 The follow issues might prevent this POC from actually working:
 
- - NextJs does not support the `!=!` import syntax as it checks `this.resourcePath`: https://github.com/vercel/next.js/blob/8366f1af31d71a3e9f69ad9d53d0264f61486e7e/packages/next/src/build/webpack/loaders/next-flight-css-loader.ts#L25 - Fix: https://github.com/vercel/next.js/pull/51115
+ - NextJs does not support the `!=!` import syntax for RSC: https://github.com/vercel/next.js/issues/53366
  - Typescript does not allow type inference for nested template strings.
 
 
