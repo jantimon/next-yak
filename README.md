@@ -51,6 +51,8 @@ https://github.com/jantimon/yacijs/tree/poc
 
 ## Performance Gains
 
+There are multiple styled-components parts which can be skipped with static css:
+
 [![CSS Extract](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)
 
 ## Issues
