@@ -30,13 +30,13 @@ Optimizations are done by postcss. This allows to use the full power of postcss 
 ## Example
 
 ```tsx
-import { styled, styleWhen, cssVar } from "@TBD";
+import { styled, css } from "@TBD";
 
 const Title = styled.h1<{ x: number; children: React.ReactNode }>`
   display: block;
-  ${styleWhen(({ x }) => x % 2 === 0, `color: red`)}
+  ${({ x }) => x % 2 === 0 && css`color: red`}
   position: relative;
-  top: ${cssVar(({ x }) => `${x * 100}px`)};
+  top: ${({ x }) => `${x * 100}px`};
 `;
 
 const App = () => (
@@ -46,13 +46,23 @@ const App = () => (
 );
 ```
 
+See the current poc:
+https://github.com/jantimon/yacijs/tree/poc
+
+## Performance Gains
+
+[![CSS Extract](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)
+
 ## Issues
 
 The follow issues might prevent this POC from actually working:
 
- - NextJs does not support the `!=!` import syntax for RSC: https://github.com/vercel/next.js/issues/53366
+ - NextJs does not support the `!=!` import syntax for RSC: https://github.com/vercel/next.js/issues/53366 / https://github.com/vercel/next.js/pull/53796
  - Typescript does not allow type inference for nested template strings.
 
+## How it works
+
+[![Compile Flow](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)
 
 ## Further ideas
 
@@ -61,11 +71,11 @@ The follow issues might prevent this POC from actually working:
 Provide class name helpers. This would allow using atomic css libraries like [tailwind](https://tailwindcss.com/) or [tachyons](https://tachyons.io/) with a css-in-js library.
 
 ```tsx
-import { styled, styleWhen, cssVar } from "@TBD";
+import { styled, css, atoms } from "@TBD";
 
 const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
-  ${classNames(() => "tw-text-lg md:tw-text-xl tw-bg-red-500")}
-  ${styleWhen(({ isAnimated }) => isAnimated, `animation: spin 1s linear infinite`)}
+  ${atoms("tw-text-lg md:tw-text-xl tw-bg-red-500")}
+  ${({ isAnimated }) => isAnimated && css`animation: spin 1s linear infinite`)}
 `;
 
 const App = () => (
@@ -74,6 +84,9 @@ const App = () => (
   </SpinningTitle>
 );
 ```
+
+See the current atoms poc:
+https://github.com/jantimon/yacijs/tree/atoms
 
 ### CSS Nesting
 
