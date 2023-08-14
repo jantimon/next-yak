@@ -47,7 +47,9 @@ const App = () => (
 ```
 
 See the current poc:
-https://github.com/jantimon/yacijs/tree/poc
+
+Code: https://github.com/jantimon/yacijs/tree/poc  
+Preview: https://yacijs.vercel.app/
 
 ## Performance Gains
 
@@ -59,7 +61,6 @@ There are multiple styled-components parts which can be skipped with static css:
 
 The follow issues might prevent this POC from actually working:
 
- - NextJs does not support the `!=!` import syntax for RSC: https://github.com/vercel/next.js/issues/53366 / https://github.com/vercel/next.js/pull/53796
  - Typescript does not allow type inference for nested template strings.
 
 ## How it works
