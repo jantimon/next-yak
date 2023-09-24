@@ -1,0 +1,1 @@
+{"version":3,"file":"atoms.js","sourceRoot":"","sources":["../runtime/atoms.tsx"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;GAaG;AACH,MAAM,CAAC,MAAM,KAAK,GAAG,CAAC,GAAG,KAAe,EAAE,EAAE;IACxC,MAAM,SAAS,GAAG,KAAK,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC;IAClC,OAAO,GAAG,EAAE,CAAC,CAAC,EAAE,SAAS,EAAE,CAAC,CAAC;AACjC,CAAC,CAAC"}
