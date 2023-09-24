@@ -82,13 +82,13 @@ const App = () => (
 
 ## Performance Gains
 
-[![CSS Extract](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)
+[![CSS Extract](https://raw.githubusercontent.com/jantimon/next-yak/main/css-extract.gif)](https://raw.githubusercontent.com/jantimon/next-yak/main/css-extract.gif)
 
 ## How it works
 
 next-yak converts css-in-js into css modules. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
 
-[![Compile Flow](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)
+[![Compile Flow](https://raw.githubusercontent.com/jantimon/next-yak/main/compile-flow.webp)](https://raw.githubusercontent.com/jantimon/next-yak/main/compile-flow.webp)
 
 
 ### Atomic CSS
