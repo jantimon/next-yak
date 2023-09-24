@@ -15,7 +15,7 @@
   "scripts": {
     "prepublishOnly": "npm run build && npm run test",
     "build": "tsc -p tsconfig.json --outDir dist/",
-    "test": "vitest",
+    "test": "vitest run",
     "test:watch": "vitest --watch -u"
   },
   "dependencies": {
