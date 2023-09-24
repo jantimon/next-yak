@@ -56,9 +56,9 @@ Therefore you have to create a `postcss.config.js` file in your project root:
 // postcss.config.js
 module.exports = {
   plugins: {
-    'postcss-nested':{},
-	}
-}
+    'postcss-nested': {},
+  }
+};
 ```
 
 ## Example
