@@ -29,18 +29,24 @@ const addYak = (yakOptions, nextConfig) => {
   return nextConfig;
 };
 
+
+// Wrapper to allow sync, async, and function configuration of Next.js
+const withYak = (yakOptions, nextConfig) => {
+  if (nextConfig === undefined) {
+    return withYak({}, yakOptions);
+  }
+  if (typeof nextConfig === "function") {
+    return (...args) => {
+      const config = nextConfig(...args);
+      if (config.then) {
+        return config.then((config) => addYak(yakOptions, config));
+      }
+      return addYak(yakOptions, config);
+    };
+  }
+  return addYak(yakOptions, nextConfig);
+};
+
 module.exports = {
-  // Wrapper to allow sync, async, and function configuration of Next.js
-  withYak: (yakOptions, nextConfig) => {
-    if (typeof nextConfig === "function") {
-      return (...args) => {
-        const config = nextConfig(...args);
-        if (config.then) {
-          return config.then((config) => addYak(yakOptions, config));
-        }
-        return addYak(yakOptions, config);
-      };
-    }
-    return addYak(yakOptions, nextConfig);
-  },
+  withYak
 };

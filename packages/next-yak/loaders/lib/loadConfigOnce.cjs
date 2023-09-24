@@ -1,7 +1,7 @@
 /// @ts-check
 
 /**
- * @type {Promise<Record<string, Record<string, string>>>}
+ * @type {Promise<{ replaces?: Record<string, Record<string, string>> }>}
  */
 let cache;
 module.exports = function loadConfigOnce(loader) {

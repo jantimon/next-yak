@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "react": "^18.2.0",
+    "@babel/traverse": "^7.16.12",
     "@types/node": "20.4.5",
     "@types/react": "18.2.16",
     "@types/react-dom": "18.2.7",

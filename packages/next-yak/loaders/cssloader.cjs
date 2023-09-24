@@ -31,6 +31,10 @@ module.exports = async function cssLoader(source) {
     ],
   });
 
+  if (ast === null) {
+    return "";
+  }
+
   const { types: t } = babel;
 
   /** @type {{css?: string, styled?: string}} */
