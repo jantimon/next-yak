@@ -1,18 +1,20 @@
 {
-  "name": "next-jak-root",
+  "name": "next-yak-root",
   "private": true,
   "version": "0.0.0",
-  "description": "Mono repository root for next-jak a performant css-in-js solution",
+  "description": "Mono repository root for next-yak a performant css-in-js solution",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
+    "test": "pnpm --filter=next-yak run test",
+    "test:watch": "pnpm --filter=next-yak run test:watch"
   },
   "engines": {
     "node": ">=16.14.0",
-    "pnpm": "8.7.1"
+    "pnpm": "8"
   },
-  "packageManager": "pnpm@8.7.1",
+  "packageManager": "pnpm@8.6.1+",
   "author": "Jan Nicklas",
   "license": "MIT"
 }

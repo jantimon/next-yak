@@ -1,10 +1,10 @@
-# next-jak
+# next-yak
 
 yet another CSS-in-JS library
 
 a CSS-in-JS with the power of "dynamic at the speed and reliability of static" 🙃
 
-the initial version of next-jak will only work for next.js
+the initial version of next-yak will only work for next.js
 
 ## Motivation
 
@@ -32,7 +32,7 @@ Optimizations are done by postcss. This allows to use the full power of postcss 
 ## Example
 
 ```tsx
-import { styled, css } from "next-jak";
+import { styled, css } from "next-yak";
 
 const Title = styled.h1<{ x: number; children: React.ReactNode }>`
   display: block;
@@ -54,17 +54,17 @@ const App = () => (
 
 ## How it works
 
-next-jak converts css-in-js into css modules. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
+next-yak converts css-in-js into css modules. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
 
 [![Compile Flow](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)
 
 
 ### Atomic CSS
 
-next-jak provide class name helpers. This allows using [tailwind](https://tailwindcss.com/) out of the box without additonal configuration.
+next-yak provide class name helpers. This allows using [tailwind](https://tailwindcss.com/) out of the box without additonal configuration.
 
 ```tsx
-import { styled, css, atoms } from "next-jak";
+import { styled, css, atoms } from "next-yak";
 
 const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
   ${atoms("tw-text-lg md:tw-text-xl tw-bg-red-500")}
@@ -77,6 +77,13 @@ const App = () => (
   </SpinningTitle>
 );
 ```
+
+## Todos:
+
+This is a proof of concept. There are a lot of things that need to be done before this can be used in production:
+
+ - [ ] improve js parsing - right now it not reusing babel..
+ - [ ] config hot module reloading
 
 ## Prior art
 
