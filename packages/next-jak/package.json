@@ -1,0 +1,10 @@
+{
+  "name": "next-jak",
+  "version": "0.0.1",
+  "description": "yet another CSS-in-JS library",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Jan Nicklas",
+  "license": "MIT"
+}

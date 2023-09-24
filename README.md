@@ -1,8 +1,10 @@
-# yacijs
+# next-jak
 
 yet another CSS-in-JS library
 
-a CSS-in-JS POC with the power of "dynamic at the speed and reliability of static" 🙃
+a CSS-in-JS with the power of "dynamic at the speed and reliability of static" 🙃
+
+the initial version of next-jak will only work for next.js
 
 ## Motivation
 
@@ -30,48 +32,39 @@ Optimizations are done by postcss. This allows to use the full power of postcss 
 ## Example
 
 ```tsx
-import { styled, css } from "@TBD";
+import { styled, css } from "next-jak";
 
 const Title = styled.h1<{ x: number; children: React.ReactNode }>`
   display: block;
-  ${({ x }) => x % 2 === 0 && css`color: red`}
+  ${({ $x }) => $x % 2 === 0 && css`color: red`}
   position: relative;
-  top: ${({ x }) => `${x * 100}px`};
+  top: ${({ $x }) => `${$x * 100}px`};
 `;
 
 const App = () => (
-  <Title x={3}>
+  <Title $x={3}>
     Hello World
   </Title>
 );
 ```
 
-See the current poc:
-https://github.com/jantimon/yacijs/tree/poc
-
 ## Performance Gains
 
 [![CSS Extract](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)](https://raw.githubusercontent.com/jantimon/yacijs/main/css-extract.gif)
 
-## Issues
-
-The follow issues might prevent this POC from actually working:
-
- - NextJs does not support the `!=!` import syntax for RSC: https://github.com/vercel/next.js/issues/53366 / https://github.com/vercel/next.js/pull/53796
- - Typescript does not allow type inference for nested template strings.
-
 ## How it works
+
+next-jak converts css-in-js into css modules. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
 
 [![Compile Flow](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)](https://raw.githubusercontent.com/jantimon/yacijs/main/compile-flow.webp)
 
-## Further ideas
 
 ### Atomic CSS
 
-Provide class name helpers. This would allow using atomic css libraries like [tailwind](https://tailwindcss.com/) or [tachyons](https://tachyons.io/) with a css-in-js library.
+next-jak provide class name helpers. This allows using [tailwind](https://tailwindcss.com/) out of the box without additonal configuration.
 
 ```tsx
-import { styled, css, atoms } from "@TBD";
+import { styled, css, atoms } from "next-jak";
 
 const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
   ${atoms("tw-text-lg md:tw-text-xl tw-bg-red-500")}
@@ -84,18 +77,6 @@ const App = () => (
   </SpinningTitle>
 );
 ```
-
-See the current atoms poc:
-https://github.com/jantimon/yacijs/tree/atoms
-
-### CSS Nesting
-
-Extracting the css from the jsx would create a lot of duplicate css. This could be solved by using css nesting. See https://developer.chrome.com/articles/css-nesting/
-
-### CSS Scope
-
-Slots could lead to css collisions. This could be solved by using css scope. 
-See https://fullystacked.net/posts/scope-in-css/
 
 ## Prior art
 
