@@ -3,7 +3,6 @@ const path = require("path");
 const babel = require("@babel/core");
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
-const loadConfigOnce = require("./lib/loadConfigOnce.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve } = require("path");
 
@@ -22,9 +21,9 @@ module.exports = async function tsloader(source) {
   // Config for replacing tokens in css template literals
   // can be based on a typescript file
   const options = this.getOptions();
-  const config = options.configPath ? await loadConfigOnce(
-    async () => await this.importModule(resolve(this.rootContext, options.configPath))
-  ) : {};
+  const config = options.configPath ? await this.importModule(resolve(this.rootContext, options.configPath), { 
+    layer: "yak-importModule",
+  }) : {};
   const replaces = config.replaces || {};
 
   /** @type {string | null} */

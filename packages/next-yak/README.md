@@ -98,15 +98,15 @@ next-yak provide class name helpers. This allows using [tailwind](https://tailwi
 ```tsx
 import { styled, css, atoms } from "next-yak";
 
-const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
-  ${atoms("tw-text-lg md:tw-text-xl tw-bg-red-500")}
-  ${({ isAnimated }) => isAnimated && css`animation: spin 1s linear infinite`)}
+const Button = styled.button<{ $primary?: boolean }>`
+ ${atoms("text-teal-600", "text-base", "rounded-md")}
+ ${props => props.$primary && atoms("shadow-md")}
 `;
 
 const App = () => (
-  <SpinningTitle isAnimated={true}>
+  <Button primary>
     Hello World
-  </SpinningTitle>
+  </Button>
 );
 ```
 
@@ -115,7 +115,8 @@ const App = () => (
 This is a proof of concept. There are a lot of things that need to be done before this can be used in production:
 
  - [ ] improve js parsing - right now it not reusing babel..
- - [ ] config hot module reloading
+ - [ ] sourcemaps
+ - [ ] replace config apporach with a solution similar to vanilla-extracts `.styles.ts` files
 
 ## Prior art
 

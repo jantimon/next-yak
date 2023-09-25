@@ -17,6 +17,11 @@ const addYak = (yakOptions, nextConfig) => {
       test: /\.tsx?$/,
       loader: require.resolve("./tsloader.cjs"),
       options: yakOptions,
+      issuerLayer: {
+        // prevent recursions when calling this.importModule
+        // in the tsloader
+        not: ["yak-importModule"],
+      },
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
