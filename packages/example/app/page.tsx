@@ -93,7 +93,7 @@ export default function Home() {
       <Button $primary>Primary Ghost</Button>
       <FancyButton $primary>Fancy Ghost</FancyButton>
       <Clock />
-      <SyledLink href="https://github.com/jantimon/yacijs/tree/poc/app">
+      <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
         view code
       </SyledLink>
     </main>
