@@ -32,11 +32,11 @@ const headline = css<{ $primary?: boolean }>`
     `}
 `;
 
-const Headline = styled.h1<{ $primary?: boolean; children: ReactNode }>`
+const Headline = styled.h1<{ $primary?: boolean }>`
   ${headline}
 `;
 
-const Button = styled.button<{ $primary?: boolean; children: ReactNode }>`
+const Button = styled.button<{ $primary?: boolean }>`
   color: #009688;
   background: #fff;
   border: 1px solid currentColor;
@@ -91,7 +91,7 @@ export default function Home() {
       <Headline>Hello world</Headline>
       <Button>Ghost</Button>
       <Button $primary>Primary Ghost</Button>
-      <FancyButton $primary>Fancy Ghost</FancyButton>
+      <FancyButton $primary  onClick={(e) => console.log("Ghost clicked", e.target)}>Fancy Ghost</FancyButton>
       <Clock />
       <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
         view code

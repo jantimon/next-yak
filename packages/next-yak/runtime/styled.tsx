@@ -2,7 +2,13 @@ import { FunctionComponent } from "react";
 import { CSSInterpolation, css } from "./cssLiteral";
 import React from "react";
 
-const StyledFactory = function (Component: string | FunctionComponent<any>) {
+type HtmlTags = keyof JSX.IntrinsicElements;
+
+function StyledFactory <THtmlTag extends HtmlTags>(Component: THtmlTag): <TProps extends Record<string, unknown>>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps>[]
+) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
+function StyledFactory (Component: string | FunctionComponent<any>) {
   return <TProps extends Record<string, unknown>>(
     styles: TemplateStringsArray,
     ...values: CSSInterpolation<TProps>[]
@@ -30,10 +36,15 @@ export const styled = new Proxy(StyledFactory, {
     if (typeof TagName !== "string") {
       throw new Error("Only string tags are supported");
     }
-    return target(TagName);
+    return target(TagName as keyof JSX.IntrinsicElements);
   },
-}) as typeof StyledFactory & {
-  [TagName in keyof JSX.IntrinsicElements]: ReturnType<typeof StyledFactory>;
+}) as (
+  <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(
+    styles: TemplateStringsArray,
+    ...values: CSSInterpolation<TProps>[]
+  ) => FunctionComponent<TBaseProps & TProps>
+) & {
+  [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
 };
 
 // Remove all entries that start with a $ sign
