@@ -1,5 +1,4 @@
 import { css, styled } from "next-yak";
-import type { ReactNode } from "react";
 import styles from "./page.module.css";
 import { queries } from "@/theme";
 import { Clock } from "./Clock";
@@ -91,7 +90,7 @@ export default function Home() {
       <Headline>Hello world</Headline>
       <Button>Ghost</Button>
       <Button $primary>Primary Ghost</Button>
-      <FancyButton $primary  onClick={(e) => console.log("Ghost clicked", e.target)}>Fancy Ghost</FancyButton>
+      <FancyButton $primary title="fancy">Fancy Ghost</FancyButton>
       <Clock />
       <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
         view code
