@@ -29,6 +29,38 @@ The goal of this project is to create a proof of concept for a CSS-in-JS library
 
 Optimizations are done by postcss. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
 
+# Installation
+
+```bash
+npm install next-yak
+```
+
+```js
+// next.config.js
+const { withYak } = require("next-yak");
+
+const nextConfig = {
+  // your next.js config
+};
+
+module.exports = withYak(nextConfig);
+```
+
+## Nesting
+
+`next-yak` supports nesting out of the box.  
+Next.js 13 supports nesting only with the `postcss-nested` plugin.  
+Therefore you have to create a `postcss.config.js` file in your project root:
+
+```js
+// postcss.config.js
+module.exports = {
+  plugins: {
+    'postcss-nested': {},
+  }
+};
+```
+
 ## Example
 
 ```tsx
@@ -66,15 +98,15 @@ next-yak provide class name helpers. This allows using [tailwind](https://tailwi
 ```tsx
 import { styled, css, atoms } from "next-yak";
 
-const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
-  ${atoms("tw-text-lg md:tw-text-xl tw-bg-red-500")}
-  ${({ isAnimated }) => isAnimated && css`animation: spin 1s linear infinite`)}
+const Button = styled.button<{ $primary?: boolean }>`
+ ${atoms("text-teal-600", "text-base", "rounded-md")}
+ ${props => props.$primary && atoms("shadow-md")}
 `;
 
 const App = () => (
-  <SpinningTitle isAnimated={true}>
+  <Button primary>
     Hello World
-  </SpinningTitle>
+  </Button>
 );
 ```
 
@@ -83,7 +115,8 @@ const App = () => (
 This is a proof of concept. There are a lot of things that need to be done before this can be used in production:
 
  - [ ] improve js parsing - right now it not reusing babel..
- - [ ] config hot module reloading
+ - [ ] sourcemaps
+ - [ ] replace config apporach with a solution similar to vanilla-extracts `.styles.ts` files
 
 ## Prior art
 
