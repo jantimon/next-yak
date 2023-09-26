@@ -12,11 +12,13 @@ import React from "react";
 
 type HtmlTags = keyof JSX.IntrinsicElements;
 
-function StyledFactory <THtmlTag extends HtmlTags>(Component: THtmlTag): <TProps extends Record<string, unknown>>(
+function StyledFactory<THtmlTag extends HtmlTags>(
+  Component: THtmlTag
+): <TProps extends Record<string, unknown>>(
   styles: TemplateStringsArray,
   ...values: CSSInterpolation<TProps>[]
 ) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
-function StyledFactory (Component: string | FunctionComponent<any>) {
+function StyledFactory(Component: string | FunctionComponent<any>) {
   return <TProps extends Record<string, unknown>>(
     styles: TemplateStringsArray,
     ...values: CSSInterpolation<TProps>[]
@@ -37,14 +39,14 @@ function StyledFactory (Component: string | FunctionComponent<any>) {
       );
     };
   };
-};
+}
 
 /**
- * The `styled` method works perfectly on all of your own or any third-party component, 
+ * The `styled` method works perfectly on all of your own or any third-party component,
  * as long as they attach the passed className prop to a DOM element.
- * 
+ *
  * @usage
- * 
+ *
  * ```tsx
  * const StyledLink = styled(Link)`
  *  color: #BF4F74;
@@ -59,12 +61,12 @@ export const styled = new Proxy(StyledFactory, {
     }
     return target(TagName as keyof JSX.IntrinsicElements);
   },
-}) as (
-  <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
-  ) => FunctionComponent<TBaseProps & TProps>
-) & {
+}) as (<TBaseProps extends {}>(
+  Component: FunctionComponent<TBaseProps>
+) => <TProps extends {}>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps>[]
+) => FunctionComponent<TBaseProps & TProps>) & {
   [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
 };
 

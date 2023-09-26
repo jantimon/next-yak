@@ -90,7 +90,9 @@ export default function Home() {
       <Headline>Hello world</Headline>
       <Button>Ghost</Button>
       <Button $primary>Primary Ghost</Button>
-      <FancyButton $primary title="fancy">Fancy Ghost</FancyButton>
+      <FancyButton $primary title="fancy">
+        Fancy Ghost
+      </FancyButton>
       <Clock />
       <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
         view code
