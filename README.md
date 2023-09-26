@@ -87,6 +87,15 @@ This is a proof of concept. There are a lot of things that need to be done befor
  - [ ] improve js parsing - right now it not reusing babel..
  - [ ] config hot module reloading
 
+<details>
+  <summary>prs</summary>
+
+  - https://github.com/vercel/next.js/pull/51115
+  - https://github.com/vercel/next.js/pull/53796
+  - https://github.com/css-modules/postcss-modules-local-by-default/pull/64
+  
+</details>
+
 ## Prior art
 
 This POC is heavily inspried by [styled-components](https://styled-components.com/), [emotion](https://emotion.sh/docs/introduction) and [linaria](https://github.com/callstack/linaria).
