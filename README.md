@@ -31,6 +31,8 @@ Optimizations are done by postcss. This allows to use the full power of postcss 
 
 ## Example
 
+Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
+
 ```tsx
 import { styled, css } from "next-yak";
 
