@@ -6,6 +6,8 @@ a CSS-in-JS with the power of "dynamic at the speed and reliability of static" ð
 
 the initial version of next-yak will only work for next.js
 
+![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/0fa7c329-2b8b-4863-a4f7-d7b5fdd21d38)
+
 ## Motivation
 
 Most of the existing CSS-in-JS libraries are either slow or have a complex api. This project tries to find a middle ground between speed and api complexity.
