@@ -9,10 +9,12 @@ function StyledFactory(Component) {
                     runtimeStyles.className }));
         };
     };
-    const attrs = (callback) => {
+    const attrs = (attrsProps) => {
         return (styles, ...values) => {
             return (_props) => {
-                const newProps = callback(_props);
+                const newProps = typeof attrsProps === "function"
+                    ? attrsProps(_props)
+                    : attrsProps;
                 const props = {
                     ...newProps,
                     children: _props.children,

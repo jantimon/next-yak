@@ -31,7 +31,9 @@ const headline = css<{ $primary?: boolean }>`
     `}
 `;
 
-const Headline = styled.h1<{ $primary?: boolean }>`
+const Headline = styled.h1.attrs({
+  $primary: true,
+})<{ $primary?: boolean }>`
   ${headline}
 `;
 

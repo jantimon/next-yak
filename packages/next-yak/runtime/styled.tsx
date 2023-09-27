@@ -16,9 +16,11 @@ function StyledFactory<THtmlTag extends HtmlTags>(
   Component: THtmlTag
 ): {
   attrs: <TProps extends Record<string, unknown>>(
-    callback: (
-      props: TProps & JSX.IntrinsicElements[THtmlTag]
-    ) => Record<string, unknown> & JSX.IntrinsicElements[THtmlTag]
+    attrsProps:
+      | ((
+          props: TProps & JSX.IntrinsicElements[THtmlTag]
+        ) => Record<string, unknown> & JSX.IntrinsicElements[THtmlTag])
+      | (Record<string, unknown> & JSX.IntrinsicElements[THtmlTag])
   ) => <TResultProps extends Record<string, unknown>>(
     styles: TemplateStringsArray,
     ...values: CSSInterpolation<TResultProps>[]
@@ -52,13 +54,16 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
     };
   };
 
-  const attrs = (callback: any) => {
+  const attrs = (attrsProps: any) => {
     return <TProps extends Record<string, unknown>>(
       styles: TemplateStringsArray,
       ...values: CSSInterpolation<TProps>[]
     ) => {
       return (_props: TProps) => {
-        const newProps = callback(_props as any);
+        const newProps =
+          typeof attrsProps === "function"
+            ? attrsProps(_props as any)
+            : attrsProps;
         const props = {
           ...newProps,
           children: _props.children,
