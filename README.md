@@ -85,7 +85,13 @@ const App = () => (
 This is a proof of concept. There are a lot of things that need to be done before this can be used in production:
 
  - [ ] improve js parsing - right now it not reusing babel..
- - [ ] config hot module reloading
+ - [ ] add theme provider
+ - [ ] add support for forwardRef
+ - [ ] add support for attrs
+ - [ ] improve runtime code size and typings
+ - [ ] maybe remove proxy by compiling `styled.button -> styled("button")`
+ - [x] config hot module reloading
+ 
 
 <details>
   <summary>prs</summary>
