@@ -10,8 +10,12 @@
   },
   "typesVersions": {
     "*": {
-      "withYak": ["./loaders/withYak.d.ts"],
-      "*": ["./runtime/index.d.ts"]
+      "withYak": [
+        "./loaders/withYak.d.ts"
+      ],
+      "*": [
+        "./runtime/index.d.ts"
+      ]
     }
   },
   "scripts": {

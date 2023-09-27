@@ -14,12 +14,24 @@ type HtmlTags = keyof JSX.IntrinsicElements;
 
 function StyledFactory<THtmlTag extends HtmlTags>(
   Component: THtmlTag
-): <TProps extends Record<string, unknown>>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps>[]
-) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
+): {
+  attrs: <TProps extends Record<string, unknown>>(
+    callback: (
+      props: TProps & JSX.IntrinsicElements[THtmlTag]
+    ) => Record<string, unknown> & JSX.IntrinsicElements[THtmlTag]
+  ) => <TResultProps extends Record<string, unknown>>(
+    styles: TemplateStringsArray,
+    ...values: CSSInterpolation<TResultProps>[]
+  ) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
+
+  <TProps extends Record<string, unknown>>(
+    styles: TemplateStringsArray,
+    ...values: CSSInterpolation<TProps>[]
+  ): FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
+};
+
 function StyledFactory(Component: string | FunctionComponent<any>) {
-  return <TProps extends Record<string, unknown>>(
+  const C = <TProps extends Record<string, unknown>>(
     styles: TemplateStringsArray,
     ...values: CSSInterpolation<TProps>[]
   ) => {
@@ -39,7 +51,49 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
       );
     };
   };
+
+  const attrs = (callback: any) => {
+    return <TProps extends Record<string, unknown>>(
+      styles: TemplateStringsArray,
+      ...values: CSSInterpolation<TProps>[]
+    ) => {
+      return (_props: TProps) => {
+        const newProps = callback(_props as any);
+        const props = {
+          ...newProps,
+          children: _props.children,
+          className: _props.className,
+          style: _props.style,
+        };
+        const runtimeStyles = css(styles, ...values)(props as any);
+        const filteredProps =
+          typeof Component === "string"
+            ? removePrefixedProperties(props)
+            : props;
+        return (
+          <Component
+            {...filteredProps}
+            style={{ ...(props.style || {}), ...runtimeStyles.style }}
+            className={
+              (props.className ? props.className + " " : "") +
+              runtimeStyles.className
+            }
+          />
+        );
+      };
+    };
+  };
+
+  C.attrs = attrs;
+  return C;
 }
+
+type StyledComponent = <TBaseProps extends {}>(
+  Component: FunctionComponent<TBaseProps>
+) => <TProps extends {}>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps>[]
+) => FunctionComponent<TBaseProps & TProps>;
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
@@ -61,12 +115,7 @@ export const styled = new Proxy(StyledFactory, {
     }
     return target(TagName as keyof JSX.IntrinsicElements);
   },
-}) as (<TBaseProps extends {}>(
-  Component: FunctionComponent<TBaseProps>
-) => <TProps extends {}>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps>[]
-) => FunctionComponent<TBaseProps & TProps>) & {
+}) as unknown as StyledComponent & {
   [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
 };
 

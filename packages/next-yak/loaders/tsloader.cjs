@@ -21,9 +21,11 @@ module.exports = async function tsloader(source) {
   // Config for replacing tokens in css template literals
   // can be based on a typescript file
   const options = this.getOptions();
-  const config = options.configPath ? await this.importModule(resolve(this.rootContext, options.configPath), { 
-    layer: "yak-importModule",
-  }) : {};
+  const config = options.configPath
+    ? await this.importModule(resolve(this.rootContext, options.configPath), {
+        layer: "yak-importModule",
+      })
+    : {};
   const replaces = config.replaces || {};
 
   /** @type {string | null} */
@@ -64,9 +66,7 @@ module.exports = async function tsloader(source) {
              */
             ImportDeclaration(path) {
               const node = path.node;
-              if (
-                node.source.value !== "next-yak"
-              ) {
+              if (node.source.value !== "next-yak") {
                 return;
               }
 
@@ -133,7 +133,18 @@ module.exports = async function tsloader(source) {
                   /** @type {babel.types.CallExpression} */ (tag).callee
                 ).name === this.localVarNames.styled;
 
-              if (!isCssLiteral && !isStyledLiteral && !isStyledCall) {
+              const isAttrsCall =
+                t.isCallExpression(tag) &&
+                t.isMemberExpression(tag.callee) &&
+                t.isIdentifier(tag.callee.property) &&
+                tag.callee.property.name === "attrs";
+
+              if (
+                !isCssLiteral &&
+                !isStyledLiteral &&
+                !isStyledCall &&
+                !isAttrsCall
+              ) {
                 return;
               }
 
@@ -235,6 +246,6 @@ module.exports = async function tsloader(source) {
     ],
   });
 
-  const code = (result && result.code);
+  const code = result && result.code;
   return code == null ? source : code;
 };

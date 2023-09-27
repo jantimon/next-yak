@@ -14,9 +14,11 @@ module.exports = async function cssLoader(source) {
   // Config for replacing tokens in css template literals
   // can be based on a typescript file
   const options = this.getOptions();
-  const config = options.configPath ? await this.importModule(resolve(this.rootContext, options.configPath), { 
-    layer: "yak-importModule",
-  }) : {};
+  const config = options.configPath
+    ? await this.importModule(resolve(this.rootContext, options.configPath), {
+        layer: "yak-importModule",
+      })
+    : {};
   const replaces = config.replaces || {};
 
   // parse source with babel
@@ -37,10 +39,11 @@ module.exports = async function cssLoader(source) {
 
   const { types: t } = babel;
 
-  /** @type {{css?: string, styled?: string}} */
+  /** @type {{css?: string, styled?: string, attrs?: "attrs"}} */
   const localVarNames = {
     css: undefined,
     styled: undefined,
+    attrs: "attrs",
   };
 
   let index = 0;
@@ -60,9 +63,7 @@ module.exports = async function cssLoader(source) {
      */
     ImportDeclaration(path) {
       const node = path.node;
-      if (
-        node.source.value !== "next-yak"
-      ) {
+      if (node.source.value !== "next-yak") {
         return;
       }
       // Process import specifiers
@@ -115,7 +116,13 @@ module.exports = async function cssLoader(source) {
           /** @type {babel.types.CallExpression} */ (tag).callee
         ).name === localVarNames.styled;
 
-      if (!isCssLiteral && !isStyledLiteral && !isStyledCall) {
+      const isAttrsCall =
+        t.isCallExpression(tag) &&
+        t.isMemberExpression(tag.callee) &&
+        /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
+          "attrs";
+
+      if (!isCssLiteral && !isStyledLiteral && !isStyledCall && !isAttrsCall) {
         return;
       }
 

@@ -35,7 +35,10 @@ const Headline = styled.h1<{ $primary?: boolean }>`
   ${headline}
 `;
 
-const Button = styled.button<{ $primary?: boolean }>`
+const Button = styled.button.attrs<{ primary?: boolean }>((p) => ({
+  type: "button",
+  $primary: p.primary,
+}))<{ $primary?: boolean }>`
   color: #009688;
   background: #fff;
   border: 1px solid currentColor;
@@ -89,8 +92,8 @@ export default function Home() {
     <main className={styles.main}>
       <Headline>Hello world</Headline>
       <Button>Ghost</Button>
-      <Button $primary>Primary Ghost</Button>
-      <FancyButton $primary title="fancy">
+      <Button primary>Primary Ghost</Button>
+      <FancyButton primary title="fancy">
         Fancy Ghost
       </FancyButton>
       <Clock />
