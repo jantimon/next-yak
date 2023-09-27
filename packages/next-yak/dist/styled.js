@@ -1,6 +1,6 @@
 import { css } from "./cssLiteral";
 import React from "react";
-const StyledFactory = function (Component) {
+function StyledFactory(Component) {
     return (styles, ...values) => {
         return (props) => {
             const runtimeStyles = css(styles, ...values)(props);
@@ -9,7 +9,8 @@ const StyledFactory = function (Component) {
                     runtimeStyles.className }));
         };
     };
-};
+}
+;
 export const styled = new Proxy(StyledFactory, {
     get(target, TagName) {
         if (typeof TagName !== "string") {
