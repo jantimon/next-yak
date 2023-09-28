@@ -1,4 +1,4 @@
-import {describe, it, expect} from "vitest";
+import { describe, it, expect } from "vitest";
 import cssloader from "../cssloader.cjs";
 
 const loaderContext = {
@@ -56,9 +56,9 @@ const headline = css\`
 
   it("should support nested css code", async () => {
     expect(
-  await cssloader.call(
-    loaderContext,
-    `
+      await cssloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -78,8 +78,8 @@ const headline = css\`
   }
 \`;
 `
-  )
-).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
 ".style0 { 
   font-size: 2rem;
   font-weight: bold;
@@ -129,9 +129,9 @@ const headline = css\`
 
 it("should support css variables", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -141,8 +141,8 @@ const headline = css\`
   }
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
+    )
+  ).toMatchInlineSnapshot(`
 ".style0 { 
   &:hover {
     color: var(--🦬18fi82j0);
@@ -151,11 +151,61 @@ const headline = css\`
 `);
 });
 
+it("should support attrs on intrinsic elements", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled } from "next-yak";
+
+const headline = styled.input.attrs({
+  type: "text",
+})\`
+  color: red;
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".style0 { 
+      color: red;
+       }"
+  `);
+});
+
+it("should support attrs on wrapped elements", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled } from "next-yak";
+
+const headline = styled.input\`
+  color: red;
+\`;
+
+const newHeadline = styled(headline).attrs({
+  type: "text",
+})\`
+  color: black;
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".style0 { 
+      color: red;
+     }
+
+    .style1 { 
+      color: black;
+       }"
+  `);
+});
+
 it("should support css variables with spaces", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -165,8 +215,8 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
+    )
+  ).toMatchInlineSnapshot(`
 ".style0 { 
   transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
   display: block;
@@ -178,9 +228,9 @@ const headline = css\`
 
 it("should replace breakpoint references with actual media queries", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import { css } from "next-yak";
 import { queries } from "@/theme";
 
@@ -194,8 +244,8 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
+    )
+  ).toMatchInlineSnapshot(`
 ".style0 { 
   color: blue;
   @media (min-width: 640px) {
