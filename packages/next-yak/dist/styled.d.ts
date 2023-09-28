@@ -1,7 +1,10 @@
 import { FunctionComponent } from "react";
 import { CSSInterpolation } from "./cssLiteral";
 import React from "react";
-type StyledComponent = <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]) => FunctionComponent<TBaseProps & TProps>;
+type StyledComponent = <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => {
+    attrs: <TProps extends Record<string, unknown>>(attrsProps: ((props: TProps & TBaseProps) => Record<string, unknown> & TBaseProps) | (Record<string, unknown> & TBaseProps)) => <TResultProps extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TResultProps>[]) => FunctionComponent<TBaseProps & TProps>;
+    <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]): FunctionComponent<TBaseProps & TProps>;
+};
 export declare const styled: StyledComponent & {
     symbol: {
         <TProps extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]): FunctionComponent<React.SVGProps<SVGSymbolElement> & TProps>;

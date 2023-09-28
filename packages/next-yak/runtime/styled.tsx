@@ -95,10 +95,20 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
 
 type StyledComponent = <TBaseProps extends {}>(
   Component: FunctionComponent<TBaseProps>
-) => <TProps extends {}>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps>[]
-) => FunctionComponent<TBaseProps & TProps>;
+) => {
+  attrs: <TProps extends Record<string, unknown>>(
+    attrsProps:
+      | ((props: TProps & TBaseProps) => Record<string, unknown> & TBaseProps)
+      | (Record<string, unknown> & TBaseProps)
+  ) => <TResultProps extends Record<string, unknown>>(
+    styles: TemplateStringsArray,
+    ...values: CSSInterpolation<TResultProps>[]
+  ) => FunctionComponent<TBaseProps & TProps>;
+  <TProps extends {}>(
+    styles: TemplateStringsArray,
+    ...values: CSSInterpolation<TProps>[]
+  ): FunctionComponent<TBaseProps & TProps>;
+};
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,

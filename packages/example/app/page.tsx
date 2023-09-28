@@ -37,9 +37,9 @@ const Headline = styled.h1.attrs({
   ${headline}
 `;
 
-const Button = styled.button.attrs<{ primary?: boolean }>((p) => ({
+const Button = styled.button.attrs<{ attrsPrimary?: boolean }>((p) => ({
   type: "button",
-  $primary: p.primary,
+  $primary: p.attrsPrimary,
 }))<{ $primary?: boolean }>`
   color: #009688;
   background: #fff;
@@ -59,7 +59,9 @@ const Button = styled.button.attrs<{ primary?: boolean }>((p) => ({
     `}
 `;
 
-const FancyButton = styled(Button)`
+const FancyButton = styled(Button).attrs<{ $newPrimary?: boolean }>((p) => ({
+  $primary: p.$newPrimary,
+}))`
   color: #fff;
   background: linear-gradient(
     149deg,
@@ -94,8 +96,8 @@ export default function Home() {
     <main className={styles.main}>
       <Headline>Hello world</Headline>
       <Button>Ghost</Button>
-      <Button primary>Primary Ghost</Button>
-      <FancyButton primary title="fancy">
+      <Button attrsPrimary>Primary Ghost</Button>
+      <FancyButton $newPrimary title="fancy">
         Fancy Ghost
       </FancyButton>
       <Clock />
