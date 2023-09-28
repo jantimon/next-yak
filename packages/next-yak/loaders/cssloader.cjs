@@ -22,6 +22,7 @@ module.exports = async function cssLoader(source) {
   // parse source with babel
   const ast = babel.parseSync(source, {
     filename: this.resourcePath,
+    configFile: false,
     plugins: [
       [
         "@babel/plugin-syntax-typescript",

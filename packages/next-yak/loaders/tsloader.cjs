@@ -35,6 +35,7 @@ module.exports = async function tsloader(source) {
   // parse source with babel
   const result = babel.transformSync(source, {
     filename: this.resourcePath,
+    configFile: false,
     // Only for parsing - will be removed once moved to a swc or babel plugin
     plugins: [
       [
