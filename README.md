@@ -87,11 +87,14 @@ const App = () => (
 This is a proof of concept. There are a lot of things that need to be done before this can be used in production:
 
  - [ ] improve js parsing - right now it not reusing babel..
- - [ ] add theme provider
+ - [ ] better sourcemaps
+ - [ ] add theme provider (which works for Server Components)
  - [ ] add support for forwardRef
  - [ ] add support for attrs
  - [ ] improve runtime code size and typings
  - [ ] maybe remove proxy by compiling `styled.button -> styled("button")`
+ - [ ] replace the current config apporach with a solution similar to vanilla-extracts `.styles.ts` files
+ - [ ] better error messages
  - [x] config hot module reloading
  
 
