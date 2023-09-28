@@ -6,7 +6,8 @@ a CSS-in-JS with the power of "dynamic at the speed and reliability of static" ð
 
 the initial version of next-yak will only work for next.js
 
-![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/0fa7c329-2b8b-4863-a4f7-d7b5fdd21d38)
+![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/2dcaf443-7205-4ef3-ba44-fbbe3ef2807d)
+
 
 ## Motivation
 
@@ -65,21 +66,31 @@ next-yak converts css-in-js into css modules. This allows to use the full power 
 
 ### Atomic CSS
 
-next-yak provide class name helpers. This allows using [tailwind](https://tailwindcss.com/) out of the box without additonal configuration.
+`next-yak` ships with atomic css support  
+So you can use [tailwind](https://tailwindcss.com/) out of the box without additonal configuration.
 
 ```tsx
-import { styled, css, atoms } from "next-yak";
+import { styled, atoms } from "next-yak";
 
-const SpinningTitle = styled.h1<{ isAnimated: boolean; children: React.ReactNode }>`
-  ${atoms("tw-text-lg md:tw-text-xl tw-bg-red-500")}
-  ${({ isAnimated }) => isAnimated && css`animation: spin 1s linear infinite`)}
+// Mixing tailwind with custom styles
+const Icon = styled.p`
+ ${atoms("font-bold")}
+ @supports (initial-letter: 2) {
+   initial-letter: 2;
+ }
 `;
 
-const App = () => (
-  <SpinningTitle isAnimated={true}>
-    Hello World
-  </SpinningTitle>
-);
+// Apply tailwind classes conditionally
+const Button = styled.button`
+  ${({ $primary }) =>
+    $primary
+      ? atoms(
+          'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+        )
+      : atoms(
+          'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+        )}
+`;
 ```
 
 ## Todos:
