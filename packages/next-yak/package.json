@@ -22,7 +22,7 @@
     "prepublishOnly": "npm run build && npm run test",
     "build": "tsc -p tsconfig.json --outDir dist/",
     "test": "vitest run",
-    "test:watch": "vitest --watch -u"
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@babel/core": "^7.16.12",

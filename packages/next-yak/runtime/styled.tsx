@@ -66,9 +66,10 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
             : attrsProps;
         const props = {
           ...newProps,
-          children: _props.children,
-          className: _props.className,
-          style: _props.style,
+          ..._props,
+          // children: _props.children,
+          // className: _props.className,
+          // style: _props.style,
         };
         const runtimeStyles = css(styles, ...values)(props as any);
         const filteredProps =
