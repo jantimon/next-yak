@@ -20,6 +20,12 @@ const loaderContext = {
   getOptions: () => ({
     configPath: "/some/special/path/config",
   }),
+  async: () => (err, result) => {
+    if (err) {
+      throw err;
+    }
+    return result;
+  }
 };
 
 describe("tsloader", () => {
