@@ -21,21 +21,23 @@
     "test:watch": "vitest --watch -u"
   },
   "dependencies": {
-    "postcss-nested": "^6.0.1",
     "@babel/core": "^7.16.12",
-    "@babel/plugin-syntax-typescript": "^7.16.7"
+    "@babel/plugin-syntax-typescript": "^7.16.7",
+    "postcss-nested": "^6.0.1"
   },
   "devDependencies": {
-    "react": "^18.2.0",
     "@babel/traverse": "^7.16.12",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "29.5.5",
     "@types/node": "20.4.5",
     "@types/react": "18.2.16",
     "@types/react-dom": "18.2.7",
-    "@types/jest": "29.5.5",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^14.0.0",
-    "vitest": "0.34.5",
-    "typescript": "5.1.6"
+    "jsdom": "^22.1.0",
+    "react": "^18.2.0",
+    "typescript": "5.1.6",
+    "vite": "^4.4.9",
+    "vitest": "0.34.5"
   },
   "files": [
     "dist",
