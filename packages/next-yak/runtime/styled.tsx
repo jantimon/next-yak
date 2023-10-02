@@ -12,11 +12,11 @@ import React from "react";
 
 type HtmlTags = keyof JSX.IntrinsicElements;
 
-type YakAttributes<T> = (
-  attrArgs:
-    | ((props: T) => Record<string, unknown> & T)
-    | (Record<string, unknown> & T)
-) => YakTemplateString<T>;
+type Merge<T, U> = Omit<T, keyof U>;
+
+type YakAttributes<T> = <TNew extends Record<string, unknown>>(
+  attrArgs: ((props: T & TNew) => TNew & T) | (TNew & T)
+) => YakTemplateString<Merge<T, TNew>>;
 
 type YakTemplateString<T> = <TCSSProps extends Record<string, unknown>>(
   styles: TemplateStringsArray,
@@ -35,7 +35,7 @@ type YakLiteralComponents = {
   [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>;
 };
 
-type YakStyledComponentFunction<T = {}> = (
+type YakStyledComponentFunction = <T extends {}>(
   component: FunctionComponent<T>
 ) => YakWithAttributes<T>;
 
@@ -74,11 +74,17 @@ function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
           return (_props) => {
             const newProps =
               typeof attrsProps === "function"
-                ? attrsProps(_props)
+                ? //@ts-expect-error
+                  attrsProps(_props)
                 : attrsProps;
             const props = {
-              ...newProps,
               ..._props,
+              ...newProps,
+              className: mergeClassNames(
+                _props.className as string,
+                newProps.className as string
+              ),
+              style: { ...(_props.style || {}), ...(newProps.style || {}) },
               // children: _props.children,
               // className: _props.className,
               // style: _props.style,
@@ -92,10 +98,10 @@ function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
               <Component
                 {...filteredProps}
                 style={{ ...(props.style || {}), ...runtimeStyles.style }}
-                className={
-                  (props.className ? props.className + " " : "") +
-                  runtimeStyles.className
-                }
+                className={mergeClassNames(
+                  props.className as string,
+                  runtimeStyles.className as string
+                )}
               />
             );
           };
@@ -137,3 +143,9 @@ function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
   }
   return result;
 }
+
+const mergeClassNames = (a?: string, b?: string) => {
+  if (!a) return b;
+  if (!b) return a;
+  return a + " " + b;
+};

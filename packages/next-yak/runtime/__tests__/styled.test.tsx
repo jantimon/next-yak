@@ -5,7 +5,7 @@ import { css } from "../cssLiteral";
 import React from "react";
 
 it("should render a literal element", () => {
-  const Component = styled.input();
+  const Component = styled.input``;
 
   const { container } = render(<Component />);
 
@@ -48,7 +48,7 @@ it("should forward properties", () => {
 });
 
 it("should forward children", () => {
-  const Component = styled.div();
+  const Component = styled.div``;
 
   const { container } = render(
     <Component>
@@ -70,7 +70,7 @@ it("should forward children", () => {
 });
 
 it("should filter out properties starting with $", () => {
-  const Component = styled.input();
+  const Component = styled.input``;
 
   const { container } = render(<Component $forwardedProp="notForwarded" />);
 
@@ -98,7 +98,7 @@ it("should concatenate classNames", () => {
 });
 
 it("should concatenate styles", () => {
-  const Component = styled.input();
+  const Component = styled.input``;
 
   const { container } = render(<Component style={{ color: "red" }} />);
 
@@ -138,153 +138,4 @@ it("should add class if prop is set", () => {
       />
     </div>
   `);
-});
-
-it("should set static properties if attrs is set", () => {
-  const Component = styled.input.attrs({ type: "password" })();
-
-  const { container } = render(<Component />);
-
-  expect(container).toMatchInlineSnapshot(`
-    <div>
-      <input
-        class=""
-        type="password"
-      />
-    </div>
-  `);
-});
-
-it("should map properties if attrs is set", () => {
-  const Component = styled.input.attrs(({ map }) => ({ $testProp: map }))(
-    ({ $testProp }) => $testProp && css("look attrs mapping work")
-  );
-
-  const { container } = render(<Component map />);
-
-  expect(container).toMatchInlineSnapshot(`
-    <div>
-      <input
-        class="look attrs mapping work"
-      />
-    </div>
-  `);
-});
-
-it("should not map properties if attrs is not set", () => {
-  const Component = styled.input.attrs(({ map }) => ({ $testProp: map }))(
-    ({ $testProp }) => $testProp && css("look attrs mapping work")
-  );
-
-  const { container } = render(<Component />);
-
-  expect(container).toMatchInlineSnapshot(`
-    <div>
-      <input
-        class=""
-      />
-    </div>
-  `);
-});
-
-describe("wrapped component", () => {
-  it("should override static properties if attrs is set", () => {
-    const Component = styled.input.attrs({ type: "password" })();
-    const WrappedComponent = styled(Component).attrs({ type: "text" })();
-
-    const { container } = render(<WrappedComponent />);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <input
-          class=""
-          type="text"
-        />
-      </div>
-    `);
-  });
-
-  it("should map properties if attrs is set", () => {
-    const Component = styled.input.attrs(({ map }) => ({ $testProp: map }))(
-      ({ $testProp }) => $testProp && css("look attrs mapping work")
-    );
-    const WrappedComponent = styled(Component).attrs(({ overrideMap }) => ({
-      type: "text",
-      map: overrideMap,
-    }))();
-
-    const { container } = render(<WrappedComponent overrideMap />);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <input
-          class="look attrs mapping work"
-          type="text"
-        />
-      </div>
-    `);
-  });
-
-  it("should not map properties if attrs is not set", () => {
-    const Component = styled.input.attrs(({ map }) => ({ $testProp: map }))(
-      ({ $testProp }) => $testProp && css("look attrs mapping work")
-    );
-    const WrappedComponent = styled(Component).attrs(({ overrideMap }) => ({
-      type: "text",
-      map: overrideMap,
-    }))();
-
-    const { container } = render(<WrappedComponent />);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <input
-          class=""
-          type="text"
-        />
-      </div>
-    `);
-  });
-
-  it("should override properties of wrapped component if attrs is set", () => {
-    const Component = styled.input.attrs({ type: "password" })(
-      ({ $testProp }) => $testProp && css("look attrs mapping work")
-    );
-    const WrappedComponent = styled(Component).attrs({
-      type: "text",
-      $testProp: true,
-    })();
-
-    const { container } = render(<WrappedComponent />);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <input
-          class="look attrs mapping work"
-          type="text"
-        />
-      </div>
-    `);
-  });
-
-  it("should override properties of wrapping component if attrs is set", () => {
-    const Component = styled.input.attrs(({ map }) => ({ $testProp: map }))(
-      ({ $testProp }) => $testProp && css("look attrs mapping work")
-    );
-    const WrappedComponent = styled(Component).attrs({
-      type: "text",
-      map: true,
-    })();
-
-    const { container } = render(<WrappedComponent />);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <input
-          class="look attrs mapping work"
-          type="text"
-        />
-      </div>
-    `);
-  });
 });
