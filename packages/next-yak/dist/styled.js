@@ -18,12 +18,25 @@ function StyledFactory(Component) {
                         ? //@ts-expect-error
                             attrsProps(_props)
                         : attrsProps;
-                    const props = {
-                        ..._props,
-                        ...removeUndefined(newProps),
-                        className: mergeClassNames(_props.className, newProps.className),
-                        style: { ...(_props.style || {}), ...(newProps.style || {}) },
-                    };
+                    let props = {};
+                    if ("$__zzAttrs" in _props) {
+                        props = {
+                            ...removeUndefined(newProps),
+                            ..._props,
+                            className: mergeClassNames(_props.className, newProps.className),
+                            style: { ...(_props.style || {}), ...(newProps.style || {}) },
+                            $__zzAttrs: true,
+                        };
+                    }
+                    else {
+                        props = {
+                            ..._props,
+                            ...removeUndefined(newProps),
+                            className: mergeClassNames(_props.className, newProps.className),
+                            style: { ...(_props.style || {}), ...(newProps.style || {}) },
+                            $__zzAttrs: true,
+                        };
+                    }
                     const runtimeStyles = css(styles, ...values)(props);
                     const filteredProps = typeof Component === "string"
                         ? removePrefixedProperties(props)

@@ -209,7 +209,7 @@ it("should work with data and aria attributes", () => {
     />
   `);
 });
-it.skip("merge attrs when inheriting SC", () => {
+it("merge attrs when inheriting SC", () => {
     const Parent = styled.button.attrs(() => ({
         type: "button",
         tabIndex: 0,
@@ -226,19 +226,27 @@ it.skip("merge attrs when inheriting SC", () => {
     />
   `);
 });
-it.skip("pass attrs to style block", () => {
+it("pass attrs to style block", () => {
     /* Would be a React Router Link in real life */
     const Comp = styled.a.attrs(() => ({
         href: "#",
         "data-active-class-name": "--is-active",
         // @ts-expect-error
-    }))("c1", (props) => props["data-active-class-name"] && "c2");
+    }))("c1", {
+        style: {
+            "--testVar": (props) => props["data-active-class-name"] && "c2",
+        },
+    });
     expect(TestRenderer.create(React.createElement(Comp, null)).toJSON()).toMatchInlineSnapshot(`
     <a
-      className="c1 c2"
+      className="c1"
       data-active-class-name="--is-active"
       href="#"
-      style={{}}
+      style={
+        {
+          "--testVar": "c2",
+        }
+      }
     />
   `);
 });

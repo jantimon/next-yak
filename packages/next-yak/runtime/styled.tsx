@@ -79,15 +79,31 @@ function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
                 ? //@ts-expect-error
                   attrsProps(_props)
                 : attrsProps;
-            const props = {
-              ..._props,
-              ...removeUndefined(newProps),
-              className: mergeClassNames(
-                _props.className as string,
-                newProps.className as string
-              ),
-              style: { ...(_props.style || {}), ...(newProps.style || {}) },
-            };
+
+            let props = {} as any;
+            if ("$__zzAttrs" in _props) {
+              props = {
+                ...removeUndefined(newProps),
+                ..._props,
+                className: mergeClassNames(
+                  _props.className as string,
+                  newProps.className as string
+                ),
+                style: { ...(_props.style || {}), ...(newProps.style || {}) },
+                $__zzAttrs: true,
+              };
+            } else {
+              props = {
+                ..._props,
+                ...removeUndefined(newProps),
+                className: mergeClassNames(
+                  _props.className as string,
+                  newProps.className as string
+                ),
+                style: { ...(_props.style || {}), ...(newProps.style || {}) },
+                $__zzAttrs: true,
+              };
+            }
             const runtimeStyles = css(styles, ...values)(props as any);
             const filteredProps =
               typeof Component === "string"

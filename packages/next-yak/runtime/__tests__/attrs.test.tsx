@@ -7,10 +7,6 @@ beforeEach(() => {
   vi.spyOn(console, "warn");
 });
 
-type Display<T> = {
-  [K in keyof T]: T[K] extends unknown ? T[K] : never;
-};
-
 type DataAttributes = { [key: `data-${string}`]: any };
 
 it("works fine with an empty object", () => {
@@ -259,7 +255,19 @@ it("should work with data and aria attributes", () => {
   `);
 });
 
-it.skip("merge attrs when inheriting SC", () => {
+// it("merge attrs", () => {
+//   const Comp = styled.button
+//     .attrs(() => ({
+//       type: "button",
+//       tabIndex: 0,
+//     }))
+//     .attrs(() => ({
+//       type: "submit",
+//     }))``;
+//   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot();
+// });
+
+it("merge attrs when inheriting SC", () => {
   const Parent = styled.button.attrs(() => ({
     type: "button",
     tabIndex: 0,
@@ -277,19 +285,27 @@ it.skip("merge attrs when inheriting SC", () => {
   `);
 });
 
-it.skip("pass attrs to style block", () => {
+it("pass attrs to style block", () => {
   /* Would be a React Router Link in real life */
   const Comp = styled.a.attrs<DataAttributes>(() => ({
     href: "#",
     "data-active-class-name": "--is-active",
     // @ts-expect-error
-  }))("c1", (props) => props["data-active-class-name"] && "c2");
+  }))("c1", {
+    style: {
+      "--testVar": (props: any) => props["data-active-class-name"] && "c2",
+    },
+  });
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <a
-      className="c1 c2"
+      className="c1"
       data-active-class-name="--is-active"
       href="#"
-      style={{}}
+      style={
+        {
+          "--testVar": "c2",
+        }
+      }
     />
   `);
 });
