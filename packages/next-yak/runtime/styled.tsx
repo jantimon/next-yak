@@ -12,32 +12,31 @@ import React from "react";
 
 type HtmlTags = keyof JSX.IntrinsicElements;
 
-function StyledFactory<THtmlTag extends HtmlTags>(
-  Component: THtmlTag
-): {
-  attrs: <TProps extends Record<string, unknown>>(
-    attrsProps:
-      | ((
-          props: TProps & JSX.IntrinsicElements[THtmlTag]
-        ) => Record<string, unknown> & JSX.IntrinsicElements[THtmlTag])
-      | (Record<string, unknown> & JSX.IntrinsicElements[THtmlTag])
-  ) => <TResultProps extends Record<string, unknown>>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TResultProps>[]
-  ) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
+type YakAttributes<T> = (attrArgs: ((props: T) => Record<string, unknown> & T) | (Record<string, unknown> & T)) => YakTemplateString<T>
 
-  <TProps extends Record<string, unknown>>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
-  ): FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
-};
+type YakTemplateString<T> = <TCSSProps extends Record<string,unknown>>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<TCSSProps>>) => FunctionComponent<TCSSProps & T>;
 
-function StyledFactory(Component: string | FunctionComponent<any>) {
-  const C = <TProps extends Record<string, unknown>>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
+type YakWithAttributes<T> = {
+  <TCSSProps extends Record<string,unknown>>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<TCSSProps>>): FunctionComponent<TCSSProps & T>;
+  attrs: YakAttributes<T>
+}
+
+type YakLiteralComponents = {
+  [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>
+}
+
+type YakStyledComponentFunction<T = {}> = (component: FunctionComponent<T>) => YakWithAttributes<T>;
+
+type YakStyled = YakStyledComponentFunction & YakLiteralComponents
+
+function StyledFactory<T>(Component: FunctionComponent<T>): YakWithAttributes<T>;
+function StyledFactory<T extends HtmlTags>(Component: T): YakWithAttributes<JSX.IntrinsicElements[T]>;
+function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
+  const templateFunction:YakWithAttributes<T> = (
+    styles,
+    ...values
   ) => {
-    return (props: TProps) => {
+    return (props) => {
       const runtimeStyles = css(styles, ...values)(props as any);
       const filteredProps =
         typeof Component === "string" ? removePrefixedProperties(props) : props;
@@ -54,15 +53,15 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
     };
   };
 
-  const attrs = (attrsProps: any) => {
-    return <TProps extends Record<string, unknown>>(
-      styles: TemplateStringsArray,
-      ...values: CSSInterpolation<TProps>[]
+  templateFunction.attrs = (attrsProps) => {
+    return (
+      styles,
+      ...values
     ) => {
-      return (_props: TProps) => {
+      return (_props) => {
         const newProps =
           typeof attrsProps === "function"
-            ? attrsProps(_props as any)
+            ? attrsProps(_props)
             : attrsProps;
         const props = {
           ...newProps,
@@ -89,27 +88,8 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
       };
     };
   };
-
-  C.attrs = attrs;
-  return C;
+  return templateFunction;
 }
-
-type StyledComponent = <TBaseProps extends {}>(
-  Component: FunctionComponent<TBaseProps>
-) => {
-  attrs: <TProps extends Record<string, unknown>>(
-    attrsProps:
-      | ((props: TProps & TBaseProps) => Record<string, unknown> & TBaseProps)
-      | (Record<string, unknown> & TBaseProps)
-  ) => <TResultProps extends Record<string, unknown>>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TResultProps>[]
-  ) => FunctionComponent<TBaseProps & TProps>;
-  <TProps extends {}>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
-  ): FunctionComponent<TBaseProps & TProps>;
-};
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
@@ -131,9 +111,7 @@ export const styled = new Proxy(StyledFactory, {
     }
     return target(TagName as keyof JSX.IntrinsicElements);
   },
-}) as unknown as StyledComponent & {
-  [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
-};
+}) as YakStyled; 
 
 // Remove all entries that start with a $ sign
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
