@@ -8,8 +8,9 @@ const { relative, resolve, basename } = require("path");
 /** @typedef {import("./babel-yak-plugin.d.ts").YakBabelPluginOptions} YakBabelPluginOptions */
 
 /**
- * Babel plugin for typescript files that use yak,
- * it replaces the css template literal with a call to the 'styled' function
+ * Babel plugin for typescript files that use yak - it will do things:
+ * - inject the import to the css-module (with .yak.module.css extension)
+ * - replace the css template literal with styles from the css-module
  *
  * @param {babel} babel
  * @param {YakBabelPluginOptions} options

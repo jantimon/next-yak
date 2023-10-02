@@ -3,13 +3,13 @@ const babel = require("@babel/core");
 const { resolve } = require("path");
 
 /**
- * Loader for typescript files that use yacijs, it replaces the css template literal with a call to the 'styled' function
+ * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
  * @param {string} source
  * @this {any}
  * @returns {Promise<string | void>}
  */
 module.exports = async function tsloader(source) {
-  // ignore files if they don't use yacijs
+  // ignore files if they don't use yak
   if (!source.includes("next-yak")) {
     return source;
   }
@@ -25,11 +25,12 @@ module.exports = async function tsloader(source) {
     : {};
   const replaces = config.replaces || {};
   const { rootContext, resourcePath } = this;
-  // Parse source with babel and pass options to the Babel plugin
+  // Compile the typescript file with babel - this will:
+  // - inject the import to the css-module (with .yak.module.css extension)
+  // - replace the css template literal with styles from the css-module
   const result = babel.transformSync(source, {
     filename: resourcePath,
     configFile: false,
-    // Use the Babel plugin you created here and pass the required options
     plugins: [
       [
         "@babel/plugin-syntax-typescript",
@@ -44,7 +45,6 @@ module.exports = async function tsloader(source) {
       ],
     ],
   });
-
   if (!result?.code) {
     throw new Error("babel transform failed");
   }
