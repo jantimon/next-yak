@@ -31,12 +31,11 @@
   },
   "devDependencies": {
     "@babel/traverse": "^7.16.12",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^14.0.0",
     "@types/jest": "29.5.5",
     "@types/node": "20.4.5",
     "@types/react": "18.2.16",
     "@types/react-dom": "18.2.7",
+    "@types/react-test-renderer": "^18.0.3",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
     "react-test-renderer": "^18.2.0",
