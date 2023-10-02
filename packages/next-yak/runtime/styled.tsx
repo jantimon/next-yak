@@ -12,64 +12,45 @@ import React from "react";
 
 type HtmlTags = keyof JSX.IntrinsicElements;
 
-type YakAttributes<T> = (attrArgs: ((props: T) => Record<string, unknown> & T) | (Record<string, unknown> & T)) => YakTemplateString<T>
+type YakAttributes<T> = (
+  attrArgs:
+    | ((props: T) => Record<string, unknown> & T)
+    | (Record<string, unknown> & T)
+) => YakTemplateString<T>;
 
-type YakTemplateString<T> = <TCSSProps extends Record<string,unknown>>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<TCSSProps>>) => FunctionComponent<TCSSProps & T>;
+type YakTemplateString<T> = <TCSSProps extends Record<string, unknown>>(
+  styles: TemplateStringsArray,
+  ...values: Array<CSSInterpolation<TCSSProps>>
+) => FunctionComponent<TCSSProps & T>;
 
 type YakWithAttributes<T> = {
-  <TCSSProps extends Record<string,unknown>>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<TCSSProps>>): FunctionComponent<TCSSProps & T>;
-  attrs: YakAttributes<T>
-}
+  <TCSSProps extends Record<string, unknown>>(
+    styles: TemplateStringsArray,
+    ...values: Array<CSSInterpolation<TCSSProps>>
+  ): FunctionComponent<TCSSProps & T>;
+  attrs: YakAttributes<T>;
+};
 
 type YakLiteralComponents = {
-  [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>
-}
+  [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>;
+};
 
-type YakStyledComponentFunction<T = {}> = (component: FunctionComponent<T>) => YakWithAttributes<T>;
+type YakStyledComponentFunction<T = {}> = (
+  component: FunctionComponent<T>
+) => YakWithAttributes<T>;
 
-type YakStyled = YakStyledComponentFunction & YakLiteralComponents
+type YakStyled = YakStyledComponentFunction & YakLiteralComponents;
 
-function StyledFactory<T>(Component: FunctionComponent<T>): YakWithAttributes<T>;
-function StyledFactory<T extends HtmlTags>(Component: T): YakWithAttributes<JSX.IntrinsicElements[T]>;
+function StyledFactory<T>(
+  Component: FunctionComponent<T>
+): YakWithAttributes<T>;
+function StyledFactory<T extends HtmlTags>(
+  Component: T
+): YakWithAttributes<JSX.IntrinsicElements[T]>;
 function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
-  const templateFunction:YakWithAttributes<T> = (
-    styles,
-    ...values
-  ) => {
-    return (props) => {
-      const runtimeStyles = css(styles, ...values)(props as any);
-      const filteredProps =
-        typeof Component === "string" ? removePrefixedProperties(props) : props;
-      return (
-        <Component
-          {...filteredProps}
-          style={{ ...(props.style || {}), ...runtimeStyles.style }}
-          className={
-            (props.className ? props.className + " " : "") +
-            runtimeStyles.className
-          }
-        />
-      );
-    };
-  };
-
-  templateFunction.attrs = (attrsProps) => {
-    return (
-      styles,
-      ...values
-    ) => {
-      return (_props) => {
-        const newProps =
-          typeof attrsProps === "function"
-            ? attrsProps(_props)
-            : attrsProps;
-        const props = {
-          ...newProps,
-          ..._props,
-          // children: _props.children,
-          // className: _props.className,
-          // style: _props.style,
-        };
+  return Object.assign<YakTemplateString<T>, { attrs: YakAttributes<T> }>(
+    (styles, ...values) => {
+      return (props) => {
         const runtimeStyles = css(styles, ...values)(props as any);
         const filteredProps =
           typeof Component === "string"
@@ -86,9 +67,42 @@ function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
           />
         );
       };
-    };
-  };
-  return templateFunction;
+    },
+    {
+      attrs: (attrsProps) => {
+        return (styles, ...values) => {
+          return (_props) => {
+            const newProps =
+              typeof attrsProps === "function"
+                ? attrsProps(_props)
+                : attrsProps;
+            const props = {
+              ...newProps,
+              ..._props,
+              // children: _props.children,
+              // className: _props.className,
+              // style: _props.style,
+            };
+            const runtimeStyles = css(styles, ...values)(props as any);
+            const filteredProps =
+              typeof Component === "string"
+                ? removePrefixedProperties(props)
+                : props;
+            return (
+              <Component
+                {...filteredProps}
+                style={{ ...(props.style || {}), ...runtimeStyles.style }}
+                className={
+                  (props.className ? props.className + " " : "") +
+                  runtimeStyles.className
+                }
+              />
+            );
+          };
+        };
+      },
+    }
+  );
 }
 
 /**
@@ -111,7 +125,7 @@ export const styled = new Proxy(StyledFactory, {
     }
     return target(TagName as keyof JSX.IntrinsicElements);
   },
-}) as YakStyled; 
+}) as YakStyled;
 
 // Remove all entries that start with a $ sign
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
