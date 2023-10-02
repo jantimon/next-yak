@@ -63,6 +63,7 @@ const FancyButton = styled(Button).attrs<{ $newPrimary?: boolean }>((p) => ({
   $primary: p.$newPrimary,
 }))`
   color: #fff;
+  border: 1px solid blue;
   background: linear-gradient(
     149deg,
     #ae52eb 0%,
@@ -71,7 +72,7 @@ const FancyButton = styled(Button).attrs<{ $newPrimary?: boolean }>((p) => ({
   );
 `;
 
-const SyledLink = styled.a`
+const StyledLink = styled.a`
   background: linear-gradient(
     149deg,
     #ae52eb 0%,
@@ -101,9 +102,9 @@ export default function Home() {
         Fancy Ghost
       </FancyButton>
       <Clock />
-      <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
+      <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
         view code
-      </SyledLink>
+      </StyledLink>
     </main>
   );
 }

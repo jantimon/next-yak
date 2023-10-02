@@ -12,19 +12,21 @@ import React from "react";
 
 type HtmlTags = keyof JSX.IntrinsicElements;
 
-type Merge<T, U> = Omit<T, keyof U>;
+type Merge<T, U> = Omit<Partial<T>, keyof U> &
+  Omit<Partial<U>, keyof T> &
+  Partial<U & T>;
 
-type YakAttributes<T> = <TNew extends Record<string, unknown>>(
-  attrArgs: ((props: T & TNew) => TNew & T) | (TNew & T)
+type YakAttributes<T> = <TNew = {}>(
+  attrArgs: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
 ) => YakTemplateString<Merge<T, TNew>>;
 
-type YakTemplateString<T> = <TCSSProps extends Record<string, unknown>>(
+type YakTemplateString<T> = <TCSSProps extends Record<string, unknown> = {}>(
   styles: TemplateStringsArray,
   ...values: Array<CSSInterpolation<TCSSProps>>
 ) => FunctionComponent<TCSSProps & T>;
 
 type YakWithAttributes<T> = {
-  <TCSSProps extends Record<string, unknown>>(
+  <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<TCSSProps>>
   ): FunctionComponent<TCSSProps & T>;
@@ -35,7 +37,7 @@ type YakLiteralComponents = {
   [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>;
 };
 
-type YakStyledComponentFunction = <T extends {}>(
+type YakStyledComponentFunction = <T>(
   component: FunctionComponent<T>
 ) => YakWithAttributes<T>;
 
@@ -79,15 +81,12 @@ function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
                 : attrsProps;
             const props = {
               ..._props,
-              ...newProps,
+              ...removeUndefined(newProps),
               className: mergeClassNames(
                 _props.className as string,
                 newProps.className as string
               ),
               style: { ...(_props.style || {}), ...(newProps.style || {}) },
-              // children: _props.children,
-              // className: _props.className,
-              // style: _props.style,
             };
             const runtimeStyles = css(styles, ...values)(props as any);
             const filteredProps =
@@ -148,4 +147,14 @@ const mergeClassNames = (a?: string, b?: string) => {
   if (!a) return b;
   if (!b) return a;
   return a + " " + b;
+};
+
+const removeUndefined = <T,>(obj: T) => {
+  const result = {} as T;
+  for (const key in obj) {
+    if (obj[key] !== undefined) {
+      result[key] = obj[key];
+    }
+  }
+  return result;
 };

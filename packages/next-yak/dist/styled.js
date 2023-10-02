@@ -1,38 +1,52 @@
 import { css } from "./cssLiteral";
 import React from "react";
 function StyledFactory(Component) {
-    const C = (styles, ...values) => {
+    return Object.assign((styles, ...values) => {
         return (props) => {
             const runtimeStyles = css(styles, ...values)(props);
-            const filteredProps = typeof Component === "string" ? removePrefixedProperties(props) : props;
+            const filteredProps = typeof Component === "string"
+                ? removePrefixedProperties(props)
+                : props;
             return (React.createElement(Component, { ...filteredProps, style: { ...(props.style || {}), ...runtimeStyles.style }, className: (props.className ? props.className + " " : "") +
                     runtimeStyles.className }));
         };
-    };
-    const attrs = (attrsProps) => {
-        return (styles, ...values) => {
-            return (_props) => {
-                const newProps = typeof attrsProps === "function"
-                    ? attrsProps(_props)
-                    : attrsProps;
-                const props = {
-                    ...newProps,
-                    children: _props.children,
-                    className: _props.className,
-                    style: _props.style,
+    }, {
+        attrs: (attrsProps) => {
+            return (styles, ...values) => {
+                return (_props) => {
+                    const newProps = typeof attrsProps === "function"
+                        ? //@ts-expect-error
+                            attrsProps(_props)
+                        : attrsProps;
+                    const props = {
+                        ..._props,
+                        ...removeUndefined(newProps),
+                        className: mergeClassNames(_props.className, newProps.className),
+                        style: { ...(_props.style || {}), ...(newProps.style || {}) },
+                    };
+                    const runtimeStyles = css(styles, ...values)(props);
+                    const filteredProps = typeof Component === "string"
+                        ? removePrefixedProperties(props)
+                        : props;
+                    return (React.createElement(Component, { ...filteredProps, style: { ...(props.style || {}), ...runtimeStyles.style }, className: mergeClassNames(props.className, runtimeStyles.className) }));
                 };
-                const runtimeStyles = css(styles, ...values)(props);
-                const filteredProps = typeof Component === "string"
-                    ? removePrefixedProperties(props)
-                    : props;
-                return (React.createElement(Component, { ...filteredProps, style: { ...(props.style || {}), ...runtimeStyles.style }, className: (props.className ? props.className + " " : "") +
-                        runtimeStyles.className }));
             };
-        };
-    };
-    C.attrs = attrs;
-    return C;
+        },
+    });
 }
+/**
+ * The `styled` method works perfectly on all of your own or any third-party component,
+ * as long as they attach the passed className prop to a DOM element.
+ *
+ * @usage
+ *
+ * ```tsx
+ * const StyledLink = styled(Link)`
+ *  color: #BF4F74;
+ *  font-weight: bold;
+ * `;
+ * ```
+ */
 export const styled = new Proxy(StyledFactory, {
     get(target, TagName) {
         if (typeof TagName !== "string") {
@@ -51,4 +65,20 @@ function removePrefixedProperties(obj) {
     }
     return result;
 }
+const mergeClassNames = (a, b) => {
+    if (!a)
+        return b;
+    if (!b)
+        return a;
+    return a + " " + b;
+};
+const removeUndefined = (obj) => {
+    const result = {};
+    for (const key in obj) {
+        if (obj[key] !== undefined) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+};
 //# sourceMappingURL=styled.js.map

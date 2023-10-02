@@ -7,6 +7,10 @@ beforeEach(() => {
   vi.spyOn(console, "warn");
 });
 
+type Display<T> = {
+  [K in keyof T]: T[K] extends unknown ? T[K] : never;
+};
+
 type DataAttributes = { [key: `data-${string}`]: any };
 
 it("works fine with an empty object", () => {
@@ -321,6 +325,8 @@ it("should pass through complex children as well", () => {
 });
 
 it("should override children", () => {
+  const X = styled.div``;
+  type XProps = React.ComponentProps<typeof X>["children"] & JSX.Element;
   const Comp = styled.div.attrs(() => ({
     children: <span>Amazing</span>,
   }))``;
@@ -387,7 +393,7 @@ it("does not pass transient props to HTML element", () => {
     color: ${(props) => props.$textColor};
   `;
 
-  const StyledComp = styled(Comp).attrs<Partial<CompProps>>(() => ({
+  const StyledComp = styled(Comp).attrs<CompProps>(() => ({
     $textColor: "red",
   }))``;
 
@@ -402,10 +408,66 @@ it("does not pass transient props to HTML element", () => {
 it.skip('should apply given "as" prop to the progressive type', () => {
   const Comp = styled.div.attrs({ as: "video" as const })``;
 
+  //@ts-expect-error
   expect(TestRenderer.create(<Comp loop />).toJSON()).toMatchInlineSnapshot(`
     <video
       className=""
       loop={true}
+      style={{}}
+    />
+  `);
+});
+
+// our own tests
+it("should remap props", () => {
+  const Comp = styled.button.attrs<{ primary?: boolean; $submit?: boolean }>(
+    (p) => ({
+      type: p.$submit ? "submit" : "button",
+      $primary: p.primary,
+    })
+  )<{ $primary?: boolean }>``;
+
+  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+    <button
+      className=""
+      style={{}}
+      type="button"
+    />
+  `);
+  expect(TestRenderer.create(<Comp primary />).toJSON()).toMatchInlineSnapshot(`
+    <button
+      className=""
+      primary={true}
+      style={{}}
+      type="button"
+    />
+  `);
+
+  expect(TestRenderer.create(<Comp $submit />).toJSON()).toMatchInlineSnapshot(`
+    <button
+      className=""
+      style={{}}
+      type="submit"
+    />
+  `);
+});
+
+it("should have optional attrs props as component interface", () => {
+  const Comp = styled.h1.attrs({
+    $primary: true,
+  })``;
+
+  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+    <h1
+      className=""
+      style={{}}
+    />
+  `);
+
+  expect(TestRenderer.create(<Comp $primary />).toJSON())
+    .toMatchInlineSnapshot(`
+    <h1
+      className=""
       style={{}}
     />
   `);
