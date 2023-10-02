@@ -403,8 +403,7 @@ it.skip('should apply given "as" prop to the progressive type', () => {
   const Comp = styled.div.attrs({ as: "video" as const })``;
 
   expect(TestRenderer.create(<Comp loop />).toJSON()).toMatchInlineSnapshot(`
-    <div
-      as="video"
+    <video
       className=""
       loop={true}
       style={{}}
