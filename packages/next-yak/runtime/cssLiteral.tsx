@@ -71,7 +71,7 @@ const internalImplementation = (
     const result = fn(props);
     if (typeof result === "function") {
       unwrapProps(props, result, classNames, style);
-    } else if (typeof result === "object") {
+    } else if (typeof result === "object" && result) {
       if ("className" in result && result.className) {
         classNames.push(result.className);
       }

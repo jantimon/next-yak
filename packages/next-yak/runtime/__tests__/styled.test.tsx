@@ -140,6 +140,32 @@ it("should add class if prop is set", () => {
   `);
 });
 
+
+it("should allow falsy values", () => {
+  const Component = styled.input(
+    ({ testProp }) => testProp && css("test"));
+
+  const { container } = render(<>
+    <Component testProp={null} />
+    <Component testProp={false} />
+    <Component testProp={undefined} />
+  </>);
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <input
+        class=""
+      />
+      <input
+        class=""
+      />
+      <input
+        class=""
+      />
+    </div>
+  `);
+});
+
 it("should execute runtime styles recursively", () => {
   const Component = styled.input<{ $testProp: boolean }>(
     ({ $testProp }) =>
