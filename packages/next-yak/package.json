@@ -1,21 +1,19 @@
 {
   "name": "next-yak",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./withYak": "./loaders/withYak.cjs"
+    "./withYak": "./loaders/withYak.cjs",
+    "./babel": "./runtime/babel-yak-plugin.js"
   },
   "typesVersions": {
     "*": {
-      "withYak": [
-        "./loaders/withYak.d.ts"
-      ],
-      "*": [
-        "./runtime/index.d.ts"
-      ]
+      "withYak": ["./loaders/withYak.d.ts"],
+      "babel": ["./runtime/babel-yak-plugin.d.ts"],
+      "*": ["./runtime/index.d.ts"]
     }
   },
   "scripts": {

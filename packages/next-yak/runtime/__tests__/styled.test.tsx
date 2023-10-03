@@ -139,3 +139,24 @@ it("should add class if prop is set", () => {
     </div>
   `);
 });
+
+it("should execute runtime styles recursively", () => {
+  const Component = styled.input<{ $testProp: boolean }>(
+    ({ $testProp }) =>
+      $testProp &&
+      css(
+        ({ $testProp }) =>
+          $testProp && css(({ $testProp }) => $testProp && css("recursive-test-class"))
+      )
+  );
+
+  const { container } = render(<Component $testProp />);
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <input
+        class="recursive-test-class"
+      />
+    </div>
+  `);
+});
