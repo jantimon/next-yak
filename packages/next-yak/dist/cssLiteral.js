@@ -15,7 +15,7 @@ const internalImplementation = (...args) => {
                 const value = arg.style[key];
                 if (typeof value === "function") {
                     dynamicCssFunctions.push((props) => ({
-                        style: { [key]: value(props) },
+                        style: { [key]: String(recursivePropExecution(props, value)) },
                     }));
                 }
                 else {
@@ -35,7 +35,7 @@ const internalImplementation = (...args) => {
         if (typeof result === "function") {
             unwrapProps(props, result, classNames, style);
         }
-        else if (typeof result === "object") {
+        else if (typeof result === "object" && result) {
             if ("className" in result && result.className) {
                 classNames.push(result.className);
             }
@@ -58,6 +58,20 @@ const internalImplementation = (...args) => {
             style: allStyles,
         };
     };
+};
+const recursivePropExecution = (props, fn) => {
+    const result = fn(props);
+    if (typeof result === "function") {
+        return recursivePropExecution(props, result);
+    }
+    if (process.env.NODE_ENV === "development") {
+        if (typeof result !== "string" &&
+            typeof result !== "number" &&
+            !(result instanceof String)) {
+            throw new Error(`Dynamic CSS functions must return a string or number but returned ${JSON.stringify(result)}`);
+        }
+    }
+    return result;
 };
 export const css = internalImplementation;
 //# sourceMappingURL=cssLiteral.js.map

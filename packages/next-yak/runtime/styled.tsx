@@ -21,21 +21,31 @@ function StyledFactory (Component: string | FunctionComponent<any>) {
     styles: TemplateStringsArray,
     ...values: CSSInterpolation<TProps>[]
   ) => {
-    return (props: TProps) => {
+    const yak = (props: TProps, ref: unknown) => {
       const runtimeStyles = css(styles, ...values)(props as any);
       const filteredProps =
         typeof Component === "string" ? removePrefixedProperties(props) : props;
+      const mergedProps = {
+        ...filteredProps,
+        style: { ...(props.style || {}), ...runtimeStyles.style },
+        className:
+          (props.className ? props.className + " " : "") +
+          runtimeStyles.className,
+      }
+      // if the styled(Component) syntax is used and the component is a yak component
+      // we can call the yak function directly to avoid an unnecessary wrapper with an additional
+      // forwardRef call
+      if (typeof Component !== "string" && "yak" in (Component as (FunctionComponent<any> & {yak?: FunctionComponent<any>}))) {
+        return (Component as (FunctionComponent<any> & {yak: FunctionComponent<any>})).yak(mergedProps, ref);
+      }
       return (
         <Component
-          {...filteredProps}
-          style={{ ...(props.style || {}), ...runtimeStyles.style }}
-          className={
-            (props.className ? props.className + " " : "") +
-            runtimeStyles.className
-          }
+          ref={ref as any}
+          {...mergedProps}
         />
       );
     };
+    return Object.assign(React.forwardRef(yak), {yak});
   };
 };
 
