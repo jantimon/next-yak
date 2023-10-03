@@ -13,35 +13,19 @@ function StyledFactory(Component) {
     }, {
         attrs: (attrsProps) => {
             return (styles, ...values) => {
-                return (_props) => {
+                return (props) => {
                     const newProps = typeof attrsProps === "function"
-                        ? //@ts-expect-error
-                            attrsProps(_props)
+                        ? attrsProps(props)
                         : attrsProps;
-                    let props = {};
-                    if ("$__zzAttrs" in _props) {
-                        props = {
-                            ...removeUndefined(newProps),
-                            ..._props,
-                            className: mergeClassNames(_props.className, newProps.className),
-                            style: { ...(_props.style || {}), ...(newProps.style || {}) },
-                            $__zzAttrs: true,
-                        };
-                    }
-                    else {
-                        props = {
-                            ..._props,
-                            ...removeUndefined(newProps),
-                            className: mergeClassNames(_props.className, newProps.className),
-                            style: { ...(_props.style || {}), ...(newProps.style || {}) },
-                            $__zzAttrs: true,
-                        };
-                    }
-                    const runtimeStyles = css(styles, ...values)(props);
+                    const combinedProps = combineProps(props, newProps);
+                    const runtimeStyles = css(styles, ...values)(combinedProps);
                     const filteredProps = typeof Component === "string"
-                        ? removePrefixedProperties(props)
-                        : props;
-                    return (React.createElement(Component, { ...filteredProps, style: { ...(props.style || {}), ...runtimeStyles.style }, className: mergeClassNames(props.className, runtimeStyles.className) }));
+                        ? removePrefixedProperties(combinedProps)
+                        : combinedProps;
+                    return (React.createElement(Component, { ...filteredProps, style: {
+                            ...(combinedProps.style || {}),
+                            ...runtimeStyles.style,
+                        }, className: mergeClassNames(combinedProps.className, runtimeStyles.className) }));
                 };
             };
         },
@@ -93,5 +77,27 @@ const removeUndefined = (obj) => {
         }
     }
     return result;
+};
+const combineProps = (props, newProps) => {
+    let combinedProps = {};
+    if ("$__attrs" in props) {
+        // allow overriding props when attrs was used previously
+        combinedProps = {
+            ...removeUndefined(newProps),
+            ...props,
+        };
+    }
+    else {
+        combinedProps = {
+            ...props,
+            ...removeUndefined(newProps),
+        };
+    }
+    return {
+        ...combinedProps,
+        className: mergeClassNames(props.className, newProps.className),
+        style: { ...(props.style || {}), ...(newProps.style || {}) },
+        $__attrs: true,
+    };
 };
 //# sourceMappingURL=styled.js.map

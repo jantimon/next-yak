@@ -73,48 +73,28 @@ function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
     {
       attrs: (attrsProps) => {
         return (styles, ...values) => {
-          return (_props) => {
+          return (props) => {
             const newProps =
               typeof attrsProps === "function"
-                ? //@ts-expect-error
-                  attrsProps(_props)
+                ? (attrsProps as Function)(props)
                 : attrsProps;
 
-            let props = {} as any;
-            if ("$__zzAttrs" in _props) {
-              props = {
-                ...removeUndefined(newProps),
-                ..._props,
-                className: mergeClassNames(
-                  _props.className as string,
-                  newProps.className as string
-                ),
-                style: { ...(_props.style || {}), ...(newProps.style || {}) },
-                $__zzAttrs: true,
-              };
-            } else {
-              props = {
-                ..._props,
-                ...removeUndefined(newProps),
-                className: mergeClassNames(
-                  _props.className as string,
-                  newProps.className as string
-                ),
-                style: { ...(_props.style || {}), ...(newProps.style || {}) },
-                $__zzAttrs: true,
-              };
-            }
-            const runtimeStyles = css(styles, ...values)(props as any);
+            const combinedProps = combineProps(props, newProps);
+
+            const runtimeStyles = css(styles, ...values)(combinedProps);
             const filteredProps =
               typeof Component === "string"
-                ? removePrefixedProperties(props)
-                : props;
+                ? removePrefixedProperties(combinedProps)
+                : combinedProps;
             return (
               <Component
                 {...filteredProps}
-                style={{ ...(props.style || {}), ...runtimeStyles.style }}
+                style={{
+                  ...(combinedProps.style || {}),
+                  ...runtimeStyles.style,
+                }}
                 className={mergeClassNames(
-                  props.className as string,
+                  combinedProps.className as string,
                   runtimeStyles.className as string
                 )}
               />
@@ -173,4 +153,38 @@ const removeUndefined = <T,>(obj: T) => {
     }
   }
   return result;
+};
+
+const combineProps = <
+  T extends {
+    className?: string;
+    style?: React.CSSProperties;
+  }
+>(
+  props: T,
+  newProps: T
+) => {
+  let combinedProps = {} as T;
+  if ("$__attrs" in props) {
+    // allow overriding props when attrs was used previously
+    combinedProps = {
+      ...removeUndefined(newProps),
+      ...props,
+    };
+  } else {
+    combinedProps = {
+      ...props,
+      ...removeUndefined(newProps),
+    };
+  }
+
+  return {
+    ...combinedProps,
+    className: mergeClassNames(
+      props.className as string,
+      newProps.className as string
+    ),
+    style: { ...(props.style || {}), ...(newProps.style || {}) },
+    $__attrs: true,
+  };
 };
