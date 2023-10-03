@@ -1,6 +1,19 @@
 import { FunctionComponent } from "react";
 import { CSSInterpolation } from "./cssLiteral";
 import React from "react";
+/**
+ * The `styled` method works perfectly on all of your own or any third-party component,
+ * as long as they attach the passed className prop to a DOM element.
+ *
+ * @usage
+ *
+ * ```tsx
+ * const StyledLink = styled(Link)`
+ *  color: #BF4F74;
+ *  font-weight: bold;
+ * `;
+ * ```
+ */
 export declare const styled: (<TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]) => FunctionComponent<TBaseProps & TProps>) & {
     symbol: <TProps_1 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_1>[]) => FunctionComponent<React.SVGProps<SVGSymbolElement> & TProps_1>;
     object: <TProps_2 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_2>[]) => FunctionComponent<React.ClassAttributes<HTMLObjectElement> & React.ObjectHTMLAttributes<HTMLObjectElement> & TProps_2>;

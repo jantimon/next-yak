@@ -11,6 +11,19 @@ function StyledFactory(Component) {
     };
 }
 ;
+/**
+ * The `styled` method works perfectly on all of your own or any third-party component,
+ * as long as they attach the passed className prop to a DOM element.
+ *
+ * @usage
+ *
+ * ```tsx
+ * const StyledLink = styled(Link)`
+ *  color: #BF4F74;
+ *  font-weight: bold;
+ * `;
+ * ```
+ */
 export const styled = new Proxy(StyledFactory, {
     get(target, TagName) {
         if (typeof TagName !== "string") {
