@@ -2,12 +2,24 @@ import { css } from "./cssLiteral";
 import React from "react";
 function StyledFactory(Component) {
     return (styles, ...values) => {
-        return (props) => {
+        const yak = (props, ref) => {
             const runtimeStyles = css(styles, ...values)(props);
             const filteredProps = typeof Component === "string" ? removePrefixedProperties(props) : props;
-            return (React.createElement(Component, { ...filteredProps, style: { ...(props.style || {}), ...runtimeStyles.style }, className: (props.className ? props.className + " " : "") +
-                    runtimeStyles.className }));
+            const mergedProps = {
+                ...filteredProps,
+                style: { ...(props.style || {}), ...runtimeStyles.style },
+                className: (props.className ? props.className + " " : "") +
+                    runtimeStyles.className,
+            };
+            // if the styled(Component) syntax is used and the component is a yak component
+            // we can call the yak function directly to avoid an unnecessary wrapper with an additional
+            // forwardRef call
+            if (typeof Component !== "string" && "yak" in Component) {
+                return Component.yak(mergedProps, ref);
+            }
+            return (React.createElement(Component, { ref: ref, ...mergedProps }));
         };
+        return Object.assign(React.forwardRef(yak), { yak });
     };
 }
 ;

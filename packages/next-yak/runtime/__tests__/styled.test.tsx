@@ -191,3 +191,26 @@ it("should execute runtime styles recursively", () => {
     </div>
   `);
 });
+
+it("should allow using refs", () => {
+  const Component = styled.input();
+
+  let elementFromRef: HTMLInputElement | null = null;
+  render(<Component ref={(element) => {
+    elementFromRef = element;
+  }} />);
+
+  expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
+});
+
+it("should allow using nested refs", () => {
+  const BaseComponent = styled.input();
+  const Component = styled(BaseComponent)();
+
+  let elementFromRef: HTMLInputElement | null = null;
+  render(<Component ref={(element) => {
+    elementFromRef = element;
+  }} />);
+
+  expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
+});
