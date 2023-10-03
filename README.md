@@ -114,6 +114,7 @@ This is a proof of concept. There are a lot of things that need to be done befor
 
   - https://github.com/vercel/next.js/pull/51115
   - https://github.com/vercel/next.js/pull/53796
+  - https://github.com/scottrippey/next-router-mock/pull/105
   - https://github.com/css-modules/postcss-modules-local-by-default/pull/64
   
 </details>

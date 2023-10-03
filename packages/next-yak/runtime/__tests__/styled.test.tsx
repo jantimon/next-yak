@@ -35,13 +35,13 @@ it("should render a literal element with styles", () => {
 it("should forward properties", () => {
   const Component = styled.input("cssClass");
 
-  const { container } = render(<Component type="password" />);
+  const { container } = render(<Component forwardedProp="forwarded" />);
 
   expect(container).toMatchInlineSnapshot(`
     <div>
       <input
         class="cssClass"
-        type="password"
+        forwardedprop="forwarded"
       />
     </div>
   `);
