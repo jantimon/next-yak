@@ -1,3 +1,8 @@
+/// @ts-nocheck
+// We are testing internal functionality which does not match
+// 1:1 the API exposed to the user before compilation.
+// Therfefore types are not matching and need to be ignored.
+
 import { it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import { styled } from "../styled";
@@ -35,13 +40,13 @@ it("should render a literal element with styles", () => {
 it("should forward properties", () => {
   const Component = styled.input("cssClass");
 
-  const { container } = render(<Component forwardedProp="forwarded" />);
+  const { container } = render(<Component defaultValue="forwarded" />);
 
   expect(container).toMatchInlineSnapshot(`
     <div>
       <input
         class="cssClass"
-        forwardedprop="forwarded"
+        value="forwarded"
       />
     </div>
   `);
@@ -127,9 +132,9 @@ it("should not add class if prop is not set", () => {
 });
 
 it("should add class if prop is set", () => {
-  const Component = styled.input(({ testProp }) => testProp && css("test"));
+  const Component = styled.input(({ $testProp }) => $testProp && css("test"));
 
-  const { container } = render(<Component testProp />);
+  const { container } = render(<Component $testProp />);
 
   expect(container).toMatchInlineSnapshot(`
     <div>
