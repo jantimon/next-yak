@@ -169,7 +169,7 @@ module.exports = async function cssLoader(source) {
         }
 
         cssCode.push({
-          code: `${literalSelector} { ${code} }`,
+          code: `${literalSelector} { ${unEscapeCssCode(code)} }`,
           loc: quasi.loc?.start.line || 0,
         });
       }
@@ -181,3 +181,11 @@ module.exports = async function cssLoader(source) {
 
   return cssCode.map((code) => code.code).join("\n\n");
 };
+
+/**
+ * In jscode slashes are escaped however in css code they are not
+ * e.g. in javascript `:before { content: "\\f0c9"; }` would be `:before { content: "\f0c9"; }` in css
+ * slashes are still possible with `:before { content: "\\\\"; }`
+ * @param {string} code
+ */
+const unEscapeCssCode = (code) => code.replace(/\\\\/ig, "\\");

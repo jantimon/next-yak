@@ -21,6 +21,10 @@ const headline = css<{ $primary?: boolean }>`
     font-size: 1.5rem;
   }
 
+  &:before, &:after {
+    content: '\\2022'
+  }
+
   &:hover {
     color: red;
   }
