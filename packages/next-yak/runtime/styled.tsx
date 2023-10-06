@@ -14,23 +14,39 @@ import { HtmlTags, YakAttributes, YakStyled, YakTemplateString } from "./types";
 function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
   return Object.assign<YakTemplateString<T>, { attrs: YakAttributes<T> }>(
     (styles, ...values) => {
-      return (props) => {
+      const yak = (props: any, ref: unknown) => {
         const runtimeStyles = css(styles, ...values)(props as any);
         const filteredProps =
           typeof Component === "string"
             ? removePrefixedProperties(props)
             : props;
-        return (
-          <Component
-            {...filteredProps}
-            style={{ ...(props.style || {}), ...runtimeStyles.style }}
-            className={
-              (props.className ? props.className + " " : "") +
-              runtimeStyles.className
+        const mergedProps = {
+          ...filteredProps,
+          style: { ...(props.style || {}), ...runtimeStyles.style },
+          className:
+            (props.className ? props.className + " " : "") +
+            runtimeStyles.className,
+        };
+        // if the styled(Component) syntax is used and the component is a yak component
+        // we can call the yak function directly to avoid an unnecessary wrapper with an additional
+        // forwardRef call
+        if (
+          typeof Component !== "string" &&
+          "yak" in
+            (Component as FunctionComponent<any> & {
+              yak?: FunctionComponent<any>;
+            })
+        ) {
+          return (
+            Component as FunctionComponent<any> & {
+              yak: FunctionComponent<any>;
             }
-          />
-        );
+          ).yak(mergedProps, ref);
+        }
+        // @ts-expect-error
+        return <Component ref={ref as any} {...mergedProps} />;
       };
+      return Object.assign(React.forwardRef(yak), { yak });
     },
     {
       attrs: (attrsProps) => {
