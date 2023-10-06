@@ -208,3 +208,37 @@ const headline = css\`
 .style1 { color: orange }"
 `);
 });
+
+it("should prevent double escaped chars", async () => {
+  // in styled-components \\ is replaced with \
+  // this test verifies that yak provides the same behavior
+  expect(
+  await cssloader.call(
+    loaderContext,
+    `
+import { css } from "next-yak";
+import { queries } from "@/theme";
+
+const headline = css\`
+  :before {
+    content: "\\2022";
+  }
+  :after {
+    content: "\\\\2022";
+  }
+  content: "\\\\\\\\"
+\`
+`
+  )
+).toMatchInlineSnapshot(`
+  ".style0 { 
+    :before {
+      content: \\"\\\\2022\\";
+    }
+    :after {
+      content: \\"\\\\2022\\";
+    }
+    content: \\"\\\\\\\\\\"
+   }"
+`);
+});
