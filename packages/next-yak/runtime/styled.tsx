@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
-import { CSSInterpolation, css } from "./cssLiteral";
+import { css } from "./cssLiteral";
 import React from "react";
+import { HtmlTags, YakAttributes, YakStyled, YakTemplateString } from "./types";
 
 //
 // The `styled()` and `styled.` API
@@ -10,45 +11,6 @@ import React from "react";
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
 
-type HtmlTags = keyof JSX.IntrinsicElements;
-
-type Merge<T, U> = Omit<Partial<T>, keyof U> &
-  Omit<Partial<U>, keyof T> &
-  Partial<U & T>;
-
-type YakAttributes<T> = <TNew = {}>(
-  attrArgs: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
-) => YakTemplateString<Merge<T, TNew>>;
-
-type YakTemplateString<T> = <TCSSProps extends Record<string, unknown> = {}>(
-  styles: TemplateStringsArray,
-  ...values: Array<CSSInterpolation<TCSSProps>>
-) => FunctionComponent<TCSSProps & T>;
-
-type YakWithAttributes<T> = {
-  <TCSSProps extends Record<string, unknown> = {}>(
-    styles: TemplateStringsArray,
-    ...values: Array<CSSInterpolation<TCSSProps>>
-  ): FunctionComponent<TCSSProps & T>;
-  attrs: YakAttributes<T>;
-};
-
-type YakLiteralComponents = {
-  [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>;
-};
-
-type YakStyledComponentFunction = <T>(
-  component: FunctionComponent<T>
-) => YakWithAttributes<T>;
-
-type YakStyled = YakStyledComponentFunction & YakLiteralComponents;
-
-function StyledFactory<T>(
-  Component: FunctionComponent<T>
-): YakWithAttributes<T>;
-function StyledFactory<T extends HtmlTags>(
-  Component: T
-): YakWithAttributes<JSX.IntrinsicElements[T]>;
 function StyledFactory<T>(Component: HtmlTags | FunctionComponent<T>) {
   return Object.assign<YakTemplateString<T>, { attrs: YakAttributes<T> }>(
     (styles, ...values) => {
