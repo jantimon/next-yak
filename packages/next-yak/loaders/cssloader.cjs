@@ -1,6 +1,7 @@
 /// @ts-check
 const babel = require("@babel/core");
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
+const localIdent = require("./lib/localIdent.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve } = require("path");
@@ -37,10 +38,11 @@ module.exports = async function cssLoader(source) {
 
   const { types: t } = babel;
 
-  /** @type {{css?: string, styled?: string}} */
+  /** @type {{css?: string, styled?: string, keyframes?: string}} */
   const localVarNames = {
     css: undefined,
     styled: undefined,
+    keyframes: undefined,
   };
 
   let index = 0;
@@ -81,7 +83,8 @@ module.exports = async function cssLoader(source) {
         const localSpecifier = specifier.local || importSpecifier;
         if (
           importSpecifier.name === "styled" ||
-          importSpecifier.name === "css"
+          importSpecifier.name === "css" ||
+          importSpecifier.name === "keyframes"
         ) {
           localVarNames[importSpecifier.name] = localSpecifier.name;
         }
@@ -97,6 +100,12 @@ module.exports = async function cssLoader(source) {
       const isCssLiteral =
         t.isIdentifier(tag) &&
         /** @type {babel.types.Identifier} */ (tag).name === localVarNames.css;
+
+      const isKeyFrameLiteral =
+        t.isIdentifier(tag) &&
+        /** @type {babel.types.Identifier} */ (tag).name === localVarNames.keyframes;
+
+
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
@@ -115,14 +124,14 @@ module.exports = async function cssLoader(source) {
           /** @type {babel.types.CallExpression} */ (tag).callee
         ).name === localVarNames.styled;
 
-      if (!isCssLiteral && !isStyledLiteral && !isStyledCall) {
+      if (!isCssLiteral && !isKeyFrameLiteral && !isStyledLiteral && !isStyledCall) {
         return;
       }
 
       replaceQuasiExpressionTokens(path.node.quasi, replaces, t);
 
       // Keep the same selector for all quasis belonging to the same css block
-      const literalSelector = `.style${index++}`;
+      const literalSelector = localIdent(index++ , isKeyFrameLiteral ? "keyframes": "selector");
 
       // Replace the tagged template expression with a call to the 'styled' function
       const quasis = path.node.quasi.quasis;

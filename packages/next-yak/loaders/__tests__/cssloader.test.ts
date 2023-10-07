@@ -43,15 +43,15 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-".style0 { 
-  font-size: 2rem;
-  font-weight: bold;
-  color: red;
-  &:hover {
-    color: red;
-  }
-       }"
-`);
+      ".yak-0 { 
+        font-size: 2rem;
+        font-weight: bold;
+        color: red;
+        &:hover {
+          color: red;
+        }
+             }"
+    `);
   });
 
   it("should support nested css code", async () => {
@@ -80,25 +80,25 @@ const headline = css\`
 `
   )
 ).toMatchInlineSnapshot(`
-".style0 { 
-  font-size: 2rem;
-  font-weight: bold;
-  color: red;
-   }
+  ".yak-0 { 
+    font-size: 2rem;
+    font-weight: bold;
+    color: red;
+     }
 
-.style1 { 
-    color: blue;
-   }
+  .yak-1 { 
+      color: blue;
+     }
 
-.style2 { 
-    color: blue;
-   }
+  .yak-2 { 
+      color: blue;
+     }
 
-.style0 { 
-  &:hover {
-    color: var(--🦬18fi82j0);
-  }
- }"
+  .yak-0 { 
+    &:hover {
+      color: var(--🦬18fi82j0);
+    }
+   }"
 `);
   });
 
@@ -120,10 +120,10 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-".style1 { 
-    color: blue;
-   }"
-`);
+      ".yak-1 { 
+          color: blue;
+         }"
+    `);
   });
 });
 
@@ -143,11 +143,11 @@ const headline = css\`
 `
   )
 ).toMatchInlineSnapshot(`
-".style0 { 
-  &:hover {
-    color: var(--🦬18fi82j0);
-  }
-   }"
+  ".yak-0 { 
+    &:hover {
+      color: var(--🦬18fi82j0);
+    }
+     }"
 `);
 });
 
@@ -167,12 +167,12 @@ const headline = css\`
 `
   )
 ).toMatchInlineSnapshot(`
-".style0 { 
-  transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-  display: block;
-   }
+  ".yak-0 { 
+    transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+    display: block;
+     }
 
-.style1 { color: orange }"
+  .yak-1 { color: orange }"
 `);
 });
 
@@ -196,16 +196,16 @@ const headline = css\`
 `
   )
 ).toMatchInlineSnapshot(`
-".style0 { 
-  color: blue;
-  @media (min-width: 640px) {
-    color: red;
-  }
-  transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-  display: block;
-   }
+  ".yak-0 { 
+    color: blue;
+    @media (min-width: 640px) {
+      color: red;
+    }
+    transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+    display: block;
+     }
 
-.style1 { color: orange }"
+  .yak-1 { color: orange }"
 `);
 });
 
@@ -231,7 +231,7 @@ const headline = css\`
 `
   )
 ).toMatchInlineSnapshot(`
-  ".style0 { 
+  ".yak-0 { 
     :before {
       content: \\"\\\\2022\\";
     }
@@ -239,6 +239,44 @@ const headline = css\`
       content: \\"\\\\2022\\";
     }
     content: \\"\\\\\\\\\\"
+   }"
+`);
+});
+
+it("should convert keyframes", async () => {
+  expect(
+  await cssloader.call(
+    loaderContext,
+    `
+import styles from "./page.module.css";
+import { styled, keyframes } from "next-yak";
+
+const fadeIn = keyframes\`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+\`
+
+const FadeInButton = styled.button\`
+  animation: 1s \${fadeIn} ease-out;
+\`
+`
+  )
+).toMatchInlineSnapshot(`
+  "@keyframes yak-animation-0 { 
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+   }
+
+  .yak-1 { 
+    animation: 1s var(--🦬18fi82j0) ease-out;
    }"
 `);
 });

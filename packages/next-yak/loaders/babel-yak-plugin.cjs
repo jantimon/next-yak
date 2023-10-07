@@ -4,6 +4,7 @@ const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
+const localIdent = require("./lib/localIdent.cjs");
 
 /** @typedef {import("./babel-yak-plugin.d.ts").YakBabelPluginOptions} YakBabelPluginOptions */
 
@@ -31,6 +32,7 @@ module.exports = function (babel, options) {
       this.localVarNames = {
         css: undefined,
         styled: undefined,
+        keyframes: undefined,
       };
       this.isImportedInCurrentFile = false;
       this.classNameCount = 0;
@@ -80,7 +82,8 @@ module.exports = function (babel, options) {
           const localSpecifier = specifier.local || importSpecifier;
           if (
             importSpecifier.name === "styled" ||
-            importSpecifier.name === "css"
+            importSpecifier.name === "css" ||
+            importSpecifier.name === "keyframes"
           ) {
             this.localVarNames[importSpecifier.name] = localSpecifier.name;
             this.isImportedInCurrentFile = true;
@@ -102,6 +105,12 @@ module.exports = function (babel, options) {
           t.isIdentifier(tag) &&
           /** @type {babel.types.Identifier} */ (tag).name ===
             this.localVarNames.css;
+
+        const isKeyframesLiteral =
+          t.isIdentifier(tag) &&
+          /** @type {babel.types.Identifier} */ (tag).name ===
+            this.localVarNames.keyframes;
+
         const isStyledLiteral =
           t.isMemberExpression(tag) &&
           t.isIdentifier(
@@ -119,7 +128,7 @@ module.exports = function (babel, options) {
             /** @type {babel.types.CallExpression} */ (tag).callee
           ).name === this.localVarNames.styled;
 
-        if (!isCssLiteral && !isStyledLiteral && !isStyledCall) {
+        if (!isCssLiteral && !isStyledLiteral && !isStyledCall && !isKeyframesLiteral) {
           return;
         }
 
@@ -128,7 +137,7 @@ module.exports = function (babel, options) {
         // Keep the same selector for all quasis belonging to the same css block
         const classNameExpression = t.memberExpression(
           t.identifier("__styleYak"),
-          t.identifier(`style${this.classNameCount++}`)
+          t.identifier(localIdent(this.classNameCount++, isKeyframesLiteral ? "animation" : "className" ) )
         );
 
         // Replace the tagged template expression with a call to the 'styled' function
