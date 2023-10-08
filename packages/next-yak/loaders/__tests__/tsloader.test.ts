@@ -60,7 +60,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
-      const headline = css(__styleYak.yak-0);
+      const headline = css(__styleYak.yak_0);
       export const Main = () => <h1 className={headline({}).className}>Hello World</h1>;"
     `);
   });
@@ -91,7 +91,7 @@ const headline = css\`
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const headline = css(__styleYak.yak-0, x > 0.5 && css(__styleYak.yak-1));"
+      const headline = css(__styleYak.yak_0, x > 0.5 && css(__styleYak.yak_1));"
     `);
   });
 
@@ -125,8 +125,8 @@ const FancyButton = styled(Button)\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const Button = styled.button(__styleYak.yak-0, x > 0.5 && css(__styleYak.yak-1));
-      const FancyButton = styled(Button)(__styleYak.yak-2);"
+      const Button = styled.button(__styleYak.yak_0, x > 0.5 && css(__styleYak.yak_1));
+      const FancyButton = styled(Button)(__styleYak.yak_2);"
     `);
   });
 });
@@ -153,7 +153,7 @@ const headline = css\`
   import { css } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
   import { easing } from \\"styleguide\\";
-  const headline = css(__styleYak.yak-0, css(__styleYak.yak-1), css(__styleYak.yak-2), {
+  const headline = css(__styleYak.yak_0, css(__styleYak.yak_1), css(__styleYak.yak_2), {
     \\"style\\": {
       \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
         i
@@ -190,8 +190,8 @@ const FadeInButton = styled.button\`
   "import styles from \\"./page.module.css\\";
   import { styled, keyframes } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-  const fadeIn = keyframes(__styleYak.yak-animation-0);
-  const FadeInButton = styled.button(__styleYak.yak-1, {
+  const fadeIn = keyframes(__styleYak.yak_animation_0);
+  const FadeInButton = styled.button(__styleYak.yak_1, {
     \\"style\\": {
       \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": fadeIn
     }
