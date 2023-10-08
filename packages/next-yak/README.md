@@ -9,6 +9,59 @@ the initial version of next-yak will only work for next.js
 ![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/2dcaf443-7205-4ef3-ba44-fbbe3ef2807d)
 
 
+## Example
+
+Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
+
+```tsx
+import { styled, css } from "next-yak";
+
+const Title = styled.h1<{ x: number; children: React.ReactNode }>`
+  display: block;
+  ${({ $x }) => $x % 2 === 0 && css`color: red`}
+  position: relative;
+  top: ${({ $x }) => `${$x * 100}px`};
+`;
+
+const App = () => (
+  <Title $x={3}>
+    Hello World
+  </Title>
+);
+```
+
+## Installation
+
+```bash
+npm install next-yak
+```
+
+```js
+// next.config.js
+const { withYak } = require("next-yak");
+
+const nextConfig = {
+  // your next.js config
+};
+
+module.exports = withYak(nextConfig);
+```
+
+## Nesting
+
+`next-yak` supports nesting out of the box.  
+Next.js 13 supports nesting only with the `postcss-nested` plugin.  
+Therefore you have to create a `postcss.config.js` file in your project root:
+
+```js
+// postcss.config.js
+module.exports = {
+  plugins: {
+    'postcss-nested': {},
+  }
+};
+```
+
 ## Motivation
 
 Most of the existing CSS-in-JS libraries are either slow or have a complex api. This project tries to find a middle ground between speed and api complexity.
@@ -32,27 +85,6 @@ The goal of this project is to create a proof of concept for a CSS-in-JS library
 
 Optimizations are done by postcss. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
 
-## Example
-
-Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
-
-```tsx
-import { styled, css } from "next-yak";
-
-const Title = styled.h1<{ x: number; children: React.ReactNode }>`
-  display: block;
-  ${({ $x }) => $x % 2 === 0 && css`color: red`}
-  position: relative;
-  top: ${({ $x }) => `${$x * 100}px`};
-`;
-
-const App = () => (
-  <Title $x={3}>
-    Hello World
-  </Title>
-);
-```
-
 ## Performance Gains
 
 [![CSS Extract](https://raw.githubusercontent.com/jantimon/next-yak/main/css-extract.gif)](https://raw.githubusercontent.com/jantimon/next-yak/main/css-extract.gif)
@@ -64,7 +96,7 @@ next-yak converts css-in-js into css modules. This allows to use the full power 
 [![Compile Flow](https://raw.githubusercontent.com/jantimon/next-yak/main/compile-flow.webp)](https://raw.githubusercontent.com/jantimon/next-yak/main/compile-flow.webp)
 
 
-### Atomic CSS
+## Atomic CSS
 
 `next-yak` ships with atomic css support  
 So you can use [tailwind](https://tailwindcss.com/) out of the box without additonal configuration.
