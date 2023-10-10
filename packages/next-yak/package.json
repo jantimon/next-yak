@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
     "./withYak": "./loaders/withYak.cjs",
     "./babel": "./runtime/babel-yak-plugin.js"
   },
@@ -18,7 +21,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build && npm run test",
-    "build": "tsc -p tsconfig.json --outDir dist/",
+    "build": "tsc -p tsconfig.json --noEmit && tsup runtime/index.ts --target es2022 --external react --dts --format cjs,esm --minify --clean --sourcemap --out-dir dist",
     "test": "vitest run",
     "test:watch": "vitest --watch -u"
   },
@@ -39,7 +42,8 @@
     "react": "^18.2.0",
     "typescript": "5.1.6",
     "vite": "^4.4.9",
-    "vitest": "0.34.5"
+    "vitest": "0.34.5",
+    "tsup": "7.2.0"
   },
   "files": [
     "dist",
