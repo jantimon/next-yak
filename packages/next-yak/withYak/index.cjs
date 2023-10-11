@@ -1,14 +1,39 @@
-// @ts-check
-/// <reference types="node" />
-/** @typedef {import("./index.d.ts").YakConfigOptions} YakConfigOptions */
-/** @typedef {import("../../example/node_modules/next/dist/server/config.js").NextConfig} NextConfig */
+"use strict";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-/**
- Add a Yak to a Next.js app
- @param {YakConfigOptions} yakOptions
- @param {NextConfig} nextConfig
-*/
-const addYak = (yakOptions, nextConfig) => {
+// withYak/index.ts
+var withYak_exports = {};
+__export(withYak_exports, {
+  withYak: () => withYak
+});
+module.exports = __toCommonJS(withYak_exports);
+var addYak = (yakOptions, nextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
     if (previousConfig) {
@@ -21,48 +46,33 @@ const addYak = (yakOptions, nextConfig) => {
       issuerLayer: {
         // prevent recursions when calling this.importModule
         // in the tsloader
-        not: ["yak-importModule"],
-      },
+        not: ["yak-importModule"]
+      }
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
       loader: require.resolve("../loaders/cssloader.cjs"),
-      options: yakOptions,
+      options: yakOptions
     });
-
     return webpackConfig;
   };
   return nextConfig;
 };
-
-// Wrapper to allow sync, async, and function configuration of Next.js
-/** @type {typeof import("./index.d.ts")["withYak"]} */
-const withYak = (
-  maybeYakOptions,
-  nextConfig
-) => {
-  if (nextConfig === undefined) {
+var withYak = (maybeYakOptions, nextConfig) => {
+  if (nextConfig === void 0) {
     return withYak({}, maybeYakOptions);
   }
-  // If the second parameter is present the first parameter must be a YakConfigOptions
-  const yakOptions = /** @type {YakConfigOptions} */(maybeYakOptions);
+  const yakOptions = maybeYakOptions;
   if (typeof nextConfig === "function") {
-    /**
-     * A NextConfig can be a sync or async function
-     * https://nextjs.org/docs/pages/api-reference/next-config-js
-     * @param {any[]} args
-     */
     return (...args) => {
-      /** @type {NextConfig | Promise<NextConfig>} Dynamic Next Configs can be async or sync */
       const config = nextConfig(...args);
-      return config instanceof Promise
-        ? config.then((config) => addYak(yakOptions, config))
-        : addYak(yakOptions, config);
+      return config instanceof Promise ? config.then((config2) => addYak(yakOptions, config2)) : addYak(yakOptions, config);
     };
   }
   return addYak(yakOptions, nextConfig);
 };
-
-module.exports = {
-  withYak,
-};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  withYak
+});
+//# sourceMappingURL=index.cjs.map
