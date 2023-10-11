@@ -1,11 +1,12 @@
 // @ts-check
 /// <reference types="node" />
-/** @typedef {import("./withYak.d.ts").YakConfigOptions} YakConfigOptions */
+/** @typedef {import("./index.d.ts").YakConfigOptions} YakConfigOptions */
+/** @typedef {import("../../example/node_modules/next/dist/server/config.js").NextConfig} NextConfig */
 
 /**
  Add a Yak to a Next.js app
  @param {YakConfigOptions} yakOptions
- @param {any} nextConfig
+ @param {NextConfig} nextConfig
 */
 const addYak = (yakOptions, nextConfig) => {
   const previousConfig = nextConfig.webpack;
@@ -15,7 +16,7 @@ const addYak = (yakOptions, nextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: require.resolve("./tsloader.cjs"),
+      loader: require.resolve("../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -25,7 +26,7 @@ const addYak = (yakOptions, nextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: require.resolve("./cssloader.cjs"),
+      loader: require.resolve("../loaders/cssloader.cjs"),
       options: yakOptions,
     });
 
@@ -34,24 +35,34 @@ const addYak = (yakOptions, nextConfig) => {
   return nextConfig;
 };
 
-
 // Wrapper to allow sync, async, and function configuration of Next.js
-const withYak = (yakOptions, nextConfig) => {
+/** @type {typeof import("./index.d.ts")["withYak"]} */
+const withYak = (
+  maybeYakOptions,
+  nextConfig
+) => {
   if (nextConfig === undefined) {
-    return withYak({}, yakOptions);
+    return withYak({}, maybeYakOptions);
   }
+  // If the second parameter is present the first parameter must be a YakConfigOptions
+  const yakOptions = /** @type {YakConfigOptions} */(maybeYakOptions);
   if (typeof nextConfig === "function") {
+    /**
+     * A NextConfig can be a sync or async function
+     * https://nextjs.org/docs/pages/api-reference/next-config-js
+     * @param {any[]} args
+     */
     return (...args) => {
+      /** @type {NextConfig | Promise<NextConfig>} Dynamic Next Configs can be async or sync */
       const config = nextConfig(...args);
-      if (config.then) {
-        return config.then((config) => addYak(yakOptions, config));
-      }
-      return addYak(yakOptions, config);
+      return config instanceof Promise
+        ? config.then((config) => addYak(yakOptions, config))
+        : addYak(yakOptions, config);
     };
   }
   return addYak(yakOptions, nextConfig);
 };
 
 module.exports = {
-  withYak
+  withYak,
 };

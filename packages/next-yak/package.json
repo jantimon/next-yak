@@ -9,29 +9,22 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./withYak": "./loaders/withYak.cjs",
-    "./babel": "./runtime/babel-yak-plugin.js"
-  },
-  "typesVersions": {
-    "*": {
-      "withYak": ["./loaders/withYak.d.ts"],
-      "babel": ["./runtime/babel-yak-plugin.d.ts"],
-      "*": ["./runtime/index.d.ts"]
-    }
+    "./withYak": "./withYak/index.cjs"
   },
   "scripts": {
     "prepublishOnly": "npm run build && npm run test",
-    "build": "tsc -p tsconfig.json --noEmit && tsup runtime/index.ts --target es2022 --external react --dts --format cjs,esm --minify --clean --sourcemap --out-dir dist",
-    "test": "vitest run",
+    "build": "tsup runtime/index.ts --target es2022 --external react --dts --format cjs,esm --minify --clean --sourcemap --out-dir dist",
+    "test": "vitest run && tsc -p tsconfig.json",
     "test:watch": "vitest --watch -u"
   },
   "dependencies": {
-    "@babel/core": "^7.16.12",
-    "@babel/plugin-syntax-typescript": "^7.16.7",
+    "@babel/core": "7.23.0",
+    "@babel/plugin-syntax-typescript": "7.22.5",
     "postcss-nested": "^6.0.1"
   },
   "devDependencies": {
-    "@babel/traverse": "^7.16.12",
+    "@types/babel__core": "^7.1.14",
+    "@babel/types": "7.23.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "29.5.5",

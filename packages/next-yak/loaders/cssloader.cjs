@@ -58,7 +58,7 @@ module.exports = async function cssLoader(source) {
   const cssCode = [];
   babel.traverse(ast, {
     /**
-     * @param {import("@babel/traverse").NodePath<import("@babel/types").ImportDeclaration>} path
+     * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
      */
     ImportDeclaration(path) {
       const node = path.node;
@@ -91,7 +91,7 @@ module.exports = async function cssLoader(source) {
       });
     },
     /**
-     * @param {import("@babel/traverse").NodePath<import("@babel/types").TaggedTemplateExpression>} path
+     * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
      */
     TaggedTemplateExpression(path) {
       // Check if the tag name matches the imported 'css' or 'styled' variable

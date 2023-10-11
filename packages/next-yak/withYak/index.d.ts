@@ -27,13 +27,25 @@
  * ```
  */
 export const withYak: {
-  <T extends Record<string, any>>(yakOptions: YakConfigOptions, nextConfig: T): T;
-  <T extends () => Record<string, any>> (yakOptions: YakConfigOptions, nextConfig: T): T;
-  <T extends () => Promise<Record<string, any>>> (yakOptions: YakConfigOptions, nextConfig: T): T;
+  <T extends 
+    (
+      Record<string, any>
+      |
+      ((...args: any[]) => Record<string, any>)
+      |
+      ((...args: any[]) => Promise<Record<string, any>>)
+    )
+  >(yakOptions: YakConfigOptions, nextConfig: T): T;
   // no yakConfig
-  <T extends Record<string, any>>(nextConfig: T): T;
-  <T extends () => Record<string, any>> (nextConfig: T): T;
-  <T extends () => Promise<Record<string, any>>> (nextConfig: T): T;
+  <T extends 
+    (
+      Record<string, any>
+      |
+      ((...args: any[]) => Record<string, any>)
+      |
+      ((...args: any[]) => Promise<Record<string, any>>)
+    )
+  >(nextConfig: T, _?: undefined): T;
 }
 
-export type YakConfigOptions = { configPath: string }
+export type YakConfigOptions = { configPath?: string }
