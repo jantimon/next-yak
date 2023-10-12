@@ -7,8 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "pnpm --filter=next-yak run test",
-    "test:watch": "pnpm --filter=next-yak run test:watch"
+    "test": "pnpm --filter=next-yak run test && pnpm run package:types",
+    "test:watch": "pnpm --filter=next-yak run test:watch",
+    "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak"
   },
   "engines": {
     "node": ">=16.14.0",

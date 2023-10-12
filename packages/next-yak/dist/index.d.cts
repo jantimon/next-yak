@@ -1,6 +1,15 @@
-import { FunctionComponent } from "react";
-import { CSSInterpolation } from "./cssLiteral";
-import React from "react";
+import React, { FunctionComponent } from 'react';
+
+type ComponentStyles<TProps extends Record<string, unknown>> = (props: TProps) => {
+    className: string;
+    style?: {
+        [key: string]: string;
+    };
+};
+type CSSInterpolation<TProps extends Record<string, unknown>> = string | number | undefined | null | false | ComponentStyles<TProps> | ((props: TProps) => CSSInterpolation<TProps>);
+type CSSFunction = <TProps extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]) => ComponentStyles<TProps>;
+declare const css: CSSFunction;
+
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
  * as long as they attach the passed className prop to a DOM element.
@@ -14,7 +23,7 @@ import React from "react";
  * `;
  * ```
  */
-export declare const styled: (<TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]) => FunctionComponent<TBaseProps & TProps>) & {
+declare const styled: (<TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]) => FunctionComponent<TBaseProps & TProps>) & {
     symbol: <TProps_1 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_1>[]) => FunctionComponent<React.SVGProps<SVGSymbolElement> & TProps_1>;
     object: <TProps_2 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_2>[]) => FunctionComponent<React.ClassAttributes<HTMLObjectElement> & React.ObjectHTMLAttributes<HTMLObjectElement> & TProps_2>;
     style: <TProps_3 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_3>[]) => FunctionComponent<React.ClassAttributes<HTMLStyleElement> & React.StyleHTMLAttributes<HTMLStyleElement> & TProps_3>;
@@ -193,4 +202,47 @@ export declare const styled: (<TBaseProps extends {}>(Component: FunctionCompone
     use: <TProps_176 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_176>[]) => FunctionComponent<React.SVGProps<SVGUseElement> & TProps_176>;
     view: <TProps_177 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_177>[]) => FunctionComponent<React.SVGProps<SVGViewElement> & TProps_177>;
 };
-//# sourceMappingURL=styled.d.ts.map
+
+/**
+ * Allows to use atomic CSS classes in a styled or css block
+ *
+ * @usage
+ *
+ * ```tsx
+ * import { styled, atoms } from "next-yak";
+ *
+ * const Button = styled.button<{ $primary?: boolean }>`
+ *  ${atoms("text-teal-600", "text-base", "rounded-md")}
+ *  ${props => props.$primary && atoms("shadow-md")}
+ * `;
+ * ```
+ */
+declare const atoms: (...atoms: string[]) => () => {
+    className: string;
+};
+
+/**
+ * Allows to use CSS keyframe animations in a styled or css block
+ *
+ * @usage
+ *
+ * ```tsx
+ * import { styled, keyframes } from "next-yak";
+ *
+ * const rotate = keyframes`
+ *  from {
+ *   transform: rotate(0deg);
+ *  }
+ *  to {
+ *   transform: rotate(360deg);
+ *  }
+ * `;
+ *
+ * const Spinner = styled.div`
+ *   animation: ${rotate} 1s linear infinite;
+ * `;
+ * ```
+ */
+declare const keyframes: (styles: TemplateStringsArray, ...dynamic: never[]) => string;
+
+export { atoms, css, keyframes, styled };

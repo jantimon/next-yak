@@ -1,21 +1,20 @@
-/// @ts-check
-const babel = require("@babel/core");
+/// @ts-check;
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 
-/** @typedef {import("./babel-yak-plugin.d.ts").YakBabelPluginOptions} YakBabelPluginOptions */
+/** @typedef {{replaces: Record<string, Record<string, string>>,  rootContext?: string}} YakBabelPluginOptions */
 
 /**
  * Babel plugin for typescript files that use yak - it will do things:
  * - inject the import to the css-module (with .yak.module.css extension)
  * - replace the css template literal with styles from the css-module
  *
- * @param {babel} babel
+ * @param {import("@babel/core")} babel
  * @param {YakBabelPluginOptions} options
- * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}>}
+ * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string, keyframes?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}>}
  */
 module.exports = function (babel, options) {
   const { replaces } = options;
@@ -40,7 +39,7 @@ module.exports = function (babel, options) {
     },
     visitor: {
       /**
-       * @param {import("@babel/traverse").NodePath<import("@babel/types").ImportDeclaration>} path
+       * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
        * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       ImportDeclaration(path, state) {
@@ -91,7 +90,7 @@ module.exports = function (babel, options) {
         });
       },
       /**
-       * @param {import("@babel/traverse").NodePath<import("@babel/types").TaggedTemplateExpression>} path
+       * @param {import("@babel/core").NodePath<import("@babel/core").types.TaggedTemplateExpression>} path
        * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       TaggedTemplateExpression(path, state) {

@@ -1,9 +1,11 @@
+/// @ts-check
 // from https://github.com/sindresorhus/strip-css-comments/tree/main
 /**
  * 
  * @param {string} cssString 
  */
 module.exports = function stripCssComments(cssString) {
+	/** @type {string | false} */
 	let isInsideString = false;
 	let currentCharacter = '';
 	let comment = '';
