@@ -30,6 +30,10 @@ export function getYakThemeContext() {
         },
     }
 }
+
+declare module "next-yak/context" {
+    export interface DefaultTheme extends ReturnType<typeof getYakThemeContext> { }
+}
 ```
 
 In your root layout component you have to forward the entire response of `getYakThemeContext`
