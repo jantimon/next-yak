@@ -1,6 +1,11 @@
 import { FunctionComponent } from "react";
-import { CSSInterpolation, css } from "./cssLiteral";
+import { CSSInterpolation, css } from "./cssLiteral.js";
 import React from "react";
+
+// the following export is not relative as "next-yak/context"
+// links to one file for react server components and
+// to another file for classic react components
+import { DefaultTheme, useTheme } from "next-yak/context"
 
 //
 // The `styled()` and `styled.` API
@@ -14,7 +19,7 @@ type HtmlTags = keyof JSX.IntrinsicElements;
 
 function StyledFactory <THtmlTag extends HtmlTags>(Component: THtmlTag): <TProps extends Record<string, unknown>>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps>[]
+  ...values: CSSInterpolation<TProps & { theme: DefaultTheme }>[]
 ) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
 function StyledFactory (Component: string | FunctionComponent<any>) {
   return <TProps extends Record<string, unknown>>(
@@ -22,7 +27,8 @@ function StyledFactory (Component: string | FunctionComponent<any>) {
     ...values: CSSInterpolation<TProps>[]
   ) => {
     const yak = (props: TProps, ref: unknown) => {
-      const runtimeStyles = css(styles, ...values)(props as any);
+      const propsWithTheme = { ...props, theme: useTheme() };
+      const runtimeStyles = css(styles, ...values)(propsWithTheme as any);
       const filteredProps =
         typeof Component === "string" ? removePrefixedProperties(props) : props;
       const mergedProps = {

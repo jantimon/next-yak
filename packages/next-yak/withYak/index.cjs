@@ -33,6 +33,8 @@ __export(withYak_exports, {
   withYak: () => withYak
 });
 module.exports = __toCommonJS(withYak_exports);
+var import_path = __toESM(require("path"), 1);
+var import_fs = require("fs");
 var addYak = (yakOptions, nextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
@@ -54,10 +56,27 @@ var addYak = (yakOptions, nextConfig) => {
       loader: require.resolve("../loaders/cssloader.cjs"),
       options: yakOptions
     });
+    const yakContext = resolveYakContext(yakOptions.contextPath, webpackConfig.context);
+    if (yakContext) {
+      webpackConfig.resolve.alias["next-yak/context/baseContext"] = yakContext;
+    }
     return webpackConfig;
   };
   return nextConfig;
 };
+function resolveYakContext(contextPath, cwd) {
+  const yakContext = contextPath ? import_path.default.resolve(cwd, contextPath) : import_path.default.resolve(cwd, "yak.context");
+  const extensions = ["", ".ts", ".tsx", ".js", ".jsx"];
+  for (const extension in extensions) {
+    const fileName = yakContext + extensions[extension];
+    if ((0, import_fs.existsSync)(fileName)) {
+      return fileName;
+    }
+  }
+  if (contextPath) {
+    throw new Error(`Could not find yak context file at ${yakContext}`);
+  }
+}
 var withYak = (maybeYakOptions, nextConfig) => {
   if (nextConfig === void 0) {
     return withYak({}, maybeYakOptions);

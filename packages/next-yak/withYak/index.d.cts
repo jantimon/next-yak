@@ -1,5 +1,6 @@
 type YakConfigOptions = {
     configPath?: string;
+    contextPath?: string;
 };
 /**
  * Add Yak to your Next.js app

@@ -1,7 +1,9 @@
 /// <reference types="node" />
 import { NextConfig } from "../../example/node_modules/next/dist/server/config.js";
+import path from "path";
+import { existsSync } from "fs";
 
-export type YakConfigOptions = { configPath?: string }
+export type YakConfigOptions = { configPath?: string, contextPath?: string }
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
@@ -25,10 +27,34 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
       options: yakOptions,
     });
 
+    // With the following alias the internal next-yak code 
+    // is able to import a context which works for server components
+    const yakContext = resolveYakContext(yakOptions.contextPath, webpackConfig.context);
+    if (yakContext) {
+      webpackConfig.resolve.alias['next-yak/context/baseContext'] = yakContext;
+    }
+
     return webpackConfig;
   };
   return nextConfig;
 };
+
+/**
+ * Try to resolve yak
+ */
+function resolveYakContext(contextPath: string | undefined, cwd: string) {
+  const yakContext = contextPath ? path.resolve(cwd, contextPath) : path.resolve(cwd, "yak.context");
+  const extensions = ["", ".ts", ".tsx", ".js", ".jsx", ];
+  for (const extension in extensions) {
+    const fileName = yakContext + extensions[extension];
+    if (existsSync(fileName)) {
+      return fileName;
+    }
+  }
+  if (contextPath) {
+    throw new Error(`Could not find yak context file at ${yakContext}`);
+  }
+}
 
 // Wrapper to allow sync, async, and function configuration of Next.js
 /**

@@ -1,4 +1,4 @@
-import { css, styled } from "next-yak";
+import { YakThemeProvider, css, styled, useTheme } from "next-yak";
 import styles from "./page.module.css";
 import { queries } from "@/theme";
 import { Clock } from "./Clock";
@@ -40,7 +40,12 @@ const Headline = styled.h1<{ $primary?: boolean }>`
 `;
 
 const Button = styled.button<{ $primary?: boolean }>`
-  color: #009688;
+  ${({ theme }) => theme.highContrast ?
+  css`
+    color: #000;
+  ` : css`
+    color: #009688;
+  `};
   background: #fff;
   border: 1px solid currentColor;
   font-size: 17px;
@@ -52,10 +57,12 @@ const Button = styled.button<{ $primary?: boolean }>`
   font-family: "Open Sans", sans-serif;
   min-width: 120px;
   ${({ $primary }) =>
-    $primary &&
-    css`
+    {
+    return $primary &&
+      css`
       border-width: 2px;
-    `}
+    `;
+  }}
 `;
 
 const FancyButton = styled(Button)`
@@ -90,15 +97,17 @@ const SyledLink = styled.a`
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <Headline>Hello world</Headline>
-      <Button>Ghost</Button>
-      <Button $primary>Primary Ghost</Button>
-      <FancyButton $primary title="fancy">Fancy Ghost</FancyButton>
-      <Clock />
-      <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
-        view code
-      </SyledLink>
-    </main>
+    <YakThemeProvider>
+      <main className={styles.main}>
+        <Headline>Hello world</Headline>
+        <Button>Ghost</Button>
+        <Button $primary>Primary Ghost</Button>
+        <FancyButton $primary title="fancy">Fancy Ghost</FancyButton>
+        <Clock />
+        <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
+          view code
+        </SyledLink>
+      </main>
+    </YakThemeProvider>
   );
 }
