@@ -2,6 +2,7 @@ import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries } from "@/theme";
 import { Clock } from "./Clock";
+import { HighContrastToggle } from "./HighContrastToggle";
 
 const headline = css<{ $primary?: boolean }>`
   font-size: 2rem;
@@ -107,6 +108,7 @@ export default function Home() {
           Fancy Ghost
         </FancyButton>
         <Clock />
+        <HighContrastToggle />
         <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
         </SyledLink>
