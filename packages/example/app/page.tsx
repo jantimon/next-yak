@@ -1,4 +1,4 @@
-import { css, styled } from "next-yak";
+import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries } from "@/theme";
 import { Clock } from "./Clock";
@@ -21,8 +21,9 @@ const headline = css<{ $primary?: boolean }>`
     font-size: 1.5rem;
   }
 
-  &:before, &:after {
-    content: '\\2022'
+  &:before,
+  &:after {
+    content: "\\2022";
   }
 
   &:hover {
@@ -40,7 +41,14 @@ const Headline = styled.h1<{ $primary?: boolean }>`
 `;
 
 const Button = styled.button<{ $primary?: boolean }>`
-  color: #009688;
+  ${({ theme }) =>
+    theme.highContrast
+      ? css`
+          color: #000;
+        `
+      : css`
+          color: #009688;
+        `};
   background: #fff;
   border: 1px solid currentColor;
   font-size: 17px;
@@ -90,15 +98,19 @@ const SyledLink = styled.a`
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <Headline>Hello world</Headline>
-      <Button>Ghost</Button>
-      <Button $primary>Primary Ghost</Button>
-      <FancyButton $primary title="fancy">Fancy Ghost</FancyButton>
-      <Clock />
-      <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
-        view code
-      </SyledLink>
-    </main>
+    <YakThemeProvider>
+      <main className={styles.main}>
+        <Headline>Hello world</Headline>
+        <Button>Ghost</Button>
+        <Button $primary>Primary Ghost</Button>
+        <FancyButton $primary title="fancy">
+          Fancy Ghost
+        </FancyButton>
+        <Clock />
+        <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
+          view code
+        </SyledLink>
+      </main>
+    </YakThemeProvider>
   );
 }
