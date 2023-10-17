@@ -1,6 +1,6 @@
 "use client";
-import { css, keyframes, styled } from "next-yak";
-import { useEffect, useState, useMemo, ReactNode } from "react";
+import { css, styled } from "next-yak";
+import { useEffect, useMemo, useState } from "react";
 
 export const ClockHands = () => {
   const currentTime = useCurrentTime();
