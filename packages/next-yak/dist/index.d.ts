@@ -25,7 +25,9 @@ declare const css: CSSFunction;
  * `;
  * ```
  */
-declare const styled: (<TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps>[]) => FunctionComponent<TBaseProps & TProps>) & {
+declare const styled: (<TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps & {
+    theme: DefaultTheme;
+}>[]) => FunctionComponent<TBaseProps & TProps>) & {
     symbol: <TProps_1 extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps_1 & {
         theme: DefaultTheme;
     }>[]) => FunctionComponent<React.SVGProps<SVGSymbolElement> & TProps_1>;

@@ -78,7 +78,7 @@ export const styled = new Proxy(StyledFactory, {
 }) as (
   <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(
     styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
+    ...values: CSSInterpolation<TProps & { theme: DefaultTheme }>[]
   ) => FunctionComponent<TBaseProps & TProps>
 ) & {
   [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
