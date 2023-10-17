@@ -7,3 +7,5 @@ export { keyframes } from "./keyframes.js";
 // links to one file for react server components and
 // to another file for classic react components
 export { useTheme, YakThemeProvider} from "next-yak/context"
+
+export type { YakTheme } from "./context/index.d.ts";

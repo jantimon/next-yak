@@ -7,17 +7,31 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import { getYakThemeContext } from "./baseContext.js";
 
-export interface DefaultTheme { }
+export interface YakTheme { }
 
-const YakContext = createContext<DefaultTheme>(getYakThemeContext());
+/** 
+ * The yak theme context
+ * @see https://github.com/jantimon/next-yak/blob/main/packages/next-yak/runtime/context/README.md
+ */
+const YakContext = createContext<YakTheme>({});
 
-export const useTheme = (): DefaultTheme => useContext(YakContext);
+/** 
+ * Returns the current yak theme context
+ * 
+ * @see https://github.com/jantimon/next-yak/blob/main/packages/next-yak/runtime/context/README.md
+ */
+export const useTheme = (): YakTheme => useContext(YakContext);
+
+/** 
+ * Yak theme context provider
+ * 
+ * @see https://github.com/jantimon/next-yak/blob/main/packages/next-yak/runtime/context/README.md
+ */
 export const YakThemeProvider = ({
   children,
-  theme = getYakThemeContext(),
+  theme = {},
 }: {
   children: ReactNode;
-  theme?: ReturnType<typeof getYakThemeContext>;
+  theme?: YakTheme;
 }) => <YakContext.Provider value={theme}>{children}</YakContext.Provider>;

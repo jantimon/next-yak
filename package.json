@@ -7,6 +7,8 @@
     "packages/*"
   ],
   "scripts": {
+    "build": "pnpm run --filter=next-yak build",
+    "example": "pnpm --filter=next-yak-example run dev",
     "test": "pnpm --filter=next-yak run test && pnpm run package:types",
     "test:watch": "pnpm --filter=next-yak run test:watch",
     "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak"

@@ -32,7 +32,7 @@ export function getYakThemeContext() {
 }
 
 declare module "next-yak/context" {
-    export interface DefaultTheme extends ReturnType<typeof getYakThemeContext> { }
+    export interface YakTheme extends ReturnType<typeof getYakThemeContext> { }
 }
 ```
 
@@ -70,6 +70,10 @@ const theme = {
         secondary: "blue",
     },
 };
+
+declare module "next-yak/context" {
+    export interface YakTheme extends typeof theme { }
+}
 
 export function App({ children }) {
     return (

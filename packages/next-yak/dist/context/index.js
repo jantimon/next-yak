@@ -5,18 +5,11 @@ import React, {
   createContext,
   useContext
 } from "react";
-
-// runtime/context/baseContext.tsx
-function getYakThemeContext() {
-  return {};
-}
-
-// runtime/context/index.tsx
-var YakContext = createContext(getYakThemeContext());
+var YakContext = createContext({});
 var useTheme = () => useContext(YakContext);
 var YakThemeProvider = ({
   children,
-  theme = getYakThemeContext()
+  theme = {}
 }) => /* @__PURE__ */ React.createElement(YakContext.Provider, { value: theme }, children);
 export {
   YakThemeProvider,
