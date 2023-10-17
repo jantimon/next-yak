@@ -12,6 +12,6 @@ export function getYakThemeContext() {
     }
 }
 
-declare module "next-yak/context" {
-    export interface DefaultTheme extends ReturnType<typeof getYakThemeContext> { }
+declare module "next-yak" {
+    export interface YakTheme extends ReturnType<typeof getYakThemeContext> { }
 }

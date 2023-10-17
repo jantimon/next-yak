@@ -1,15 +1,15 @@
 "use client";
-import { styled } from "next-yak";
-import { useEffect, useState, useMemo, ReactNode } from "react";
+import { css, styled } from "next-yak";
+import { useEffect, useMemo, useState } from "react";
 
 export const ClockHands = () => {
   const currentTime = useCurrentTime();
   if (currentTime === null) return null;
   return (
           <>
-            <SecondHand angle={currentTime.secondsAngle} />
-            <MinuteHand angle={currentTime.minutesAngle} />
-            <HourHand angle={currentTime.hoursAngle} />
+            <SecondHand $angle={currentTime.secondsAngle} />
+            <MinuteHand $angle={currentTime.minutesAngle} />
+            <HourHand $angle={currentTime.hoursAngle} />
           </>
         )
 };
@@ -36,25 +36,35 @@ const useCurrentTime = () => {
   }, [time]);
 };
 
-const ClockHand = styled.div<{ angle: number }>`
+const ClockHand = styled.div<{ $angle: number }>`
   position: absolute;
   left: 50%;
   top: 50%;
   transform-origin: 50% 100%;
-  transform: translate(-50%, -100%) rotate(${({ angle }) => `${angle}deg`});
+  transform: translate(-50%, -100%) rotate(${({ $angle }) => `${$angle}deg`});
 `;
 const SecondHand = styled(ClockHand)`
   width: 2px;
   height: 45%;
-  background: red;
+  translate: 0 0 40px;
+  ${({ theme }) =>
+    theme.highContrast
+      ? css`
+          background: #000;
+        `
+      : css`
+          background: #f00;
+        `};
 `;
 const MinuteHand = styled(ClockHand)`
   width: 4px;
   height: 40%;
   background: black;
+  translate: 0 0 40px;
 `;
 const HourHand = styled(ClockHand)`
   width: 6px;
   height: 30%;
   background: black;
+  translate: 0 0 40px;
 `;

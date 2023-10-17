@@ -1,7 +1,8 @@
 {
   "name": "next-yak",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "type": "module",
+  "types": "./dist/",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -11,22 +12,28 @@
       "require": "./withYak/index.cjs"
     },
     "./context/baseContext": {
-      "types": "./dist/context/baseContext.d.ts",
-      "default": "./dist/context/baseContext.js"
+      "import": "./dist/context/baseContext.js",
+      "require": "./dist/context/baseContext.cjs"
     },
     "./context": {
-      "types": "./dist/context/index.d.ts",
-      "react-server": "./dist/context/index.server.js",
-      "default": "./dist/context/index.js"
+      "react-server": {
+        "import": "./dist/context/index.server.js",
+        "require": "./dist/context/index.server.cjs"
+      },
+      "default": {
+        "import": "./dist/context/index.js",
+        "require": "./dist/context/index.cjs"
+      }
     }
   },
   "scripts": {
     "prepublishOnly": "npm run build && npm run test",
     "build": "pnpm run --filter . \"/^build:/\"",
-    "build:runtime": "tsup runtime/index.ts --target es2022 --clean --external react --external next-yak/context --dts --format cjs,esm --minify --sourcemap --out-dir dist",
-    "build:baseContext": "tsup runtime/context/baseContext.tsx --target es2022 --external react --dts --format esm --sourcemap --out-dir dist/context/",
-    "build:context:client": "tsup runtime/context/index.tsx --target es2022 --external react --external next-yak/context/baseContext --dts --format esm --sourcemap --out-dir dist/context/",
-    "build:context:server": "tsup runtime/context/index.server.tsx --target es2022 --external react --external next-yak/context/baseContext --external ./index.js --format esm --sourcemap --out-dir dist/context/",
+    "build:runtime": "tsup runtime/index.ts --target es2022 --clean --external react --external next-yak/context --format cjs,esm --minify --sourcemap --out-dir dist",
+    "build:runtime:types": "tsup runtime/index.ts --target es2022 --clean --external react --dts-only --format cjs,esm --minify --sourcemap --out-dir dist",
+    "build:baseContext": "tsup runtime/context/baseContext.tsx --target es2022 --external react --dts --format cjs,esm --sourcemap --out-dir dist/context/",
+    "build:context:client": "tsup runtime/context/index.tsx --target es2022 --external react --external next-yak/context/baseContext --dts --format cjs,esm --sourcemap --out-dir dist/context/",
+    "build:context:server": "tsup runtime/context/index.server.tsx --target es2022 --external react --external next-yak/context/baseContext --external ./index.js --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:withYak": "tsup withYak/index.ts --target es2022 --dts --format cjs --sourcemap --out-dir withYak --external ../loaders/tsloader.cjs --external ../loaders/cssloader.cjs",
     "test": "vitest run && tsc -p tsconfig.json",
     "test:watch": "vitest --watch -u"

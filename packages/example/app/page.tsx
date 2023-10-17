@@ -7,16 +7,23 @@ import { HighContrastToggle } from "./HighContrastToggle";
 const headline = css<{ $primary?: boolean }>`
   font-size: 2rem;
   font-weight: bold;
-  color: blue;
-  background: linear-gradient(
-    149deg,
-    #ae52eb 0%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   filter: drop-shadow(0px 0px 1px #fff);
+  ${({ theme }) =>
+    theme.highContrast
+      ? css`
+          color: #000;
+        `
+      : css`
+          color: blue;
+          background: linear-gradient(
+            149deg,
+            #ae52eb 0%,
+            rgba(253, 29, 29, 1) 50%,
+            rgba(252, 176, 69, 1) 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        `};
 
   ${queries.sm} {
     font-size: 1.5rem;

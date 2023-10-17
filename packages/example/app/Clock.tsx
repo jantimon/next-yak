@@ -25,12 +25,18 @@ const ClockWrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   margin: 10px auto;
+  perspective: 1000px;
 `;
 const ClockFace = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 50%;
   position: relative;
+  transform-style: preserve-3d;
+  transition: transform 2s ease-in-out;
+  &:hover {
+    transform: rotateX(55deg);
+  }
 `;
 const ClockCenter = styled.div`
   width: 10px;
@@ -41,6 +47,7 @@ const ClockCenter = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  translate: 0 0 40px;
 `;
 const ClockNumber = styled.div<{ index: number; children: ReactNode }>`
   position: absolute;

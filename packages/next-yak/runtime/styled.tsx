@@ -5,7 +5,8 @@ import React from "react";
 // the following export is not relative as "next-yak/context"
 // links to one file for react server components and
 // to another file for classic react components
-import { DefaultTheme, useTheme } from "next-yak/context"
+import { useTheme } from "next-yak/context";
+import type { YakTheme } from "./context/index.d.ts";
 
 //
 // The `styled()` and `styled.` API
@@ -19,7 +20,7 @@ type HtmlTags = keyof JSX.IntrinsicElements;
 
 function StyledFactory <THtmlTag extends HtmlTags>(Component: THtmlTag): <TProps extends Record<string, unknown>>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: DefaultTheme }>[]
+  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
 function StyledFactory (Component: string | FunctionComponent<any>) {
   return <TProps extends Record<string, unknown>>(
@@ -78,7 +79,7 @@ export const styled = new Proxy(StyledFactory, {
 }) as (
   <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(
     styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
+    ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
   ) => FunctionComponent<TBaseProps & TProps>
 ) & {
   [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
