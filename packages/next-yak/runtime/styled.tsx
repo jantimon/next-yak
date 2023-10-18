@@ -1,12 +1,7 @@
 import { ForwardedRef, FunctionComponent } from "react";
 import { css } from "./cssLiteral.js";
 import React from "react";
-import {
-  HtmlTags,
-  YakOptionalAttributes,
-  YakStyled,
-  YakWithAttributes,
-} from "./types.js";
+import { HtmlTags, Merge, YakStyled, YakTemplateString } from "./types.js";
 
 // the following export is not relative as "next-yak/context"
 // links to one file for react server components and
@@ -23,13 +18,14 @@ import type { YakTheme } from "./context/index.d.ts";
 //
 
 const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
-  Object.assign(yakStyled(Component)(), {
-    attrs: yakStyled(Component),
-  }) as YakWithAttributes<T>;
+  Object.assign(yakStyled(Component), {
+    attrs: (attrs: any) => yakStyled(Component, attrs),
+  });
 
-const yakStyled: <T>(
-  component: FunctionComponent<T> | HtmlTags
-) => YakOptionalAttributes<T> = (Component) => (attrs) => {
+const yakStyled: <T, TNew>(
+  component: FunctionComponent<T> | HtmlTags,
+  attrs?: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
+) => YakTemplateString<Merge<T, TNew>> = (Component, attrs) => {
   return (styles, ...values) => {
     const yak = (
       props: {
