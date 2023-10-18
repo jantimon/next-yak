@@ -145,16 +145,16 @@ it("should add class if prop is set", () => {
   `);
 });
 
-
 it("should allow falsy values", () => {
-  const Component = styled.input(
-    ({ testProp }) => testProp && css("test"));
+  const Component = styled.input(({ $testProp }) => $testProp && css("test"));
 
-  const { container } = render(<>
-    <Component testProp={null} />
-    <Component testProp={false} />
-    <Component testProp={undefined} />
-  </>);
+  const { container } = render(
+    <>
+      <Component $testProp={null} />
+      <Component $testProp={false} />
+      <Component $testProp={undefined} />
+    </>
+  );
 
   expect(container).toMatchInlineSnapshot(`
     <div>
@@ -177,7 +177,8 @@ it("should execute runtime styles recursively", () => {
       $testProp &&
       css(
         ({ $testProp }) =>
-          $testProp && css(({ $testProp }) => $testProp && css("recursive-test-class"))
+          $testProp &&
+          css(({ $testProp }) => $testProp && css("recursive-test-class"))
       )
   );
 
@@ -196,9 +197,13 @@ it("should allow using refs", () => {
   const Component = styled.input();
 
   let elementFromRef: HTMLInputElement | null = null;
-  render(<Component ref={(element) => {
-    elementFromRef = element;
-  }} />);
+  render(
+    <Component
+      ref={(element) => {
+        elementFromRef = element;
+      }}
+    />
+  );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
 });
@@ -208,9 +213,13 @@ it("should allow using nested refs", () => {
   const Component = styled(BaseComponent)();
 
   let elementFromRef: HTMLInputElement | null = null;
-  render(<Component ref={(element) => {
-    elementFromRef = element;
-  }} />);
+  render(
+    <Component
+      ref={(element) => {
+        elementFromRef = element;
+      }}
+    />
+  );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
 });

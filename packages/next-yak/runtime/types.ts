@@ -8,7 +8,11 @@ export type Merge<T, U> = Omit<Partial<T>, keyof U> &
   Partial<U & T>;
 
 export type YakAttributes<T> = <TNew = {}>(
-  attrArgs: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
+  attrs: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
+) => YakTemplateString<Merge<T, TNew>>;
+
+export type YakOptionalAttributes<T> = <TNew = {}>(
+  attrs?: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
 ) => YakTemplateString<Merge<T, TNew>>;
 
 export type YakTemplateString<T> = <
