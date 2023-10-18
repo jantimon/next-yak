@@ -2,6 +2,7 @@ import { css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries } from "@/theme";
 import { Clock } from "./Clock";
+import { Inputs } from "@/app/Input";
 
 const headline = css<{ $primary?: boolean }>`
   font-size: 2rem;
@@ -31,16 +32,11 @@ const headline = css<{ $primary?: boolean }>`
     `}
 `;
 
-const Headline = styled.h1.attrs({
-  $primary: true,
-})<{ $primary?: boolean }>`
+const Headline = styled.h1<{ $primary?: boolean }>`
   ${headline}
 `;
 
-const Button = styled.button.attrs<{ $attrsPrimary?: boolean }>((p) => ({
-  type: "button",
-  $primary: p.$attrsPrimary,
-}))<{ $primary?: boolean }>`
+const Button = styled.button<{ $primary?: boolean }>`
   color: #009688;
   background: #fff;
   border: 1px solid currentColor;
@@ -59,9 +55,7 @@ const Button = styled.button.attrs<{ $attrsPrimary?: boolean }>((p) => ({
     `}
 `;
 
-const FancyButton = styled(Button).attrs<{ $newPrimary?: boolean }>((p) => ({
-  $primary: p.$newPrimary,
-}))`
+const FancyButton = styled(Button)`
   color: #fff;
   border: 1px solid blue;
   background: linear-gradient(
@@ -97,14 +91,15 @@ export default function Home() {
     <main className={styles.main}>
       <Headline>Hello world</Headline>
       <Button>Ghost</Button>
-      <Button $attrsPrimary>Primary Ghost</Button>
-      <FancyButton $newPrimary title="fancy">
+      <Button $primary>Primary Ghost</Button>
+      <FancyButton $primary title="fancy">
         Fancy Ghost
       </FancyButton>
       <Clock />
       <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
         view code
       </StyledLink>
+      <Inputs />
     </main>
   );
 }
