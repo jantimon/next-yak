@@ -36,7 +36,7 @@ type CSSFunction = <TProps extends Record<string, unknown>>(
  * During development the user of next-yak wants to work with the
  * typings BEFORE compilation.
  * 
- * Therefore this is internal function only and it must be cast to any 
+ * Therefore this is only an internal function only and it must be cast to any 
  * before exported to the user.
  */
 const internalCssFactory = (
