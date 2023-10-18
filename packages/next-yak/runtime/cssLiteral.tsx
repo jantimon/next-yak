@@ -1,3 +1,5 @@
+import type { YakTheme } from "./index.d.ts";
+
 type ComponentStyles<TProps extends Record<string, unknown>> = (
   props: TProps
 ) => {
@@ -22,7 +24,7 @@ type CSSStyles<TProps extends Record<string, unknown>> = {
 
 type CSSFunction = <TProps extends Record<string, unknown>>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps>[]
+  ...values: CSSInterpolation<TProps & {theme: YakTheme}>[]
 ) => ComponentStyles<TProps>;
 
 const internalImplementation = (

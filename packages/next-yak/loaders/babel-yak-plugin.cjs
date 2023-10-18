@@ -1,20 +1,20 @@
-/// @ts-check
-const babel = require("@babel/core");
+/// @ts-check;
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
+const localIdent = require("./lib/localIdent.cjs");
 
-/** @typedef {import("./babel-yak-plugin.d.ts").YakBabelPluginOptions} YakBabelPluginOptions */
+/** @typedef {{replaces: Record<string, Record<string, string>>,  rootContext?: string}} YakBabelPluginOptions */
 
 /**
  * Babel plugin for typescript files that use yak - it will do things:
  * - inject the import to the css-module (with .yak.module.css extension)
  * - replace the css template literal with styles from the css-module
  *
- * @param {babel} babel
+ * @param {import("@babel/core")} babel
  * @param {YakBabelPluginOptions} options
- * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}>}
+ * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string, keyframes?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}>}
  */
 module.exports = function (babel, options) {
   const { replaces } = options;
@@ -31,6 +31,7 @@ module.exports = function (babel, options) {
       this.localVarNames = {
         css: undefined,
         styled: undefined,
+        keyframes: undefined,
       };
       this.isImportedInCurrentFile = false;
       this.classNameCount = 0;
@@ -38,7 +39,7 @@ module.exports = function (babel, options) {
     },
     visitor: {
       /**
-       * @param {import("@babel/traverse").NodePath<import("@babel/types").ImportDeclaration>} path
+       * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
        * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       ImportDeclaration(path, state) {
@@ -80,7 +81,8 @@ module.exports = function (babel, options) {
           const localSpecifier = specifier.local || importSpecifier;
           if (
             importSpecifier.name === "styled" ||
-            importSpecifier.name === "css"
+            importSpecifier.name === "css" ||
+            importSpecifier.name === "keyframes"
           ) {
             this.localVarNames[importSpecifier.name] = localSpecifier.name;
             this.isImportedInCurrentFile = true;
@@ -88,7 +90,7 @@ module.exports = function (babel, options) {
         });
       },
       /**
-       * @param {import("@babel/traverse").NodePath<import("@babel/types").TaggedTemplateExpression>} path
+       * @param {import("@babel/core").NodePath<import("@babel/core").types.TaggedTemplateExpression>} path
        * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       TaggedTemplateExpression(path, state) {
@@ -102,6 +104,12 @@ module.exports = function (babel, options) {
           t.isIdentifier(tag) &&
           /** @type {babel.types.Identifier} */ (tag).name ===
             this.localVarNames.css;
+
+        const isKeyframesLiteral =
+          t.isIdentifier(tag) &&
+          /** @type {babel.types.Identifier} */ (tag).name ===
+            this.localVarNames.keyframes;
+
         const isStyledLiteral =
           t.isMemberExpression(tag) &&
           t.isIdentifier(
@@ -129,6 +137,7 @@ module.exports = function (babel, options) {
           !isCssLiteral &&
           !isStyledLiteral &&
           !isStyledCall &&
+          !isKeyframesLiteral &&
           !isAttrsCall
         ) {
           return;
@@ -139,7 +148,12 @@ module.exports = function (babel, options) {
         // Keep the same selector for all quasis belonging to the same css block
         const classNameExpression = t.memberExpression(
           t.identifier("__styleYak"),
-          t.identifier(`style${this.classNameCount++}`)
+          t.identifier(
+            localIdent(
+              this.classNameCount++,
+              isKeyframesLiteral ? "animation" : "className"
+            )
+          )
         );
 
         // Replace the tagged template expression with a call to the 'styled' function

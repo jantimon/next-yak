@@ -43,15 +43,15 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-".style0 { 
-  font-size: 2rem;
-  font-weight: bold;
-  color: red;
-  &:hover {
-    color: red;
-  }
-       }"
-`);
+      ".yak_0 { 
+        font-size: 2rem;
+        font-weight: bold;
+        color: red;
+        &:hover {
+          color: red;
+        }
+             }"
+    `);
   });
 
   it("should support nested css code", async () => {
@@ -80,26 +80,26 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-".style0 { 
-  font-size: 2rem;
-  font-weight: bold;
-  color: red;
-   }
+      ".yak_0 { 
+        font-size: 2rem;
+        font-weight: bold;
+        color: red;
+         }
 
-.style1 { 
-    color: blue;
-   }
+      .yak_1 { 
+          color: blue;
+         }
 
-.style2 { 
-    color: blue;
-   }
+      .yak_2 { 
+          color: blue;
+         }
 
-.style0 { 
-  &:hover {
-    color: var(--🦬18fi82j0);
-  }
- }"
-`);
+      .yak_0 { 
+        &:hover {
+          color: var(--🦬18fi82j0);
+        }
+       }"
+    `);
   });
 
   it("should ignores empty chunks if they include only a comment", async () => {
@@ -120,10 +120,10 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-".style1 { 
-    color: blue;
-   }"
-`);
+      ".yak_1 { 
+          color: blue;
+         }"
+    `);
   });
 });
 
@@ -143,12 +143,12 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-".style0 { 
-  &:hover {
-    color: var(--🦬18fi82j0);
-  }
-   }"
-`);
+    ".yak_0 { 
+      &:hover {
+        color: var(--🦬18fi82j0);
+      }
+       }"
+  `);
 });
 
 it("should support attrs on intrinsic elements", async () => {
@@ -166,7 +166,7 @@ const headline = styled.input.attrs({
 `
     )
   ).toMatchInlineSnapshot(`
-    ".style0 { 
+    ".yak_0 { 
       color: red;
        }"
   `);
@@ -191,11 +191,11 @@ const newHeadline = styled(headline).attrs({
 `
     )
   ).toMatchInlineSnapshot(`
-    ".style0 { 
+    ".yak_0 { 
       color: red;
      }
 
-    .style1 { 
+    .yak_1 { 
       color: black;
        }"
   `);
@@ -217,13 +217,13 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-".style0 { 
-  transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-  display: block;
-   }
+    ".yak_0 { 
+      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+      display: block;
+       }
 
-.style1 { color: orange }"
-`);
+    .yak_1 { color: orange }"
+  `);
 });
 
 it("should replace breakpoint references with actual media queries", async () => {
@@ -246,15 +246,87 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-".style0 { 
-  color: blue;
-  @media (min-width: 640px) {
-    color: red;
+    ".yak_0 { 
+      color: blue;
+      @media (min-width: 640px) {
+        color: red;
+      }
+      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+      display: block;
+       }
+
+    .yak_1 { color: orange }"
+  `);
+});
+
+it("should prevent double escaped chars", async () => {
+  // in styled-components \\ is replaced with \
+  // this test verifies that yak provides the same behavior
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { css } from "next-yak";
+import { queries } from "@/theme";
+
+const headline = css\`
+  :before {
+    content: "\\2022";
   }
-  transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-  display: block;
+  :after {
+    content: "\\\\2022";
+  }
+  content: "\\\\\\\\"
+\`
+`
+    )
+  ).toMatchInlineSnapshot(`
+  ".yak_0 { 
+    :before {
+      content: \\"\\\\2022\\";
+    }
+    :after {
+      content: \\"\\\\2022\\";
+    }
+    content: \\"\\\\\\\\\\"
+   }"
+`);
+});
+
+it("should convert keyframes", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import styles from "./page.module.css";
+import { styled, keyframes } from "next-yak";
+
+const fadeIn = keyframes\`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+\`
+
+const FadeInButton = styled.button\`
+  animation: 1s \${fadeIn} ease-out;
+\`
+`
+    )
+  ).toMatchInlineSnapshot(`
+  "@keyframes yak_animation_0 { 
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
    }
 
-.style1 { color: orange }"
+  .yak_1 { 
+    animation: 1s var(--🦬18fi82j0) ease-out;
+   }"
 `);
 });

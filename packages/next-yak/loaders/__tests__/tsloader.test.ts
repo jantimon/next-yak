@@ -60,7 +60,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
-      const headline = css(__styleYak.style0);
+      const headline = css(__styleYak.yak_0);
       export const Main = () => <h1 className={headline({}).className}>Hello World</h1>;"
     `);
   });
@@ -91,7 +91,7 @@ const headline = css\`
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const headline = css(__styleYak.style0, x > 0.5 && css(__styleYak.style1));"
+      const headline = css(__styleYak.yak_0, x > 0.5 && css(__styleYak.yak_1));"
     `);
   });
 
@@ -125,8 +125,8 @@ const FancyButton = styled(Button)\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const Button = styled.button(__styleYak.style0, x > 0.5 && css(__styleYak.style1));
-      const FancyButton = styled(Button)(__styleYak.style2);"
+      const Button = styled.button(__styleYak.yak_0, x > 0.5 && css(__styleYak.yak_1));
+      const FancyButton = styled(Button)(__styleYak.yak_2);"
     `);
   });
 });
@@ -150,7 +150,7 @@ const headline = styled.input.attrs({
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
     const headline = styled.input.attrs({
       type: \\"text\\"
-    })(__styleYak.style0);"
+    })(__styleYak.yak_0);"
   `);
 });
 
@@ -175,10 +175,10 @@ const newHeadline = styled(headline).attrs({
   ).toMatchInlineSnapshot(`
     "import { styled } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    const headline = styled.input(__styleYak.style0);
+    const headline = styled.input(__styleYak.yak_0);
     const newHeadline = styled(headline).attrs({
       type: \\"text\\"
-    })(__styleYak.style1);"
+    })(__styleYak.yak_1);"
   `);
 });
 
@@ -204,12 +204,47 @@ const headline = css\`
   import { css } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
   import { easing } from \\"styleguide\\";
-  const headline = css(__styleYak.style0, css(__styleYak.style1), css(__styleYak.style2), {
+  const headline = css(__styleYak.yak_0, css(__styleYak.yak_1), css(__styleYak.yak_2), {
     \\"style\\": {
       \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
         i
       }) => i * 100 + \\"ms\\",
       \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": easing
+    }
+  });"
+`);
+});
+
+it("should convert keyframes", async () => {
+  expect(
+  await tsloader.call(
+    loaderContext,
+    `
+import styles from "./page.module.css";
+import { styled, keyframes } from "next-yak";
+
+const fadeIn = keyframes\`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+\`
+
+const FadeInButton = styled.button\`
+  animation: 1s \${fadeIn} ease-out;
+\`
+`
+  )
+).toMatchInlineSnapshot(`
+  "import styles from \\"./page.module.css\\";
+  import { styled, keyframes } from \\"next-yak\\";
+  import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+  const fadeIn = keyframes(__styleYak.yak_animation_0);
+  const FadeInButton = styled.button(__styleYak.yak_1, {
+    \\"style\\": {
+      \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": fadeIn
     }
   });"
 `);

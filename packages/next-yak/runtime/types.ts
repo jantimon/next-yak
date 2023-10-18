@@ -1,5 +1,10 @@
-import { ComponentType, FunctionComponent } from "react";
-import { CSSInterpolation } from "./cssLiteral";
+import { FunctionComponent } from "react";
+import { CSSInterpolation } from "./cssLiteral.js";
+
+// the following export is not relative as "next-yak/context"
+// links to one file for react server components and
+// to another file for classic react components
+import type { YakTheme } from "./context/index.d.ts";
 
 export type HtmlTags = keyof JSX.IntrinsicElements;
 
@@ -19,13 +24,13 @@ export type YakTemplateString<T> = <
   TCSSProps extends Record<string, unknown> = {}
 >(
   styles: TemplateStringsArray,
-  ...values: Array<CSSInterpolation<TCSSProps>>
+  ...values: Array<CSSInterpolation<TCSSProps & { theme: YakTheme }>>
 ) => FunctionComponent<TCSSProps & T>;
 
 export type YakWithAttributes<T> = {
   <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
-    ...values: Array<CSSInterpolation<TCSSProps>>
+    ...values: Array<CSSInterpolation<TCSSProps & { theme: YakTheme }>>
   ): FunctionComponent<TCSSProps & T>;
   attrs: YakAttributes<T>;
 };

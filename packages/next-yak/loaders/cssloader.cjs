@@ -1,6 +1,7 @@
 /// @ts-check
 const babel = require("@babel/core");
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
+const localIdent = require("./lib/localIdent.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve } = require("path");
@@ -39,11 +40,12 @@ module.exports = async function cssLoader(source) {
 
   const { types: t } = babel;
 
-  /** @type {{css?: string, styled?: string, attrs?: "attrs"}} */
+  /** @type {{css?: string, styled?: string, attrs?: "attrs", keyframes?: string}} */
   const localVarNames = {
     css: undefined,
     styled: undefined,
     attrs: "attrs",
+    keyframes: undefined,
   };
 
   let index = 0;
@@ -59,7 +61,7 @@ module.exports = async function cssLoader(source) {
   const cssCode = [];
   babel.traverse(ast, {
     /**
-     * @param {import("@babel/traverse").NodePath<import("@babel/types").ImportDeclaration>} path
+     * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
      */
     ImportDeclaration(path) {
       const node = path.node;
@@ -82,14 +84,15 @@ module.exports = async function cssLoader(source) {
         const localSpecifier = specifier.local || importSpecifier;
         if (
           importSpecifier.name === "styled" ||
-          importSpecifier.name === "css"
+          importSpecifier.name === "css" ||
+          importSpecifier.name === "keyframes"
         ) {
           localVarNames[importSpecifier.name] = localSpecifier.name;
         }
       });
     },
     /**
-     * @param {import("@babel/traverse").NodePath<import("@babel/types").TaggedTemplateExpression>} path
+     * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
      */
     TaggedTemplateExpression(path) {
       // Check if the tag name matches the imported 'css' or 'styled' variable
@@ -98,6 +101,12 @@ module.exports = async function cssLoader(source) {
       const isCssLiteral =
         t.isIdentifier(tag) &&
         /** @type {babel.types.Identifier} */ (tag).name === localVarNames.css;
+
+      const isKeyFrameLiteral =
+        t.isIdentifier(tag) &&
+        /** @type {babel.types.Identifier} */ (tag).name ===
+          localVarNames.keyframes;
+
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
@@ -122,14 +131,23 @@ module.exports = async function cssLoader(source) {
         /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
           "attrs";
 
-      if (!isCssLiteral && !isStyledLiteral && !isStyledCall && !isAttrsCall) {
+      if (
+        !isCssLiteral &&
+        !isKeyFrameLiteral &&
+        !isStyledLiteral &&
+        !isStyledCall &&
+        !isAttrsCall
+      ) {
         return;
       }
 
       replaceQuasiExpressionTokens(path.node.quasi, replaces, t);
 
       // Keep the same selector for all quasis belonging to the same css block
-      const literalSelector = `.style${index++}`;
+      const literalSelector = localIdent(
+        index++,
+        isKeyFrameLiteral ? "keyframes" : "selector"
+      );
 
       // Replace the tagged template expression with a call to the 'styled' function
       const quasis = path.node.quasi.quasis;
@@ -176,7 +194,7 @@ module.exports = async function cssLoader(source) {
         }
 
         cssCode.push({
-          code: `${literalSelector} { ${code} }`,
+          code: `${literalSelector} { ${unEscapeCssCode(code)} }`,
           loc: quasi.loc?.start.line || 0,
         });
       }
@@ -188,3 +206,11 @@ module.exports = async function cssLoader(source) {
 
   return cssCode.map((code) => code.code).join("\n\n");
 };
+
+/**
+ * In jscode slashes are escaped however in css code they are not
+ * e.g. in javascript `:before { content: "\\f0c9"; }` would be `:before { content: "\f0c9"; }` in css
+ * slashes are still possible with `:before { content: "\\\\"; }`
+ * @param {string} code
+ */
+const unEscapeCssCode = (code) => code.replace(/\\\\/gi, "\\");

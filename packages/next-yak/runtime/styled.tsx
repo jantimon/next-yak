@@ -1,12 +1,18 @@
-import { ForwardedRef, FunctionComponent, MutableRefObject } from "react";
-import { css } from "./cssLiteral";
+import { ForwardedRef, FunctionComponent } from "react";
+import { css } from "./cssLiteral.js";
 import React from "react";
 import {
   HtmlTags,
   YakOptionalAttributes,
   YakStyled,
   YakWithAttributes,
-} from "./types";
+} from "./types.js";
+
+// the following export is not relative as "next-yak/context"
+// links to one file for react server components and
+// to another file for classic react components
+import { useTheme } from "next-yak/context";
+import type { YakTheme } from "./context/index.d.ts";
 
 //
 // The `styled()` and `styled.` API
@@ -26,10 +32,14 @@ const yakStyled: <T>(
 ) => YakOptionalAttributes<T> = (Component) => (attrs) => {
   return (styles, ...values) => {
     const yak = (
-      props: Record<string, unknown>,
+      props: {
+        style: Record<string, unknown>;
+        className: string;
+        theme: YakTheme;
+      },
       ref: ForwardedRef<unknown>
     ) => {
-      let combinedProps = props;
+      let combinedProps = { ...props, theme: useTheme() };
       if (attrs) {
         const newProps =
           typeof attrs === "function" ? (attrs as Function)(props) : attrs;
@@ -105,7 +115,7 @@ export const styled = new Proxy(StyledFactory, {
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
   const result = {} as T;
   for (const key in obj) {
-    if (!key.startsWith("$")) {
+    if (!key.startsWith("$") && key !== "theme") {
       result[key] = obj[key];
     }
   }
