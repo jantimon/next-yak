@@ -1,8 +1,15 @@
 {
   "name": "next-yak",
   "version": "0.0.12",
+  "description": "yak - a css in js solution for RSC",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jantimon/next-yak/tree/main/packages/next-yak.git"
+  },
   "type": "module",
   "types": "./dist/",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -64,5 +71,11 @@
     "loaders",
     "runtime",
     "withYak"
+  ],
+  "keywords": [
+    "css",
+    "css-in-js",
+    "rsc",
+    "react"
   ]
 }
