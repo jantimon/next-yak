@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { type FunctionComponent, forwardRef } from "react";
 import { CSSInterpolation, css } from "./cssLiteral.js";
 
 // the following export is not relative as "next-yak/context"
@@ -79,7 +79,7 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
       }
       return <Component ref={ref as any} {...mergedProps} />;
     };
-    return Object.assign(React.forwardRef(Yak), { Yak });
+    return Object.assign(forwardRef(Yak), { Yak });
   };
 }
 
