@@ -35,7 +35,7 @@
     "build:context:client": "tsup runtime/context/index.tsx --target es2022 --external react --external next-yak/context/baseContext --dts --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:context:server": "tsup runtime/context/index.server.tsx --target es2022 --external react --external next-yak/context/baseContext --external ./index.js --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:withYak": "tsup withYak/index.ts --target es2022 --dts --format cjs --sourcemap --out-dir withYak --external ../loaders/tsloader.cjs --external ../loaders/cssloader.cjs",
-    "test": "vitest run && tsc -p tsconfig.json",
+    "test": "vitest run && tsc -p tsconfig.json && tsc -p ./runtime/__tests__/tsconfig.json",
     "test:watch": "vitest --watch -u"
   },
   "dependencies": {
