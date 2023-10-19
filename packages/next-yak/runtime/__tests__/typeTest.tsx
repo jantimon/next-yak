@@ -59,7 +59,7 @@ const RefTest2 = () => {
 };
 
 // Verify that a ref is inferred correctly
-const Button2 = styled.button(Button);
+const Button2 = styled(Button)``;
 const RefTest3 = () => {
   const ref = useRef<HTMLButtonElement>(null);
   return <Button2 ref={ref}>Hello World</Button2>;
