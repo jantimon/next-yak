@@ -57,10 +57,9 @@ const StyledFactory = <TComponent extends HtmlTags | FunctionComponent<any>>(Com
         return (Component as (FunctionComponent<any> & {yak: FunctionComponent<any>})).yak(mergedProps, ref);
       }
       return (
-        // @ts-expect-error
         <Component
           ref={ref as any}
-          {...mergedProps}
+          {...mergedProps as any}
         />
       );
     };
