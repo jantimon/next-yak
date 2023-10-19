@@ -21,7 +21,7 @@ const mixin = css`
   animation: ${keyframe} 1s;
   color: ${({ theme }) => {
     // verify that theme is typed correctly in styled.tsx
-    const mood: "happy1" | "sad" = theme.mood;
+    const mood: "happy" | "sad" = theme.mood;
     return mood === "happy" ? "green" : "red";
   }};
 `;
