@@ -1,15 +1,13 @@
 import type { YakTheme } from "./index.d.ts";
 
-type ComponentStyles<TProps extends Record<string, unknown>> = (
-  props: TProps
-) => {
+type ComponentStyles<TProps = {}> = (props: TProps) => {
   className: string;
   style?: {
     [key: string]: string;
   };
 };
 
-export type CSSInterpolation<TProps extends Record<string, unknown>> =
+export type CSSInterpolation<TProps = {}> =
   | string
   | number
   | undefined
@@ -18,13 +16,13 @@ export type CSSInterpolation<TProps extends Record<string, unknown>> =
   | ComponentStyles<TProps>
   | ((props: TProps) => CSSInterpolation<TProps>);
 
-type CSSStyles<TProps extends Record<string, unknown>> = {
+type CSSStyles<TProps = {}> = {
   style: { [key: string]: string | ((props: TProps) => string) };
 };
 
-type CSSFunction = <TProps extends Record<string, unknown>>(
+type CSSFunction = <TProps = {}>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & {theme: YakTheme}>[]
+  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => ComponentStyles<TProps>;
 
 const internalImplementation = (
@@ -101,7 +99,7 @@ const internalImplementation = (
 
 const recursivePropExecution = (
   props: unknown,
-  fn: (props: unknown) => any,
+  fn: (props: unknown) => any
 ): string | number => {
   const result = fn(props);
   if (typeof result === "function") {
@@ -115,8 +113,8 @@ const recursivePropExecution = (
     ) {
       throw new Error(
         `Dynamic CSS functions must return a string or number but returned ${JSON.stringify(
-          result,
-        )}`,
+          result
+        )}`
       );
     }
   }

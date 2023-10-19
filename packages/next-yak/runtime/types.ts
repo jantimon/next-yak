@@ -24,13 +24,13 @@ export type YakTemplateString<T> = <
   TCSSProps extends Record<string, unknown> = {}
 >(
   styles: TemplateStringsArray,
-  ...values: Array<CSSInterpolation<TCSSProps & { theme: YakTheme }>>
+  ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
 ) => FunctionComponent<TCSSProps & T>;
 
 export type YakWithAttributes<T> = {
   <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
-    ...values: Array<CSSInterpolation<TCSSProps & { theme: YakTheme }>>
+    ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ): FunctionComponent<TCSSProps & T>;
   attrs: YakAttributes<T>;
 };

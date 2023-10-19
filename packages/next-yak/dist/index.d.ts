@@ -1,13 +1,13 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 
-type ComponentStyles<TProps extends Record<string, unknown>> = (props: TProps) => {
+type ComponentStyles<TProps = {}> = (props: TProps) => {
     className: string;
     style?: {
         [key: string]: string;
     };
 };
-type CSSInterpolation<TProps extends Record<string, unknown>> = string | number | undefined | null | false | ComponentStyles<TProps> | ((props: TProps) => CSSInterpolation<TProps>);
-type CSSFunction = <TProps extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps & {
+type CSSInterpolation<TProps = {}> = string | number | undefined | null | false | ComponentStyles<TProps> | ((props: TProps) => CSSInterpolation<TProps>);
+type CSSFunction = <TProps = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps & {
     theme: YakTheme;
 }>[]) => ComponentStyles<TProps>;
 declare const css: CSSFunction;
@@ -33,11 +33,11 @@ declare const YakThemeProvider: ({ children, theme, }: {
 type HtmlTags = keyof JSX.IntrinsicElements;
 type Merge<T, U> = Omit<Partial<T>, keyof U> & Omit<Partial<U>, keyof T> & Partial<U & T>;
 type YakAttributes<T> = <TNew = {}>(attrs: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)) => YakTemplateString<Merge<T, TNew>>;
-type YakTemplateString<T> = <TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<TCSSProps & {
+type YakTemplateString<T> = <TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<T & TCSSProps & {
     theme: YakTheme;
 }>>) => FunctionComponent<TCSSProps & T>;
 type YakWithAttributes<T> = {
-    <TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<TCSSProps & {
+    <TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<T & TCSSProps & {
         theme: YakTheme;
     }>>): FunctionComponent<TCSSProps & T>;
     attrs: YakAttributes<T>;
