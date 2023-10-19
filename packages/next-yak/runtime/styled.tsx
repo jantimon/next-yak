@@ -1,13 +1,32 @@
-import { ForwardedRef, FunctionComponent } from "react";
-import { css } from "./cssLiteral.js";
+import {
+  ForwardRefRenderFunction,
+  ForwardedRef,
+  FunctionComponent,
+} from "react";
+import { CSSInterpolation, css } from "./cssLiteral.js";
 import React from "react";
-import { HtmlTags, Merge, YakStyled, YakTemplateString } from "./types.js";
+import {
+  HtmlTags,
+  Merge,
+  YakAttributes,
+  YakStyled,
+  YakTemplateString,
+  YakWithAttributes,
+} from "./types.js";
 
 // the following export is not relative as "next-yak/context"
 // links to one file for react server components and
 // to another file for classic react components
 import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
+
+/**
+ * Hack to hide .yak from the type definition and to deal with ExoticComponents
+ */
+const yakForwardRef: <TProps>(
+  component: ForwardRefRenderFunction<any, TProps>
+) => FunctionComponent<TProps> = (component) =>
+  Object.assign(React.forwardRef(component), { component }) as any;
 
 //
 // The `styled()` and `styled.` API
@@ -19,22 +38,20 @@ import type { YakTheme } from "./context/index.d.ts";
 
 const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
-    attrs: (attrs: any) => yakStyled(Component, attrs),
+    attrs: <TNew,>(
+      attrs?: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
+    ) => yakStyled<T, TNew>(Component, attrs),
   });
 
-const yakStyled: <T, TNew>(
-  component: FunctionComponent<T> | HtmlTags,
+const yakStyled = <T, TNew>(
+  Component: FunctionComponent<T> | HtmlTags,
   attrs?: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
-) => YakTemplateString<Merge<T, TNew>> = (Component, attrs) => {
-  return (styles, ...values) => {
-    const yak = (
-      props: {
-        style: Record<string, unknown>;
-        className: string;
-        theme: YakTheme;
-      },
-      ref: ForwardedRef<unknown>
-    ) => {
+) => {
+  return <TCSSProps extends Record<string, unknown> = {}>(
+    styles: TemplateStringsArray,
+    ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
+  ) => {
+    const yak = (props: Merge<T & TCSSProps, TNew>, ref: unknown) => {
       let combinedProps = { ...props, theme: useTheme() };
       if (attrs) {
         const newProps =
@@ -51,9 +68,13 @@ const yakStyled: <T, TNew>(
 
       const mergedProps = {
         ...filteredProps,
-        style: { ...(combinedProps.style || {}), ...runtimeStyles.style },
+        style: {
+          ...((combinedProps as { style?: Record<string, unknown> }).style ||
+            {}),
+          ...runtimeStyles.style,
+        },
         className: mergeClassNames(
-          combinedProps.className as string,
+          (combinedProps as { className?: string }).className,
           runtimeStyles.className as string
         ),
       };
@@ -61,27 +82,18 @@ const yakStyled: <T, TNew>(
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
-      if (
-        typeof Component !== "string" &&
-        "yak" in
-          (Component as FunctionComponent<any> & {
-            yak?: FunctionComponent<any>;
-          })
-      ) {
+      if (typeof Component !== "string" && "yak" in Component) {
         return (
-          Component as FunctionComponent<any> & {
-            yak: FunctionComponent<any>;
+          Component as typeof Component & {
+            yak: FunctionComponent<typeof mergedProps>;
           }
         ).yak(mergedProps, ref);
       }
 
-      if (ref) {
-        // @ts-expect-error too complex
-        return <Component ref={ref as any} {...mergedProps} />;
-      }
-      return <Component {...(mergedProps as any)} />;
+      // @ts-expect-error too complex
+      return <Component ref={ref as any} {...(mergedProps as any)} />;
     };
-    return Object.assign(React.forwardRef(yak), { yak }) as any;
+    return yakForwardRef(yak);
   };
 };
 
@@ -98,14 +110,16 @@ const yakStyled: <T, TNew>(
  * `;
  * ```
  */
-export const styled = new Proxy(StyledFactory, {
-  get(target, TagName) {
-    if (typeof TagName !== "string") {
-      throw new Error("Only string tags are supported");
-    }
-    return target(TagName as keyof JSX.IntrinsicElements);
+export const styled = new Proxy(
+  StyledFactory as typeof StyledFactory & {
+    [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>;
   },
-}) as YakStyled;
+  {
+    get(target, TagName: keyof JSX.IntrinsicElements) {
+      return target(TagName);
+    },
+  }
+);
 
 // Remove all entries that start with a $ sign
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
