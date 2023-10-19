@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { ForwardRefRenderFunction, FunctionComponent } from "react";
 import { CSSInterpolation, css } from "./cssLiteral.js";
 import React from "react";
 
@@ -17,17 +17,28 @@ import type { YakTheme } from "./context/index.d.ts";
 //
 
 type HtmlTags = keyof JSX.IntrinsicElements;
+type PropsOf<TComponent extends FunctionComponent<any>> = TComponent extends FunctionComponent<infer TProps> ? TProps : never;
 
-function StyledFactory <THtmlTag extends HtmlTags>(Component: THtmlTag): <TProps extends Record<string, unknown>>(
+type StyledLiteral<TBaseProps extends {}> = <TProps extends Record<string, unknown>>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
-function StyledFactory (Component: string | FunctionComponent<any>) {
-  return <TProps extends Record<string, unknown>>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
+  ...values: CSSInterpolation<TBaseProps & TProps & { theme: YakTheme }>[]
+) => FunctionComponent<TBaseProps & TProps>
+
+/**
+ * Hack to hide .yak from the type definition and to deal with ExoticComponents
+ */
+const yakForwardRef: <TProps>(component: ForwardRefRenderFunction<any, TProps>) => FunctionComponent<TProps> = (
+  component
+) => Object.assign(React.forwardRef(component), {component}) as any;
+
+const StyledFactory = <TComponent extends HtmlTags | FunctionComponent<any>>(Component: TComponent) => {
+  type Props = TComponent extends HtmlTags ? JSX.IntrinsicElements[TComponent] : TComponent extends FunctionComponent ? PropsOf<TComponent> : never;
+
+  const literal: StyledLiteral<Props> = (
+    styles,
+    ...values
   ) => {
-    const yak = (props: TProps, ref: unknown) => {
+    const yak = (props: Props, ref: unknown) => {
       const propsWithTheme = { ...props, theme: useTheme() };
       const runtimeStyles = css(styles, ...values)(propsWithTheme as any);
       const filteredProps =
@@ -46,14 +57,17 @@ function StyledFactory (Component: string | FunctionComponent<any>) {
         return (Component as (FunctionComponent<any> & {yak: FunctionComponent<any>})).yak(mergedProps, ref);
       }
       return (
+        // @ts-expect-error
         <Component
           ref={ref as any}
           {...mergedProps}
         />
       );
     };
-    return Object.assign(React.forwardRef(yak), {yak});
-  };
+    return yakForwardRef(yak);
+  }
+
+  return literal;
 };
 
 /**
@@ -69,21 +83,14 @@ function StyledFactory (Component: string | FunctionComponent<any>) {
  * `;
  * ```
  */
-export const styled = new Proxy(StyledFactory, {
-  get(target, TagName) {
-    if (typeof TagName !== "string") {
-      throw new Error("Only string tags are supported");
-    }
+export const styled = new Proxy(StyledFactory as typeof StyledFactory &
+  {
+    [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
+  }, {
+  get(target, TagName: keyof JSX.IntrinsicElements) {
     return target(TagName as keyof JSX.IntrinsicElements);
   },
-}) as (
-  <TBaseProps extends {}>(Component: FunctionComponent<TBaseProps>) => <TProps extends {}>(
-    styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-  ) => FunctionComponent<TBaseProps & TProps>
-) & {
-  [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
-};
+})
 
 // Remove all entries that start with a $ sign
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {

@@ -1,6 +1,6 @@
 import type { YakTheme } from "./index.d.ts";
 
-type ComponentStyles<TProps extends Record<string, unknown>> = (
+type ComponentStyles<TProps extends {}> = (
   props: TProps
 ) => {
   className: string;
@@ -9,7 +9,7 @@ type ComponentStyles<TProps extends Record<string, unknown>> = (
   };
 };
 
-export type CSSInterpolation<TProps extends Record<string, unknown>> =
+export type CSSInterpolation<TProps extends {}> =
   | string
   | number
   | undefined
@@ -18,11 +18,11 @@ export type CSSInterpolation<TProps extends Record<string, unknown>> =
   | ComponentStyles<TProps>
   | ((props: TProps) => CSSInterpolation<TProps>);
 
-type CSSStyles<TProps extends Record<string, unknown>> = {
+type CSSStyles<TProps extends {}> = {
   style: { [key: string]: string | ((props: TProps) => string) };
 };
 
-type CSSFunction = <TProps extends Record<string, unknown>>(
+type CSSFunction = <TProps extends {}>(
   styles: TemplateStringsArray,
   ...values: CSSInterpolation<TProps & {theme: YakTheme}>[]
 ) => ComponentStyles<TProps>;

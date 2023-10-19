@@ -32,6 +32,9 @@ const Button = styled.button`
     const mood: "happy" | "sad" = theme.mood;
     return mood === "happy" ? "green" : "red";
   }};
+  background-color: ${({ type }) => {
+    return type === "submit" ? "gray" : "white";
+  }};
   ${mixin}
 `;
 
@@ -47,7 +50,7 @@ const RefTest1 = () => {
 const RefTest2 = () => {
   return (
     <Button
-      as="button"
+      type="button"
       ref={(element) => {
         const button: HTMLButtonElement = element!;
         console.log(button);
@@ -90,7 +93,7 @@ const Button3 = styled.button<{ $primary?: boolean }>`
 const Button4 = styled(Button3)<{ $secondary?: boolean }>`
   ${({ $secondary }) =>
     $secondary &&
-    css`
+    css<{ $secondary?: boolean }>`
       color: blue;
     `}
 `;
