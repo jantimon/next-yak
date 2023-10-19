@@ -31,7 +31,7 @@ declare const YakThemeProvider: ({ children, theme, }: {
 }) => React.JSX.Element;
 
 type PropsOf<TComponent extends FunctionComponent<any>> = TComponent extends FunctionComponent<infer TProps> ? TProps : never;
-type StyledLiteral<TBaseProps extends {}> = <TProps extends Record<string, unknown>>(styles: TemplateStringsArray, ...values: CSSInterpolation<TBaseProps & TProps & {
+type StyledLiteral<TBaseProps extends {}> = <TProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TBaseProps & TProps & {
     theme: YakTheme;
 }>[]) => FunctionComponent<TBaseProps & TProps>;
 /**
@@ -47,7 +47,7 @@ type StyledLiteral<TBaseProps extends {}> = <TProps extends Record<string, unkno
  * `;
  * ```
  */
-declare const styled: (<TComponent extends FunctionComponent<any> | keyof JSX.IntrinsicElements>(Component: TComponent) => StyledLiteral<TComponent extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[TComponent] : TComponent extends FunctionComponent<{}> ? PropsOf<TComponent> : never>) & {
+declare const styled: (<TComponent extends FunctionComponent<any> | keyof JSX.IntrinsicElements>(Component: TComponent) => StyledLiteral<TComponent extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[TComponent] : TComponent extends FunctionComponent<any> ? PropsOf<TComponent> : never>) & {
     symbol: StyledLiteral<React.SVGProps<SVGSymbolElement>>;
     object: StyledLiteral<React.DetailedHTMLProps<React.ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement>>;
     style: StyledLiteral<React.DetailedHTMLProps<React.StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>>;

@@ -19,7 +19,7 @@ import type { YakTheme } from "./context/index.d.ts";
 type HtmlTags = keyof JSX.IntrinsicElements;
 type PropsOf<TComponent extends FunctionComponent<any>> = TComponent extends FunctionComponent<infer TProps> ? TProps : never;
 
-type StyledLiteral<TBaseProps extends {}> = <TProps extends Record<string, unknown>>(
+type StyledLiteral<TBaseProps extends {}> = <TProps extends Record<string, unknown> = {}>(
   styles: TemplateStringsArray,
   ...values: CSSInterpolation<TBaseProps & TProps & { theme: YakTheme }>[]
 ) => FunctionComponent<TBaseProps & TProps>
@@ -32,7 +32,7 @@ const yakForwardRef: <TProps>(component: ForwardRefRenderFunction<any, TProps>) 
 ) => Object.assign(React.forwardRef(component), {component}) as any;
 
 const StyledFactory = <TComponent extends HtmlTags | FunctionComponent<any>>(Component: TComponent) => {
-  type Props = TComponent extends HtmlTags ? JSX.IntrinsicElements[TComponent] : TComponent extends FunctionComponent ? PropsOf<TComponent> : never;
+  type Props = TComponent extends HtmlTags ? JSX.IntrinsicElements[TComponent] : TComponent extends FunctionComponent<any> ? PropsOf<TComponent> : never;
 
   const literal: StyledLiteral<Props> = (
     styles,
