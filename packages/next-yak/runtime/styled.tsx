@@ -1,18 +1,6 @@
-import {
-  ForwardRefRenderFunction,
-  ForwardedRef,
-  FunctionComponent,
-} from "react";
+import { ForwardRefRenderFunction, FunctionComponent } from "react";
 import { CSSInterpolation, css } from "./cssLiteral.js";
 import React from "react";
-import {
-  HtmlTags,
-  Merge,
-  YakAttributes,
-  YakStyled,
-  YakTemplateString,
-  YakWithAttributes,
-} from "./types.js";
 
 // the following export is not relative as "next-yak/context"
 // links to one file for react server components and
@@ -28,6 +16,28 @@ const yakForwardRef: <TProps>(
 ) => FunctionComponent<TProps> = (component) =>
   Object.assign(React.forwardRef(component), { component }) as any;
 
+/**
+ * Attrs can be used to add additional props to a styled component.
+ */
+type Attrs<TProps, TNew> =
+  | ((props: TNew & TProps) => Partial<TNew & TProps>)
+  | (TProps & TNew);
+
+/**
+ * All valid html tags
+ */
+type HtmlTags = keyof JSX.IntrinsicElements;
+
+/**
+ * Merge two types, but make sure that properties that are present in one of the types
+ * are optional in the merged type.
+ */
+
+// type Merge<T, U> = Omit<T, keyof U> & U;
+type Merge<T, U> = Omit<Partial<T>, keyof U> &
+  Omit<Partial<U>, keyof T> &
+  Partial<U & T>;
+
 //
 // The `styled()` and `styled.` API
 //
@@ -38,14 +48,13 @@ const yakForwardRef: <TProps>(
 
 const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
-    attrs: <TNew,>(
-      attrs?: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
-    ) => yakStyled<T, TNew>(Component, attrs),
+    attrs: <TNew,>(attrs?: Attrs<T, TNew>) =>
+      yakStyled<T, TNew>(Component, attrs),
   });
 
 const yakStyled = <T, TNew>(
   Component: FunctionComponent<T> | HtmlTags,
-  attrs?: ((props: TNew & T) => Partial<TNew & T>) | (T & TNew)
+  attrs?: Attrs<T, TNew>
 ) => {
   return <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
@@ -98,6 +107,15 @@ const yakStyled = <T, TNew>(
 };
 
 /**
+ * Type for the proxy object returned by `styled` that allows to
+ * access all html tags as properties.
+ */
+type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(
+  styles: TemplateStringsArray,
+  ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
+) => FunctionComponent<TCSSProps & T>;
+
+/**
  * The `styled` method works perfectly on all of your own or any third-party component,
  * as long as they attach the passed className prop to a DOM element.
  *
@@ -112,7 +130,11 @@ const yakStyled = <T, TNew>(
  */
 export const styled = new Proxy(
   StyledFactory as typeof StyledFactory & {
-    [Tag in HtmlTags]: YakWithAttributes<JSX.IntrinsicElements[Tag]>;
+    [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
+      attrs: <TNew extends Record<string, unknown> = {}>(
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TNew>
+      ) => StyledLiteral<Merge<JSX.IntrinsicElements[Tag], TNew>>;
+    };
   },
   {
     get(target, TagName: keyof JSX.IntrinsicElements) {
