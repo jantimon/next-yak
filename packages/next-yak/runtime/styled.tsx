@@ -17,26 +17,31 @@ const yakForwardRef: <TProps>(
   Object.assign(React.forwardRef(component), { component }) as any;
 
 /**
- * Attrs can be used to add additional props to a styled component.
- */
-type Attrs<TProps, TNew> =
-  | ((props: TNew & TProps) => Partial<TNew & TProps>)
-  | (TProps & TNew);
-
-/**
  * All valid html tags
  */
 type HtmlTags = keyof JSX.IntrinsicElements;
 
 /**
- * Merge two types, but make sure that properties that are present in one of the types
- * are optional in the merged type.
+ * Return type of the provided props merged with the initial props
+ * where the specified props are optional
  */
+type AttrsMerged<TBaseProps, TIn extends object = {}> = Substitute<
+  TBaseProps & { theme: YakTheme },
+  TIn
+>;
 
-// type Merge<T, U> = Omit<T, keyof U> & U;
-type Merge<T, U> = Omit<Partial<T>, keyof U> &
-  Omit<Partial<U>, keyof T> &
-  Partial<U & T>;
+/**
+ * The attrs function allows to add additional props to a styled component.
+ * The props can be specified as an object or as a function that receives the
+ * current props as argument.
+ */
+type Attrs<
+  TBaseProps,
+  TIn extends object = {},
+  TOut extends AttrsMerged<TBaseProps, TIn> = AttrsMerged<TBaseProps, TIn>
+> =
+  | Partial<TOut>
+  | ((p: Substitute<TBaseProps & { theme: YakTheme }, TIn>) => Partial<TOut>);
 
 //
 // The `styled()` and `styled.` API
@@ -48,19 +53,27 @@ type Merge<T, U> = Omit<Partial<T>, keyof U> &
 
 const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
-    attrs: <TNew,>(attrs?: Attrs<T, TNew>) =>
-      yakStyled<T, TNew>(Component, attrs),
+    attrs: <
+      TAttrsIn extends object = {},
+      TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>
+    >(
+      attrs: Attrs<T, TAttrsIn, TAttrsOut>
+    ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
-const yakStyled = <T, TNew>(
+const yakStyled = <
+  T,
+  TAttrsIn extends object = {},
+  TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>
+>(
   Component: FunctionComponent<T> | HtmlTags,
-  attrs?: Attrs<T, TNew>
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>
 ) => {
   return <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
-    const yak = (props: Merge<T & TCSSProps, TNew>, ref: unknown) => {
+    const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
       let combinedProps = { ...props, theme: useTheme() };
       if (attrs) {
         const newProps =
@@ -131,9 +144,15 @@ type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(
 export const styled = new Proxy(
   StyledFactory as typeof StyledFactory & {
     [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
-      attrs: <TNew extends Record<string, unknown> = {}>(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TNew>
-      ) => StyledLiteral<Merge<JSX.IntrinsicElements[Tag], TNew>>;
+      attrs: <
+        TAttrsIn extends object = {},
+        TAttrsOut extends AttrsMerged<
+          JSX.IntrinsicElements[Tag],
+          TAttrsIn
+        > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>
+      >(
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
+      ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
     };
   },
   {
@@ -203,3 +222,16 @@ const combineProps = <
     $__attrs: true,
   };
 };
+
+// util type to remove properties from an object
+type FastOmit<T extends object, U extends string | number | symbol> = {
+  [K in keyof T as K extends U ? never : K]: T[K];
+};
+
+// util type to merge two objects
+// if a property is present in both objects the property from B is used
+export type Substitute<A extends object, B extends object> = FastOmit<
+  A,
+  keyof B
+> &
+  B;

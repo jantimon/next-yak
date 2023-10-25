@@ -409,7 +409,7 @@ it("does not pass transient props to HTML element", () => {
     color: ${(props) => props.$textColor};
   `;
 
-  const StyledComp = styled(Comp).attrs<CompProps>(() => ({
+  const StyledComp = styled(Comp).attrs<Partial<CompProps>>(() => ({
     $textColor: "red",
   }))``;
 
@@ -422,7 +422,7 @@ it("does not pass transient props to HTML element", () => {
 });
 
 it.skip('should apply given "as" prop to the progressive type', () => {
-  const Comp = styled.div.attrs({ as: "video" as const })``;
+  const Comp = styled.div.attrs<{ as?: any }>({ as: "video" as const })``;
 
   //@ts-expect-error
   expect(TestRenderer.create(<Comp loop />).toJSON()).toMatchInlineSnapshot(`
@@ -469,7 +469,7 @@ it("should remap props", () => {
 });
 
 it("should have optional attrs props as component interface", () => {
-  const Comp = styled.h1.attrs({
+  const Comp = styled.h1.attrs<{ $primary?: boolean }>({
     $primary: true,
   })``;
 
