@@ -77,7 +77,6 @@ const Button = styled.button<{ $primary?: boolean }>`
 
 const FancyButton = styled(Button)`
   color: #fff;
-  border: 1px solid blue;
   background: linear-gradient(
     149deg,
     #ae52eb 0%,
