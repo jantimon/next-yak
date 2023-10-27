@@ -25,9 +25,21 @@ type CSSFunction = <TProps = {}>(
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => ComponentStyles<TProps>;
 
-const internalImplementation = (
+/**
+ * css() runtime factory of css``
+ * 
+ * /!\ next-yak transpiles css`` and styled``
+ * 
+ * This changes the typings of the css`` and styled`` functions.
+ * During development the user of next-yak wants to work with the
+ * typings BEFORE compilation.
+ * 
+ * Therefore this is only an internal function only and it must be cast to any 
+ * before exported to the user.
+ */
+const internalCssFactory = (
   ...args: Array<string | CSSFunction | CSSStyles<any>>
-): ComponentStyles<any> => {
+) => {
   type PropsToClassNameFn = (props: unknown) => {
     className?: string;
     style?: Record<string, string>;
@@ -121,4 +133,4 @@ const recursivePropExecution = (
   return result;
 };
 
-export const css = internalImplementation as any as CSSFunction;
+export const css = internalCssFactory as any as CSSFunction;

@@ -1,4 +1,4 @@
-import { it, expect, vi } from "vitest";
+import { it, expect, vi, beforeEach } from "vitest";
 import TestRenderer from "react-test-renderer";
 import { styled } from "../styled";
 import React, { FunctionComponent } from "react";

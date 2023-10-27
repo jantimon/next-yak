@@ -19,5 +19,8 @@
   },
   "packageManager": "pnpm@8.6.1",
   "author": "Jan Nicklas",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.0.3"
+  }
 }

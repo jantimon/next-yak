@@ -73,21 +73,45 @@ const yakStyled = <
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
+    const getRuntimeStyles = css(styles, ...values);
+    const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
+      combineProps(
+        props,
+        typeof attrs === "function" ? (attrs as Function)(props) : attrs
+      );
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
-      let combinedProps = { ...props, theme: useTheme() };
-      if (attrs) {
-        const newProps =
-          typeof attrs === "function" ? (attrs as Function)(props) : attrs;
-        combinedProps = combineProps(props, newProps);
-      }
+      /** The combined props are passed into the styled`` literal functions */
+      const combinedProps = processAttrs(
+        // if the css component does not require arguments
+        // it can be call without arguments and skip calling useTheme()
+        //
+        // this is NOT against the rule of hooks as
+        // getRuntimeStyles is a constant defined outside of the component
+        //
+        // for example
+        //
+        // const Button = styled.button`color: red;`
+        //       ^ does not need to have access to theme
+        //
+        // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
+        //       ^ must be have acces to theme
+        (attrs || getRuntimeStyles.length
+          ? { ...props, theme: useTheme() }
+          : props) as Substitute<TCSSProps & T, TAttrsIn>
+      );
+      // execute all functions inside the style literal
+      // e.g. styled.button`color: ${props => props.color};`
+      const runtimeStyles = getRuntimeStyles(combinedProps as any);
 
-      const runtimeStyles = css(styles, ...values)(combinedProps as any);
-
+      // remove all props that start with a $ sign for string components e.g. "button" or "div"
+      // so that they are not passed to the DOM element
       const filteredProps =
         typeof Component === "string"
           ? removePrefixedProperties(combinedProps)
           : combinedProps;
 
+      // yak provides a className and style prop that needs to be merged with the
+      // user provided className and style prop
       const mergedProps = {
         ...filteredProps,
         style: {
@@ -198,20 +222,18 @@ const combineProps = <
   props: T,
   newProps: T
 ) => {
-  let combinedProps = {} as T;
-  if ("$__attrs" in props) {
-    // allow overriding props when attrs was used previously
-    combinedProps = {
-      ...removeUndefined(newProps),
-      ...props,
-    };
-  } else {
-    combinedProps = {
-      ...props,
-      ...removeUndefined(newProps),
-    };
-  }
-
+  if (!newProps) return props;
+  const combinedProps: T =
+    "$__attrs" in props
+      ? // allow overriding props when attrs was used previously
+        {
+          ...removeUndefined(newProps),
+          ...props,
+        }
+      : {
+          ...props,
+          ...removeUndefined(newProps),
+        };
   return {
     ...combinedProps,
     className: mergeClassNames(
