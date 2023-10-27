@@ -10,7 +10,7 @@ jobs:
   autofix:
     runs-on: ubuntu-latest
     steps:
-     - name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install Node.js
@@ -41,9 +41,9 @@ jobs:
         run: pnpm install
 
       - name: Prettier Yak Runtime
-        run: npx prettier --write packages/next-yak/runtime/**/*.{ts,tsx,js,jsx}
+        run: npx prettier --write "packages/next-yak/runtime/**/*.{ts,tsx,js,jsx}"
 
       - name: Prettier Examples
-        run: npx prettier --write packages/example/app/**/*.{ts,tsx,js,jsx}
+        run: npx prettier --write "packages/example/app/**/*.{ts,tsx,js,jsx}"
 
       - uses: autofix-ci/action@d3e591514b99d0fca6779455ff8338516663f7cc
