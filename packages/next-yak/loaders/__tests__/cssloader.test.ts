@@ -1,4 +1,4 @@
-import {describe, it, expect} from "vitest";
+import { describe, it, expect } from "vitest";
 import cssloader from "../cssloader.cjs";
 
 const loaderContext = {
@@ -56,9 +56,9 @@ const headline = css\`
 
   it("should support nested css code", async () => {
     expect(
-  await cssloader.call(
-    loaderContext,
-    `
+      await cssloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -78,28 +78,28 @@ const headline = css\`
   }
 \`;
 `
-  )
-).toMatchInlineSnapshot(`
-  ".yak_0 { 
-    font-size: 2rem;
-    font-weight: bold;
-    color: red;
-     }
+      )
+    ).toMatchInlineSnapshot(`
+      ".yak_0 { 
+        font-size: 2rem;
+        font-weight: bold;
+        color: red;
+         }
 
-  .yak_1 { 
-      color: blue;
-     }
+      .yak_1 { 
+          color: blue;
+         }
 
-  .yak_2 { 
-      color: blue;
-     }
+      .yak_2 { 
+          color: blue;
+         }
 
-  .yak_0 { 
-    &:hover {
-      color: var(--🦬18fi82j0);
-    }
-   }"
-`);
+      .yak_0 { 
+        &:hover {
+          color: var(--🦬18fi82j0);
+        }
+       }"
+    `);
   });
 
   it("should ignores empty chunks if they include only a comment", async () => {
@@ -129,9 +129,9 @@ const headline = css\`
 
 it("should support css variables", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -141,21 +141,71 @@ const headline = css\`
   }
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
-  ".yak_0 { 
-    &:hover {
-      color: var(--🦬18fi82j0);
-    }
-     }"
-`);
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      &:hover {
+        color: var(--🦬18fi82j0);
+      }
+       }"
+  `);
+});
+
+it("should support attrs on intrinsic elements", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled } from "next-yak";
+
+const headline = styled.input.attrs({
+  type: "text",
+})\`
+  color: red;
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      color: red;
+       }"
+  `);
+});
+
+it("should support attrs on wrapped elements", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled } from "next-yak";
+
+const headline = styled.input\`
+  color: red;
+\`;
+
+const newHeadline = styled(headline).attrs({
+  type: "text",
+})\`
+  color: black;
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      color: red;
+     }
+
+    .yak_1 { 
+      color: black;
+       }"
+  `);
 });
 
 it("should support css variables with spaces", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -165,22 +215,22 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
-  ".yak_0 { 
-    transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-    display: block;
-     }
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+      display: block;
+       }
 
-  .yak_1 { color: orange }"
-`);
+    .yak_1 { color: orange }"
+  `);
 });
 
 it("should replace breakpoint references with actual media queries", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import { css } from "next-yak";
 import { queries } from "@/theme";
 
@@ -194,28 +244,28 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
-  ".yak_0 { 
-    color: blue;
-    @media (min-width: 640px) {
-      color: red;
-    }
-    transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-    display: block;
-     }
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      color: blue;
+      @media (min-width: 640px) {
+        color: red;
+      }
+      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+      display: block;
+       }
 
-  .yak_1 { color: orange }"
-`);
+    .yak_1 { color: orange }"
+  `);
 });
 
 it("should prevent double escaped chars", async () => {
   // in styled-components \\ is replaced with \
   // this test verifies that yak provides the same behavior
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import { css } from "next-yak";
 import { queries } from "@/theme";
 
@@ -229,8 +279,8 @@ const headline = css\`
   content: "\\\\\\\\"
 \`
 `
-  )
-).toMatchInlineSnapshot(`
+    )
+  ).toMatchInlineSnapshot(`
   ".yak_0 { 
     :before {
       content: \\"\\\\2022\\";
@@ -245,9 +295,9 @@ const headline = css\`
 
 it("should convert keyframes", async () => {
   expect(
-  await cssloader.call(
-    loaderContext,
-    `
+    await cssloader.call(
+      loaderContext,
+      `
 import styles from "./page.module.css";
 import { styled, keyframes } from "next-yak";
 
@@ -264,8 +314,8 @@ const FadeInButton = styled.button\`
   animation: 1s \${fadeIn} ease-out;
 \`
 `
-  )
-).toMatchInlineSnapshot(`
+    )
+  ).toMatchInlineSnapshot(`
   "@keyframes yak_animation_0 { 
     0% {
       opacity: 0;

@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "type": "module",
   "types": "./dist/",
   "exports": {
@@ -36,7 +36,7 @@
     "build:context:server": "tsup runtime/context/index.server.tsx --target es2022 --external react --external next-yak/context/baseContext --external ./index.js --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:withYak": "tsup withYak/index.ts --target es2022 --dts --format cjs --sourcemap --out-dir withYak --external ../loaders/tsloader.cjs --external ../loaders/cssloader.cjs",
     "test": "vitest run && tsc -p tsconfig.json && tsc -p ./runtime/__tests__/tsconfig.json",
-    "test:watch": "vitest --watch -u"
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@babel/core": "7.23.0",
@@ -50,10 +50,12 @@
     "@testing-library/react": "^14.0.0",
     "@types/jest": "29.5.5",
     "@types/node": "20.4.5",
-    "@types/react": "18.2.28",
-    "@types/react-dom": "18.2.7",
+    "@types/react": "18.2.29",
+    "@types/react-dom": "18.2.13",
+    "@types/react-test-renderer": "^18.0.3",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
     "typescript": "5.1.6",
     "vite": "^4.4.9",
     "vitest": "0.34.5",

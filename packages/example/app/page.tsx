@@ -2,6 +2,7 @@ import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries } from "@/theme";
 import { Clock } from "./Clock";
+import { Inputs } from "@/app/Input";
 import { HighContrastToggle } from "./HighContrastToggle";
 
 const headline = css<{ $primary?: boolean }>`
@@ -84,7 +85,7 @@ const FancyButton = styled(Button)`
   );
 `;
 
-const SyledLink = styled.a`
+const StyledLink = styled.a`
   background: linear-gradient(
     149deg,
     #ae52eb 0%,
@@ -116,9 +117,10 @@ export default function Home() {
         </FancyButton>
         <Clock />
         <HighContrastToggle />
-        <SyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
+        <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
-        </SyledLink>
+        </StyledLink>
+        <Inputs />
       </main>
     </YakThemeProvider>
   );

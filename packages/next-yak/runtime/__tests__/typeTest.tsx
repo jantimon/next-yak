@@ -47,7 +47,6 @@ const RefTest1 = () => {
 const RefTest2 = () => {
   return (
     <Button
-      as="button"
       ref={(element) => {
         const button: HTMLButtonElement = element!;
         console.log(button);
