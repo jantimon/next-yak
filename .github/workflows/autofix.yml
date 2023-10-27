@@ -1,18 +1,16 @@
-name: Vite-Tests
-
+name: autofix.ci
 on:
+  pull_request:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+permissions:
+  contents: read
 
 jobs:
-  build:
-
+  autofix:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
+     - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install Node.js
@@ -42,8 +40,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Test
-        run: pnpm run test
-      
-      - name: Build
-        run: pnpm run build
+      - name: Prettier Yak Runtime
+        run: npx prettier --write packages/next-yak/runtime/**/*.{ts,tsx,js,jsx}
+
+      - name: Prettier Examples
+        run: npx prettier --write packages/example/app/**/*.{ts,tsx,js,jsx}
+
+      - uses: autofix-ci/action@d3e591514b99d0fca6779455ff8338516663f7cc
