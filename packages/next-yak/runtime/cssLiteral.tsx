@@ -27,14 +27,14 @@ type CSSFunction = <TProps = {}>(
 
 /**
  * css() runtime factory of css``
- * 
+ *
  * /!\ next-yak transpiles css`` and styled``
- * 
+ *
  * This changes the typings of the css`` and styled`` functions.
  * During development the user of next-yak wants to work with the
  * typings BEFORE compilation.
- * 
- * Therefore this is only an internal function only and it must be cast to any 
+ *
+ * Therefore this is only an internal function only and it must be cast to any
  * before exported to the user.
  */
 const internalCssFactory = (
@@ -78,7 +78,7 @@ const internalCssFactory = (
     props: unknown,
     fn: PropsToClassNameFn,
     classNames: string[],
-    style: Record<string, string>
+    style: Record<string, string>,
   ) => {
     const result = fn(props);
     if (typeof result === "function") {
@@ -111,7 +111,7 @@ const internalCssFactory = (
 
 const recursivePropExecution = (
   props: unknown,
-  fn: (props: unknown) => any
+  fn: (props: unknown) => any,
 ): string | number => {
   const result = fn(props);
   if (typeof result === "function") {
@@ -125,8 +125,8 @@ const recursivePropExecution = (
     ) {
       throw new Error(
         `Dynamic CSS functions must return a string or number but returned ${JSON.stringify(
-          result
-        )}`
+          result,
+        )}`,
       );
     }
   }

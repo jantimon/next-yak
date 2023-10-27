@@ -6,12 +6,12 @@ export const ClockHands = () => {
   const currentTime = useCurrentTime();
   if (currentTime === null) return null;
   return (
-          <>
-            <SecondHand $angle={currentTime.secondsAngle} />
-            <MinuteHand $angle={currentTime.minutesAngle} />
-            <HourHand $angle={currentTime.hoursAngle} />
-          </>
-        )
+    <>
+      <SecondHand $angle={currentTime.secondsAngle} />
+      <MinuteHand $angle={currentTime.minutesAngle} />
+      <HourHand $angle={currentTime.hoursAngle} />
+    </>
+  );
 };
 
 const useCurrentTime = () => {

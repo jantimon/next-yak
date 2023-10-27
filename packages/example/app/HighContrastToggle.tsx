@@ -29,20 +29,26 @@ const Button = styled.button<{ $primary?: boolean }>`
 `;
 
 export const HighContrastToggle = () => {
-    const router = useRouter();
-    const theme = useTheme();
-    return <Button onClick={() => {
+  const router = useRouter();
+  const theme = useTheme();
+  return (
+    <Button
+      onClick={() => {
         setCookie("highContrast", theme.highContrast ? "false" : "true");
         router.refresh();
-    }}>Toggle High Contrast</Button>;
-}
+      }}
+    >
+      Toggle High Contrast
+    </Button>
+  );
+};
 
-function setCookie(name: string,value: string,days: number = 365) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+function setCookie(name: string, value: string, days: number = 365) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }

@@ -1,7 +1,6 @@
 import { styled, keyframes } from "next-yak";
 import styles from "../page.module.css";
 
-
 const rotate = keyframes`
   from {
     transform: rotate(0deg);

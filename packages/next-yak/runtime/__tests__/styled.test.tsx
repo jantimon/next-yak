@@ -58,7 +58,7 @@ it("should forward children", () => {
   const { container } = render(
     <Component>
       <button>Click me!</button>
-    </Component>
+    </Component>,
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -153,7 +153,7 @@ it("should allow falsy values", () => {
       <Component $testProp={null} />
       <Component $testProp={false} />
       <Component $testProp={undefined} />
-    </>
+    </>,
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -178,8 +178,8 @@ it("should execute runtime styles recursively", () => {
       css(
         ({ $testProp }) =>
           $testProp &&
-          css(({ $testProp }) => $testProp && css("recursive-test-class"))
-      )
+          css(({ $testProp }) => $testProp && css("recursive-test-class")),
+      ),
   );
 
   const { container } = render(<Component $testProp />);
@@ -202,7 +202,7 @@ it("should allow using refs", () => {
       ref={(element) => {
         elementFromRef = element;
       }}
-    />
+    />,
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
@@ -218,7 +218,7 @@ it("should allow using nested refs", () => {
       ref={(element) => {
         elementFromRef = element;
       }}
-    />
+    />,
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
