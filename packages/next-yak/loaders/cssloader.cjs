@@ -15,9 +15,11 @@ module.exports = async function cssLoader(source) {
   // Config for replacing tokens in css template literals
   // can be based on a typescript file
   const options = this.getOptions();
-  const config = options.configPath ? await this.importModule(resolve(this.rootContext, options.configPath), { 
-    layer: "yak-importModule",
-  }) : {};
+  const config = options.configPath
+    ? await this.importModule(resolve(this.rootContext, options.configPath), {
+        layer: "yak-importModule",
+      })
+    : {};
   const replaces = config.replaces || {};
 
   // parse source with babel
@@ -38,10 +40,11 @@ module.exports = async function cssLoader(source) {
 
   const { types: t } = babel;
 
-  /** @type {{css?: string, styled?: string, keyframes?: string}} */
+  /** @type {{css?: string, styled?: string, attrs?: "attrs", keyframes?: string}} */
   const localVarNames = {
     css: undefined,
     styled: undefined,
+    attrs: "attrs",
     keyframes: undefined,
   };
 
@@ -62,9 +65,7 @@ module.exports = async function cssLoader(source) {
      */
     ImportDeclaration(path) {
       const node = path.node;
-      if (
-        node.source.value !== "next-yak"
-      ) {
+      if (node.source.value !== "next-yak") {
         return;
       }
       // Process import specifiers
@@ -103,8 +104,8 @@ module.exports = async function cssLoader(source) {
 
       const isKeyFrameLiteral =
         t.isIdentifier(tag) &&
-        /** @type {babel.types.Identifier} */ (tag).name === localVarNames.keyframes;
-
+        /** @type {babel.types.Identifier} */ (tag).name ===
+          localVarNames.keyframes;
 
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
@@ -124,14 +125,29 @@ module.exports = async function cssLoader(source) {
           /** @type {babel.types.CallExpression} */ (tag).callee
         ).name === localVarNames.styled;
 
-      if (!isCssLiteral && !isKeyFrameLiteral && !isStyledLiteral && !isStyledCall) {
+      const isAttrsCall =
+        t.isCallExpression(tag) &&
+        t.isMemberExpression(tag.callee) &&
+        /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
+          "attrs";
+
+      if (
+        !isCssLiteral &&
+        !isKeyFrameLiteral &&
+        !isStyledLiteral &&
+        !isStyledCall &&
+        !isAttrsCall
+      ) {
         return;
       }
 
       replaceQuasiExpressionTokens(path.node.quasi, replaces, t);
 
       // Keep the same selector for all quasis belonging to the same css block
-      const literalSelector = localIdent(index++ , isKeyFrameLiteral ? "keyframes": "selector");
+      const literalSelector = localIdent(
+        index++,
+        isKeyFrameLiteral ? "keyframes" : "selector"
+      );
 
       // Replace the tagged template expression with a call to the 'styled' function
       const quasis = path.node.quasi.quasis;
@@ -197,4 +213,4 @@ module.exports = async function cssLoader(source) {
  * slashes are still possible with `:before { content: "\\\\"; }`
  * @param {string} code
  */
-const unEscapeCssCode = (code) => code.replace(/\\\\/ig, "\\");
+const unEscapeCssCode = (code) => code.replace(/\\\\/gi, "\\");

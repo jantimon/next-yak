@@ -1,11 +1,47 @@
-import React, { type FunctionComponent, forwardRef } from "react";
+import { ForwardRefRenderFunction, FunctionComponent } from "react";
 import { CSSInterpolation, css } from "./cssLiteral.js";
+import React from "react";
 
 // the following export is not relative as "next-yak/context"
 // links to one file for react server components and
 // to another file for classic react components
 import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
+
+/**
+ * Hack to hide .yak from the type definition and to deal with ExoticComponents
+ */
+const yakForwardRef: <TProps>(
+  component: ForwardRefRenderFunction<any, TProps>
+) => FunctionComponent<TProps> = (component) =>
+  Object.assign(React.forwardRef(component), { component }) as any;
+
+/**
+ * All valid html tags
+ */
+type HtmlTags = keyof JSX.IntrinsicElements;
+
+/**
+ * Return type of the provided props merged with the initial props
+ * where the specified props are optional
+ */
+type AttrsMerged<TBaseProps, TIn extends object = {}> = Substitute<
+  TBaseProps & { theme: YakTheme },
+  TIn
+>;
+
+/**
+ * The attrs function allows to add additional props to a styled component.
+ * The props can be specified as an object or as a function that receives the
+ * current props as argument.
+ */
+type Attrs<
+  TBaseProps,
+  TIn extends object = {},
+  TOut extends AttrsMerged<TBaseProps, TIn> = AttrsMerged<TBaseProps, TIn>
+> =
+  | Partial<TOut>
+  | ((p: Substitute<TBaseProps & { theme: YakTheme }, TIn>) => Partial<TOut>);
 
 //
 // The `styled()` and `styled.` API
@@ -15,23 +51,37 @@ import type { YakTheme } from "./context/index.d.ts";
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
 
-type HtmlTags = keyof JSX.IntrinsicElements;
+const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
+  Object.assign(yakStyled(Component), {
+    attrs: <
+      TAttrsIn extends object = {},
+      TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>
+    >(
+      attrs: Attrs<T, TAttrsIn, TAttrsOut>
+    ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
+  });
 
-function StyledFactory<THtmlTag extends HtmlTags>(
-  Component: THtmlTag
-): <TProps extends Record<string, unknown>>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-) => FunctionComponent<JSX.IntrinsicElements[THtmlTag] & TProps>;
-function StyledFactory(Component: string | FunctionComponent<any>) {
-  return <TProps extends Record<string, unknown>>(
+const yakStyled = <
+  T,
+  TAttrsIn extends object = {},
+  TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>
+>(
+  Component: FunctionComponent<T> | HtmlTags,
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>
+) => {
+  return <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
-    ...values: CSSInterpolation<TProps>[]
+    ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
     const getRuntimeStyles = css(styles, ...values);
-
-    const Yak = (props: TProps, ref: unknown) => {
-      const runtimeStyles = getRuntimeStyles(
+    const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
+      combineProps(
+        props,
+        typeof attrs === "function" ? (attrs as Function)(props) : attrs
+      );
+    const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
+      /** The combined props are passed into the styled`` literal functions */
+      const combinedProps = processAttrs(
         // if the css component does not require arguments
         // it can be call without arguments and skip calling useTheme()
         //
@@ -45,43 +95,62 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
         //
         // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
         //       ^ must be have acces to theme
-        (getRuntimeStyles.length
+        (attrs || getRuntimeStyles.length
           ? { ...props, theme: useTheme() }
-          : {}) as TProps
+          : props) as Substitute<TCSSProps & T, TAttrsIn>
       );
-      // props includes all values for the css and for the html
-      // however if Component is a string e.g. "div" only the html props should be passed
-      // 
-      // similar to styled-components 6.0.0 all props that start with a $ sign are removed
+      // execute all functions inside the style literal
+      // e.g. styled.button`color: ${props => props.color};`
+      const runtimeStyles = getRuntimeStyles(combinedProps as any);
+
+      // remove all props that start with a $ sign for string components e.g. "button" or "div"
+      // so that they are not passed to the DOM element
       const filteredProps =
-        typeof Component === "string" ? removePrefixedProperties(props) : props;
-      // merge the users props with the generated runtime className and style
+        typeof Component === "string"
+          ? removePrefixedProperties(combinedProps)
+          : combinedProps;
+
+      // yak provides a className and style prop that needs to be merged with the
+      // user provided className and style prop
       const mergedProps = {
         ...filteredProps,
-        style: { ...props.style as {}, ...runtimeStyles.style },
-        className:
-          (props.className ? props.className + " " : "") +
-          runtimeStyles.className,
+        style: {
+          ...((combinedProps as { style?: Record<string, unknown> }).style ||
+            {}),
+          ...runtimeStyles.style,
+        },
+        className: mergeClassNames(
+          (combinedProps as { className?: string }).className,
+          runtimeStyles.className as string
+        ),
       };
+
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
-      if (
-        typeof Component !== "string" &&
-        "Yak" in
-          (Component as FunctionComponent<any> & {
-            Yak?: FunctionComponent<any>;
-          })
-      ) {
+      if (typeof Component !== "string" && "yak" in Component) {
         return (
-          Component as FunctionComponent<any> & { Yak: FunctionComponent<any> }
-        ).Yak(mergedProps, ref);
+          Component as typeof Component & {
+            yak: FunctionComponent<typeof mergedProps>;
+          }
+        ).yak(mergedProps, ref);
       }
-      return <Component ref={ref as any} {...mergedProps} />;
+
+      // @ts-expect-error too complex
+      return <Component ref={ref as any} {...(mergedProps as any)} />;
     };
-    return Object.assign(forwardRef(Yak), { Yak });
+    return yakForwardRef(yak);
   };
-}
+};
+
+/**
+ * Type for the proxy object returned by `styled` that allows to
+ * access all html tags as properties.
+ */
+type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(
+  styles: TemplateStringsArray,
+  ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
+) => FunctionComponent<TCSSProps & T>;
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
@@ -96,29 +165,95 @@ function StyledFactory(Component: string | FunctionComponent<any>) {
  * `;
  * ```
  */
-export const styled = new Proxy(StyledFactory, {
-  get(target, TagName) {
-    if (typeof TagName !== "string") {
-      throw new Error("Only string tags are supported");
-    }
-    return target(TagName as keyof JSX.IntrinsicElements);
+export const styled = new Proxy(
+  StyledFactory as typeof StyledFactory & {
+    [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
+      attrs: <
+        TAttrsIn extends object = {},
+        TAttrsOut extends AttrsMerged<
+          JSX.IntrinsicElements[Tag],
+          TAttrsIn
+        > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>
+      >(
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
+      ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
+    };
   },
-}) as (<TBaseProps extends {}>(
-  Component: FunctionComponent<TBaseProps>
-) => <TProps extends {}>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-) => FunctionComponent<TBaseProps & TProps>) & {
-  [TagName in HtmlTags]: ReturnType<typeof StyledFactory<TagName>>;
-};
+  {
+    get(target, TagName: keyof JSX.IntrinsicElements) {
+      return target(TagName);
+    },
+  }
+);
 
 // Remove all entries that start with a $ sign
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
   const result = {} as T;
   for (const key in obj) {
-    if (!key.startsWith("$")) {
+    if (!key.startsWith("$") && key !== "theme") {
       result[key] = obj[key];
     }
   }
   return result;
 }
+
+const mergeClassNames = (a?: string, b?: string) => {
+  if (!a) return b;
+  if (!b) return a;
+  return a + " " + b;
+};
+
+const removeUndefined = <T,>(obj: T) => {
+  const result = {} as T;
+  for (const key in obj) {
+    if (obj[key] !== undefined) {
+      result[key] = obj[key];
+    }
+  }
+  return result;
+};
+
+const combineProps = <
+  T extends {
+    className?: string;
+    style?: React.CSSProperties;
+  }
+>(
+  props: T,
+  newProps: T
+) => {
+  if (!newProps) return props;
+  const combinedProps: T =
+    "$__attrs" in props
+      ? // allow overriding props when attrs was used previously
+        {
+          ...removeUndefined(newProps),
+          ...props,
+        }
+      : {
+          ...props,
+          ...removeUndefined(newProps),
+        };
+  return {
+    ...combinedProps,
+    className: mergeClassNames(
+      props.className as string,
+      newProps.className as string
+    ),
+    style: { ...(props.style || {}), ...(newProps.style || {}) },
+    $__attrs: true,
+  };
+};
+
+// util type to remove properties from an object
+type FastOmit<T extends object, U extends string | number | symbol> = {
+  [K in keyof T as K extends U ? never : K]: T[K];
+};
+
+// util type to merge two objects
+// if a property is present in both objects the property from B is used
+export type Substitute<A extends object, B extends object> = FastOmit<
+  A,
+  keyof B
+> &
+  B;

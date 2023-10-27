@@ -1,5 +1,5 @@
 import tsloader from "../tsloader.cjs";
-import {describe, it, expect} from "vitest";
+import { describe, it, expect } from "vitest";
 
 const loaderContext = {
   resourcePath: "/some/special/path/page.tsx",
@@ -131,11 +131,62 @@ const FancyButton = styled(Button)\`
   });
 });
 
+it("should support attrs on intrinsic elements", async () => {
+  expect(
+    await tsloader.call(
+      loaderContext,
+      `
+import { styled } from "next-yak";
+
+const headline = styled.input.attrs({
+  type: "text",
+})\`
+  color: red;
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    "import { styled } from \\"next-yak\\";
+    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+    const headline = styled.input.attrs({
+      type: \\"text\\"
+    })(__styleYak.yak_0);"
+  `);
+});
+
+it("should support attrs on wrapped elements", async () => {
+  expect(
+    await tsloader.call(
+      loaderContext,
+      `
+import { styled } from "next-yak";
+
+const headline = styled.input\`
+  color: red;
+\`;
+
+const newHeadline = styled(headline).attrs({
+  type: "text",
+})\`
+  color: black;
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    "import { styled } from \\"next-yak\\";
+    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+    const headline = styled.input(__styleYak.yak_0);
+    const newHeadline = styled(headline).attrs({
+      type: \\"text\\"
+    })(__styleYak.yak_1);"
+  `);
+});
+
 it("should support css variables with spaces", async () => {
   expect(
-  await tsloader.call(
-    loaderContext,
-    `
+    await tsloader.call(
+      loaderContext,
+      `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 import { easing } from "styleguide";
@@ -147,8 +198,8 @@ const headline = css\`
   \${css\`color: blue\`}
   \`;
 `
-  )
-).toMatchInlineSnapshot(`
+    )
+  ).toMatchInlineSnapshot(`
   "import styles from \\"./page.module.css\\";
   import { css } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";

@@ -50,7 +50,7 @@ module.exports = function (babel, options) {
 
         const filePath = state.file.opts.filename;
         if (!filePath) {
-            throw new Error("filePath is undefined");
+          throw new Error("filePath is undefined");
         }
         const fileName = basename(filePath).replace(/\.tsx?/, "");
 
@@ -127,7 +127,19 @@ module.exports = function (babel, options) {
             /** @type {babel.types.CallExpression} */ (tag).callee
           ).name === this.localVarNames.styled;
 
-        if (!isCssLiteral && !isStyledLiteral && !isStyledCall && !isKeyframesLiteral) {
+        const isAttrsCall =
+          t.isCallExpression(tag) &&
+          t.isMemberExpression(tag.callee) &&
+          t.isIdentifier(tag.callee.property) &&
+          tag.callee.property.name === "attrs";
+
+        if (
+          !isCssLiteral &&
+          !isStyledLiteral &&
+          !isStyledCall &&
+          !isKeyframesLiteral &&
+          !isAttrsCall
+        ) {
           return;
         }
 
@@ -136,7 +148,12 @@ module.exports = function (babel, options) {
         // Keep the same selector for all quasis belonging to the same css block
         const classNameExpression = t.memberExpression(
           t.identifier("__styleYak"),
-          t.identifier(localIdent(this.classNameCount++, isKeyframesLiteral ? "animation" : "className" ) )
+          t.identifier(
+            localIdent(
+              this.classNameCount++,
+              isKeyframesLiteral ? "animation" : "className"
+            )
+          )
         );
 
         // Replace the tagged template expression with a call to the 'styled' function
@@ -189,9 +206,12 @@ module.exports = function (babel, options) {
               if (!hashedFile) {
                 const resourcePath = state.file.opts.filename;
                 if (!resourcePath) {
-                    throw new Error("resourcePath is undefined");
+                  throw new Error("resourcePath is undefined");
                 }
-                const relativePath = relative(rootContext, resolve(rootContext, resourcePath));
+                const relativePath = relative(
+                  rootContext,
+                  resolve(rootContext, resourcePath)
+                );
                 hashedFile = murmurhash2_32_gc(relativePath);
               }
 

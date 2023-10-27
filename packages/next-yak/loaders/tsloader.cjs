@@ -37,7 +37,7 @@ module.exports = async function tsloader(source) {
         { isTSX: this.resourcePath.endsWith(".tsx") },
       ],
       [
-        require.resolve("./babel-yak-plugin.cjs"), 
+        require.resolve("./babel-yak-plugin.cjs"),
         {
           replaces,
           rootContext,
@@ -48,9 +48,5 @@ module.exports = async function tsloader(source) {
   if (!result?.code) {
     throw new Error("babel transform failed");
   }
-  return callback( 
-    null,
-    result.code,
-    result.map
-  )
+  return callback(null, result.code, result.map);
 };
