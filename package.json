@@ -14,7 +14,7 @@
     "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak"
   },
   "engines": {
-    "node": ">=16.14.0",
+    "node": ">=20",
     "pnpm": "8"
   },
   "packageManager": "pnpm@8.6.1",
