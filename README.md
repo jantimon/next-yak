@@ -131,13 +131,13 @@ This is a proof of concept. There are a lot of things that need to be done befor
 
  - [ ] improve js parsing - right now it not reusing babel..
  - [ ] better sourcemaps
- - [ ] add theme provider (which works for Server Components)
- - [ ] add support for forwardRef
- - [ ] add support for attrs
  - [ ] improve runtime code size and typings
  - [ ] maybe remove proxy by compiling `styled.button -> styled("button")`
  - [ ] replace the current config apporach with a solution similar to vanilla-extracts `.styles.ts` files
  - [ ] better error messages
+ - [x] add theme provider (which works for Server Components)
+ - [x] add support for forwardRef
+ - [x] add support for attrs
  - [x] config hot module reloading
  
 
