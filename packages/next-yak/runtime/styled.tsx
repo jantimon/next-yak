@@ -12,7 +12,7 @@ import type { YakTheme } from "./context/index.d.ts";
  * Hack to hide .yak from the type definition and to deal with ExoticComponents
  */
 const yakForwardRef: <TProps>(
-  component: ForwardRefRenderFunction<any, TProps>,
+  component: ForwardRefRenderFunction<any, TProps>
 ) => FunctionComponent<TProps> = (component) =>
   Object.assign(React.forwardRef(component), { component }) as any;
 
@@ -57,7 +57,7 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
       TAttrsIn extends object = {},
       TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
     >(
-      attrs: Attrs<T, TAttrsIn, TAttrsOut>,
+      attrs: Attrs<T, TAttrsIn, TAttrsOut>
     ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
@@ -67,7 +67,7 @@ const yakStyled = <
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 >(
   Component: FunctionComponent<T> | HtmlTags,
-  attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>
 ) => {
   return <TCSSProps extends Record<string, unknown> = {}>(
     styles: TemplateStringsArray,
@@ -77,27 +77,28 @@ const yakStyled = <
     const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
       combineProps(
         props,
-        typeof attrs === "function" ? (attrs as Function)(props) : attrs,
+        typeof attrs === "function" ? (attrs as Function)(props) : attrs
       );
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
       /** The combined props are passed into the styled`` literal functions */
-      const combinedProps = processAttrs(
-        // if the css component does not require arguments
-        // it can be call without arguments and skip calling useTheme()
-        //
-        // this is NOT against the rule of hooks as
-        // getRuntimeStyles is a constant defined outside of the component
-        //
-        // for example
-        //
-        // const Button = styled.button`color: red;`
-        //       ^ does not need to have access to theme
-        //
-        // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
-        //       ^ must be have acces to theme
-        (attrs || getRuntimeStyles.length
-          ? { ...props, theme: useTheme() }
-          : props) as Substitute<TCSSProps & T, TAttrsIn>,
+      const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs(
+        Object.assign(
+          // if the css component does not require arguments
+          // it can be call without arguments and skip calling useTheme()
+          //
+          // this is NOT against the rule of hooks as
+          // getRuntimeStyles is a constant defined outside of the component
+          //
+          // for example
+          //
+          // const Button = styled.button`color: red;`
+          //       ^ does not need to have access to theme
+          //
+          // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
+          //       ^ must be have acces to theme
+          attrs || getRuntimeStyles.length ? { theme: useTheme() } : {},
+          props
+        ) as Substitute<TCSSProps & T, TAttrsIn>
       );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
@@ -112,32 +113,30 @@ const yakStyled = <
 
       // yak provides a className and style prop that needs to be merged with the
       // user provided className and style prop
-      const mergedProps = {
-        ...filteredProps,
-        style: {
-          ...((combinedProps as { style?: Record<string, unknown> }).style ||
-            {}),
-          ...runtimeStyles.style,
-        },
-        className: mergeClassNames(
-          (combinedProps as { className?: string }).className,
-          runtimeStyles.className as string,
-        ),
-      };
-
+      (filteredProps as { className?: string }).className = mergeClassNames(
+        (combinedProps as { className?: string }).className,
+        runtimeStyles.className as string
+      );
+      (filteredProps as { style?: React.CSSProperties }).style =
+        "style" in combinedProps
+          ? {
+              ...(combinedProps as { style?: React.CSSProperties }).style,
+              ...runtimeStyles.style,
+            }
+          : runtimeStyles.style;
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
       if (typeof Component !== "string" && "yak" in Component) {
         return (
           Component as typeof Component & {
-            yak: FunctionComponent<typeof mergedProps>;
+            yak: FunctionComponent<typeof combinedProps>;
           }
-        ).yak(mergedProps, ref);
+        ).yak(filteredProps, ref);
       }
 
-      // @ts-expect-error too complex
-      return <Component ref={ref as any} {...(mergedProps as any)} />;
+      (filteredProps as { ref?: unknown }).ref = ref;
+      return <Component {...(filteredProps as any)} />;
     };
     return yakForwardRef(yak);
   };
@@ -175,7 +174,7 @@ export const styled = new Proxy(
           TAttrsIn
         > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
       >(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
       ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
     };
   },
@@ -183,7 +182,7 @@ export const styled = new Proxy(
     get(target, TagName: keyof JSX.IntrinsicElements) {
       return target(TagName);
     },
-  },
+  }
 );
 
 // Remove all entries that start with a $ sign
@@ -220,7 +219,7 @@ const combineProps = <
   },
 >(
   props: T,
-  newProps: T,
+  newProps: T
 ) => {
   if (!newProps) return props;
   const combinedProps: T =
@@ -238,7 +237,7 @@ const combineProps = <
     ...combinedProps,
     className: mergeClassNames(
       props.className as string,
-      newProps.className as string,
+      newProps.className as string
     ),
     style: { ...(props.style || {}), ...(newProps.style || {}) },
     $__attrs: true,
