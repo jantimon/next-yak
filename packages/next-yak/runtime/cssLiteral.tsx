@@ -25,6 +25,11 @@ type CSSFunction = <TProps = {}>(
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => ComponentStyles<TProps>;
 
+type PropsToClassNameFn = (props: unknown) => ({
+  className?: string;
+  style?: Record<string, string>;
+} | PropsToClassNameFn);
+
 /**
  * css() runtime factory of css``
  *
@@ -40,15 +45,10 @@ type CSSFunction = <TProps = {}>(
 const internalCssFactory = (
   ...args: Array<string | CSSFunction | CSSStyles<any>>
 ) => {
-  type PropsToClassNameFn = (props: unknown) => {
-    className?: string;
-    style?: Record<string, string>;
-  };
   const classNames: string[] = [];
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
-  for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
+  for (const arg of args) {
     // CSS Mocule Class Name (auto generated during build form static css)
     // e.g. css`color: red;` -> css("yak31e4")
     if (typeof arg === "string") {
@@ -67,7 +67,14 @@ const internalCssFactory = (
         const value = arg.style[key];
         if (typeof value === "function") {
           dynamicCssFunctions.push((props: unknown) => ({
-            style: { [key]: String(recursivePropExecution(props, value)) },
+            style: { [key]: 
+              String(
+                // The value for a css value can be a theme dependent function e.g.:
+                // const borderColor = (props: { theme: { mode: "dark" | "light" } }) => props.theme === "dark" ? "black" : "white";
+                // css`border-color: ${borderColor};`
+                // Therefore the value has to be extracted recursively
+              recursivePropExecution(props, value)) 
+            },
           }));
         } else {
           style[key] = value;
@@ -82,29 +89,6 @@ const internalCssFactory = (
     return () => ({ className, style });
   }
 
-  // Dynamic CSS with runtime logic
-  const unwrapProps = (
-    props: unknown,
-    fn: PropsToClassNameFn,
-    classNames: string[],
-    style: Record<string, string>,
-  ) => {
-    const result = fn(props);
-    if (typeof result === "function") {
-      unwrapProps(props, result, classNames, style);
-    } else if (typeof result === "object" && result) {
-      if ("className" in result && result.className) {
-        classNames.push(result.className);
-      }
-      if ("style" in result && result.style) {
-        for (const key in result.style) {
-          const value = result.style[key];
-          style[key] = value;
-        }
-      }
-    }
-  };
-
   return (props: unknown) => {
     const allClassNames: string[] = [...classNames];
     const allStyles: Record<string, string> = { ...style };
@@ -116,6 +100,32 @@ const internalCssFactory = (
       style: allStyles,
     };
   };
+};
+
+// Dynamic CSS with runtime logic
+const unwrapProps = (
+  props: unknown,
+  fn: PropsToClassNameFn,
+  classNames: string[],
+  style: Record<string, string>,
+) => {
+  let result = fn(props);
+  while (result) {
+    if (typeof result === "function") {
+      result = result(props);
+      continue;
+    } else if (typeof result === "object" && result) {
+      if ("className" in result && result.className) {
+        classNames.push(result.className);
+      }
+      if ("style" in result && result.style) {
+        for (const key in result.style) {
+          style[key] = result.style[key];
+        }
+      }
+    }
+    break;
+  }
 };
 
 const recursivePropExecution = (
