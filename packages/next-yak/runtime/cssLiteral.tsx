@@ -25,10 +25,12 @@ type CSSFunction = <TProps = {}>(
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => ComponentStyles<TProps>;
 
-type PropsToClassNameFn = (props: unknown) => ({
-  className?: string;
-  style?: Record<string, string>;
-} | PropsToClassNameFn);
+type PropsToClassNameFn = (props: unknown) =>
+  | {
+      className?: string;
+      style?: Record<string, string>;
+    }
+  | PropsToClassNameFn;
 
 /**
  * css() runtime factory of css``
@@ -53,27 +55,28 @@ const internalCssFactory = (
     // e.g. css`color: red;` -> css("yak31e4")
     if (typeof arg === "string") {
       classNames.push(arg);
-    } 
-    // Dynamic CSS e.g. 
+    }
+    // Dynamic CSS e.g.
     // css`${props => props.active && css`color: red;`}`
     else if (typeof arg === "function") {
       dynamicCssFunctions.push(arg as unknown as PropsToClassNameFn);
-    } 
+    }
     // Dynamic CSS with css variables e.g.
-    // css`transform: translate(${props => props.x}, ${props => props.y});` 
+    // css`transform: translate(${props => props.x}, ${props => props.y});`
     // -> css("yak31e4", { style: { "--yakVarX": props => props.x }, "--yakVarY": props => props.y }})
     else if (typeof arg === "object" && "style" in arg) {
       for (const key in arg.style) {
         const value = arg.style[key];
         if (typeof value === "function") {
           dynamicCssFunctions.push((props: unknown) => ({
-            style: { [key]: 
-              String(
+            style: {
+              [key]: String(
                 // The value for a css value can be a theme dependent function e.g.:
                 // const borderColor = (props: { theme: { mode: "dark" | "light" } }) => props.theme === "dark" ? "black" : "white";
                 // css`border-color: ${borderColor};`
                 // Therefore the value has to be extracted recursively
-              recursivePropExecution(props, value)) 
+                recursivePropExecution(props, value),
+              ),
             },
           }));
         } else {
