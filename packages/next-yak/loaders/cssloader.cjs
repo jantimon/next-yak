@@ -1,10 +1,11 @@
 /// @ts-check
+const getYakImports = require("./lib/getYakImports.cjs");
 const babel = require("@babel/core");
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const localIdent = require("./lib/localIdent.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
-const { relative, resolve } = require("path");
+const { relative } = require("path");
 
 /**
  * @param {string} source
@@ -12,15 +13,19 @@ const { relative, resolve } = require("path");
  * @returns {Promise<string>}
  */
 module.exports = async function cssLoader(source) {
-  // Config for replacing tokens in css template literals
-  // can be based on a typescript file
-  const options = this.getOptions();
-  const config = options.configPath
-    ? await this.importModule(resolve(this.rootContext, options.configPath), {
-        layer: "yak-importModule",
-      })
-    : {};
-  const replaces = config.replaces || {};
+  // The user may import constants from a yak file
+  // e.g. import { primary } from './colors.yak'
+  const importedYakConstants = getYakImports(source);
+  /** @type {Record<string, unknown>} */
+  const replaces = {};
+  await Promise.all(importedYakConstants.map(async ({imports, from}) => {
+    const constantValues = await this.importModule(from, {
+      layer: "yak-importModule",
+    });
+    imports.forEach(({localName, importedName}) => {
+      replaces[localName] = constantValues[importedName];
+    });
+  }));
 
   // parse source with babel
   const ast = babel.parseSync(source, {

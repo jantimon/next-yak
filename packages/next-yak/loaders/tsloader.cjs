@@ -1,6 +1,6 @@
 /// @ts-check
 const babel = require("@babel/core");
-const { resolve } = require("path");
+const getYakImports = require("./lib/getYakImports.cjs");
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
@@ -15,15 +15,11 @@ module.exports = async function tsloader(source) {
   }
   const callback = this.async();
 
-  // Config for replacing tokens in css template literals
-  // can be based on a typescript file
-  const options = this.getOptions();
-  const config = options.configPath
-    ? await this.importModule(resolve(this.rootContext, options.configPath), {
-        layer: "yak-importModule",
-      })
-    : {};
-  const replaces = config.replaces || {};
+  // The user may import constants from a yak file
+  // e.g. import { primary } from './colors.yak'
+  const importedYakConstantNames = getYakImports(source).map(({ imports }) => imports.map(({ localName }) => localName)).flat(2);
+  const replaces = Object.fromEntries(importedYakConstantNames.map((name) => [name, null]));
+
   const { rootContext, resourcePath } = this;
   // Compile the typescript file with babel - this will:
   // - inject the import to the css-module (with .yak.module.css extension)

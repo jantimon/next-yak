@@ -1,6 +1,6 @@
 import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
-import { queries } from "@/theme";
+import { queries, colors } from "@/theme/constants.yak";
 import { Clock } from "./Clock";
 import { Inputs } from "@/app/Input";
 import { HighContrastToggle } from "./HighContrastToggle";
@@ -12,7 +12,7 @@ const headline = css<{ $primary?: boolean }>`
   ${({ theme }) =>
     theme.highContrast
       ? css`
-          color: #000;
+          color: ${colors.dark};
         `
       : css`
           color: blue;
@@ -53,7 +53,7 @@ const Button = styled.button<{ $primary?: boolean }>`
   ${({ theme }) =>
     theme.highContrast
       ? css`
-          color: #000;
+          color: ${colors.dark};
         `
       : css`
           color: #009688;
