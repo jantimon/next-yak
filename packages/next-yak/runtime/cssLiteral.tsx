@@ -114,7 +114,7 @@ const unwrapProps = (
     if (typeof result === "function") {
       result = result(props);
       continue;
-    } else if (typeof result === "object" && result) {
+    } else if (typeof result === "object") {
       if ("className" in result && result.className) {
         classNames.push(result.className);
       }
