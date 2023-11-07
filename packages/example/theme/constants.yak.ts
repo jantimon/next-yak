@@ -3,3 +3,5 @@ export const queries = {
   md: "@media(max-width: 768px)",
   lg: "@media(max-width: 1024px)",
 };
+
+export { colors } from "./colors.yak";

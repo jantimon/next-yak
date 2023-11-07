@@ -1,10 +1,7 @@
 "use client";
 
 // runtime/context/index.tsx
-import React, {
-  createContext,
-  useContext
-} from "react";
+import React, { createContext, useContext } from "react";
 var YakContext = createContext({});
 var useTheme = () => useContext(YakContext);
 var YakThemeProvider = ({

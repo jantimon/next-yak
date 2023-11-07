@@ -133,8 +133,8 @@ This is a proof of concept. There are a lot of things that need to be done befor
  - [ ] better sourcemaps
  - [ ] improve runtime code size and typings
  - [ ] maybe remove proxy by compiling `styled.button -> styled("button")`
- - [ ] replace the current config apporach with a solution similar to vanilla-extracts `.styles.ts` files
  - [ ] better error messages
+ - [x] replace the current config apporach with a solution similar to vanilla-extracts `.styles.ts` files
  - [x] add theme provider (which works for Server Components)
  - [x] add support for forwardRef
  - [x] add support for attrs

@@ -3,7 +3,7 @@ import { NextConfig } from "../../example/node_modules/next/dist/server/config.j
 import path from "path";
 import { existsSync } from "fs";
 
-export type YakConfigOptions = { configPath?: string, contextPath?: string }
+export type YakConfigOptions = { contextPath?: string }
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
