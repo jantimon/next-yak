@@ -129,6 +129,44 @@ const FancyButton = styled(Button)\`
       const FancyButton = styled(Button)(__styleYak.yak_2);"
     `);
   });
+
+
+  it("should support access to the theme", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+import styles from "./page.module.css";
+import { styled, css } from "next-yak";
+
+const x = Math.random();
+const Button = styled.button\`
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+  \${({theme}) => theme.mode === "dark" && css\`
+    color: blue;
+  \`}
+  &:hover {
+    color: red;
+  }
+\`;
+const FancyButton = styled(Button)\`
+  background-color: green;
+\`;
+`
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { styled, css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const x = Math.random();
+      const Button = styled.button(__styleYak.yak_0, ({
+        theme
+      }) => theme.mode === \\"dark\\" && css(__styleYak.yak_1));
+      const FancyButton = styled(Button)(__styleYak.yak_2);"
+    `);
+  });
 });
 
 it("should support attrs on intrinsic elements", async () => {
