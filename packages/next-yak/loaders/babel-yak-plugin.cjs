@@ -5,7 +5,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 
-/** @typedef {{replaces: Record<string, Record<string, string>>,  rootContext?: string}} YakBabelPluginOptions */
+/** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
 
 /**
  * Babel plugin for typescript files that use yak - it will do things:

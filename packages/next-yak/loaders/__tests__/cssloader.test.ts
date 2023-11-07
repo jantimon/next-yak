@@ -6,7 +6,6 @@ const loaderContext = {
   rootContext: "/some",
   importModule: () => {
     return {
-      replaces: {
         queries: {
           sm: "@media (min-width: 640px)",
           md: "@media (min-width: 768px)",
@@ -14,7 +13,6 @@ const loaderContext = {
           xl: "@media (min-width: 1280px)",
           xxl: "@media (min-width: 1536px)",
         },
-      },
     };
   },
   getOptions: () => ({
@@ -232,7 +230,7 @@ it("should replace breakpoint references with actual media queries", async () =>
       loaderContext,
       `
 import { css } from "next-yak";
-import { queries } from "@/theme";
+import { queries } from "@/theme.yak";
 
 const headline = css\`
   color: blue;

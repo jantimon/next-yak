@@ -1,5 +1,4 @@
 type YakConfigOptions = {
-    configPath?: string;
     contextPath?: string;
 };
 /**

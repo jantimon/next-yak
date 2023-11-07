@@ -5,8 +5,4 @@ const nextConfig = {
 
 }
 
-const yakConfig = {
-	configPath: "./yak.config.ts",
-}
-
-module.exports = withYak(yakConfig, nextConfig)
+module.exports = withYak(nextConfig)
