@@ -257,6 +257,39 @@ const headline = css\`
   `);
 });
 
+it("should replace breakpoint references with actual media queries from single quote imports", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { css } from "next-yak";
+import { queries } from '@/theme.yak';
+
+const headline = css\`
+  color: blue;
+  \${queries.sm} {
+    color: red;
+  }
+  transition: color \${duration} \${easing};
+  display: block;
+  \${css\`color: orange\`}
+  \`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      color: blue;
+      @media (min-width: 640px) {
+        color: red;
+      }
+      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+      display: block;
+       }
+
+    .yak_1 { color: orange }"
+  `);
+});
+
 it("should prevent double escaped chars", async () => {
   // in styled-components \\ is replaced with \
   // this test verifies that yak provides the same behavior

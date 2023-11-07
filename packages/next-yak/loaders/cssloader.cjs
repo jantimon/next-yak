@@ -13,9 +13,16 @@ const { relative } = require("path");
  * @returns {Promise<string>}
  */
 module.exports = async function cssLoader(source) {
+  const { rootContext, resourcePath } = this;
+
+  /** .yak files are constant definition files */
+  const isYakFile = /\.yak\.(j|t)sx?$/.test(resourcePath.matches);
   // The user may import constants from a yak file
   // e.g. import { primary } from './colors.yak'
-  const importedYakConstants = getYakImports(source);
+  // 
+  // However .yak files inside .yak files are not be compiled
+  // to avoid performance overhead
+  const importedYakConstants = isYakFile ? [] : getYakImports(source);
   /** @type {Record<string, unknown>} */
   const replaces = {};
   await Promise.all(importedYakConstants.map(async ({imports, from}) => {
@@ -57,7 +64,6 @@ module.exports = async function cssLoader(source) {
   let varIndex = 0;
   /** @type {string | null} */
   let hashedFile = null;
-  const { rootContext, resourcePath } = this;
 
   /**
    * find all css template literals in ast
