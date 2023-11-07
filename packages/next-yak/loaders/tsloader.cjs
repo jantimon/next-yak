@@ -15,9 +15,14 @@ module.exports = async function tsloader(source) {
   }
   const callback = this.async();
 
-  // The user may import constants from a yak file
+  /** .yak files are constant definition files */
+  const isYakFile = this.resourcePath.matches(/\.yak\.(j|t)sx?$/);
+  // The user may import constants from a .yak file
   // e.g. import { primary } from './colors.yak'
-  const importedYakConstantNames = getYakImports(source).map(({ imports }) => imports.map(({ localName }) => localName)).flat(2);
+  // 
+  // However .yak files inside .yak files are not be compiled
+  // to avoid performance overhead
+  const importedYakConstantNames = isYakFile ? [] : getYakImports(source).map(({ imports }) => imports.map(({ localName }) => localName)).flat(2);
   const replaces = Object.fromEntries(importedYakConstantNames.map((name) => [name, null]));
 
   const { rootContext, resourcePath } = this;
