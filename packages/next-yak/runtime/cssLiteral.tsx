@@ -52,7 +52,7 @@ const internalCssFactory = (
   const style: Record<string, string> = {};
   for (const arg of args) {
     // A CSS-module class name which got auto generated during build from static css
-    // e.g. css`color: red;` 
+    // e.g. css`color: red;`
     // compiled -> css("yak31e4")
     if (typeof arg === "string") {
       classNames.push(arg);
