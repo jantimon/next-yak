@@ -14,9 +14,10 @@ module.exports = async function tsloader(source) {
     return source;
   }
   const callback = this.async();
+  const { rootContext, resourcePath } = this;
 
   /** .yak files are constant definition files */
-  const isYakFile = this.resourcePath.matches(/\.yak\.(j|t)sx?$/);
+  const isYakFile = /\.yak\.(j|t)sx?$/.test(resourcePath.matches);
   // The user may import constants from a .yak file
   // e.g. import { primary } from './colors.yak'
   // 
@@ -25,7 +26,6 @@ module.exports = async function tsloader(source) {
   const importedYakConstantNames = isYakFile ? [] : getYakImports(source).map(({ imports }) => imports.map(({ localName }) => localName)).flat(2);
   const replaces = Object.fromEntries(importedYakConstantNames.map((name) => [name, null]));
 
-  const { rootContext, resourcePath } = this;
   // Compile the typescript file with babel - this will:
   // - inject the import to the css-module (with .yak.module.css extension)
   // - replace the css template literal with styles from the css-module
