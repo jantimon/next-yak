@@ -51,19 +51,21 @@ const internalCssFactory = (
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
   for (const arg of args) {
-    // CSS Mocule Class Name (auto generated during build form static css)
-    // e.g. css`color: red;` -> css("yak31e4")
+    // A CSS-module class name which got auto generated during build from static css
+    // e.g. css`color: red;` 
+    // compiled -> css("yak31e4")
     if (typeof arg === "string") {
       classNames.push(arg);
     }
     // Dynamic CSS e.g.
     // css`${props => props.active && css`color: red;`}`
+    // compiled -> css((props: { active: boolean }) => props.active && css("yak31e4"))
     else if (typeof arg === "function") {
       dynamicCssFunctions.push(arg as unknown as PropsToClassNameFn);
     }
     // Dynamic CSS with css variables e.g.
     // css`transform: translate(${props => props.x}, ${props => props.y});`
-    // -> css("yak31e4", { style: { "--yakVarX": props => props.x }, "--yakVarY": props => props.y }})
+    // compiled -> css("yak31e4", { style: { "--yakVarX": props => props.x }, "--yakVarY": props => props.y }})
     else if (typeof arg === "object" && "style" in arg) {
       for (const key in arg.style) {
         const value = arg.style[key];
