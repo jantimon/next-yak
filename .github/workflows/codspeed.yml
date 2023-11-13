@@ -1,34 +1,31 @@
-name: autofix.ci
+name: codspeed-benchmarks
+
 on:
-  pull_request:
   push:
     branches: [ "main" ]
-permissions:
-  contents: read
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-  autofix:
+  benchmarks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
           version: 8
           run_install: false
-
       - name: Get pnpm store directory
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
@@ -36,17 +33,11 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-
       - name: Install dependencies
         run: pnpm install
-
-      - name: Prettier Yak Runtime
-        run: npx prettier --write "packages/next-yak/runtime/**/*.{ts,tsx,js,jsx}"
-
-      - name: Prettier Examples
-        run: npx prettier --write "packages/example/app/**/*.{ts,tsx,js,jsx}"
-
-      - name: Benchmarks
-        run: npx prettier --write "packages/benchmark/**/*.{ts,tsx}" --ignore-path "packages/benchmark/.prettierignore"
-
-      - uses: autofix-ci/action@d3e591514b99d0fca6779455ff8338516663f7cc
+      - name: Run benchmarks
+        uses: CodSpeedHQ/action@v1
+        with:
+          working-directory: "packages/benchmark"
+          run: pnpm run codspeed
+          token: ${{ secrets.CODSPEED_TOKEN }}
