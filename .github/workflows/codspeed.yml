@@ -2,15 +2,17 @@ name: codspeed-benchmarks
 
 on:
   push:
-    branches:
-      - "main"
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   benchmarks:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
