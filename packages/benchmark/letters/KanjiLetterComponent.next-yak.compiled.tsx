@@ -2,7 +2,7 @@
 
 "use client";    
 import React, { type FunctionComponent } from 'react';
-import { styled as styledYak } from '../../../packages/next-yak/runtime/';
+import { styled as styledYak } from 'next-yak';
 
 const JapaneseCard = styledYak.div("yak-class-0");
 

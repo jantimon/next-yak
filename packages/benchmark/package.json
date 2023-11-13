@@ -8,7 +8,9 @@
     "start": "next start",
     "generate:letters": "node ./letters/gen.js",
     "lighthouse": "node ./lighthouse.mjs",
-    "codspeed": "NODE_ENV=production tsx ./codspeed/index.bench.tsx"
+    "codspeed": "pnpm run codspeed:build && pnpm run codspeed:run",
+    "codspeed:build": "tsup ./codspeed/index.bench.tsx --sourcemap inline --format esm --target node20 --clean --outDir ./codspeed/dist --external benchmark --external react --external next-yak --external styled-components --external react-dom --external @codspeed/benchmark.js-plugin",
+    "codspeed:run": "NODE_ENV=production node ./codspeed/dist/index.bench.mjs"
   },
   "dependencies": {
     "next": "14.0.2",
@@ -25,6 +27,6 @@
     "tree-kill": "1.2.2",
     "@codspeed/benchmark.js-plugin": "2.2.0",
     "benchmark": "2.1.4",
-    "tsx": "4.1.1"
+    "tsup": "7.2.0"
   }
 }
