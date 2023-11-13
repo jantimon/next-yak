@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate:letters": "node ./letters/gen.js",
+    "lighhouse": "node ./lighthouse.js",
+    "codspeed": "NODE_ENV=production tsx ./codspeed/index.bench.tsx"
   },
   "dependencies": {
     "next": "14.0.2",
@@ -16,7 +19,12 @@
   },
   "devDependencies": {
     "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "@types/benchmark": "2.1.5",
     "typescript": "5.2.2",
-    "tree-kill": "1.2.2"
+    "tree-kill": "1.2.2",
+    "@codspeed/benchmark.js-plugin": "2.2.0",
+    "benchmark": "2.1.4",
+    "tsx": "4.1.1"
   }
 }

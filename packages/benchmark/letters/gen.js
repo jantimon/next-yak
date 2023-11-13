@@ -20,9 +20,7 @@ function generateKanjiComponentFile() {
     const fileContent = `
 "use client";    
 import React, { type FunctionComponent } from 'react';
-import ${
-      lib === "next-yak" ? `{ styled as ${styled} }` : styled
-    } from '${lib}';
+import ${lib === "next-yak" ? `{ styled as ${styled} }` : styled} from '${lib}';
 
 const JapaneseCard = ${styled}.div\`
     width: 100px;
@@ -84,6 +82,25 @@ export const KanjiLetterComponent${
         `KanjiLetterComponent.${lib}.tsx has been created successfully.`
       );
     });
+
+    // Precompile yak similar to how it would be compiled by our loader
+    if (lib === "next-yak") {
+      let i = 0;
+      const compiled = "// @ts-nocheck\n" + fileContent.replace(
+        /`\n([^`]*)`/g,
+        (_, content) => `("yak-class-${i++}")`
+      );
+      fs.writeFile(
+        `${__dirname}/KanjiLetterComponent.${lib}.compiled.tsx`,
+        compiled,
+        (err) => {
+          if (err) throw err;
+          console.log(
+            `KanjiLetterComponent.${lib}.compiled.tsx has been created successfully.`
+          );
+        }
+      );
+    }
   }
 }
 
