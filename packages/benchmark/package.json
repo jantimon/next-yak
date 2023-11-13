@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "generate:letters": "node ./letters/gen.js",
-    "lighhouse": "node ./lighthouse.js",
+    "lighthouse": "node ./lighthouse.mjs",
     "codspeed": "NODE_ENV=production tsx ./codspeed/index.bench.tsx"
   },
   "dependencies": {

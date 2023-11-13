@@ -76,7 +76,7 @@ export const KanjiLetterComponent${
 };
 `;
 
-    fs.writeFile(`KanjiLetterComponent.${lib}.tsx`, fileContent, (err) => {
+    fs.writeFile(`${__dirname}/KanjiLetterComponent.${lib}.tsx`, fileContent, (err) => {
       if (err) throw err;
       console.log(
         `KanjiLetterComponent.${lib}.tsx has been created successfully.`
