@@ -41,5 +41,5 @@ jobs:
         uses: CodSpeedHQ/action@v1
         with:
           working-directory: "packages/benchmark"
-          run: node ./codspeed/dist/index.bench.js
+          run: NODE_ENV=production node ./codspeed/dist/index.bench.js
           token: ${{ secrets.CODSPEED_TOKEN }}
