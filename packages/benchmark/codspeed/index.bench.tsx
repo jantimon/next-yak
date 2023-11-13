@@ -16,7 +16,6 @@ import { KanjiLetterComponentStyled } from "../letters/KanjiLetterComponent.styl
       renderToString(<KanjiLetterComponentYak />).length;
     })
     .on("cycle", function (event: Benchmark.Event) {
-      console.log(event);
       console.log(String(event.target));
     });
 

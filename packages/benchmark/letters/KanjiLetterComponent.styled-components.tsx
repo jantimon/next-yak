@@ -1,7 +1,7 @@
 
 "use client";    
 import React, { type FunctionComponent } from 'react';
-import styled from 'styled-components';
+import {styled} from 'styled-components';
 
 const JapaneseCard = styled.div`
     width: 100px;

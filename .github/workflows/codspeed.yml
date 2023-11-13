@@ -35,9 +35,11 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
+      - name: Build benchmark suite
+        run: pnpm run codspeed:build 
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v1
         with:
           working-directory: "packages/benchmark"
-          run: pnpm run codspeed
+          run: node ./codspeed/dist/index.bench.js
           token: ${{ secrets.CODSPEED_TOKEN }}
