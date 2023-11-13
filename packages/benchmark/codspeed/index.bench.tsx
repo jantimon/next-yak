@@ -5,22 +5,19 @@ import { KanjiLetterComponentYak } from "../letters/KanjiLetterComponent.next-ya
 import React from "react";
 import { KanjiLetterComponentStyled } from "../letters/KanjiLetterComponent.styled-components";
 
-
 (async () => {
-const suite = withCodSpeed(new Benchmark.Suite());
+  const suite = withCodSpeed(new Benchmark.Suite());
 
-suite
-  .add("render KanjiLetterComponentYak", () => {
-    return renderToString(<KanjiLetterComponentYak />);
-  })
-  .add("render KanjiLetterComponentStyled", () => {
-    return renderToString(<KanjiLetterComponentStyled />);
-  })
-  .on("cycle", function (event: Benchmark.Event) {
-    console.log(String(event.target));
-  })
-
+  suite
+    .add("render KanjiLetterComponentStyled", () => {
+      renderToString(<KanjiLetterComponentStyled />).length;
+    })
+    .add("render KanjiLetterComponentYak", () => {
+      renderToString(<KanjiLetterComponentYak />).length;
+    })
+    .on("cycle", function (event: Benchmark.Event) {
+      console.log(String(event.target));
+    });
 
   await suite.run({ async: true });
-
-})()
+})();

@@ -46,4 +46,7 @@ jobs:
       - name: Prettier Examples
         run: npx prettier --write "packages/example/app/**/*.{ts,tsx,js,jsx}"
 
+      - name: Benchmarks
+        run: npx prettier --write "packages/benchmark/**/*.{ts,tsx}"
+
       - uses: autofix-ci/action@d3e591514b99d0fca6779455ff8338516663f7cc
