@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build benchmark suite
-        run: cd packages/benchmark && pnpm run codspeed:build 
+        run: cd packages/benchmark && pnpm run codspeed 
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v1
         with:
