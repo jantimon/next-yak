@@ -1,10 +1,11 @@
 // @ts-nocheck
 
-"use client";
-import React, { type FunctionComponent } from "react";
-import { styled as styledYak } from "next-yak";
+"use client";    
+import React, { type FunctionComponent } from 'react';
+import { styled as styledYak } from '../../../packages/next-yak/runtime/';
 
 const JapaneseCard = styledYak.div("yak-class-0");
+
 
 const Kanji1Character = styledYak(JapaneseCard)("yak-class-1");
 
@@ -5005,6 +5006,7 @@ const Kanji2498Character = styledYak(JapaneseCard)("yak-class-2498");
 const Kanji2499Character = styledYak(JapaneseCard)("yak-class-2499");
 
 const Kanji2500Character = styledYak(JapaneseCard)("yak-class-2500");
+
 
 const Wrapper = styledYak.div("yak-class-2501");
 

@@ -89,6 +89,9 @@ export const KanjiLetterComponent${
       const compiled = "// @ts-nocheck\n" + fileContent.replace(
         /`\n([^`]*)`/g,
         (_, content) => `("yak-class-${i++}")`
+      ).replace(
+        "import { styled as styledYak } from 'next-yak';",
+        "import { styled as styledYak } from '../../../packages/next-yak/runtime/';"
       );
       fs.writeFile(
         `${__dirname}/KanjiLetterComponent.${lib}.compiled.tsx`,
