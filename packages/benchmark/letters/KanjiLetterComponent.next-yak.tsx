@@ -1,7 +1,6 @@
-
-"use client";    
-import React, { type FunctionComponent } from 'react';
-import { styled as styledYak } from 'next-yak';
+"use client";
+import React, { type FunctionComponent } from "react";
+import { styled as styledYak } from "next-yak";
 
 const JapaneseCard = styledYak.div`
     width: 100px;
@@ -17,7 +16,6 @@ const JapaneseCard = styledYak.div`
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 `;
-
 
 const Kanji1Character = styledYak(JapaneseCard)`
   &:before {
@@ -22518,7 +22516,6 @@ const Kanji2500Character = styledYak(JapaneseCard)`
     content: '埃';
   }
 `;
-
 
 const Wrapper = styledYak.div`
     display: flex;

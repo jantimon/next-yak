@@ -1,30 +1,28 @@
-
-"use client";    
-import React, { type FunctionComponent } from 'react';
-import styled from 'styled-components';
+"use client";
+import React, { type FunctionComponent } from "react";
+import styled from "styled-components";
 
 const JapaneseCard = styled.div`
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    transition: box-shadow 0.3s;
-    &:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 `;
-
 
 const Kanji1Character = styled(JapaneseCard)`
   &:before {
     display: block;
     font-size: 2em;
     color: #333;
-    content: '一';
+    content: "一";
   }
 `;
 
@@ -33,7 +31,7 @@ const Kanji2Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丁';
+    content: "丁";
   }
 `;
 
@@ -42,7 +40,7 @@ const Kanji3Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丂';
+    content: "丂";
   }
 `;
 
@@ -51,7 +49,7 @@ const Kanji4Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '七';
+    content: "七";
   }
 `;
 
@@ -60,7 +58,7 @@ const Kanji5Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丄';
+    content: "丄";
   }
 `;
 
@@ -69,7 +67,7 @@ const Kanji6Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丅';
+    content: "丅";
   }
 `;
 
@@ -78,7 +76,7 @@ const Kanji7Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丆';
+    content: "丆";
   }
 `;
 
@@ -87,7 +85,7 @@ const Kanji8Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '万';
+    content: "万";
   }
 `;
 
@@ -96,7 +94,7 @@ const Kanji9Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丈';
+    content: "丈";
   }
 `;
 
@@ -105,7 +103,7 @@ const Kanji10Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '三';
+    content: "三";
   }
 `;
 
@@ -114,7 +112,7 @@ const Kanji11Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '上';
+    content: "上";
   }
 `;
 
@@ -123,7 +121,7 @@ const Kanji12Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '下';
+    content: "下";
   }
 `;
 
@@ -132,7 +130,7 @@ const Kanji13Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丌';
+    content: "丌";
   }
 `;
 
@@ -141,7 +139,7 @@ const Kanji14Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '不';
+    content: "不";
   }
 `;
 
@@ -150,7 +148,7 @@ const Kanji15Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '与';
+    content: "与";
   }
 `;
 
@@ -159,7 +157,7 @@ const Kanji16Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丏';
+    content: "丏";
   }
 `;
 
@@ -168,7 +166,7 @@ const Kanji17Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丐';
+    content: "丐";
   }
 `;
 
@@ -177,7 +175,7 @@ const Kanji18Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丑';
+    content: "丑";
   }
 `;
 
@@ -186,7 +184,7 @@ const Kanji19Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丒';
+    content: "丒";
   }
 `;
 
@@ -195,7 +193,7 @@ const Kanji20Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '专';
+    content: "专";
   }
 `;
 
@@ -204,7 +202,7 @@ const Kanji21Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '且';
+    content: "且";
   }
 `;
 
@@ -213,7 +211,7 @@ const Kanji22Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丕';
+    content: "丕";
   }
 `;
 
@@ -222,7 +220,7 @@ const Kanji23Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '世';
+    content: "世";
   }
 `;
 
@@ -231,7 +229,7 @@ const Kanji24Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丗';
+    content: "丗";
   }
 `;
 
@@ -240,7 +238,7 @@ const Kanji25Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丘';
+    content: "丘";
   }
 `;
 
@@ -249,7 +247,7 @@ const Kanji26Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丙';
+    content: "丙";
   }
 `;
 
@@ -258,7 +256,7 @@ const Kanji27Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '业';
+    content: "业";
   }
 `;
 
@@ -267,7 +265,7 @@ const Kanji28Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丛';
+    content: "丛";
   }
 `;
 
@@ -276,7 +274,7 @@ const Kanji29Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '东';
+    content: "东";
   }
 `;
 
@@ -285,7 +283,7 @@ const Kanji30Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丝';
+    content: "丝";
   }
 `;
 
@@ -294,7 +292,7 @@ const Kanji31Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丞';
+    content: "丞";
   }
 `;
 
@@ -303,7 +301,7 @@ const Kanji32Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丟';
+    content: "丟";
   }
 `;
 
@@ -312,7 +310,7 @@ const Kanji33Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丠';
+    content: "丠";
   }
 `;
 
@@ -321,7 +319,7 @@ const Kanji34Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '両';
+    content: "両";
   }
 `;
 
@@ -330,7 +328,7 @@ const Kanji35Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丢';
+    content: "丢";
   }
 `;
 
@@ -339,7 +337,7 @@ const Kanji36Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丣';
+    content: "丣";
   }
 `;
 
@@ -348,7 +346,7 @@ const Kanji37Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '两';
+    content: "两";
   }
 `;
 
@@ -357,7 +355,7 @@ const Kanji38Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '严';
+    content: "严";
   }
 `;
 
@@ -366,7 +364,7 @@ const Kanji39Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '並';
+    content: "並";
   }
 `;
 
@@ -375,7 +373,7 @@ const Kanji40Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丧';
+    content: "丧";
   }
 `;
 
@@ -384,7 +382,7 @@ const Kanji41Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丨';
+    content: "丨";
   }
 `;
 
@@ -393,7 +391,7 @@ const Kanji42Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丩';
+    content: "丩";
   }
 `;
 
@@ -402,7 +400,7 @@ const Kanji43Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '个';
+    content: "个";
   }
 `;
 
@@ -411,7 +409,7 @@ const Kanji44Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丫';
+    content: "丫";
   }
 `;
 
@@ -420,7 +418,7 @@ const Kanji45Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丬';
+    content: "丬";
   }
 `;
 
@@ -429,7 +427,7 @@ const Kanji46Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '中';
+    content: "中";
   }
 `;
 
@@ -438,7 +436,7 @@ const Kanji47Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丮';
+    content: "丮";
   }
 `;
 
@@ -447,7 +445,7 @@ const Kanji48Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丯';
+    content: "丯";
   }
 `;
 
@@ -456,7 +454,7 @@ const Kanji49Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丰';
+    content: "丰";
   }
 `;
 
@@ -465,7 +463,7 @@ const Kanji50Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丱';
+    content: "丱";
   }
 `;
 
@@ -474,7 +472,7 @@ const Kanji51Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '串';
+    content: "串";
   }
 `;
 
@@ -483,7 +481,7 @@ const Kanji52Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丳';
+    content: "丳";
   }
 `;
 
@@ -492,7 +490,7 @@ const Kanji53Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '临';
+    content: "临";
   }
 `;
 
@@ -501,7 +499,7 @@ const Kanji54Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丵';
+    content: "丵";
   }
 `;
 
@@ -510,7 +508,7 @@ const Kanji55Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丶';
+    content: "丶";
   }
 `;
 
@@ -519,7 +517,7 @@ const Kanji56Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丷';
+    content: "丷";
   }
 `;
 
@@ -528,7 +526,7 @@ const Kanji57Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丸';
+    content: "丸";
   }
 `;
 
@@ -537,7 +535,7 @@ const Kanji58Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丹';
+    content: "丹";
   }
 `;
 
@@ -546,7 +544,7 @@ const Kanji59Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '为';
+    content: "为";
   }
 `;
 
@@ -555,7 +553,7 @@ const Kanji60Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '主';
+    content: "主";
   }
 `;
 
@@ -564,7 +562,7 @@ const Kanji61Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丼';
+    content: "丼";
   }
 `;
 
@@ -573,7 +571,7 @@ const Kanji62Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丽';
+    content: "丽";
   }
 `;
 
@@ -582,7 +580,7 @@ const Kanji63Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '举';
+    content: "举";
   }
 `;
 
@@ -591,7 +589,7 @@ const Kanji64Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '丿';
+    content: "丿";
   }
 `;
 
@@ -600,7 +598,7 @@ const Kanji65Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乀';
+    content: "乀";
   }
 `;
 
@@ -609,7 +607,7 @@ const Kanji66Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乁';
+    content: "乁";
   }
 `;
 
@@ -618,7 +616,7 @@ const Kanji67Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乂';
+    content: "乂";
   }
 `;
 
@@ -627,7 +625,7 @@ const Kanji68Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乃';
+    content: "乃";
   }
 `;
 
@@ -636,7 +634,7 @@ const Kanji69Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乄';
+    content: "乄";
   }
 `;
 
@@ -645,7 +643,7 @@ const Kanji70Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '久';
+    content: "久";
   }
 `;
 
@@ -654,7 +652,7 @@ const Kanji71Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乆';
+    content: "乆";
   }
 `;
 
@@ -663,7 +661,7 @@ const Kanji72Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乇';
+    content: "乇";
   }
 `;
 
@@ -672,7 +670,7 @@ const Kanji73Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '么';
+    content: "么";
   }
 `;
 
@@ -681,7 +679,7 @@ const Kanji74Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '义';
+    content: "义";
   }
 `;
 
@@ -690,7 +688,7 @@ const Kanji75Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乊';
+    content: "乊";
   }
 `;
 
@@ -699,7 +697,7 @@ const Kanji76Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '之';
+    content: "之";
   }
 `;
 
@@ -708,7 +706,7 @@ const Kanji77Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乌';
+    content: "乌";
   }
 `;
 
@@ -717,7 +715,7 @@ const Kanji78Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乍';
+    content: "乍";
   }
 `;
 
@@ -726,7 +724,7 @@ const Kanji79Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乎';
+    content: "乎";
   }
 `;
 
@@ -735,7 +733,7 @@ const Kanji80Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乏';
+    content: "乏";
   }
 `;
 
@@ -744,7 +742,7 @@ const Kanji81Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乐';
+    content: "乐";
   }
 `;
 
@@ -753,7 +751,7 @@ const Kanji82Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乑';
+    content: "乑";
   }
 `;
 
@@ -762,7 +760,7 @@ const Kanji83Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乒';
+    content: "乒";
   }
 `;
 
@@ -771,7 +769,7 @@ const Kanji84Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乓';
+    content: "乓";
   }
 `;
 
@@ -780,7 +778,7 @@ const Kanji85Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乔';
+    content: "乔";
   }
 `;
 
@@ -789,7 +787,7 @@ const Kanji86Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乕';
+    content: "乕";
   }
 `;
 
@@ -798,7 +796,7 @@ const Kanji87Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乖';
+    content: "乖";
   }
 `;
 
@@ -807,7 +805,7 @@ const Kanji88Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乗';
+    content: "乗";
   }
 `;
 
@@ -816,7 +814,7 @@ const Kanji89Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乘';
+    content: "乘";
   }
 `;
 
@@ -825,7 +823,7 @@ const Kanji90Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乙';
+    content: "乙";
   }
 `;
 
@@ -834,7 +832,7 @@ const Kanji91Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乚';
+    content: "乚";
   }
 `;
 
@@ -843,7 +841,7 @@ const Kanji92Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乛';
+    content: "乛";
   }
 `;
 
@@ -852,7 +850,7 @@ const Kanji93Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乜';
+    content: "乜";
   }
 `;
 
@@ -861,7 +859,7 @@ const Kanji94Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '九';
+    content: "九";
   }
 `;
 
@@ -870,7 +868,7 @@ const Kanji95Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乞';
+    content: "乞";
   }
 `;
 
@@ -879,7 +877,7 @@ const Kanji96Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '也';
+    content: "也";
   }
 `;
 
@@ -888,7 +886,7 @@ const Kanji97Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '习';
+    content: "习";
   }
 `;
 
@@ -897,7 +895,7 @@ const Kanji98Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乡';
+    content: "乡";
   }
 `;
 
@@ -906,7 +904,7 @@ const Kanji99Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乢';
+    content: "乢";
   }
 `;
 
@@ -915,7 +913,7 @@ const Kanji100Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乣';
+    content: "乣";
   }
 `;
 
@@ -924,7 +922,7 @@ const Kanji101Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乤';
+    content: "乤";
   }
 `;
 
@@ -933,7 +931,7 @@ const Kanji102Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乥';
+    content: "乥";
   }
 `;
 
@@ -942,7 +940,7 @@ const Kanji103Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '书';
+    content: "书";
   }
 `;
 
@@ -951,7 +949,7 @@ const Kanji104Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乧';
+    content: "乧";
   }
 `;
 
@@ -960,7 +958,7 @@ const Kanji105Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乨';
+    content: "乨";
   }
 `;
 
@@ -969,7 +967,7 @@ const Kanji106Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乩';
+    content: "乩";
   }
 `;
 
@@ -978,7 +976,7 @@ const Kanji107Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乪';
+    content: "乪";
   }
 `;
 
@@ -987,7 +985,7 @@ const Kanji108Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乫';
+    content: "乫";
   }
 `;
 
@@ -996,7 +994,7 @@ const Kanji109Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乬';
+    content: "乬";
   }
 `;
 
@@ -1005,7 +1003,7 @@ const Kanji110Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乭';
+    content: "乭";
   }
 `;
 
@@ -1014,7 +1012,7 @@ const Kanji111Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乮';
+    content: "乮";
   }
 `;
 
@@ -1023,7 +1021,7 @@ const Kanji112Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乯';
+    content: "乯";
   }
 `;
 
@@ -1032,7 +1030,7 @@ const Kanji113Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '买';
+    content: "买";
   }
 `;
 
@@ -1041,7 +1039,7 @@ const Kanji114Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乱';
+    content: "乱";
   }
 `;
 
@@ -1050,7 +1048,7 @@ const Kanji115Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乲';
+    content: "乲";
   }
 `;
 
@@ -1059,7 +1057,7 @@ const Kanji116Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乳';
+    content: "乳";
   }
 `;
 
@@ -1068,7 +1066,7 @@ const Kanji117Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乴';
+    content: "乴";
   }
 `;
 
@@ -1077,7 +1075,7 @@ const Kanji118Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乵';
+    content: "乵";
   }
 `;
 
@@ -1086,7 +1084,7 @@ const Kanji119Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乶';
+    content: "乶";
   }
 `;
 
@@ -1095,7 +1093,7 @@ const Kanji120Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乷';
+    content: "乷";
   }
 `;
 
@@ -1104,7 +1102,7 @@ const Kanji121Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乸';
+    content: "乸";
   }
 `;
 
@@ -1113,7 +1111,7 @@ const Kanji122Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乹';
+    content: "乹";
   }
 `;
 
@@ -1122,7 +1120,7 @@ const Kanji123Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乺';
+    content: "乺";
   }
 `;
 
@@ -1131,7 +1129,7 @@ const Kanji124Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乻';
+    content: "乻";
   }
 `;
 
@@ -1140,7 +1138,7 @@ const Kanji125Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乼';
+    content: "乼";
   }
 `;
 
@@ -1149,7 +1147,7 @@ const Kanji126Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乽';
+    content: "乽";
   }
 `;
 
@@ -1158,7 +1156,7 @@ const Kanji127Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乾';
+    content: "乾";
   }
 `;
 
@@ -1167,7 +1165,7 @@ const Kanji128Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '乿';
+    content: "乿";
   }
 `;
 
@@ -1176,7 +1174,7 @@ const Kanji129Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亀';
+    content: "亀";
   }
 `;
 
@@ -1185,7 +1183,7 @@ const Kanji130Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亁';
+    content: "亁";
   }
 `;
 
@@ -1194,7 +1192,7 @@ const Kanji131Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亂';
+    content: "亂";
   }
 `;
 
@@ -1203,7 +1201,7 @@ const Kanji132Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亃';
+    content: "亃";
   }
 `;
 
@@ -1212,7 +1210,7 @@ const Kanji133Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亄';
+    content: "亄";
   }
 `;
 
@@ -1221,7 +1219,7 @@ const Kanji134Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亅';
+    content: "亅";
   }
 `;
 
@@ -1230,7 +1228,7 @@ const Kanji135Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '了';
+    content: "了";
   }
 `;
 
@@ -1239,7 +1237,7 @@ const Kanji136Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亇';
+    content: "亇";
   }
 `;
 
@@ -1248,7 +1246,7 @@ const Kanji137Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '予';
+    content: "予";
   }
 `;
 
@@ -1257,7 +1255,7 @@ const Kanji138Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '争';
+    content: "争";
   }
 `;
 
@@ -1266,7 +1264,7 @@ const Kanji139Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亊';
+    content: "亊";
   }
 `;
 
@@ -1275,7 +1273,7 @@ const Kanji140Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '事';
+    content: "事";
   }
 `;
 
@@ -1284,7 +1282,7 @@ const Kanji141Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '二';
+    content: "二";
   }
 `;
 
@@ -1293,7 +1291,7 @@ const Kanji142Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亍';
+    content: "亍";
   }
 `;
 
@@ -1302,7 +1300,7 @@ const Kanji143Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '于';
+    content: "于";
   }
 `;
 
@@ -1311,7 +1309,7 @@ const Kanji144Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亏';
+    content: "亏";
   }
 `;
 
@@ -1320,7 +1318,7 @@ const Kanji145Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亐';
+    content: "亐";
   }
 `;
 
@@ -1329,7 +1327,7 @@ const Kanji146Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '云';
+    content: "云";
   }
 `;
 
@@ -1338,7 +1336,7 @@ const Kanji147Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '互';
+    content: "互";
   }
 `;
 
@@ -1347,7 +1345,7 @@ const Kanji148Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亓';
+    content: "亓";
   }
 `;
 
@@ -1356,7 +1354,7 @@ const Kanji149Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '五';
+    content: "五";
   }
 `;
 
@@ -1365,7 +1363,7 @@ const Kanji150Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '井';
+    content: "井";
   }
 `;
 
@@ -1374,7 +1372,7 @@ const Kanji151Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亖';
+    content: "亖";
   }
 `;
 
@@ -1383,7 +1381,7 @@ const Kanji152Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亗';
+    content: "亗";
   }
 `;
 
@@ -1392,7 +1390,7 @@ const Kanji153Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亘';
+    content: "亘";
   }
 `;
 
@@ -1401,7 +1399,7 @@ const Kanji154Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亙';
+    content: "亙";
   }
 `;
 
@@ -1410,7 +1408,7 @@ const Kanji155Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亚';
+    content: "亚";
   }
 `;
 
@@ -1419,7 +1417,7 @@ const Kanji156Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '些';
+    content: "些";
   }
 `;
 
@@ -1428,7 +1426,7 @@ const Kanji157Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亜';
+    content: "亜";
   }
 `;
 
@@ -1437,7 +1435,7 @@ const Kanji158Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亝';
+    content: "亝";
   }
 `;
 
@@ -1446,7 +1444,7 @@ const Kanji159Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亞';
+    content: "亞";
   }
 `;
 
@@ -1455,7 +1453,7 @@ const Kanji160Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亟';
+    content: "亟";
   }
 `;
 
@@ -1464,7 +1462,7 @@ const Kanji161Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亠';
+    content: "亠";
   }
 `;
 
@@ -1473,7 +1471,7 @@ const Kanji162Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亡';
+    content: "亡";
   }
 `;
 
@@ -1482,7 +1480,7 @@ const Kanji163Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亢';
+    content: "亢";
   }
 `;
 
@@ -1491,7 +1489,7 @@ const Kanji164Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亣';
+    content: "亣";
   }
 `;
 
@@ -1500,7 +1498,7 @@ const Kanji165Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '交';
+    content: "交";
   }
 `;
 
@@ -1509,7 +1507,7 @@ const Kanji166Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亥';
+    content: "亥";
   }
 `;
 
@@ -1518,7 +1516,7 @@ const Kanji167Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亦';
+    content: "亦";
   }
 `;
 
@@ -1527,7 +1525,7 @@ const Kanji168Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '产';
+    content: "产";
   }
 `;
 
@@ -1536,7 +1534,7 @@ const Kanji169Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亨';
+    content: "亨";
   }
 `;
 
@@ -1545,7 +1543,7 @@ const Kanji170Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亩';
+    content: "亩";
   }
 `;
 
@@ -1554,7 +1552,7 @@ const Kanji171Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亪';
+    content: "亪";
   }
 `;
 
@@ -1563,7 +1561,7 @@ const Kanji172Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '享';
+    content: "享";
   }
 `;
 
@@ -1572,7 +1570,7 @@ const Kanji173Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '京';
+    content: "京";
   }
 `;
 
@@ -1581,7 +1579,7 @@ const Kanji174Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亭';
+    content: "亭";
   }
 `;
 
@@ -1590,7 +1588,7 @@ const Kanji175Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亮';
+    content: "亮";
   }
 `;
 
@@ -1599,7 +1597,7 @@ const Kanji176Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亯';
+    content: "亯";
   }
 `;
 
@@ -1608,7 +1606,7 @@ const Kanji177Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亰';
+    content: "亰";
   }
 `;
 
@@ -1617,7 +1615,7 @@ const Kanji178Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亱';
+    content: "亱";
   }
 `;
 
@@ -1626,7 +1624,7 @@ const Kanji179Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亲';
+    content: "亲";
   }
 `;
 
@@ -1635,7 +1633,7 @@ const Kanji180Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亳';
+    content: "亳";
   }
 `;
 
@@ -1644,7 +1642,7 @@ const Kanji181Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亴';
+    content: "亴";
   }
 `;
 
@@ -1653,7 +1651,7 @@ const Kanji182Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亵';
+    content: "亵";
   }
 `;
 
@@ -1662,7 +1660,7 @@ const Kanji183Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亶';
+    content: "亶";
   }
 `;
 
@@ -1671,7 +1669,7 @@ const Kanji184Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亷';
+    content: "亷";
   }
 `;
 
@@ -1680,7 +1678,7 @@ const Kanji185Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亸';
+    content: "亸";
   }
 `;
 
@@ -1689,7 +1687,7 @@ const Kanji186Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亹';
+    content: "亹";
   }
 `;
 
@@ -1698,7 +1696,7 @@ const Kanji187Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '人';
+    content: "人";
   }
 `;
 
@@ -1707,7 +1705,7 @@ const Kanji188Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亻';
+    content: "亻";
   }
 `;
 
@@ -1716,7 +1714,7 @@ const Kanji189Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亼';
+    content: "亼";
   }
 `;
 
@@ -1725,7 +1723,7 @@ const Kanji190Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亽';
+    content: "亽";
   }
 `;
 
@@ -1734,7 +1732,7 @@ const Kanji191Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亾';
+    content: "亾";
   }
 `;
 
@@ -1743,7 +1741,7 @@ const Kanji192Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '亿';
+    content: "亿";
   }
 `;
 
@@ -1752,7 +1750,7 @@ const Kanji193Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '什';
+    content: "什";
   }
 `;
 
@@ -1761,7 +1759,7 @@ const Kanji194Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仁';
+    content: "仁";
   }
 `;
 
@@ -1770,7 +1768,7 @@ const Kanji195Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仂';
+    content: "仂";
   }
 `;
 
@@ -1779,7 +1777,7 @@ const Kanji196Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仃';
+    content: "仃";
   }
 `;
 
@@ -1788,7 +1786,7 @@ const Kanji197Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仄';
+    content: "仄";
   }
 `;
 
@@ -1797,7 +1795,7 @@ const Kanji198Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仅';
+    content: "仅";
   }
 `;
 
@@ -1806,7 +1804,7 @@ const Kanji199Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仆';
+    content: "仆";
   }
 `;
 
@@ -1815,7 +1813,7 @@ const Kanji200Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仇';
+    content: "仇";
   }
 `;
 
@@ -1824,7 +1822,7 @@ const Kanji201Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仈';
+    content: "仈";
   }
 `;
 
@@ -1833,7 +1831,7 @@ const Kanji202Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仉';
+    content: "仉";
   }
 `;
 
@@ -1842,7 +1840,7 @@ const Kanji203Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '今';
+    content: "今";
   }
 `;
 
@@ -1851,7 +1849,7 @@ const Kanji204Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '介';
+    content: "介";
   }
 `;
 
@@ -1860,7 +1858,7 @@ const Kanji205Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仌';
+    content: "仌";
   }
 `;
 
@@ -1869,7 +1867,7 @@ const Kanji206Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仍';
+    content: "仍";
   }
 `;
 
@@ -1878,7 +1876,7 @@ const Kanji207Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '从';
+    content: "从";
   }
 `;
 
@@ -1887,7 +1885,7 @@ const Kanji208Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仏';
+    content: "仏";
   }
 `;
 
@@ -1896,7 +1894,7 @@ const Kanji209Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仐';
+    content: "仐";
   }
 `;
 
@@ -1905,7 +1903,7 @@ const Kanji210Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仑';
+    content: "仑";
   }
 `;
 
@@ -1914,7 +1912,7 @@ const Kanji211Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仒';
+    content: "仒";
   }
 `;
 
@@ -1923,7 +1921,7 @@ const Kanji212Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仓';
+    content: "仓";
   }
 `;
 
@@ -1932,7 +1930,7 @@ const Kanji213Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仔';
+    content: "仔";
   }
 `;
 
@@ -1941,7 +1939,7 @@ const Kanji214Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仕';
+    content: "仕";
   }
 `;
 
@@ -1950,7 +1948,7 @@ const Kanji215Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '他';
+    content: "他";
   }
 `;
 
@@ -1959,7 +1957,7 @@ const Kanji216Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仗';
+    content: "仗";
   }
 `;
 
@@ -1968,7 +1966,7 @@ const Kanji217Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '付';
+    content: "付";
   }
 `;
 
@@ -1977,7 +1975,7 @@ const Kanji218Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仙';
+    content: "仙";
   }
 `;
 
@@ -1986,7 +1984,7 @@ const Kanji219Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仚';
+    content: "仚";
   }
 `;
 
@@ -1995,7 +1993,7 @@ const Kanji220Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仛';
+    content: "仛";
   }
 `;
 
@@ -2004,7 +2002,7 @@ const Kanji221Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仜';
+    content: "仜";
   }
 `;
 
@@ -2013,7 +2011,7 @@ const Kanji222Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仝';
+    content: "仝";
   }
 `;
 
@@ -2022,7 +2020,7 @@ const Kanji223Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仞';
+    content: "仞";
   }
 `;
 
@@ -2031,7 +2029,7 @@ const Kanji224Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仟';
+    content: "仟";
   }
 `;
 
@@ -2040,7 +2038,7 @@ const Kanji225Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仠';
+    content: "仠";
   }
 `;
 
@@ -2049,7 +2047,7 @@ const Kanji226Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仡';
+    content: "仡";
   }
 `;
 
@@ -2058,7 +2056,7 @@ const Kanji227Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仢';
+    content: "仢";
   }
 `;
 
@@ -2067,7 +2065,7 @@ const Kanji228Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '代';
+    content: "代";
   }
 `;
 
@@ -2076,7 +2074,7 @@ const Kanji229Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '令';
+    content: "令";
   }
 `;
 
@@ -2085,7 +2083,7 @@ const Kanji230Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '以';
+    content: "以";
   }
 `;
 
@@ -2094,7 +2092,7 @@ const Kanji231Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仦';
+    content: "仦";
   }
 `;
 
@@ -2103,7 +2101,7 @@ const Kanji232Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仧';
+    content: "仧";
   }
 `;
 
@@ -2112,7 +2110,7 @@ const Kanji233Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仨';
+    content: "仨";
   }
 `;
 
@@ -2121,7 +2119,7 @@ const Kanji234Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仩';
+    content: "仩";
   }
 `;
 
@@ -2130,7 +2128,7 @@ const Kanji235Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仪';
+    content: "仪";
   }
 `;
 
@@ -2139,7 +2137,7 @@ const Kanji236Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仫';
+    content: "仫";
   }
 `;
 
@@ -2148,7 +2146,7 @@ const Kanji237Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '们';
+    content: "们";
   }
 `;
 
@@ -2157,7 +2155,7 @@ const Kanji238Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仭';
+    content: "仭";
   }
 `;
 
@@ -2166,7 +2164,7 @@ const Kanji239Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仮';
+    content: "仮";
   }
 `;
 
@@ -2175,7 +2173,7 @@ const Kanji240Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仯';
+    content: "仯";
   }
 `;
 
@@ -2184,7 +2182,7 @@ const Kanji241Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仰';
+    content: "仰";
   }
 `;
 
@@ -2193,7 +2191,7 @@ const Kanji242Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仱';
+    content: "仱";
   }
 `;
 
@@ -2202,7 +2200,7 @@ const Kanji243Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仲';
+    content: "仲";
   }
 `;
 
@@ -2211,7 +2209,7 @@ const Kanji244Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仳';
+    content: "仳";
   }
 `;
 
@@ -2220,7 +2218,7 @@ const Kanji245Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仴';
+    content: "仴";
   }
 `;
 
@@ -2229,7 +2227,7 @@ const Kanji246Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仵';
+    content: "仵";
   }
 `;
 
@@ -2238,7 +2236,7 @@ const Kanji247Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '件';
+    content: "件";
   }
 `;
 
@@ -2247,7 +2245,7 @@ const Kanji248Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '价';
+    content: "价";
   }
 `;
 
@@ -2256,7 +2254,7 @@ const Kanji249Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仸';
+    content: "仸";
   }
 `;
 
@@ -2265,7 +2263,7 @@ const Kanji250Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仹';
+    content: "仹";
   }
 `;
 
@@ -2274,7 +2272,7 @@ const Kanji251Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仺';
+    content: "仺";
   }
 `;
 
@@ -2283,7 +2281,7 @@ const Kanji252Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '任';
+    content: "任";
   }
 `;
 
@@ -2292,7 +2290,7 @@ const Kanji253Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仼';
+    content: "仼";
   }
 `;
 
@@ -2301,7 +2299,7 @@ const Kanji254Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '份';
+    content: "份";
   }
 `;
 
@@ -2310,7 +2308,7 @@ const Kanji255Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仾';
+    content: "仾";
   }
 `;
 
@@ -2319,7 +2317,7 @@ const Kanji256Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '仿';
+    content: "仿";
   }
 `;
 
@@ -2328,7 +2326,7 @@ const Kanji257Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伀';
+    content: "伀";
   }
 `;
 
@@ -2337,7 +2335,7 @@ const Kanji258Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '企';
+    content: "企";
   }
 `;
 
@@ -2346,7 +2344,7 @@ const Kanji259Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伂';
+    content: "伂";
   }
 `;
 
@@ -2355,7 +2353,7 @@ const Kanji260Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伃';
+    content: "伃";
   }
 `;
 
@@ -2364,7 +2362,7 @@ const Kanji261Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伄';
+    content: "伄";
   }
 `;
 
@@ -2373,7 +2371,7 @@ const Kanji262Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伅';
+    content: "伅";
   }
 `;
 
@@ -2382,7 +2380,7 @@ const Kanji263Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伆';
+    content: "伆";
   }
 `;
 
@@ -2391,7 +2389,7 @@ const Kanji264Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伇';
+    content: "伇";
   }
 `;
 
@@ -2400,7 +2398,7 @@ const Kanji265Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伈';
+    content: "伈";
   }
 `;
 
@@ -2409,7 +2407,7 @@ const Kanji266Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伉';
+    content: "伉";
   }
 `;
 
@@ -2418,7 +2416,7 @@ const Kanji267Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伊';
+    content: "伊";
   }
 `;
 
@@ -2427,7 +2425,7 @@ const Kanji268Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伋';
+    content: "伋";
   }
 `;
 
@@ -2436,7 +2434,7 @@ const Kanji269Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伌';
+    content: "伌";
   }
 `;
 
@@ -2445,7 +2443,7 @@ const Kanji270Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伍';
+    content: "伍";
   }
 `;
 
@@ -2454,7 +2452,7 @@ const Kanji271Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伎';
+    content: "伎";
   }
 `;
 
@@ -2463,7 +2461,7 @@ const Kanji272Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伏';
+    content: "伏";
   }
 `;
 
@@ -2472,7 +2470,7 @@ const Kanji273Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伐';
+    content: "伐";
   }
 `;
 
@@ -2481,7 +2479,7 @@ const Kanji274Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '休';
+    content: "休";
   }
 `;
 
@@ -2490,7 +2488,7 @@ const Kanji275Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伒';
+    content: "伒";
   }
 `;
 
@@ -2499,7 +2497,7 @@ const Kanji276Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伓';
+    content: "伓";
   }
 `;
 
@@ -2508,7 +2506,7 @@ const Kanji277Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伔';
+    content: "伔";
   }
 `;
 
@@ -2517,7 +2515,7 @@ const Kanji278Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伕';
+    content: "伕";
   }
 `;
 
@@ -2526,7 +2524,7 @@ const Kanji279Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伖';
+    content: "伖";
   }
 `;
 
@@ -2535,7 +2533,7 @@ const Kanji280Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '众';
+    content: "众";
   }
 `;
 
@@ -2544,7 +2542,7 @@ const Kanji281Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '优';
+    content: "优";
   }
 `;
 
@@ -2553,7 +2551,7 @@ const Kanji282Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伙';
+    content: "伙";
   }
 `;
 
@@ -2562,7 +2560,7 @@ const Kanji283Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '会';
+    content: "会";
   }
 `;
 
@@ -2571,7 +2569,7 @@ const Kanji284Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伛';
+    content: "伛";
   }
 `;
 
@@ -2580,7 +2578,7 @@ const Kanji285Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伜';
+    content: "伜";
   }
 `;
 
@@ -2589,7 +2587,7 @@ const Kanji286Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伝';
+    content: "伝";
   }
 `;
 
@@ -2598,7 +2596,7 @@ const Kanji287Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伞';
+    content: "伞";
   }
 `;
 
@@ -2607,7 +2605,7 @@ const Kanji288Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伟';
+    content: "伟";
   }
 `;
 
@@ -2616,7 +2614,7 @@ const Kanji289Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '传';
+    content: "传";
   }
 `;
 
@@ -2625,7 +2623,7 @@ const Kanji290Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伡';
+    content: "伡";
   }
 `;
 
@@ -2634,7 +2632,7 @@ const Kanji291Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伢';
+    content: "伢";
   }
 `;
 
@@ -2643,7 +2641,7 @@ const Kanji292Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伣';
+    content: "伣";
   }
 `;
 
@@ -2652,7 +2650,7 @@ const Kanji293Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伤';
+    content: "伤";
   }
 `;
 
@@ -2661,7 +2659,7 @@ const Kanji294Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伥';
+    content: "伥";
   }
 `;
 
@@ -2670,7 +2668,7 @@ const Kanji295Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伦';
+    content: "伦";
   }
 `;
 
@@ -2679,7 +2677,7 @@ const Kanji296Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伧';
+    content: "伧";
   }
 `;
 
@@ -2688,7 +2686,7 @@ const Kanji297Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伨';
+    content: "伨";
   }
 `;
 
@@ -2697,7 +2695,7 @@ const Kanji298Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伩';
+    content: "伩";
   }
 `;
 
@@ -2706,7 +2704,7 @@ const Kanji299Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伪';
+    content: "伪";
   }
 `;
 
@@ -2715,7 +2713,7 @@ const Kanji300Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伫';
+    content: "伫";
   }
 `;
 
@@ -2724,7 +2722,7 @@ const Kanji301Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伬';
+    content: "伬";
   }
 `;
 
@@ -2733,7 +2731,7 @@ const Kanji302Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伭';
+    content: "伭";
   }
 `;
 
@@ -2742,7 +2740,7 @@ const Kanji303Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伮';
+    content: "伮";
   }
 `;
 
@@ -2751,7 +2749,7 @@ const Kanji304Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伯';
+    content: "伯";
   }
 `;
 
@@ -2760,7 +2758,7 @@ const Kanji305Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '估';
+    content: "估";
   }
 `;
 
@@ -2769,7 +2767,7 @@ const Kanji306Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伱';
+    content: "伱";
   }
 `;
 
@@ -2778,7 +2776,7 @@ const Kanji307Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伲';
+    content: "伲";
   }
 `;
 
@@ -2787,7 +2785,7 @@ const Kanji308Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伳';
+    content: "伳";
   }
 `;
 
@@ -2796,7 +2794,7 @@ const Kanji309Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伴';
+    content: "伴";
   }
 `;
 
@@ -2805,7 +2803,7 @@ const Kanji310Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伵';
+    content: "伵";
   }
 `;
 
@@ -2814,7 +2812,7 @@ const Kanji311Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伶';
+    content: "伶";
   }
 `;
 
@@ -2823,7 +2821,7 @@ const Kanji312Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伷';
+    content: "伷";
   }
 `;
 
@@ -2832,7 +2830,7 @@ const Kanji313Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伸';
+    content: "伸";
   }
 `;
 
@@ -2841,7 +2839,7 @@ const Kanji314Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伹';
+    content: "伹";
   }
 `;
 
@@ -2850,7 +2848,7 @@ const Kanji315Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伺';
+    content: "伺";
   }
 `;
 
@@ -2859,7 +2857,7 @@ const Kanji316Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伻';
+    content: "伻";
   }
 `;
 
@@ -2868,7 +2866,7 @@ const Kanji317Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '似';
+    content: "似";
   }
 `;
 
@@ -2877,7 +2875,7 @@ const Kanji318Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伽';
+    content: "伽";
   }
 `;
 
@@ -2886,7 +2884,7 @@ const Kanji319Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伾';
+    content: "伾";
   }
 `;
 
@@ -2895,7 +2893,7 @@ const Kanji320Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '伿';
+    content: "伿";
   }
 `;
 
@@ -2904,7 +2902,7 @@ const Kanji321Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佀';
+    content: "佀";
   }
 `;
 
@@ -2913,7 +2911,7 @@ const Kanji322Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佁';
+    content: "佁";
   }
 `;
 
@@ -2922,7 +2920,7 @@ const Kanji323Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佂';
+    content: "佂";
   }
 `;
 
@@ -2931,7 +2929,7 @@ const Kanji324Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佃';
+    content: "佃";
   }
 `;
 
@@ -2940,7 +2938,7 @@ const Kanji325Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佄';
+    content: "佄";
   }
 `;
 
@@ -2949,7 +2947,7 @@ const Kanji326Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佅';
+    content: "佅";
   }
 `;
 
@@ -2958,7 +2956,7 @@ const Kanji327Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '但';
+    content: "但";
   }
 `;
 
@@ -2967,7 +2965,7 @@ const Kanji328Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佇';
+    content: "佇";
   }
 `;
 
@@ -2976,7 +2974,7 @@ const Kanji329Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佈';
+    content: "佈";
   }
 `;
 
@@ -2985,7 +2983,7 @@ const Kanji330Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佉';
+    content: "佉";
   }
 `;
 
@@ -2994,7 +2992,7 @@ const Kanji331Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佊';
+    content: "佊";
   }
 `;
 
@@ -3003,7 +3001,7 @@ const Kanji332Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佋';
+    content: "佋";
   }
 `;
 
@@ -3012,7 +3010,7 @@ const Kanji333Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佌';
+    content: "佌";
   }
 `;
 
@@ -3021,7 +3019,7 @@ const Kanji334Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '位';
+    content: "位";
   }
 `;
 
@@ -3030,7 +3028,7 @@ const Kanji335Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '低';
+    content: "低";
   }
 `;
 
@@ -3039,7 +3037,7 @@ const Kanji336Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '住';
+    content: "住";
   }
 `;
 
@@ -3048,7 +3046,7 @@ const Kanji337Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佐';
+    content: "佐";
   }
 `;
 
@@ -3057,7 +3055,7 @@ const Kanji338Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佑';
+    content: "佑";
   }
 `;
 
@@ -3066,7 +3064,7 @@ const Kanji339Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佒';
+    content: "佒";
   }
 `;
 
@@ -3075,7 +3073,7 @@ const Kanji340Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '体';
+    content: "体";
   }
 `;
 
@@ -3084,7 +3082,7 @@ const Kanji341Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佔';
+    content: "佔";
   }
 `;
 
@@ -3093,7 +3091,7 @@ const Kanji342Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '何';
+    content: "何";
   }
 `;
 
@@ -3102,7 +3100,7 @@ const Kanji343Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佖';
+    content: "佖";
   }
 `;
 
@@ -3111,7 +3109,7 @@ const Kanji344Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佗';
+    content: "佗";
   }
 `;
 
@@ -3120,7 +3118,7 @@ const Kanji345Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佘';
+    content: "佘";
   }
 `;
 
@@ -3129,7 +3127,7 @@ const Kanji346Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '余';
+    content: "余";
   }
 `;
 
@@ -3138,7 +3136,7 @@ const Kanji347Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佚';
+    content: "佚";
   }
 `;
 
@@ -3147,7 +3145,7 @@ const Kanji348Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佛';
+    content: "佛";
   }
 `;
 
@@ -3156,7 +3154,7 @@ const Kanji349Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '作';
+    content: "作";
   }
 `;
 
@@ -3165,7 +3163,7 @@ const Kanji350Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佝';
+    content: "佝";
   }
 `;
 
@@ -3174,7 +3172,7 @@ const Kanji351Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佞';
+    content: "佞";
   }
 `;
 
@@ -3183,7 +3181,7 @@ const Kanji352Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佟';
+    content: "佟";
   }
 `;
 
@@ -3192,7 +3190,7 @@ const Kanji353Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '你';
+    content: "你";
   }
 `;
 
@@ -3201,7 +3199,7 @@ const Kanji354Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佡';
+    content: "佡";
   }
 `;
 
@@ -3210,7 +3208,7 @@ const Kanji355Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佢';
+    content: "佢";
   }
 `;
 
@@ -3219,7 +3217,7 @@ const Kanji356Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佣';
+    content: "佣";
   }
 `;
 
@@ -3228,7 +3226,7 @@ const Kanji357Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佤';
+    content: "佤";
   }
 `;
 
@@ -3237,7 +3235,7 @@ const Kanji358Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佥';
+    content: "佥";
   }
 `;
 
@@ -3246,7 +3244,7 @@ const Kanji359Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佦';
+    content: "佦";
   }
 `;
 
@@ -3255,7 +3253,7 @@ const Kanji360Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佧';
+    content: "佧";
   }
 `;
 
@@ -3264,7 +3262,7 @@ const Kanji361Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佨';
+    content: "佨";
   }
 `;
 
@@ -3273,7 +3271,7 @@ const Kanji362Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佩';
+    content: "佩";
   }
 `;
 
@@ -3282,7 +3280,7 @@ const Kanji363Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佪';
+    content: "佪";
   }
 `;
 
@@ -3291,7 +3289,7 @@ const Kanji364Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佫';
+    content: "佫";
   }
 `;
 
@@ -3300,7 +3298,7 @@ const Kanji365Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佬';
+    content: "佬";
   }
 `;
 
@@ -3309,7 +3307,7 @@ const Kanji366Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佭';
+    content: "佭";
   }
 `;
 
@@ -3318,7 +3316,7 @@ const Kanji367Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佮';
+    content: "佮";
   }
 `;
 
@@ -3327,7 +3325,7 @@ const Kanji368Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佯';
+    content: "佯";
   }
 `;
 
@@ -3336,7 +3334,7 @@ const Kanji369Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佰';
+    content: "佰";
   }
 `;
 
@@ -3345,7 +3343,7 @@ const Kanji370Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佱';
+    content: "佱";
   }
 `;
 
@@ -3354,7 +3352,7 @@ const Kanji371Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佲';
+    content: "佲";
   }
 `;
 
@@ -3363,7 +3361,7 @@ const Kanji372Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佳';
+    content: "佳";
   }
 `;
 
@@ -3372,7 +3370,7 @@ const Kanji373Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佴';
+    content: "佴";
   }
 `;
 
@@ -3381,7 +3379,7 @@ const Kanji374Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '併';
+    content: "併";
   }
 `;
 
@@ -3390,7 +3388,7 @@ const Kanji375Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佶';
+    content: "佶";
   }
 `;
 
@@ -3399,7 +3397,7 @@ const Kanji376Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佷';
+    content: "佷";
   }
 `;
 
@@ -3408,7 +3406,7 @@ const Kanji377Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佸';
+    content: "佸";
   }
 `;
 
@@ -3417,7 +3415,7 @@ const Kanji378Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佹';
+    content: "佹";
   }
 `;
 
@@ -3426,7 +3424,7 @@ const Kanji379Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佺';
+    content: "佺";
   }
 `;
 
@@ -3435,7 +3433,7 @@ const Kanji380Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佻';
+    content: "佻";
   }
 `;
 
@@ -3444,7 +3442,7 @@ const Kanji381Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佼';
+    content: "佼";
   }
 `;
 
@@ -3453,7 +3451,7 @@ const Kanji382Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佽';
+    content: "佽";
   }
 `;
 
@@ -3462,7 +3460,7 @@ const Kanji383Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '佾';
+    content: "佾";
   }
 `;
 
@@ -3471,7 +3469,7 @@ const Kanji384Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '使';
+    content: "使";
   }
 `;
 
@@ -3480,7 +3478,7 @@ const Kanji385Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侀';
+    content: "侀";
   }
 `;
 
@@ -3489,7 +3487,7 @@ const Kanji386Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侁';
+    content: "侁";
   }
 `;
 
@@ -3498,7 +3496,7 @@ const Kanji387Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侂';
+    content: "侂";
   }
 `;
 
@@ -3507,7 +3505,7 @@ const Kanji388Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侃';
+    content: "侃";
   }
 `;
 
@@ -3516,7 +3514,7 @@ const Kanji389Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侄';
+    content: "侄";
   }
 `;
 
@@ -3525,7 +3523,7 @@ const Kanji390Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侅';
+    content: "侅";
   }
 `;
 
@@ -3534,7 +3532,7 @@ const Kanji391Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '來';
+    content: "來";
   }
 `;
 
@@ -3543,7 +3541,7 @@ const Kanji392Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侇';
+    content: "侇";
   }
 `;
 
@@ -3552,7 +3550,7 @@ const Kanji393Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侈';
+    content: "侈";
   }
 `;
 
@@ -3561,7 +3559,7 @@ const Kanji394Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侉';
+    content: "侉";
   }
 `;
 
@@ -3570,7 +3568,7 @@ const Kanji395Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侊';
+    content: "侊";
   }
 `;
 
@@ -3579,7 +3577,7 @@ const Kanji396Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '例';
+    content: "例";
   }
 `;
 
@@ -3588,7 +3586,7 @@ const Kanji397Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侌';
+    content: "侌";
   }
 `;
 
@@ -3597,7 +3595,7 @@ const Kanji398Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侍';
+    content: "侍";
   }
 `;
 
@@ -3606,7 +3604,7 @@ const Kanji399Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侎';
+    content: "侎";
   }
 `;
 
@@ -3615,7 +3613,7 @@ const Kanji400Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侏';
+    content: "侏";
   }
 `;
 
@@ -3624,7 +3622,7 @@ const Kanji401Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侐';
+    content: "侐";
   }
 `;
 
@@ -3633,7 +3631,7 @@ const Kanji402Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侑';
+    content: "侑";
   }
 `;
 
@@ -3642,7 +3640,7 @@ const Kanji403Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侒';
+    content: "侒";
   }
 `;
 
@@ -3651,7 +3649,7 @@ const Kanji404Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侓';
+    content: "侓";
   }
 `;
 
@@ -3660,7 +3658,7 @@ const Kanji405Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侔';
+    content: "侔";
   }
 `;
 
@@ -3669,7 +3667,7 @@ const Kanji406Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侕';
+    content: "侕";
   }
 `;
 
@@ -3678,7 +3676,7 @@ const Kanji407Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侖';
+    content: "侖";
   }
 `;
 
@@ -3687,7 +3685,7 @@ const Kanji408Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侗';
+    content: "侗";
   }
 `;
 
@@ -3696,7 +3694,7 @@ const Kanji409Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侘';
+    content: "侘";
   }
 `;
 
@@ -3705,7 +3703,7 @@ const Kanji410Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侙';
+    content: "侙";
   }
 `;
 
@@ -3714,7 +3712,7 @@ const Kanji411Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侚';
+    content: "侚";
   }
 `;
 
@@ -3723,7 +3721,7 @@ const Kanji412Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '供';
+    content: "供";
   }
 `;
 
@@ -3732,7 +3730,7 @@ const Kanji413Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侜';
+    content: "侜";
   }
 `;
 
@@ -3741,7 +3739,7 @@ const Kanji414Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '依';
+    content: "依";
   }
 `;
 
@@ -3750,7 +3748,7 @@ const Kanji415Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侞';
+    content: "侞";
   }
 `;
 
@@ -3759,7 +3757,7 @@ const Kanji416Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侟';
+    content: "侟";
   }
 `;
 
@@ -3768,7 +3766,7 @@ const Kanji417Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侠';
+    content: "侠";
   }
 `;
 
@@ -3777,7 +3775,7 @@ const Kanji418Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '価';
+    content: "価";
   }
 `;
 
@@ -3786,7 +3784,7 @@ const Kanji419Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侢';
+    content: "侢";
   }
 `;
 
@@ -3795,7 +3793,7 @@ const Kanji420Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侣';
+    content: "侣";
   }
 `;
 
@@ -3804,7 +3802,7 @@ const Kanji421Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侤';
+    content: "侤";
   }
 `;
 
@@ -3813,7 +3811,7 @@ const Kanji422Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侥';
+    content: "侥";
   }
 `;
 
@@ -3822,7 +3820,7 @@ const Kanji423Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侦';
+    content: "侦";
   }
 `;
 
@@ -3831,7 +3829,7 @@ const Kanji424Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侧';
+    content: "侧";
   }
 `;
 
@@ -3840,7 +3838,7 @@ const Kanji425Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侨';
+    content: "侨";
   }
 `;
 
@@ -3849,7 +3847,7 @@ const Kanji426Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侩';
+    content: "侩";
   }
 `;
 
@@ -3858,7 +3856,7 @@ const Kanji427Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侪';
+    content: "侪";
   }
 `;
 
@@ -3867,7 +3865,7 @@ const Kanji428Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侫';
+    content: "侫";
   }
 `;
 
@@ -3876,7 +3874,7 @@ const Kanji429Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侬';
+    content: "侬";
   }
 `;
 
@@ -3885,7 +3883,7 @@ const Kanji430Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侭';
+    content: "侭";
   }
 `;
 
@@ -3894,7 +3892,7 @@ const Kanji431Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侮';
+    content: "侮";
   }
 `;
 
@@ -3903,7 +3901,7 @@ const Kanji432Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侯';
+    content: "侯";
   }
 `;
 
@@ -3912,7 +3910,7 @@ const Kanji433Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侰';
+    content: "侰";
   }
 `;
 
@@ -3921,7 +3919,7 @@ const Kanji434Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侱';
+    content: "侱";
   }
 `;
 
@@ -3930,7 +3928,7 @@ const Kanji435Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侲';
+    content: "侲";
   }
 `;
 
@@ -3939,7 +3937,7 @@ const Kanji436Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侳';
+    content: "侳";
   }
 `;
 
@@ -3948,7 +3946,7 @@ const Kanji437Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侴';
+    content: "侴";
   }
 `;
 
@@ -3957,7 +3955,7 @@ const Kanji438Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侵';
+    content: "侵";
   }
 `;
 
@@ -3966,7 +3964,7 @@ const Kanji439Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侶';
+    content: "侶";
   }
 `;
 
@@ -3975,7 +3973,7 @@ const Kanji440Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侷';
+    content: "侷";
   }
 `;
 
@@ -3984,7 +3982,7 @@ const Kanji441Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侸';
+    content: "侸";
   }
 `;
 
@@ -3993,7 +3991,7 @@ const Kanji442Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侹';
+    content: "侹";
   }
 `;
 
@@ -4002,7 +4000,7 @@ const Kanji443Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侺';
+    content: "侺";
   }
 `;
 
@@ -4011,7 +4009,7 @@ const Kanji444Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侻';
+    content: "侻";
   }
 `;
 
@@ -4020,7 +4018,7 @@ const Kanji445Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侼';
+    content: "侼";
   }
 `;
 
@@ -4029,7 +4027,7 @@ const Kanji446Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侽';
+    content: "侽";
   }
 `;
 
@@ -4038,7 +4036,7 @@ const Kanji447Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '侾';
+    content: "侾";
   }
 `;
 
@@ -4047,7 +4045,7 @@ const Kanji448Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '便';
+    content: "便";
   }
 `;
 
@@ -4056,7 +4054,7 @@ const Kanji449Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俀';
+    content: "俀";
   }
 `;
 
@@ -4065,7 +4063,7 @@ const Kanji450Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俁';
+    content: "俁";
   }
 `;
 
@@ -4074,7 +4072,7 @@ const Kanji451Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '係';
+    content: "係";
   }
 `;
 
@@ -4083,7 +4081,7 @@ const Kanji452Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '促';
+    content: "促";
   }
 `;
 
@@ -4092,7 +4090,7 @@ const Kanji453Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俄';
+    content: "俄";
   }
 `;
 
@@ -4101,7 +4099,7 @@ const Kanji454Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俅';
+    content: "俅";
   }
 `;
 
@@ -4110,7 +4108,7 @@ const Kanji455Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俆';
+    content: "俆";
   }
 `;
 
@@ -4119,7 +4117,7 @@ const Kanji456Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俇';
+    content: "俇";
   }
 `;
 
@@ -4128,7 +4126,7 @@ const Kanji457Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俈';
+    content: "俈";
   }
 `;
 
@@ -4137,7 +4135,7 @@ const Kanji458Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俉';
+    content: "俉";
   }
 `;
 
@@ -4146,7 +4144,7 @@ const Kanji459Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俊';
+    content: "俊";
   }
 `;
 
@@ -4155,7 +4153,7 @@ const Kanji460Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俋';
+    content: "俋";
   }
 `;
 
@@ -4164,7 +4162,7 @@ const Kanji461Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俌';
+    content: "俌";
   }
 `;
 
@@ -4173,7 +4171,7 @@ const Kanji462Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俍';
+    content: "俍";
   }
 `;
 
@@ -4182,7 +4180,7 @@ const Kanji463Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俎';
+    content: "俎";
   }
 `;
 
@@ -4191,7 +4189,7 @@ const Kanji464Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俏';
+    content: "俏";
   }
 `;
 
@@ -4200,7 +4198,7 @@ const Kanji465Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俐';
+    content: "俐";
   }
 `;
 
@@ -4209,7 +4207,7 @@ const Kanji466Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俑';
+    content: "俑";
   }
 `;
 
@@ -4218,7 +4216,7 @@ const Kanji467Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俒';
+    content: "俒";
   }
 `;
 
@@ -4227,7 +4225,7 @@ const Kanji468Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俓';
+    content: "俓";
   }
 `;
 
@@ -4236,7 +4234,7 @@ const Kanji469Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俔';
+    content: "俔";
   }
 `;
 
@@ -4245,7 +4243,7 @@ const Kanji470Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俕';
+    content: "俕";
   }
 `;
 
@@ -4254,7 +4252,7 @@ const Kanji471Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俖';
+    content: "俖";
   }
 `;
 
@@ -4263,7 +4261,7 @@ const Kanji472Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俗';
+    content: "俗";
   }
 `;
 
@@ -4272,7 +4270,7 @@ const Kanji473Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俘';
+    content: "俘";
   }
 `;
 
@@ -4281,7 +4279,7 @@ const Kanji474Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俙';
+    content: "俙";
   }
 `;
 
@@ -4290,7 +4288,7 @@ const Kanji475Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俚';
+    content: "俚";
   }
 `;
 
@@ -4299,7 +4297,7 @@ const Kanji476Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俛';
+    content: "俛";
   }
 `;
 
@@ -4308,7 +4306,7 @@ const Kanji477Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俜';
+    content: "俜";
   }
 `;
 
@@ -4317,7 +4315,7 @@ const Kanji478Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '保';
+    content: "保";
   }
 `;
 
@@ -4326,7 +4324,7 @@ const Kanji479Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俞';
+    content: "俞";
   }
 `;
 
@@ -4335,7 +4333,7 @@ const Kanji480Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俟';
+    content: "俟";
   }
 `;
 
@@ -4344,7 +4342,7 @@ const Kanji481Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俠';
+    content: "俠";
   }
 `;
 
@@ -4353,7 +4351,7 @@ const Kanji482Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '信';
+    content: "信";
   }
 `;
 
@@ -4362,7 +4360,7 @@ const Kanji483Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俢';
+    content: "俢";
   }
 `;
 
@@ -4371,7 +4369,7 @@ const Kanji484Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俣';
+    content: "俣";
   }
 `;
 
@@ -4380,7 +4378,7 @@ const Kanji485Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俤';
+    content: "俤";
   }
 `;
 
@@ -4389,7 +4387,7 @@ const Kanji486Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俥';
+    content: "俥";
   }
 `;
 
@@ -4398,7 +4396,7 @@ const Kanji487Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俦';
+    content: "俦";
   }
 `;
 
@@ -4407,7 +4405,7 @@ const Kanji488Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俧';
+    content: "俧";
   }
 `;
 
@@ -4416,7 +4414,7 @@ const Kanji489Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俨';
+    content: "俨";
   }
 `;
 
@@ -4425,7 +4423,7 @@ const Kanji490Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俩';
+    content: "俩";
   }
 `;
 
@@ -4434,7 +4432,7 @@ const Kanji491Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俪';
+    content: "俪";
   }
 `;
 
@@ -4443,7 +4441,7 @@ const Kanji492Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俫';
+    content: "俫";
   }
 `;
 
@@ -4452,7 +4450,7 @@ const Kanji493Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俬';
+    content: "俬";
   }
 `;
 
@@ -4461,7 +4459,7 @@ const Kanji494Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俭';
+    content: "俭";
   }
 `;
 
@@ -4470,7 +4468,7 @@ const Kanji495Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '修';
+    content: "修";
   }
 `;
 
@@ -4479,7 +4477,7 @@ const Kanji496Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俯';
+    content: "俯";
   }
 `;
 
@@ -4488,7 +4486,7 @@ const Kanji497Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俰';
+    content: "俰";
   }
 `;
 
@@ -4497,7 +4495,7 @@ const Kanji498Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俱';
+    content: "俱";
   }
 `;
 
@@ -4506,7 +4504,7 @@ const Kanji499Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俲';
+    content: "俲";
   }
 `;
 
@@ -4515,7 +4513,7 @@ const Kanji500Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俳';
+    content: "俳";
   }
 `;
 
@@ -4524,7 +4522,7 @@ const Kanji501Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俴';
+    content: "俴";
   }
 `;
 
@@ -4533,7 +4531,7 @@ const Kanji502Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俵';
+    content: "俵";
   }
 `;
 
@@ -4542,7 +4540,7 @@ const Kanji503Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俶';
+    content: "俶";
   }
 `;
 
@@ -4551,7 +4549,7 @@ const Kanji504Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俷';
+    content: "俷";
   }
 `;
 
@@ -4560,7 +4558,7 @@ const Kanji505Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俸';
+    content: "俸";
   }
 `;
 
@@ -4569,7 +4567,7 @@ const Kanji506Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俹';
+    content: "俹";
   }
 `;
 
@@ -4578,7 +4576,7 @@ const Kanji507Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俺';
+    content: "俺";
   }
 `;
 
@@ -4587,7 +4585,7 @@ const Kanji508Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俻';
+    content: "俻";
   }
 `;
 
@@ -4596,7 +4594,7 @@ const Kanji509Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俼';
+    content: "俼";
   }
 `;
 
@@ -4605,7 +4603,7 @@ const Kanji510Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俽';
+    content: "俽";
   }
 `;
 
@@ -4614,7 +4612,7 @@ const Kanji511Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俾';
+    content: "俾";
   }
 `;
 
@@ -4623,7 +4621,7 @@ const Kanji512Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '俿';
+    content: "俿";
   }
 `;
 
@@ -4632,7 +4630,7 @@ const Kanji513Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倀';
+    content: "倀";
   }
 `;
 
@@ -4641,7 +4639,7 @@ const Kanji514Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倁';
+    content: "倁";
   }
 `;
 
@@ -4650,7 +4648,7 @@ const Kanji515Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倂';
+    content: "倂";
   }
 `;
 
@@ -4659,7 +4657,7 @@ const Kanji516Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倃';
+    content: "倃";
   }
 `;
 
@@ -4668,7 +4666,7 @@ const Kanji517Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倄';
+    content: "倄";
   }
 `;
 
@@ -4677,7 +4675,7 @@ const Kanji518Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倅';
+    content: "倅";
   }
 `;
 
@@ -4686,7 +4684,7 @@ const Kanji519Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倆';
+    content: "倆";
   }
 `;
 
@@ -4695,7 +4693,7 @@ const Kanji520Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倇';
+    content: "倇";
   }
 `;
 
@@ -4704,7 +4702,7 @@ const Kanji521Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倈';
+    content: "倈";
   }
 `;
 
@@ -4713,7 +4711,7 @@ const Kanji522Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倉';
+    content: "倉";
   }
 `;
 
@@ -4722,7 +4720,7 @@ const Kanji523Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倊';
+    content: "倊";
   }
 `;
 
@@ -4731,7 +4729,7 @@ const Kanji524Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '個';
+    content: "個";
   }
 `;
 
@@ -4740,7 +4738,7 @@ const Kanji525Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倌';
+    content: "倌";
   }
 `;
 
@@ -4749,7 +4747,7 @@ const Kanji526Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倍';
+    content: "倍";
   }
 `;
 
@@ -4758,7 +4756,7 @@ const Kanji527Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倎';
+    content: "倎";
   }
 `;
 
@@ -4767,7 +4765,7 @@ const Kanji528Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倏';
+    content: "倏";
   }
 `;
 
@@ -4776,7 +4774,7 @@ const Kanji529Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倐';
+    content: "倐";
   }
 `;
 
@@ -4785,7 +4783,7 @@ const Kanji530Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '們';
+    content: "們";
   }
 `;
 
@@ -4794,7 +4792,7 @@ const Kanji531Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倒';
+    content: "倒";
   }
 `;
 
@@ -4803,7 +4801,7 @@ const Kanji532Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倓';
+    content: "倓";
   }
 `;
 
@@ -4812,7 +4810,7 @@ const Kanji533Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倔';
+    content: "倔";
   }
 `;
 
@@ -4821,7 +4819,7 @@ const Kanji534Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倕';
+    content: "倕";
   }
 `;
 
@@ -4830,7 +4828,7 @@ const Kanji535Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倖';
+    content: "倖";
   }
 `;
 
@@ -4839,7 +4837,7 @@ const Kanji536Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倗';
+    content: "倗";
   }
 `;
 
@@ -4848,7 +4846,7 @@ const Kanji537Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倘';
+    content: "倘";
   }
 `;
 
@@ -4857,7 +4855,7 @@ const Kanji538Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '候';
+    content: "候";
   }
 `;
 
@@ -4866,7 +4864,7 @@ const Kanji539Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倚';
+    content: "倚";
   }
 `;
 
@@ -4875,7 +4873,7 @@ const Kanji540Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倛';
+    content: "倛";
   }
 `;
 
@@ -4884,7 +4882,7 @@ const Kanji541Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倜';
+    content: "倜";
   }
 `;
 
@@ -4893,7 +4891,7 @@ const Kanji542Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倝';
+    content: "倝";
   }
 `;
 
@@ -4902,7 +4900,7 @@ const Kanji543Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倞';
+    content: "倞";
   }
 `;
 
@@ -4911,7 +4909,7 @@ const Kanji544Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '借';
+    content: "借";
   }
 `;
 
@@ -4920,7 +4918,7 @@ const Kanji545Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倠';
+    content: "倠";
   }
 `;
 
@@ -4929,7 +4927,7 @@ const Kanji546Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倡';
+    content: "倡";
   }
 `;
 
@@ -4938,7 +4936,7 @@ const Kanji547Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倢';
+    content: "倢";
   }
 `;
 
@@ -4947,7 +4945,7 @@ const Kanji548Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倣';
+    content: "倣";
   }
 `;
 
@@ -4956,7 +4954,7 @@ const Kanji549Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '値';
+    content: "値";
   }
 `;
 
@@ -4965,7 +4963,7 @@ const Kanji550Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倥';
+    content: "倥";
   }
 `;
 
@@ -4974,7 +4972,7 @@ const Kanji551Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倦';
+    content: "倦";
   }
 `;
 
@@ -4983,7 +4981,7 @@ const Kanji552Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倧';
+    content: "倧";
   }
 `;
 
@@ -4992,7 +4990,7 @@ const Kanji553Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倨';
+    content: "倨";
   }
 `;
 
@@ -5001,7 +4999,7 @@ const Kanji554Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倩';
+    content: "倩";
   }
 `;
 
@@ -5010,7 +5008,7 @@ const Kanji555Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倪';
+    content: "倪";
   }
 `;
 
@@ -5019,7 +5017,7 @@ const Kanji556Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倫';
+    content: "倫";
   }
 `;
 
@@ -5028,7 +5026,7 @@ const Kanji557Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倬';
+    content: "倬";
   }
 `;
 
@@ -5037,7 +5035,7 @@ const Kanji558Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倭';
+    content: "倭";
   }
 `;
 
@@ -5046,7 +5044,7 @@ const Kanji559Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倮';
+    content: "倮";
   }
 `;
 
@@ -5055,7 +5053,7 @@ const Kanji560Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倯';
+    content: "倯";
   }
 `;
 
@@ -5064,7 +5062,7 @@ const Kanji561Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倰';
+    content: "倰";
   }
 `;
 
@@ -5073,7 +5071,7 @@ const Kanji562Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倱';
+    content: "倱";
   }
 `;
 
@@ -5082,7 +5080,7 @@ const Kanji563Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倲';
+    content: "倲";
   }
 `;
 
@@ -5091,7 +5089,7 @@ const Kanji564Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倳';
+    content: "倳";
   }
 `;
 
@@ -5100,7 +5098,7 @@ const Kanji565Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倴';
+    content: "倴";
   }
 `;
 
@@ -5109,7 +5107,7 @@ const Kanji566Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倵';
+    content: "倵";
   }
 `;
 
@@ -5118,7 +5116,7 @@ const Kanji567Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倶';
+    content: "倶";
   }
 `;
 
@@ -5127,7 +5125,7 @@ const Kanji568Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倷';
+    content: "倷";
   }
 `;
 
@@ -5136,7 +5134,7 @@ const Kanji569Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倸';
+    content: "倸";
   }
 `;
 
@@ -5145,7 +5143,7 @@ const Kanji570Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倹';
+    content: "倹";
   }
 `;
 
@@ -5154,7 +5152,7 @@ const Kanji571Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '债';
+    content: "债";
   }
 `;
 
@@ -5163,7 +5161,7 @@ const Kanji572Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倻';
+    content: "倻";
   }
 `;
 
@@ -5172,7 +5170,7 @@ const Kanji573Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '值';
+    content: "值";
   }
 `;
 
@@ -5181,7 +5179,7 @@ const Kanji574Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倽';
+    content: "倽";
   }
 `;
 
@@ -5190,7 +5188,7 @@ const Kanji575Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倾';
+    content: "倾";
   }
 `;
 
@@ -5199,7 +5197,7 @@ const Kanji576Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '倿';
+    content: "倿";
   }
 `;
 
@@ -5208,7 +5206,7 @@ const Kanji577Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偀';
+    content: "偀";
   }
 `;
 
@@ -5217,7 +5215,7 @@ const Kanji578Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偁';
+    content: "偁";
   }
 `;
 
@@ -5226,7 +5224,7 @@ const Kanji579Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偂';
+    content: "偂";
   }
 `;
 
@@ -5235,7 +5233,7 @@ const Kanji580Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偃';
+    content: "偃";
   }
 `;
 
@@ -5244,7 +5242,7 @@ const Kanji581Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偄';
+    content: "偄";
   }
 `;
 
@@ -5253,7 +5251,7 @@ const Kanji582Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偅';
+    content: "偅";
   }
 `;
 
@@ -5262,7 +5260,7 @@ const Kanji583Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偆';
+    content: "偆";
   }
 `;
 
@@ -5271,7 +5269,7 @@ const Kanji584Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '假';
+    content: "假";
   }
 `;
 
@@ -5280,7 +5278,7 @@ const Kanji585Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偈';
+    content: "偈";
   }
 `;
 
@@ -5289,7 +5287,7 @@ const Kanji586Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偉';
+    content: "偉";
   }
 `;
 
@@ -5298,7 +5296,7 @@ const Kanji587Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偊';
+    content: "偊";
   }
 `;
 
@@ -5307,7 +5305,7 @@ const Kanji588Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偋';
+    content: "偋";
   }
 `;
 
@@ -5316,7 +5314,7 @@ const Kanji589Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偌';
+    content: "偌";
   }
 `;
 
@@ -5325,7 +5323,7 @@ const Kanji590Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偍';
+    content: "偍";
   }
 `;
 
@@ -5334,7 +5332,7 @@ const Kanji591Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偎';
+    content: "偎";
   }
 `;
 
@@ -5343,7 +5341,7 @@ const Kanji592Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偏';
+    content: "偏";
   }
 `;
 
@@ -5352,7 +5350,7 @@ const Kanji593Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偐';
+    content: "偐";
   }
 `;
 
@@ -5361,7 +5359,7 @@ const Kanji594Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偑';
+    content: "偑";
   }
 `;
 
@@ -5370,7 +5368,7 @@ const Kanji595Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偒';
+    content: "偒";
   }
 `;
 
@@ -5379,7 +5377,7 @@ const Kanji596Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偓';
+    content: "偓";
   }
 `;
 
@@ -5388,7 +5386,7 @@ const Kanji597Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偔';
+    content: "偔";
   }
 `;
 
@@ -5397,7 +5395,7 @@ const Kanji598Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偕';
+    content: "偕";
   }
 `;
 
@@ -5406,7 +5404,7 @@ const Kanji599Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偖';
+    content: "偖";
   }
 `;
 
@@ -5415,7 +5413,7 @@ const Kanji600Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偗';
+    content: "偗";
   }
 `;
 
@@ -5424,7 +5422,7 @@ const Kanji601Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偘';
+    content: "偘";
   }
 `;
 
@@ -5433,7 +5431,7 @@ const Kanji602Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偙';
+    content: "偙";
   }
 `;
 
@@ -5442,7 +5440,7 @@ const Kanji603Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '做';
+    content: "做";
   }
 `;
 
@@ -5451,7 +5449,7 @@ const Kanji604Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偛';
+    content: "偛";
   }
 `;
 
@@ -5460,7 +5458,7 @@ const Kanji605Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '停';
+    content: "停";
   }
 `;
 
@@ -5469,7 +5467,7 @@ const Kanji606Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偝';
+    content: "偝";
   }
 `;
 
@@ -5478,7 +5476,7 @@ const Kanji607Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偞';
+    content: "偞";
   }
 `;
 
@@ -5487,7 +5485,7 @@ const Kanji608Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偟';
+    content: "偟";
   }
 `;
 
@@ -5496,7 +5494,7 @@ const Kanji609Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偠';
+    content: "偠";
   }
 `;
 
@@ -5505,7 +5503,7 @@ const Kanji610Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偡';
+    content: "偡";
   }
 `;
 
@@ -5514,7 +5512,7 @@ const Kanji611Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偢';
+    content: "偢";
   }
 `;
 
@@ -5523,7 +5521,7 @@ const Kanji612Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偣';
+    content: "偣";
   }
 `;
 
@@ -5532,7 +5530,7 @@ const Kanji613Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偤';
+    content: "偤";
   }
 `;
 
@@ -5541,7 +5539,7 @@ const Kanji614Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '健';
+    content: "健";
   }
 `;
 
@@ -5550,7 +5548,7 @@ const Kanji615Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偦';
+    content: "偦";
   }
 `;
 
@@ -5559,7 +5557,7 @@ const Kanji616Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偧';
+    content: "偧";
   }
 `;
 
@@ -5568,7 +5566,7 @@ const Kanji617Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偨';
+    content: "偨";
   }
 `;
 
@@ -5577,7 +5575,7 @@ const Kanji618Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偩';
+    content: "偩";
   }
 `;
 
@@ -5586,7 +5584,7 @@ const Kanji619Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偪';
+    content: "偪";
   }
 `;
 
@@ -5595,7 +5593,7 @@ const Kanji620Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偫';
+    content: "偫";
   }
 `;
 
@@ -5604,7 +5602,7 @@ const Kanji621Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偬';
+    content: "偬";
   }
 `;
 
@@ -5613,7 +5611,7 @@ const Kanji622Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偭';
+    content: "偭";
   }
 `;
 
@@ -5622,7 +5620,7 @@ const Kanji623Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偮';
+    content: "偮";
   }
 `;
 
@@ -5631,7 +5629,7 @@ const Kanji624Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偯';
+    content: "偯";
   }
 `;
 
@@ -5640,7 +5638,7 @@ const Kanji625Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偰';
+    content: "偰";
   }
 `;
 
@@ -5649,7 +5647,7 @@ const Kanji626Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偱';
+    content: "偱";
   }
 `;
 
@@ -5658,7 +5656,7 @@ const Kanji627Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偲';
+    content: "偲";
   }
 `;
 
@@ -5667,7 +5665,7 @@ const Kanji628Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偳';
+    content: "偳";
   }
 `;
 
@@ -5676,7 +5674,7 @@ const Kanji629Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '側';
+    content: "側";
   }
 `;
 
@@ -5685,7 +5683,7 @@ const Kanji630Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偵';
+    content: "偵";
   }
 `;
 
@@ -5694,7 +5692,7 @@ const Kanji631Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偶';
+    content: "偶";
   }
 `;
 
@@ -5703,7 +5701,7 @@ const Kanji632Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偷';
+    content: "偷";
   }
 `;
 
@@ -5712,7 +5710,7 @@ const Kanji633Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偸';
+    content: "偸";
   }
 `;
 
@@ -5721,7 +5719,7 @@ const Kanji634Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偹';
+    content: "偹";
   }
 `;
 
@@ -5730,7 +5728,7 @@ const Kanji635Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偺';
+    content: "偺";
   }
 `;
 
@@ -5739,7 +5737,7 @@ const Kanji636Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偻';
+    content: "偻";
   }
 `;
 
@@ -5748,7 +5746,7 @@ const Kanji637Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偼';
+    content: "偼";
   }
 `;
 
@@ -5757,7 +5755,7 @@ const Kanji638Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偽';
+    content: "偽";
   }
 `;
 
@@ -5766,7 +5764,7 @@ const Kanji639Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偾';
+    content: "偾";
   }
 `;
 
@@ -5775,7 +5773,7 @@ const Kanji640Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '偿';
+    content: "偿";
   }
 `;
 
@@ -5784,7 +5782,7 @@ const Kanji641Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傀';
+    content: "傀";
   }
 `;
 
@@ -5793,7 +5791,7 @@ const Kanji642Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傁';
+    content: "傁";
   }
 `;
 
@@ -5802,7 +5800,7 @@ const Kanji643Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傂';
+    content: "傂";
   }
 `;
 
@@ -5811,7 +5809,7 @@ const Kanji644Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傃';
+    content: "傃";
   }
 `;
 
@@ -5820,7 +5818,7 @@ const Kanji645Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傄';
+    content: "傄";
   }
 `;
 
@@ -5829,7 +5827,7 @@ const Kanji646Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傅';
+    content: "傅";
   }
 `;
 
@@ -5838,7 +5836,7 @@ const Kanji647Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傆';
+    content: "傆";
   }
 `;
 
@@ -5847,7 +5845,7 @@ const Kanji648Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傇';
+    content: "傇";
   }
 `;
 
@@ -5856,7 +5854,7 @@ const Kanji649Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傈';
+    content: "傈";
   }
 `;
 
@@ -5865,7 +5863,7 @@ const Kanji650Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傉';
+    content: "傉";
   }
 `;
 
@@ -5874,7 +5872,7 @@ const Kanji651Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傊';
+    content: "傊";
   }
 `;
 
@@ -5883,7 +5881,7 @@ const Kanji652Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傋';
+    content: "傋";
   }
 `;
 
@@ -5892,7 +5890,7 @@ const Kanji653Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傌';
+    content: "傌";
   }
 `;
 
@@ -5901,7 +5899,7 @@ const Kanji654Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傍';
+    content: "傍";
   }
 `;
 
@@ -5910,7 +5908,7 @@ const Kanji655Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傎';
+    content: "傎";
   }
 `;
 
@@ -5919,7 +5917,7 @@ const Kanji656Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傏';
+    content: "傏";
   }
 `;
 
@@ -5928,7 +5926,7 @@ const Kanji657Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傐';
+    content: "傐";
   }
 `;
 
@@ -5937,7 +5935,7 @@ const Kanji658Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傑';
+    content: "傑";
   }
 `;
 
@@ -5946,7 +5944,7 @@ const Kanji659Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傒';
+    content: "傒";
   }
 `;
 
@@ -5955,7 +5953,7 @@ const Kanji660Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傓';
+    content: "傓";
   }
 `;
 
@@ -5964,7 +5962,7 @@ const Kanji661Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傔';
+    content: "傔";
   }
 `;
 
@@ -5973,7 +5971,7 @@ const Kanji662Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傕';
+    content: "傕";
   }
 `;
 
@@ -5982,7 +5980,7 @@ const Kanji663Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傖';
+    content: "傖";
   }
 `;
 
@@ -5991,7 +5989,7 @@ const Kanji664Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傗';
+    content: "傗";
   }
 `;
 
@@ -6000,7 +5998,7 @@ const Kanji665Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傘';
+    content: "傘";
   }
 `;
 
@@ -6009,7 +6007,7 @@ const Kanji666Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '備';
+    content: "備";
   }
 `;
 
@@ -6018,7 +6016,7 @@ const Kanji667Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傚';
+    content: "傚";
   }
 `;
 
@@ -6027,7 +6025,7 @@ const Kanji668Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傛';
+    content: "傛";
   }
 `;
 
@@ -6036,7 +6034,7 @@ const Kanji669Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傜';
+    content: "傜";
   }
 `;
 
@@ -6045,7 +6043,7 @@ const Kanji670Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傝';
+    content: "傝";
   }
 `;
 
@@ -6054,7 +6052,7 @@ const Kanji671Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傞';
+    content: "傞";
   }
 `;
 
@@ -6063,7 +6061,7 @@ const Kanji672Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傟';
+    content: "傟";
   }
 `;
 
@@ -6072,7 +6070,7 @@ const Kanji673Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傠';
+    content: "傠";
   }
 `;
 
@@ -6081,7 +6079,7 @@ const Kanji674Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傡';
+    content: "傡";
   }
 `;
 
@@ -6090,7 +6088,7 @@ const Kanji675Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傢';
+    content: "傢";
   }
 `;
 
@@ -6099,7 +6097,7 @@ const Kanji676Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傣';
+    content: "傣";
   }
 `;
 
@@ -6108,7 +6106,7 @@ const Kanji677Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傤';
+    content: "傤";
   }
 `;
 
@@ -6117,7 +6115,7 @@ const Kanji678Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傥';
+    content: "傥";
   }
 `;
 
@@ -6126,7 +6124,7 @@ const Kanji679Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傦';
+    content: "傦";
   }
 `;
 
@@ -6135,7 +6133,7 @@ const Kanji680Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傧';
+    content: "傧";
   }
 `;
 
@@ -6144,7 +6142,7 @@ const Kanji681Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '储';
+    content: "储";
   }
 `;
 
@@ -6153,7 +6151,7 @@ const Kanji682Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傩';
+    content: "傩";
   }
 `;
 
@@ -6162,7 +6160,7 @@ const Kanji683Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傪';
+    content: "傪";
   }
 `;
 
@@ -6171,7 +6169,7 @@ const Kanji684Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傫';
+    content: "傫";
   }
 `;
 
@@ -6180,7 +6178,7 @@ const Kanji685Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '催';
+    content: "催";
   }
 `;
 
@@ -6189,7 +6187,7 @@ const Kanji686Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傭';
+    content: "傭";
   }
 `;
 
@@ -6198,7 +6196,7 @@ const Kanji687Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傮';
+    content: "傮";
   }
 `;
 
@@ -6207,7 +6205,7 @@ const Kanji688Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傯';
+    content: "傯";
   }
 `;
 
@@ -6216,7 +6214,7 @@ const Kanji689Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傰';
+    content: "傰";
   }
 `;
 
@@ -6225,7 +6223,7 @@ const Kanji690Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傱';
+    content: "傱";
   }
 `;
 
@@ -6234,7 +6232,7 @@ const Kanji691Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傲';
+    content: "傲";
   }
 `;
 
@@ -6243,7 +6241,7 @@ const Kanji692Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傳';
+    content: "傳";
   }
 `;
 
@@ -6252,7 +6250,7 @@ const Kanji693Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傴';
+    content: "傴";
   }
 `;
 
@@ -6261,7 +6259,7 @@ const Kanji694Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '債';
+    content: "債";
   }
 `;
 
@@ -6270,7 +6268,7 @@ const Kanji695Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傶';
+    content: "傶";
   }
 `;
 
@@ -6279,7 +6277,7 @@ const Kanji696Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傷';
+    content: "傷";
   }
 `;
 
@@ -6288,7 +6286,7 @@ const Kanji697Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傸';
+    content: "傸";
   }
 `;
 
@@ -6297,7 +6295,7 @@ const Kanji698Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傹';
+    content: "傹";
   }
 `;
 
@@ -6306,7 +6304,7 @@ const Kanji699Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傺';
+    content: "傺";
   }
 `;
 
@@ -6315,7 +6313,7 @@ const Kanji700Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傻';
+    content: "傻";
   }
 `;
 
@@ -6324,7 +6322,7 @@ const Kanji701Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傼';
+    content: "傼";
   }
 `;
 
@@ -6333,7 +6331,7 @@ const Kanji702Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傽';
+    content: "傽";
   }
 `;
 
@@ -6342,7 +6340,7 @@ const Kanji703Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傾';
+    content: "傾";
   }
 `;
 
@@ -6351,7 +6349,7 @@ const Kanji704Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '傿';
+    content: "傿";
   }
 `;
 
@@ -6360,7 +6358,7 @@ const Kanji705Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僀';
+    content: "僀";
   }
 `;
 
@@ -6369,7 +6367,7 @@ const Kanji706Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僁';
+    content: "僁";
   }
 `;
 
@@ -6378,7 +6376,7 @@ const Kanji707Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僂';
+    content: "僂";
   }
 `;
 
@@ -6387,7 +6385,7 @@ const Kanji708Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僃';
+    content: "僃";
   }
 `;
 
@@ -6396,7 +6394,7 @@ const Kanji709Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僄';
+    content: "僄";
   }
 `;
 
@@ -6405,7 +6403,7 @@ const Kanji710Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僅';
+    content: "僅";
   }
 `;
 
@@ -6414,7 +6412,7 @@ const Kanji711Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僆';
+    content: "僆";
   }
 `;
 
@@ -6423,7 +6421,7 @@ const Kanji712Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僇';
+    content: "僇";
   }
 `;
 
@@ -6432,7 +6430,7 @@ const Kanji713Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僈';
+    content: "僈";
   }
 `;
 
@@ -6441,7 +6439,7 @@ const Kanji714Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僉';
+    content: "僉";
   }
 `;
 
@@ -6450,7 +6448,7 @@ const Kanji715Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僊';
+    content: "僊";
   }
 `;
 
@@ -6459,7 +6457,7 @@ const Kanji716Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僋';
+    content: "僋";
   }
 `;
 
@@ -6468,7 +6466,7 @@ const Kanji717Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僌';
+    content: "僌";
   }
 `;
 
@@ -6477,7 +6475,7 @@ const Kanji718Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '働';
+    content: "働";
   }
 `;
 
@@ -6486,7 +6484,7 @@ const Kanji719Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僎';
+    content: "僎";
   }
 `;
 
@@ -6495,7 +6493,7 @@ const Kanji720Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '像';
+    content: "像";
   }
 `;
 
@@ -6504,7 +6502,7 @@ const Kanji721Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僐';
+    content: "僐";
   }
 `;
 
@@ -6513,7 +6511,7 @@ const Kanji722Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僑';
+    content: "僑";
   }
 `;
 
@@ -6522,7 +6520,7 @@ const Kanji723Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僒';
+    content: "僒";
   }
 `;
 
@@ -6531,7 +6529,7 @@ const Kanji724Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僓';
+    content: "僓";
   }
 `;
 
@@ -6540,7 +6538,7 @@ const Kanji725Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僔';
+    content: "僔";
   }
 `;
 
@@ -6549,7 +6547,7 @@ const Kanji726Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僕';
+    content: "僕";
   }
 `;
 
@@ -6558,7 +6556,7 @@ const Kanji727Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僖';
+    content: "僖";
   }
 `;
 
@@ -6567,7 +6565,7 @@ const Kanji728Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僗';
+    content: "僗";
   }
 `;
 
@@ -6576,7 +6574,7 @@ const Kanji729Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僘';
+    content: "僘";
   }
 `;
 
@@ -6585,7 +6583,7 @@ const Kanji730Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僙';
+    content: "僙";
   }
 `;
 
@@ -6594,7 +6592,7 @@ const Kanji731Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僚';
+    content: "僚";
   }
 `;
 
@@ -6603,7 +6601,7 @@ const Kanji732Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僛';
+    content: "僛";
   }
 `;
 
@@ -6612,7 +6610,7 @@ const Kanji733Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僜';
+    content: "僜";
   }
 `;
 
@@ -6621,7 +6619,7 @@ const Kanji734Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僝';
+    content: "僝";
   }
 `;
 
@@ -6630,7 +6628,7 @@ const Kanji735Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僞';
+    content: "僞";
   }
 `;
 
@@ -6639,7 +6637,7 @@ const Kanji736Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僟';
+    content: "僟";
   }
 `;
 
@@ -6648,7 +6646,7 @@ const Kanji737Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僠';
+    content: "僠";
   }
 `;
 
@@ -6657,7 +6655,7 @@ const Kanji738Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僡';
+    content: "僡";
   }
 `;
 
@@ -6666,7 +6664,7 @@ const Kanji739Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僢';
+    content: "僢";
   }
 `;
 
@@ -6675,7 +6673,7 @@ const Kanji740Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僣';
+    content: "僣";
   }
 `;
 
@@ -6684,7 +6682,7 @@ const Kanji741Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僤';
+    content: "僤";
   }
 `;
 
@@ -6693,7 +6691,7 @@ const Kanji742Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僥';
+    content: "僥";
   }
 `;
 
@@ -6702,7 +6700,7 @@ const Kanji743Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僦';
+    content: "僦";
   }
 `;
 
@@ -6711,7 +6709,7 @@ const Kanji744Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僧';
+    content: "僧";
   }
 `;
 
@@ -6720,7 +6718,7 @@ const Kanji745Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僨';
+    content: "僨";
   }
 `;
 
@@ -6729,7 +6727,7 @@ const Kanji746Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僩';
+    content: "僩";
   }
 `;
 
@@ -6738,7 +6736,7 @@ const Kanji747Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僪';
+    content: "僪";
   }
 `;
 
@@ -6747,7 +6745,7 @@ const Kanji748Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僫';
+    content: "僫";
   }
 `;
 
@@ -6756,7 +6754,7 @@ const Kanji749Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僬';
+    content: "僬";
   }
 `;
 
@@ -6765,7 +6763,7 @@ const Kanji750Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僭';
+    content: "僭";
   }
 `;
 
@@ -6774,7 +6772,7 @@ const Kanji751Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僮';
+    content: "僮";
   }
 `;
 
@@ -6783,7 +6781,7 @@ const Kanji752Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僯';
+    content: "僯";
   }
 `;
 
@@ -6792,7 +6790,7 @@ const Kanji753Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僰';
+    content: "僰";
   }
 `;
 
@@ -6801,7 +6799,7 @@ const Kanji754Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僱';
+    content: "僱";
   }
 `;
 
@@ -6810,7 +6808,7 @@ const Kanji755Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僲';
+    content: "僲";
   }
 `;
 
@@ -6819,7 +6817,7 @@ const Kanji756Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僳';
+    content: "僳";
   }
 `;
 
@@ -6828,7 +6826,7 @@ const Kanji757Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僴';
+    content: "僴";
   }
 `;
 
@@ -6837,7 +6835,7 @@ const Kanji758Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僵';
+    content: "僵";
   }
 `;
 
@@ -6846,7 +6844,7 @@ const Kanji759Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僶';
+    content: "僶";
   }
 `;
 
@@ -6855,7 +6853,7 @@ const Kanji760Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僷';
+    content: "僷";
   }
 `;
 
@@ -6864,7 +6862,7 @@ const Kanji761Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僸';
+    content: "僸";
   }
 `;
 
@@ -6873,7 +6871,7 @@ const Kanji762Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '價';
+    content: "價";
   }
 `;
 
@@ -6882,7 +6880,7 @@ const Kanji763Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僺';
+    content: "僺";
   }
 `;
 
@@ -6891,7 +6889,7 @@ const Kanji764Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僻';
+    content: "僻";
   }
 `;
 
@@ -6900,7 +6898,7 @@ const Kanji765Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僼';
+    content: "僼";
   }
 `;
 
@@ -6909,7 +6907,7 @@ const Kanji766Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僽';
+    content: "僽";
   }
 `;
 
@@ -6918,7 +6916,7 @@ const Kanji767Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僾';
+    content: "僾";
   }
 `;
 
@@ -6927,7 +6925,7 @@ const Kanji768Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '僿';
+    content: "僿";
   }
 `;
 
@@ -6936,7 +6934,7 @@ const Kanji769Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儀';
+    content: "儀";
   }
 `;
 
@@ -6945,7 +6943,7 @@ const Kanji770Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儁';
+    content: "儁";
   }
 `;
 
@@ -6954,7 +6952,7 @@ const Kanji771Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儂';
+    content: "儂";
   }
 `;
 
@@ -6963,7 +6961,7 @@ const Kanji772Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儃';
+    content: "儃";
   }
 `;
 
@@ -6972,7 +6970,7 @@ const Kanji773Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '億';
+    content: "億";
   }
 `;
 
@@ -6981,7 +6979,7 @@ const Kanji774Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儅';
+    content: "儅";
   }
 `;
 
@@ -6990,7 +6988,7 @@ const Kanji775Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儆';
+    content: "儆";
   }
 `;
 
@@ -6999,7 +6997,7 @@ const Kanji776Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儇';
+    content: "儇";
   }
 `;
 
@@ -7008,7 +7006,7 @@ const Kanji777Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儈';
+    content: "儈";
   }
 `;
 
@@ -7017,7 +7015,7 @@ const Kanji778Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儉';
+    content: "儉";
   }
 `;
 
@@ -7026,7 +7024,7 @@ const Kanji779Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儊';
+    content: "儊";
   }
 `;
 
@@ -7035,7 +7033,7 @@ const Kanji780Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儋';
+    content: "儋";
   }
 `;
 
@@ -7044,7 +7042,7 @@ const Kanji781Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儌';
+    content: "儌";
   }
 `;
 
@@ -7053,7 +7051,7 @@ const Kanji782Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儍';
+    content: "儍";
   }
 `;
 
@@ -7062,7 +7060,7 @@ const Kanji783Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儎';
+    content: "儎";
   }
 `;
 
@@ -7071,7 +7069,7 @@ const Kanji784Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儏';
+    content: "儏";
   }
 `;
 
@@ -7080,7 +7078,7 @@ const Kanji785Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儐';
+    content: "儐";
   }
 `;
 
@@ -7089,7 +7087,7 @@ const Kanji786Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儑';
+    content: "儑";
   }
 `;
 
@@ -7098,7 +7096,7 @@ const Kanji787Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儒';
+    content: "儒";
   }
 `;
 
@@ -7107,7 +7105,7 @@ const Kanji788Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儓';
+    content: "儓";
   }
 `;
 
@@ -7116,7 +7114,7 @@ const Kanji789Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儔';
+    content: "儔";
   }
 `;
 
@@ -7125,7 +7123,7 @@ const Kanji790Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儕';
+    content: "儕";
   }
 `;
 
@@ -7134,7 +7132,7 @@ const Kanji791Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儖';
+    content: "儖";
   }
 `;
 
@@ -7143,7 +7141,7 @@ const Kanji792Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儗';
+    content: "儗";
   }
 `;
 
@@ -7152,7 +7150,7 @@ const Kanji793Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儘';
+    content: "儘";
   }
 `;
 
@@ -7161,7 +7159,7 @@ const Kanji794Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儙';
+    content: "儙";
   }
 `;
 
@@ -7170,7 +7168,7 @@ const Kanji795Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儚';
+    content: "儚";
   }
 `;
 
@@ -7179,7 +7177,7 @@ const Kanji796Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儛';
+    content: "儛";
   }
 `;
 
@@ -7188,7 +7186,7 @@ const Kanji797Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儜';
+    content: "儜";
   }
 `;
 
@@ -7197,7 +7195,7 @@ const Kanji798Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儝';
+    content: "儝";
   }
 `;
 
@@ -7206,7 +7204,7 @@ const Kanji799Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儞';
+    content: "儞";
   }
 `;
 
@@ -7215,7 +7213,7 @@ const Kanji800Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '償';
+    content: "償";
   }
 `;
 
@@ -7224,7 +7222,7 @@ const Kanji801Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儠';
+    content: "儠";
   }
 `;
 
@@ -7233,7 +7231,7 @@ const Kanji802Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儡';
+    content: "儡";
   }
 `;
 
@@ -7242,7 +7240,7 @@ const Kanji803Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儢';
+    content: "儢";
   }
 `;
 
@@ -7251,7 +7249,7 @@ const Kanji804Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儣';
+    content: "儣";
   }
 `;
 
@@ -7260,7 +7258,7 @@ const Kanji805Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儤';
+    content: "儤";
   }
 `;
 
@@ -7269,7 +7267,7 @@ const Kanji806Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儥';
+    content: "儥";
   }
 `;
 
@@ -7278,7 +7276,7 @@ const Kanji807Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儦';
+    content: "儦";
   }
 `;
 
@@ -7287,7 +7285,7 @@ const Kanji808Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儧';
+    content: "儧";
   }
 `;
 
@@ -7296,7 +7294,7 @@ const Kanji809Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儨';
+    content: "儨";
   }
 `;
 
@@ -7305,7 +7303,7 @@ const Kanji810Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儩';
+    content: "儩";
   }
 `;
 
@@ -7314,7 +7312,7 @@ const Kanji811Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '優';
+    content: "優";
   }
 `;
 
@@ -7323,7 +7321,7 @@ const Kanji812Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儫';
+    content: "儫";
   }
 `;
 
@@ -7332,7 +7330,7 @@ const Kanji813Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儬';
+    content: "儬";
   }
 `;
 
@@ -7341,7 +7339,7 @@ const Kanji814Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儭';
+    content: "儭";
   }
 `;
 
@@ -7350,7 +7348,7 @@ const Kanji815Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儮';
+    content: "儮";
   }
 `;
 
@@ -7359,7 +7357,7 @@ const Kanji816Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儯';
+    content: "儯";
   }
 `;
 
@@ -7368,7 +7366,7 @@ const Kanji817Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儰';
+    content: "儰";
   }
 `;
 
@@ -7377,7 +7375,7 @@ const Kanji818Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儱';
+    content: "儱";
   }
 `;
 
@@ -7386,7 +7384,7 @@ const Kanji819Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儲';
+    content: "儲";
   }
 `;
 
@@ -7395,7 +7393,7 @@ const Kanji820Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儳';
+    content: "儳";
   }
 `;
 
@@ -7404,7 +7402,7 @@ const Kanji821Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儴';
+    content: "儴";
   }
 `;
 
@@ -7413,7 +7411,7 @@ const Kanji822Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儵';
+    content: "儵";
   }
 `;
 
@@ -7422,7 +7420,7 @@ const Kanji823Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儶';
+    content: "儶";
   }
 `;
 
@@ -7431,7 +7429,7 @@ const Kanji824Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儷';
+    content: "儷";
   }
 `;
 
@@ -7440,7 +7438,7 @@ const Kanji825Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儸';
+    content: "儸";
   }
 `;
 
@@ -7449,7 +7447,7 @@ const Kanji826Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儹';
+    content: "儹";
   }
 `;
 
@@ -7458,7 +7456,7 @@ const Kanji827Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儺';
+    content: "儺";
   }
 `;
 
@@ -7467,7 +7465,7 @@ const Kanji828Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儻';
+    content: "儻";
   }
 `;
 
@@ -7476,7 +7474,7 @@ const Kanji829Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儼';
+    content: "儼";
   }
 `;
 
@@ -7485,7 +7483,7 @@ const Kanji830Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儽';
+    content: "儽";
   }
 `;
 
@@ -7494,7 +7492,7 @@ const Kanji831Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儾';
+    content: "儾";
   }
 `;
 
@@ -7503,7 +7501,7 @@ const Kanji832Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '儿';
+    content: "儿";
   }
 `;
 
@@ -7512,7 +7510,7 @@ const Kanji833Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兀';
+    content: "兀";
   }
 `;
 
@@ -7521,7 +7519,7 @@ const Kanji834Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '允';
+    content: "允";
   }
 `;
 
@@ -7530,7 +7528,7 @@ const Kanji835Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兂';
+    content: "兂";
   }
 `;
 
@@ -7539,7 +7537,7 @@ const Kanji836Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '元';
+    content: "元";
   }
 `;
 
@@ -7548,7 +7546,7 @@ const Kanji837Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兄';
+    content: "兄";
   }
 `;
 
@@ -7557,7 +7555,7 @@ const Kanji838Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '充';
+    content: "充";
   }
 `;
 
@@ -7566,7 +7564,7 @@ const Kanji839Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兆';
+    content: "兆";
   }
 `;
 
@@ -7575,7 +7573,7 @@ const Kanji840Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兇';
+    content: "兇";
   }
 `;
 
@@ -7584,7 +7582,7 @@ const Kanji841Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '先';
+    content: "先";
   }
 `;
 
@@ -7593,7 +7591,7 @@ const Kanji842Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '光';
+    content: "光";
   }
 `;
 
@@ -7602,7 +7600,7 @@ const Kanji843Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兊';
+    content: "兊";
   }
 `;
 
@@ -7611,7 +7609,7 @@ const Kanji844Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '克';
+    content: "克";
   }
 `;
 
@@ -7620,7 +7618,7 @@ const Kanji845Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兌';
+    content: "兌";
   }
 `;
 
@@ -7629,7 +7627,7 @@ const Kanji846Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '免';
+    content: "免";
   }
 `;
 
@@ -7638,7 +7636,7 @@ const Kanji847Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兎';
+    content: "兎";
   }
 `;
 
@@ -7647,7 +7645,7 @@ const Kanji848Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兏';
+    content: "兏";
   }
 `;
 
@@ -7656,7 +7654,7 @@ const Kanji849Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '児';
+    content: "児";
   }
 `;
 
@@ -7665,7 +7663,7 @@ const Kanji850Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兑';
+    content: "兑";
   }
 `;
 
@@ -7674,7 +7672,7 @@ const Kanji851Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兒';
+    content: "兒";
   }
 `;
 
@@ -7683,7 +7681,7 @@ const Kanji852Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兓';
+    content: "兓";
   }
 `;
 
@@ -7692,7 +7690,7 @@ const Kanji853Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兔';
+    content: "兔";
   }
 `;
 
@@ -7701,7 +7699,7 @@ const Kanji854Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兕';
+    content: "兕";
   }
 `;
 
@@ -7710,7 +7708,7 @@ const Kanji855Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兖';
+    content: "兖";
   }
 `;
 
@@ -7719,7 +7717,7 @@ const Kanji856Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兗';
+    content: "兗";
   }
 `;
 
@@ -7728,7 +7726,7 @@ const Kanji857Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兘';
+    content: "兘";
   }
 `;
 
@@ -7737,7 +7735,7 @@ const Kanji858Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兙';
+    content: "兙";
   }
 `;
 
@@ -7746,7 +7744,7 @@ const Kanji859Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '党';
+    content: "党";
   }
 `;
 
@@ -7755,7 +7753,7 @@ const Kanji860Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兛';
+    content: "兛";
   }
 `;
 
@@ -7764,7 +7762,7 @@ const Kanji861Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兜';
+    content: "兜";
   }
 `;
 
@@ -7773,7 +7771,7 @@ const Kanji862Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兝';
+    content: "兝";
   }
 `;
 
@@ -7782,7 +7780,7 @@ const Kanji863Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兞';
+    content: "兞";
   }
 `;
 
@@ -7791,7 +7789,7 @@ const Kanji864Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兟';
+    content: "兟";
   }
 `;
 
@@ -7800,7 +7798,7 @@ const Kanji865Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兠';
+    content: "兠";
   }
 `;
 
@@ -7809,7 +7807,7 @@ const Kanji866Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兡';
+    content: "兡";
   }
 `;
 
@@ -7818,7 +7816,7 @@ const Kanji867Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兢';
+    content: "兢";
   }
 `;
 
@@ -7827,7 +7825,7 @@ const Kanji868Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兣';
+    content: "兣";
   }
 `;
 
@@ -7836,7 +7834,7 @@ const Kanji869Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兤';
+    content: "兤";
   }
 `;
 
@@ -7845,7 +7843,7 @@ const Kanji870Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '入';
+    content: "入";
   }
 `;
 
@@ -7854,7 +7852,7 @@ const Kanji871Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兦';
+    content: "兦";
   }
 `;
 
@@ -7863,7 +7861,7 @@ const Kanji872Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '內';
+    content: "內";
   }
 `;
 
@@ -7872,7 +7870,7 @@ const Kanji873Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '全';
+    content: "全";
   }
 `;
 
@@ -7881,7 +7879,7 @@ const Kanji874Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兩';
+    content: "兩";
   }
 `;
 
@@ -7890,7 +7888,7 @@ const Kanji875Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兪';
+    content: "兪";
   }
 `;
 
@@ -7899,7 +7897,7 @@ const Kanji876Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '八';
+    content: "八";
   }
 `;
 
@@ -7908,7 +7906,7 @@ const Kanji877Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '公';
+    content: "公";
   }
 `;
 
@@ -7917,7 +7915,7 @@ const Kanji878Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '六';
+    content: "六";
   }
 `;
 
@@ -7926,7 +7924,7 @@ const Kanji879Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兮';
+    content: "兮";
   }
 `;
 
@@ -7935,7 +7933,7 @@ const Kanji880Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兯';
+    content: "兯";
   }
 `;
 
@@ -7944,7 +7942,7 @@ const Kanji881Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兰';
+    content: "兰";
   }
 `;
 
@@ -7953,7 +7951,7 @@ const Kanji882Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '共';
+    content: "共";
   }
 `;
 
@@ -7962,7 +7960,7 @@ const Kanji883Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兲';
+    content: "兲";
   }
 `;
 
@@ -7971,7 +7969,7 @@ const Kanji884Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '关';
+    content: "关";
   }
 `;
 
@@ -7980,7 +7978,7 @@ const Kanji885Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兴';
+    content: "兴";
   }
 `;
 
@@ -7989,7 +7987,7 @@ const Kanji886Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兵';
+    content: "兵";
   }
 `;
 
@@ -7998,7 +7996,7 @@ const Kanji887Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '其';
+    content: "其";
   }
 `;
 
@@ -8007,7 +8005,7 @@ const Kanji888Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '具';
+    content: "具";
   }
 `;
 
@@ -8016,7 +8014,7 @@ const Kanji889Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '典';
+    content: "典";
   }
 `;
 
@@ -8025,7 +8023,7 @@ const Kanji890Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兹';
+    content: "兹";
   }
 `;
 
@@ -8034,7 +8032,7 @@ const Kanji891Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兺';
+    content: "兺";
   }
 `;
 
@@ -8043,7 +8041,7 @@ const Kanji892Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '养';
+    content: "养";
   }
 `;
 
@@ -8052,7 +8050,7 @@ const Kanji893Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兼';
+    content: "兼";
   }
 `;
 
@@ -8061,7 +8059,7 @@ const Kanji894Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兽';
+    content: "兽";
   }
 `;
 
@@ -8070,7 +8068,7 @@ const Kanji895Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兾';
+    content: "兾";
   }
 `;
 
@@ -8079,7 +8077,7 @@ const Kanji896Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '兿';
+    content: "兿";
   }
 `;
 
@@ -8088,7 +8086,7 @@ const Kanji897Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冀';
+    content: "冀";
   }
 `;
 
@@ -8097,7 +8095,7 @@ const Kanji898Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冁';
+    content: "冁";
   }
 `;
 
@@ -8106,7 +8104,7 @@ const Kanji899Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冂';
+    content: "冂";
   }
 `;
 
@@ -8115,7 +8113,7 @@ const Kanji900Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冃';
+    content: "冃";
   }
 `;
 
@@ -8124,7 +8122,7 @@ const Kanji901Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冄';
+    content: "冄";
   }
 `;
 
@@ -8133,7 +8131,7 @@ const Kanji902Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '内';
+    content: "内";
   }
 `;
 
@@ -8142,7 +8140,7 @@ const Kanji903Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '円';
+    content: "円";
   }
 `;
 
@@ -8151,7 +8149,7 @@ const Kanji904Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冇';
+    content: "冇";
   }
 `;
 
@@ -8160,7 +8158,7 @@ const Kanji905Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冈';
+    content: "冈";
   }
 `;
 
@@ -8169,7 +8167,7 @@ const Kanji906Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冉';
+    content: "冉";
   }
 `;
 
@@ -8178,7 +8176,7 @@ const Kanji907Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冊';
+    content: "冊";
   }
 `;
 
@@ -8187,7 +8185,7 @@ const Kanji908Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冋';
+    content: "冋";
   }
 `;
 
@@ -8196,7 +8194,7 @@ const Kanji909Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '册';
+    content: "册";
   }
 `;
 
@@ -8205,7 +8203,7 @@ const Kanji910Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '再';
+    content: "再";
   }
 `;
 
@@ -8214,7 +8212,7 @@ const Kanji911Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冎';
+    content: "冎";
   }
 `;
 
@@ -8223,7 +8221,7 @@ const Kanji912Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冏';
+    content: "冏";
   }
 `;
 
@@ -8232,7 +8230,7 @@ const Kanji913Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冐';
+    content: "冐";
   }
 `;
 
@@ -8241,7 +8239,7 @@ const Kanji914Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冑';
+    content: "冑";
   }
 `;
 
@@ -8250,7 +8248,7 @@ const Kanji915Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冒';
+    content: "冒";
   }
 `;
 
@@ -8259,7 +8257,7 @@ const Kanji916Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冓';
+    content: "冓";
   }
 `;
 
@@ -8268,7 +8266,7 @@ const Kanji917Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冔';
+    content: "冔";
   }
 `;
 
@@ -8277,7 +8275,7 @@ const Kanji918Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冕';
+    content: "冕";
   }
 `;
 
@@ -8286,7 +8284,7 @@ const Kanji919Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冖';
+    content: "冖";
   }
 `;
 
@@ -8295,7 +8293,7 @@ const Kanji920Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冗';
+    content: "冗";
   }
 `;
 
@@ -8304,7 +8302,7 @@ const Kanji921Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冘';
+    content: "冘";
   }
 `;
 
@@ -8313,7 +8311,7 @@ const Kanji922Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '写';
+    content: "写";
   }
 `;
 
@@ -8322,7 +8320,7 @@ const Kanji923Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冚';
+    content: "冚";
   }
 `;
 
@@ -8331,7 +8329,7 @@ const Kanji924Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '军';
+    content: "军";
   }
 `;
 
@@ -8340,7 +8338,7 @@ const Kanji925Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '农';
+    content: "农";
   }
 `;
 
@@ -8349,7 +8347,7 @@ const Kanji926Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冝';
+    content: "冝";
   }
 `;
 
@@ -8358,7 +8356,7 @@ const Kanji927Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冞';
+    content: "冞";
   }
 `;
 
@@ -8367,7 +8365,7 @@ const Kanji928Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冟';
+    content: "冟";
   }
 `;
 
@@ -8376,7 +8374,7 @@ const Kanji929Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冠';
+    content: "冠";
   }
 `;
 
@@ -8385,7 +8383,7 @@ const Kanji930Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冡';
+    content: "冡";
   }
 `;
 
@@ -8394,7 +8392,7 @@ const Kanji931Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冢';
+    content: "冢";
   }
 `;
 
@@ -8403,7 +8401,7 @@ const Kanji932Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冣';
+    content: "冣";
   }
 `;
 
@@ -8412,7 +8410,7 @@ const Kanji933Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冤';
+    content: "冤";
   }
 `;
 
@@ -8421,7 +8419,7 @@ const Kanji934Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冥';
+    content: "冥";
   }
 `;
 
@@ -8430,7 +8428,7 @@ const Kanji935Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冦';
+    content: "冦";
   }
 `;
 
@@ -8439,7 +8437,7 @@ const Kanji936Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冧';
+    content: "冧";
   }
 `;
 
@@ -8448,7 +8446,7 @@ const Kanji937Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冨';
+    content: "冨";
   }
 `;
 
@@ -8457,7 +8455,7 @@ const Kanji938Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冩';
+    content: "冩";
   }
 `;
 
@@ -8466,7 +8464,7 @@ const Kanji939Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冪';
+    content: "冪";
   }
 `;
 
@@ -8475,7 +8473,7 @@ const Kanji940Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冫';
+    content: "冫";
   }
 `;
 
@@ -8484,7 +8482,7 @@ const Kanji941Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冬';
+    content: "冬";
   }
 `;
 
@@ -8493,7 +8491,7 @@ const Kanji942Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冭';
+    content: "冭";
   }
 `;
 
@@ -8502,7 +8500,7 @@ const Kanji943Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冮';
+    content: "冮";
   }
 `;
 
@@ -8511,7 +8509,7 @@ const Kanji944Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冯';
+    content: "冯";
   }
 `;
 
@@ -8520,7 +8518,7 @@ const Kanji945Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冰';
+    content: "冰";
   }
 `;
 
@@ -8529,7 +8527,7 @@ const Kanji946Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冱';
+    content: "冱";
   }
 `;
 
@@ -8538,7 +8536,7 @@ const Kanji947Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冲';
+    content: "冲";
   }
 `;
 
@@ -8547,7 +8545,7 @@ const Kanji948Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '决';
+    content: "决";
   }
 `;
 
@@ -8556,7 +8554,7 @@ const Kanji949Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冴';
+    content: "冴";
   }
 `;
 
@@ -8565,7 +8563,7 @@ const Kanji950Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '况';
+    content: "况";
   }
 `;
 
@@ -8574,7 +8572,7 @@ const Kanji951Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冶';
+    content: "冶";
   }
 `;
 
@@ -8583,7 +8581,7 @@ const Kanji952Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冷';
+    content: "冷";
   }
 `;
 
@@ -8592,7 +8590,7 @@ const Kanji953Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冸';
+    content: "冸";
   }
 `;
 
@@ -8601,7 +8599,7 @@ const Kanji954Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冹';
+    content: "冹";
   }
 `;
 
@@ -8610,7 +8608,7 @@ const Kanji955Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冺';
+    content: "冺";
   }
 `;
 
@@ -8619,7 +8617,7 @@ const Kanji956Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冻';
+    content: "冻";
   }
 `;
 
@@ -8628,7 +8626,7 @@ const Kanji957Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冼';
+    content: "冼";
   }
 `;
 
@@ -8637,7 +8635,7 @@ const Kanji958Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冽';
+    content: "冽";
   }
 `;
 
@@ -8646,7 +8644,7 @@ const Kanji959Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冾';
+    content: "冾";
   }
 `;
 
@@ -8655,7 +8653,7 @@ const Kanji960Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '冿';
+    content: "冿";
   }
 `;
 
@@ -8664,7 +8662,7 @@ const Kanji961Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '净';
+    content: "净";
   }
 `;
 
@@ -8673,7 +8671,7 @@ const Kanji962Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凁';
+    content: "凁";
   }
 `;
 
@@ -8682,7 +8680,7 @@ const Kanji963Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凂';
+    content: "凂";
   }
 `;
 
@@ -8691,7 +8689,7 @@ const Kanji964Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凃';
+    content: "凃";
   }
 `;
 
@@ -8700,7 +8698,7 @@ const Kanji965Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凄';
+    content: "凄";
   }
 `;
 
@@ -8709,7 +8707,7 @@ const Kanji966Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凅';
+    content: "凅";
   }
 `;
 
@@ -8718,7 +8716,7 @@ const Kanji967Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '准';
+    content: "准";
   }
 `;
 
@@ -8727,7 +8725,7 @@ const Kanji968Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凇';
+    content: "凇";
   }
 `;
 
@@ -8736,7 +8734,7 @@ const Kanji969Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凈';
+    content: "凈";
   }
 `;
 
@@ -8745,7 +8743,7 @@ const Kanji970Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凉';
+    content: "凉";
   }
 `;
 
@@ -8754,7 +8752,7 @@ const Kanji971Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凊';
+    content: "凊";
   }
 `;
 
@@ -8763,7 +8761,7 @@ const Kanji972Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凋';
+    content: "凋";
   }
 `;
 
@@ -8772,7 +8770,7 @@ const Kanji973Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凌';
+    content: "凌";
   }
 `;
 
@@ -8781,7 +8779,7 @@ const Kanji974Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凍';
+    content: "凍";
   }
 `;
 
@@ -8790,7 +8788,7 @@ const Kanji975Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凎';
+    content: "凎";
   }
 `;
 
@@ -8799,7 +8797,7 @@ const Kanji976Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '减';
+    content: "减";
   }
 `;
 
@@ -8808,7 +8806,7 @@ const Kanji977Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凐';
+    content: "凐";
   }
 `;
 
@@ -8817,7 +8815,7 @@ const Kanji978Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凑';
+    content: "凑";
   }
 `;
 
@@ -8826,7 +8824,7 @@ const Kanji979Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凒';
+    content: "凒";
   }
 `;
 
@@ -8835,7 +8833,7 @@ const Kanji980Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凓';
+    content: "凓";
   }
 `;
 
@@ -8844,7 +8842,7 @@ const Kanji981Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凔';
+    content: "凔";
   }
 `;
 
@@ -8853,7 +8851,7 @@ const Kanji982Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凕';
+    content: "凕";
   }
 `;
 
@@ -8862,7 +8860,7 @@ const Kanji983Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凖';
+    content: "凖";
   }
 `;
 
@@ -8871,7 +8869,7 @@ const Kanji984Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凗';
+    content: "凗";
   }
 `;
 
@@ -8880,7 +8878,7 @@ const Kanji985Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凘';
+    content: "凘";
   }
 `;
 
@@ -8889,7 +8887,7 @@ const Kanji986Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凙';
+    content: "凙";
   }
 `;
 
@@ -8898,7 +8896,7 @@ const Kanji987Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凚';
+    content: "凚";
   }
 `;
 
@@ -8907,7 +8905,7 @@ const Kanji988Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凛';
+    content: "凛";
   }
 `;
 
@@ -8916,7 +8914,7 @@ const Kanji989Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凜';
+    content: "凜";
   }
 `;
 
@@ -8925,7 +8923,7 @@ const Kanji990Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凝';
+    content: "凝";
   }
 `;
 
@@ -8934,7 +8932,7 @@ const Kanji991Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凞';
+    content: "凞";
   }
 `;
 
@@ -8943,7 +8941,7 @@ const Kanji992Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凟';
+    content: "凟";
   }
 `;
 
@@ -8952,7 +8950,7 @@ const Kanji993Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '几';
+    content: "几";
   }
 `;
 
@@ -8961,7 +8959,7 @@ const Kanji994Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凡';
+    content: "凡";
   }
 `;
 
@@ -8970,7 +8968,7 @@ const Kanji995Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凢';
+    content: "凢";
   }
 `;
 
@@ -8979,7 +8977,7 @@ const Kanji996Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凣';
+    content: "凣";
   }
 `;
 
@@ -8988,7 +8986,7 @@ const Kanji997Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凤';
+    content: "凤";
   }
 `;
 
@@ -8997,7 +8995,7 @@ const Kanji998Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凥';
+    content: "凥";
   }
 `;
 
@@ -9006,7 +9004,7 @@ const Kanji999Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '処';
+    content: "処";
   }
 `;
 
@@ -9015,7 +9013,7 @@ const Kanji1000Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凧';
+    content: "凧";
   }
 `;
 
@@ -9024,7 +9022,7 @@ const Kanji1001Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凨';
+    content: "凨";
   }
 `;
 
@@ -9033,7 +9031,7 @@ const Kanji1002Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凩';
+    content: "凩";
   }
 `;
 
@@ -9042,7 +9040,7 @@ const Kanji1003Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凪';
+    content: "凪";
   }
 `;
 
@@ -9051,7 +9049,7 @@ const Kanji1004Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凫';
+    content: "凫";
   }
 `;
 
@@ -9060,7 +9058,7 @@ const Kanji1005Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凬';
+    content: "凬";
   }
 `;
 
@@ -9069,7 +9067,7 @@ const Kanji1006Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凭';
+    content: "凭";
   }
 `;
 
@@ -9078,7 +9076,7 @@ const Kanji1007Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凮';
+    content: "凮";
   }
 `;
 
@@ -9087,7 +9085,7 @@ const Kanji1008Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凯';
+    content: "凯";
   }
 `;
 
@@ -9096,7 +9094,7 @@ const Kanji1009Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凰';
+    content: "凰";
   }
 `;
 
@@ -9105,7 +9103,7 @@ const Kanji1010Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凱';
+    content: "凱";
   }
 `;
 
@@ -9114,7 +9112,7 @@ const Kanji1011Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凲';
+    content: "凲";
   }
 `;
 
@@ -9123,7 +9121,7 @@ const Kanji1012Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凳';
+    content: "凳";
   }
 `;
 
@@ -9132,7 +9130,7 @@ const Kanji1013Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凴';
+    content: "凴";
   }
 `;
 
@@ -9141,7 +9139,7 @@ const Kanji1014Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凵';
+    content: "凵";
   }
 `;
 
@@ -9150,7 +9148,7 @@ const Kanji1015Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凶';
+    content: "凶";
   }
 `;
 
@@ -9159,7 +9157,7 @@ const Kanji1016Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凷';
+    content: "凷";
   }
 `;
 
@@ -9168,7 +9166,7 @@ const Kanji1017Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凸';
+    content: "凸";
   }
 `;
 
@@ -9177,7 +9175,7 @@ const Kanji1018Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凹';
+    content: "凹";
   }
 `;
 
@@ -9186,7 +9184,7 @@ const Kanji1019Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '出';
+    content: "出";
   }
 `;
 
@@ -9195,7 +9193,7 @@ const Kanji1020Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '击';
+    content: "击";
   }
 `;
 
@@ -9204,7 +9202,7 @@ const Kanji1021Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凼';
+    content: "凼";
   }
 `;
 
@@ -9213,7 +9211,7 @@ const Kanji1022Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '函';
+    content: "函";
   }
 `;
 
@@ -9222,7 +9220,7 @@ const Kanji1023Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凾';
+    content: "凾";
   }
 `;
 
@@ -9231,7 +9229,7 @@ const Kanji1024Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '凿';
+    content: "凿";
   }
 `;
 
@@ -9240,7 +9238,7 @@ const Kanji1025Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刀';
+    content: "刀";
   }
 `;
 
@@ -9249,7 +9247,7 @@ const Kanji1026Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刁';
+    content: "刁";
   }
 `;
 
@@ -9258,7 +9256,7 @@ const Kanji1027Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刂';
+    content: "刂";
   }
 `;
 
@@ -9267,7 +9265,7 @@ const Kanji1028Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刃';
+    content: "刃";
   }
 `;
 
@@ -9276,7 +9274,7 @@ const Kanji1029Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刄';
+    content: "刄";
   }
 `;
 
@@ -9285,7 +9283,7 @@ const Kanji1030Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刅';
+    content: "刅";
   }
 `;
 
@@ -9294,7 +9292,7 @@ const Kanji1031Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '分';
+    content: "分";
   }
 `;
 
@@ -9303,7 +9301,7 @@ const Kanji1032Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '切';
+    content: "切";
   }
 `;
 
@@ -9312,7 +9310,7 @@ const Kanji1033Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刈';
+    content: "刈";
   }
 `;
 
@@ -9321,7 +9319,7 @@ const Kanji1034Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刉';
+    content: "刉";
   }
 `;
 
@@ -9330,7 +9328,7 @@ const Kanji1035Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刊';
+    content: "刊";
   }
 `;
 
@@ -9339,7 +9337,7 @@ const Kanji1036Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刋';
+    content: "刋";
   }
 `;
 
@@ -9348,7 +9346,7 @@ const Kanji1037Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刌';
+    content: "刌";
   }
 `;
 
@@ -9357,7 +9355,7 @@ const Kanji1038Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刍';
+    content: "刍";
   }
 `;
 
@@ -9366,7 +9364,7 @@ const Kanji1039Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刎';
+    content: "刎";
   }
 `;
 
@@ -9375,7 +9373,7 @@ const Kanji1040Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刏';
+    content: "刏";
   }
 `;
 
@@ -9384,7 +9382,7 @@ const Kanji1041Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刐';
+    content: "刐";
   }
 `;
 
@@ -9393,7 +9391,7 @@ const Kanji1042Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刑';
+    content: "刑";
   }
 `;
 
@@ -9402,7 +9400,7 @@ const Kanji1043Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '划';
+    content: "划";
   }
 `;
 
@@ -9411,7 +9409,7 @@ const Kanji1044Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刓';
+    content: "刓";
   }
 `;
 
@@ -9420,7 +9418,7 @@ const Kanji1045Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刔';
+    content: "刔";
   }
 `;
 
@@ -9429,7 +9427,7 @@ const Kanji1046Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刕';
+    content: "刕";
   }
 `;
 
@@ -9438,7 +9436,7 @@ const Kanji1047Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刖';
+    content: "刖";
   }
 `;
 
@@ -9447,7 +9445,7 @@ const Kanji1048Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '列';
+    content: "列";
   }
 `;
 
@@ -9456,7 +9454,7 @@ const Kanji1049Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刘';
+    content: "刘";
   }
 `;
 
@@ -9465,7 +9463,7 @@ const Kanji1050Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '则';
+    content: "则";
   }
 `;
 
@@ -9474,7 +9472,7 @@ const Kanji1051Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刚';
+    content: "刚";
   }
 `;
 
@@ -9483,7 +9481,7 @@ const Kanji1052Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '创';
+    content: "创";
   }
 `;
 
@@ -9492,7 +9490,7 @@ const Kanji1053Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刜';
+    content: "刜";
   }
 `;
 
@@ -9501,7 +9499,7 @@ const Kanji1054Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '初';
+    content: "初";
   }
 `;
 
@@ -9510,7 +9508,7 @@ const Kanji1055Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刞';
+    content: "刞";
   }
 `;
 
@@ -9519,7 +9517,7 @@ const Kanji1056Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刟';
+    content: "刟";
   }
 `;
 
@@ -9528,7 +9526,7 @@ const Kanji1057Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '删';
+    content: "删";
   }
 `;
 
@@ -9537,7 +9535,7 @@ const Kanji1058Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刡';
+    content: "刡";
   }
 `;
 
@@ -9546,7 +9544,7 @@ const Kanji1059Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刢';
+    content: "刢";
   }
 `;
 
@@ -9555,7 +9553,7 @@ const Kanji1060Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刣';
+    content: "刣";
   }
 `;
 
@@ -9564,7 +9562,7 @@ const Kanji1061Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '判';
+    content: "判";
   }
 `;
 
@@ -9573,7 +9571,7 @@ const Kanji1062Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '別';
+    content: "別";
   }
 `;
 
@@ -9582,7 +9580,7 @@ const Kanji1063Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刦';
+    content: "刦";
   }
 `;
 
@@ -9591,7 +9589,7 @@ const Kanji1064Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刧';
+    content: "刧";
   }
 `;
 
@@ -9600,7 +9598,7 @@ const Kanji1065Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刨';
+    content: "刨";
   }
 `;
 
@@ -9609,7 +9607,7 @@ const Kanji1066Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '利';
+    content: "利";
   }
 `;
 
@@ -9618,7 +9616,7 @@ const Kanji1067Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刪';
+    content: "刪";
   }
 `;
 
@@ -9627,7 +9625,7 @@ const Kanji1068Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '别';
+    content: "别";
   }
 `;
 
@@ -9636,7 +9634,7 @@ const Kanji1069Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刬';
+    content: "刬";
   }
 `;
 
@@ -9645,7 +9643,7 @@ const Kanji1070Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刭';
+    content: "刭";
   }
 `;
 
@@ -9654,7 +9652,7 @@ const Kanji1071Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刮';
+    content: "刮";
   }
 `;
 
@@ -9663,7 +9661,7 @@ const Kanji1072Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刯';
+    content: "刯";
   }
 `;
 
@@ -9672,7 +9670,7 @@ const Kanji1073Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '到';
+    content: "到";
   }
 `;
 
@@ -9681,7 +9679,7 @@ const Kanji1074Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刱';
+    content: "刱";
   }
 `;
 
@@ -9690,7 +9688,7 @@ const Kanji1075Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刲';
+    content: "刲";
   }
 `;
 
@@ -9699,7 +9697,7 @@ const Kanji1076Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刳';
+    content: "刳";
   }
 `;
 
@@ -9708,7 +9706,7 @@ const Kanji1077Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刴';
+    content: "刴";
   }
 `;
 
@@ -9717,7 +9715,7 @@ const Kanji1078Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刵';
+    content: "刵";
   }
 `;
 
@@ -9726,7 +9724,7 @@ const Kanji1079Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '制';
+    content: "制";
   }
 `;
 
@@ -9735,7 +9733,7 @@ const Kanji1080Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刷';
+    content: "刷";
   }
 `;
 
@@ -9744,7 +9742,7 @@ const Kanji1081Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '券';
+    content: "券";
   }
 `;
 
@@ -9753,7 +9751,7 @@ const Kanji1082Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刹';
+    content: "刹";
   }
 `;
 
@@ -9762,7 +9760,7 @@ const Kanji1083Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刺';
+    content: "刺";
   }
 `;
 
@@ -9771,7 +9769,7 @@ const Kanji1084Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刻';
+    content: "刻";
   }
 `;
 
@@ -9780,7 +9778,7 @@ const Kanji1085Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刼';
+    content: "刼";
   }
 `;
 
@@ -9789,7 +9787,7 @@ const Kanji1086Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刽';
+    content: "刽";
   }
 `;
 
@@ -9798,7 +9796,7 @@ const Kanji1087Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刾';
+    content: "刾";
   }
 `;
 
@@ -9807,7 +9805,7 @@ const Kanji1088Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '刿';
+    content: "刿";
   }
 `;
 
@@ -9816,7 +9814,7 @@ const Kanji1089Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剀';
+    content: "剀";
   }
 `;
 
@@ -9825,7 +9823,7 @@ const Kanji1090Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剁';
+    content: "剁";
   }
 `;
 
@@ -9834,7 +9832,7 @@ const Kanji1091Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剂';
+    content: "剂";
   }
 `;
 
@@ -9843,7 +9841,7 @@ const Kanji1092Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剃';
+    content: "剃";
   }
 `;
 
@@ -9852,7 +9850,7 @@ const Kanji1093Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剄';
+    content: "剄";
   }
 `;
 
@@ -9861,7 +9859,7 @@ const Kanji1094Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剅';
+    content: "剅";
   }
 `;
 
@@ -9870,7 +9868,7 @@ const Kanji1095Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剆';
+    content: "剆";
   }
 `;
 
@@ -9879,7 +9877,7 @@ const Kanji1096Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '則';
+    content: "則";
   }
 `;
 
@@ -9888,7 +9886,7 @@ const Kanji1097Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剈';
+    content: "剈";
   }
 `;
 
@@ -9897,7 +9895,7 @@ const Kanji1098Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剉';
+    content: "剉";
   }
 `;
 
@@ -9906,7 +9904,7 @@ const Kanji1099Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '削';
+    content: "削";
   }
 `;
 
@@ -9915,7 +9913,7 @@ const Kanji1100Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剋';
+    content: "剋";
   }
 `;
 
@@ -9924,7 +9922,7 @@ const Kanji1101Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剌';
+    content: "剌";
   }
 `;
 
@@ -9933,7 +9931,7 @@ const Kanji1102Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '前';
+    content: "前";
   }
 `;
 
@@ -9942,7 +9940,7 @@ const Kanji1103Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剎';
+    content: "剎";
   }
 `;
 
@@ -9951,7 +9949,7 @@ const Kanji1104Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剏';
+    content: "剏";
   }
 `;
 
@@ -9960,7 +9958,7 @@ const Kanji1105Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剐';
+    content: "剐";
   }
 `;
 
@@ -9969,7 +9967,7 @@ const Kanji1106Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剑';
+    content: "剑";
   }
 `;
 
@@ -9978,7 +9976,7 @@ const Kanji1107Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剒';
+    content: "剒";
   }
 `;
 
@@ -9987,7 +9985,7 @@ const Kanji1108Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剓';
+    content: "剓";
   }
 `;
 
@@ -9996,7 +9994,7 @@ const Kanji1109Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剔';
+    content: "剔";
   }
 `;
 
@@ -10005,7 +10003,7 @@ const Kanji1110Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剕';
+    content: "剕";
   }
 `;
 
@@ -10014,7 +10012,7 @@ const Kanji1111Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剖';
+    content: "剖";
   }
 `;
 
@@ -10023,7 +10021,7 @@ const Kanji1112Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剗';
+    content: "剗";
   }
 `;
 
@@ -10032,7 +10030,7 @@ const Kanji1113Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剘';
+    content: "剘";
   }
 `;
 
@@ -10041,7 +10039,7 @@ const Kanji1114Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剙';
+    content: "剙";
   }
 `;
 
@@ -10050,7 +10048,7 @@ const Kanji1115Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剚';
+    content: "剚";
   }
 `;
 
@@ -10059,7 +10057,7 @@ const Kanji1116Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剛';
+    content: "剛";
   }
 `;
 
@@ -10068,7 +10066,7 @@ const Kanji1117Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剜';
+    content: "剜";
   }
 `;
 
@@ -10077,7 +10075,7 @@ const Kanji1118Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剝';
+    content: "剝";
   }
 `;
 
@@ -10086,7 +10084,7 @@ const Kanji1119Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剞';
+    content: "剞";
   }
 `;
 
@@ -10095,7 +10093,7 @@ const Kanji1120Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剟';
+    content: "剟";
   }
 `;
 
@@ -10104,7 +10102,7 @@ const Kanji1121Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剠';
+    content: "剠";
   }
 `;
 
@@ -10113,7 +10111,7 @@ const Kanji1122Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剡';
+    content: "剡";
   }
 `;
 
@@ -10122,7 +10120,7 @@ const Kanji1123Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剢';
+    content: "剢";
   }
 `;
 
@@ -10131,7 +10129,7 @@ const Kanji1124Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剣';
+    content: "剣";
   }
 `;
 
@@ -10140,7 +10138,7 @@ const Kanji1125Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剤';
+    content: "剤";
   }
 `;
 
@@ -10149,7 +10147,7 @@ const Kanji1126Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剥';
+    content: "剥";
   }
 `;
 
@@ -10158,7 +10156,7 @@ const Kanji1127Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剦';
+    content: "剦";
   }
 `;
 
@@ -10167,7 +10165,7 @@ const Kanji1128Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剧';
+    content: "剧";
   }
 `;
 
@@ -10176,7 +10174,7 @@ const Kanji1129Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剨';
+    content: "剨";
   }
 `;
 
@@ -10185,7 +10183,7 @@ const Kanji1130Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剩';
+    content: "剩";
   }
 `;
 
@@ -10194,7 +10192,7 @@ const Kanji1131Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剪';
+    content: "剪";
   }
 `;
 
@@ -10203,7 +10201,7 @@ const Kanji1132Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剫';
+    content: "剫";
   }
 `;
 
@@ -10212,7 +10210,7 @@ const Kanji1133Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剬';
+    content: "剬";
   }
 `;
 
@@ -10221,7 +10219,7 @@ const Kanji1134Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剭';
+    content: "剭";
   }
 `;
 
@@ -10230,7 +10228,7 @@ const Kanji1135Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剮';
+    content: "剮";
   }
 `;
 
@@ -10239,7 +10237,7 @@ const Kanji1136Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '副';
+    content: "副";
   }
 `;
 
@@ -10248,7 +10246,7 @@ const Kanji1137Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剰';
+    content: "剰";
   }
 `;
 
@@ -10257,7 +10255,7 @@ const Kanji1138Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剱';
+    content: "剱";
   }
 `;
 
@@ -10266,7 +10264,7 @@ const Kanji1139Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '割';
+    content: "割";
   }
 `;
 
@@ -10275,7 +10273,7 @@ const Kanji1140Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剳';
+    content: "剳";
   }
 `;
 
@@ -10284,7 +10282,7 @@ const Kanji1141Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剴';
+    content: "剴";
   }
 `;
 
@@ -10293,7 +10291,7 @@ const Kanji1142Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '創';
+    content: "創";
   }
 `;
 
@@ -10302,7 +10300,7 @@ const Kanji1143Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剶';
+    content: "剶";
   }
 `;
 
@@ -10311,7 +10309,7 @@ const Kanji1144Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剷';
+    content: "剷";
   }
 `;
 
@@ -10320,7 +10318,7 @@ const Kanji1145Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剸';
+    content: "剸";
   }
 `;
 
@@ -10329,7 +10327,7 @@ const Kanji1146Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剹';
+    content: "剹";
   }
 `;
 
@@ -10338,7 +10336,7 @@ const Kanji1147Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剺';
+    content: "剺";
   }
 `;
 
@@ -10347,7 +10345,7 @@ const Kanji1148Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剻';
+    content: "剻";
   }
 `;
 
@@ -10356,7 +10354,7 @@ const Kanji1149Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剼';
+    content: "剼";
   }
 `;
 
@@ -10365,7 +10363,7 @@ const Kanji1150Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剽';
+    content: "剽";
   }
 `;
 
@@ -10374,7 +10372,7 @@ const Kanji1151Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剾';
+    content: "剾";
   }
 `;
 
@@ -10383,7 +10381,7 @@ const Kanji1152Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '剿';
+    content: "剿";
   }
 `;
 
@@ -10392,7 +10390,7 @@ const Kanji1153Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劀';
+    content: "劀";
   }
 `;
 
@@ -10401,7 +10399,7 @@ const Kanji1154Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劁';
+    content: "劁";
   }
 `;
 
@@ -10410,7 +10408,7 @@ const Kanji1155Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劂';
+    content: "劂";
   }
 `;
 
@@ -10419,7 +10417,7 @@ const Kanji1156Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劃';
+    content: "劃";
   }
 `;
 
@@ -10428,7 +10426,7 @@ const Kanji1157Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劄';
+    content: "劄";
   }
 `;
 
@@ -10437,7 +10435,7 @@ const Kanji1158Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劅';
+    content: "劅";
   }
 `;
 
@@ -10446,7 +10444,7 @@ const Kanji1159Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劆';
+    content: "劆";
   }
 `;
 
@@ -10455,7 +10453,7 @@ const Kanji1160Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劇';
+    content: "劇";
   }
 `;
 
@@ -10464,7 +10462,7 @@ const Kanji1161Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劈';
+    content: "劈";
   }
 `;
 
@@ -10473,7 +10471,7 @@ const Kanji1162Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劉';
+    content: "劉";
   }
 `;
 
@@ -10482,7 +10480,7 @@ const Kanji1163Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劊';
+    content: "劊";
   }
 `;
 
@@ -10491,7 +10489,7 @@ const Kanji1164Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劋';
+    content: "劋";
   }
 `;
 
@@ -10500,7 +10498,7 @@ const Kanji1165Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劌';
+    content: "劌";
   }
 `;
 
@@ -10509,7 +10507,7 @@ const Kanji1166Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劍';
+    content: "劍";
   }
 `;
 
@@ -10518,7 +10516,7 @@ const Kanji1167Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劎';
+    content: "劎";
   }
 `;
 
@@ -10527,7 +10525,7 @@ const Kanji1168Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劏';
+    content: "劏";
   }
 `;
 
@@ -10536,7 +10534,7 @@ const Kanji1169Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劐';
+    content: "劐";
   }
 `;
 
@@ -10545,7 +10543,7 @@ const Kanji1170Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劑';
+    content: "劑";
   }
 `;
 
@@ -10554,7 +10552,7 @@ const Kanji1171Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劒';
+    content: "劒";
   }
 `;
 
@@ -10563,7 +10561,7 @@ const Kanji1172Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劓';
+    content: "劓";
   }
 `;
 
@@ -10572,7 +10570,7 @@ const Kanji1173Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劔';
+    content: "劔";
   }
 `;
 
@@ -10581,7 +10579,7 @@ const Kanji1174Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劕';
+    content: "劕";
   }
 `;
 
@@ -10590,7 +10588,7 @@ const Kanji1175Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劖';
+    content: "劖";
   }
 `;
 
@@ -10599,7 +10597,7 @@ const Kanji1176Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劗';
+    content: "劗";
   }
 `;
 
@@ -10608,7 +10606,7 @@ const Kanji1177Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劘';
+    content: "劘";
   }
 `;
 
@@ -10617,7 +10615,7 @@ const Kanji1178Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劙';
+    content: "劙";
   }
 `;
 
@@ -10626,7 +10624,7 @@ const Kanji1179Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劚';
+    content: "劚";
   }
 `;
 
@@ -10635,7 +10633,7 @@ const Kanji1180Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '力';
+    content: "力";
   }
 `;
 
@@ -10644,7 +10642,7 @@ const Kanji1181Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劜';
+    content: "劜";
   }
 `;
 
@@ -10653,7 +10651,7 @@ const Kanji1182Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劝';
+    content: "劝";
   }
 `;
 
@@ -10662,7 +10660,7 @@ const Kanji1183Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '办';
+    content: "办";
   }
 `;
 
@@ -10671,7 +10669,7 @@ const Kanji1184Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '功';
+    content: "功";
   }
 `;
 
@@ -10680,7 +10678,7 @@ const Kanji1185Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '加';
+    content: "加";
   }
 `;
 
@@ -10689,7 +10687,7 @@ const Kanji1186Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '务';
+    content: "务";
   }
 `;
 
@@ -10698,7 +10696,7 @@ const Kanji1187Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劢';
+    content: "劢";
   }
 `;
 
@@ -10707,7 +10705,7 @@ const Kanji1188Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劣';
+    content: "劣";
   }
 `;
 
@@ -10716,7 +10714,7 @@ const Kanji1189Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劤';
+    content: "劤";
   }
 `;
 
@@ -10725,7 +10723,7 @@ const Kanji1190Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劥';
+    content: "劥";
   }
 `;
 
@@ -10734,7 +10732,7 @@ const Kanji1191Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劦';
+    content: "劦";
   }
 `;
 
@@ -10743,7 +10741,7 @@ const Kanji1192Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劧';
+    content: "劧";
   }
 `;
 
@@ -10752,7 +10750,7 @@ const Kanji1193Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '动';
+    content: "动";
   }
 `;
 
@@ -10761,7 +10759,7 @@ const Kanji1194Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '助';
+    content: "助";
   }
 `;
 
@@ -10770,7 +10768,7 @@ const Kanji1195Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '努';
+    content: "努";
   }
 `;
 
@@ -10779,7 +10777,7 @@ const Kanji1196Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劫';
+    content: "劫";
   }
 `;
 
@@ -10788,7 +10786,7 @@ const Kanji1197Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劬';
+    content: "劬";
   }
 `;
 
@@ -10797,7 +10795,7 @@ const Kanji1198Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劭';
+    content: "劭";
   }
 `;
 
@@ -10806,7 +10804,7 @@ const Kanji1199Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劮';
+    content: "劮";
   }
 `;
 
@@ -10815,7 +10813,7 @@ const Kanji1200Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劯';
+    content: "劯";
   }
 `;
 
@@ -10824,7 +10822,7 @@ const Kanji1201Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劰';
+    content: "劰";
   }
 `;
 
@@ -10833,7 +10831,7 @@ const Kanji1202Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '励';
+    content: "励";
   }
 `;
 
@@ -10842,7 +10840,7 @@ const Kanji1203Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劲';
+    content: "劲";
   }
 `;
 
@@ -10851,7 +10849,7 @@ const Kanji1204Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劳';
+    content: "劳";
   }
 `;
 
@@ -10860,7 +10858,7 @@ const Kanji1205Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '労';
+    content: "労";
   }
 `;
 
@@ -10869,7 +10867,7 @@ const Kanji1206Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劵';
+    content: "劵";
   }
 `;
 
@@ -10878,7 +10876,7 @@ const Kanji1207Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劶';
+    content: "劶";
   }
 `;
 
@@ -10887,7 +10885,7 @@ const Kanji1208Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劷';
+    content: "劷";
   }
 `;
 
@@ -10896,7 +10894,7 @@ const Kanji1209Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劸';
+    content: "劸";
   }
 `;
 
@@ -10905,7 +10903,7 @@ const Kanji1210Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '効';
+    content: "効";
   }
 `;
 
@@ -10914,7 +10912,7 @@ const Kanji1211Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劺';
+    content: "劺";
   }
 `;
 
@@ -10923,7 +10921,7 @@ const Kanji1212Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劻';
+    content: "劻";
   }
 `;
 
@@ -10932,7 +10930,7 @@ const Kanji1213Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劼';
+    content: "劼";
   }
 `;
 
@@ -10941,7 +10939,7 @@ const Kanji1214Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劽';
+    content: "劽";
   }
 `;
 
@@ -10950,7 +10948,7 @@ const Kanji1215Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '劾';
+    content: "劾";
   }
 `;
 
@@ -10959,7 +10957,7 @@ const Kanji1216Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '势';
+    content: "势";
   }
 `;
 
@@ -10968,7 +10966,7 @@ const Kanji1217Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勀';
+    content: "勀";
   }
 `;
 
@@ -10977,7 +10975,7 @@ const Kanji1218Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勁';
+    content: "勁";
   }
 `;
 
@@ -10986,7 +10984,7 @@ const Kanji1219Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勂';
+    content: "勂";
   }
 `;
 
@@ -10995,7 +10993,7 @@ const Kanji1220Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勃';
+    content: "勃";
   }
 `;
 
@@ -11004,7 +11002,7 @@ const Kanji1221Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勄';
+    content: "勄";
   }
 `;
 
@@ -11013,7 +11011,7 @@ const Kanji1222Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勅';
+    content: "勅";
   }
 `;
 
@@ -11022,7 +11020,7 @@ const Kanji1223Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勆';
+    content: "勆";
   }
 `;
 
@@ -11031,7 +11029,7 @@ const Kanji1224Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勇';
+    content: "勇";
   }
 `;
 
@@ -11040,7 +11038,7 @@ const Kanji1225Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勈';
+    content: "勈";
   }
 `;
 
@@ -11049,7 +11047,7 @@ const Kanji1226Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勉';
+    content: "勉";
   }
 `;
 
@@ -11058,7 +11056,7 @@ const Kanji1227Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勊';
+    content: "勊";
   }
 `;
 
@@ -11067,7 +11065,7 @@ const Kanji1228Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勋';
+    content: "勋";
   }
 `;
 
@@ -11076,7 +11074,7 @@ const Kanji1229Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勌';
+    content: "勌";
   }
 `;
 
@@ -11085,7 +11083,7 @@ const Kanji1230Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勍';
+    content: "勍";
   }
 `;
 
@@ -11094,7 +11092,7 @@ const Kanji1231Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勎';
+    content: "勎";
   }
 `;
 
@@ -11103,7 +11101,7 @@ const Kanji1232Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勏';
+    content: "勏";
   }
 `;
 
@@ -11112,7 +11110,7 @@ const Kanji1233Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勐';
+    content: "勐";
   }
 `;
 
@@ -11121,7 +11119,7 @@ const Kanji1234Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勑';
+    content: "勑";
   }
 `;
 
@@ -11130,7 +11128,7 @@ const Kanji1235Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勒';
+    content: "勒";
   }
 `;
 
@@ -11139,7 +11137,7 @@ const Kanji1236Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勓';
+    content: "勓";
   }
 `;
 
@@ -11148,7 +11146,7 @@ const Kanji1237Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勔';
+    content: "勔";
   }
 `;
 
@@ -11157,7 +11155,7 @@ const Kanji1238Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '動';
+    content: "動";
   }
 `;
 
@@ -11166,7 +11164,7 @@ const Kanji1239Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勖';
+    content: "勖";
   }
 `;
 
@@ -11175,7 +11173,7 @@ const Kanji1240Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勗';
+    content: "勗";
   }
 `;
 
@@ -11184,7 +11182,7 @@ const Kanji1241Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勘';
+    content: "勘";
   }
 `;
 
@@ -11193,7 +11191,7 @@ const Kanji1242Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '務';
+    content: "務";
   }
 `;
 
@@ -11202,7 +11200,7 @@ const Kanji1243Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勚';
+    content: "勚";
   }
 `;
 
@@ -11211,7 +11209,7 @@ const Kanji1244Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勛';
+    content: "勛";
   }
 `;
 
@@ -11220,7 +11218,7 @@ const Kanji1245Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勜';
+    content: "勜";
   }
 `;
 
@@ -11229,7 +11227,7 @@ const Kanji1246Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勝';
+    content: "勝";
   }
 `;
 
@@ -11238,7 +11236,7 @@ const Kanji1247Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勞';
+    content: "勞";
   }
 `;
 
@@ -11247,7 +11245,7 @@ const Kanji1248Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '募';
+    content: "募";
   }
 `;
 
@@ -11256,7 +11254,7 @@ const Kanji1249Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勠';
+    content: "勠";
   }
 `;
 
@@ -11265,7 +11263,7 @@ const Kanji1250Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勡';
+    content: "勡";
   }
 `;
 
@@ -11274,7 +11272,7 @@ const Kanji1251Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勢';
+    content: "勢";
   }
 `;
 
@@ -11283,7 +11281,7 @@ const Kanji1252Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勣';
+    content: "勣";
   }
 `;
 
@@ -11292,7 +11290,7 @@ const Kanji1253Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勤';
+    content: "勤";
   }
 `;
 
@@ -11301,7 +11299,7 @@ const Kanji1254Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勥';
+    content: "勥";
   }
 `;
 
@@ -11310,7 +11308,7 @@ const Kanji1255Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勦';
+    content: "勦";
   }
 `;
 
@@ -11319,7 +11317,7 @@ const Kanji1256Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勧';
+    content: "勧";
   }
 `;
 
@@ -11328,7 +11326,7 @@ const Kanji1257Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勨';
+    content: "勨";
   }
 `;
 
@@ -11337,7 +11335,7 @@ const Kanji1258Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勩';
+    content: "勩";
   }
 `;
 
@@ -11346,7 +11344,7 @@ const Kanji1259Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勪';
+    content: "勪";
   }
 `;
 
@@ -11355,7 +11353,7 @@ const Kanji1260Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勫';
+    content: "勫";
   }
 `;
 
@@ -11364,7 +11362,7 @@ const Kanji1261Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勬';
+    content: "勬";
   }
 `;
 
@@ -11373,7 +11371,7 @@ const Kanji1262Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勭';
+    content: "勭";
   }
 `;
 
@@ -11382,7 +11380,7 @@ const Kanji1263Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勮';
+    content: "勮";
   }
 `;
 
@@ -11391,7 +11389,7 @@ const Kanji1264Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勯';
+    content: "勯";
   }
 `;
 
@@ -11400,7 +11398,7 @@ const Kanji1265Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勰';
+    content: "勰";
   }
 `;
 
@@ -11409,7 +11407,7 @@ const Kanji1266Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勱';
+    content: "勱";
   }
 `;
 
@@ -11418,7 +11416,7 @@ const Kanji1267Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勲';
+    content: "勲";
   }
 `;
 
@@ -11427,7 +11425,7 @@ const Kanji1268Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勳';
+    content: "勳";
   }
 `;
 
@@ -11436,7 +11434,7 @@ const Kanji1269Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勴';
+    content: "勴";
   }
 `;
 
@@ -11445,7 +11443,7 @@ const Kanji1270Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勵';
+    content: "勵";
   }
 `;
 
@@ -11454,7 +11452,7 @@ const Kanji1271Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勶';
+    content: "勶";
   }
 `;
 
@@ -11463,7 +11461,7 @@ const Kanji1272Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勷';
+    content: "勷";
   }
 `;
 
@@ -11472,7 +11470,7 @@ const Kanji1273Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勸';
+    content: "勸";
   }
 `;
 
@@ -11481,7 +11479,7 @@ const Kanji1274Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勹';
+    content: "勹";
   }
 `;
 
@@ -11490,7 +11488,7 @@ const Kanji1275Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勺';
+    content: "勺";
   }
 `;
 
@@ -11499,7 +11497,7 @@ const Kanji1276Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勻';
+    content: "勻";
   }
 `;
 
@@ -11508,7 +11506,7 @@ const Kanji1277Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勼';
+    content: "勼";
   }
 `;
 
@@ -11517,7 +11515,7 @@ const Kanji1278Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勽';
+    content: "勽";
   }
 `;
 
@@ -11526,7 +11524,7 @@ const Kanji1279Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勾';
+    content: "勾";
   }
 `;
 
@@ -11535,7 +11533,7 @@ const Kanji1280Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '勿';
+    content: "勿";
   }
 `;
 
@@ -11544,7 +11542,7 @@ const Kanji1281Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匀';
+    content: "匀";
   }
 `;
 
@@ -11553,7 +11551,7 @@ const Kanji1282Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匁';
+    content: "匁";
   }
 `;
 
@@ -11562,7 +11560,7 @@ const Kanji1283Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匂';
+    content: "匂";
   }
 `;
 
@@ -11571,7 +11569,7 @@ const Kanji1284Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匃';
+    content: "匃";
   }
 `;
 
@@ -11580,7 +11578,7 @@ const Kanji1285Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匄';
+    content: "匄";
   }
 `;
 
@@ -11589,7 +11587,7 @@ const Kanji1286Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '包';
+    content: "包";
   }
 `;
 
@@ -11598,7 +11596,7 @@ const Kanji1287Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匆';
+    content: "匆";
   }
 `;
 
@@ -11607,7 +11605,7 @@ const Kanji1288Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匇';
+    content: "匇";
   }
 `;
 
@@ -11616,7 +11614,7 @@ const Kanji1289Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匈';
+    content: "匈";
   }
 `;
 
@@ -11625,7 +11623,7 @@ const Kanji1290Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匉';
+    content: "匉";
   }
 `;
 
@@ -11634,7 +11632,7 @@ const Kanji1291Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匊';
+    content: "匊";
   }
 `;
 
@@ -11643,7 +11641,7 @@ const Kanji1292Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匋';
+    content: "匋";
   }
 `;
 
@@ -11652,7 +11650,7 @@ const Kanji1293Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匌';
+    content: "匌";
   }
 `;
 
@@ -11661,7 +11659,7 @@ const Kanji1294Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匍';
+    content: "匍";
   }
 `;
 
@@ -11670,7 +11668,7 @@ const Kanji1295Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匎';
+    content: "匎";
   }
 `;
 
@@ -11679,7 +11677,7 @@ const Kanji1296Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匏';
+    content: "匏";
   }
 `;
 
@@ -11688,7 +11686,7 @@ const Kanji1297Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匐';
+    content: "匐";
   }
 `;
 
@@ -11697,7 +11695,7 @@ const Kanji1298Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匑';
+    content: "匑";
   }
 `;
 
@@ -11706,7 +11704,7 @@ const Kanji1299Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匒';
+    content: "匒";
   }
 `;
 
@@ -11715,7 +11713,7 @@ const Kanji1300Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匓';
+    content: "匓";
   }
 `;
 
@@ -11724,7 +11722,7 @@ const Kanji1301Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匔';
+    content: "匔";
   }
 `;
 
@@ -11733,7 +11731,7 @@ const Kanji1302Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匕';
+    content: "匕";
   }
 `;
 
@@ -11742,7 +11740,7 @@ const Kanji1303Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '化';
+    content: "化";
   }
 `;
 
@@ -11751,7 +11749,7 @@ const Kanji1304Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '北';
+    content: "北";
   }
 `;
 
@@ -11760,7 +11758,7 @@ const Kanji1305Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匘';
+    content: "匘";
   }
 `;
 
@@ -11769,7 +11767,7 @@ const Kanji1306Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匙';
+    content: "匙";
   }
 `;
 
@@ -11778,7 +11776,7 @@ const Kanji1307Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匚';
+    content: "匚";
   }
 `;
 
@@ -11787,7 +11785,7 @@ const Kanji1308Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匛';
+    content: "匛";
   }
 `;
 
@@ -11796,7 +11794,7 @@ const Kanji1309Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匜';
+    content: "匜";
   }
 `;
 
@@ -11805,7 +11803,7 @@ const Kanji1310Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匝';
+    content: "匝";
   }
 `;
 
@@ -11814,7 +11812,7 @@ const Kanji1311Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匞';
+    content: "匞";
   }
 `;
 
@@ -11823,7 +11821,7 @@ const Kanji1312Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匟';
+    content: "匟";
   }
 `;
 
@@ -11832,7 +11830,7 @@ const Kanji1313Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匠';
+    content: "匠";
   }
 `;
 
@@ -11841,7 +11839,7 @@ const Kanji1314Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匡';
+    content: "匡";
   }
 `;
 
@@ -11850,7 +11848,7 @@ const Kanji1315Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匢';
+    content: "匢";
   }
 `;
 
@@ -11859,7 +11857,7 @@ const Kanji1316Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匣';
+    content: "匣";
   }
 `;
 
@@ -11868,7 +11866,7 @@ const Kanji1317Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匤';
+    content: "匤";
   }
 `;
 
@@ -11877,7 +11875,7 @@ const Kanji1318Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匥';
+    content: "匥";
   }
 `;
 
@@ -11886,7 +11884,7 @@ const Kanji1319Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匦';
+    content: "匦";
   }
 `;
 
@@ -11895,7 +11893,7 @@ const Kanji1320Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匧';
+    content: "匧";
   }
 `;
 
@@ -11904,7 +11902,7 @@ const Kanji1321Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匨';
+    content: "匨";
   }
 `;
 
@@ -11913,7 +11911,7 @@ const Kanji1322Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匩';
+    content: "匩";
   }
 `;
 
@@ -11922,7 +11920,7 @@ const Kanji1323Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匪';
+    content: "匪";
   }
 `;
 
@@ -11931,7 +11929,7 @@ const Kanji1324Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匫';
+    content: "匫";
   }
 `;
 
@@ -11940,7 +11938,7 @@ const Kanji1325Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匬';
+    content: "匬";
   }
 `;
 
@@ -11949,7 +11947,7 @@ const Kanji1326Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匭';
+    content: "匭";
   }
 `;
 
@@ -11958,7 +11956,7 @@ const Kanji1327Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匮';
+    content: "匮";
   }
 `;
 
@@ -11967,7 +11965,7 @@ const Kanji1328Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匯';
+    content: "匯";
   }
 `;
 
@@ -11976,7 +11974,7 @@ const Kanji1329Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匰';
+    content: "匰";
   }
 `;
 
@@ -11985,7 +11983,7 @@ const Kanji1330Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匱';
+    content: "匱";
   }
 `;
 
@@ -11994,7 +11992,7 @@ const Kanji1331Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匲';
+    content: "匲";
   }
 `;
 
@@ -12003,7 +12001,7 @@ const Kanji1332Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匳';
+    content: "匳";
   }
 `;
 
@@ -12012,7 +12010,7 @@ const Kanji1333Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匴';
+    content: "匴";
   }
 `;
 
@@ -12021,7 +12019,7 @@ const Kanji1334Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匵';
+    content: "匵";
   }
 `;
 
@@ -12030,7 +12028,7 @@ const Kanji1335Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匶';
+    content: "匶";
   }
 `;
 
@@ -12039,7 +12037,7 @@ const Kanji1336Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匷';
+    content: "匷";
   }
 `;
 
@@ -12048,7 +12046,7 @@ const Kanji1337Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匸';
+    content: "匸";
   }
 `;
 
@@ -12057,7 +12055,7 @@ const Kanji1338Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匹';
+    content: "匹";
   }
 `;
 
@@ -12066,7 +12064,7 @@ const Kanji1339Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '区';
+    content: "区";
   }
 `;
 
@@ -12075,7 +12073,7 @@ const Kanji1340Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '医';
+    content: "医";
   }
 `;
 
@@ -12084,7 +12082,7 @@ const Kanji1341Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匼';
+    content: "匼";
   }
 `;
 
@@ -12093,7 +12091,7 @@ const Kanji1342Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匽';
+    content: "匽";
   }
 `;
 
@@ -12102,7 +12100,7 @@ const Kanji1343Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匾';
+    content: "匾";
   }
 `;
 
@@ -12111,7 +12109,7 @@ const Kanji1344Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '匿';
+    content: "匿";
   }
 `;
 
@@ -12120,7 +12118,7 @@ const Kanji1345Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '區';
+    content: "區";
   }
 `;
 
@@ -12129,7 +12127,7 @@ const Kanji1346Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '十';
+    content: "十";
   }
 `;
 
@@ -12138,7 +12136,7 @@ const Kanji1347Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卂';
+    content: "卂";
   }
 `;
 
@@ -12147,7 +12145,7 @@ const Kanji1348Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '千';
+    content: "千";
   }
 `;
 
@@ -12156,7 +12154,7 @@ const Kanji1349Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卄';
+    content: "卄";
   }
 `;
 
@@ -12165,7 +12163,7 @@ const Kanji1350Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卅';
+    content: "卅";
   }
 `;
 
@@ -12174,7 +12172,7 @@ const Kanji1351Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卆';
+    content: "卆";
   }
 `;
 
@@ -12183,7 +12181,7 @@ const Kanji1352Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '升';
+    content: "升";
   }
 `;
 
@@ -12192,7 +12190,7 @@ const Kanji1353Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '午';
+    content: "午";
   }
 `;
 
@@ -12201,7 +12199,7 @@ const Kanji1354Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卉';
+    content: "卉";
   }
 `;
 
@@ -12210,7 +12208,7 @@ const Kanji1355Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '半';
+    content: "半";
   }
 `;
 
@@ -12219,7 +12217,7 @@ const Kanji1356Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卋';
+    content: "卋";
   }
 `;
 
@@ -12228,7 +12226,7 @@ const Kanji1357Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卌';
+    content: "卌";
   }
 `;
 
@@ -12237,7 +12235,7 @@ const Kanji1358Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卍';
+    content: "卍";
   }
 `;
 
@@ -12246,7 +12244,7 @@ const Kanji1359Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '华';
+    content: "华";
   }
 `;
 
@@ -12255,7 +12253,7 @@ const Kanji1360Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '协';
+    content: "协";
   }
 `;
 
@@ -12264,7 +12262,7 @@ const Kanji1361Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卐';
+    content: "卐";
   }
 `;
 
@@ -12273,7 +12271,7 @@ const Kanji1362Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卑';
+    content: "卑";
   }
 `;
 
@@ -12282,7 +12280,7 @@ const Kanji1363Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卒';
+    content: "卒";
   }
 `;
 
@@ -12291,7 +12289,7 @@ const Kanji1364Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卓';
+    content: "卓";
   }
 `;
 
@@ -12300,7 +12298,7 @@ const Kanji1365Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '協';
+    content: "協";
   }
 `;
 
@@ -12309,7 +12307,7 @@ const Kanji1366Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '单';
+    content: "单";
   }
 `;
 
@@ -12318,7 +12316,7 @@ const Kanji1367Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卖';
+    content: "卖";
   }
 `;
 
@@ -12327,7 +12325,7 @@ const Kanji1368Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '南';
+    content: "南";
   }
 `;
 
@@ -12336,7 +12334,7 @@ const Kanji1369Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '単';
+    content: "単";
   }
 `;
 
@@ -12345,7 +12343,7 @@ const Kanji1370Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卙';
+    content: "卙";
   }
 `;
 
@@ -12354,7 +12352,7 @@ const Kanji1371Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '博';
+    content: "博";
   }
 `;
 
@@ -12363,7 +12361,7 @@ const Kanji1372Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卛';
+    content: "卛";
   }
 `;
 
@@ -12372,7 +12370,7 @@ const Kanji1373Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卜';
+    content: "卜";
   }
 `;
 
@@ -12381,7 +12379,7 @@ const Kanji1374Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卝';
+    content: "卝";
   }
 `;
 
@@ -12390,7 +12388,7 @@ const Kanji1375Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卞';
+    content: "卞";
   }
 `;
 
@@ -12399,7 +12397,7 @@ const Kanji1376Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卟';
+    content: "卟";
   }
 `;
 
@@ -12408,7 +12406,7 @@ const Kanji1377Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '占';
+    content: "占";
   }
 `;
 
@@ -12417,7 +12415,7 @@ const Kanji1378Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卡';
+    content: "卡";
   }
 `;
 
@@ -12426,7 +12424,7 @@ const Kanji1379Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卢';
+    content: "卢";
   }
 `;
 
@@ -12435,7 +12433,7 @@ const Kanji1380Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卣';
+    content: "卣";
   }
 `;
 
@@ -12444,7 +12442,7 @@ const Kanji1381Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卤';
+    content: "卤";
   }
 `;
 
@@ -12453,7 +12451,7 @@ const Kanji1382Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卥';
+    content: "卥";
   }
 `;
 
@@ -12462,7 +12460,7 @@ const Kanji1383Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卦';
+    content: "卦";
   }
 `;
 
@@ -12471,7 +12469,7 @@ const Kanji1384Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卧';
+    content: "卧";
   }
 `;
 
@@ -12480,7 +12478,7 @@ const Kanji1385Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卨';
+    content: "卨";
   }
 `;
 
@@ -12489,7 +12487,7 @@ const Kanji1386Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卩';
+    content: "卩";
   }
 `;
 
@@ -12498,7 +12496,7 @@ const Kanji1387Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卪';
+    content: "卪";
   }
 `;
 
@@ -12507,7 +12505,7 @@ const Kanji1388Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卫';
+    content: "卫";
   }
 `;
 
@@ -12516,7 +12514,7 @@ const Kanji1389Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卬';
+    content: "卬";
   }
 `;
 
@@ -12525,7 +12523,7 @@ const Kanji1390Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卭';
+    content: "卭";
   }
 `;
 
@@ -12534,7 +12532,7 @@ const Kanji1391Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卮';
+    content: "卮";
   }
 `;
 
@@ -12543,7 +12541,7 @@ const Kanji1392Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卯';
+    content: "卯";
   }
 `;
 
@@ -12552,7 +12550,7 @@ const Kanji1393Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '印';
+    content: "印";
   }
 `;
 
@@ -12561,7 +12559,7 @@ const Kanji1394Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '危';
+    content: "危";
   }
 `;
 
@@ -12570,7 +12568,7 @@ const Kanji1395Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卲';
+    content: "卲";
   }
 `;
 
@@ -12579,7 +12577,7 @@ const Kanji1396Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '即';
+    content: "即";
   }
 `;
 
@@ -12588,7 +12586,7 @@ const Kanji1397Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '却';
+    content: "却";
   }
 `;
 
@@ -12597,7 +12595,7 @@ const Kanji1398Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卵';
+    content: "卵";
   }
 `;
 
@@ -12606,7 +12604,7 @@ const Kanji1399Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卶';
+    content: "卶";
   }
 `;
 
@@ -12615,7 +12613,7 @@ const Kanji1400Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卷';
+    content: "卷";
   }
 `;
 
@@ -12624,7 +12622,7 @@ const Kanji1401Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卸';
+    content: "卸";
   }
 `;
 
@@ -12633,7 +12631,7 @@ const Kanji1402Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卹';
+    content: "卹";
   }
 `;
 
@@ -12642,7 +12640,7 @@ const Kanji1403Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卺';
+    content: "卺";
   }
 `;
 
@@ -12651,7 +12649,7 @@ const Kanji1404Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卻';
+    content: "卻";
   }
 `;
 
@@ -12660,7 +12658,7 @@ const Kanji1405Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卼';
+    content: "卼";
   }
 `;
 
@@ -12669,7 +12667,7 @@ const Kanji1406Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卽';
+    content: "卽";
   }
 `;
 
@@ -12678,7 +12676,7 @@ const Kanji1407Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卾';
+    content: "卾";
   }
 `;
 
@@ -12687,7 +12685,7 @@ const Kanji1408Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '卿';
+    content: "卿";
   }
 `;
 
@@ -12696,7 +12694,7 @@ const Kanji1409Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厀';
+    content: "厀";
   }
 `;
 
@@ -12705,7 +12703,7 @@ const Kanji1410Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厁';
+    content: "厁";
   }
 `;
 
@@ -12714,7 +12712,7 @@ const Kanji1411Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厂';
+    content: "厂";
   }
 `;
 
@@ -12723,7 +12721,7 @@ const Kanji1412Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厃';
+    content: "厃";
   }
 `;
 
@@ -12732,7 +12730,7 @@ const Kanji1413Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厄';
+    content: "厄";
   }
 `;
 
@@ -12741,7 +12739,7 @@ const Kanji1414Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厅';
+    content: "厅";
   }
 `;
 
@@ -12750,7 +12748,7 @@ const Kanji1415Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '历';
+    content: "历";
   }
 `;
 
@@ -12759,7 +12757,7 @@ const Kanji1416Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厇';
+    content: "厇";
   }
 `;
 
@@ -12768,7 +12766,7 @@ const Kanji1417Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厈';
+    content: "厈";
   }
 `;
 
@@ -12777,7 +12775,7 @@ const Kanji1418Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厉';
+    content: "厉";
   }
 `;
 
@@ -12786,7 +12784,7 @@ const Kanji1419Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厊';
+    content: "厊";
   }
 `;
 
@@ -12795,7 +12793,7 @@ const Kanji1420Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '压';
+    content: "压";
   }
 `;
 
@@ -12804,7 +12802,7 @@ const Kanji1421Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厌';
+    content: "厌";
   }
 `;
 
@@ -12813,7 +12811,7 @@ const Kanji1422Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厍';
+    content: "厍";
   }
 `;
 
@@ -12822,7 +12820,7 @@ const Kanji1423Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厎';
+    content: "厎";
   }
 `;
 
@@ -12831,7 +12829,7 @@ const Kanji1424Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厏';
+    content: "厏";
   }
 `;
 
@@ -12840,7 +12838,7 @@ const Kanji1425Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厐';
+    content: "厐";
   }
 `;
 
@@ -12849,7 +12847,7 @@ const Kanji1426Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厑';
+    content: "厑";
   }
 `;
 
@@ -12858,7 +12856,7 @@ const Kanji1427Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厒';
+    content: "厒";
   }
 `;
 
@@ -12867,7 +12865,7 @@ const Kanji1428Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厓';
+    content: "厓";
   }
 `;
 
@@ -12876,7 +12874,7 @@ const Kanji1429Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厔';
+    content: "厔";
   }
 `;
 
@@ -12885,7 +12883,7 @@ const Kanji1430Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厕';
+    content: "厕";
   }
 `;
 
@@ -12894,7 +12892,7 @@ const Kanji1431Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厖';
+    content: "厖";
   }
 `;
 
@@ -12903,7 +12901,7 @@ const Kanji1432Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厗';
+    content: "厗";
   }
 `;
 
@@ -12912,7 +12910,7 @@ const Kanji1433Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厘';
+    content: "厘";
   }
 `;
 
@@ -12921,7 +12919,7 @@ const Kanji1434Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厙';
+    content: "厙";
   }
 `;
 
@@ -12930,7 +12928,7 @@ const Kanji1435Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厚';
+    content: "厚";
   }
 `;
 
@@ -12939,7 +12937,7 @@ const Kanji1436Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厛';
+    content: "厛";
   }
 `;
 
@@ -12948,7 +12946,7 @@ const Kanji1437Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厜';
+    content: "厜";
   }
 `;
 
@@ -12957,7 +12955,7 @@ const Kanji1438Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厝';
+    content: "厝";
   }
 `;
 
@@ -12966,7 +12964,7 @@ const Kanji1439Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厞';
+    content: "厞";
   }
 `;
 
@@ -12975,7 +12973,7 @@ const Kanji1440Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '原';
+    content: "原";
   }
 `;
 
@@ -12984,7 +12982,7 @@ const Kanji1441Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厠';
+    content: "厠";
   }
 `;
 
@@ -12993,7 +12991,7 @@ const Kanji1442Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厡';
+    content: "厡";
   }
 `;
 
@@ -13002,7 +13000,7 @@ const Kanji1443Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厢';
+    content: "厢";
   }
 `;
 
@@ -13011,7 +13009,7 @@ const Kanji1444Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厣';
+    content: "厣";
   }
 `;
 
@@ -13020,7 +13018,7 @@ const Kanji1445Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厤';
+    content: "厤";
   }
 `;
 
@@ -13029,7 +13027,7 @@ const Kanji1446Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厥';
+    content: "厥";
   }
 `;
 
@@ -13038,7 +13036,7 @@ const Kanji1447Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厦';
+    content: "厦";
   }
 `;
 
@@ -13047,7 +13045,7 @@ const Kanji1448Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厧';
+    content: "厧";
   }
 `;
 
@@ -13056,7 +13054,7 @@ const Kanji1449Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厨';
+    content: "厨";
   }
 `;
 
@@ -13065,7 +13063,7 @@ const Kanji1450Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厩';
+    content: "厩";
   }
 `;
 
@@ -13074,7 +13072,7 @@ const Kanji1451Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厪';
+    content: "厪";
   }
 `;
 
@@ -13083,7 +13081,7 @@ const Kanji1452Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厫';
+    content: "厫";
   }
 `;
 
@@ -13092,7 +13090,7 @@ const Kanji1453Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厬';
+    content: "厬";
   }
 `;
 
@@ -13101,7 +13099,7 @@ const Kanji1454Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厭';
+    content: "厭";
   }
 `;
 
@@ -13110,7 +13108,7 @@ const Kanji1455Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厮';
+    content: "厮";
   }
 `;
 
@@ -13119,7 +13117,7 @@ const Kanji1456Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厯';
+    content: "厯";
   }
 `;
 
@@ -13128,7 +13126,7 @@ const Kanji1457Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厰';
+    content: "厰";
   }
 `;
 
@@ -13137,7 +13135,7 @@ const Kanji1458Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厱';
+    content: "厱";
   }
 `;
 
@@ -13146,7 +13144,7 @@ const Kanji1459Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厲';
+    content: "厲";
   }
 `;
 
@@ -13155,7 +13153,7 @@ const Kanji1460Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厳';
+    content: "厳";
   }
 `;
 
@@ -13164,7 +13162,7 @@ const Kanji1461Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厴';
+    content: "厴";
   }
 `;
 
@@ -13173,7 +13171,7 @@ const Kanji1462Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厵';
+    content: "厵";
   }
 `;
 
@@ -13182,7 +13180,7 @@ const Kanji1463Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厶';
+    content: "厶";
   }
 `;
 
@@ -13191,7 +13189,7 @@ const Kanji1464Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厷';
+    content: "厷";
   }
 `;
 
@@ -13200,7 +13198,7 @@ const Kanji1465Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厸';
+    content: "厸";
   }
 `;
 
@@ -13209,7 +13207,7 @@ const Kanji1466Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厹';
+    content: "厹";
   }
 `;
 
@@ -13218,7 +13216,7 @@ const Kanji1467Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厺';
+    content: "厺";
   }
 `;
 
@@ -13227,7 +13225,7 @@ const Kanji1468Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '去';
+    content: "去";
   }
 `;
 
@@ -13236,7 +13234,7 @@ const Kanji1469Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厼';
+    content: "厼";
   }
 `;
 
@@ -13245,7 +13243,7 @@ const Kanji1470Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厽';
+    content: "厽";
   }
 `;
 
@@ -13254,7 +13252,7 @@ const Kanji1471Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '厾';
+    content: "厾";
   }
 `;
 
@@ -13263,7 +13261,7 @@ const Kanji1472Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '县';
+    content: "县";
   }
 `;
 
@@ -13272,7 +13270,7 @@ const Kanji1473Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叀';
+    content: "叀";
   }
 `;
 
@@ -13281,7 +13279,7 @@ const Kanji1474Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叁';
+    content: "叁";
   }
 `;
 
@@ -13290,7 +13288,7 @@ const Kanji1475Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '参';
+    content: "参";
   }
 `;
 
@@ -13299,7 +13297,7 @@ const Kanji1476Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '參';
+    content: "參";
   }
 `;
 
@@ -13308,7 +13306,7 @@ const Kanji1477Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叄';
+    content: "叄";
   }
 `;
 
@@ -13317,7 +13315,7 @@ const Kanji1478Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叅';
+    content: "叅";
   }
 `;
 
@@ -13326,7 +13324,7 @@ const Kanji1479Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叆';
+    content: "叆";
   }
 `;
 
@@ -13335,7 +13333,7 @@ const Kanji1480Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叇';
+    content: "叇";
   }
 `;
 
@@ -13344,7 +13342,7 @@ const Kanji1481Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '又';
+    content: "又";
   }
 `;
 
@@ -13353,7 +13351,7 @@ const Kanji1482Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叉';
+    content: "叉";
   }
 `;
 
@@ -13362,7 +13360,7 @@ const Kanji1483Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '及';
+    content: "及";
   }
 `;
 
@@ -13371,7 +13369,7 @@ const Kanji1484Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '友';
+    content: "友";
   }
 `;
 
@@ -13380,7 +13378,7 @@ const Kanji1485Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '双';
+    content: "双";
   }
 `;
 
@@ -13389,7 +13387,7 @@ const Kanji1486Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '反';
+    content: "反";
   }
 `;
 
@@ -13398,7 +13396,7 @@ const Kanji1487Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '収';
+    content: "収";
   }
 `;
 
@@ -13407,7 +13405,7 @@ const Kanji1488Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叏';
+    content: "叏";
   }
 `;
 
@@ -13416,7 +13414,7 @@ const Kanji1489Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叐';
+    content: "叐";
   }
 `;
 
@@ -13425,7 +13423,7 @@ const Kanji1490Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '发';
+    content: "发";
   }
 `;
 
@@ -13434,7 +13432,7 @@ const Kanji1491Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叒';
+    content: "叒";
   }
 `;
 
@@ -13443,7 +13441,7 @@ const Kanji1492Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叓';
+    content: "叓";
   }
 `;
 
@@ -13452,7 +13450,7 @@ const Kanji1493Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叔';
+    content: "叔";
   }
 `;
 
@@ -13461,7 +13459,7 @@ const Kanji1494Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叕';
+    content: "叕";
   }
 `;
 
@@ -13470,7 +13468,7 @@ const Kanji1495Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '取';
+    content: "取";
   }
 `;
 
@@ -13479,7 +13477,7 @@ const Kanji1496Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '受';
+    content: "受";
   }
 `;
 
@@ -13488,7 +13486,7 @@ const Kanji1497Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '变';
+    content: "变";
   }
 `;
 
@@ -13497,7 +13495,7 @@ const Kanji1498Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叙';
+    content: "叙";
   }
 `;
 
@@ -13506,7 +13504,7 @@ const Kanji1499Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叚';
+    content: "叚";
   }
 `;
 
@@ -13515,7 +13513,7 @@ const Kanji1500Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叛';
+    content: "叛";
   }
 `;
 
@@ -13524,7 +13522,7 @@ const Kanji1501Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叜';
+    content: "叜";
   }
 `;
 
@@ -13533,7 +13531,7 @@ const Kanji1502Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叝';
+    content: "叝";
   }
 `;
 
@@ -13542,7 +13540,7 @@ const Kanji1503Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叞';
+    content: "叞";
   }
 `;
 
@@ -13551,7 +13549,7 @@ const Kanji1504Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叟';
+    content: "叟";
   }
 `;
 
@@ -13560,7 +13558,7 @@ const Kanji1505Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叠';
+    content: "叠";
   }
 `;
 
@@ -13569,7 +13567,7 @@ const Kanji1506Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叡';
+    content: "叡";
   }
 `;
 
@@ -13578,7 +13576,7 @@ const Kanji1507Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叢';
+    content: "叢";
   }
 `;
 
@@ -13587,7 +13585,7 @@ const Kanji1508Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '口';
+    content: "口";
   }
 `;
 
@@ -13596,7 +13594,7 @@ const Kanji1509Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '古';
+    content: "古";
   }
 `;
 
@@ -13605,7 +13603,7 @@ const Kanji1510Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '句';
+    content: "句";
   }
 `;
 
@@ -13614,7 +13612,7 @@ const Kanji1511Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '另';
+    content: "另";
   }
 `;
 
@@ -13623,7 +13621,7 @@ const Kanji1512Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叧';
+    content: "叧";
   }
 `;
 
@@ -13632,7 +13630,7 @@ const Kanji1513Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叨';
+    content: "叨";
   }
 `;
 
@@ -13641,7 +13639,7 @@ const Kanji1514Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叩';
+    content: "叩";
   }
 `;
 
@@ -13650,7 +13648,7 @@ const Kanji1515Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '只';
+    content: "只";
   }
 `;
 
@@ -13659,7 +13657,7 @@ const Kanji1516Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叫';
+    content: "叫";
   }
 `;
 
@@ -13668,7 +13666,7 @@ const Kanji1517Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '召';
+    content: "召";
   }
 `;
 
@@ -13677,7 +13675,7 @@ const Kanji1518Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叭';
+    content: "叭";
   }
 `;
 
@@ -13686,7 +13684,7 @@ const Kanji1519Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叮';
+    content: "叮";
   }
 `;
 
@@ -13695,7 +13693,7 @@ const Kanji1520Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '可';
+    content: "可";
   }
 `;
 
@@ -13704,7 +13702,7 @@ const Kanji1521Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '台';
+    content: "台";
   }
 `;
 
@@ -13713,7 +13711,7 @@ const Kanji1522Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叱';
+    content: "叱";
   }
 `;
 
@@ -13722,7 +13720,7 @@ const Kanji1523Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '史';
+    content: "史";
   }
 `;
 
@@ -13731,7 +13729,7 @@ const Kanji1524Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '右';
+    content: "右";
   }
 `;
 
@@ -13740,7 +13738,7 @@ const Kanji1525Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叴';
+    content: "叴";
   }
 `;
 
@@ -13749,7 +13747,7 @@ const Kanji1526Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叵';
+    content: "叵";
   }
 `;
 
@@ -13758,7 +13756,7 @@ const Kanji1527Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叶';
+    content: "叶";
   }
 `;
 
@@ -13767,7 +13765,7 @@ const Kanji1528Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '号';
+    content: "号";
   }
 `;
 
@@ -13776,7 +13774,7 @@ const Kanji1529Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '司';
+    content: "司";
   }
 `;
 
@@ -13785,7 +13783,7 @@ const Kanji1530Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叹';
+    content: "叹";
   }
 `;
 
@@ -13794,7 +13792,7 @@ const Kanji1531Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叺';
+    content: "叺";
   }
 `;
 
@@ -13803,7 +13801,7 @@ const Kanji1532Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叻';
+    content: "叻";
   }
 `;
 
@@ -13812,7 +13810,7 @@ const Kanji1533Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叼';
+    content: "叼";
   }
 `;
 
@@ -13821,7 +13819,7 @@ const Kanji1534Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叽';
+    content: "叽";
   }
 `;
 
@@ -13830,7 +13828,7 @@ const Kanji1535Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叾';
+    content: "叾";
   }
 `;
 
@@ -13839,7 +13837,7 @@ const Kanji1536Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '叿';
+    content: "叿";
   }
 `;
 
@@ -13848,7 +13846,7 @@ const Kanji1537Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吀';
+    content: "吀";
   }
 `;
 
@@ -13857,7 +13855,7 @@ const Kanji1538Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吁';
+    content: "吁";
   }
 `;
 
@@ -13866,7 +13864,7 @@ const Kanji1539Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吂';
+    content: "吂";
   }
 `;
 
@@ -13875,7 +13873,7 @@ const Kanji1540Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吃';
+    content: "吃";
   }
 `;
 
@@ -13884,7 +13882,7 @@ const Kanji1541Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '各';
+    content: "各";
   }
 `;
 
@@ -13893,7 +13891,7 @@ const Kanji1542Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吅';
+    content: "吅";
   }
 `;
 
@@ -13902,7 +13900,7 @@ const Kanji1543Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吆';
+    content: "吆";
   }
 `;
 
@@ -13911,7 +13909,7 @@ const Kanji1544Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吇';
+    content: "吇";
   }
 `;
 
@@ -13920,7 +13918,7 @@ const Kanji1545Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '合';
+    content: "合";
   }
 `;
 
@@ -13929,7 +13927,7 @@ const Kanji1546Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吉';
+    content: "吉";
   }
 `;
 
@@ -13938,7 +13936,7 @@ const Kanji1547Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吊';
+    content: "吊";
   }
 `;
 
@@ -13947,7 +13945,7 @@ const Kanji1548Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吋';
+    content: "吋";
   }
 `;
 
@@ -13956,7 +13954,7 @@ const Kanji1549Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '同';
+    content: "同";
   }
 `;
 
@@ -13965,7 +13963,7 @@ const Kanji1550Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '名';
+    content: "名";
   }
 `;
 
@@ -13974,7 +13972,7 @@ const Kanji1551Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '后';
+    content: "后";
   }
 `;
 
@@ -13983,7 +13981,7 @@ const Kanji1552Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吏';
+    content: "吏";
   }
 `;
 
@@ -13992,7 +13990,7 @@ const Kanji1553Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吐';
+    content: "吐";
   }
 `;
 
@@ -14001,7 +13999,7 @@ const Kanji1554Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '向';
+    content: "向";
   }
 `;
 
@@ -14010,7 +14008,7 @@ const Kanji1555Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吒';
+    content: "吒";
   }
 `;
 
@@ -14019,7 +14017,7 @@ const Kanji1556Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吓';
+    content: "吓";
   }
 `;
 
@@ -14028,7 +14026,7 @@ const Kanji1557Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吔';
+    content: "吔";
   }
 `;
 
@@ -14037,7 +14035,7 @@ const Kanji1558Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吕';
+    content: "吕";
   }
 `;
 
@@ -14046,7 +14044,7 @@ const Kanji1559Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吖';
+    content: "吖";
   }
 `;
 
@@ -14055,7 +14053,7 @@ const Kanji1560Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吗';
+    content: "吗";
   }
 `;
 
@@ -14064,7 +14062,7 @@ const Kanji1561Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吘';
+    content: "吘";
   }
 `;
 
@@ -14073,7 +14071,7 @@ const Kanji1562Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吙';
+    content: "吙";
   }
 `;
 
@@ -14082,7 +14080,7 @@ const Kanji1563Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吚';
+    content: "吚";
   }
 `;
 
@@ -14091,7 +14089,7 @@ const Kanji1564Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '君';
+    content: "君";
   }
 `;
 
@@ -14100,7 +14098,7 @@ const Kanji1565Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吜';
+    content: "吜";
   }
 `;
 
@@ -14109,7 +14107,7 @@ const Kanji1566Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吝';
+    content: "吝";
   }
 `;
 
@@ -14118,7 +14116,7 @@ const Kanji1567Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吞';
+    content: "吞";
   }
 `;
 
@@ -14127,7 +14125,7 @@ const Kanji1568Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吟';
+    content: "吟";
   }
 `;
 
@@ -14136,7 +14134,7 @@ const Kanji1569Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吠';
+    content: "吠";
   }
 `;
 
@@ -14145,7 +14143,7 @@ const Kanji1570Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吡';
+    content: "吡";
   }
 `;
 
@@ -14154,7 +14152,7 @@ const Kanji1571Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吢';
+    content: "吢";
   }
 `;
 
@@ -14163,7 +14161,7 @@ const Kanji1572Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吣';
+    content: "吣";
   }
 `;
 
@@ -14172,7 +14170,7 @@ const Kanji1573Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吤';
+    content: "吤";
   }
 `;
 
@@ -14181,7 +14179,7 @@ const Kanji1574Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吥';
+    content: "吥";
   }
 `;
 
@@ -14190,7 +14188,7 @@ const Kanji1575Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '否';
+    content: "否";
   }
 `;
 
@@ -14199,7 +14197,7 @@ const Kanji1576Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吧';
+    content: "吧";
   }
 `;
 
@@ -14208,7 +14206,7 @@ const Kanji1577Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吨';
+    content: "吨";
   }
 `;
 
@@ -14217,7 +14215,7 @@ const Kanji1578Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吩';
+    content: "吩";
   }
 `;
 
@@ -14226,7 +14224,7 @@ const Kanji1579Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吪';
+    content: "吪";
   }
 `;
 
@@ -14235,7 +14233,7 @@ const Kanji1580Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '含';
+    content: "含";
   }
 `;
 
@@ -14244,7 +14242,7 @@ const Kanji1581Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '听';
+    content: "听";
   }
 `;
 
@@ -14253,7 +14251,7 @@ const Kanji1582Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吭';
+    content: "吭";
   }
 `;
 
@@ -14262,7 +14260,7 @@ const Kanji1583Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吮';
+    content: "吮";
   }
 `;
 
@@ -14271,7 +14269,7 @@ const Kanji1584Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '启';
+    content: "启";
   }
 `;
 
@@ -14280,7 +14278,7 @@ const Kanji1585Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吰';
+    content: "吰";
   }
 `;
 
@@ -14289,7 +14287,7 @@ const Kanji1586Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吱';
+    content: "吱";
   }
 `;
 
@@ -14298,7 +14296,7 @@ const Kanji1587Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吲';
+    content: "吲";
   }
 `;
 
@@ -14307,7 +14305,7 @@ const Kanji1588Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吳';
+    content: "吳";
   }
 `;
 
@@ -14316,7 +14314,7 @@ const Kanji1589Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吴';
+    content: "吴";
   }
 `;
 
@@ -14325,7 +14323,7 @@ const Kanji1590Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吵';
+    content: "吵";
   }
 `;
 
@@ -14334,7 +14332,7 @@ const Kanji1591Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吶';
+    content: "吶";
   }
 `;
 
@@ -14343,7 +14341,7 @@ const Kanji1592Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吷';
+    content: "吷";
   }
 `;
 
@@ -14352,7 +14350,7 @@ const Kanji1593Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吸';
+    content: "吸";
   }
 `;
 
@@ -14361,7 +14359,7 @@ const Kanji1594Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吹';
+    content: "吹";
   }
 `;
 
@@ -14370,7 +14368,7 @@ const Kanji1595Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吺';
+    content: "吺";
   }
 `;
 
@@ -14379,7 +14377,7 @@ const Kanji1596Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吻';
+    content: "吻";
   }
 `;
 
@@ -14388,7 +14386,7 @@ const Kanji1597Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吼';
+    content: "吼";
   }
 `;
 
@@ -14397,7 +14395,7 @@ const Kanji1598Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吽';
+    content: "吽";
   }
 `;
 
@@ -14406,7 +14404,7 @@ const Kanji1599Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吾';
+    content: "吾";
   }
 `;
 
@@ -14415,7 +14413,7 @@ const Kanji1600Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '吿';
+    content: "吿";
   }
 `;
 
@@ -14424,7 +14422,7 @@ const Kanji1601Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呀';
+    content: "呀";
   }
 `;
 
@@ -14433,7 +14431,7 @@ const Kanji1602Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呁';
+    content: "呁";
   }
 `;
 
@@ -14442,7 +14440,7 @@ const Kanji1603Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呂';
+    content: "呂";
   }
 `;
 
@@ -14451,7 +14449,7 @@ const Kanji1604Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呃';
+    content: "呃";
   }
 `;
 
@@ -14460,7 +14458,7 @@ const Kanji1605Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呄';
+    content: "呄";
   }
 `;
 
@@ -14469,7 +14467,7 @@ const Kanji1606Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呅';
+    content: "呅";
   }
 `;
 
@@ -14478,7 +14476,7 @@ const Kanji1607Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呆';
+    content: "呆";
   }
 `;
 
@@ -14487,7 +14485,7 @@ const Kanji1608Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呇';
+    content: "呇";
   }
 `;
 
@@ -14496,7 +14494,7 @@ const Kanji1609Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呈';
+    content: "呈";
   }
 `;
 
@@ -14505,7 +14503,7 @@ const Kanji1610Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呉';
+    content: "呉";
   }
 `;
 
@@ -14514,7 +14512,7 @@ const Kanji1611Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '告';
+    content: "告";
   }
 `;
 
@@ -14523,7 +14521,7 @@ const Kanji1612Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呋';
+    content: "呋";
   }
 `;
 
@@ -14532,7 +14530,7 @@ const Kanji1613Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呌';
+    content: "呌";
   }
 `;
 
@@ -14541,7 +14539,7 @@ const Kanji1614Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呍';
+    content: "呍";
   }
 `;
 
@@ -14550,7 +14548,7 @@ const Kanji1615Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呎';
+    content: "呎";
   }
 `;
 
@@ -14559,7 +14557,7 @@ const Kanji1616Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呏';
+    content: "呏";
   }
 `;
 
@@ -14568,7 +14566,7 @@ const Kanji1617Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呐';
+    content: "呐";
   }
 `;
 
@@ -14577,7 +14575,7 @@ const Kanji1618Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呑';
+    content: "呑";
   }
 `;
 
@@ -14586,7 +14584,7 @@ const Kanji1619Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呒';
+    content: "呒";
   }
 `;
 
@@ -14595,7 +14593,7 @@ const Kanji1620Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呓';
+    content: "呓";
   }
 `;
 
@@ -14604,7 +14602,7 @@ const Kanji1621Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呔';
+    content: "呔";
   }
 `;
 
@@ -14613,7 +14611,7 @@ const Kanji1622Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呕';
+    content: "呕";
   }
 `;
 
@@ -14622,7 +14620,7 @@ const Kanji1623Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呖';
+    content: "呖";
   }
 `;
 
@@ -14631,7 +14629,7 @@ const Kanji1624Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呗';
+    content: "呗";
   }
 `;
 
@@ -14640,7 +14638,7 @@ const Kanji1625Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '员';
+    content: "员";
   }
 `;
 
@@ -14649,7 +14647,7 @@ const Kanji1626Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呙';
+    content: "呙";
   }
 `;
 
@@ -14658,7 +14656,7 @@ const Kanji1627Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呚';
+    content: "呚";
   }
 `;
 
@@ -14667,7 +14665,7 @@ const Kanji1628Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呛';
+    content: "呛";
   }
 `;
 
@@ -14676,7 +14674,7 @@ const Kanji1629Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呜';
+    content: "呜";
   }
 `;
 
@@ -14685,7 +14683,7 @@ const Kanji1630Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呝';
+    content: "呝";
   }
 `;
 
@@ -14694,7 +14692,7 @@ const Kanji1631Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呞';
+    content: "呞";
   }
 `;
 
@@ -14703,7 +14701,7 @@ const Kanji1632Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呟';
+    content: "呟";
   }
 `;
 
@@ -14712,7 +14710,7 @@ const Kanji1633Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呠';
+    content: "呠";
   }
 `;
 
@@ -14721,7 +14719,7 @@ const Kanji1634Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呡';
+    content: "呡";
   }
 `;
 
@@ -14730,7 +14728,7 @@ const Kanji1635Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呢';
+    content: "呢";
   }
 `;
 
@@ -14739,7 +14737,7 @@ const Kanji1636Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呣';
+    content: "呣";
   }
 `;
 
@@ -14748,7 +14746,7 @@ const Kanji1637Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呤';
+    content: "呤";
   }
 `;
 
@@ -14757,7 +14755,7 @@ const Kanji1638Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呥';
+    content: "呥";
   }
 `;
 
@@ -14766,7 +14764,7 @@ const Kanji1639Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呦';
+    content: "呦";
   }
 `;
 
@@ -14775,7 +14773,7 @@ const Kanji1640Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呧';
+    content: "呧";
   }
 `;
 
@@ -14784,7 +14782,7 @@ const Kanji1641Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '周';
+    content: "周";
   }
 `;
 
@@ -14793,7 +14791,7 @@ const Kanji1642Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呩';
+    content: "呩";
   }
 `;
 
@@ -14802,7 +14800,7 @@ const Kanji1643Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呪';
+    content: "呪";
   }
 `;
 
@@ -14811,7 +14809,7 @@ const Kanji1644Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呫';
+    content: "呫";
   }
 `;
 
@@ -14820,7 +14818,7 @@ const Kanji1645Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呬';
+    content: "呬";
   }
 `;
 
@@ -14829,7 +14827,7 @@ const Kanji1646Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呭';
+    content: "呭";
   }
 `;
 
@@ -14838,7 +14836,7 @@ const Kanji1647Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呮';
+    content: "呮";
   }
 `;
 
@@ -14847,7 +14845,7 @@ const Kanji1648Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呯';
+    content: "呯";
   }
 `;
 
@@ -14856,7 +14854,7 @@ const Kanji1649Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呰';
+    content: "呰";
   }
 `;
 
@@ -14865,7 +14863,7 @@ const Kanji1650Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呱';
+    content: "呱";
   }
 `;
 
@@ -14874,7 +14872,7 @@ const Kanji1651Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呲';
+    content: "呲";
   }
 `;
 
@@ -14883,7 +14881,7 @@ const Kanji1652Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '味';
+    content: "味";
   }
 `;
 
@@ -14892,7 +14890,7 @@ const Kanji1653Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呴';
+    content: "呴";
   }
 `;
 
@@ -14901,7 +14899,7 @@ const Kanji1654Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呵';
+    content: "呵";
   }
 `;
 
@@ -14910,7 +14908,7 @@ const Kanji1655Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呶';
+    content: "呶";
   }
 `;
 
@@ -14919,7 +14917,7 @@ const Kanji1656Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呷';
+    content: "呷";
   }
 `;
 
@@ -14928,7 +14926,7 @@ const Kanji1657Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呸';
+    content: "呸";
   }
 `;
 
@@ -14937,7 +14935,7 @@ const Kanji1658Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呹';
+    content: "呹";
   }
 `;
 
@@ -14946,7 +14944,7 @@ const Kanji1659Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呺';
+    content: "呺";
   }
 `;
 
@@ -14955,7 +14953,7 @@ const Kanji1660Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呻';
+    content: "呻";
   }
 `;
 
@@ -14964,7 +14962,7 @@ const Kanji1661Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呼';
+    content: "呼";
   }
 `;
 
@@ -14973,7 +14971,7 @@ const Kanji1662Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '命';
+    content: "命";
   }
 `;
 
@@ -14982,7 +14980,7 @@ const Kanji1663Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呾';
+    content: "呾";
   }
 `;
 
@@ -14991,7 +14989,7 @@ const Kanji1664Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '呿';
+    content: "呿";
   }
 `;
 
@@ -15000,7 +14998,7 @@ const Kanji1665Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咀';
+    content: "咀";
   }
 `;
 
@@ -15009,7 +15007,7 @@ const Kanji1666Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咁';
+    content: "咁";
   }
 `;
 
@@ -15018,7 +15016,7 @@ const Kanji1667Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咂';
+    content: "咂";
   }
 `;
 
@@ -15027,7 +15025,7 @@ const Kanji1668Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咃';
+    content: "咃";
   }
 `;
 
@@ -15036,7 +15034,7 @@ const Kanji1669Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咄';
+    content: "咄";
   }
 `;
 
@@ -15045,7 +15043,7 @@ const Kanji1670Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咅';
+    content: "咅";
   }
 `;
 
@@ -15054,7 +15052,7 @@ const Kanji1671Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咆';
+    content: "咆";
   }
 `;
 
@@ -15063,7 +15061,7 @@ const Kanji1672Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咇';
+    content: "咇";
   }
 `;
 
@@ -15072,7 +15070,7 @@ const Kanji1673Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咈';
+    content: "咈";
   }
 `;
 
@@ -15081,7 +15079,7 @@ const Kanji1674Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咉';
+    content: "咉";
   }
 `;
 
@@ -15090,7 +15088,7 @@ const Kanji1675Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咊';
+    content: "咊";
   }
 `;
 
@@ -15099,7 +15097,7 @@ const Kanji1676Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咋';
+    content: "咋";
   }
 `;
 
@@ -15108,7 +15106,7 @@ const Kanji1677Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '和';
+    content: "和";
   }
 `;
 
@@ -15117,7 +15115,7 @@ const Kanji1678Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咍';
+    content: "咍";
   }
 `;
 
@@ -15126,7 +15124,7 @@ const Kanji1679Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咎';
+    content: "咎";
   }
 `;
 
@@ -15135,7 +15133,7 @@ const Kanji1680Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咏';
+    content: "咏";
   }
 `;
 
@@ -15144,7 +15142,7 @@ const Kanji1681Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咐';
+    content: "咐";
   }
 `;
 
@@ -15153,7 +15151,7 @@ const Kanji1682Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咑';
+    content: "咑";
   }
 `;
 
@@ -15162,7 +15160,7 @@ const Kanji1683Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咒';
+    content: "咒";
   }
 `;
 
@@ -15171,7 +15169,7 @@ const Kanji1684Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咓';
+    content: "咓";
   }
 `;
 
@@ -15180,7 +15178,7 @@ const Kanji1685Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咔';
+    content: "咔";
   }
 `;
 
@@ -15189,7 +15187,7 @@ const Kanji1686Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咕';
+    content: "咕";
   }
 `;
 
@@ -15198,7 +15196,7 @@ const Kanji1687Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咖';
+    content: "咖";
   }
 `;
 
@@ -15207,7 +15205,7 @@ const Kanji1688Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咗';
+    content: "咗";
   }
 `;
 
@@ -15216,7 +15214,7 @@ const Kanji1689Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咘';
+    content: "咘";
   }
 `;
 
@@ -15225,7 +15223,7 @@ const Kanji1690Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咙';
+    content: "咙";
   }
 `;
 
@@ -15234,7 +15232,7 @@ const Kanji1691Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咚';
+    content: "咚";
   }
 `;
 
@@ -15243,7 +15241,7 @@ const Kanji1692Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咛';
+    content: "咛";
   }
 `;
 
@@ -15252,7 +15250,7 @@ const Kanji1693Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咜';
+    content: "咜";
   }
 `;
 
@@ -15261,7 +15259,7 @@ const Kanji1694Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咝';
+    content: "咝";
   }
 `;
 
@@ -15270,7 +15268,7 @@ const Kanji1695Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咞';
+    content: "咞";
   }
 `;
 
@@ -15279,7 +15277,7 @@ const Kanji1696Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咟';
+    content: "咟";
   }
 `;
 
@@ -15288,7 +15286,7 @@ const Kanji1697Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咠';
+    content: "咠";
   }
 `;
 
@@ -15297,7 +15295,7 @@ const Kanji1698Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咡';
+    content: "咡";
   }
 `;
 
@@ -15306,7 +15304,7 @@ const Kanji1699Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咢';
+    content: "咢";
   }
 `;
 
@@ -15315,7 +15313,7 @@ const Kanji1700Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咣';
+    content: "咣";
   }
 `;
 
@@ -15324,7 +15322,7 @@ const Kanji1701Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咤';
+    content: "咤";
   }
 `;
 
@@ -15333,7 +15331,7 @@ const Kanji1702Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咥';
+    content: "咥";
   }
 `;
 
@@ -15342,7 +15340,7 @@ const Kanji1703Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咦';
+    content: "咦";
   }
 `;
 
@@ -15351,7 +15349,7 @@ const Kanji1704Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咧';
+    content: "咧";
   }
 `;
 
@@ -15360,7 +15358,7 @@ const Kanji1705Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咨';
+    content: "咨";
   }
 `;
 
@@ -15369,7 +15367,7 @@ const Kanji1706Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咩';
+    content: "咩";
   }
 `;
 
@@ -15378,7 +15376,7 @@ const Kanji1707Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咪';
+    content: "咪";
   }
 `;
 
@@ -15387,7 +15385,7 @@ const Kanji1708Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咫';
+    content: "咫";
   }
 `;
 
@@ -15396,7 +15394,7 @@ const Kanji1709Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咬';
+    content: "咬";
   }
 `;
 
@@ -15405,7 +15403,7 @@ const Kanji1710Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咭';
+    content: "咭";
   }
 `;
 
@@ -15414,7 +15412,7 @@ const Kanji1711Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咮';
+    content: "咮";
   }
 `;
 
@@ -15423,7 +15421,7 @@ const Kanji1712Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咯';
+    content: "咯";
   }
 `;
 
@@ -15432,7 +15430,7 @@ const Kanji1713Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咰';
+    content: "咰";
   }
 `;
 
@@ -15441,7 +15439,7 @@ const Kanji1714Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咱';
+    content: "咱";
   }
 `;
 
@@ -15450,7 +15448,7 @@ const Kanji1715Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咲';
+    content: "咲";
   }
 `;
 
@@ -15459,7 +15457,7 @@ const Kanji1716Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咳';
+    content: "咳";
   }
 `;
 
@@ -15468,7 +15466,7 @@ const Kanji1717Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咴';
+    content: "咴";
   }
 `;
 
@@ -15477,7 +15475,7 @@ const Kanji1718Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咵';
+    content: "咵";
   }
 `;
 
@@ -15486,7 +15484,7 @@ const Kanji1719Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咶';
+    content: "咶";
   }
 `;
 
@@ -15495,7 +15493,7 @@ const Kanji1720Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咷';
+    content: "咷";
   }
 `;
 
@@ -15504,7 +15502,7 @@ const Kanji1721Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咸';
+    content: "咸";
   }
 `;
 
@@ -15513,7 +15511,7 @@ const Kanji1722Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咹';
+    content: "咹";
   }
 `;
 
@@ -15522,7 +15520,7 @@ const Kanji1723Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咺';
+    content: "咺";
   }
 `;
 
@@ -15531,7 +15529,7 @@ const Kanji1724Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咻';
+    content: "咻";
   }
 `;
 
@@ -15540,7 +15538,7 @@ const Kanji1725Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咼';
+    content: "咼";
   }
 `;
 
@@ -15549,7 +15547,7 @@ const Kanji1726Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咽';
+    content: "咽";
   }
 `;
 
@@ -15558,7 +15556,7 @@ const Kanji1727Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咾';
+    content: "咾";
   }
 `;
 
@@ -15567,7 +15565,7 @@ const Kanji1728Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '咿';
+    content: "咿";
   }
 `;
 
@@ -15576,7 +15574,7 @@ const Kanji1729Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哀';
+    content: "哀";
   }
 `;
 
@@ -15585,7 +15583,7 @@ const Kanji1730Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '品';
+    content: "品";
   }
 `;
 
@@ -15594,7 +15592,7 @@ const Kanji1731Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哂';
+    content: "哂";
   }
 `;
 
@@ -15603,7 +15601,7 @@ const Kanji1732Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哃';
+    content: "哃";
   }
 `;
 
@@ -15612,7 +15610,7 @@ const Kanji1733Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哄';
+    content: "哄";
   }
 `;
 
@@ -15621,7 +15619,7 @@ const Kanji1734Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哅';
+    content: "哅";
   }
 `;
 
@@ -15630,7 +15628,7 @@ const Kanji1735Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哆';
+    content: "哆";
   }
 `;
 
@@ -15639,7 +15637,7 @@ const Kanji1736Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哇';
+    content: "哇";
   }
 `;
 
@@ -15648,7 +15646,7 @@ const Kanji1737Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哈';
+    content: "哈";
   }
 `;
 
@@ -15657,7 +15655,7 @@ const Kanji1738Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哉';
+    content: "哉";
   }
 `;
 
@@ -15666,7 +15664,7 @@ const Kanji1739Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哊';
+    content: "哊";
   }
 `;
 
@@ -15675,7 +15673,7 @@ const Kanji1740Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哋';
+    content: "哋";
   }
 `;
 
@@ -15684,7 +15682,7 @@ const Kanji1741Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哌';
+    content: "哌";
   }
 `;
 
@@ -15693,7 +15691,7 @@ const Kanji1742Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '响';
+    content: "响";
   }
 `;
 
@@ -15702,7 +15700,7 @@ const Kanji1743Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哎';
+    content: "哎";
   }
 `;
 
@@ -15711,7 +15709,7 @@ const Kanji1744Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哏';
+    content: "哏";
   }
 `;
 
@@ -15720,7 +15718,7 @@ const Kanji1745Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哐';
+    content: "哐";
   }
 `;
 
@@ -15729,7 +15727,7 @@ const Kanji1746Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哑';
+    content: "哑";
   }
 `;
 
@@ -15738,7 +15736,7 @@ const Kanji1747Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哒';
+    content: "哒";
   }
 `;
 
@@ -15747,7 +15745,7 @@ const Kanji1748Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哓';
+    content: "哓";
   }
 `;
 
@@ -15756,7 +15754,7 @@ const Kanji1749Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哔';
+    content: "哔";
   }
 `;
 
@@ -15765,7 +15763,7 @@ const Kanji1750Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哕';
+    content: "哕";
   }
 `;
 
@@ -15774,7 +15772,7 @@ const Kanji1751Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哖';
+    content: "哖";
   }
 `;
 
@@ -15783,7 +15781,7 @@ const Kanji1752Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哗';
+    content: "哗";
   }
 `;
 
@@ -15792,7 +15790,7 @@ const Kanji1753Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哘';
+    content: "哘";
   }
 `;
 
@@ -15801,7 +15799,7 @@ const Kanji1754Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哙';
+    content: "哙";
   }
 `;
 
@@ -15810,7 +15808,7 @@ const Kanji1755Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哚';
+    content: "哚";
   }
 `;
 
@@ -15819,7 +15817,7 @@ const Kanji1756Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哛';
+    content: "哛";
   }
 `;
 
@@ -15828,7 +15826,7 @@ const Kanji1757Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哜';
+    content: "哜";
   }
 `;
 
@@ -15837,7 +15835,7 @@ const Kanji1758Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哝';
+    content: "哝";
   }
 `;
 
@@ -15846,7 +15844,7 @@ const Kanji1759Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哞';
+    content: "哞";
   }
 `;
 
@@ -15855,7 +15853,7 @@ const Kanji1760Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哟';
+    content: "哟";
   }
 `;
 
@@ -15864,7 +15862,7 @@ const Kanji1761Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哠';
+    content: "哠";
   }
 `;
 
@@ -15873,7 +15871,7 @@ const Kanji1762Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '員';
+    content: "員";
   }
 `;
 
@@ -15882,7 +15880,7 @@ const Kanji1763Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哢';
+    content: "哢";
   }
 `;
 
@@ -15891,7 +15889,7 @@ const Kanji1764Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哣';
+    content: "哣";
   }
 `;
 
@@ -15900,7 +15898,7 @@ const Kanji1765Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哤';
+    content: "哤";
   }
 `;
 
@@ -15909,7 +15907,7 @@ const Kanji1766Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哥';
+    content: "哥";
   }
 `;
 
@@ -15918,7 +15916,7 @@ const Kanji1767Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哦';
+    content: "哦";
   }
 `;
 
@@ -15927,7 +15925,7 @@ const Kanji1768Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哧';
+    content: "哧";
   }
 `;
 
@@ -15936,7 +15934,7 @@ const Kanji1769Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哨';
+    content: "哨";
   }
 `;
 
@@ -15945,7 +15943,7 @@ const Kanji1770Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哩';
+    content: "哩";
   }
 `;
 
@@ -15954,7 +15952,7 @@ const Kanji1771Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哪';
+    content: "哪";
   }
 `;
 
@@ -15963,7 +15961,7 @@ const Kanji1772Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哫';
+    content: "哫";
   }
 `;
 
@@ -15972,7 +15970,7 @@ const Kanji1773Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哬';
+    content: "哬";
   }
 `;
 
@@ -15981,7 +15979,7 @@ const Kanji1774Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哭';
+    content: "哭";
   }
 `;
 
@@ -15990,7 +15988,7 @@ const Kanji1775Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哮';
+    content: "哮";
   }
 `;
 
@@ -15999,7 +15997,7 @@ const Kanji1776Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哯';
+    content: "哯";
   }
 `;
 
@@ -16008,7 +16006,7 @@ const Kanji1777Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哰';
+    content: "哰";
   }
 `;
 
@@ -16017,7 +16015,7 @@ const Kanji1778Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哱';
+    content: "哱";
   }
 `;
 
@@ -16026,7 +16024,7 @@ const Kanji1779Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哲';
+    content: "哲";
   }
 `;
 
@@ -16035,7 +16033,7 @@ const Kanji1780Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哳';
+    content: "哳";
   }
 `;
 
@@ -16044,7 +16042,7 @@ const Kanji1781Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哴';
+    content: "哴";
   }
 `;
 
@@ -16053,7 +16051,7 @@ const Kanji1782Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哵';
+    content: "哵";
   }
 `;
 
@@ -16062,7 +16060,7 @@ const Kanji1783Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哶';
+    content: "哶";
   }
 `;
 
@@ -16071,7 +16069,7 @@ const Kanji1784Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哷';
+    content: "哷";
   }
 `;
 
@@ -16080,7 +16078,7 @@ const Kanji1785Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哸';
+    content: "哸";
   }
 `;
 
@@ -16089,7 +16087,7 @@ const Kanji1786Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哹';
+    content: "哹";
   }
 `;
 
@@ -16098,7 +16096,7 @@ const Kanji1787Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哺';
+    content: "哺";
   }
 `;
 
@@ -16107,7 +16105,7 @@ const Kanji1788Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哻';
+    content: "哻";
   }
 `;
 
@@ -16116,7 +16114,7 @@ const Kanji1789Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哼';
+    content: "哼";
   }
 `;
 
@@ -16125,7 +16123,7 @@ const Kanji1790Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哽';
+    content: "哽";
   }
 `;
 
@@ -16134,7 +16132,7 @@ const Kanji1791Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哾';
+    content: "哾";
   }
 `;
 
@@ -16143,7 +16141,7 @@ const Kanji1792Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '哿';
+    content: "哿";
   }
 `;
 
@@ -16152,7 +16150,7 @@ const Kanji1793Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唀';
+    content: "唀";
   }
 `;
 
@@ -16161,7 +16159,7 @@ const Kanji1794Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唁';
+    content: "唁";
   }
 `;
 
@@ -16170,7 +16168,7 @@ const Kanji1795Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唂';
+    content: "唂";
   }
 `;
 
@@ -16179,7 +16177,7 @@ const Kanji1796Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唃';
+    content: "唃";
   }
 `;
 
@@ -16188,7 +16186,7 @@ const Kanji1797Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唄';
+    content: "唄";
   }
 `;
 
@@ -16197,7 +16195,7 @@ const Kanji1798Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唅';
+    content: "唅";
   }
 `;
 
@@ -16206,7 +16204,7 @@ const Kanji1799Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唆';
+    content: "唆";
   }
 `;
 
@@ -16215,7 +16213,7 @@ const Kanji1800Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唇';
+    content: "唇";
   }
 `;
 
@@ -16224,7 +16222,7 @@ const Kanji1801Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唈';
+    content: "唈";
   }
 `;
 
@@ -16233,7 +16231,7 @@ const Kanji1802Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唉';
+    content: "唉";
   }
 `;
 
@@ -16242,7 +16240,7 @@ const Kanji1803Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唊';
+    content: "唊";
   }
 `;
 
@@ -16251,7 +16249,7 @@ const Kanji1804Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唋';
+    content: "唋";
   }
 `;
 
@@ -16260,7 +16258,7 @@ const Kanji1805Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唌';
+    content: "唌";
   }
 `;
 
@@ -16269,7 +16267,7 @@ const Kanji1806Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唍';
+    content: "唍";
   }
 `;
 
@@ -16278,7 +16276,7 @@ const Kanji1807Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唎';
+    content: "唎";
   }
 `;
 
@@ -16287,7 +16285,7 @@ const Kanji1808Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唏';
+    content: "唏";
   }
 `;
 
@@ -16296,7 +16294,7 @@ const Kanji1809Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唐';
+    content: "唐";
   }
 `;
 
@@ -16305,7 +16303,7 @@ const Kanji1810Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唑';
+    content: "唑";
   }
 `;
 
@@ -16314,7 +16312,7 @@ const Kanji1811Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唒';
+    content: "唒";
   }
 `;
 
@@ -16323,7 +16321,7 @@ const Kanji1812Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唓';
+    content: "唓";
   }
 `;
 
@@ -16332,7 +16330,7 @@ const Kanji1813Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唔';
+    content: "唔";
   }
 `;
 
@@ -16341,7 +16339,7 @@ const Kanji1814Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唕';
+    content: "唕";
   }
 `;
 
@@ -16350,7 +16348,7 @@ const Kanji1815Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唖';
+    content: "唖";
   }
 `;
 
@@ -16359,7 +16357,7 @@ const Kanji1816Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唗';
+    content: "唗";
   }
 `;
 
@@ -16368,7 +16366,7 @@ const Kanji1817Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唘';
+    content: "唘";
   }
 `;
 
@@ -16377,7 +16375,7 @@ const Kanji1818Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唙';
+    content: "唙";
   }
 `;
 
@@ -16386,7 +16384,7 @@ const Kanji1819Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唚';
+    content: "唚";
   }
 `;
 
@@ -16395,7 +16393,7 @@ const Kanji1820Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唛';
+    content: "唛";
   }
 `;
 
@@ -16404,7 +16402,7 @@ const Kanji1821Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唜';
+    content: "唜";
   }
 `;
 
@@ -16413,7 +16411,7 @@ const Kanji1822Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唝';
+    content: "唝";
   }
 `;
 
@@ -16422,7 +16420,7 @@ const Kanji1823Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唞';
+    content: "唞";
   }
 `;
 
@@ -16431,7 +16429,7 @@ const Kanji1824Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唟';
+    content: "唟";
   }
 `;
 
@@ -16440,7 +16438,7 @@ const Kanji1825Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唠';
+    content: "唠";
   }
 `;
 
@@ -16449,7 +16447,7 @@ const Kanji1826Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唡';
+    content: "唡";
   }
 `;
 
@@ -16458,7 +16456,7 @@ const Kanji1827Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唢';
+    content: "唢";
   }
 `;
 
@@ -16467,7 +16465,7 @@ const Kanji1828Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唣';
+    content: "唣";
   }
 `;
 
@@ -16476,7 +16474,7 @@ const Kanji1829Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唤';
+    content: "唤";
   }
 `;
 
@@ -16485,7 +16483,7 @@ const Kanji1830Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唥';
+    content: "唥";
   }
 `;
 
@@ -16494,7 +16492,7 @@ const Kanji1831Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唦';
+    content: "唦";
   }
 `;
 
@@ -16503,7 +16501,7 @@ const Kanji1832Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唧';
+    content: "唧";
   }
 `;
 
@@ -16512,7 +16510,7 @@ const Kanji1833Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唨';
+    content: "唨";
   }
 `;
 
@@ -16521,7 +16519,7 @@ const Kanji1834Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唩';
+    content: "唩";
   }
 `;
 
@@ -16530,7 +16528,7 @@ const Kanji1835Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唪';
+    content: "唪";
   }
 `;
 
@@ -16539,7 +16537,7 @@ const Kanji1836Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唫';
+    content: "唫";
   }
 `;
 
@@ -16548,7 +16546,7 @@ const Kanji1837Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唬';
+    content: "唬";
   }
 `;
 
@@ -16557,7 +16555,7 @@ const Kanji1838Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唭';
+    content: "唭";
   }
 `;
 
@@ -16566,7 +16564,7 @@ const Kanji1839Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '售';
+    content: "售";
   }
 `;
 
@@ -16575,7 +16573,7 @@ const Kanji1840Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唯';
+    content: "唯";
   }
 `;
 
@@ -16584,7 +16582,7 @@ const Kanji1841Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唰';
+    content: "唰";
   }
 `;
 
@@ -16593,7 +16591,7 @@ const Kanji1842Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唱';
+    content: "唱";
   }
 `;
 
@@ -16602,7 +16600,7 @@ const Kanji1843Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唲';
+    content: "唲";
   }
 `;
 
@@ -16611,7 +16609,7 @@ const Kanji1844Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唳';
+    content: "唳";
   }
 `;
 
@@ -16620,7 +16618,7 @@ const Kanji1845Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唴';
+    content: "唴";
   }
 `;
 
@@ -16629,7 +16627,7 @@ const Kanji1846Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唵';
+    content: "唵";
   }
 `;
 
@@ -16638,7 +16636,7 @@ const Kanji1847Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唶';
+    content: "唶";
   }
 `;
 
@@ -16647,7 +16645,7 @@ const Kanji1848Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唷';
+    content: "唷";
   }
 `;
 
@@ -16656,7 +16654,7 @@ const Kanji1849Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唸';
+    content: "唸";
   }
 `;
 
@@ -16665,7 +16663,7 @@ const Kanji1850Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唹';
+    content: "唹";
   }
 `;
 
@@ -16674,7 +16672,7 @@ const Kanji1851Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唺';
+    content: "唺";
   }
 `;
 
@@ -16683,7 +16681,7 @@ const Kanji1852Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唻';
+    content: "唻";
   }
 `;
 
@@ -16692,7 +16690,7 @@ const Kanji1853Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唼';
+    content: "唼";
   }
 `;
 
@@ -16701,7 +16699,7 @@ const Kanji1854Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唽';
+    content: "唽";
   }
 `;
 
@@ -16710,7 +16708,7 @@ const Kanji1855Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唾';
+    content: "唾";
   }
 `;
 
@@ -16719,7 +16717,7 @@ const Kanji1856Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '唿';
+    content: "唿";
   }
 `;
 
@@ -16728,7 +16726,7 @@ const Kanji1857Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啀';
+    content: "啀";
   }
 `;
 
@@ -16737,7 +16735,7 @@ const Kanji1858Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啁';
+    content: "啁";
   }
 `;
 
@@ -16746,7 +16744,7 @@ const Kanji1859Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啂';
+    content: "啂";
   }
 `;
 
@@ -16755,7 +16753,7 @@ const Kanji1860Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啃';
+    content: "啃";
   }
 `;
 
@@ -16764,7 +16762,7 @@ const Kanji1861Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啄';
+    content: "啄";
   }
 `;
 
@@ -16773,7 +16771,7 @@ const Kanji1862Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啅';
+    content: "啅";
   }
 `;
 
@@ -16782,7 +16780,7 @@ const Kanji1863Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '商';
+    content: "商";
   }
 `;
 
@@ -16791,7 +16789,7 @@ const Kanji1864Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啇';
+    content: "啇";
   }
 `;
 
@@ -16800,7 +16798,7 @@ const Kanji1865Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啈';
+    content: "啈";
   }
 `;
 
@@ -16809,7 +16807,7 @@ const Kanji1866Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啉';
+    content: "啉";
   }
 `;
 
@@ -16818,7 +16816,7 @@ const Kanji1867Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啊';
+    content: "啊";
   }
 `;
 
@@ -16827,7 +16825,7 @@ const Kanji1868Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啋';
+    content: "啋";
   }
 `;
 
@@ -16836,7 +16834,7 @@ const Kanji1869Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啌';
+    content: "啌";
   }
 `;
 
@@ -16845,7 +16843,7 @@ const Kanji1870Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啍';
+    content: "啍";
   }
 `;
 
@@ -16854,7 +16852,7 @@ const Kanji1871Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啎';
+    content: "啎";
   }
 `;
 
@@ -16863,7 +16861,7 @@ const Kanji1872Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '問';
+    content: "問";
   }
 `;
 
@@ -16872,7 +16870,7 @@ const Kanji1873Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啐';
+    content: "啐";
   }
 `;
 
@@ -16881,7 +16879,7 @@ const Kanji1874Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啑';
+    content: "啑";
   }
 `;
 
@@ -16890,7 +16888,7 @@ const Kanji1875Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啒';
+    content: "啒";
   }
 `;
 
@@ -16899,7 +16897,7 @@ const Kanji1876Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啓';
+    content: "啓";
   }
 `;
 
@@ -16908,7 +16906,7 @@ const Kanji1877Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啔';
+    content: "啔";
   }
 `;
 
@@ -16917,7 +16915,7 @@ const Kanji1878Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啕';
+    content: "啕";
   }
 `;
 
@@ -16926,7 +16924,7 @@ const Kanji1879Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啖';
+    content: "啖";
   }
 `;
 
@@ -16935,7 +16933,7 @@ const Kanji1880Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啗';
+    content: "啗";
   }
 `;
 
@@ -16944,7 +16942,7 @@ const Kanji1881Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啘';
+    content: "啘";
   }
 `;
 
@@ -16953,7 +16951,7 @@ const Kanji1882Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啙';
+    content: "啙";
   }
 `;
 
@@ -16962,7 +16960,7 @@ const Kanji1883Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啚';
+    content: "啚";
   }
 `;
 
@@ -16971,7 +16969,7 @@ const Kanji1884Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啛';
+    content: "啛";
   }
 `;
 
@@ -16980,7 +16978,7 @@ const Kanji1885Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啜';
+    content: "啜";
   }
 `;
 
@@ -16989,7 +16987,7 @@ const Kanji1886Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啝';
+    content: "啝";
   }
 `;
 
@@ -16998,7 +16996,7 @@ const Kanji1887Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啞';
+    content: "啞";
   }
 `;
 
@@ -17007,7 +17005,7 @@ const Kanji1888Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啟';
+    content: "啟";
   }
 `;
 
@@ -17016,7 +17014,7 @@ const Kanji1889Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啠';
+    content: "啠";
   }
 `;
 
@@ -17025,7 +17023,7 @@ const Kanji1890Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啡';
+    content: "啡";
   }
 `;
 
@@ -17034,7 +17032,7 @@ const Kanji1891Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啢';
+    content: "啢";
   }
 `;
 
@@ -17043,7 +17041,7 @@ const Kanji1892Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啣';
+    content: "啣";
   }
 `;
 
@@ -17052,7 +17050,7 @@ const Kanji1893Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啤';
+    content: "啤";
   }
 `;
 
@@ -17061,7 +17059,7 @@ const Kanji1894Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啥';
+    content: "啥";
   }
 `;
 
@@ -17070,7 +17068,7 @@ const Kanji1895Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啦';
+    content: "啦";
   }
 `;
 
@@ -17079,7 +17077,7 @@ const Kanji1896Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啧';
+    content: "啧";
   }
 `;
 
@@ -17088,7 +17086,7 @@ const Kanji1897Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啨';
+    content: "啨";
   }
 `;
 
@@ -17097,7 +17095,7 @@ const Kanji1898Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啩';
+    content: "啩";
   }
 `;
 
@@ -17106,7 +17104,7 @@ const Kanji1899Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啪';
+    content: "啪";
   }
 `;
 
@@ -17115,7 +17113,7 @@ const Kanji1900Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啫';
+    content: "啫";
   }
 `;
 
@@ -17124,7 +17122,7 @@ const Kanji1901Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啬';
+    content: "啬";
   }
 `;
 
@@ -17133,7 +17131,7 @@ const Kanji1902Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啭';
+    content: "啭";
   }
 `;
 
@@ -17142,7 +17140,7 @@ const Kanji1903Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啮';
+    content: "啮";
   }
 `;
 
@@ -17151,7 +17149,7 @@ const Kanji1904Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啯';
+    content: "啯";
   }
 `;
 
@@ -17160,7 +17158,7 @@ const Kanji1905Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啰';
+    content: "啰";
   }
 `;
 
@@ -17169,7 +17167,7 @@ const Kanji1906Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啱';
+    content: "啱";
   }
 `;
 
@@ -17178,7 +17176,7 @@ const Kanji1907Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啲';
+    content: "啲";
   }
 `;
 
@@ -17187,7 +17185,7 @@ const Kanji1908Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啳';
+    content: "啳";
   }
 `;
 
@@ -17196,7 +17194,7 @@ const Kanji1909Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啴';
+    content: "啴";
   }
 `;
 
@@ -17205,7 +17203,7 @@ const Kanji1910Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啵';
+    content: "啵";
   }
 `;
 
@@ -17214,7 +17212,7 @@ const Kanji1911Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啶';
+    content: "啶";
   }
 `;
 
@@ -17223,7 +17221,7 @@ const Kanji1912Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啷';
+    content: "啷";
   }
 `;
 
@@ -17232,7 +17230,7 @@ const Kanji1913Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啸';
+    content: "啸";
   }
 `;
 
@@ -17241,7 +17239,7 @@ const Kanji1914Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啹';
+    content: "啹";
   }
 `;
 
@@ -17250,7 +17248,7 @@ const Kanji1915Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啺';
+    content: "啺";
   }
 `;
 
@@ -17259,7 +17257,7 @@ const Kanji1916Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啻';
+    content: "啻";
   }
 `;
 
@@ -17268,7 +17266,7 @@ const Kanji1917Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啼';
+    content: "啼";
   }
 `;
 
@@ -17277,7 +17275,7 @@ const Kanji1918Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啽';
+    content: "啽";
   }
 `;
 
@@ -17286,7 +17284,7 @@ const Kanji1919Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啾';
+    content: "啾";
   }
 `;
 
@@ -17295,7 +17293,7 @@ const Kanji1920Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '啿';
+    content: "啿";
   }
 `;
 
@@ -17304,7 +17302,7 @@ const Kanji1921Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喀';
+    content: "喀";
   }
 `;
 
@@ -17313,7 +17311,7 @@ const Kanji1922Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喁';
+    content: "喁";
   }
 `;
 
@@ -17322,7 +17320,7 @@ const Kanji1923Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喂';
+    content: "喂";
   }
 `;
 
@@ -17331,7 +17329,7 @@ const Kanji1924Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喃';
+    content: "喃";
   }
 `;
 
@@ -17340,7 +17338,7 @@ const Kanji1925Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '善';
+    content: "善";
   }
 `;
 
@@ -17349,7 +17347,7 @@ const Kanji1926Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喅';
+    content: "喅";
   }
 `;
 
@@ -17358,7 +17356,7 @@ const Kanji1927Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喆';
+    content: "喆";
   }
 `;
 
@@ -17367,7 +17365,7 @@ const Kanji1928Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喇';
+    content: "喇";
   }
 `;
 
@@ -17376,7 +17374,7 @@ const Kanji1929Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喈';
+    content: "喈";
   }
 `;
 
@@ -17385,7 +17383,7 @@ const Kanji1930Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喉';
+    content: "喉";
   }
 `;
 
@@ -17394,7 +17392,7 @@ const Kanji1931Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喊';
+    content: "喊";
   }
 `;
 
@@ -17403,7 +17401,7 @@ const Kanji1932Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喋';
+    content: "喋";
   }
 `;
 
@@ -17412,7 +17410,7 @@ const Kanji1933Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喌';
+    content: "喌";
   }
 `;
 
@@ -17421,7 +17419,7 @@ const Kanji1934Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喍';
+    content: "喍";
   }
 `;
 
@@ -17430,7 +17428,7 @@ const Kanji1935Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喎';
+    content: "喎";
   }
 `;
 
@@ -17439,7 +17437,7 @@ const Kanji1936Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喏';
+    content: "喏";
   }
 `;
 
@@ -17448,7 +17446,7 @@ const Kanji1937Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喐';
+    content: "喐";
   }
 `;
 
@@ -17457,7 +17455,7 @@ const Kanji1938Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喑';
+    content: "喑";
   }
 `;
 
@@ -17466,7 +17464,7 @@ const Kanji1939Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喒';
+    content: "喒";
   }
 `;
 
@@ -17475,7 +17473,7 @@ const Kanji1940Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喓';
+    content: "喓";
   }
 `;
 
@@ -17484,7 +17482,7 @@ const Kanji1941Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喔';
+    content: "喔";
   }
 `;
 
@@ -17493,7 +17491,7 @@ const Kanji1942Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喕';
+    content: "喕";
   }
 `;
 
@@ -17502,7 +17500,7 @@ const Kanji1943Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喖';
+    content: "喖";
   }
 `;
 
@@ -17511,7 +17509,7 @@ const Kanji1944Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喗';
+    content: "喗";
   }
 `;
 
@@ -17520,7 +17518,7 @@ const Kanji1945Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喘';
+    content: "喘";
   }
 `;
 
@@ -17529,7 +17527,7 @@ const Kanji1946Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喙';
+    content: "喙";
   }
 `;
 
@@ -17538,7 +17536,7 @@ const Kanji1947Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喚';
+    content: "喚";
   }
 `;
 
@@ -17547,7 +17545,7 @@ const Kanji1948Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喛';
+    content: "喛";
   }
 `;
 
@@ -17556,7 +17554,7 @@ const Kanji1949Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喜';
+    content: "喜";
   }
 `;
 
@@ -17565,7 +17563,7 @@ const Kanji1950Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喝';
+    content: "喝";
   }
 `;
 
@@ -17574,7 +17572,7 @@ const Kanji1951Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喞';
+    content: "喞";
   }
 `;
 
@@ -17583,7 +17581,7 @@ const Kanji1952Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喟';
+    content: "喟";
   }
 `;
 
@@ -17592,7 +17590,7 @@ const Kanji1953Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喠';
+    content: "喠";
   }
 `;
 
@@ -17601,7 +17599,7 @@ const Kanji1954Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喡';
+    content: "喡";
   }
 `;
 
@@ -17610,7 +17608,7 @@ const Kanji1955Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喢';
+    content: "喢";
   }
 `;
 
@@ -17619,7 +17617,7 @@ const Kanji1956Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喣';
+    content: "喣";
   }
 `;
 
@@ -17628,7 +17626,7 @@ const Kanji1957Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喤';
+    content: "喤";
   }
 `;
 
@@ -17637,7 +17635,7 @@ const Kanji1958Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喥';
+    content: "喥";
   }
 `;
 
@@ -17646,7 +17644,7 @@ const Kanji1959Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喦';
+    content: "喦";
   }
 `;
 
@@ -17655,7 +17653,7 @@ const Kanji1960Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喧';
+    content: "喧";
   }
 `;
 
@@ -17664,7 +17662,7 @@ const Kanji1961Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喨';
+    content: "喨";
   }
 `;
 
@@ -17673,7 +17671,7 @@ const Kanji1962Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喩';
+    content: "喩";
   }
 `;
 
@@ -17682,7 +17680,7 @@ const Kanji1963Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喪';
+    content: "喪";
   }
 `;
 
@@ -17691,7 +17689,7 @@ const Kanji1964Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喫';
+    content: "喫";
   }
 `;
 
@@ -17700,7 +17698,7 @@ const Kanji1965Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喬';
+    content: "喬";
   }
 `;
 
@@ -17709,7 +17707,7 @@ const Kanji1966Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喭';
+    content: "喭";
   }
 `;
 
@@ -17718,7 +17716,7 @@ const Kanji1967Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '單';
+    content: "單";
   }
 `;
 
@@ -17727,7 +17725,7 @@ const Kanji1968Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喯';
+    content: "喯";
   }
 `;
 
@@ -17736,7 +17734,7 @@ const Kanji1969Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喰';
+    content: "喰";
   }
 `;
 
@@ -17745,7 +17743,7 @@ const Kanji1970Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喱';
+    content: "喱";
   }
 `;
 
@@ -17754,7 +17752,7 @@ const Kanji1971Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喲';
+    content: "喲";
   }
 `;
 
@@ -17763,7 +17761,7 @@ const Kanji1972Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喳';
+    content: "喳";
   }
 `;
 
@@ -17772,7 +17770,7 @@ const Kanji1973Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喴';
+    content: "喴";
   }
 `;
 
@@ -17781,7 +17779,7 @@ const Kanji1974Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喵';
+    content: "喵";
   }
 `;
 
@@ -17790,7 +17788,7 @@ const Kanji1975Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '営';
+    content: "営";
   }
 `;
 
@@ -17799,7 +17797,7 @@ const Kanji1976Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喷';
+    content: "喷";
   }
 `;
 
@@ -17808,7 +17806,7 @@ const Kanji1977Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喸';
+    content: "喸";
   }
 `;
 
@@ -17817,7 +17815,7 @@ const Kanji1978Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喹';
+    content: "喹";
   }
 `;
 
@@ -17826,7 +17824,7 @@ const Kanji1979Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喺';
+    content: "喺";
   }
 `;
 
@@ -17835,7 +17833,7 @@ const Kanji1980Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喻';
+    content: "喻";
   }
 `;
 
@@ -17844,7 +17842,7 @@ const Kanji1981Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喼';
+    content: "喼";
   }
 `;
 
@@ -17853,7 +17851,7 @@ const Kanji1982Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喽';
+    content: "喽";
   }
 `;
 
@@ -17862,7 +17860,7 @@ const Kanji1983Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喾';
+    content: "喾";
   }
 `;
 
@@ -17871,7 +17869,7 @@ const Kanji1984Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '喿';
+    content: "喿";
   }
 `;
 
@@ -17880,7 +17878,7 @@ const Kanji1985Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗀';
+    content: "嗀";
   }
 `;
 
@@ -17889,7 +17887,7 @@ const Kanji1986Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗁';
+    content: "嗁";
   }
 `;
 
@@ -17898,7 +17896,7 @@ const Kanji1987Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗂';
+    content: "嗂";
   }
 `;
 
@@ -17907,7 +17905,7 @@ const Kanji1988Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗃';
+    content: "嗃";
   }
 `;
 
@@ -17916,7 +17914,7 @@ const Kanji1989Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗄';
+    content: "嗄";
   }
 `;
 
@@ -17925,7 +17923,7 @@ const Kanji1990Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗅';
+    content: "嗅";
   }
 `;
 
@@ -17934,7 +17932,7 @@ const Kanji1991Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗆';
+    content: "嗆";
   }
 `;
 
@@ -17943,7 +17941,7 @@ const Kanji1992Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗇';
+    content: "嗇";
   }
 `;
 
@@ -17952,7 +17950,7 @@ const Kanji1993Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗈';
+    content: "嗈";
   }
 `;
 
@@ -17961,7 +17959,7 @@ const Kanji1994Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗉';
+    content: "嗉";
   }
 `;
 
@@ -17970,7 +17968,7 @@ const Kanji1995Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗊';
+    content: "嗊";
   }
 `;
 
@@ -17979,7 +17977,7 @@ const Kanji1996Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗋';
+    content: "嗋";
   }
 `;
 
@@ -17988,7 +17986,7 @@ const Kanji1997Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗌';
+    content: "嗌";
   }
 `;
 
@@ -17997,7 +17995,7 @@ const Kanji1998Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗍';
+    content: "嗍";
   }
 `;
 
@@ -18006,7 +18004,7 @@ const Kanji1999Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗎';
+    content: "嗎";
   }
 `;
 
@@ -18015,7 +18013,7 @@ const Kanji2000Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗏';
+    content: "嗏";
   }
 `;
 
@@ -18024,7 +18022,7 @@ const Kanji2001Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗐';
+    content: "嗐";
   }
 `;
 
@@ -18033,7 +18031,7 @@ const Kanji2002Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗑';
+    content: "嗑";
   }
 `;
 
@@ -18042,7 +18040,7 @@ const Kanji2003Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗒';
+    content: "嗒";
   }
 `;
 
@@ -18051,7 +18049,7 @@ const Kanji2004Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗓';
+    content: "嗓";
   }
 `;
 
@@ -18060,7 +18058,7 @@ const Kanji2005Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗔';
+    content: "嗔";
   }
 `;
 
@@ -18069,7 +18067,7 @@ const Kanji2006Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗕';
+    content: "嗕";
   }
 `;
 
@@ -18078,7 +18076,7 @@ const Kanji2007Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗖';
+    content: "嗖";
   }
 `;
 
@@ -18087,7 +18085,7 @@ const Kanji2008Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗗';
+    content: "嗗";
   }
 `;
 
@@ -18096,7 +18094,7 @@ const Kanji2009Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗘';
+    content: "嗘";
   }
 `;
 
@@ -18105,7 +18103,7 @@ const Kanji2010Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗙';
+    content: "嗙";
   }
 `;
 
@@ -18114,7 +18112,7 @@ const Kanji2011Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗚';
+    content: "嗚";
   }
 `;
 
@@ -18123,7 +18121,7 @@ const Kanji2012Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗛';
+    content: "嗛";
   }
 `;
 
@@ -18132,7 +18130,7 @@ const Kanji2013Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗜';
+    content: "嗜";
   }
 `;
 
@@ -18141,7 +18139,7 @@ const Kanji2014Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗝';
+    content: "嗝";
   }
 `;
 
@@ -18150,7 +18148,7 @@ const Kanji2015Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗞';
+    content: "嗞";
   }
 `;
 
@@ -18159,7 +18157,7 @@ const Kanji2016Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗟';
+    content: "嗟";
   }
 `;
 
@@ -18168,7 +18166,7 @@ const Kanji2017Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗠';
+    content: "嗠";
   }
 `;
 
@@ -18177,7 +18175,7 @@ const Kanji2018Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗡';
+    content: "嗡";
   }
 `;
 
@@ -18186,7 +18184,7 @@ const Kanji2019Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗢';
+    content: "嗢";
   }
 `;
 
@@ -18195,7 +18193,7 @@ const Kanji2020Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗣';
+    content: "嗣";
   }
 `;
 
@@ -18204,7 +18202,7 @@ const Kanji2021Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗤';
+    content: "嗤";
   }
 `;
 
@@ -18213,7 +18211,7 @@ const Kanji2022Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗥';
+    content: "嗥";
   }
 `;
 
@@ -18222,7 +18220,7 @@ const Kanji2023Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗦';
+    content: "嗦";
   }
 `;
 
@@ -18231,7 +18229,7 @@ const Kanji2024Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗧';
+    content: "嗧";
   }
 `;
 
@@ -18240,7 +18238,7 @@ const Kanji2025Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗨';
+    content: "嗨";
   }
 `;
 
@@ -18249,7 +18247,7 @@ const Kanji2026Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗩';
+    content: "嗩";
   }
 `;
 
@@ -18258,7 +18256,7 @@ const Kanji2027Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗪';
+    content: "嗪";
   }
 `;
 
@@ -18267,7 +18265,7 @@ const Kanji2028Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗫';
+    content: "嗫";
   }
 `;
 
@@ -18276,7 +18274,7 @@ const Kanji2029Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗬';
+    content: "嗬";
   }
 `;
 
@@ -18285,7 +18283,7 @@ const Kanji2030Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗭';
+    content: "嗭";
   }
 `;
 
@@ -18294,7 +18292,7 @@ const Kanji2031Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗮';
+    content: "嗮";
   }
 `;
 
@@ -18303,7 +18301,7 @@ const Kanji2032Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗯';
+    content: "嗯";
   }
 `;
 
@@ -18312,7 +18310,7 @@ const Kanji2033Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗰';
+    content: "嗰";
   }
 `;
 
@@ -18321,7 +18319,7 @@ const Kanji2034Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗱';
+    content: "嗱";
   }
 `;
 
@@ -18330,7 +18328,7 @@ const Kanji2035Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗲';
+    content: "嗲";
   }
 `;
 
@@ -18339,7 +18337,7 @@ const Kanji2036Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗳';
+    content: "嗳";
   }
 `;
 
@@ -18348,7 +18346,7 @@ const Kanji2037Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗴';
+    content: "嗴";
   }
 `;
 
@@ -18357,7 +18355,7 @@ const Kanji2038Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗵';
+    content: "嗵";
   }
 `;
 
@@ -18366,7 +18364,7 @@ const Kanji2039Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗶';
+    content: "嗶";
   }
 `;
 
@@ -18375,7 +18373,7 @@ const Kanji2040Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗷';
+    content: "嗷";
   }
 `;
 
@@ -18384,7 +18382,7 @@ const Kanji2041Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗸';
+    content: "嗸";
   }
 `;
 
@@ -18393,7 +18391,7 @@ const Kanji2042Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗹';
+    content: "嗹";
   }
 `;
 
@@ -18402,7 +18400,7 @@ const Kanji2043Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗺';
+    content: "嗺";
   }
 `;
 
@@ -18411,7 +18409,7 @@ const Kanji2044Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗻';
+    content: "嗻";
   }
 `;
 
@@ -18420,7 +18418,7 @@ const Kanji2045Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗼';
+    content: "嗼";
   }
 `;
 
@@ -18429,7 +18427,7 @@ const Kanji2046Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗽';
+    content: "嗽";
   }
 `;
 
@@ -18438,7 +18436,7 @@ const Kanji2047Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗾';
+    content: "嗾";
   }
 `;
 
@@ -18447,7 +18445,7 @@ const Kanji2048Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嗿';
+    content: "嗿";
   }
 `;
 
@@ -18456,7 +18454,7 @@ const Kanji2049Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘀';
+    content: "嘀";
   }
 `;
 
@@ -18465,7 +18463,7 @@ const Kanji2050Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘁';
+    content: "嘁";
   }
 `;
 
@@ -18474,7 +18472,7 @@ const Kanji2051Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘂';
+    content: "嘂";
   }
 `;
 
@@ -18483,7 +18481,7 @@ const Kanji2052Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘃';
+    content: "嘃";
   }
 `;
 
@@ -18492,7 +18490,7 @@ const Kanji2053Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘄';
+    content: "嘄";
   }
 `;
 
@@ -18501,7 +18499,7 @@ const Kanji2054Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘅';
+    content: "嘅";
   }
 `;
 
@@ -18510,7 +18508,7 @@ const Kanji2055Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘆';
+    content: "嘆";
   }
 `;
 
@@ -18519,7 +18517,7 @@ const Kanji2056Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘇';
+    content: "嘇";
   }
 `;
 
@@ -18528,7 +18526,7 @@ const Kanji2057Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘈';
+    content: "嘈";
   }
 `;
 
@@ -18537,7 +18535,7 @@ const Kanji2058Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘉';
+    content: "嘉";
   }
 `;
 
@@ -18546,7 +18544,7 @@ const Kanji2059Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘊';
+    content: "嘊";
   }
 `;
 
@@ -18555,7 +18553,7 @@ const Kanji2060Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘋';
+    content: "嘋";
   }
 `;
 
@@ -18564,7 +18562,7 @@ const Kanji2061Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘌';
+    content: "嘌";
   }
 `;
 
@@ -18573,7 +18571,7 @@ const Kanji2062Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘍';
+    content: "嘍";
   }
 `;
 
@@ -18582,7 +18580,7 @@ const Kanji2063Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘎';
+    content: "嘎";
   }
 `;
 
@@ -18591,7 +18589,7 @@ const Kanji2064Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘏';
+    content: "嘏";
   }
 `;
 
@@ -18600,7 +18598,7 @@ const Kanji2065Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘐';
+    content: "嘐";
   }
 `;
 
@@ -18609,7 +18607,7 @@ const Kanji2066Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘑';
+    content: "嘑";
   }
 `;
 
@@ -18618,7 +18616,7 @@ const Kanji2067Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘒';
+    content: "嘒";
   }
 `;
 
@@ -18627,7 +18625,7 @@ const Kanji2068Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘓';
+    content: "嘓";
   }
 `;
 
@@ -18636,7 +18634,7 @@ const Kanji2069Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘔';
+    content: "嘔";
   }
 `;
 
@@ -18645,7 +18643,7 @@ const Kanji2070Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘕';
+    content: "嘕";
   }
 `;
 
@@ -18654,7 +18652,7 @@ const Kanji2071Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘖';
+    content: "嘖";
   }
 `;
 
@@ -18663,7 +18661,7 @@ const Kanji2072Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘗';
+    content: "嘗";
   }
 `;
 
@@ -18672,7 +18670,7 @@ const Kanji2073Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘘';
+    content: "嘘";
   }
 `;
 
@@ -18681,7 +18679,7 @@ const Kanji2074Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘙';
+    content: "嘙";
   }
 `;
 
@@ -18690,7 +18688,7 @@ const Kanji2075Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘚';
+    content: "嘚";
   }
 `;
 
@@ -18699,7 +18697,7 @@ const Kanji2076Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘛';
+    content: "嘛";
   }
 `;
 
@@ -18708,7 +18706,7 @@ const Kanji2077Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘜';
+    content: "嘜";
   }
 `;
 
@@ -18717,7 +18715,7 @@ const Kanji2078Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘝';
+    content: "嘝";
   }
 `;
 
@@ -18726,7 +18724,7 @@ const Kanji2079Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘞';
+    content: "嘞";
   }
 `;
 
@@ -18735,7 +18733,7 @@ const Kanji2080Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘟';
+    content: "嘟";
   }
 `;
 
@@ -18744,7 +18742,7 @@ const Kanji2081Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘠';
+    content: "嘠";
   }
 `;
 
@@ -18753,7 +18751,7 @@ const Kanji2082Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘡';
+    content: "嘡";
   }
 `;
 
@@ -18762,7 +18760,7 @@ const Kanji2083Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘢';
+    content: "嘢";
   }
 `;
 
@@ -18771,7 +18769,7 @@ const Kanji2084Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘣';
+    content: "嘣";
   }
 `;
 
@@ -18780,7 +18778,7 @@ const Kanji2085Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘤';
+    content: "嘤";
   }
 `;
 
@@ -18789,7 +18787,7 @@ const Kanji2086Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘥';
+    content: "嘥";
   }
 `;
 
@@ -18798,7 +18796,7 @@ const Kanji2087Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘦';
+    content: "嘦";
   }
 `;
 
@@ -18807,7 +18805,7 @@ const Kanji2088Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘧';
+    content: "嘧";
   }
 `;
 
@@ -18816,7 +18814,7 @@ const Kanji2089Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘨';
+    content: "嘨";
   }
 `;
 
@@ -18825,7 +18823,7 @@ const Kanji2090Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘩';
+    content: "嘩";
   }
 `;
 
@@ -18834,7 +18832,7 @@ const Kanji2091Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘪';
+    content: "嘪";
   }
 `;
 
@@ -18843,7 +18841,7 @@ const Kanji2092Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘫';
+    content: "嘫";
   }
 `;
 
@@ -18852,7 +18850,7 @@ const Kanji2093Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘬';
+    content: "嘬";
   }
 `;
 
@@ -18861,7 +18859,7 @@ const Kanji2094Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘭';
+    content: "嘭";
   }
 `;
 
@@ -18870,7 +18868,7 @@ const Kanji2095Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘮';
+    content: "嘮";
   }
 `;
 
@@ -18879,7 +18877,7 @@ const Kanji2096Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘯';
+    content: "嘯";
   }
 `;
 
@@ -18888,7 +18886,7 @@ const Kanji2097Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘰';
+    content: "嘰";
   }
 `;
 
@@ -18897,7 +18895,7 @@ const Kanji2098Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘱';
+    content: "嘱";
   }
 `;
 
@@ -18906,7 +18904,7 @@ const Kanji2099Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘲';
+    content: "嘲";
   }
 `;
 
@@ -18915,7 +18913,7 @@ const Kanji2100Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘳';
+    content: "嘳";
   }
 `;
 
@@ -18924,7 +18922,7 @@ const Kanji2101Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘴';
+    content: "嘴";
   }
 `;
 
@@ -18933,7 +18931,7 @@ const Kanji2102Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘵';
+    content: "嘵";
   }
 `;
 
@@ -18942,7 +18940,7 @@ const Kanji2103Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘶';
+    content: "嘶";
   }
 `;
 
@@ -18951,7 +18949,7 @@ const Kanji2104Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘷';
+    content: "嘷";
   }
 `;
 
@@ -18960,7 +18958,7 @@ const Kanji2105Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘸';
+    content: "嘸";
   }
 `;
 
@@ -18969,7 +18967,7 @@ const Kanji2106Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘹';
+    content: "嘹";
   }
 `;
 
@@ -18978,7 +18976,7 @@ const Kanji2107Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘺';
+    content: "嘺";
   }
 `;
 
@@ -18987,7 +18985,7 @@ const Kanji2108Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘻';
+    content: "嘻";
   }
 `;
 
@@ -18996,7 +18994,7 @@ const Kanji2109Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘼';
+    content: "嘼";
   }
 `;
 
@@ -19005,7 +19003,7 @@ const Kanji2110Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘽';
+    content: "嘽";
   }
 `;
 
@@ -19014,7 +19012,7 @@ const Kanji2111Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘾';
+    content: "嘾";
   }
 `;
 
@@ -19023,7 +19021,7 @@ const Kanji2112Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嘿';
+    content: "嘿";
   }
 `;
 
@@ -19032,7 +19030,7 @@ const Kanji2113Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噀';
+    content: "噀";
   }
 `;
 
@@ -19041,7 +19039,7 @@ const Kanji2114Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噁';
+    content: "噁";
   }
 `;
 
@@ -19050,7 +19048,7 @@ const Kanji2115Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噂';
+    content: "噂";
   }
 `;
 
@@ -19059,7 +19057,7 @@ const Kanji2116Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噃';
+    content: "噃";
   }
 `;
 
@@ -19068,7 +19066,7 @@ const Kanji2117Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噄';
+    content: "噄";
   }
 `;
 
@@ -19077,7 +19075,7 @@ const Kanji2118Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噅';
+    content: "噅";
   }
 `;
 
@@ -19086,7 +19084,7 @@ const Kanji2119Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噆';
+    content: "噆";
   }
 `;
 
@@ -19095,7 +19093,7 @@ const Kanji2120Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噇';
+    content: "噇";
   }
 `;
 
@@ -19104,7 +19102,7 @@ const Kanji2121Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噈';
+    content: "噈";
   }
 `;
 
@@ -19113,7 +19111,7 @@ const Kanji2122Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噉';
+    content: "噉";
   }
 `;
 
@@ -19122,7 +19120,7 @@ const Kanji2123Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噊';
+    content: "噊";
   }
 `;
 
@@ -19131,7 +19129,7 @@ const Kanji2124Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噋';
+    content: "噋";
   }
 `;
 
@@ -19140,7 +19138,7 @@ const Kanji2125Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噌';
+    content: "噌";
   }
 `;
 
@@ -19149,7 +19147,7 @@ const Kanji2126Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噍';
+    content: "噍";
   }
 `;
 
@@ -19158,7 +19156,7 @@ const Kanji2127Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噎';
+    content: "噎";
   }
 `;
 
@@ -19167,7 +19165,7 @@ const Kanji2128Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噏';
+    content: "噏";
   }
 `;
 
@@ -19176,7 +19174,7 @@ const Kanji2129Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噐';
+    content: "噐";
   }
 `;
 
@@ -19185,7 +19183,7 @@ const Kanji2130Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噑';
+    content: "噑";
   }
 `;
 
@@ -19194,7 +19192,7 @@ const Kanji2131Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噒';
+    content: "噒";
   }
 `;
 
@@ -19203,7 +19201,7 @@ const Kanji2132Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噓';
+    content: "噓";
   }
 `;
 
@@ -19212,7 +19210,7 @@ const Kanji2133Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噔';
+    content: "噔";
   }
 `;
 
@@ -19221,7 +19219,7 @@ const Kanji2134Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噕';
+    content: "噕";
   }
 `;
 
@@ -19230,7 +19228,7 @@ const Kanji2135Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噖';
+    content: "噖";
   }
 `;
 
@@ -19239,7 +19237,7 @@ const Kanji2136Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噗';
+    content: "噗";
   }
 `;
 
@@ -19248,7 +19246,7 @@ const Kanji2137Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噘';
+    content: "噘";
   }
 `;
 
@@ -19257,7 +19255,7 @@ const Kanji2138Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噙';
+    content: "噙";
   }
 `;
 
@@ -19266,7 +19264,7 @@ const Kanji2139Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噚';
+    content: "噚";
   }
 `;
 
@@ -19275,7 +19273,7 @@ const Kanji2140Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噛';
+    content: "噛";
   }
 `;
 
@@ -19284,7 +19282,7 @@ const Kanji2141Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噜';
+    content: "噜";
   }
 `;
 
@@ -19293,7 +19291,7 @@ const Kanji2142Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噝';
+    content: "噝";
   }
 `;
 
@@ -19302,7 +19300,7 @@ const Kanji2143Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噞';
+    content: "噞";
   }
 `;
 
@@ -19311,7 +19309,7 @@ const Kanji2144Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噟';
+    content: "噟";
   }
 `;
 
@@ -19320,7 +19318,7 @@ const Kanji2145Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噠';
+    content: "噠";
   }
 `;
 
@@ -19329,7 +19327,7 @@ const Kanji2146Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噡';
+    content: "噡";
   }
 `;
 
@@ -19338,7 +19336,7 @@ const Kanji2147Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噢';
+    content: "噢";
   }
 `;
 
@@ -19347,7 +19345,7 @@ const Kanji2148Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噣';
+    content: "噣";
   }
 `;
 
@@ -19356,7 +19354,7 @@ const Kanji2149Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噤';
+    content: "噤";
   }
 `;
 
@@ -19365,7 +19363,7 @@ const Kanji2150Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噥';
+    content: "噥";
   }
 `;
 
@@ -19374,7 +19372,7 @@ const Kanji2151Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噦';
+    content: "噦";
   }
 `;
 
@@ -19383,7 +19381,7 @@ const Kanji2152Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噧';
+    content: "噧";
   }
 `;
 
@@ -19392,7 +19390,7 @@ const Kanji2153Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '器';
+    content: "器";
   }
 `;
 
@@ -19401,7 +19399,7 @@ const Kanji2154Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噩';
+    content: "噩";
   }
 `;
 
@@ -19410,7 +19408,7 @@ const Kanji2155Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噪';
+    content: "噪";
   }
 `;
 
@@ -19419,7 +19417,7 @@ const Kanji2156Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噫';
+    content: "噫";
   }
 `;
 
@@ -19428,7 +19426,7 @@ const Kanji2157Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噬';
+    content: "噬";
   }
 `;
 
@@ -19437,7 +19435,7 @@ const Kanji2158Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噭';
+    content: "噭";
   }
 `;
 
@@ -19446,7 +19444,7 @@ const Kanji2159Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噮';
+    content: "噮";
   }
 `;
 
@@ -19455,7 +19453,7 @@ const Kanji2160Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噯';
+    content: "噯";
   }
 `;
 
@@ -19464,7 +19462,7 @@ const Kanji2161Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噰';
+    content: "噰";
   }
 `;
 
@@ -19473,7 +19471,7 @@ const Kanji2162Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噱';
+    content: "噱";
   }
 `;
 
@@ -19482,7 +19480,7 @@ const Kanji2163Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噲';
+    content: "噲";
   }
 `;
 
@@ -19491,7 +19489,7 @@ const Kanji2164Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噳';
+    content: "噳";
   }
 `;
 
@@ -19500,7 +19498,7 @@ const Kanji2165Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噴';
+    content: "噴";
   }
 `;
 
@@ -19509,7 +19507,7 @@ const Kanji2166Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噵';
+    content: "噵";
   }
 `;
 
@@ -19518,7 +19516,7 @@ const Kanji2167Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噶';
+    content: "噶";
   }
 `;
 
@@ -19527,7 +19525,7 @@ const Kanji2168Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噷';
+    content: "噷";
   }
 `;
 
@@ -19536,7 +19534,7 @@ const Kanji2169Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噸';
+    content: "噸";
   }
 `;
 
@@ -19545,7 +19543,7 @@ const Kanji2170Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噹';
+    content: "噹";
   }
 `;
 
@@ -19554,7 +19552,7 @@ const Kanji2171Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噺';
+    content: "噺";
   }
 `;
 
@@ -19563,7 +19561,7 @@ const Kanji2172Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噻';
+    content: "噻";
   }
 `;
 
@@ -19572,7 +19570,7 @@ const Kanji2173Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噼';
+    content: "噼";
   }
 `;
 
@@ -19581,7 +19579,7 @@ const Kanji2174Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噽';
+    content: "噽";
   }
 `;
 
@@ -19590,7 +19588,7 @@ const Kanji2175Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噾';
+    content: "噾";
   }
 `;
 
@@ -19599,7 +19597,7 @@ const Kanji2176Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '噿';
+    content: "噿";
   }
 `;
 
@@ -19608,7 +19606,7 @@ const Kanji2177Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚀';
+    content: "嚀";
   }
 `;
 
@@ -19617,7 +19615,7 @@ const Kanji2178Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚁';
+    content: "嚁";
   }
 `;
 
@@ -19626,7 +19624,7 @@ const Kanji2179Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚂';
+    content: "嚂";
   }
 `;
 
@@ -19635,7 +19633,7 @@ const Kanji2180Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚃';
+    content: "嚃";
   }
 `;
 
@@ -19644,7 +19642,7 @@ const Kanji2181Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚄';
+    content: "嚄";
   }
 `;
 
@@ -19653,7 +19651,7 @@ const Kanji2182Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚅';
+    content: "嚅";
   }
 `;
 
@@ -19662,7 +19660,7 @@ const Kanji2183Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚆';
+    content: "嚆";
   }
 `;
 
@@ -19671,7 +19669,7 @@ const Kanji2184Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚇';
+    content: "嚇";
   }
 `;
 
@@ -19680,7 +19678,7 @@ const Kanji2185Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚈';
+    content: "嚈";
   }
 `;
 
@@ -19689,7 +19687,7 @@ const Kanji2186Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚉';
+    content: "嚉";
   }
 `;
 
@@ -19698,7 +19696,7 @@ const Kanji2187Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚊';
+    content: "嚊";
   }
 `;
 
@@ -19707,7 +19705,7 @@ const Kanji2188Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚋';
+    content: "嚋";
   }
 `;
 
@@ -19716,7 +19714,7 @@ const Kanji2189Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚌';
+    content: "嚌";
   }
 `;
 
@@ -19725,7 +19723,7 @@ const Kanji2190Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚍';
+    content: "嚍";
   }
 `;
 
@@ -19734,7 +19732,7 @@ const Kanji2191Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚎';
+    content: "嚎";
   }
 `;
 
@@ -19743,7 +19741,7 @@ const Kanji2192Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚏';
+    content: "嚏";
   }
 `;
 
@@ -19752,7 +19750,7 @@ const Kanji2193Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚐';
+    content: "嚐";
   }
 `;
 
@@ -19761,7 +19759,7 @@ const Kanji2194Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚑';
+    content: "嚑";
   }
 `;
 
@@ -19770,7 +19768,7 @@ const Kanji2195Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚒';
+    content: "嚒";
   }
 `;
 
@@ -19779,7 +19777,7 @@ const Kanji2196Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚓';
+    content: "嚓";
   }
 `;
 
@@ -19788,7 +19786,7 @@ const Kanji2197Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚔';
+    content: "嚔";
   }
 `;
 
@@ -19797,7 +19795,7 @@ const Kanji2198Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚕';
+    content: "嚕";
   }
 `;
 
@@ -19806,7 +19804,7 @@ const Kanji2199Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚖';
+    content: "嚖";
   }
 `;
 
@@ -19815,7 +19813,7 @@ const Kanji2200Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚗';
+    content: "嚗";
   }
 `;
 
@@ -19824,7 +19822,7 @@ const Kanji2201Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚘';
+    content: "嚘";
   }
 `;
 
@@ -19833,7 +19831,7 @@ const Kanji2202Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚙';
+    content: "嚙";
   }
 `;
 
@@ -19842,7 +19840,7 @@ const Kanji2203Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚚';
+    content: "嚚";
   }
 `;
 
@@ -19851,7 +19849,7 @@ const Kanji2204Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚛';
+    content: "嚛";
   }
 `;
 
@@ -19860,7 +19858,7 @@ const Kanji2205Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚜';
+    content: "嚜";
   }
 `;
 
@@ -19869,7 +19867,7 @@ const Kanji2206Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚝';
+    content: "嚝";
   }
 `;
 
@@ -19878,7 +19876,7 @@ const Kanji2207Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚞';
+    content: "嚞";
   }
 `;
 
@@ -19887,7 +19885,7 @@ const Kanji2208Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚟';
+    content: "嚟";
   }
 `;
 
@@ -19896,7 +19894,7 @@ const Kanji2209Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚠';
+    content: "嚠";
   }
 `;
 
@@ -19905,7 +19903,7 @@ const Kanji2210Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚡';
+    content: "嚡";
   }
 `;
 
@@ -19914,7 +19912,7 @@ const Kanji2211Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚢';
+    content: "嚢";
   }
 `;
 
@@ -19923,7 +19921,7 @@ const Kanji2212Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚣';
+    content: "嚣";
   }
 `;
 
@@ -19932,7 +19930,7 @@ const Kanji2213Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚤';
+    content: "嚤";
   }
 `;
 
@@ -19941,7 +19939,7 @@ const Kanji2214Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚥';
+    content: "嚥";
   }
 `;
 
@@ -19950,7 +19948,7 @@ const Kanji2215Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚦';
+    content: "嚦";
   }
 `;
 
@@ -19959,7 +19957,7 @@ const Kanji2216Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚧';
+    content: "嚧";
   }
 `;
 
@@ -19968,7 +19966,7 @@ const Kanji2217Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚨';
+    content: "嚨";
   }
 `;
 
@@ -19977,7 +19975,7 @@ const Kanji2218Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚩';
+    content: "嚩";
   }
 `;
 
@@ -19986,7 +19984,7 @@ const Kanji2219Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚪';
+    content: "嚪";
   }
 `;
 
@@ -19995,7 +19993,7 @@ const Kanji2220Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚫';
+    content: "嚫";
   }
 `;
 
@@ -20004,7 +20002,7 @@ const Kanji2221Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚬';
+    content: "嚬";
   }
 `;
 
@@ -20013,7 +20011,7 @@ const Kanji2222Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚭';
+    content: "嚭";
   }
 `;
 
@@ -20022,7 +20020,7 @@ const Kanji2223Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚮';
+    content: "嚮";
   }
 `;
 
@@ -20031,7 +20029,7 @@ const Kanji2224Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚯';
+    content: "嚯";
   }
 `;
 
@@ -20040,7 +20038,7 @@ const Kanji2225Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚰';
+    content: "嚰";
   }
 `;
 
@@ -20049,7 +20047,7 @@ const Kanji2226Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚱';
+    content: "嚱";
   }
 `;
 
@@ -20058,7 +20056,7 @@ const Kanji2227Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚲';
+    content: "嚲";
   }
 `;
 
@@ -20067,7 +20065,7 @@ const Kanji2228Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚳';
+    content: "嚳";
   }
 `;
 
@@ -20076,7 +20074,7 @@ const Kanji2229Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚴';
+    content: "嚴";
   }
 `;
 
@@ -20085,7 +20083,7 @@ const Kanji2230Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚵';
+    content: "嚵";
   }
 `;
 
@@ -20094,7 +20092,7 @@ const Kanji2231Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚶';
+    content: "嚶";
   }
 `;
 
@@ -20103,7 +20101,7 @@ const Kanji2232Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚷';
+    content: "嚷";
   }
 `;
 
@@ -20112,7 +20110,7 @@ const Kanji2233Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚸';
+    content: "嚸";
   }
 `;
 
@@ -20121,7 +20119,7 @@ const Kanji2234Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚹';
+    content: "嚹";
   }
 `;
 
@@ -20130,7 +20128,7 @@ const Kanji2235Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚺';
+    content: "嚺";
   }
 `;
 
@@ -20139,7 +20137,7 @@ const Kanji2236Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚻';
+    content: "嚻";
   }
 `;
 
@@ -20148,7 +20146,7 @@ const Kanji2237Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚼';
+    content: "嚼";
   }
 `;
 
@@ -20157,7 +20155,7 @@ const Kanji2238Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚽';
+    content: "嚽";
   }
 `;
 
@@ -20166,7 +20164,7 @@ const Kanji2239Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚾';
+    content: "嚾";
   }
 `;
 
@@ -20175,7 +20173,7 @@ const Kanji2240Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '嚿';
+    content: "嚿";
   }
 `;
 
@@ -20184,7 +20182,7 @@ const Kanji2241Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囀';
+    content: "囀";
   }
 `;
 
@@ -20193,7 +20191,7 @@ const Kanji2242Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囁';
+    content: "囁";
   }
 `;
 
@@ -20202,7 +20200,7 @@ const Kanji2243Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囂';
+    content: "囂";
   }
 `;
 
@@ -20211,7 +20209,7 @@ const Kanji2244Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囃';
+    content: "囃";
   }
 `;
 
@@ -20220,7 +20218,7 @@ const Kanji2245Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囄';
+    content: "囄";
   }
 `;
 
@@ -20229,7 +20227,7 @@ const Kanji2246Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囅';
+    content: "囅";
   }
 `;
 
@@ -20238,7 +20236,7 @@ const Kanji2247Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囆';
+    content: "囆";
   }
 `;
 
@@ -20247,7 +20245,7 @@ const Kanji2248Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囇';
+    content: "囇";
   }
 `;
 
@@ -20256,7 +20254,7 @@ const Kanji2249Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囈';
+    content: "囈";
   }
 `;
 
@@ -20265,7 +20263,7 @@ const Kanji2250Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囉';
+    content: "囉";
   }
 `;
 
@@ -20274,7 +20272,7 @@ const Kanji2251Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囊';
+    content: "囊";
   }
 `;
 
@@ -20283,7 +20281,7 @@ const Kanji2252Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囋';
+    content: "囋";
   }
 `;
 
@@ -20292,7 +20290,7 @@ const Kanji2253Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囌';
+    content: "囌";
   }
 `;
 
@@ -20301,7 +20299,7 @@ const Kanji2254Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囍';
+    content: "囍";
   }
 `;
 
@@ -20310,7 +20308,7 @@ const Kanji2255Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囎';
+    content: "囎";
   }
 `;
 
@@ -20319,7 +20317,7 @@ const Kanji2256Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囏';
+    content: "囏";
   }
 `;
 
@@ -20328,7 +20326,7 @@ const Kanji2257Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囐';
+    content: "囐";
   }
 `;
 
@@ -20337,7 +20335,7 @@ const Kanji2258Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囑';
+    content: "囑";
   }
 `;
 
@@ -20346,7 +20344,7 @@ const Kanji2259Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囒';
+    content: "囒";
   }
 `;
 
@@ -20355,7 +20353,7 @@ const Kanji2260Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囓';
+    content: "囓";
   }
 `;
 
@@ -20364,7 +20362,7 @@ const Kanji2261Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囔';
+    content: "囔";
   }
 `;
 
@@ -20373,7 +20371,7 @@ const Kanji2262Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囕';
+    content: "囕";
   }
 `;
 
@@ -20382,7 +20380,7 @@ const Kanji2263Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囖';
+    content: "囖";
   }
 `;
 
@@ -20391,7 +20389,7 @@ const Kanji2264Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囗';
+    content: "囗";
   }
 `;
 
@@ -20400,7 +20398,7 @@ const Kanji2265Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囘';
+    content: "囘";
   }
 `;
 
@@ -20409,7 +20407,7 @@ const Kanji2266Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囙';
+    content: "囙";
   }
 `;
 
@@ -20418,7 +20416,7 @@ const Kanji2267Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囚';
+    content: "囚";
   }
 `;
 
@@ -20427,7 +20425,7 @@ const Kanji2268Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '四';
+    content: "四";
   }
 `;
 
@@ -20436,7 +20434,7 @@ const Kanji2269Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囜';
+    content: "囜";
   }
 `;
 
@@ -20445,7 +20443,7 @@ const Kanji2270Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囝';
+    content: "囝";
   }
 `;
 
@@ -20454,7 +20452,7 @@ const Kanji2271Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '回';
+    content: "回";
   }
 `;
 
@@ -20463,7 +20461,7 @@ const Kanji2272Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囟';
+    content: "囟";
   }
 `;
 
@@ -20472,7 +20470,7 @@ const Kanji2273Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '因';
+    content: "因";
   }
 `;
 
@@ -20481,7 +20479,7 @@ const Kanji2274Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囡';
+    content: "囡";
   }
 `;
 
@@ -20490,7 +20488,7 @@ const Kanji2275Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '团';
+    content: "团";
   }
 `;
 
@@ -20499,7 +20497,7 @@ const Kanji2276Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '団';
+    content: "団";
   }
 `;
 
@@ -20508,7 +20506,7 @@ const Kanji2277Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囤';
+    content: "囤";
   }
 `;
 
@@ -20517,7 +20515,7 @@ const Kanji2278Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囥';
+    content: "囥";
   }
 `;
 
@@ -20526,7 +20524,7 @@ const Kanji2279Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囦';
+    content: "囦";
   }
 `;
 
@@ -20535,7 +20533,7 @@ const Kanji2280Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囧';
+    content: "囧";
   }
 `;
 
@@ -20544,7 +20542,7 @@ const Kanji2281Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囨';
+    content: "囨";
   }
 `;
 
@@ -20553,7 +20551,7 @@ const Kanji2282Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囩';
+    content: "囩";
   }
 `;
 
@@ -20562,7 +20560,7 @@ const Kanji2283Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囪';
+    content: "囪";
   }
 `;
 
@@ -20571,7 +20569,7 @@ const Kanji2284Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囫';
+    content: "囫";
   }
 `;
 
@@ -20580,7 +20578,7 @@ const Kanji2285Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囬';
+    content: "囬";
   }
 `;
 
@@ -20589,7 +20587,7 @@ const Kanji2286Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '园';
+    content: "园";
   }
 `;
 
@@ -20598,7 +20596,7 @@ const Kanji2287Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囮';
+    content: "囮";
   }
 `;
 
@@ -20607,7 +20605,7 @@ const Kanji2288Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囯';
+    content: "囯";
   }
 `;
 
@@ -20616,7 +20614,7 @@ const Kanji2289Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '困';
+    content: "困";
   }
 `;
 
@@ -20625,7 +20623,7 @@ const Kanji2290Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囱';
+    content: "囱";
   }
 `;
 
@@ -20634,7 +20632,7 @@ const Kanji2291Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囲';
+    content: "囲";
   }
 `;
 
@@ -20643,7 +20641,7 @@ const Kanji2292Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '図';
+    content: "図";
   }
 `;
 
@@ -20652,7 +20650,7 @@ const Kanji2293Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '围';
+    content: "围";
   }
 `;
 
@@ -20661,7 +20659,7 @@ const Kanji2294Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囵';
+    content: "囵";
   }
 `;
 
@@ -20670,7 +20668,7 @@ const Kanji2295Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囶';
+    content: "囶";
   }
 `;
 
@@ -20679,7 +20677,7 @@ const Kanji2296Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囷';
+    content: "囷";
   }
 `;
 
@@ -20688,7 +20686,7 @@ const Kanji2297Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囸';
+    content: "囸";
   }
 `;
 
@@ -20697,7 +20695,7 @@ const Kanji2298Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囹';
+    content: "囹";
   }
 `;
 
@@ -20706,7 +20704,7 @@ const Kanji2299Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '固';
+    content: "固";
   }
 `;
 
@@ -20715,7 +20713,7 @@ const Kanji2300Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囻';
+    content: "囻";
   }
 `;
 
@@ -20724,7 +20722,7 @@ const Kanji2301Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囼';
+    content: "囼";
   }
 `;
 
@@ -20733,7 +20731,7 @@ const Kanji2302Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '国';
+    content: "国";
   }
 `;
 
@@ -20742,7 +20740,7 @@ const Kanji2303Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '图';
+    content: "图";
   }
 `;
 
@@ -20751,7 +20749,7 @@ const Kanji2304Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '囿';
+    content: "囿";
   }
 `;
 
@@ -20760,7 +20758,7 @@ const Kanji2305Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圀';
+    content: "圀";
   }
 `;
 
@@ -20769,7 +20767,7 @@ const Kanji2306Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圁';
+    content: "圁";
   }
 `;
 
@@ -20778,7 +20776,7 @@ const Kanji2307Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圂';
+    content: "圂";
   }
 `;
 
@@ -20787,7 +20785,7 @@ const Kanji2308Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圃';
+    content: "圃";
   }
 `;
 
@@ -20796,7 +20794,7 @@ const Kanji2309Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圄';
+    content: "圄";
   }
 `;
 
@@ -20805,7 +20803,7 @@ const Kanji2310Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圅';
+    content: "圅";
   }
 `;
 
@@ -20814,7 +20812,7 @@ const Kanji2311Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圆';
+    content: "圆";
   }
 `;
 
@@ -20823,7 +20821,7 @@ const Kanji2312Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圇';
+    content: "圇";
   }
 `;
 
@@ -20832,7 +20830,7 @@ const Kanji2313Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圈';
+    content: "圈";
   }
 `;
 
@@ -20841,7 +20839,7 @@ const Kanji2314Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圉';
+    content: "圉";
   }
 `;
 
@@ -20850,7 +20848,7 @@ const Kanji2315Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圊';
+    content: "圊";
   }
 `;
 
@@ -20859,7 +20857,7 @@ const Kanji2316Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '國';
+    content: "國";
   }
 `;
 
@@ -20868,7 +20866,7 @@ const Kanji2317Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圌';
+    content: "圌";
   }
 `;
 
@@ -20877,7 +20875,7 @@ const Kanji2318Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圍';
+    content: "圍";
   }
 `;
 
@@ -20886,7 +20884,7 @@ const Kanji2319Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圎';
+    content: "圎";
   }
 `;
 
@@ -20895,7 +20893,7 @@ const Kanji2320Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圏';
+    content: "圏";
   }
 `;
 
@@ -20904,7 +20902,7 @@ const Kanji2321Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圐';
+    content: "圐";
   }
 `;
 
@@ -20913,7 +20911,7 @@ const Kanji2322Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圑';
+    content: "圑";
   }
 `;
 
@@ -20922,7 +20920,7 @@ const Kanji2323Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '園';
+    content: "園";
   }
 `;
 
@@ -20931,7 +20929,7 @@ const Kanji2324Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圓';
+    content: "圓";
   }
 `;
 
@@ -20940,7 +20938,7 @@ const Kanji2325Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圔';
+    content: "圔";
   }
 `;
 
@@ -20949,7 +20947,7 @@ const Kanji2326Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圕';
+    content: "圕";
   }
 `;
 
@@ -20958,7 +20956,7 @@ const Kanji2327Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圖';
+    content: "圖";
   }
 `;
 
@@ -20967,7 +20965,7 @@ const Kanji2328Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圗';
+    content: "圗";
   }
 `;
 
@@ -20976,7 +20974,7 @@ const Kanji2329Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '團';
+    content: "團";
   }
 `;
 
@@ -20985,7 +20983,7 @@ const Kanji2330Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圙';
+    content: "圙";
   }
 `;
 
@@ -20994,7 +20992,7 @@ const Kanji2331Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圚';
+    content: "圚";
   }
 `;
 
@@ -21003,7 +21001,7 @@ const Kanji2332Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圛';
+    content: "圛";
   }
 `;
 
@@ -21012,7 +21010,7 @@ const Kanji2333Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圜';
+    content: "圜";
   }
 `;
 
@@ -21021,7 +21019,7 @@ const Kanji2334Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圝';
+    content: "圝";
   }
 `;
 
@@ -21030,7 +21028,7 @@ const Kanji2335Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圞';
+    content: "圞";
   }
 `;
 
@@ -21039,7 +21037,7 @@ const Kanji2336Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '土';
+    content: "土";
   }
 `;
 
@@ -21048,7 +21046,7 @@ const Kanji2337Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圠';
+    content: "圠";
   }
 `;
 
@@ -21057,7 +21055,7 @@ const Kanji2338Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圡';
+    content: "圡";
   }
 `;
 
@@ -21066,7 +21064,7 @@ const Kanji2339Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圢';
+    content: "圢";
   }
 `;
 
@@ -21075,7 +21073,7 @@ const Kanji2340Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圣';
+    content: "圣";
   }
 `;
 
@@ -21084,7 +21082,7 @@ const Kanji2341Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圤';
+    content: "圤";
   }
 `;
 
@@ -21093,7 +21091,7 @@ const Kanji2342Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圥';
+    content: "圥";
   }
 `;
 
@@ -21102,7 +21100,7 @@ const Kanji2343Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圦';
+    content: "圦";
   }
 `;
 
@@ -21111,7 +21109,7 @@ const Kanji2344Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圧';
+    content: "圧";
   }
 `;
 
@@ -21120,7 +21118,7 @@ const Kanji2345Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '在';
+    content: "在";
   }
 `;
 
@@ -21129,7 +21127,7 @@ const Kanji2346Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圩';
+    content: "圩";
   }
 `;
 
@@ -21138,7 +21136,7 @@ const Kanji2347Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圪';
+    content: "圪";
   }
 `;
 
@@ -21147,7 +21145,7 @@ const Kanji2348Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圫';
+    content: "圫";
   }
 `;
 
@@ -21156,7 +21154,7 @@ const Kanji2349Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圬';
+    content: "圬";
   }
 `;
 
@@ -21165,7 +21163,7 @@ const Kanji2350Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圭';
+    content: "圭";
   }
 `;
 
@@ -21174,7 +21172,7 @@ const Kanji2351Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圮';
+    content: "圮";
   }
 `;
 
@@ -21183,7 +21181,7 @@ const Kanji2352Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圯';
+    content: "圯";
   }
 `;
 
@@ -21192,7 +21190,7 @@ const Kanji2353Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '地';
+    content: "地";
   }
 `;
 
@@ -21201,7 +21199,7 @@ const Kanji2354Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圱';
+    content: "圱";
   }
 `;
 
@@ -21210,7 +21208,7 @@ const Kanji2355Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圲';
+    content: "圲";
   }
 `;
 
@@ -21219,7 +21217,7 @@ const Kanji2356Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圳';
+    content: "圳";
   }
 `;
 
@@ -21228,7 +21226,7 @@ const Kanji2357Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圴';
+    content: "圴";
   }
 `;
 
@@ -21237,7 +21235,7 @@ const Kanji2358Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圵';
+    content: "圵";
   }
 `;
 
@@ -21246,7 +21244,7 @@ const Kanji2359Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圶';
+    content: "圶";
   }
 `;
 
@@ -21255,7 +21253,7 @@ const Kanji2360Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圷';
+    content: "圷";
   }
 `;
 
@@ -21264,7 +21262,7 @@ const Kanji2361Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圸';
+    content: "圸";
   }
 `;
 
@@ -21273,7 +21271,7 @@ const Kanji2362Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圹';
+    content: "圹";
   }
 `;
 
@@ -21282,7 +21280,7 @@ const Kanji2363Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '场';
+    content: "场";
   }
 `;
 
@@ -21291,7 +21289,7 @@ const Kanji2364Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圻';
+    content: "圻";
   }
 `;
 
@@ -21300,7 +21298,7 @@ const Kanji2365Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圼';
+    content: "圼";
   }
 `;
 
@@ -21309,7 +21307,7 @@ const Kanji2366Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圽';
+    content: "圽";
   }
 `;
 
@@ -21318,7 +21316,7 @@ const Kanji2367Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圾';
+    content: "圾";
   }
 `;
 
@@ -21327,7 +21325,7 @@ const Kanji2368Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '圿';
+    content: "圿";
   }
 `;
 
@@ -21336,7 +21334,7 @@ const Kanji2369Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '址';
+    content: "址";
   }
 `;
 
@@ -21345,7 +21343,7 @@ const Kanji2370Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坁';
+    content: "坁";
   }
 `;
 
@@ -21354,7 +21352,7 @@ const Kanji2371Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坂';
+    content: "坂";
   }
 `;
 
@@ -21363,7 +21361,7 @@ const Kanji2372Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坃';
+    content: "坃";
   }
 `;
 
@@ -21372,7 +21370,7 @@ const Kanji2373Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坄';
+    content: "坄";
   }
 `;
 
@@ -21381,7 +21379,7 @@ const Kanji2374Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坅';
+    content: "坅";
   }
 `;
 
@@ -21390,7 +21388,7 @@ const Kanji2375Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坆';
+    content: "坆";
   }
 `;
 
@@ -21399,7 +21397,7 @@ const Kanji2376Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '均';
+    content: "均";
   }
 `;
 
@@ -21408,7 +21406,7 @@ const Kanji2377Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坈';
+    content: "坈";
   }
 `;
 
@@ -21417,7 +21415,7 @@ const Kanji2378Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坉';
+    content: "坉";
   }
 `;
 
@@ -21426,7 +21424,7 @@ const Kanji2379Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坊';
+    content: "坊";
   }
 `;
 
@@ -21435,7 +21433,7 @@ const Kanji2380Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坋';
+    content: "坋";
   }
 `;
 
@@ -21444,7 +21442,7 @@ const Kanji2381Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坌';
+    content: "坌";
   }
 `;
 
@@ -21453,7 +21451,7 @@ const Kanji2382Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坍';
+    content: "坍";
   }
 `;
 
@@ -21462,7 +21460,7 @@ const Kanji2383Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坎';
+    content: "坎";
   }
 `;
 
@@ -21471,7 +21469,7 @@ const Kanji2384Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坏';
+    content: "坏";
   }
 `;
 
@@ -21480,7 +21478,7 @@ const Kanji2385Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坐';
+    content: "坐";
   }
 `;
 
@@ -21489,7 +21487,7 @@ const Kanji2386Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坑';
+    content: "坑";
   }
 `;
 
@@ -21498,7 +21496,7 @@ const Kanji2387Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坒';
+    content: "坒";
   }
 `;
 
@@ -21507,7 +21505,7 @@ const Kanji2388Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坓';
+    content: "坓";
   }
 `;
 
@@ -21516,7 +21514,7 @@ const Kanji2389Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坔';
+    content: "坔";
   }
 `;
 
@@ -21525,7 +21523,7 @@ const Kanji2390Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坕';
+    content: "坕";
   }
 `;
 
@@ -21534,7 +21532,7 @@ const Kanji2391Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坖';
+    content: "坖";
   }
 `;
 
@@ -21543,7 +21541,7 @@ const Kanji2392Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '块';
+    content: "块";
   }
 `;
 
@@ -21552,7 +21550,7 @@ const Kanji2393Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坘';
+    content: "坘";
   }
 `;
 
@@ -21561,7 +21559,7 @@ const Kanji2394Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坙';
+    content: "坙";
   }
 `;
 
@@ -21570,7 +21568,7 @@ const Kanji2395Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坚';
+    content: "坚";
   }
 `;
 
@@ -21579,7 +21577,7 @@ const Kanji2396Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坛';
+    content: "坛";
   }
 `;
 
@@ -21588,7 +21586,7 @@ const Kanji2397Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坜';
+    content: "坜";
   }
 `;
 
@@ -21597,7 +21595,7 @@ const Kanji2398Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坝';
+    content: "坝";
   }
 `;
 
@@ -21606,7 +21604,7 @@ const Kanji2399Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坞';
+    content: "坞";
   }
 `;
 
@@ -21615,7 +21613,7 @@ const Kanji2400Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坟';
+    content: "坟";
   }
 `;
 
@@ -21624,7 +21622,7 @@ const Kanji2401Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坠';
+    content: "坠";
   }
 `;
 
@@ -21633,7 +21631,7 @@ const Kanji2402Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坡';
+    content: "坡";
   }
 `;
 
@@ -21642,7 +21640,7 @@ const Kanji2403Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坢';
+    content: "坢";
   }
 `;
 
@@ -21651,7 +21649,7 @@ const Kanji2404Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坣';
+    content: "坣";
   }
 `;
 
@@ -21660,7 +21658,7 @@ const Kanji2405Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坤';
+    content: "坤";
   }
 `;
 
@@ -21669,7 +21667,7 @@ const Kanji2406Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坥';
+    content: "坥";
   }
 `;
 
@@ -21678,7 +21676,7 @@ const Kanji2407Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坦';
+    content: "坦";
   }
 `;
 
@@ -21687,7 +21685,7 @@ const Kanji2408Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坧';
+    content: "坧";
   }
 `;
 
@@ -21696,7 +21694,7 @@ const Kanji2409Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坨';
+    content: "坨";
   }
 `;
 
@@ -21705,7 +21703,7 @@ const Kanji2410Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坩';
+    content: "坩";
   }
 `;
 
@@ -21714,7 +21712,7 @@ const Kanji2411Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坪';
+    content: "坪";
   }
 `;
 
@@ -21723,7 +21721,7 @@ const Kanji2412Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坫';
+    content: "坫";
   }
 `;
 
@@ -21732,7 +21730,7 @@ const Kanji2413Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坬';
+    content: "坬";
   }
 `;
 
@@ -21741,7 +21739,7 @@ const Kanji2414Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坭';
+    content: "坭";
   }
 `;
 
@@ -21750,7 +21748,7 @@ const Kanji2415Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坮';
+    content: "坮";
   }
 `;
 
@@ -21759,7 +21757,7 @@ const Kanji2416Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坯';
+    content: "坯";
   }
 `;
 
@@ -21768,7 +21766,7 @@ const Kanji2417Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坰';
+    content: "坰";
   }
 `;
 
@@ -21777,7 +21775,7 @@ const Kanji2418Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坱';
+    content: "坱";
   }
 `;
 
@@ -21786,7 +21784,7 @@ const Kanji2419Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坲';
+    content: "坲";
   }
 `;
 
@@ -21795,7 +21793,7 @@ const Kanji2420Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坳';
+    content: "坳";
   }
 `;
 
@@ -21804,7 +21802,7 @@ const Kanji2421Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坴';
+    content: "坴";
   }
 `;
 
@@ -21813,7 +21811,7 @@ const Kanji2422Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坵';
+    content: "坵";
   }
 `;
 
@@ -21822,7 +21820,7 @@ const Kanji2423Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坶';
+    content: "坶";
   }
 `;
 
@@ -21831,7 +21829,7 @@ const Kanji2424Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坷';
+    content: "坷";
   }
 `;
 
@@ -21840,7 +21838,7 @@ const Kanji2425Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坸';
+    content: "坸";
   }
 `;
 
@@ -21849,7 +21847,7 @@ const Kanji2426Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坹';
+    content: "坹";
   }
 `;
 
@@ -21858,7 +21856,7 @@ const Kanji2427Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坺';
+    content: "坺";
   }
 `;
 
@@ -21867,7 +21865,7 @@ const Kanji2428Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坻';
+    content: "坻";
   }
 `;
 
@@ -21876,7 +21874,7 @@ const Kanji2429Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坼';
+    content: "坼";
   }
 `;
 
@@ -21885,7 +21883,7 @@ const Kanji2430Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坽';
+    content: "坽";
   }
 `;
 
@@ -21894,7 +21892,7 @@ const Kanji2431Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坾';
+    content: "坾";
   }
 `;
 
@@ -21903,7 +21901,7 @@ const Kanji2432Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '坿';
+    content: "坿";
   }
 `;
 
@@ -21912,7 +21910,7 @@ const Kanji2433Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垀';
+    content: "垀";
   }
 `;
 
@@ -21921,7 +21919,7 @@ const Kanji2434Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垁';
+    content: "垁";
   }
 `;
 
@@ -21930,7 +21928,7 @@ const Kanji2435Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垂';
+    content: "垂";
   }
 `;
 
@@ -21939,7 +21937,7 @@ const Kanji2436Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垃';
+    content: "垃";
   }
 `;
 
@@ -21948,7 +21946,7 @@ const Kanji2437Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垄';
+    content: "垄";
   }
 `;
 
@@ -21957,7 +21955,7 @@ const Kanji2438Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垅';
+    content: "垅";
   }
 `;
 
@@ -21966,7 +21964,7 @@ const Kanji2439Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垆';
+    content: "垆";
   }
 `;
 
@@ -21975,7 +21973,7 @@ const Kanji2440Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垇';
+    content: "垇";
   }
 `;
 
@@ -21984,7 +21982,7 @@ const Kanji2441Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垈';
+    content: "垈";
   }
 `;
 
@@ -21993,7 +21991,7 @@ const Kanji2442Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垉';
+    content: "垉";
   }
 `;
 
@@ -22002,7 +22000,7 @@ const Kanji2443Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垊';
+    content: "垊";
   }
 `;
 
@@ -22011,7 +22009,7 @@ const Kanji2444Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '型';
+    content: "型";
   }
 `;
 
@@ -22020,7 +22018,7 @@ const Kanji2445Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垌';
+    content: "垌";
   }
 `;
 
@@ -22029,7 +22027,7 @@ const Kanji2446Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垍';
+    content: "垍";
   }
 `;
 
@@ -22038,7 +22036,7 @@ const Kanji2447Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垎';
+    content: "垎";
   }
 `;
 
@@ -22047,7 +22045,7 @@ const Kanji2448Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垏';
+    content: "垏";
   }
 `;
 
@@ -22056,7 +22054,7 @@ const Kanji2449Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垐';
+    content: "垐";
   }
 `;
 
@@ -22065,7 +22063,7 @@ const Kanji2450Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垑';
+    content: "垑";
   }
 `;
 
@@ -22074,7 +22072,7 @@ const Kanji2451Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垒';
+    content: "垒";
   }
 `;
 
@@ -22083,7 +22081,7 @@ const Kanji2452Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垓';
+    content: "垓";
   }
 `;
 
@@ -22092,7 +22090,7 @@ const Kanji2453Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垔';
+    content: "垔";
   }
 `;
 
@@ -22101,7 +22099,7 @@ const Kanji2454Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垕';
+    content: "垕";
   }
 `;
 
@@ -22110,7 +22108,7 @@ const Kanji2455Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垖';
+    content: "垖";
   }
 `;
 
@@ -22119,7 +22117,7 @@ const Kanji2456Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垗';
+    content: "垗";
   }
 `;
 
@@ -22128,7 +22126,7 @@ const Kanji2457Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垘';
+    content: "垘";
   }
 `;
 
@@ -22137,7 +22135,7 @@ const Kanji2458Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垙';
+    content: "垙";
   }
 `;
 
@@ -22146,7 +22144,7 @@ const Kanji2459Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垚';
+    content: "垚";
   }
 `;
 
@@ -22155,7 +22153,7 @@ const Kanji2460Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垛';
+    content: "垛";
   }
 `;
 
@@ -22164,7 +22162,7 @@ const Kanji2461Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垜';
+    content: "垜";
   }
 `;
 
@@ -22173,7 +22171,7 @@ const Kanji2462Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垝';
+    content: "垝";
   }
 `;
 
@@ -22182,7 +22180,7 @@ const Kanji2463Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垞';
+    content: "垞";
   }
 `;
 
@@ -22191,7 +22189,7 @@ const Kanji2464Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垟';
+    content: "垟";
   }
 `;
 
@@ -22200,7 +22198,7 @@ const Kanji2465Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垠';
+    content: "垠";
   }
 `;
 
@@ -22209,7 +22207,7 @@ const Kanji2466Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垡';
+    content: "垡";
   }
 `;
 
@@ -22218,7 +22216,7 @@ const Kanji2467Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垢';
+    content: "垢";
   }
 `;
 
@@ -22227,7 +22225,7 @@ const Kanji2468Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垣';
+    content: "垣";
   }
 `;
 
@@ -22236,7 +22234,7 @@ const Kanji2469Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垤';
+    content: "垤";
   }
 `;
 
@@ -22245,7 +22243,7 @@ const Kanji2470Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垥';
+    content: "垥";
   }
 `;
 
@@ -22254,7 +22252,7 @@ const Kanji2471Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垦';
+    content: "垦";
   }
 `;
 
@@ -22263,7 +22261,7 @@ const Kanji2472Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垧';
+    content: "垧";
   }
 `;
 
@@ -22272,7 +22270,7 @@ const Kanji2473Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垨';
+    content: "垨";
   }
 `;
 
@@ -22281,7 +22279,7 @@ const Kanji2474Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垩';
+    content: "垩";
   }
 `;
 
@@ -22290,7 +22288,7 @@ const Kanji2475Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垪';
+    content: "垪";
   }
 `;
 
@@ -22299,7 +22297,7 @@ const Kanji2476Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垫';
+    content: "垫";
   }
 `;
 
@@ -22308,7 +22306,7 @@ const Kanji2477Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垬';
+    content: "垬";
   }
 `;
 
@@ -22317,7 +22315,7 @@ const Kanji2478Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垭';
+    content: "垭";
   }
 `;
 
@@ -22326,7 +22324,7 @@ const Kanji2479Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垮';
+    content: "垮";
   }
 `;
 
@@ -22335,7 +22333,7 @@ const Kanji2480Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垯';
+    content: "垯";
   }
 `;
 
@@ -22344,7 +22342,7 @@ const Kanji2481Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垰';
+    content: "垰";
   }
 `;
 
@@ -22353,7 +22351,7 @@ const Kanji2482Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垱';
+    content: "垱";
   }
 `;
 
@@ -22362,7 +22360,7 @@ const Kanji2483Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垲';
+    content: "垲";
   }
 `;
 
@@ -22371,7 +22369,7 @@ const Kanji2484Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垳';
+    content: "垳";
   }
 `;
 
@@ -22380,7 +22378,7 @@ const Kanji2485Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垴';
+    content: "垴";
   }
 `;
 
@@ -22389,7 +22387,7 @@ const Kanji2486Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垵';
+    content: "垵";
   }
 `;
 
@@ -22398,7 +22396,7 @@ const Kanji2487Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垶';
+    content: "垶";
   }
 `;
 
@@ -22407,7 +22405,7 @@ const Kanji2488Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垷';
+    content: "垷";
   }
 `;
 
@@ -22416,7 +22414,7 @@ const Kanji2489Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垸';
+    content: "垸";
   }
 `;
 
@@ -22425,7 +22423,7 @@ const Kanji2490Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垹';
+    content: "垹";
   }
 `;
 
@@ -22434,7 +22432,7 @@ const Kanji2491Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垺';
+    content: "垺";
   }
 `;
 
@@ -22443,7 +22441,7 @@ const Kanji2492Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垻';
+    content: "垻";
   }
 `;
 
@@ -22452,7 +22450,7 @@ const Kanji2493Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垼';
+    content: "垼";
   }
 `;
 
@@ -22461,7 +22459,7 @@ const Kanji2494Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垽';
+    content: "垽";
   }
 `;
 
@@ -22470,7 +22468,7 @@ const Kanji2495Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垾';
+    content: "垾";
   }
 `;
 
@@ -22479,7 +22477,7 @@ const Kanji2496Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '垿';
+    content: "垿";
   }
 `;
 
@@ -22488,7 +22486,7 @@ const Kanji2497Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '埀';
+    content: "埀";
   }
 `;
 
@@ -22497,7 +22495,7 @@ const Kanji2498Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '埁';
+    content: "埁";
   }
 `;
 
@@ -22506,7 +22504,7 @@ const Kanji2499Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '埂';
+    content: "埂";
   }
 `;
 
@@ -22515,20 +22513,19 @@ const Kanji2500Character = styled(JapaneseCard)`
     display: block;
     font-size: 2em;
     color: #333;
-    content: '埃';
+    content: "埃";
   }
 `;
 
-
 const Wrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #eee;
-    gap: 1rem;
-    padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #eee;
+  gap: 1rem;
+  padding: 1rem;
 `;
 
 export const KanjiLetterComponentStyled: FunctionComponent = () => {
