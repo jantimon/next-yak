@@ -44,7 +44,7 @@ const Kanji${index + 1}Character = ${styled}(JapaneseCard)\`
   &:before {
     display: block;
     font-size: 2em;
-    color: #333;
+    color: #313131;
     content: '${kanji}';
   }
 \`;
