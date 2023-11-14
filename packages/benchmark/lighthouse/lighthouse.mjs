@@ -4,7 +4,7 @@ import { mkdirSync, readFileSync } from "fs";
 import path from "path";
 
 const __dirname = new URL(".", import.meta.url).pathname;
-const resultDir = path.resolve("./results");
+const resultDir = path.resolve(__dirname, "./results");
 const lighthouseArgs = "--preset=perf --only-categories=performance --chrome-flags=\"--headless\"";
 
 // run npm run build:
