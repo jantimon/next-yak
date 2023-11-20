@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   transition: background-color 0.5s ease-in-out;
   &:has(
       ${Input}:where(:hover, :focus),
-      ${PasswordInput}::where(:hover, :focus)
+      ${PasswordInput}:where(:hover, :focus)
     ) {
     background-color: #4c4c4cb9;
   }
