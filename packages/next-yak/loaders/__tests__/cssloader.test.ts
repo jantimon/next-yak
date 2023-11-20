@@ -193,7 +193,7 @@ const newHeadline = styled(headline).attrs({
       color: red;
      }
 
-    .yak_1 { 
+    .yak_2 { 
       color: black;
        }"
   `);
@@ -360,4 +360,60 @@ const FadeInButton = styled.button\`
     animation: 1s var(--🦬18fi82j0) ease-out;
    }"
 `);
+});
+
+
+it("should allow to target components", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled, keyframes } from "next-yak";
+
+const Link = styled.a\`
+  color: palevioletred;
+\`
+
+const Icon = styled.svg\`
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  \${Link}:hover & {
+    color: red;
+  }
+  \${Link}:focus & {
+    color: red;
+  }
+\`
+
+const Wrapper = styled.div\`
+  &:has(> \${Link}) {
+    padding: 10px;
+  }
+\`
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".yak_0 { 
+      color: palevioletred;
+     }
+
+    .yak_2 { 
+      fill: currentColor;
+      width: 1em;
+      height: 1em;
+      yak_1:hover & {
+        color: red;
+      }
+      yak_1:focus & {
+        color: red;
+      }
+     }
+
+    .yak_4 { 
+      &:has(> yak_1) {
+        padding: 10px;
+      }
+     }"
+  `);
 });

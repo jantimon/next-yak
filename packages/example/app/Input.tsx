@@ -20,10 +20,14 @@ const PasswordInput = styled(Input).attrs({
   border: 2px solid #167f8d;
 `;
 
-const Centered = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: background-color 0.5s ease-in-out;
+  &:has(${Input}:where(:hover, :focus), ${PasswordInput}:where(:hover, :focus)) {
+    background-color: #4c4c4cb9
+  }
 `;
 
 const Headline = styled.h2`
@@ -49,12 +53,12 @@ const Headline = styled.h2`
 
 export const Inputs = () => {
   return (
-    <Centered>
+    <Wrapper>
       <Headline>Styled Inputs</Headline>
       <Input placeholder="A small text input" />
       <Input $size="2rem" placeholder="A large text input" />
       <PasswordInput placeholder="A password input" />
       <PasswordInput $size="2rem" placeholder="A large password input" />
-    </Centered>
+    </Wrapper>
   );
 };

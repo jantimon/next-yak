@@ -4,6 +4,7 @@ const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
+const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 
 /** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
 
@@ -14,7 +15,7 @@ const localIdent = require("./lib/localIdent.cjs");
  *
  * @param {import("@babel/core")} babel
  * @param {YakBabelPluginOptions} options
- * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string, keyframes?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}>}
+ * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string, keyframes?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number, variableNameToStyledCall: Map<string, {wasAdded: boolean, className: string, astNode: import("@babel/types").CallExpression}>}>}
  */
 module.exports = function (babel, options) {
   const { replaces } = options;
@@ -36,6 +37,7 @@ module.exports = function (babel, options) {
       this.isImportedInCurrentFile = false;
       this.classNameCount = 0;
       this.varIndex = 0;
+      this.variableNameToStyledCall = new Map();
     },
     visitor: {
       /**
@@ -143,7 +145,28 @@ module.exports = function (babel, options) {
           return;
         }
 
-        replaceQuasiExpressionTokens(path.node.quasi, replaces, t);
+        replaceQuasiExpressionTokens(path.node.quasi, (name) => {
+          if (name in replaces) {
+            return replaces[name];
+          }
+          const styledCall = this.variableNameToStyledCall.get(name);
+          if (styledCall) {
+            const { wasAdded, className, astNode } = styledCall;
+            // on first usage of another styled component, add a
+            // the className to it so it can be targeted
+            if (!wasAdded) {
+              styledCall.wasAdded = true;
+              astNode.arguments.push(
+                t.memberExpression(
+                  t.identifier("__styleYak"),
+                  t.identifier(className)
+                )
+              );
+            }
+            return className;
+          }
+          return false;
+        }, t);
 
         // Keep the same selector for all quasis belonging to the same css block
         const classNameExpression = t.memberExpression(
@@ -246,6 +269,18 @@ module.exports = function (babel, options) {
 
         const styledCall = t.callExpression(tag, [...newArguments]);
         path.replaceWith(styledCall);
+
+        // Store reference to AST node to allow other components to target the styled literal inside css like
+        // e.g. `& ${Button} { ... }`
+        if (isStyledLiteral || isStyledCall || isAttrsCall) {
+          const variableName = getStyledComponentName(path);
+          // TODO: reuse existing class name if possible
+          this.variableNameToStyledCall.set(variableName, {
+            wasAdded: false,
+            className: localIdent(this.classNameCount++, "className"),
+            astNode: styledCall,
+          });
+        }
       },
     },
   };
