@@ -402,16 +402,16 @@ const Wrapper = styled.div\`
       fill: currentColor;
       width: 1em;
       height: 1em;
-      yak_1:hover & {
+      .yak_1:hover & {
         color: red;
       }
-      yak_1:focus & {
+      .yak_1:focus & {
         color: red;
       }
      }
 
     .yak_4 { 
-      &:has(> yak_1) {
+      &:has(> .yak_1) {
         padding: 10px;
       }
      }"
