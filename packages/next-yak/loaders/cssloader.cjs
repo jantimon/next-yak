@@ -221,8 +221,7 @@ module.exports = async function cssLoader(source) {
         });
       }
 
-      // Store reference to AST node to allow other components to target the styled literal inside css like
-      // e.g. `& ${Button} { ... }`
+      // Store class name of the created variable 
       if (isStyledLiteral || isStyledCall || isAttrsCall) {
         const variableName = getStyledComponentName(path);
         // TODO: reuse existing class name if possible
