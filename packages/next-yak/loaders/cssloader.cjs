@@ -4,6 +4,7 @@ const babel = require("@babel/core");
 const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const localIdent = require("./lib/localIdent.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
+const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative } = require("path");
 
@@ -64,6 +65,9 @@ module.exports = async function cssLoader(source) {
   let varIndex = 0;
   /** @type {string | null} */
   let hashedFile = null;
+
+  /** @type {Map<string, string>} */
+  const variableNameToStyledClassName = new Map();
 
   /**
    * find all css template literals in ast
@@ -151,8 +155,15 @@ module.exports = async function cssLoader(source) {
       ) {
         return;
       }
-
-      replaceQuasiExpressionTokens(path.node.quasi, replaces, t);
+      replaceQuasiExpressionTokens(path.node.quasi, (name) => {
+        if (name in replaces) {
+          return replaces[name];
+        }
+        if (variableNameToStyledClassName.has(name)) {
+          return variableNameToStyledClassName.get(name)
+        }
+        return false;
+      }, t);
 
       // Keep the same selector for all quasis belonging to the same css block
       const literalSelector = localIdent(
@@ -209,6 +220,19 @@ module.exports = async function cssLoader(source) {
           loc: quasi.loc?.start.line || 0,
         });
       }
+
+      // Store class name for the created variable for later replacements 
+      // e.g. const MyStyledDiv = styled.div`color: red;` 
+      // "MyStyledDiv" -> "selector-0"
+      if (isStyledLiteral || isStyledCall || isAttrsCall) {
+        const variableName = getStyledComponentName(path);
+        // TODO: reuse existing class name if possible
+        variableNameToStyledClassName.set(variableName, localIdent(
+          index++,
+          "selector"
+        ));
+      }
+
     },
   });
 

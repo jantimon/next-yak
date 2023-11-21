@@ -13,7 +13,12 @@ import type { YakTheme } from "./context/index.d.ts";
  */
 const yakForwardRef: <TProps>(
   component: ForwardRefRenderFunction<any, TProps>,
-) => FunctionComponent<TProps> = (component) =>
+) => FunctionComponent<TProps> & {
+  // type only identifier to allow targeting components
+  // e.g. styled.svg`${Button}:hover & { fill: red; }`
+  // warning: `__yak` is undefined during runtime
+  __yak: true;
+} = (component) =>
   Object.assign(React.forwardRef(component), { component }) as any;
 
 /**
@@ -86,7 +91,7 @@ const yakStyled = <
           // if the css component does not require arguments
           // it can be call without arguments and skip calling useTheme()
           //
-          // this is NOT against the rule of hooks as
+          // `__yak` is NOT against the rule of hooks as
           // getRuntimeStyles is a constant defined outside of the component
           //
           // for example
@@ -149,7 +154,12 @@ const yakStyled = <
 type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(
   styles: TemplateStringsArray,
   ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
-) => FunctionComponent<TCSSProps & T>;
+) => FunctionComponent<TCSSProps & T> & {
+  // type only identifier to allow targeting components
+  // e.g. styled.svg`${Button}:hover & { fill: red; }`
+  // warning: this is undefined during runtime
+  __yak: true;
+};
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,

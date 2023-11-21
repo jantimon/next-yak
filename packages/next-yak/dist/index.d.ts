@@ -6,7 +6,9 @@ type ComponentStyles<TProps = {}> = (props: TProps) => {
         [key: string]: string;
     };
 };
-type CSSInterpolation<TProps = {}> = string | number | undefined | null | false | ComponentStyles<TProps> | ((props: TProps) => CSSInterpolation<TProps>);
+type CSSInterpolation<TProps = {}> = string | number | undefined | null | false | ComponentStyles<TProps> | {
+    __yak: true;
+} | ((props: TProps) => CSSInterpolation<TProps>);
 type CSSFunction = <TProps = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps & {
     theme: YakTheme;
 }>[]) => ComponentStyles<TProps>;
@@ -51,7 +53,9 @@ type Attrs<TBaseProps, TIn extends object = {}, TOut extends AttrsMerged<TBasePr
  */
 type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<T & TCSSProps & {
     theme: YakTheme;
-}>>) => FunctionComponent<TCSSProps & T>;
+}>>) => FunctionComponent<TCSSProps & T> & {
+    __yak: true;
+};
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
  * as long as they attach the passed className prop to a DOM element.
@@ -67,10 +71,14 @@ type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(styles:
  */
 declare const styled: (<T>(Component: keyof JSX.IntrinsicElements | FunctionComponent<T>) => (<TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<T & TCSSProps & {
     theme: YakTheme;
-}>[]) => FunctionComponent<FastOmit<TCSSProps & T, never>>) & {
+}>[]) => FunctionComponent<FastOmit<TCSSProps & T, never>> & {
+    __yak: true;
+}) & {
     attrs: <TAttrsIn extends object = {}, TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>>(attrs: Attrs<T, TAttrsIn, TAttrsOut>) => <TCSSProps_1 extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<T & TCSSProps_1 & {
         theme: YakTheme;
-    }>[]) => FunctionComponent<Substitute<TCSSProps_1 & T, TAttrsIn>>;
+    }>[]) => FunctionComponent<Substitute<TCSSProps_1 & T, TAttrsIn>> & {
+        __yak: true;
+    };
 }) & {
     symbol: StyledLiteral<React.SVGProps<SVGSymbolElement>> & {
         attrs: <TAttrsIn_1 extends object = {}, TAttrsOut_1 extends AttrsMerged<React.SVGProps<SVGSymbolElement>, TAttrsIn_1> = AttrsMerged<React.SVGProps<SVGSymbolElement>, TAttrsIn_1>>(attrs: Attrs<React.SVGProps<SVGSymbolElement>, TAttrsIn_1, TAttrsOut_1>) => StyledLiteral<Substitute<React.SVGProps<SVGSymbolElement>, TAttrsIn_1>>;

@@ -21,42 +21,42 @@
  * ```
  *
  * @param {import("@babel/types").TemplateLiteral} quasi
- * @param {Record<string, unknown>} replaces
+ * @param {(name: string) => unknown} replacer
  * @param {import("@babel/types")} t
  */
-module.exports = function replaceTokensInQuasiExpressions(quasi, replaces, t) {
+module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
   for (let i = 0; i < quasi.expressions.length; i++) {
     const expression = quasi.expressions[i];
     // replace direct identifiers e.g. ${query}
     if (t.isIdentifier(expression)) {
-      if (!(expression.name in replaces)) {
+      const replacement = replacer(expression.name);
+      if (replacement === false) {
         continue;
       }
-      const replacement = replaces[expression.name];
       replaceExpressionAndMergeQuasis(quasi, i, replacement);
       i--;
     } 
     // replace member expressions e.g. ${query.xs}
     // replace deeply nested member expressions e.g. ${query.xs.min}
     else if (t.isMemberExpression(expression) && t.isIdentifier(expression.object)) {
-      if (!(expression.object.name in replaces)) {
+      /** @type {any} */
+      let replacement = replacer(expression.object.name);
+      if (replacement === false) {
         continue;
       }
       /** @type {import("@babel/types").Expression} */
       let object = expression;
-      /** @type {any} */
-      let value = replaces[expression.object.name];
       while (t.isMemberExpression(object)) {
         if (!t.isIdentifier(object.property)) {
           break;
         }
-        if (typeof value !== "object" || value === null) {
+        if (typeof replacement !== "object" || replacement === null) {
           break;
         }
-        value = value[object.property.name];
+        replacement = replacement[object.property.name];
         object = object.object;
       }
-      replaceExpressionAndMergeQuasis(quasi, i, value);
+      replaceExpressionAndMergeQuasis(quasi, i, replacement);
       i--;
     }
   }
