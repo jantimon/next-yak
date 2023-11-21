@@ -221,7 +221,9 @@ module.exports = async function cssLoader(source) {
         });
       }
 
-      // Store class name of the created variable 
+      // Store class name for the created variable for later replacements 
+      // e.g. const MyStyledDiv = styled.div`color: red;` 
+      // "MyStyledDiv" -> "selector-0"
       if (isStyledLiteral || isStyledCall || isAttrsCall) {
         const variableName = getStyledComponentName(path);
         // TODO: reuse existing class name if possible
