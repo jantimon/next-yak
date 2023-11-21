@@ -13,9 +13,9 @@
     "codspeed:run": "NODE_ENV=production node ./codspeed/dist/index.bench.mjs"
   },
   "dependencies": {
-    "next": "canary",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next": "14.0.3",
+    "react": "18.3.0-canary-bbb9cb116-20231117",
+    "react-dom": "18.3.0-canary-bbb9cb116-20231117",
     "next-yak": "workspace:*",
     "styled-components": "6.1.1"
   },
