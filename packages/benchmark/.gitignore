@@ -33,5 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-benchmark/lighthouse
+lighthouse/results
 codspeed/dist
