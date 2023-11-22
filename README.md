@@ -262,7 +262,7 @@ Special thanks to the contributors and the inspiring projects that influenced ne
   - Linaria: For its innovative approach to zero-runtime CSS in JS and efficient styling solutions.
   - Emotion: For pushing the boundaries of CSS-in-JS and providing a high-performance styling experience.
   - Vanilla Extract: For its focus on type-safe, zero-runtime CSS and contributing to the evolution of styling techniques.
-  - Tailwind CSS 🌈: For its exceptional atomic CSS approach, enabling efficient and customizable styling solutions.
+  - Tailwind CSS: For its exceptional atomic CSS approach, enabling efficient and customizable styling solutions.
 
 ## License
 
@@ -271,5 +271,3 @@ Special thanks to the contributors and the inspiring projects that influenced ne
 ---
 
 Feel free to reach out with any questions, issues, or suggestions!
-
-[GitHub Repository](https://github.com/jantimon/next-yak)
