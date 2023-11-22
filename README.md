@@ -1,40 +1,45 @@
 # next-yak
 
-yet another CSS-in-JS library
-
-a CSS-in-JS with the power of "dynamic at the speed and reliability of static" 🙃
-
-the initial version of next-yak will only work for next.js
-
 ![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/2dcaf443-7205-4ef3-ba44-fbbe3ef2807d)
 
+[![npm version](https://badge.fury.io/js/next-yak.svg)](https://www.npmjs.com/package/next-yak)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jantimon/next-yak/blob/main/LICENSE)
 
-## Example
+**next-yak** is a CSS-in-JS solution tailored for [Next.js](https://nextjs.org/) that seamlessly combines the expressive power of styled-components syntax with efficient build-time extraction of CSS using Next.js's built-in CSS configuration.
 
-Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
+## Features
 
-```tsx
-import { styled, css } from "next-yak";
+- **Build-time Extraction**: Minimize runtime overhead by extracting CSS at build time, leveraging Next.js CSS configuration.
+  
+- **Minimal Runtime Footprint**: Enjoy a small runtime footprint as only CSS class names need to be applied during runtime, with no additional CSS added to the CSSOM.
 
-const Title = styled.h1<{ x: number; children: React.ReactNode }>`
-  display: block;
-  ${({ $x }) => $x % 2 === 0 && css`color: red`}
-  position: relative;
-  top: ${({ $x }) => `${$x * 100}px`};
-`;
+- **Optimized for Production**: Benefit from optimized, minified, and vendor-prefixed CSS generated during build time, resulting in a highly performant solution.
 
-const App = () => (
-  <Title $x={3}>
-    Hello World
-  </Title>
-);
-```
+- **Atomic CSS Integration**: Easily combine with existing atomic CSS solutions like Tailwind CSS for a customized and efficient styling approach.
+
+- **Inspired by the Best**: Incorporates ideas from Styled-Components, Linaria, Emotion, and Vanilla Extract to offer a powerful yet intuitive styling experience.
 
 ## Installation
 
 ```bash
 npm install next-yak
 ```
+
+or
+
+```bash
+yarn add next-yak
+```
+
+## Getting Started
+
+Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
+
+### Locally
+
+1. Install **next-yak** in your Next.js project.
+
+2. Add next-yak to your `nex.config.js`:
 
 ```js
 // next.config.js
@@ -45,6 +50,105 @@ const nextConfig = {
 };
 
 module.exports = withYak(nextConfig);
+```
+
+3. Ready to go:
+
+```jsx
+// pages/index.js
+import { styled } from 'next-yak';
+
+const StyledDiv = styled.div`
+  color: #333;
+  padding: 16px;
+  background-color: #f0f0f0;
+`;
+
+function HomePage() {
+  return <StyledDiv>Hello, next-yak!</StyledDiv>;
+}
+
+export default HomePage;
+```
+
+## More Examples
+
+### Dynamic Styles
+
+Dynamic Styles will only toggle the css class during runtime:
+
+```jsx
+import { styled, css } from 'next-yak';
+
+const ToggleButton = styled.button`
+  ${props => props.$active
+     ? css`background-color: green`
+     : css`background-color: lime`
+  };
+  color: white;
+  padding: 10px 20px;
+`;
+```
+
+### Dynamic Properties
+
+Dynamic Styles will use [custom properties (aka css variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) under the hood to extract the CSS at built time but modify properties at runtime:
+
+```jsx
+import { styled } from 'next-yak';
+
+const ProgressBar = styled.div`
+  width: ${props => `${props.$percent}%`};
+  height: 20px;
+  background-color: #3498db;
+  transition: width 0.3s ease-in-out;
+`;
+
+const ProgressBarContainer = styled.div`
+  border: 1px solid #ccc;
+`;
+
+const ExampleComponent = () => {
+  const progress = 75; // You can dynamically set this value
+
+  return (
+    <ProgressBarContainer>
+      <ProgressBar $percent={progress} />
+    </ProgressBarContainer>
+  );
+};
+```
+
+### Targeting Components
+
+In next-yak, you can target other components directly using CSS selectors as long as they are **in the same file**:
+
+```jsx
+import { styled, keyframes } from 'next-yak';
+
+const flip = keyframes`
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+`;
+
+const Glow = styled.div`
+  /* Add your Glow component styles here */
+`;
+
+const Text = styled.span`
+  display: inline-block;
+  ${Glow}:hover & {
+    animation: 1.5s ${flip} ease-out;
+  }
+`;
+
+const ExampleComponent = () => {
+  return (
+    <Glow>
+      <Text>This text will flip on hover.</Text>
+    </Glow>
+  );
+};
 ```
 
 ## Nesting
@@ -127,7 +231,7 @@ const Button = styled.button`
 
 ## Todos:
 
-This is a proof of concept. There are a lot of things that need to be done before this can be used in production:
+next-yak is currently in the development phase, with several todos that must be completed before it is ready for production:
 
  - [ ] improve js parsing - right now it not reusing babel..
  - [ ] better sourcemaps
@@ -150,6 +254,22 @@ This is a proof of concept. There are a lot of things that need to be done befor
   
 </details>
 
-## Prior art
+## Acknowledgments
 
-This POC is heavily inspried by [styled-components](https://styled-components.com/), [emotion](https://emotion.sh/docs/introduction) and [linaria](https://github.com/callstack/linaria).
+Special thanks to the contributors and the inspiring projects that influenced next-yak:
+
+  - Styled-Components 💅: For pioneering the styled syntax and redefining styling in the React ecosystem.
+  - Linaria: For its innovative approach to zero-runtime CSS in JS and efficient styling solutions.
+  - Emotion: For pushing the boundaries of CSS-in-JS and providing a high-performance styling experience.
+  - Vanilla Extract: For its focus on type-safe, zero-runtime CSS and contributing to the evolution of styling techniques.
+  - Tailwind CSS 🌈: For its exceptional atomic CSS approach, enabling efficient and customizable styling solutions.
+
+## License
+
+**next-yak** is licensed under the [MIT License](link/to/LICENSE).
+
+---
+
+Feel free to reach out with any questions, issues, or suggestions!
+
+[GitHub Repository](https://github.com/jantimon/next-yak)
