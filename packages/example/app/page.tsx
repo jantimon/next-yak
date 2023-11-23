@@ -109,7 +109,7 @@ export default function Home() {
   return (
     <YakThemeProvider>
       <main className={styles.main}>
-        <Headline>Hello world</Headline>
+        <Headline>Hello Test</Headline>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">
