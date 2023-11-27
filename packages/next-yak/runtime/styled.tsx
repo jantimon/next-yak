@@ -74,7 +74,7 @@ const yakStyled = <
   Component: FunctionComponent<T> | HtmlTags,
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
 ) => {
-  return <TCSSProps extends Record<string, unknown> = {}>(
+  return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
@@ -151,7 +151,7 @@ const yakStyled = <
  * Type for the proxy object returned by `styled` that allows to
  * access all html tags as properties.
  */
-type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(
+type StyledLiteral<T> = <TCSSProps = {}>(
   styles: TemplateStringsArray,
   ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
 ) => FunctionComponent<TCSSProps & T> & {
