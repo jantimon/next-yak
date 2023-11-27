@@ -51,7 +51,7 @@ type Attrs<TBaseProps, TIn extends object = {}, TOut extends AttrsMerged<TBasePr
  * Type for the proxy object returned by `styled` that allows to
  * access all html tags as properties.
  */
-type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<T & TCSSProps & {
+type StyledLiteral<T> = <TCSSProps = {}>(styles: TemplateStringsArray, ...values: Array<CSSInterpolation<T & TCSSProps & {
     theme: YakTheme;
 }>>) => FunctionComponent<TCSSProps & T> & {
     __yak: true;
@@ -69,12 +69,12 @@ type StyledLiteral<T> = <TCSSProps extends Record<string, unknown> = {}>(styles:
  * `;
  * ```
  */
-declare const styled: (<T>(Component: keyof JSX.IntrinsicElements | FunctionComponent<T>) => (<TCSSProps extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<T & TCSSProps & {
+declare const styled: (<T>(Component: keyof JSX.IntrinsicElements | FunctionComponent<T>) => (<TCSSProps extends object = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<T & TCSSProps & {
     theme: YakTheme;
 }>[]) => FunctionComponent<FastOmit<TCSSProps & T, never>> & {
     __yak: true;
 }) & {
-    attrs: <TAttrsIn extends object = {}, TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>>(attrs: Attrs<T, TAttrsIn, TAttrsOut>) => <TCSSProps_1 extends Record<string, unknown> = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<T & TCSSProps_1 & {
+    attrs: <TAttrsIn extends object = {}, TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>>(attrs: Attrs<T, TAttrsIn, TAttrsOut>) => <TCSSProps_1 extends object = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<T & TCSSProps_1 & {
         theme: YakTheme;
     }>[]) => FunctionComponent<Substitute<TCSSProps_1 & T, TAttrsIn>> & {
         __yak: true;
