@@ -20,20 +20,22 @@ module.exports = async function cssLoader(source) {
   const isYakFile = /\.yak\.(j|t)sx?$/.test(resourcePath.matches);
   // The user may import constants from a yak file
   // e.g. import { primary } from './colors.yak'
-  // 
+  //
   // However .yak files inside .yak files are not be compiled
   // to avoid performance overhead
   const importedYakConstants = isYakFile ? [] : getYakImports(source);
   /** @type {Record<string, unknown>} */
   const replaces = {};
-  await Promise.all(importedYakConstants.map(async ({imports, from}) => {
-    const constantValues = await this.importModule(from, {
-      layer: "yak-importModule",
-    });
-    imports.forEach(({localName, importedName}) => {
-      replaces[localName] = constantValues[importedName];
-    });
-  }));
+  await Promise.all(
+    importedYakConstants.map(async ({ imports, from }) => {
+      const constantValues = await this.importModule(from, {
+        layer: "yak-importModule",
+      });
+      imports.forEach(({ localName, importedName }) => {
+        replaces[localName] = constantValues[importedName];
+      });
+    })
+  );
 
   // parse source with babel
   const ast = babel.parseSync(source, {
@@ -155,19 +157,33 @@ module.exports = async function cssLoader(source) {
       ) {
         return;
       }
-      replaceQuasiExpressionTokens(path.node.quasi, (name) => {
-        if (name in replaces) {
-          return replaces[name];
-        }
-        if (variableNameToStyledClassName.has(name)) {
-          return variableNameToStyledClassName.get(name)
-        }
-        return false;
-      }, t);
+      // Store class name for the created variable for later replacements
+      // e.g. const MyStyledDiv = styled.div`color: red;`
+      // "MyStyledDiv" -> "selector-0"
+      const variableName =
+        isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
+          ? getStyledComponentName(path)
+          : "_yak";
+
+      replaceQuasiExpressionTokens(
+        path.node.quasi,
+        (name) => {
+          if (name in replaces) {
+            return replaces[name];
+          }
+          if (variableNameToStyledClassName.has(name)) {
+            return variableNameToStyledClassName.get(name);
+          }
+          return false;
+        },
+        t
+      );
 
       // Keep the same selector for all quasis belonging to the same css block
+      const literalSelectorIndex = index++;
       const literalSelector = localIdent(
-        index++,
+        variableName,
+        literalSelectorIndex,
         isKeyFrameLiteral ? "keyframes" : "selector"
       );
 
@@ -221,18 +237,15 @@ module.exports = async function cssLoader(source) {
         });
       }
 
-      // Store class name for the created variable for later replacements 
-      // e.g. const MyStyledDiv = styled.div`color: red;` 
+      // Store class name for the created variable for later replacements
+      // e.g. const MyStyledDiv = styled.div`color: red;`
       // "MyStyledDiv" -> "selector-0"
       if (isStyledLiteral || isStyledCall || isAttrsCall) {
-        const variableName = getStyledComponentName(path);
-        // TODO: reuse existing class name if possible
-        variableNameToStyledClassName.set(variableName, localIdent(
-          index++,
-          "selector"
-        ));
+        variableNameToStyledClassName.set(
+          variableName,
+          localIdent(variableName, literalSelectorIndex, "selector")
+        );
       }
-
     },
   });
 

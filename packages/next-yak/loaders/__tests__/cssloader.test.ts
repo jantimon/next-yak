@@ -6,13 +6,13 @@ const loaderContext = {
   rootContext: "/some",
   importModule: () => {
     return {
-        queries: {
-          sm: "@media (min-width: 640px)",
-          md: "@media (min-width: 768px)",
-          lg: "@media (min-width: 1024px)",
-          xl: "@media (min-width: 1280px)",
-          xxl: "@media (min-width: 1536px)",
-        },
+      queries: {
+        sm: "@media (min-width: 640px)",
+        md: "@media (min-width: 768px)",
+        lg: "@media (min-width: 1024px)",
+        xl: "@media (min-width: 1280px)",
+        xxl: "@media (min-width: 1536px)",
+      },
     };
   },
   getOptions: () => ({
@@ -41,7 +41,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 { 
+      "._yak_0 { 
         font-size: 2rem;
         font-weight: bold;
         color: red;
@@ -78,21 +78,21 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 { 
+      "._yak_0 { 
         font-size: 2rem;
         font-weight: bold;
         color: red;
          }
 
-      .yak_1 { 
+      ._yak_1 { 
           color: blue;
          }
 
-      .yak_2 { 
+      ._yak_2 { 
           color: blue;
          }
 
-      .yak_0 { 
+      ._yak_0 { 
         &:hover {
           color: var(--🦬18fi82j0);
         }
@@ -118,7 +118,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_1 { 
+      "._yak_1 { 
           color: blue;
          }"
     `);
@@ -141,7 +141,7 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    "._yak_0 { 
       &:hover {
         color: var(--🦬18fi82j0);
       }
@@ -164,7 +164,7 @@ const headline = styled.input.attrs({
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    ".headline_0 { 
       color: red;
        }"
   `);
@@ -189,11 +189,11 @@ const newHeadline = styled(headline).attrs({
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    ".headline_0 { 
       color: red;
      }
 
-    .yak_2 { 
+    .newHeadline_1 { 
       color: black;
        }"
   `);
@@ -215,12 +215,12 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    "._yak_0 { 
       transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
       display: block;
        }
 
-    .yak_1 { color: orange }"
+    ._yak_1 { color: orange }"
   `);
 });
 
@@ -244,7 +244,7 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    "._yak_0 { 
       color: blue;
       @media (min-width: 640px) {
         color: red;
@@ -253,7 +253,7 @@ const headline = css\`
       display: block;
        }
 
-    .yak_1 { color: orange }"
+    ._yak_1 { color: orange }"
   `);
 });
 
@@ -277,7 +277,7 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    "._yak_0 { 
       color: blue;
       @media (min-width: 640px) {
         color: red;
@@ -286,7 +286,7 @@ const headline = css\`
       display: block;
        }
 
-    .yak_1 { color: orange }"
+    ._yak_1 { color: orange }"
   `);
 });
 
@@ -312,16 +312,16 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-  ".yak_0 { 
-    :before {
-      content: \\"\\\\2022\\";
-    }
-    :after {
-      content: \\"\\\\2022\\";
-    }
-    content: \\"\\\\\\\\\\"
-   }"
-`);
+    "._yak_0 { 
+      :before {
+        content: \\"\\\\2022\\";
+      }
+      :after {
+        content: \\"\\\\2022\\";
+      }
+      content: \\"\\\\\\\\\\"
+     }"
+  `);
 });
 
 it("should convert keyframes", async () => {
@@ -347,21 +347,20 @@ const FadeInButton = styled.button\`
 `
     )
   ).toMatchInlineSnapshot(`
-  "@keyframes yak_animation_0 { 
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-   }
+    "@keyframes fadeIn_0 { 
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+     }
 
-  .yak_1 { 
-    animation: 1s var(--🦬18fi82j0) ease-out;
-   }"
-`);
+    .FadeInButton_1 { 
+      animation: 1s var(--🦬18fi82j0) ease-out;
+     }"
+  `);
 });
-
 
 it("should allow to target components", async () => {
   expect(
@@ -394,24 +393,54 @@ const Wrapper = styled.div\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".yak_0 { 
+    ".Link_0 { 
       color: palevioletred;
      }
 
-    .yak_2 { 
+    .Icon_1 { 
       fill: currentColor;
       width: 1em;
       height: 1em;
-      .yak_1:hover & {
+      .Link_0:hover & {
         color: red;
       }
-      .yak_1:focus & {
+      .Link_0:focus & {
         color: red;
       }
      }
 
-    .yak_4 { 
-      &:has(> .yak_1) {
+    .Wrapper_2 { 
+      &:has(> .Link_0) {
+        padding: 10px;
+      }
+     }"
+  `);
+});
+
+it("should allow to target components even if they don't have styles", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled, keyframes } from "next-yak";
+
+const Link = styled.a\`
+\`
+
+const Icon = styled.svg\`
+\`
+
+const Wrapper = styled.div\`
+  &:has(> \${Icon}) {
+    padding: 10px;
+  }
+\`
+
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".Wrapper_2 { 
+      &:has(> .Icon_1) {
         padding: 10px;
       }
      }"

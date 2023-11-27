@@ -145,35 +145,50 @@ module.exports = function (babel, options) {
           return;
         }
 
-        replaceQuasiExpressionTokens(path.node.quasi, (name) => {
-          if (name in replaces) {
-            return replaces[name];
-          }
-          const styledCall = this.variableNameToStyledCall.get(name);
-          if (styledCall) {
-            const { wasAdded, className, astNode } = styledCall;
-            // on first usage of another styled component, add a
-            // the className to it so it can be targeted
-            if (!wasAdded) {
-              styledCall.wasAdded = true;
-              astNode.arguments.push(
-                t.memberExpression(
-                  t.identifier("__styleYak"),
-                  t.identifier(className)
-                )
-              );
-            }
-            return className;
-          }
-          return false;
-        }, t);
+        // Store class name for the created variable for later replacements
+        // e.g. const MyStyledDiv = styled.div`color: red;`
+        // "MyStyledDiv" -> "selector-0"
+        const variableName =
+          isStyledLiteral || isStyledCall || isAttrsCall || isKeyframesLiteral
+            ? getStyledComponentName(path)
+            : "_yak";
 
+        replaceQuasiExpressionTokens(
+          path.node.quasi,
+          (name) => {
+            if (name in replaces) {
+              return replaces[name];
+            }
+            const styledCall = this.variableNameToStyledCall.get(name);
+            if (styledCall) {
+              const { wasAdded, className, astNode } = styledCall;
+              // on first usage of another styled component, add a
+              // the className to it so it can be targeted
+              if (!wasAdded) {
+                styledCall.wasAdded = true;
+                astNode.arguments.push(
+                  t.memberExpression(
+                    t.identifier("__styleYak"),
+                    t.identifier(className)
+                  )
+                );
+              }
+              return className;
+            }
+            return false;
+          },
+          t
+        );
+
+        let literalSelectorWasUsed = false;
+        const literalSelectorIndex = this.classNameCount++;
         // Keep the same selector for all quasis belonging to the same css block
         const classNameExpression = t.memberExpression(
           t.identifier("__styleYak"),
           t.identifier(
             localIdent(
-              this.classNameCount++,
+              variableName,
+              literalSelectorIndex,
               isKeyframesLiteral ? "animation" : "className"
             )
           )
@@ -203,6 +218,7 @@ module.exports = function (babel, options) {
 
           // AutoGenerate a unique className
           newArguments.add(classNameExpression);
+          literalSelectorWasUsed = true;
 
           let isMerging = false;
           // loop over all quasis belonging to the same css block
@@ -273,11 +289,13 @@ module.exports = function (babel, options) {
         // Store reference to AST node to allow other components to target the styled literal inside css like
         // e.g. `& ${Button} { ... }`
         if (isStyledLiteral || isStyledCall || isAttrsCall) {
-          const variableName = getStyledComponentName(path);
-          // TODO: reuse existing class name if possible
           this.variableNameToStyledCall.set(variableName, {
-            wasAdded: false,
-            className: localIdent(this.classNameCount++, "className"),
+            wasAdded: literalSelectorWasUsed,
+            className: localIdent(
+              variableName,
+              literalSelectorIndex,
+              "className"
+            ),
             astNode: styledCall,
           });
         }
