@@ -92,7 +92,7 @@ const ToggleButton = styled.button`
 
 ### Dynamic Properties
 
-Dynamic Styles will use [custom properties (aka css variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) under the hood to extract the CSS at built time but modify properties at runtime:
+Dynamic Properties will use custom properties ([aka css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)) under the hood to extract the CSS at built time but modify properties at runtime:
 
 ```jsx
 import { styled } from 'next-yak';
