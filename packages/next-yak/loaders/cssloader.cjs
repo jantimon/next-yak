@@ -34,7 +34,7 @@ module.exports = async function cssLoader(source) {
       imports.forEach(({ localName, importedName }) => {
         replaces[localName] = constantValues[importedName];
       });
-    })
+    }),
   );
 
   // parse source with babel
@@ -127,7 +127,7 @@ module.exports = async function cssLoader(source) {
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.MemberExpression} */ (tag).object
+          /** @type {babel.types.MemberExpression} */ (tag).object,
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.MemberExpression} */ (tag).object
@@ -136,7 +136,7 @@ module.exports = async function cssLoader(source) {
       const isStyledCall =
         t.isCallExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.CallExpression} */ (tag).callee
+          /** @type {babel.types.CallExpression} */ (tag).callee,
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.CallExpression} */ (tag).callee
@@ -176,7 +176,7 @@ module.exports = async function cssLoader(source) {
           }
           return false;
         },
-        t
+        t,
       );
 
       // Keep the same selector for all quasis belonging to the same css block
@@ -184,14 +184,12 @@ module.exports = async function cssLoader(source) {
       const literalSelector = localIdent(
         variableName,
         literalSelectorIndex,
-        isKeyFrameLiteral ? "keyframes" : "selector"
+        isKeyFrameLiteral ? "keyframes" : "selector",
       );
 
       // Replace the tagged template expression with a call to the 'styled' function
       const quasis = path.node.quasi.quasis;
-      const quasiTypes = quasis.map((quasi) =>
-        quasiClassifier(quasi.value.raw)
-      );
+      const quasiTypes = quasis.map((quasi) => quasiClassifier(quasi.value.raw, []));
 
       for (let i = 0; i < quasis.length; i++) {
         const quasi = quasis[i];
@@ -206,8 +204,8 @@ module.exports = async function cssLoader(source) {
           const type = quasiTypes[i];
           // expressions after a partial css are converted into css variables
           if (
-            type.partialStart ||
-            type.partialEnd ||
+            type.unknownSelector ||
+            type.insideCssValue ||
             (isMerging && type.empty)
           ) {
             isMerging = true;
@@ -243,7 +241,7 @@ module.exports = async function cssLoader(source) {
       if (isStyledLiteral || isStyledCall || isAttrsCall) {
         variableNameToStyledClassName.set(
           variableName,
-          localIdent(variableName, literalSelectorIndex, "selector")
+          localIdent(variableName, literalSelectorIndex, "selector"),
         );
       }
     },
