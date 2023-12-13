@@ -62,9 +62,9 @@ module.exports = function (babel, options) {
           t.importDeclaration(
             [t.importDefaultSpecifier(t.identifier("__styleYak"))],
             t.stringLiteral(
-              `./${fileName}.yak.module.css!=!./${fileName}?./${fileName}.yak.module.css`
-            )
-          )
+              `./${fileName}.yak.module.css!=!./${fileName}?./${fileName}.yak.module.css`,
+            ),
+          ),
         );
 
         // Process import specifiers
@@ -115,7 +115,7 @@ module.exports = function (babel, options) {
         const isStyledLiteral =
           t.isMemberExpression(tag) &&
           t.isIdentifier(
-            /** @type {babel.types.MemberExpression} */ (tag).object
+            /** @type {babel.types.MemberExpression} */ (tag).object,
           ) &&
           /** @type {babel.types.Identifier} */ (
             /** @type {babel.types.MemberExpression} */ (tag).object
@@ -123,7 +123,7 @@ module.exports = function (babel, options) {
         const isStyledCall =
           t.isCallExpression(tag) &&
           t.isIdentifier(
-            /** @type {babel.types.CallExpression} */ (tag).callee
+            /** @type {babel.types.CallExpression} */ (tag).callee,
           ) &&
           /** @type {babel.types.Identifier} */ (
             /** @type {babel.types.CallExpression} */ (tag).callee
@@ -169,15 +169,15 @@ module.exports = function (babel, options) {
                 astNode.arguments.push(
                   t.memberExpression(
                     t.identifier("__styleYak"),
-                    t.identifier(className)
-                  )
+                    t.identifier(className),
+                  ),
                 );
               }
               return className;
             }
             return false;
           },
-          t
+          t,
         );
 
         let literalSelectorWasUsed = false;
@@ -189,17 +189,21 @@ module.exports = function (babel, options) {
             localIdent(
               variableName,
               literalSelectorIndex,
-              isKeyframesLiteral ? "animation" : "className"
-            )
-          )
+              isKeyframesLiteral ? "animation" : "className",
+            ),
+          ),
         );
 
         // Replace the tagged template expression with a call to the 'styled' function
         const newArguments = new Set();
         const quasis = path.node.quasi.quasis;
-        const quasiTypes = quasis.map((quasi) =>
-          quasiClassifier(quasi.value.raw)
-        );
+        /** @type {string[]} */
+        let currentNestingScopes = [];
+        const quasiTypes = quasis.map((quasi) => {
+          const classification = quasiClassifier(quasi.value.raw, currentNestingScopes);
+          currentNestingScopes = classification.currentNestingScopes;
+          return classification;
+        });
         const expressions = path.node.quasi.expressions;
 
         let cssVariablesInlineStyle;
@@ -226,8 +230,8 @@ module.exports = function (babel, options) {
             const type = quasiTypes[i];
             // expressions after a partial css are converted into css variables
             if (
-              type.partialStart ||
-              type.partialEnd ||
+              type.unknownSelector ||
+              type.insideCssValue ||
               (isMerging && type.empty)
             ) {
               isMerging = true;
@@ -249,7 +253,7 @@ module.exports = function (babel, options) {
                 }
                 const relativePath = relative(
                   rootContext,
-                  resolve(rootContext, resourcePath)
+                  resolve(rootContext, resourcePath),
                 );
                 hashedFile = murmurhash2_32_gc(relativePath);
               }
@@ -257,14 +261,23 @@ module.exports = function (babel, options) {
               cssVariablesInlineStyle.properties.push(
                 t.objectProperty(
                   t.stringLiteral(`--🦬${hashedFile}${this.varIndex++}`),
-                  /** @type {babel.types.Expression} */ (expression)
-                )
+                  /** @type {babel.types.Expression} */ (expression),
+                ),
               );
             } else if (type.empty) {
-              // empty quasis can be ignored
+              // empty quasis can be ignored in typescript
               // e.g. `transition: color ${duration} ${easing};`
+              //                                    ^
             } else {
               if (expressions[i]) {
+                if (quasiTypes[i].currentNestingScopes.length > 0) {
+                  const errorExpression = expressions[i];
+                  const name = errorExpression.type === "Identifier" ? `"${errorExpression.name}"` : "Expression";
+                  const line = errorExpression.loc?.start.line || -1
+                  throw new InvalidPositionError(
+                    `Expressions are not allowed inside nested selectors:\n${line !== -1 ? `line ${line}: ` : ""}found ${name} inside "${quasiTypes[i].currentNestingScopes.join(" { ")} {"`,
+                  );
+                }
                 newArguments.add(expressions[i]);
               }
               break;
@@ -277,9 +290,9 @@ module.exports = function (babel, options) {
             t.objectExpression([
               t.objectProperty(
                 t.stringLiteral(`style`),
-                cssVariablesInlineStyle
+                cssVariablesInlineStyle,
               ),
-            ])
+            ]),
           );
         }
 
@@ -294,7 +307,7 @@ module.exports = function (babel, options) {
             className: localIdent(
               variableName,
               literalSelectorIndex,
-              "className"
+              "className",
             ),
             astNode: styledCall,
           });
@@ -303,3 +316,14 @@ module.exports = function (babel, options) {
     },
   };
 };
+
+class InvalidPositionError extends Error {
+  /**
+   * @param {string} message
+   */
+  constructor(message) {
+    super(message);
+  }
+}
+
+module.exports.InvalidPositionError = InvalidPositionError;

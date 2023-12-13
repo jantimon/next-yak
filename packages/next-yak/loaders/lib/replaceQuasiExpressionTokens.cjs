@@ -35,10 +35,13 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
       }
       replaceExpressionAndMergeQuasis(quasi, i, replacement);
       i--;
-    } 
+    }
     // replace member expressions e.g. ${query.xs}
     // replace deeply nested member expressions e.g. ${query.xs.min}
-    else if (t.isMemberExpression(expression) && t.isIdentifier(expression.object)) {
+    else if (
+      t.isMemberExpression(expression) &&
+      t.isIdentifier(expression.object)
+    ) {
       /** @type {any} */
       let replacement = replacer(expression.object.name);
       if (replacement === false) {
@@ -60,7 +63,7 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
       i--;
     }
   }
-}
+};
 
 /**
  * Replace tokens with predefined values
@@ -69,9 +72,16 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
  * @param {unknown} replacement
  */
 function replaceExpressionAndMergeQuasis(quasi, expressionIndex, replacement) {
-  const stringReplacement = typeof replacement === "string" ? replacement : replacement == null ? "" : JSON.stringify(replacement);
+  const stringReplacement =
+    typeof replacement === "string"
+      ? replacement
+      : replacement == null
+      ? ""
+      : JSON.stringify(replacement);
   quasi.expressions.splice(expressionIndex, 1);
-  quasi.quasis[expressionIndex].value.raw += stringReplacement + quasi.quasis[expressionIndex + 1].value.raw;
-  quasi.quasis[expressionIndex].value.cooked += stringReplacement + quasi.quasis[expressionIndex + 1].value.cooked;
+  quasi.quasis[expressionIndex].value.raw +=
+    stringReplacement + quasi.quasis[expressionIndex + 1].value.raw;
+  quasi.quasis[expressionIndex].value.cooked +=
+    stringReplacement + quasi.quasis[expressionIndex + 1].value.cooked;
   quasi.quasis.splice(expressionIndex + 1, 1);
 }

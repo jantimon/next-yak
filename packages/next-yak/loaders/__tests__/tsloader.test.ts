@@ -166,13 +166,12 @@ const FancyButton = styled(Button)\`
       const FancyButton = styled(Button)(__styleYak.FancyButton_2);"
     `);
   });
-});
 
-it("should support attrs on intrinsic elements", async () => {
-  expect(
-    await tsloader.call(
-      loaderContext,
-      `
+  it("should support attrs on intrinsic elements", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
 import { styled } from "next-yak";
 
 const headline = styled.input.attrs({
@@ -181,21 +180,21 @@ const headline = styled.input.attrs({
   color: red;
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "import { styled } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
     const headline = styled.input.attrs({
       type: \\"text\\"
     })(__styleYak.headline_0);"
   `);
-});
+  });
 
-it("should support attrs on wrapped elements", async () => {
-  expect(
-    await tsloader.call(
-      loaderContext,
-      `
+  it("should support attrs on wrapped elements", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
 import { styled } from "next-yak";
 
 const headline = styled.input\`
@@ -208,8 +207,8 @@ const newHeadline = styled(headline).attrs({
   color: black;
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "import { styled } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
     const headline = styled.input(__styleYak.headline_0);
@@ -217,13 +216,13 @@ const newHeadline = styled(headline).attrs({
       type: \\"text\\"
     })(__styleYak.newHeadline_1);"
   `);
-});
+  });
 
-it("should support css variables with spaces", async () => {
-  expect(
-    await tsloader.call(
-      loaderContext,
-      `
+  it("should support css variables with spaces", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 import { easing } from "styleguide";
@@ -235,8 +234,8 @@ const headline = css\`
   \${css\`color: blue\`}
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "import styles from \\"./page.module.css\\";
     import { css } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -250,13 +249,13 @@ const headline = css\`
       }
     });"
   `);
-});
+  });
 
-it("should convert keyframes", async () => {
-  expect(
-    await tsloader.call(
-      loaderContext,
-      `
+  it("should convert keyframes", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { styled, keyframes } from "next-yak";
 
@@ -273,8 +272,8 @@ const FadeInButton = styled.button\`
   animation: 1s \${fadeIn} ease-out;
 \`
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
   "import styles from \\"./page.module.css\\";
   import { styled, keyframes } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -285,13 +284,13 @@ const FadeInButton = styled.button\`
     }
   });"
 `);
-});
+  });
 
-it("should allow to target components", async () => {
-  expect(
-    await tsloader.call(
-      loaderContext,
-      `
+  it("should allow to target components", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
 import { styled, keyframes } from "next-yak";
 
 const Link = styled.a\`
@@ -317,21 +316,21 @@ const Wrapper = styled.div\`
 \`
 
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "import { styled, keyframes } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
     const Link = styled.a(__styleYak.Link_0);
     const Icon = styled.svg(__styleYak.Icon_1);
     const Wrapper = styled.div(__styleYak.Wrapper_2);"
   `);
-});
+  });
 
-it("should allow to target components even if they don't have styles", async () => {
-  expect(
-    await tsloader.call(
-      loaderContext,
-      `
+  it("should allow to target components even if they don't have styles", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
 import { styled, keyframes } from "next-yak";
 
 const Link = styled.a\`
@@ -347,12 +346,65 @@ const Wrapper = styled.div\`
 \`
 
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "import { styled, keyframes } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
     const Link = styled.a();
     const Icon = styled.svg(__styleYak.Icon_1);
     const Wrapper = styled.div(__styleYak.Wrapper_2);"
   `);
+  });
+
+  it("should show error when mixin is used in nested selector", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const bold = css\`
+  font-weight: bold;
+\`
+
+const Icon = styled.div\`
+  @media (min-width: 640px) {
+    .bar {
+      \${bold}
+    }
+  }
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+    "/some/special/path/page.tsx: Expressions are not allowed inside nested selectors:
+    line 11: found \\"bold\\" inside \\"@media (min-width: 640px) { .bar {\\""
+  `);
+  });
+
+  it("should show error when mixin is used in nested selector inside a css", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const bold = css\`
+  font-weight: bold;
+\`
+
+const Icon = styled.div\`
+  @media (min-width: 640px) {
+    .bar {
+      \${() => css\`\${bold}\`}
+    }
+  }
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+    "/some/special/path/page.tsx: Expressions are not allowed inside nested selectors:
+    line 11: found Expression inside \\"@media (min-width: 640px) { .bar {\\""
+  `);
+  });
 });
