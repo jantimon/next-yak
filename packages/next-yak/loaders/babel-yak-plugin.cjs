@@ -62,9 +62,9 @@ module.exports = function (babel, options) {
           t.importDeclaration(
             [t.importDefaultSpecifier(t.identifier("__styleYak"))],
             t.stringLiteral(
-              `./${fileName}.yak.module.css!=!./${fileName}?./${fileName}.yak.module.css`,
-            ),
-          ),
+              `./${fileName}.yak.module.css!=!./${fileName}?./${fileName}.yak.module.css`
+            )
+          )
         );
 
         // Process import specifiers
@@ -115,7 +115,7 @@ module.exports = function (babel, options) {
         const isStyledLiteral =
           t.isMemberExpression(tag) &&
           t.isIdentifier(
-            /** @type {babel.types.MemberExpression} */ (tag).object,
+            /** @type {babel.types.MemberExpression} */ (tag).object
           ) &&
           /** @type {babel.types.Identifier} */ (
             /** @type {babel.types.MemberExpression} */ (tag).object
@@ -123,7 +123,7 @@ module.exports = function (babel, options) {
         const isStyledCall =
           t.isCallExpression(tag) &&
           t.isIdentifier(
-            /** @type {babel.types.CallExpression} */ (tag).callee,
+            /** @type {babel.types.CallExpression} */ (tag).callee
           ) &&
           /** @type {babel.types.Identifier} */ (
             /** @type {babel.types.CallExpression} */ (tag).callee
@@ -169,15 +169,15 @@ module.exports = function (babel, options) {
                 astNode.arguments.push(
                   t.memberExpression(
                     t.identifier("__styleYak"),
-                    t.identifier(className),
-                  ),
+                    t.identifier(className)
+                  )
                 );
               }
               return className;
             }
             return false;
           },
-          t,
+          t
         );
 
         let literalSelectorWasUsed = false;
@@ -189,9 +189,9 @@ module.exports = function (babel, options) {
             localIdent(
               variableName,
               literalSelectorIndex,
-              isKeyframesLiteral ? "animation" : "className",
-            ),
-          ),
+              isKeyframesLiteral ? "animation" : "className"
+            )
+          )
         );
 
         // Replace the tagged template expression with a call to the 'styled' function
@@ -200,7 +200,10 @@ module.exports = function (babel, options) {
         /** @type {string[]} */
         let currentNestingScopes = [];
         const quasiTypes = quasis.map((quasi) => {
-          const classification = quasiClassifier(quasi.value.raw, currentNestingScopes);
+          const classification = quasiClassifier(
+            quasi.value.raw,
+            currentNestingScopes
+          );
           currentNestingScopes = classification.currentNestingScopes;
           return classification;
         });
@@ -209,7 +212,26 @@ module.exports = function (babel, options) {
         let cssVariablesInlineStyle;
 
         for (let i = 0; i < quasis.length; i++) {
-          if (quasiTypes[i].empty) {
+          const type = quasiTypes[i];
+          if (type.unknownSelector) {
+            const expression = expressions[i - 1];
+            if (!expression) {
+              throw new Error(`Invalid css "${quasis[i].value.raw}"`);
+            }
+            let errorText = "Expressions are not allowed as selectors";
+            const line = expression.loc?.start.line || -1;
+            if (expression.start && expression.end) {
+              errorText += `:\n${
+                line !== -1 ? `line ${line}:` : ""
+              } found \${${this.file.code.slice(
+                expression.start,
+                expression.end
+              )}}`;
+            }
+            throw new InvalidPositionError(errorText);
+          }
+
+          if (type.empty) {
             const expression = expressions[i];
             if (expression) {
               newArguments.add(expression);
@@ -229,11 +251,7 @@ module.exports = function (babel, options) {
           while (i < quasis.length - 1) {
             const type = quasiTypes[i];
             // expressions after a partial css are converted into css variables
-            if (
-              type.unknownSelector ||
-              type.insideCssValue ||
-              (isMerging && type.empty)
-            ) {
+            if (type.insideCssValue || (isMerging && type.empty)) {
               isMerging = true;
               // expression: `x`
               // { style: { --v0: x}}
@@ -253,16 +271,18 @@ module.exports = function (babel, options) {
                 }
                 const relativePath = relative(
                   rootContext,
-                  resolve(rootContext, resourcePath),
+                  resolve(rootContext, resourcePath)
                 );
                 hashedFile = murmurhash2_32_gc(relativePath);
               }
 
+              // expression: `x`
+              // { style: { --v0: x}}
               cssVariablesInlineStyle.properties.push(
                 t.objectProperty(
                   t.stringLiteral(`--🦬${hashedFile}${this.varIndex++}`),
-                  /** @type {babel.types.Expression} */ (expression),
-                ),
+                  /** @type {babel.types.Expression} */ (expression)
+                )
               );
             } else if (type.empty) {
               // empty quasis can be ignored in typescript
@@ -272,10 +292,17 @@ module.exports = function (babel, options) {
               if (expressions[i]) {
                 if (quasiTypes[i].currentNestingScopes.length > 0) {
                   const errorExpression = expressions[i];
-                  const name = errorExpression.type === "Identifier" ? `"${errorExpression.name}"` : "Expression";
-                  const line = errorExpression.loc?.start.line || -1
+                  const name =
+                    errorExpression.type === "Identifier"
+                      ? `"${errorExpression.name}"`
+                      : "Expression";
+                  const line = errorExpression.loc?.start.line || -1;
                   throw new InvalidPositionError(
-                    `Expressions are not allowed inside nested selectors:\n${line !== -1 ? `line ${line}: ` : ""}found ${name} inside "${quasiTypes[i].currentNestingScopes.join(" { ")} {"`,
+                    `Expressions are not allowed inside nested selectors:\n${
+                      line !== -1 ? `line ${line}: ` : ""
+                    }found ${name} inside "${quasiTypes[
+                      i
+                    ].currentNestingScopes.join(" { ")} {"`
                   );
                 }
                 newArguments.add(expressions[i]);
@@ -290,9 +317,9 @@ module.exports = function (babel, options) {
             t.objectExpression([
               t.objectProperty(
                 t.stringLiteral(`style`),
-                cssVariablesInlineStyle,
+                cssVariablesInlineStyle
               ),
-            ]),
+            ])
           );
         }
 
@@ -307,7 +334,7 @@ module.exports = function (babel, options) {
             className: localIdent(
               variableName,
               literalSelectorIndex,
-              "className",
+              "className"
             ),
             astNode: styledCall,
           });

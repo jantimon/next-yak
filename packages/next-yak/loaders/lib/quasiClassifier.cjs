@@ -5,7 +5,7 @@ const stripCssComments = require("./stripCssComments.cjs");
  * Checks a quasiValue and returns its type
  *
  * - empty: no expressions, no text
- * - unknownSelector: starts with a `{` e.g. `{ opacity: 0.5; }`
+ * - unknownSelector: starts with a `{` e.g. `{ opacity: 0.5; }` or `,` e.g. `, bar { ... }`
  * - insideCssValue: does not end with a `{` or `}` or `;` e.g. `color: `
  *
  * @param {string} quasiValue
@@ -80,8 +80,11 @@ module.exports = function quasiClassifier(quasiValue, currentNestingScopes) {
 
   return {
     empty: false,
-    unknownSelector: trimmedCssString[0] === "{",
-    insideCssValue: currentCharacter !== "{" && currentCharacter !== "}" && currentCharacter !== ";",
+    unknownSelector: trimmedCssString[0] === "{" || trimmedCssString[0] === ",",
+    insideCssValue:
+      currentCharacter !== "{" &&
+      currentCharacter !== "}" &&
+      currentCharacter !== ";",
     currentNestingScopes: newNestingLevel,
   };
 };
