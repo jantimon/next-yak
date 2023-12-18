@@ -407,4 +407,47 @@ const Icon = styled.div\`
     line 11: found Expression inside \\"@media (min-width: 640px) { .bar {\\""
   `);
   });
+  it("should show error when a dynamic selector is used", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const test = "bar";
+
+const Icon = styled.div\`
+  \${test} {
+    font-weight: bold;
+  }
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: Expressions are not allowed as selectors:
+      line 7: found \${test}"
+    `);
+  });
+
+  it("should show error when a dynamic selector is used after a comma", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const test = "bar";
+
+const Icon = styled.div\`
+  \${test}, baz {
+    font-weight: bold;
+  }
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: Expressions are not allowed as selectors:
+      line 7: found \${test}"
+    `);
+  });
 });
