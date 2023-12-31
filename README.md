@@ -7,6 +7,7 @@
 
 **next-yak** is a CSS-in-JS solution tailored for [Next.js](https://nextjs.org/) that seamlessly combines the expressive power of styled-components syntax with efficient build-time extraction of CSS using Next.js's built-in CSS configuration.
 
+
 ## Features
 
 - **Build-time Extraction**: Minimize runtime overhead by extracting CSS at build time, leveraging Next.js CSS configuration.
@@ -18,6 +19,8 @@
 - **Atomic CSS Integration**: Easily combine with existing atomic CSS solutions like Tailwind CSS for a customized and efficient styling approach.
 
 - **Inspired by the Best**: Incorporates ideas from Styled-Components, Linaria, Emotion, and Vanilla Extract to offer a powerful yet intuitive styling experience.
+
+<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/2dc38707-a584-4b0c-84f7-2fc4e6da22a8" alt="Code example"></video>
 
 ## Installation
 
