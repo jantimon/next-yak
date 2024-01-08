@@ -18,9 +18,10 @@
 
 - **Atomic CSS Integration**: Easily combine with existing atomic CSS solutions like Tailwind CSS for a customized and efficient styling approach.
 
-- **Inspired by the Best**: Incorporates ideas from Styled-Components, Linaria, Emotion, and Vanilla Extract to offer a powerful yet intuitive styling experience.
+- **Inspired by the Best**: Incorporates ideas from Styled-Components, Linaria, Emotion, and Vanilla Extract to offer a powerful yet intuitive styling experienc
 
-<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/2dc38707-a584-4b0c-84f7-2fc4e6da22a8" alt="Code example"></video>
+<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/a8de3457-323e-4aaa-8aa1-4fb5b00f93fc" alt="Code example"></video>
+
 
 ## Installation
 
@@ -93,9 +94,11 @@ const ToggleButton = styled.button`
 `;
 ```
 
+<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/9065d0a0-f839-4d91-b05e-b3e72c7c2bb0" alt="Dynamic Styles example"></video>
+
 ### Dynamic Properties
 
-Dynamic Properties will use custom properties ([aka css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)) under the hood to extract the CSS at built time but modify properties at runtime:
+Dynamic Properties use custom properties ([aka css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)) under the hood to extract the CSS at built time but modify properties at runtime:
 
 ```jsx
 import { styled } from 'next-yak';
