@@ -20,7 +20,7 @@
 
 - **Inspired by the Best**: Incorporates ideas from Styled-Components, Linaria, Emotion, and Vanilla Extract to offer a powerful yet intuitive styling experienc
 
-<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/a8de3457-323e-4aaa-8aa1-4fb5b00f93fc" alt="Code example"></video>
+<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/cfacb70e-1b42-4a41-9706-f5e4da1fe8cd" alt="Code example"></video>
 
 
 ## Installation
