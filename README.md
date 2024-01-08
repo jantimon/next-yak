@@ -125,6 +125,8 @@ const ExampleComponent = () => {
 };
 ```
 
+<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/11e9aca7-f5c8-416b-bb67-67e180be81e8" alt="Dynamic Styles example"></video>
+
 ### Targeting Components
 
 In next-yak, you can target other components directly using CSS selectors as long as they are **in the same file**:
