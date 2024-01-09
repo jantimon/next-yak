@@ -10,15 +10,11 @@
 
 ## Features
 
-- **Build-time Extraction**: Minimize runtime overhead by extracting CSS at build time, leveraging Next.js CSS configuration.
-  
-- **Minimal Runtime Footprint**: Enjoy a small runtime footprint as only CSS class names need to be applied during runtime, with no additional CSS added to the CSSOM.
-
-- **Optimized for Production**: Benefit from optimized, minified, and vendor-prefixed CSS generated during build time, resulting in a highly performant solution.
-
-- **Atomic CSS Integration**: Easily combine with existing atomic CSS solutions like Tailwind CSS for a customized and efficient styling approach.
-
-- **Inspired by the Best**: Incorporates ideas from Styled-Components, Linaria, Emotion, and Vanilla Extract to offer a powerful yet intuitive styling experienc
+- **NextJs Compatibility**: Works smoothly with both React Server and Client Components
+- **Build-time CSS**: Reduces load time by handling CSS during the build phase, using Next.js built-in CSS Modules features
+- **Lightweight Runtime**: Operates with minimal impact, simply changing CSS classes without modifying the CSSOM
+- **Standard CSS Syntax**: Write styles in familiar, easy-to-use CSS
+- **Integrates with Atomic CSS**: Easily combines with atomic CSS frameworks like Tailwind CSS for more design options
 
 <video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/cfacb70e-1b42-4a41-9706-f5e4da1fe8cd" alt="Code example"></video>
 
