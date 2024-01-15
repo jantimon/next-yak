@@ -41,14 +41,14 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      "._yak_0 { 
+      "._yak_0 {
         font-size: 2rem;
         font-weight: bold;
         color: red;
         &:hover {
           color: red;
         }
-             }"
+      }"
     `);
   });
 
@@ -66,10 +66,10 @@ const headline = css\`
   font-weight: bold;
   color: red;
   \${x > 0.5 && css\`
-    color: blue;
+    color: orange;
   \`}
   \${x > 0.5 && css\`
-    color: blue;
+    color: teal;
   \`}
   &:hover {
     color: \${x ? "red" : "blue"\};
@@ -78,25 +78,21 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      "._yak_0 { 
+      "._yak_0 {
         font-size: 2rem;
         font-weight: bold;
         color: red;
-         }
+          &:where(._yak_1) {
+          color: orange;
+          }
 
-      ._yak_1 { 
-          color: blue;
-         }
-
-      ._yak_2 { 
-          color: blue;
-         }
-
-      ._yak_0 { 
+          &:where(._yak_2) {
+          color: teal;
+          }
         &:hover {
           color: var(--🦬18fi82j0);
         }
-       }"
+      }"
     `);
   });
 
@@ -118,9 +114,12 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      "._yak_1 { 
+      "._yak_0 {
+        /* comment */
+          &:where(._yak_1) {
           color: blue;
-         }"
+          }
+      }"
     `);
   });
 });
@@ -141,11 +140,11 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    "._yak_0 { 
+    "._yak_0 {
       &:hover {
         color: var(--🦬18fi82j0);
       }
-       }"
+    }"
   `);
 });
 
@@ -164,9 +163,9 @@ const headline = styled.input.attrs({
 `
     )
   ).toMatchInlineSnapshot(`
-    ".headline_0 { 
+    ".headline_0 {
       color: red;
-       }"
+    }"
   `);
 });
 
@@ -189,13 +188,12 @@ const newHeadline = styled(headline).attrs({
 `
     )
   ).toMatchInlineSnapshot(`
-    ".headline_0 { 
+    ".headline_0 {
       color: red;
-     }
-
-    .newHeadline_1 { 
+    }
+    .newHeadline_1 {
       color: black;
-       }"
+    }"
   `);
 });
 
@@ -216,16 +214,12 @@ const headline = css\`
     )
   ).toMatchInlineSnapshot(`
     "._yak_0 {
-
       transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
       display: block;
-      
-      }
-
-    ._yak_1 {
-    color: orangevar(--🦬18fi82j2)}
-
-    "
+        &:where(._yak_1) {
+    color: orange
+        }
+    }"
   `);
 });
 
@@ -249,16 +243,17 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    "._yak_0 { 
+    "._yak_0 {
       color: blue;
       @media (min-width: 640px) {
         color: red;
       }
       transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
       display: block;
-       }
-
-    ._yak_1 { color: orange }"
+        &:where(._yak_1) {
+    color: orange
+        }
+    }"
   `);
 });
 
@@ -282,16 +277,17 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    "._yak_0 { 
+    "._yak_0 {
       color: blue;
       @media (min-width: 640px) {
         color: red;
       }
       transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
       display: block;
-       }
-
-    ._yak_1 { color: orange }"
+        &:where(._yak_1) {
+    color: orange
+        }
+    }"
   `);
 });
 
@@ -317,7 +313,7 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    "._yak_0 { 
+    "._yak_0 {
       :before {
         content: \\"\\\\2022\\";
       }
@@ -325,7 +321,7 @@ const headline = css\`
         content: \\"\\\\2022\\";
       }
       content: \\"\\\\\\\\\\"
-     }"
+    }"
   `);
 });
 
@@ -352,18 +348,17 @@ const FadeInButton = styled.button\`
 `
     )
   ).toMatchInlineSnapshot(`
-    "@keyframes fadeIn_0 { 
+    "@keyframes fadeIn_0 {
       0% {
         opacity: 0;
       }
       100% {
         opacity: 1;
       }
-     }
-
-    .FadeInButton_1 { 
+    }
+    .FadeInButton_1 {
       animation: 1s var(--🦬18fi82j0) ease-out;
-     }"
+    }"
   `);
 });
 
@@ -398,11 +393,10 @@ const Wrapper = styled.div\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".Link_0 { 
+    ".Link_0 {
       color: palevioletred;
-     }
-
-    .Icon_1 { 
+    }
+    .Icon_1 {
       fill: currentColor;
       width: 1em;
       height: 1em;
@@ -412,13 +406,12 @@ const Wrapper = styled.div\`
       .Link_0:focus & {
         color: red;
       }
-     }
-
-    .Wrapper_2 { 
+    }
+    .Wrapper_2 {
       &:has(> .Link_0) {
         padding: 10px;
       }
-     }"
+    }"
   `);
 });
 
@@ -444,15 +437,15 @@ const Wrapper = styled.div\`
 `
     )
   ).toMatchInlineSnapshot(`
-    ".Wrapper_2 { 
+    ".Wrapper_2 {
       &:has(> .Icon_1) {
         padding: 10px;
       }
-     }"
+    }"
   `);
 });
 
-it.only("should support nested expressions", async () => {
+it("should support nested expressions", async () => {
   expect(
     await cssloader.call(
       loaderContext,
@@ -488,41 +481,26 @@ const Component2 = styled.div\`
     )
   ).toMatchInlineSnapshot(`
     ".Component_0 {
-
         background-color: red;
         color: white;
-        
+        &:where(._yak_1) {
+            background-color: blue;
+        }
         border: 1px solid black;
 
         &:focus {
             background-color: green;
-            
-            
+            &:where(._yak_2) {
+                background-color: blue;
+                &:where(._yak_3) {
+                    background-color: brown;
+                }
+            }
             border: 2px solid pink;
         }
     }
-
-    ._yak_1 {
-
-            background-color: blue;
-        }
-
-    ._yak_2 {
-
-                background-color: blue;
-                
-            }
-
-    ._yak_3 {
-
-                    background-color: brown;
-                }
-
     .Component2_4 {
-
         color: hotpink;
-    }
-
-    "
+    }"
   `);
 });
