@@ -276,7 +276,6 @@ module.exports = async function cssLoader(source) {
   const rootCssParts = [...cssParts.values()].filter(
     ({ hasParent }) => !hasParent
   );
-  console.dir(rootCssParts[0].cssPartExpressions, { depth: null });
   return mergeCssPartExpression(rootCssParts).trim();
 };
 
