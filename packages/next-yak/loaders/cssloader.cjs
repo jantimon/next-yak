@@ -1,3 +1,5 @@
+import { is } from "@babel/types";
+
 /// @ts-check
 const getYakImports = require("./lib/getYakImports.cjs");
 const babel = require("@babel/core");
@@ -34,7 +36,7 @@ module.exports = async function cssLoader(source) {
       imports.forEach(({ localName, importedName }) => {
         replaces[localName] = constantValues[importedName];
       });
-    }),
+    })
   );
 
   // parse source with babel
@@ -63,6 +65,14 @@ module.exports = async function cssLoader(source) {
     keyframes: undefined,
   };
 
+  /**
+   * Babel iterates over the full TaggedLiteralExpression before it iterates over their children
+   * To keep the order as written in the original code the code fragments are stored in an ordered map
+   * @typedef {{ selector: string,quasiCode: string[], cssPartExpressions: CssPartExpression[] }} CssPartExpression
+   * @type {Map<import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>, CssPartExpression>}
+   */
+  const rootCssParts = new Map();
+
   let index = 0;
   let varIndex = 0;
   /** @type {string | null} */
@@ -73,7 +83,7 @@ module.exports = async function cssLoader(source) {
 
   /**
    * find all css template literals in ast
-   * @type {{ code: string, loc: number }[]}
+   * @type {{ code: string }[]}
    */
   const cssCode = [];
   babel.traverse(ast, {
@@ -127,7 +137,7 @@ module.exports = async function cssLoader(source) {
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.MemberExpression} */ (tag).object,
+          /** @type {babel.types.MemberExpression} */ (tag).object
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.MemberExpression} */ (tag).object
@@ -136,7 +146,7 @@ module.exports = async function cssLoader(source) {
       const isStyledCall =
         t.isCallExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.CallExpression} */ (tag).callee,
+          /** @type {babel.types.CallExpression} */ (tag).callee
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.CallExpression} */ (tag).callee
@@ -157,13 +167,6 @@ module.exports = async function cssLoader(source) {
       ) {
         return;
       }
-      // Store class name for the created variable for later replacements
-      // e.g. const MyStyledDiv = styled.div`color: red;`
-      // "MyStyledDiv" -> "selector-0"
-      const variableName =
-        isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
-          ? getStyledComponentName(path)
-          : "_yak";
 
       replaceQuasiExpressionTokens(
         path.node.quasi,
@@ -176,64 +179,87 @@ module.exports = async function cssLoader(source) {
           }
           return false;
         },
-        t,
+        t
       );
+
+      const parent = getClosestTemplateLiteralExpressionParentPath(
+        path,
+        localVarNames
+      );
+
+      // Store class name for the created variable for later replacements
+      // e.g. const MyStyledDiv = styled.div`color: red;`
+      // "MyStyledDiv" -> "selector-0"
+      const variableName =
+        isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
+          ? getStyledComponentName(path)
+          : "_yak";
 
       // Keep the same selector for all quasis belonging to the same css block
       const literalSelectorIndex = index++;
       const literalSelector = localIdent(
         variableName,
         literalSelectorIndex,
-        isKeyFrameLiteral ? "keyframes" : "selector",
+        isKeyFrameLiteral ? "keyframes" : "selector"
       );
 
+      /** @type {CssPartExpression} */
+      const currentCssParts = {
+        quasiCode: [],
+        cssPartExpressions: [],
+        selector: !parent ? literalSelector : `&:where(${literalSelector})`
+      };
+      const parentCssParts = parent && rootCssParts.get(parent);
+      if (parentCssParts) {
+        parentCssParts.cssPartExpressions.push(currentCssParts);
+      } else {
+        rootCssParts.set(path, currentCssParts);
+      }
+  
       // Replace the tagged template expression with a call to the 'styled' function
       const quasis = path.node.quasi.quasis;
-      const quasiTypes = quasis.map((quasi) => quasiClassifier(quasi.value.raw, []));
+      const quasiTypes = quasis.map((quasi) =>
+        quasiClassifier(quasi.value.raw, [])
+      );
 
+      let wasInsideCssValue = false;
       for (let i = 0; i < quasis.length; i++) {
         const quasi = quasis[i];
-        // skip empty quasis
-        if (quasiTypes[i].empty) {
-          continue;
-        }
-        let code = quasi.value.raw;
-        let isMerging = false;
         // loop over all quasis belonging to the same css block
-        while (i < quasis.length - 1) {
-          const type = quasiTypes[i];
-          // expressions after a partial css are converted into css variables
-          if (
-            type.unknownSelector ||
-            type.insideCssValue ||
-            (isMerging && type.empty)
-          ) {
-            isMerging = true;
-            if (!hashedFile) {
-              const relativePath = relative(rootContext, resourcePath);
-              hashedFile = murmurhash2_32_gc(relativePath);
-            }
-            // replace the expression with a css variable
-            code += `var(--🦬${hashedFile}${varIndex++})`;
-            // as we are after the css block, we need to increment i
-            // to get the very next quasi
-            i++;
-            code += quasis[i].value.raw;
-          } else if (type.empty) {
-            // empty quasis are also added to keep spacings
-            // e.g. `transition: color ${duration} ${easing};`
-            i++;
-            code += quasis[i].value.raw;
-          } else {
-            break;
+        const type = quasiTypes[i];
+        console.log({ type, wasInsideCssValue, rawValue: quasi.value.raw });
+        // expressions after a partial css are converted into css variables
+        if (
+          type.unknownSelector ||
+          type.insideCssValue ||
+          (type.empty && wasInsideCssValue)
+        ) {
+          wasInsideCssValue = true;
+          if (!hashedFile) {
+            const relativePath = relative(rootContext, resourcePath);
+            hashedFile = murmurhash2_32_gc(relativePath);
           }
+          // as we are after the css block, we need to increment i
+          // to get the very next quasi
+          cssCode.push({ code: unEscapeCssCode(quasi.value.raw) });
+          // replace the expression with a css variable
+          cssCode.push({ code: `var(--🦬${hashedFile}${varIndex++})` });
+        } else {
+          wasInsideCssValue = false;
+          // code is added
+          // empty quasis are also added to keep spacings
+          // e.g. `transition: color ${duration} ${easing};`
+          cssCode.push({ code: unEscapeCssCode(quasi.value.raw) });
         }
 
         cssCode.push({
-          code: `${literalSelector} { ${unEscapeCssCode(code)} }`,
-          loc: quasi.loc?.start.line || 0,
+          code: `:where(${literalSelector}) {\n`,
         });
-      }
+        depthFirst(subPath);
+        cssCode.push({
+          code: "}\n\n",
+        });
+            
 
       // Store class name for the created variable for later replacements
       // e.g. const MyStyledDiv = styled.div`color: red;`
@@ -241,16 +267,13 @@ module.exports = async function cssLoader(source) {
       if (isStyledLiteral || isStyledCall || isAttrsCall) {
         variableNameToStyledClassName.set(
           variableName,
-          localIdent(variableName, literalSelectorIndex, "selector"),
+          localIdent(variableName, literalSelectorIndex, "selector")
         );
       }
     },
   });
 
-  // sort by loc
-  cssCode.sort((a, b) => a.loc - b.loc);
-
-  return cssCode.map((code) => code.code).join("\n\n");
+  return cssCode.map((code) => code.code).join("");
 };
 
 /**
@@ -260,3 +283,30 @@ module.exports = async function cssLoader(source) {
  * @param {string} code
  */
 const unEscapeCssCode = (code) => code.replace(/\\\\/gi, "\\");
+
+/**
+ * Searches the closest parent TaggedTemplateExpression using a name from localNames
+ * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
+ * @param {{ css?: string , styled?: string }} localNames
+ * @returns {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression> | null}
+ */
+const getClosestTemplateLiteralExpressionParentPath = (
+  path,
+  { css, styled }
+) => {
+  let parent = path.parentPath;
+  while (parent) {
+    if (
+      babel.types.isTaggedTemplateExpression(parent.node) &&
+      babel.types.isIdentifier(parent.node.tag) &&
+      (parent.node.tag.name === css || parent.node.tag.name === styled)
+    ) { 
+      return /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */ (parent);
+    }
+    if (!parent.parentPath) {
+      return null;
+    }
+    parent = parent.parentPath;
+  }
+  return null;
+};

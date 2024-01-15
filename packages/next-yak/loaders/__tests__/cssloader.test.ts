@@ -215,12 +215,17 @@ const headline = css\`
 `
     )
   ).toMatchInlineSnapshot(`
-    "._yak_0 { 
+    "._yak_0 {
+
       transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
       display: block;
-       }
+      
+      }
 
-    ._yak_1 { color: orange }"
+    ._yak_1 {
+    color: orangevar(--🦬18fi82j2)}
+
+    "
   `);
 });
 
@@ -444,5 +449,80 @@ const Wrapper = styled.div\`
         padding: 10px;
       }
      }"
+  `);
+});
+
+it.only("should support nested expressions", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled, keyframes, css } from "next-yak";
+
+const Component = styled.div\`
+    background-color: red;
+    color: white;
+    \${({ active }) => active && css\`
+        background-color: blue;
+    \`}
+    border: 1px solid black;
+
+    &:focus {
+        background-color: green;
+        \${({ active }) => active && css\`
+            background-color: blue;
+            \${({ active }) => active && css\`
+                background-color: brown;
+            \`}
+        \`}
+        
+        border: 2px solid pink;
+    }
+\`;
+
+const Component2 = styled.div\`
+    color: hotpink;
+\`;
+
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".Component_0 {
+
+        background-color: red;
+        color: white;
+        
+        border: 1px solid black;
+
+        &:focus {
+            background-color: green;
+            
+            
+            border: 2px solid pink;
+        }
+    }
+
+    ._yak_1 {
+
+            background-color: blue;
+        }
+
+    ._yak_2 {
+
+                background-color: blue;
+                
+            }
+
+    ._yak_3 {
+
+                    background-color: brown;
+                }
+
+    .Component2_4 {
+
+        color: hotpink;
+    }
+
+    "
   `);
 });
