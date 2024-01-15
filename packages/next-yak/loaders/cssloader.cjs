@@ -231,11 +231,11 @@ module.exports = async function cssLoader(source) {
         const type = quasiTypes[i];
         // expressions after a partial css are converted into css variables
         if (
-          expression && (
-          type.unknownSelector ||
-          type.insideCssValue ||
-          (type.empty && wasInsideCssValue)
-        )) {
+          expression &&
+          (type.unknownSelector ||
+            type.insideCssValue ||
+            (type.empty && wasInsideCssValue))
+        ) {
           wasInsideCssValue = true;
           if (!hashedFile) {
             const relativePath = relative(rootContext, resourcePath);
@@ -243,10 +243,11 @@ module.exports = async function cssLoader(source) {
           }
           currentCssParts.quasiCode.push({
             insideCssValue: true,
-            code: unEscapeCssCode(quasi.value.raw) +
+            code:
+              unEscapeCssCode(quasi.value.raw) +
               // replace the expression with a css variable
-              `var(--🦬${hashedFile}${varIndex++})`
-           });
+              `var(--🦬${hashedFile}${varIndex++})`,
+          });
         } else {
           wasInsideCssValue = false;
           // code is added
@@ -275,7 +276,7 @@ module.exports = async function cssLoader(source) {
   const rootCssParts = [...cssParts.values()].filter(
     ({ hasParent }) => !hasParent
   );
-  console.dir(rootCssParts[0].cssPartExpressions, {depth : null});
+  console.dir(rootCssParts[0].cssPartExpressions, { depth: null });
   return mergeCssPartExpression(rootCssParts).trim();
 };
 
@@ -353,25 +354,29 @@ const mergeCssPartExpression = (cssPartExpression, level = 0) => {
     let cssPart = "";
     for (let i = 0; i < quasiCode.length; i++) {
       const quasi = quasiCode[i];
-        cssPart += trimNewLines(quasi.code);
-        // Ignore Expressions for CSS Variables
-        if (quasi.insideCssValue) {
-          continue;
-        }
-        // Add expressions from child css literals
-        const childCssParts = cssPartExpressions[expressionIndex++];
-        if (childCssParts) {
-          cssPart += `\n${trimNewLines(mergeCssPartExpression([childCssParts], level + 1))}\n`;
-        }
+      cssPart += trimNewLines(quasi.code);
+      // Ignore Expressions for CSS Variables
+      if (quasi.insideCssValue) {
+        continue;
+      }
+      // Add expressions from child css literals
+      const childCssParts = cssPartExpressions[expressionIndex++];
+      if (childCssParts) {
+        cssPart += `\n${trimNewLines(
+          mergeCssPartExpression([childCssParts], level + 1)
+        )}\n`;
+      }
     }
     const indent = "    ".repeat(level);
     const hasCss = Boolean(cssPart.trim());
-    css +=  !hasCss ? "" : `${indent}${selector} {\n${trimNewLines(cssPart)}\n${indent}}\n`;
+    css += !hasCss
+      ? ""
+      : `${indent}${selector} {\n${trimNewLines(cssPart)}\n${indent}}\n`;
   }
   return css;
 };
 
-/** 
+/**
  * @param {string} str
  */
 const trimNewLines = (str) => str.replace(/^\s*\n+|\s+$/g, "");
