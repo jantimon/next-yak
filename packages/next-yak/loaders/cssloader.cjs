@@ -367,7 +367,8 @@ const mergeCssPartExpression = (cssPartExpression, level = 0) => {
         )}\n`;
       }
     }
-    const indent = "    ".repeat(level);
+    // Try to keep the same indentation as the original code
+    const indent = quasiCode[0]?.code.match(/^\n(  |\t)(\s*)/)?.[2] ?? "    ".repeat(level);
     const hasCss = Boolean(cssPart.trim());
     css += !hasCss
       ? ""

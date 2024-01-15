@@ -82,13 +82,13 @@ const headline = css\`
         font-size: 2rem;
         font-weight: bold;
         color: red;
-          &:where(._yak_1) {
+        &:where(._yak_1) {
           color: orange;
-          }
+        }
 
-          &:where(._yak_2) {
+        &:where(._yak_2) {
           color: teal;
-          }
+        }
         &:hover {
           color: var(--🦬18fi82j0);
         }
@@ -116,9 +116,9 @@ const headline = css\`
     ).toMatchInlineSnapshot(`
       "._yak_0 {
         /* comment */
-          &:where(._yak_1) {
+        &:where(._yak_1) {
           color: blue;
-          }
+        }
       }"
     `);
   });
@@ -483,24 +483,24 @@ const Component2 = styled.div\`
     ".Component_0 {
         background-color: red;
         color: white;
-        &:where(._yak_1) {
+          &:where(._yak_1) {
             background-color: blue;
-        }
+          }
         border: 1px solid black;
 
         &:focus {
             background-color: green;
-            &:where(._yak_2) {
+              &:where(._yak_2) {
                 background-color: blue;
-                &:where(._yak_3) {
+                  &:where(._yak_3) {
                     background-color: brown;
-                }
-            }
+                  }
+              }
             border: 2px solid pink;
         }
-    }
-    .Component2_4 {
+      }
+      .Component2_4 {
         color: hotpink;
-    }"
+      }"
   `);
 });
