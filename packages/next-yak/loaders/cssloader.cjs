@@ -1,5 +1,3 @@
-import { is } from "@babel/types";
-
 /// @ts-check
 const getYakImports = require("./lib/getYakImports.cjs");
 const babel = require("@babel/core");
