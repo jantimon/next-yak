@@ -377,9 +377,10 @@ const Icon = styled.div\`
 `
       )
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-    "/some/special/path/page.tsx: Expressions are not allowed inside nested selectors:
-    line 11: found \\"bold\\" inside \\"@media (min-width: 640px) { .bar {\\""
-  `);
+      "/some/special/path/page.tsx: line 11: Expressions are not allowed inside nested selectors: 
+      \\"bold\\" inside \\"@media (min-width: 640px) { .bar {\\"
+      found: \${bold}"
+    `);
   });
 
   it("should show error when mixin is used in nested selector inside a css", async () => {
@@ -403,9 +404,10 @@ const Icon = styled.div\`
 `
       )
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-    "/some/special/path/page.tsx: Expressions are not allowed inside nested selectors:
-    line 11: found Expression inside \\"@media (min-width: 640px) { .bar {\\""
-  `);
+      "/some/special/path/page.tsx: line 11: Expressions are not allowed inside nested selectors: 
+      Expression inside \\"@media (min-width: 640px) { .bar {\\"
+      found: \${() => css\`\${bold}\`}"
+    `);
   });
   it("should show error when a dynamic selector is used", async () => {
     await expect(() =>
@@ -424,8 +426,8 @@ const Icon = styled.div\`
 `
       )
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: Expressions are not allowed as selectors:
-      line 7: found \${test}"
+      "/some/special/path/page.tsx: line 7: Expressions are not allowed as selectors
+      found: \${test}"
     `);
   });
 
@@ -470,8 +472,8 @@ const Icon = styled.div\`
 `
       )
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: Expressions are not allowed as selectors:
-      line 7: found \${test}"
+      "/some/special/path/page.tsx: line 7: Expressions are not allowed as selectors
+      found: \${test}"
     `);
   });
 

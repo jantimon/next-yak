@@ -107,10 +107,10 @@ module.exports = function (babel, options) {
        * Store the name of the imported 'css' and 'styled' variables e.g.:
        * - `import { css, styled } from 'next-yak'` -> { css: 'css', styled: 'styled' }
        * - `import { css as yakCss, styled as yakStyled } from 'next-yak'` -> { css: 'yakCss', styled: 'yakStyled' }
-       * 
+       *
        * Inject the import to the css-module (with .yak.module.css extension)
        * e.g. `import './App.yak.module.css!=!./App?./App.yak.module.css'`
-       * 
+       *
        * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
        * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
@@ -166,7 +166,7 @@ module.exports = function (babel, options) {
        * - styled(Component)`...`
        * - styled.div.attrs({})`...`
        * - keyframes`...`
-       * 
+       *
        * @param {import("@babel/core").NodePath<import("@babel/core").types.TaggedTemplateExpression>} path
        * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
@@ -236,7 +236,7 @@ module.exports = function (babel, options) {
           )
         );
 
-        /** 
+        /**
          * The expression is replaced with a call to the 'styled' or 'css' function
          * e.g. styled.div`` -> styled.div(...)
          * e.g. css`` -> css(...)
@@ -254,7 +254,10 @@ module.exports = function (babel, options) {
           currentNestingScopes = classification.currentNestingScopes;
           return classification;
         });
-        const expressions = path.node.quasi.expressions;
+        const expressions = path.node.quasi.expressions.filter(
+          /** @type {(expression: babel.types.Expression | babel.types.TSType) => expression is babel.types.Expression} */
+          (expression) => t.isExpression(expression)
+        );
 
         let cssVariablesInlineStyle;
 
@@ -265,17 +268,11 @@ module.exports = function (babel, options) {
             if (!expression) {
               throw new Error(`Invalid css "${quasis[i].value.raw}"`);
             }
-            let errorText = "Expressions are not allowed as selectors";
-            const line = expression.loc?.start.line || -1;
-            if (expression.start && expression.end) {
-              errorText += `:\n${
-                line !== -1 ? `line ${line}:` : ""
-              } found \${${this.file.code.slice(
-                expression.start,
-                expression.end
-              )}}`;
-            }
-            throw new InvalidPositionError(errorText);
+            throw new InvalidPositionError(
+              "Expressions are not allowed as selectors",
+              expression,
+              this.file
+            );
           }
 
           if (type.empty) {
@@ -343,13 +340,12 @@ module.exports = function (babel, options) {
                     errorExpression.type === "Identifier"
                       ? `"${errorExpression.name}"`
                       : "Expression";
-                  const line = errorExpression.loc?.start.line || -1;
                   throw new InvalidPositionError(
-                    `Expressions are not allowed inside nested selectors:\n${
-                      line !== -1 ? `line ${line}: ` : ""
-                    }found ${name} inside "${quasiTypes[
+                    `Expressions are not allowed inside nested selectors: \n${name} inside "${quasiTypes[
                       i
-                    ].currentNestingScopes.join(" { ")} {"`
+                    ].currentNestingScopes.join(" { ")} {"`,
+                    errorExpression,
+                    this.file
                   );
                 }
                 newArguments.add(expressions[i]);
@@ -359,6 +355,8 @@ module.exports = function (babel, options) {
           }
         }
 
+        // Add the inline style object to the arguments
+        // e.g. styled.div`color: ${x};` -> styled.div({ style: { --yak43: x } })
         if (cssVariablesInlineStyle) {
           newArguments.add(
             t.objectExpression([
@@ -396,10 +394,25 @@ module.exports = function (babel, options) {
 
 class InvalidPositionError extends Error {
   /**
+   * Add the expression code that caused the error to the message
+   * for better debugging
    * @param {string} message
+   * @param {import("@babel/types").Expression} expression
+   * @param {import("@babel/core").BabelFile} file
    */
-  constructor(message) {
-    super(message);
+  constructor(message, expression, file) {
+    let errorText = message;
+    const line = expression.loc?.start.line ?? -1;
+    if (line !== -1) {
+      errorText = `line ${line}: ${errorText}`;
+    }
+    if (expression.start && expression.end) {
+      errorText += `\nfound: \${${file.code.slice(
+        expression.start,
+        expression.end
+      )}}`;
+    }
+    super(errorText);
   }
 }
 
