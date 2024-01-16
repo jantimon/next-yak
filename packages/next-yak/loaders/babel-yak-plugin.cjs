@@ -58,7 +58,7 @@ module.exports = function (babel, options) {
     const hashedFilePath = murmurhash2_32_gc(relativePath);
     hashedFilePaths.set(file, hashedFilePath);
     return hashedFilePath;
-  }
+  };
 
   /**
    * Returns wether the given tag is matching a yak import
@@ -207,25 +207,23 @@ module.exports = function (babel, options) {
           expressionType === "styledCall" ||
           expressionType === "attrsCall";
 
-        // Store class name for the created variable for later replacements
-        // e.g. const MyStyledDiv = styled.div`color: red;`
-        // "MyStyledDiv" -> "selector-0"
-        const variableName =
-          styledApi || expressionType === "keyframesLiteral"
-            ? getStyledComponentName(path)
-            : "_yak";
-
         replaceQuasiExpressionTokens(
           path.node.quasi,
           (name) => {
+            // Replace constatns from .yak files and
             if (name in replaces) {
               return replaces[name];
             }
+            // Replace expressions by the className of the styled component
+            // e.g.
+            // const MyStyledDiv = styled.div`${FOO} { color: red; }`
+            // ->
+            // const MyStyledDiv = styled.div`.selector0 { color: red; }`
             const styledCall = this.variableNameToStyledCall.get(name);
             if (styledCall) {
               const { wasAdded, className, astNode } = styledCall;
-              // on first usage of another styled component, add a
-              // the className to it so it can be targeted
+              // on first usage of another styled component, ensure that
+              // the className of the target component will be added to the DOM
               if (!wasAdded) {
                 styledCall.wasAdded = true;
                 astNode.arguments.unshift(
@@ -242,18 +240,25 @@ module.exports = function (babel, options) {
           t
         );
 
+        // Store class name for the created variable for later replacements
+        // e.g. const MyStyledDiv = styled.div`color: red;`
+        // "MyStyledDiv" -> "selector-0"
+        const variableName =
+          styledApi || expressionType === "keyframesLiteral"
+            ? getStyledComponentName(path)
+            : null;
+
+        const identifier = localIdent(
+          variableName || "_yak",
+          variableName ? null : this.classNameCount++,
+          expressionType === "keyframesLiteral" ? "animation" : "className"
+        );
+
         let literalSelectorWasUsed = false;
-        const literalSelectorIndex = this.classNameCount++;
-        // Keep the same selector for all quasis belonging to the same css block
+        // AutoGenerate a unique className for the current template literal
         const classNameExpression = t.memberExpression(
           t.identifier("__styleYak"),
-          t.identifier(
-            localIdent(
-              variableName,
-              literalSelectorIndex,
-              expressionType === "keyframesLiteral" ? "animation" : "className"
-            )
-          )
+          t.identifier(identifier)
         );
 
         /**
@@ -274,6 +279,7 @@ module.exports = function (babel, options) {
           currentNestingScopes = classification.currentNestingScopes;
           return classification;
         });
+
         const expressions = path.node.quasi.expressions.filter(
           /** @type {(expression: babel.types.Expression | babel.types.TSType) => expression is babel.types.Expression} */
           (expression) => t.isExpression(expression)
@@ -281,7 +287,19 @@ module.exports = function (babel, options) {
 
         let cssVariablesInlineStyle;
 
+        // Add the className if the template literal contains css
+        if (
+          quasiTypes.length > 1 ||
+          (quasiTypes.length === 1 && !quasiTypes[0].empty)
+        ) {
+          newArguments.add(classNameExpression);
+          literalSelectorWasUsed = true;
+        }
+
+        let wasInsideCssValue = false;
         for (let i = 0; i < quasis.length; i++) {
+          const expression = expressions[i];
+          // loop over all quasis belonging to the same css block
           const type = quasiTypes[i];
           if (type.unknownSelector) {
             const expression = expressions[i - 1];
@@ -294,72 +312,48 @@ module.exports = function (babel, options) {
               this.file
             );
           }
-
-          if (type.empty) {
-            const expression = expressions[i];
-            if (expression) {
-              newArguments.add(expression);
+          // expressions after a partial css are converted into css variables
+          if (
+            expression &&
+            (type.unknownSelector ||
+              type.insideCssValue ||
+              (type.empty && wasInsideCssValue))
+          ) {
+            wasInsideCssValue = true;
+            if (!cssVariablesInlineStyle) {
+              cssVariablesInlineStyle = t.objectExpression([]);
             }
-            continue;
-          }
-
-          // create css class name reference as argument
-          // e.g. `font-size: 2rem; display: flex;` -> `__styleYak.style1`
-
-          // AutoGenerate a unique className
-          newArguments.add(classNameExpression);
-          literalSelectorWasUsed = true;
-
-          let isMerging = false;
-          // loop over all quasis belonging to the same css block
-          while (i < quasis.length - 1) {
-            const type = quasiTypes[i];
-            // expressions after a partial css are converted into css variables
-            if (type.insideCssValue || (isMerging && type.empty)) {
-              isMerging = true;
-              // expression: `x`
-              // { style: { --v0: x}}
-              const expression = expressions[i];
-              i++;
-              if (!expression) {
-                continue;
+            if (!cssVariablesInlineStyle) {
+              cssVariablesInlineStyle = t.objectExpression([]);
+            }
+            const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
+              .varIndex++}`;
+            // expression: `x`
+            // { style: { --v0: x}}
+            cssVariablesInlineStyle.properties.push(
+              t.objectProperty(
+                t.stringLiteral(cssVariableName),
+                /** @type {babel.types.Expression} */ (expression)
+              )
+            );
+          } else {
+            wasInsideCssValue = false;
+            if (expression) {
+              if (quasiTypes[i].currentNestingScopes.length > 0) {
+                const errorExpression = expression;
+                const name =
+                  errorExpression.type === "Identifier"
+                    ? `"${errorExpression.name}"`
+                    : "Expression";
+                throw new InvalidPositionError(
+                  `Expressions are not allowed inside nested selectors: \n${name} inside "${quasiTypes[
+                    i
+                  ].currentNestingScopes.join(" { ")} {"`,
+                  errorExpression,
+                  this.file
+                );
               }
-              if (!cssVariablesInlineStyle) {
-                cssVariablesInlineStyle = t.objectExpression([]);
-              }
-
-              const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this.varIndex++}`
-              // expression: `x`
-              // { style: { --v0: x}}
-              cssVariablesInlineStyle.properties.push(
-                t.objectProperty(
-                  t.stringLiteral(cssVariableName),
-                  /** @type {babel.types.Expression} */ (expression)
-                )
-              );
-            } else if (type.empty) {
-              // empty quasis can be ignored in typescript
-              // e.g. `transition: color ${duration} ${easing};`
-              //                                    ^
-            } else {
-              if (expressions[i]) {
-                if (quasiTypes[i].currentNestingScopes.length > 0) {
-                  const errorExpression = expressions[i];
-                  const name =
-                    errorExpression.type === "Identifier"
-                      ? `"${errorExpression.name}"`
-                      : "Expression";
-                  throw new InvalidPositionError(
-                    `Expressions are not allowed inside nested selectors: \n${name} inside "${quasiTypes[
-                      i
-                    ].currentNestingScopes.join(" { ")} {"`,
-                    errorExpression,
-                    this.file
-                  );
-                }
-                newArguments.add(expressions[i]);
-              }
-              break;
+              newArguments.add(expression);
             }
           }
         }
@@ -385,14 +379,10 @@ module.exports = function (babel, options) {
         // const MyStyledDiv = styled.div`color: red;`
         // const Bar = styled.div` ${MyStyledDiv} { color: blue }`
         // "${MyStyledDiv} {" -> ".selector-0 {"
-        if (styledApi) {
+        if (styledApi && variableName) {
           this.variableNameToStyledCall.set(variableName, {
             wasAdded: literalSelectorWasUsed,
-            className: localIdent(
-              variableName,
-              literalSelectorIndex,
-              "className"
-            ),
+            className: identifier,
             astNode: styledCall,
           });
         }

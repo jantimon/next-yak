@@ -11,18 +11,18 @@
  * ```
  *
  * @param {string} variableName
- * @param {number} i
+ * @param {number | null} i
  * @param {"selector" | "className" | "keyframes" | "animation"} kind
  */
 function localIdent(variableName, i, kind) {
   switch (kind) {
     case "selector":
-      return `.${variableName}_${i}`;
+      return `.${variableName}${i === null ? "" : `_${i}`}`;
     case "className":
     case "animation":
-      return `${variableName}_${i}`;
+      return `${variableName}${i === null ? "" : `_${i}`}`;
     case "keyframes":
-      return `@keyframes ${variableName}_${i}`;
+      return `@keyframes ${variableName}${i === null ? "" : `_${i}`}`;
     default:
       throw new Error("unknown kind");
   }

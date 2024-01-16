@@ -24,13 +24,18 @@ module.exports = async function tsloader(source) {
   //
   // However .yak files inside .yak files are not be compiled
   // to avoid performance overhead
-  const importedYakConstantNames = isYakFile
-    ? []
-    : getYakImports(source)
-        .map(({ imports }) => imports.map(({ localName }) => localName))
-        .flat(2);
-  const replaces = Object.fromEntries(
-    importedYakConstantNames.map((name) => [name, null])
+  const importedYakConstants = isYakFile ? [] : getYakImports(source);
+  /** @type {Record<string, unknown>} */
+  const replaces = {};
+  await Promise.all(
+    importedYakConstants.map(async ({ imports, from }) => {
+      const constantValues = await this.importModule(from, {
+        layer: "yak-importModule",
+      });
+      imports.forEach(({ localName, importedName }) => {
+        replaces[localName] = constantValues[importedName];
+      });
+    })
   );
 
   /** @type {babel.BabelFileResult | null} */

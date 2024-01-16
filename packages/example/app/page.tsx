@@ -24,7 +24,7 @@ const headline = css<{ $primary?: boolean }>`
           );
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-        `};
+        `}
 
   ${queries.sm} {
     font-size: 1.5rem;
@@ -50,6 +50,7 @@ const Headline = styled.h1<{ $primary?: boolean }>`
 `;
 
 const Button = styled.button<{ $primary?: boolean }>`
+  display: block;
   ${({ theme }) =>
     theme.highContrast
       ? css`
@@ -57,7 +58,7 @@ const Button = styled.button<{ $primary?: boolean }>`
         `
       : css`
           color: #009688;
-        `};
+        `}
   background: #fff;
   border: 1px solid currentColor;
   font-size: 17px;

@@ -9,7 +9,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative } = require("path");
 
 /**
- * @typedef {{ selector: string, hasParent: boolean, quasiCode: Array<{ insideCssValue: boolean, code: string }>, cssPartExpressions: Array<CssPartExpression | null> }} CssPartExpression
+ * @typedef {{ selector: string, hasParent: boolean, quasiCode: Array<{ insideCssValue: boolean, code: string }>, cssPartExpressions: { [key: number]: CssPartExpression[]} }} CssPartExpression
  * A CssPartExpression is the css code block for each tagged template expression
  */
 
@@ -181,7 +181,7 @@ module.exports = async function cssLoader(source) {
         t
       );
 
-      const parent = getClosestTemplateLiteralExpressionParentPath(
+      const parentLocation = getClosestTemplateLiteralExpressionParentPath(
         path,
         localVarNames
       );
@@ -192,13 +192,11 @@ module.exports = async function cssLoader(source) {
       const variableName =
         isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
           ? getStyledComponentName(path)
-          : "_yak";
+          : null
 
-      // Keep the same selector for all quasis belonging to the same css block
-      const literalSelectorIndex = index++;
       const literalSelector = localIdent(
-        variableName,
-        literalSelectorIndex,
+        variableName || "_yak",
+        variableName ? null : index++,
         isKeyFrameLiteral ? "keyframes" : "selector"
       );
 
@@ -206,13 +204,14 @@ module.exports = async function cssLoader(source) {
       const currentCssParts = {
         quasiCode: [],
         cssPartExpressions: [],
-        selector: !parent ? literalSelector : `&:where(${literalSelector})`,
-        hasParent: Boolean(parent),
+        selector: !parentLocation ? literalSelector : `&:where(${literalSelector})`,
+        hasParent: Boolean(parentLocation),
       };
-      const parentCssParts = parent && cssParts.get(parent);
+      const parentCssParts = parentLocation && cssParts.get(parentLocation.parent);
       cssParts.set(path, currentCssParts);
       if (parentCssParts) {
-        parentCssParts.cssPartExpressions.push(currentCssParts);
+        parentCssParts.cssPartExpressions[parentLocation.currentIndex] ||= [];
+        parentCssParts.cssPartExpressions[parentLocation.currentIndex].push(currentCssParts);
       }
 
       // Replace the tagged template expression with a call to the 'styled' function
@@ -263,10 +262,10 @@ module.exports = async function cssLoader(source) {
       // const MyStyledDiv = styled.div`color: red;`
       // const Bar = styled.div` ${MyStyledDiv} { color: blue }`
       // "${MyStyledDiv} {" -> ".selector-0 {"
-      if (isStyledLiteral || isStyledCall || isAttrsCall) {
+      if (variableName && (isStyledLiteral || isStyledCall || isAttrsCall)) {
         variableNameToStyledClassName.set(
           variableName,
-          localIdent(variableName, literalSelectorIndex, "selector")
+          literalSelector
         );
       }
     },
@@ -274,6 +273,7 @@ module.exports = async function cssLoader(source) {
   const rootCssParts = [...cssParts.values()].filter(
     ({ hasParent }) => !hasParent
   );
+
   return mergeCssPartExpression(rootCssParts).trim();
 };
 
@@ -287,17 +287,23 @@ const unEscapeCssCode = (code) => code.replace(/\\\\/gi, "\\");
 
 /**
  * Searches the closest parent TaggedTemplateExpression using a name from localNames
+ * Returns the location inside this parent
+ * 
  * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
  * @param {{ css?: string , styled?: string }} localNames
- * @returns {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression> | null}
  */
 const getClosestTemplateLiteralExpressionParentPath = (
   path,
   { css, styled }
 ) => {
+  /** @type {import("@babel/core").NodePath} */
+  let grandChild = path;
+  /** @type {import("@babel/core").NodePath} */
+  let child = path;
   let parent = path.parentPath;
   const t = babel.types;
   while (parent) {
+
     if (t.isTaggedTemplateExpression(parent.node)) {
       const tag = parent.node.tag;
       const isCssLiteral =
@@ -325,14 +331,23 @@ const getClosestTemplateLiteralExpressionParentPath = (
         /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
           "attrs";
       if (isCssLiteral || isStyledLiteral || isStyledCall || isAttrsCall) {
-        return /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */ (
-          parent
+        if (!t.isTemplateLiteral(child.node) || !t.isExpression(grandChild.node)) {
+          throw new Error("Broken AST");
+        }
+        const currentIndex = child.node.expressions.indexOf(grandChild.node);
+        return  (
+          { parent: 
+              /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */(parent), 
+              currentIndex 
+            }
         );
       }
     }
     if (!parent.parentPath) {
       return null;
     }
+    grandChild = child;
+    child = parent;
     parent = parent.parentPath;
   }
   return null;
@@ -346,21 +361,16 @@ const getClosestTemplateLiteralExpressionParentPath = (
  */
 const mergeCssPartExpression = (cssPartExpression, level = 0) => {
   let css = "";
-  let expressionIndex = 0;
   for (const { quasiCode, cssPartExpressions, selector } of cssPartExpression) {
     let cssPart = "";
     for (let i = 0; i < quasiCode.length; i++) {
       const quasi = quasiCode[i];
       cssPart += trimNewLines(quasi.code);
-      // Ignore Expressions for CSS Variables
-      if (quasi.insideCssValue) {
-        continue;
-      }
       // Add expressions from child css literals
-      const childCssParts = cssPartExpressions[expressionIndex++];
+      const childCssParts = cssPartExpressions[i];
       if (childCssParts) {
         cssPart += `\n${trimNewLines(
-          mergeCssPartExpression([childCssParts], level + 1)
+          mergeCssPartExpression(childCssParts, level + 1)
         )}\n`;
       }
     }

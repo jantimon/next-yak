@@ -91,7 +91,7 @@ const headline = css\`
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const headline = css(__styleYak._yak_0, x > 0.5 && css(__styleYak._yak_1));"
+      const headline = css(__styleYak._yak_0, x > 0.5 && css(__styleYak._yak_2));"
     `);
   });
 
@@ -125,8 +125,8 @@ const FancyButton = styled(Button)\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const Button = styled.button(__styleYak.Button_0, x > 0.5 && css(__styleYak._yak_1));
-      const FancyButton = styled(Button)(__styleYak.FancyButton_2);"
+      const Button = styled.button(__styleYak.Button, x > 0.5 && css(__styleYak._yak_1));
+      const FancyButton = styled(Button)(__styleYak.FancyButton);"
     `);
   });
 
@@ -160,10 +160,10 @@ const FancyButton = styled(Button)\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const Button = styled.button(__styleYak.Button_0, ({
+      const Button = styled.button(__styleYak.Button, ({
         theme
       }) => theme.mode === \\"dark\\" && css(__styleYak._yak_1));
-      const FancyButton = styled(Button)(__styleYak.FancyButton_2);"
+      const FancyButton = styled(Button)(__styleYak.FancyButton);"
     `);
   });
 
@@ -182,12 +182,12 @@ const headline = styled.input.attrs({
 `
       )
     ).toMatchInlineSnapshot(`
-    "import { styled } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    const headline = styled.input.attrs({
-      type: \\"text\\"
-    })(__styleYak.headline_0);"
-  `);
+      "import { styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const headline = styled.input.attrs({
+        type: \\"text\\"
+      })(__styleYak.headline);"
+    `);
   });
 
   it("should support attrs on wrapped elements", async () => {
@@ -209,13 +209,13 @@ const newHeadline = styled(headline).attrs({
 `
       )
     ).toMatchInlineSnapshot(`
-    "import { styled } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    const headline = styled.input(__styleYak.headline_0);
-    const newHeadline = styled(headline).attrs({
-      type: \\"text\\"
-    })(__styleYak.newHeadline_1);"
-  `);
+      "import { styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const headline = styled.input(__styleYak.headline);
+      const newHeadline = styled(headline).attrs({
+        type: \\"text\\"
+      })(__styleYak.newHeadline);"
+    `);
   });
 
   it("should support css variables with spaces", async () => {
@@ -236,19 +236,19 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "import styles from \\"./page.module.css\\";
-    import { css } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    import { easing } from \\"styleguide\\";
-    const headline = css(__styleYak._yak_0, css(__styleYak._yak_1), css(__styleYak._yak_2), {
-      \\"style\\": {
-        \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
-          i
-        }) => i * 100 + \\"ms\\",
-        \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": easing
-      }
-    });"
-  `);
+      "import styles from \\"./page.module.css\\";
+      import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      import { easing } from \\"styleguide\\";
+      const headline = css(__styleYak._yak_0, css(__styleYak._yak_2), css(__styleYak._yak_4), {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
+            i
+          }) => i * 100 + \\"ms\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": easing
+        }
+      });"
+    `);
   });
 
   it("should convert keyframes", async () => {
@@ -274,16 +274,16 @@ const FadeInButton = styled.button\`
 `
       )
     ).toMatchInlineSnapshot(`
-  "import styles from \\"./page.module.css\\";
-  import { styled, keyframes } from \\"next-yak\\";
-  import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-  const fadeIn = keyframes(__styleYak.fadeIn_0);
-  const FadeInButton = styled.button(__styleYak.FadeInButton_1, {
-    \\"style\\": {
-      \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": fadeIn
-    }
-  });"
-`);
+      "import styles from \\"./page.module.css\\";
+      import { styled, keyframes } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const fadeIn = keyframes(__styleYak.fadeIn);
+      const FadeInButton = styled.button(__styleYak.FadeInButton, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": fadeIn
+        }
+      });"
+    `);
   });
 
   it("should allow to target components", async () => {
@@ -318,12 +318,12 @@ const Wrapper = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "import { styled, keyframes } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    const Link = styled.a(__styleYak.Link_0);
-    const Icon = styled.svg(__styleYak.Icon_1);
-    const Wrapper = styled.div(__styleYak.Wrapper_2);"
-  `);
+      "import { styled, keyframes } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Link = styled.a(__styleYak.Link);
+      const Icon = styled.svg(__styleYak.Icon);
+      const Wrapper = styled.div(__styleYak.Wrapper);"
+    `);
   });
 
   it("should allow to target components even if they don't have styles", async () => {
@@ -348,12 +348,12 @@ const Wrapper = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "import { styled, keyframes } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    const Link = styled.a();
-    const Icon = styled.svg(__styleYak.Icon_1);
-    const Wrapper = styled.div(__styleYak.Wrapper_2);"
-  `);
+      "import { styled, keyframes } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Link = styled.a();
+      const Icon = styled.svg(__styleYak.Icon);
+      const Wrapper = styled.div(__styleYak.Wrapper);"
+    `);
   });
 
   it("should show error when mixin is used in nested selector", async () => {
@@ -451,7 +451,7 @@ const headline = css\`
   import { css } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
   const x = Math.random();
-  const headline = css(x > 0.5 && css(__styleYak._yak_1));"
+  const headline = css(__styleYak._yak_0, x > 0.5 && css(__styleYak._yak_2));"
 `);
       });
 
@@ -496,8 +496,8 @@ const Button = styled.button\`
   "import styles from \\"./page.module.css\\";
   import { styled, css } from \\"next-yak\\";
   import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-  const Icon = styled.svg(__styleYak.Icon_0);
-  const Button = styled.button(__styleYak.Button_1);"
+  const Icon = styled.svg(__styleYak.Icon);
+  const Button = styled.button(__styleYak.Button);"
 `);
       });
 });

@@ -161,10 +161,10 @@ const headline = styled.input.attrs({
 `
       )
     ).toMatchInlineSnapshot(`
-    ".headline_0 {
-      color: red;
-    }"
-  `);
+      ".headline {
+        color: red;
+      }"
+    `);
   });
 
   it("should support attrs on wrapped elements", async () => {
@@ -186,13 +186,13 @@ const newHeadline = styled(headline).attrs({
 `
       )
     ).toMatchInlineSnapshot(`
-    ".headline_0 {
-      color: red;
-    }
-    .newHeadline_1 {
-      color: black;
-    }"
-  `);
+      ".headline {
+        color: red;
+      }
+      .newHeadline {
+        color: black;
+      }"
+    `);
   });
 
   it("should support css variables with spaces", async () => {
@@ -346,18 +346,18 @@ const FadeInButton = styled.button\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "@keyframes fadeIn_0 {
-      0% {
-        opacity: 0;
+      "@keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
-      100% {
-        opacity: 1;
-      }
-    }
-    .FadeInButton_1 {
-      animation: 1s var(--🦬18fi82j0) ease-out;
-    }"
-  `);
+      .FadeInButton {
+        animation: 1s var(--🦬18fi82j0) ease-out;
+      }"
+    `);
   });
 
   it("should allow to target components", async () => {
@@ -391,26 +391,26 @@ const Wrapper = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-    ".Link_0 {
-      color: palevioletred;
-    }
-    .Icon_1 {
-      fill: currentColor;
-      width: 1em;
-      height: 1em;
-      .Link_0:hover & {
-        color: red;
+      ".Link {
+        color: palevioletred;
       }
-      .Link_0:focus & {
-        color: red;
+      .Icon {
+        fill: currentColor;
+        width: 1em;
+        height: 1em;
+        .Link:hover & {
+          color: red;
+        }
+        .Link:focus & {
+          color: red;
+        }
       }
-    }
-    .Wrapper_2 {
-      &:has(> .Link_0) {
-        padding: 10px;
-      }
-    }"
-  `);
+      .Wrapper {
+        &:has(> .Link) {
+          padding: 10px;
+        }
+      }"
+    `);
   });
 
   it("should allow to target components even if they don't have styles", async () => {
@@ -435,12 +435,12 @@ const Wrapper = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-    ".Wrapper_2 {
-      &:has(> .Icon_1) {
-        padding: 10px;
-      }
-    }"
-  `);
+      ".Wrapper {
+        &:has(> .Icon) {
+          padding: 10px;
+        }
+      }"
+    `);
   });
 
   it("should support nested expressions", async () => {
@@ -478,42 +478,41 @@ const Component2 = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-    ".Component_0 {
-        background-color: red;
-        color: white;
-          &:where(._yak_1) {
-            background-color: blue;
+      ".Component {
+          background-color: red;
+          color: white;
+            &:where(._yak_0) {
+              background-color: blue;
+            }
+          border: 1px solid black;
+
+          &:focus {
+              background-color: green;
+                &:where(._yak_1) {
+                  background-color: blue;
+                    &:where(._yak_2) {
+                      background-color: brown;
+                    }
+                }
+              border: 2px solid pink;
           }
-        border: 1px solid black;
-
-        &:focus {
-            background-color: green;
-              &:where(._yak_2) {
-                background-color: blue;
-                  &:where(._yak_3) {
-                    background-color: brown;
-                  }
-              }
-            border: 2px solid pink;
         }
-      }
-      .Component2_4 {
-        color: hotpink;
-      }"
-  `);
+        .Component2 {
+          color: hotpink;
+        }"
+    `);
   });
-});
 
-
-
-it("should support conditional nested expressions", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should support conditional nested expressions", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { styled, keyframes, css } from "next-yak";
 
 const color = "green";
+const duration = "1s";
+const easing = "ease-out";
 
 const Component = styled.div\`
     background-color: red;
@@ -525,16 +524,31 @@ const Component = styled.div\`
     \`}
     border: 1px solid black;
     \${({ active }) => active ? css\`
-        color: blue;
+        color: orange;
     \` : css\`
-        color: \${color};
+        transition: color \${duration} \${easing};
     \`}
 \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
-    ".Component_0 {
-      THIS IS BROKEN
-      }"
-  `);
+      )
+    ).toMatchInlineSnapshot(`
+      ".Component {
+          background-color: red;
+          color: white;
+            &:where(._yak_0) {
+              background-color: blue;
+            }
+            &:where(._yak_1) {
+              background-color: var(--🦬18fi82j0);
+            }
+          border: 1px solid black;
+            &:where(._yak_2) {
+              color: orange;
+            }
+            &:where(._yak_3) {
+              transition: color var(--🦬18fi82j1) var(--🦬18fi82j2);
+            }
+        }"
+    `);
+  });
 });
