@@ -504,3 +504,38 @@ const Component2 = styled.div\`
       }"
   `);
 });
+
+
+
+it("should support conditional nested expressions", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+import { styled, keyframes, css } from "next-yak";
+
+const color = "green";
+
+const Component = styled.div\`
+    background-color: red;
+    color: white;
+    \${({ active }) => active ? css\`
+        background-color: blue;
+    \` : css\`
+        background-color: \${color};
+    \`}
+    border: 1px solid black;
+    \${({ active }) => active ? css\`
+        color: blue;
+    \` : css\`
+        color: \${color};
+    \`}
+\`;
+`
+    )
+  ).toMatchInlineSnapshot(`
+    ".Component_0 {
+      THIS IS BROKEN
+      }"
+  `);
+});
