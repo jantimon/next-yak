@@ -28,9 +28,11 @@ const headline = css<{ $primary?: boolean }>`
 
   ${queries.sm} {
     font-size: 1.5rem;
-    ${({ $primary }) => $primary && css`
-      font-size: 1.7rem;
-    `}
+    ${({ $primary }) =>
+      $primary &&
+      css`
+        font-size: 1.7rem;
+      `}
   }
 
   &:before,
