@@ -10,7 +10,7 @@ const Button = styled.button<{ $primary?: boolean }>`
         `
       : css`
           color: #009688;
-        `};
+        `}
   background: #fff;
   border: 1px solid currentColor;
   font-size: 17px;
