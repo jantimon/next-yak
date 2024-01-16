@@ -28,6 +28,9 @@ const headline = css<{ $primary?: boolean }>`
 
   ${queries.sm} {
     font-size: 1.5rem;
+    ${({ $primary }) => $primary && css`
+      font-size: 1.7rem;
+    `}
   }
 
   &:before,
@@ -110,7 +113,7 @@ export default function Home() {
   return (
     <YakThemeProvider>
       <main className={styles.main}>
-        <Headline>Hello world</Headline>
+        <Headline $primary>Hello world</Headline>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">

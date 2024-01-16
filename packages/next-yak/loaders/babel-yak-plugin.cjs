@@ -340,18 +340,13 @@ module.exports = function (babel, options) {
             wasInsideCssValue = false;
             if (expression) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
-                const errorExpression = expression;
-                const name =
-                  errorExpression.type === "Identifier"
-                    ? `"${errorExpression.name}"`
-                    : "Expression";
-                throw new InvalidPositionError(
-                  `Expressions are not allowed inside nested selectors: \n${name} inside "${quasiTypes[
-                    i
-                  ].currentNestingScopes.join(" { ")} {"`,
-                  errorExpression,
-                  this.file
-                );
+                // TODO: inside a nested scope a foreign css literal must not be used
+                // as we can not forward the scope.
+                // Therefore the following code must throw an error:
+                // import { mixin } from "./some-file";
+                // const Button = styled.button`
+                //   &:focus { ${mixin} }
+                // `
               }
               newArguments.add(expression);
             }
