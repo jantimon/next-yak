@@ -36,9 +36,29 @@ module.exports = function (babel, options) {
   /**
    * A unique prefix for each file to avoid collisions
    * (generated on first use by hashing the relative file path)
-   * @type {string | null}
+   * @type {WeakMap<import("@babel/core").BabelFile, string>}
    */
-  let hashedFilePath = null;
+  let hashedFilePaths = new WeakMap();
+  /**
+   * @param {import("@babel/core").BabelFile} file
+   */
+  const getHashedFilePath = (file) => {
+    const fromCache = hashedFilePaths.get(file);
+    if (fromCache) {
+      return fromCache;
+    }
+    const resourcePath = file.opts.filename;
+    if (!resourcePath) {
+      throw new Error("resourcePath is undefined");
+    }
+    const relativePath = relative(
+      rootContext,
+      resolve(rootContext, resourcePath)
+    );
+    const hashedFilePath = murmurhash2_32_gc(relativePath);
+    hashedFilePaths.set(file, hashedFilePath);
+    return hashedFilePath;
+  }
 
   /**
    * Returns wether the given tag is matching a yak import
@@ -308,23 +328,12 @@ module.exports = function (babel, options) {
                 cssVariablesInlineStyle = t.objectExpression([]);
               }
 
-              if (!hashedFilePath) {
-                const resourcePath = state.file.opts.filename;
-                if (!resourcePath) {
-                  throw new Error("resourcePath is undefined");
-                }
-                const relativePath = relative(
-                  rootContext,
-                  resolve(rootContext, resourcePath)
-                );
-                hashedFilePath = murmurhash2_32_gc(relativePath);
-              }
-
+              const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this.varIndex++}`
               // expression: `x`
               // { style: { --v0: x}}
               cssVariablesInlineStyle.properties.push(
                 t.objectProperty(
-                  t.stringLiteral(`--🦬${hashedFilePath}${this.varIndex++}`),
+                  t.stringLiteral(cssVariableName),
                   /** @type {babel.types.Expression} */ (expression)
                 )
               );
