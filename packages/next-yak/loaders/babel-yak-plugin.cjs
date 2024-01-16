@@ -38,7 +38,7 @@ module.exports = function (babel, options) {
    * (generated on first use by hashing the relative file path)
    * @type {WeakMap<import("@babel/core").BabelFile, string>}
    */
-  let hashedFilePaths = new WeakMap();
+  const hashedFilePaths = new WeakMap();
   /**
    * @param {import("@babel/core").BabelFile} file
    */
