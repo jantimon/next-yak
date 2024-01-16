@@ -21,7 +21,6 @@ const loaderContext = {
 };
 
 describe("cssloader", () => {
-  // snapshot
   it("should return the correct value", async () => {
     expect(
       await cssloader.call(
@@ -122,13 +121,12 @@ const headline = css\`
       }"
     `);
   });
-});
 
-it("should support css variables", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should support css variables", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -138,21 +136,21 @@ const headline = css\`
   }
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "._yak_0 {
       &:hover {
         color: var(--🦬18fi82j0);
       }
     }"
   `);
-});
+  });
 
-it("should support attrs on intrinsic elements", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should support attrs on intrinsic elements", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { styled } from "next-yak";
 
 const headline = styled.input.attrs({
@@ -161,19 +159,19 @@ const headline = styled.input.attrs({
   color: red;
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     ".headline_0 {
       color: red;
     }"
   `);
-});
+  });
 
-it("should support attrs on wrapped elements", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should support attrs on wrapped elements", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { styled } from "next-yak";
 
 const headline = styled.input\`
@@ -186,8 +184,8 @@ const newHeadline = styled(headline).attrs({
   color: black;
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     ".headline_0 {
       color: red;
     }
@@ -195,13 +193,13 @@ const newHeadline = styled(headline).attrs({
       color: black;
     }"
   `);
-});
+  });
 
-it("should support css variables with spaces", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should support css variables with spaces", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { css } from "next-yak";
 
@@ -211,8 +209,8 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "._yak_0 {
       transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
       display: block;
@@ -221,13 +219,13 @@ const headline = css\`
         }
     }"
   `);
-});
+  });
 
-it("should replace breakpoint references with actual media queries", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should replace breakpoint references with actual media queries", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { css } from "next-yak";
 import { queries } from "@/theme.yak";
 
@@ -241,8 +239,8 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "._yak_0 {
       color: blue;
       @media (min-width: 640px) {
@@ -255,13 +253,13 @@ const headline = css\`
         }
     }"
   `);
-});
+  });
 
-it("should replace breakpoint references with actual media queries from single quote imports", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should replace breakpoint references with actual media queries from single quote imports", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { css } from "next-yak";
 import { queries } from '@/theme.yak';
 
@@ -275,8 +273,8 @@ const headline = css\`
   \${css\`color: orange\`}
   \`;
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "._yak_0 {
       color: blue;
       @media (min-width: 640px) {
@@ -289,15 +287,15 @@ const headline = css\`
         }
     }"
   `);
-});
+  });
 
-it("should prevent double escaped chars", async () => {
-  // in styled-components \\ is replaced with \
-  // this test verifies that yak provides the same behavior
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should prevent double escaped chars", async () => {
+    // in styled-components \\ is replaced with \
+    // this test verifies that yak provides the same behavior
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { css } from "next-yak";
 import { queries } from "@/theme";
 
@@ -311,8 +309,8 @@ const headline = css\`
   content: "\\\\\\\\"
 \`
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "._yak_0 {
       :before {
         content: \\"\\\\2022\\";
@@ -323,13 +321,13 @@ const headline = css\`
       content: \\"\\\\\\\\\\"
     }"
   `);
-});
+  });
 
-it("should convert keyframes", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should convert keyframes", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import styles from "./page.module.css";
 import { styled, keyframes } from "next-yak";
 
@@ -346,8 +344,8 @@ const FadeInButton = styled.button\`
   animation: 1s \${fadeIn} ease-out;
 \`
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     "@keyframes fadeIn_0 {
       0% {
         opacity: 0;
@@ -360,13 +358,13 @@ const FadeInButton = styled.button\`
       animation: 1s var(--🦬18fi82j0) ease-out;
     }"
   `);
-});
+  });
 
-it("should allow to target components", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should allow to target components", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { styled, keyframes } from "next-yak";
 
 const Link = styled.a\`
@@ -391,8 +389,8 @@ const Wrapper = styled.div\`
   }
 \`
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     ".Link_0 {
       color: palevioletred;
     }
@@ -413,13 +411,13 @@ const Wrapper = styled.div\`
       }
     }"
   `);
-});
+  });
 
-it("should allow to target components even if they don't have styles", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should allow to target components even if they don't have styles", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { styled, keyframes } from "next-yak";
 
 const Link = styled.a\`
@@ -435,21 +433,21 @@ const Wrapper = styled.div\`
 \`
 
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     ".Wrapper_2 {
       &:has(> .Icon_1) {
         padding: 10px;
       }
     }"
   `);
-});
+  });
 
-it("should support nested expressions", async () => {
-  expect(
-    await cssloader.call(
-      loaderContext,
-      `
+  it("should support nested expressions", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
 import { styled, keyframes, css } from "next-yak";
 
 const Component = styled.div\`
@@ -478,8 +476,8 @@ const Component2 = styled.div\`
 \`;
 
 `
-    )
-  ).toMatchInlineSnapshot(`
+      )
+    ).toMatchInlineSnapshot(`
     ".Component_0 {
         background-color: red;
         color: white;
@@ -503,6 +501,7 @@ const Component2 = styled.div\`
         color: hotpink;
       }"
   `);
+  });
 });
 
 

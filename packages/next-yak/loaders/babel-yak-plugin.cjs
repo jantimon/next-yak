@@ -7,6 +7,7 @@ const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 
 /** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
+/** @typedef {{ css: string | undefined, styled: string | undefined, keyframes: string | undefined }} YakLocalIdentifierNames */
 
 /**
  * Babel plugin for typescript files that use yak - it will do things:
@@ -16,11 +17,7 @@ const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
  * @param {import("@babel/core")} babel
  * @param {YakBabelPluginOptions} options
  * @returns {babel.PluginObj<import("@babel/core").PluginPass & {
- *   localVarNames: {
- *    css?: string,
- *    styled?: string,
- *    keyframes?: string
- *   },
+ *   localVarNames: YakLocalIdentifierNames,
  *   isImportedInCurrentFile: boolean,
  *   classNameCount: number,
  *   varIndex: number,
@@ -54,7 +51,7 @@ module.exports = function (babel, options) {
    * - keyframes`...` -> keyframesLiteral
    *
    * @param {babel.types.Expression} tag
-   * @param {{ css?: string, styled?: string, keyframes?: string }} localVarNames
+   * @param {YakLocalIdentifierNames} localVarNames
    * @returns {"cssLiteral" | "keyframesLiteral" | "styledLiteral" | "styledCall" | "attrsCall" | "unknown"}
    */
   const getYakExpressionType = (tag, localVarNames) => {
@@ -115,7 +112,7 @@ module.exports = function (babel, options) {
        * e.g. `import './App.yak.module.css!=!./App?./App.yak.module.css'`
        * 
        * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
-       * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
+       * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       ImportDeclaration(path, state) {
         const node = path.node;
@@ -171,7 +168,7 @@ module.exports = function (babel, options) {
        * - keyframes`...`
        * 
        * @param {import("@babel/core").NodePath<import("@babel/core").types.TaggedTemplateExpression>} path
-       * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
+       * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       TaggedTemplateExpression(path, state) {
         if (!this.isImportedInCurrentFile) {
@@ -211,7 +208,7 @@ module.exports = function (babel, options) {
               // the className to it so it can be targeted
               if (!wasAdded) {
                 styledCall.wasAdded = true;
-                astNode.arguments.push(
+                astNode.arguments.unshift(
                   t.memberExpression(
                     t.identifier("__styleYak"),
                     t.identifier(className)

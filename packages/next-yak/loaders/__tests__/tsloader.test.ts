@@ -474,4 +474,28 @@ const Icon = styled.div\`
       line 7: found \${test}"
     `);
   });
+
+  it("should allow allow using a styled component as selector in the same file", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+import styles from "./page.module.css";
+import { styled, css } from "next-yak";
+
+const Icon = styled.svg\`\`;
+const Button = styled.button\`
+  &:has(\${Icon}) {
+    color: red;
+  }
+\`;
+
+`)).toMatchInlineSnapshot(`
+  "import styles from \\"./page.module.css\\";
+  import { styled, css } from \\"next-yak\\";
+  import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+  const Icon = styled.svg(__styleYak.Icon_0);
+  const Button = styled.button(__styleYak.Button_1);"
+`);
+      });
 });
