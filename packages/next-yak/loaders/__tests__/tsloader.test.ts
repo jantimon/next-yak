@@ -429,6 +429,30 @@ const Icon = styled.div\`
     `);
   });
 
+  it("should ignores empty chunks if they include only a comment", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+import styles from "./page.module.css";
+import { css } from "next-yak";
+
+const x = Math.random();
+const headline = css\`
+  /* comment */
+  \${x > 0.5 && css\`
+    color: blue;
+  \`}
+\`;
+`)).toMatchInlineSnapshot(`
+  "import styles from \\"./page.module.css\\";
+  import { css } from \\"next-yak\\";
+  import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+  const x = Math.random();
+  const headline = css(x > 0.5 && css(__styleYak._yak_1));"
+`);
+      });
+
   it("should show error when a dynamic selector is used after a comma", async () => {
     await expect(() =>
       tsloader.call(

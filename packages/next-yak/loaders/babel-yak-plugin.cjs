@@ -15,15 +15,81 @@ const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
  *
  * @param {import("@babel/core")} babel
  * @param {YakBabelPluginOptions} options
- * @returns {babel.PluginObj<import("@babel/core").PluginPass & {localVarNames: {css?: string, styled?: string, keyframes?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number, variableNameToStyledCall: Map<string, {wasAdded: boolean, className: string, astNode: import("@babel/types").CallExpression}>}>}
+ * @returns {babel.PluginObj<import("@babel/core").PluginPass & {
+ *   localVarNames: {
+ *    css?: string,
+ *    styled?: string,
+ *    keyframes?: string
+ *   },
+ *   isImportedInCurrentFile: boolean,
+ *   classNameCount: number,
+ *   varIndex: number,
+ *   variableNameToStyledCall: Map<string, {
+ *     wasAdded: boolean,
+ *     className: string,
+ *     astNode: import("@babel/types").CallExpression
+ *   }>
+ * }>}
  */
 module.exports = function (babel, options) {
   const { replaces } = options;
   const rootContext = options.rootContext || process.cwd();
   const { types: t } = babel;
 
-  /** @type {string | null} */
-  let hashedFile = null;
+  /**
+   * A unique prefix for each file to avoid collisions
+   * (generated on first use by hashing the relative file path)
+   * @type {string | null}
+   */
+  let hashedFilePath = null;
+
+  /**
+   * Returns wether the given tag is matching a yak import
+   *
+   * e.g.:
+   * - css`...` -> cssLiteral
+   * - styled.div`...` -> styledLiteral
+   * - styled(Component)`...` -> styledCall
+   * - styled.div.attrs({})`...` -> attrsCall
+   * - keyframes`...` -> keyframesLiteral
+   *
+   * @param {babel.types.Expression} tag
+   * @param {{ css?: string, styled?: string, keyframes?: string }} localVarNames
+   * @returns {"cssLiteral" | "keyframesLiteral" | "styledLiteral" | "styledCall" | "attrsCall" | "unknown"}
+   */
+  const getYakExpressionType = (tag, localVarNames) => {
+    if (t.isIdentifier(tag)) {
+      if (tag.name === localVarNames.css) {
+        return "cssLiteral";
+      }
+      if (tag.name === localVarNames.keyframes) {
+        return "keyframesLiteral";
+      }
+    }
+    if (
+      t.isMemberExpression(tag) &&
+      t.isIdentifier(tag.object) &&
+      tag.object.name === localVarNames.styled
+    ) {
+      return "styledLiteral";
+    }
+    if (
+      t.isCallExpression(tag) &&
+      t.isIdentifier(tag.callee) &&
+      tag.callee.name === localVarNames.styled
+    ) {
+      return "styledCall";
+    }
+    if (
+      t.isCallExpression(tag) &&
+      t.isMemberExpression(tag.callee) &&
+      t.isIdentifier(tag.callee.property) &&
+      tag.callee.property.name === "attrs"
+    ) {
+      return "attrsCall";
+    }
+    return "unknown";
+  };
 
   return {
     name: "next-yak",
@@ -41,6 +107,13 @@ module.exports = function (babel, options) {
     },
     visitor: {
       /**
+       * Store the name of the imported 'css' and 'styled' variables e.g.:
+       * - `import { css, styled } from 'next-yak'` -> { css: 'css', styled: 'styled' }
+       * - `import { css as yakCss, styled as yakStyled } from 'next-yak'` -> { css: 'yakCss', styled: 'yakStyled' }
+       * 
+       * Inject the import to the css-module (with .yak.module.css extension)
+       * e.g. `import './App.yak.module.css!=!./App?./App.yak.module.css'`
+       * 
        * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
        * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
@@ -49,13 +122,11 @@ module.exports = function (babel, options) {
         if (node.source.value !== "next-yak") {
           return;
         }
-
         const filePath = state.file.opts.filename;
         if (!filePath) {
           throw new Error("filePath is undefined");
         }
         const fileName = basename(filePath).replace(/\.tsx?/, "");
-
         // Import 'yacijs' styles and assign to '__styleYak'
         // use webpacks !=! syntax to pretend that the typescript file is actually a css-module
         path.insertAfter(
@@ -92,6 +163,13 @@ module.exports = function (babel, options) {
         });
       },
       /**
+       * Replace the tagged template expression
+       *  - css`...`
+       * - styled.div`...`
+       * - styled(Component)`...`
+       * - styled.div.attrs({})`...`
+       * - keyframes`...`
+       * 
        * @param {import("@babel/core").NodePath<import("@babel/core").types.TaggedTemplateExpression>} path
        * @param {babel.PluginPass & {localVarNames: {css?: string, styled?: string}, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
@@ -99,57 +177,24 @@ module.exports = function (babel, options) {
         if (!this.isImportedInCurrentFile) {
           return;
         }
-        // Check if the tag name matches the imported 'css' or 'styled' variable
         const tag = path.node.tag;
 
-        const isCssLiteral =
-          t.isIdentifier(tag) &&
-          /** @type {babel.types.Identifier} */ (tag).name ===
-            this.localVarNames.css;
-
-        const isKeyframesLiteral =
-          t.isIdentifier(tag) &&
-          /** @type {babel.types.Identifier} */ (tag).name ===
-            this.localVarNames.keyframes;
-
-        const isStyledLiteral =
-          t.isMemberExpression(tag) &&
-          t.isIdentifier(
-            /** @type {babel.types.MemberExpression} */ (tag).object
-          ) &&
-          /** @type {babel.types.Identifier} */ (
-            /** @type {babel.types.MemberExpression} */ (tag).object
-          ).name === this.localVarNames.styled;
-        const isStyledCall =
-          t.isCallExpression(tag) &&
-          t.isIdentifier(
-            /** @type {babel.types.CallExpression} */ (tag).callee
-          ) &&
-          /** @type {babel.types.Identifier} */ (
-            /** @type {babel.types.CallExpression} */ (tag).callee
-          ).name === this.localVarNames.styled;
-
-        const isAttrsCall =
-          t.isCallExpression(tag) &&
-          t.isMemberExpression(tag.callee) &&
-          t.isIdentifier(tag.callee.property) &&
-          tag.callee.property.name === "attrs";
-
-        if (
-          !isCssLiteral &&
-          !isStyledLiteral &&
-          !isStyledCall &&
-          !isKeyframesLiteral &&
-          !isAttrsCall
-        ) {
+        // Check if the tag name matches the imported 'css' or 'styled' variable
+        const expressionType = getYakExpressionType(tag, this.localVarNames);
+        if (expressionType === "unknown") {
           return;
         }
+
+        const styledApi =
+          expressionType === "styledLiteral" ||
+          expressionType === "styledCall" ||
+          expressionType === "attrsCall";
 
         // Store class name for the created variable for later replacements
         // e.g. const MyStyledDiv = styled.div`color: red;`
         // "MyStyledDiv" -> "selector-0"
         const variableName =
-          isStyledLiteral || isStyledCall || isAttrsCall || isKeyframesLiteral
+          styledApi || expressionType === "keyframesLiteral"
             ? getStyledComponentName(path)
             : "_yak";
 
@@ -189,12 +234,17 @@ module.exports = function (babel, options) {
             localIdent(
               variableName,
               literalSelectorIndex,
-              isKeyframesLiteral ? "animation" : "className"
+              expressionType === "keyframesLiteral" ? "animation" : "className"
             )
           )
         );
 
-        // Replace the tagged template expression with a call to the 'styled' function
+        /** 
+         * The expression is replaced with a call to the 'styled' or 'css' function
+         * e.g. styled.div`` -> styled.div(...)
+         * e.g. css`` -> css(...)
+         * newArguments is a set of all arguments that will be passed to the function
+         */
         const newArguments = new Set();
         const quasis = path.node.quasi.quasis;
         /** @type {string[]} */
@@ -264,7 +314,7 @@ module.exports = function (babel, options) {
                 cssVariablesInlineStyle = t.objectExpression([]);
               }
 
-              if (!hashedFile) {
+              if (!hashedFilePath) {
                 const resourcePath = state.file.opts.filename;
                 if (!resourcePath) {
                   throw new Error("resourcePath is undefined");
@@ -273,14 +323,14 @@ module.exports = function (babel, options) {
                   rootContext,
                   resolve(rootContext, resourcePath)
                 );
-                hashedFile = murmurhash2_32_gc(relativePath);
+                hashedFilePath = murmurhash2_32_gc(relativePath);
               }
 
               // expression: `x`
               // { style: { --v0: x}}
               cssVariablesInlineStyle.properties.push(
                 t.objectProperty(
-                  t.stringLiteral(`--🦬${hashedFile}${this.varIndex++}`),
+                  t.stringLiteral(`--🦬${hashedFilePath}${this.varIndex++}`),
                   /** @type {babel.types.Expression} */ (expression)
                 )
               );
@@ -326,9 +376,12 @@ module.exports = function (babel, options) {
         const styledCall = t.callExpression(tag, [...newArguments]);
         path.replaceWith(styledCall);
 
-        // Store reference to AST node to allow other components to target the styled literal inside css like
-        // e.g. `& ${Button} { ... }`
-        if (isStyledLiteral || isStyledCall || isAttrsCall) {
+        // Store the AST node of the `styled` node for later selector replacements
+        // e.g.
+        // const MyStyledDiv = styled.div`color: red;`
+        // const Bar = styled.div` ${MyStyledDiv} { color: blue }`
+        // "${MyStyledDiv} {" -> ".selector-0 {"
+        if (styledApi) {
           this.variableNameToStyledCall.set(variableName, {
             wasAdded: literalSelectorWasUsed,
             className: localIdent(
