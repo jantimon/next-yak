@@ -340,13 +340,17 @@ module.exports = function (babel, options) {
             wasInsideCssValue = false;
             if (expression) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
-                // TODO: inside a nested scope a foreign css literal must not be used
-                // as we can not forward the scope.
-                // Therefore the following code must throw an error:
-                // import { mixin } from "./some-file";
-                // const Button = styled.button`
-                //   &:focus { ${mixin} }
-                // `
+                // inside a nested scope a foreign css literal must not be used
+                // as we can not forward the scope
+                const isReferenceToMixin = t.isIdentifier(expression) || t.isCallExpression(expression);
+                if (isReferenceToMixin) {
+                  throw new InvalidPositionError(
+                    `Mixins are not allowed inside nested selectors`,
+                    expression,
+                    this.file,
+                    "Use an inline css literal instead or move the selector into the mixin"
+                  );
+                }
               }
               newArguments.add(expression);
             }
@@ -393,8 +397,9 @@ class InvalidPositionError extends Error {
    * @param {string} message
    * @param {import("@babel/types").Expression} expression
    * @param {import("@babel/core").BabelFile} file
+   * @param {string} [recommendedFix]
    */
-  constructor(message, expression, file) {
+  constructor(message, expression, file, recommendedFix) {
     let errorText = message;
     const line = expression.loc?.start.line ?? -1;
     if (line !== -1) {
@@ -405,6 +410,9 @@ class InvalidPositionError extends Error {
         expression.start,
         expression.end
       )}}`;
+    }
+    if (recommendedFix) {
+      errorText += `\n${recommendedFix}`;
     }
     super(errorText);
   }
