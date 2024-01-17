@@ -16,8 +16,7 @@
 - **Standard CSS Syntax**: Write styles in familiar, easy-to-use CSS
 - **Integrates with Atomic CSS**: Easily combines with atomic CSS frameworks like Tailwind CSS for more design options
 
-<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/cfacb70e-1b42-4a41-9706-f5e4da1fe8cd" alt="Code example"></video>
-
+[Preview (Video)](https://github.com/jantimon/next-yak/assets/4113649/5383f60c-3bab-4aba-906c-d66070b6116c)
 
 ## Installation
 
@@ -90,7 +89,7 @@ const ToggleButton = styled.button`
 `;
 ```
 
-<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/9065d0a0-f839-4d91-b05e-b3e72c7c2bb0" alt="Dynamic Styles example"></video>
+[Dynamic Styles (Video)](https://github.com/jantimon/next-yak/assets/4113649/c5f52846-33e4-4058-9c78-efd98197d75f)
 
 ### Dynamic Properties
 
@@ -121,7 +120,8 @@ const ExampleComponent = () => {
 };
 ```
 
-<video width="630" height="300" src="https://github.com/jantimon/next-yak/assets/4113649/11e9aca7-f5c8-416b-bb67-67e180be81e8" alt="Dynamic Styles example"></video>
+[Dynamic Props (video)](https://github.com/jantimon/next-yak/assets/4113649/2fa78f82-382c-465f-b294-2504739ea168)
+
 
 ### Targeting Components
 
@@ -158,7 +158,7 @@ const ExampleComponent = () => {
 ## Nesting
 
 `next-yak` supports nesting out of the box.  
-Next.js 13 supports nesting only with the `postcss-nested` plugin.  
+[For now](https://github.com/css-modules/postcss-modules-local-by-default/pull/64) Next.js 13 supports nesting only with the `postcss-nested` plugin.  
 Therefore you have to create a `postcss.config.js` file in your project root:
 
 ```js
@@ -169,6 +169,8 @@ module.exports = {
   }
 };
 ```
+
+[Nesting Example](https://github.com/jantimon/next-yak/assets/4113649/44dda778-94c9-4eb6-bada-8c49770004d6)
 
 ## Motivation
 
