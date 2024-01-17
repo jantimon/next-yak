@@ -342,8 +342,8 @@ module.exports = function (babel, options) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
                 // inside a nested scope a foreign css literal must not be used
                 // as we can not forward the scope
-                const isVariable = t.isIdentifier(expression);
-                if (isVariable) {
+                const isReferenceToMixin = t.isIdentifier(expression) || t.isCallExpression(expression);
+                if (isReferenceToMixin) {
                   throw new InvalidPositionError(
                     `Mixins are not allowed inside nested selectors`,
                     expression,

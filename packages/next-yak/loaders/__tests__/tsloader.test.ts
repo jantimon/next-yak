@@ -383,6 +383,33 @@ const Icon = styled.div\`
     `);
   });
 
+  it.only("should show error when a mixin function is used in nested selector", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const bold = () => css\`
+  font-weight: bold;
+\`
+
+const Icon = styled.div\`
+  @media (min-width: 640px) {
+    .bar {
+      \${bold()}
+    }
+  }
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
+      found: \${bold()}
+      Use an inline css literal instead or move the selector into the mixin"
+    `);
+  });
+
   // TODO: this test was temporarily disabled because it was failing when inline css literals were introduced
   it.skip("should show error when mixin is used in nested selector inside a css", async () => {
     await expect(() =>
