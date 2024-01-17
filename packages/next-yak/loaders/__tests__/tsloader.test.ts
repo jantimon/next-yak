@@ -383,7 +383,7 @@ const Icon = styled.div\`
     `);
   });
 
-  it.only("should show error when a mixin function is used in nested selector", async () => {
+  it("should show error when a mixin function is used in nested selector", async () => {
     await expect(() =>
       tsloader.call(
         loaderContext,
