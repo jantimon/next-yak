@@ -170,7 +170,7 @@ module.exports = {
 };
 ```
 
-[Nesting Example](https://github.com/jantimon/next-yak/assets/4113649/a4152e3a-66dd-4344-8723-24ab32630843)
+[Nesting Example (video)](https://github.com/jantimon/next-yak/assets/4113649/33eeeb13-b0cf-499f-a1d3-ba6f51cf4308)
 
 ## Motivation
 
