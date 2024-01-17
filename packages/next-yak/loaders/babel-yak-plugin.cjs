@@ -340,22 +340,17 @@ module.exports = function (babel, options) {
             wasInsideCssValue = false;
             if (expression) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
-                // TODO: inside a nested scope a foreign css literal must not be used
-                // as we can not forward the scope.
-                // Therefore the following code must throw an error:
-                // import { mixin } from "./some-file";
-                // const Button = styled.button`
-                //   &:focus { ${mixin} }
-                // `
-              }
-              const isVariable = t.isIdentifier(expression);
-              if (isVariable) {
-                throw new InvalidPositionError(
-                  `Mixins are not allowed inside nested selectors`,
-                  expression,
-                  this.file,
-                  "Use an inline css literal instead or move the selector into the mixin"
-                );
+                // inside a nested scope a foreign css literal must not be used
+                // as we can not forward the scope
+                const isVariable = t.isIdentifier(expression);
+                if (isVariable) {
+                  throw new InvalidPositionError(
+                    `Mixins are not allowed inside nested selectors`,
+                    expression,
+                    this.file,
+                    "Use an inline css literal instead or move the selector into the mixin"
+                  );
+                }
               }
               newArguments.add(expression);
             }
