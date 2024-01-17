@@ -348,6 +348,15 @@ module.exports = function (babel, options) {
                 //   &:focus { ${mixin} }
                 // `
               }
+              const isVariable = t.isIdentifier(expression);
+              if (isVariable) {
+                throw new InvalidPositionError(
+                  `Mixins are not allowed inside nested selectors`,
+                  expression,
+                  this.file,
+                  "Use an inline css literal instead or move the selector into the mixin"
+                );
+              }
               newArguments.add(expression);
             }
           }
@@ -393,8 +402,9 @@ class InvalidPositionError extends Error {
    * @param {string} message
    * @param {import("@babel/types").Expression} expression
    * @param {import("@babel/core").BabelFile} file
+   * @param {string} [recommendedFix]
    */
-  constructor(message, expression, file) {
+  constructor(message, expression, file, recommendedFix) {
     let errorText = message;
     const line = expression.loc?.start.line ?? -1;
     if (line !== -1) {
@@ -405,6 +415,9 @@ class InvalidPositionError extends Error {
         expression.start,
         expression.end
       )}}`;
+    }
+    if (recommendedFix) {
+      errorText += `\n${recommendedFix}`;
     }
     super(errorText);
   }
