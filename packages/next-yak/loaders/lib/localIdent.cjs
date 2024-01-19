@@ -17,12 +17,12 @@
 function localIdent(variableName, i, kind) {
   switch (kind) {
     case "selector":
-      return `.${variableName.replace(/_/g,"-")}${i === null ? "" : `_${unreadableNumber(i)}`}`;
+      return `.${variableName}${i === null ? "" : `_${unreadableNumber(i)}`}`;
     case "className":
     case "animation":
-      return `${variableName.replace(/_/g,"-")}${i === null ? "" : `_${unreadableNumber(i)}`}`;
+      return `${variableName}${i === null ? "" : `_${unreadableNumber(i)}`}`;
     case "keyframes":
-      return `@keyframes ${variableName.replace(/_/g,"-")}${i === null ? "" : `_${unreadableNumber(i)}`}`;
+      return `@keyframes ${variableName}${i === null ? "" : `_${unreadableNumber(i)}`}`;
     default:
       throw new Error("unknown kind");
   }
