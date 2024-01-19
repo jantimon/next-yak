@@ -17,15 +17,23 @@
 function localIdent(variableName, i, kind) {
   switch (kind) {
     case "selector":
-      return `.${variableName}${i === null ? "" : `_${i}`}`;
+      return `.${variableName.replace(/_/g,"-")}${i === null ? "" : `_${unreadableNumber(i)}`}`;
     case "className":
     case "animation":
-      return `${variableName}${i === null ? "" : `_${i}`}`;
+      return `${variableName.replace(/_/g,"-")}${i === null ? "" : `_${unreadableNumber(i)}`}`;
     case "keyframes":
-      return `@keyframes ${variableName}${i === null ? "" : `_${i}`}`;
+      return `@keyframes ${variableName.replace(/_/g,"-")}${i === null ? "" : `_${unreadableNumber(i)}`}`;
     default:
       throw new Error("unknown kind");
   }
+}
+
+/**
+ * Generates a non readable number to not distract from the actual class name.
+ * @param {number} i
+ */
+function unreadableNumber(i) {
+  return i.toString(25).replace(/\d/g, (m) => (Number(m)+26).toString(36));
 }
 
 module.exports = localIdent;

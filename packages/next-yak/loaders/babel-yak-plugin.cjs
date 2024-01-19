@@ -5,6 +5,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
+const getCssName = require("./lib/getCssName.cjs");
 
 /** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
 /** @typedef {{ css: string | undefined, styled: string | undefined, keyframes: string | undefined }} YakLocalIdentifierNames */
@@ -246,11 +247,13 @@ module.exports = function (babel, options) {
         const variableName =
           styledApi || expressionType === "keyframesLiteral"
             ? getStyledComponentName(path)
+            : expressionType === "cssLiteral" ?
+              getCssName(path)
             : null;
 
         const identifier = localIdent(
           variableName || "_yak",
-          variableName ? null : this.classNameCount++,
+          variableName && expressionType !== "cssLiteral" ? null : this.classNameCount++,
           expressionType === "keyframesLiteral" ? "animation" : "className"
         );
 

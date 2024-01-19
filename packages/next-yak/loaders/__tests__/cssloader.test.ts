@@ -40,7 +40,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      "._yak_0 {
+      ".yak_q {
         font-size: 2rem;
         font-weight: bold;
         color: red;
@@ -77,15 +77,15 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      "._yak_0 {
+      ".yak_q {
         font-size: 2rem;
         font-weight: bold;
         color: red;
-        &:where(._yak_1) {
+        &:where(.yak_r) {
           color: orange;
         }
 
-        &:where(._yak_2) {
+        &:where(.yak_s) {
           color: teal;
         }
         &:hover {
@@ -113,9 +113,9 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      "._yak_0 {
+      ".yak_q {
         /* comment */
-        &:where(._yak_1) {
+        &:where(.yak_r) {
           color: blue;
         }
       }"
@@ -138,12 +138,12 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "._yak_0 {
-      &:hover {
-        color: var(--🦬18fi82j0);
-      }
-    }"
-  `);
+      ".yak_q {
+        &:hover {
+          color: var(--🦬18fi82j0);
+        }
+      }"
+    `);
   });
 
   it("should support attrs on intrinsic elements", async () => {
@@ -211,14 +211,14 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "._yak_0 {
-      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-      display: block;
-        &:where(._yak_1) {
-    color: orange
-        }
-    }"
-  `);
+      ".yak_q {
+        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        display: block;
+          &:where(.yak_r) {
+      color: orange
+          }
+      }"
+    `);
   });
 
   it("should replace breakpoint references with actual media queries", async () => {
@@ -241,18 +241,18 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "._yak_0 {
-      color: blue;
-      @media (min-width: 640px) {
-        color: red;
-      }
-      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-      display: block;
-        &:where(._yak_1) {
-    color: orange
+      ".yak_q {
+        color: blue;
+        @media (min-width: 640px) {
+          color: red;
         }
-    }"
-  `);
+        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        display: block;
+          &:where(.yak_r) {
+      color: orange
+          }
+      }"
+    `);
   });
 
   it("should replace breakpoint references with actual media queries from single quote imports", async () => {
@@ -275,18 +275,18 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "._yak_0 {
-      color: blue;
-      @media (min-width: 640px) {
-        color: red;
-      }
-      transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
-      display: block;
-        &:where(._yak_1) {
-    color: orange
+      ".yak_q {
+        color: blue;
+        @media (min-width: 640px) {
+          color: red;
         }
-    }"
-  `);
+        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        display: block;
+          &:where(.yak_r) {
+      color: orange
+          }
+      }"
+    `);
   });
 
   it("should prevent double escaped chars", async () => {
@@ -311,16 +311,16 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-    "._yak_0 {
-      :before {
-        content: \\"\\\\2022\\";
-      }
-      :after {
-        content: \\"\\\\2022\\";
-      }
-      content: \\"\\\\\\\\\\"
-    }"
-  `);
+      ".yak_q {
+        :before {
+          content: \\"\\\\2022\\";
+        }
+        :after {
+          content: \\"\\\\2022\\";
+        }
+        content: \\"\\\\\\\\\\"
+      }"
+    `);
   });
 
   it("should convert keyframes", async () => {
@@ -481,16 +481,16 @@ const Component2 = styled.div\`
       ".Component {
           background-color: red;
           color: white;
-            &:where(._yak_0) {
+            &:where(.is-active_q) {
               background-color: blue;
             }
           border: 1px solid black;
 
           &:focus {
               background-color: green;
-                &:where(._yak_1) {
+                &:where(.is-active_r) {
                   background-color: blue;
-                    &:where(._yak_2) {
+                    &:where(.is-active_s) {
                       background-color: brown;
                     }
                 }
@@ -535,17 +535,17 @@ const Component = styled.div\`
       ".Component {
           background-color: red;
           color: white;
-            &:where(._yak_0) {
+            &:where(.is-active_q) {
               background-color: blue;
             }
-            &:where(._yak_1) {
+            &:where(.is-not-active_r) {
               background-color: var(--🦬18fi82j0);
             }
           border: 1px solid black;
-            &:where(._yak_2) {
+            &:where(.is-active_s) {
               color: orange;
             }
-            &:where(._yak_3) {
+            &:where(.is-not-active_t) {
               transition: color var(--🦬18fi82j1) var(--🦬18fi82j2);
             }
         }"
