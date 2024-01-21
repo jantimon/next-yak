@@ -21,13 +21,41 @@ const Component = () => {
 }
 ```
 
+:::details[See transformed output]
+
+:::code-group
+
+```jsx [input]
+const Headline = styled.h1`
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(253, 29, 29, 1);
+`;
+```
+
+```jsx [output javascript]
+const Headline = styled('h1')('.yakClass1');
+```
+
+```css [output CSS]
+.yakClass1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(253, 29, 29, 1);
+}
+```
+
+:::
+
 ## Dynamic styles
 
 The static functionality itself is already very useful, but the bread and butter is an easy way to 
 create dynamic styles. Styled-components made the approach, where props are responsible for driving the
 dynamic CSS parts, really easy and with next-yak you can use exactly the same known API.
 
-```jsx
+:::code-group
+
+```jsx [javascript]
 import { css, styled } from 'next-yak';
 
 const Paragraph = styled.p`
@@ -53,11 +81,88 @@ const Component = () => {
 }
 ```
 
+```tsx [typescript]
+import { css, styled } from 'next-yak';
+
+const Paragraph = styled.p<{ $primary?: boolean }>`
+  background: ${props => props.$primary ? "#BF4F74" : "white"};
+  ${props => props.$primary ? 
+    css`
+      color: white; 
+    ` : 
+    css`
+      color: #BF4F74
+    `};
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
+const Component = () => {
+  return (
+    <>
+      <Paragraph $primary> Hello there primary!</Paragraph>
+      <Paragraph> Hello there non-primary!</Paragraph>
+    </>
+  );
+}
+```
+
+:::
+
 The css templates create their own class which is referenced during runtime when the function returns them.
 The other function which returns strings directly without setting new CSS properties, will be changed to
 a CSS variable, which is set on the element itself directly based on the functions return value.
 
+:::details[See transformed output]
+
+:::code-group
+
+```jsx [input]
+const Paragraph = styled.p`
+  background: ${props => props.$primary ? "#BF4F74" : "white"};
+  ${props => props.$primary ? 
+    css`
+      color: white; 
+    ` : 
+    css`
+      color: #BF4F74
+    `};
+  font-size: 2rem;
+  font-weight: bold;
+`;
+```
+
+```jsx [output javascript]
+const Paragraph = styled('p')( 
+  '.yakClass1', 
+  props.$primary ? '.yakCSSClass1' : '.yakCSSClass2', 
+  {
+    style: { '--var1': props.$primary ? "#BF4F74" : "white" }
+  }
+);
+```
+
+```css [output CSS]
+.yakClass1 {
+  background: var(--var1);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.yakCSSClass1 {
+  color: white;
+}
+
+.yakCSSClass2 {
+  color: #BF4F74;
+}
+```
+:::
+
+
 ## Animations
+
+// todo
 
 In order to create CSS animations you can use the `keyframes` API and specify the keyframes for the animation
 you want to create. It can be used by your animation declarations.

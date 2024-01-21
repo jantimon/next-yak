@@ -30,15 +30,18 @@ on the provided props.
 
 ## When should you use next-yak
 
+### When you're familiar with styled-components
 If you're familiar with styled-components next-yak enables you to use the same syntax in the new era of streaming and Server Components.
 Additionally it's really fast and has a small footprint.
 
-```jsx
+:::code-group
+
+```jsx [javascript]
 import { styled, css } from 'next-yak';
 
 const MyParagraph = styled.p`
-  color: ${({primary}) => primary ? "teal" : "orange"};
-  ${({primary}) => primary && css`padding: 16px;`}
+  color: ${(props) => props.$primary ? "teal" : "orange"};
+  ${(props) => props.$primary && css`padding: 16px;`}
   background-color: #f0f0f0;
 `;
 
@@ -47,29 +50,88 @@ export MyComponent = () => {
 }
 ```
 
-If you're on a new green field project, next-yak can provide:
+```tsx [typescript]
+import { styled, css } from 'next-yak';
 
-1. Colocation of your styles with your code 
+const MyParagraph = styled.p<{ $primary: boolean }>`
+  color: ${(props) => props.$primary ? "teal" : "orange"};
+  ${(props) => props.$primary && css`padding: 16px;`}
+  background-color: #f0f0f0;
+`;
 
-```jsx
+export MyComponent = () => {
+  return <MyParagraph>I work like styled-components</MyParagraph>;
+}
+```
+:::
+
+And if you use TypeScript next-yak is fully typed to help you
+
+```tsx twoslash
+// @noErrors
+import { styled, css } from 'next-yak';
+
+const MyParagraph = styled.p<{ $primary: boolean; $secondary: boolean; }>`
+  ${(props => {
+    return props.$
+//                ^|
+  })}
+`;
+
+export MyComponent = () => {
+  return <MyParagraph $
+//                     ^|
+};
+```
+
+### Generally
+
+::::steps
+
+#### Colocation of your styles with your code 
+
+:::code-group
+
+```jsx [javascript]
 import { styled } from 'next-yak';
 
 const MyParagraph = styled.p`
-  color: ${({variant}) => variant === 'primary' ? "red" : "blue"}
-`
+  color: ${({$variant}) => $variant === 'primary' ? "red" : "blue"}
+`;
 
-const MyOtherComponent = styled.p``
+const MyOtherComponent = styled.p``;
 
-export MyComponent = (props) => {
-  if(props.variant) {
-    return <MyParagraph variant={variant}>{props.children}</MyParagraph>
+export const MyComponent = (props) => {
+  if(props.$variant) {
+    return (<MyParagraph $variant={props.$variant}>{props.children}</MyParagraph>);
   }
 
-  return <MyOtherComponent>{props.children}</MyOtherComponent>;
+  return (<MyOtherComponent>{props.children}</MyOtherComponent>);
 }
 ```
 
-2. A familiar interface for writing real CSS with the newest features available without a complicated setup 
+
+```tsx [typescript]
+import { styled } from 'next-yak';
+
+const MyParagraph = styled.p<{ $variant?: 'primary' | 'secondary' }>`
+  color: ${({$variant}) => $variant === 'primary' ? "red" : "blue"}
+`;
+
+const MyOtherComponent = styled.p``;
+
+export const MyComponent = (props) => {
+  if(props.$variant) {
+    return (<MyParagraph $variant={props.$variant}>{props.children}</MyParagraph>);
+  }
+
+  return (<MyOtherComponent>{props.children}</MyOtherComponent>);
+}
+```
+
+:::
+
+#### A familiar interface for writing real CSS with the newest features available without a complicated setup 
 
 ```jsx
 import { styled } from 'next-yak';
@@ -81,19 +143,35 @@ const Header = styled.div`
 `;
 ```
 
-3. Compatible with utility-first CSS frameworks like Tailwind
+#### Compatible with utility-first CSS frameworks like Tailwind
 
-```jsx
+:::code-group
+
+```jsx [javascript]
 import { styled } from 'next-yak';
 
 const Header = styled.nav`
-  ${({variant}) => variant === "primary" ?
-  atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8") :
-  atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")}
+  ${({variant}) => variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
 `
 ```
 
-4. Composable
+```tsx [typescript]
+import { styled } from 'next-yak';
+
+const Header = styled.nav<{ $variant?: 'primary' | 'secondary' }>`
+  ${({variant}) => variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
+`
+```
+
+:::
+
+#### Composable
 
 ```jsx
 import { styled } from 'next-yak';
@@ -106,3 +184,5 @@ const FormElement = styled.div`
   }
 `;
 ```
+
+::::
