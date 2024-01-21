@@ -1,0 +1,16 @@
+{
+  "name": "docs",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vocs dev",
+    "build": "vocs build",
+    "preview": "vocs preview"
+  },
+  "dependencies": {
+    "next-yak": "^0.0.22",
+    "react": "latest",
+    "react-dom": "latest",
+    "vocs": "latest"
+  }
+}

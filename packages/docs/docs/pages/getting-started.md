@@ -6,20 +6,33 @@ Next.js's built-in CSS configuration.
 
 ## Installation
 
-### 1. Install the package
+::::steps
+
+### Install the package
 
 Install next-yak dependency using your favorite package manager.
 
-```bash
-pnpm install next-yak
+:::code-group
+
+```bash [npm]
+npm i next-yak
 ```
 
-### 2. Enable next-yak
+```bash [pnpm]
+pnpm i next-yak
+```
+
+```bash [yarn]
+yarn add next-yak
+```
+
+:::
+
+### Enable next-yak
 
 Add next-yak to your `next.config.js`:
 
-```js
-// next.config.js
+```js [next.config.js]
 const { withYak } = require("next-yak/withYak");
 
 const nextConfig = {
@@ -30,12 +43,11 @@ module.exports = withYak(nextConfig);
 
 ```
 
-### 3. Start using next-yak
+### Start using next-yak
 
 That's it. You're now ready to go and you can use next-yak directly in all your components. E.g.:
 
-```jsx
-// pages/index.js
+```jsx [pages/index.tsx]
 import { styled } from 'next-yak';
 
 const StyledDiv = styled.div`
@@ -50,3 +62,5 @@ function HomePage() {
 
 export default HomePage;
 ```
+
+::::
