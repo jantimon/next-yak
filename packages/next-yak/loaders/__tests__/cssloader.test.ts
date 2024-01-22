@@ -40,7 +40,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         font-size: 2rem;
         font-weight: bold;
         color: red;
@@ -77,15 +77,15 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         font-size: 2rem;
         font-weight: bold;
         color: red;
-        &:where(.yak_r) {
+        &:where(.yak_1) {
           color: orange;
         }
 
-        &:where(.yak_s) {
+        &:where(.yak_2) {
           color: teal;
         }
         &:hover {
@@ -113,9 +113,9 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         /* comment */
-        &:where(.yak_r) {
+        &:where(.yak_1) {
           color: blue;
         }
       }"
@@ -138,7 +138,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         &:hover {
           color: var(--🦬18fi82j0);
         }
@@ -211,10 +211,10 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
         display: block;
-          &:where(.yak_r) {
+          &:where(.yak_1) {
       color: orange
           }
       }"
@@ -241,14 +241,14 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
         transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
         display: block;
-          &:where(.yak_r) {
+          &:where(.yak_1) {
       color: orange
           }
       }"
@@ -275,14 +275,14 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
         transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
         display: block;
-          &:where(.yak_r) {
+          &:where(.yak_1) {
       color: orange
           }
       }"
@@ -311,7 +311,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_q {
+      ".yak_0 {
         :before {
           content: \\"\\\\2022\\";
         }
@@ -481,16 +481,16 @@ const Component2 = styled.div\`
       ".Component {
           background-color: red;
           color: white;
-            &:where(.is_active_q) {
+            &:where(.is_active_0) {
               background-color: blue;
             }
           border: 1px solid black;
 
           &:focus {
               background-color: green;
-                &:where(.is_active_r) {
+                &:where(.is_active_1) {
                   background-color: blue;
-                    &:where(.is_active_s) {
+                    &:where(.is_active_2) {
                       background-color: brown;
                     }
                 }
@@ -535,17 +535,17 @@ const Component = styled.div\`
       ".Component {
           background-color: red;
           color: white;
-            &:where(.is_active_q) {
+            &:where(.is_active_0) {
               background-color: blue;
             }
-            &:where(.is_not_active_r) {
+            &:where(.is_not_active_1) {
               background-color: var(--🦬18fi82j0);
             }
           border: 1px solid black;
-            &:where(.is_active_s) {
+            &:where(.is_active_2) {
               color: orange;
             }
-            &:where(.is_not_active_t) {
+            &:where(.is_not_active_3) {
               transition: color var(--🦬18fi82j1) var(--🦬18fi82j2);
             }
         }"

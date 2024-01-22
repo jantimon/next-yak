@@ -43,6 +43,9 @@ function extractConditions(path) {
     currentPath &&
     (currentPath.isLogicalExpression() || currentPath.isConditionalExpression())
   ) {
+    if (currentPath.isConditionalExpression() && conditions.length > 0) {
+      conditions.push(operatorToWord("&&", false));
+    }
     let left = currentPath.isLogicalExpression()
       ? currentPath.node.left
       : currentPath.node.test;
