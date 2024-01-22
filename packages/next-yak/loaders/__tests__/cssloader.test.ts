@@ -40,7 +40,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         font-size: 2rem;
         font-weight: bold;
         color: red;
@@ -77,15 +77,15 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         font-size: 2rem;
         font-weight: bold;
         color: red;
-        &:where(.yak_1) {
+        &:where(.headline_1) {
           color: orange;
         }
 
-        &:where(.yak_2) {
+        &:where(.headline_2) {
           color: teal;
         }
         &:hover {
@@ -113,9 +113,9 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         /* comment */
-        &:where(.yak_1) {
+        &:where(.headline_1) {
           color: blue;
         }
       }"
@@ -138,7 +138,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         &:hover {
           color: var(--🦬18fi82j0);
         }
@@ -211,10 +211,10 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
         display: block;
-          &:where(.yak_1) {
+          &:where(.headline_1) {
       color: orange
           }
       }"
@@ -241,14 +241,14 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
         transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
         display: block;
-          &:where(.yak_1) {
+          &:where(.headline_1) {
       color: orange
           }
       }"
@@ -275,14 +275,14 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
         transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
         display: block;
-          &:where(.yak_1) {
+          &:where(.headline_1) {
       color: orange
           }
       }"
@@ -311,7 +311,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".yak_0 {
+      ".headline_0 {
         :before {
           content: \\"\\\\2022\\";
         }
@@ -490,7 +490,7 @@ const Component2 = styled.div\`
               background-color: green;
                 &:where(.active_1) {
                   background-color: blue;
-                    &:where(.active_2) {
+                    &:where(.active_and_active_2) {
                       background-color: brown;
                     }
                 }
