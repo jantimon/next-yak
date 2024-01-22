@@ -1,4 +1,4 @@
-import { parse } from "@babel/parser";
+import { parse } from "@babel/core";
 import traverse from "@babel/traverse";
 import { NodePath } from "@babel/core";
 import getCssName from "../lib/getCssName.cjs";
