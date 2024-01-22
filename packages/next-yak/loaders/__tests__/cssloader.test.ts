@@ -481,16 +481,16 @@ const Component2 = styled.div\`
       ".Component {
           background-color: red;
           color: white;
-            &:where(.is_active_0) {
+            &:where(.active_0) {
               background-color: blue;
             }
           border: 1px solid black;
 
           &:focus {
               background-color: green;
-                &:where(.is_active_1) {
+                &:where(.active_1) {
                   background-color: blue;
-                    &:where(.is_active_2) {
+                    &:where(.active_2) {
                       background-color: brown;
                     }
                 }
@@ -535,17 +535,17 @@ const Component = styled.div\`
       ".Component {
           background-color: red;
           color: white;
-            &:where(.is_active_0) {
+            &:where(.active_0) {
               background-color: blue;
             }
-            &:where(.is_not_active_1) {
+            &:where(.not_active_1) {
               background-color: var(--🦬18fi82j0);
             }
           border: 1px solid black;
-            &:where(.is_active_2) {
+            &:where(.active_2) {
               color: orange;
             }
-            &:where(.is_not_active_3) {
+            &:where(.not_active_3) {
               transition: color var(--🦬18fi82j1) var(--🦬18fi82j2);
             }
         }"

@@ -24,60 +24,60 @@ describe("getCssName", () => {
   it("should guess the css name from the condition of a logical expression", () => {
     const code = `({$active}) => $active && css\`\``;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_active");
+    expect(cssName).toBe("active");
   });
 
   it("should guess the css name from the condition of a ternary expression", () => {
     const code = `({$active}) => $active ? css\`\` : null`;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_active");
+    expect(cssName).toBe("active");
   });
 
   it("should guess the css name from the condition of a logical expression with negation", () => {
     const code = `({$active}) => !$active && css\`\``;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_not_active");
+    expect(cssName).toBe("not_active");
   });
 
   it("should guess the css name from the condition of a ternary expression for the else case", () => {
     const code = `({$active}) => $active ? null : css\`\``;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_not_active");
+    expect(cssName).toBe("not_active");
   });
 
   it("should guess the css name from the condition of a logical expression with multiple conditions", () => {
     const code = `({$active, $visible}) => $active && $visible && css\`\``;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_active_and_visible");
+    expect(cssName).toBe("active_and_visible");
   });
 
   it("should guess the css name from the condition of a ternary expression with multiple conditions", () => {
     const code = `({$active, $visible}) => $active ? ($visible ? css\`\` : null) : null`;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_active_and_visible");
+    expect(cssName).toBe("active_and_visible");
   });
 
   it("should guess the css name from the condition of a logical expression with negation and multiple conditions", () => {
     const code = `({$active, $visible}) => !$active && $visible && css\`\``;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_not_active_and_visible");
+    expect(cssName).toBe("not_active_and_visible");
   });
 
   it("should guess the css name from the condition of a ternary expression with negation and multiple conditions", () => {
     const code = `({$active, $visible}) => !$active ? ($visible ? css\`\`: null) : null`;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_not_active_and_visible");
+    expect(cssName).toBe("not_active_and_visible");
   });
 
   it("should guess the css name from the condition of a logical expression with negation and multiple conditions for the else case", () => {
     const code = `({$active, $visible}) => $active && !$visible && css\`\``;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_active_and_not_visible");
+    expect(cssName).toBe("active_and_not_visible");
   });
 
   it("should guess the css name from the condition of a ternary expression with negation and multiple conditions for the else case", () => {
     const code = `({$active, $visible}) => $active ? ($visible ? null : css\`\`) : null`;
     const cssName = extractConditionsWithBabel(code);
-    expect(cssName).toBe("is_active_and_not_visible");
+    expect(cssName).toBe("active_and_not_visible");
   });
 });

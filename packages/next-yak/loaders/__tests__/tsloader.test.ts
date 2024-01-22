@@ -558,7 +558,7 @@ const Button = styled.button\`
       const Icon = styled.svg(__styleYak.Icon);
       const Button = styled.button(__styleYak.Button, ({
         $primary
-      }) => $primary && css(__styleYak.is_primary_0));"
+      }) => $primary && css(__styleYak.primary_0));"
     `);
   });
 });

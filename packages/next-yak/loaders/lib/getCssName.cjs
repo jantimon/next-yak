@@ -15,7 +15,7 @@ function getCssName(path) {
   if (conditions.length === 0) {
     return "yak";
   }
-  return "is_" + conditions
+  return conditions
     .map((condition) => {
       if (condition === "&&") {
         return "and";
