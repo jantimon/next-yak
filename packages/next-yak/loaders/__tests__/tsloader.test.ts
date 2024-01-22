@@ -60,7 +60,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
-      const headline = css(__styleYak._yak_0);
+      const headline = css(__styleYak.yak_0);
       export const Main = () => <h1 className={headline({}).className}>Hello World</h1>;"
     `);
   });
@@ -91,7 +91,7 @@ const headline = css\`
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const headline = css(__styleYak._yak_0, x > 0.5 && css(__styleYak._yak_1));"
+      const headline = css(__styleYak.yak_0, x > 0.5 && css(__styleYak.yak_1));"
     `);
   });
 
@@ -125,7 +125,7 @@ const FancyButton = styled(Button)\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
-      const Button = styled.button(__styleYak.Button, x > 0.5 && css(__styleYak._yak_0));
+      const Button = styled.button(__styleYak.Button, x > 0.5 && css(__styleYak.yak_0));
       const FancyButton = styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -162,7 +162,7 @@ const FancyButton = styled(Button)\`
       const x = Math.random();
       const Button = styled.button(__styleYak.Button, ({
         theme
-      }) => theme.mode === \\"dark\\" && css(__styleYak._yak_0));
+      }) => theme.mode === \\"dark\\" && css(__styleYak.yak_0));
       const FancyButton = styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -240,7 +240,7 @@ const headline = css\`
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { easing } from \\"styleguide\\";
-      const headline = css(__styleYak._yak_0, css(__styleYak._yak_1), css(__styleYak._yak_2), {
+      const headline = css(__styleYak.yak_0, css(__styleYak.yak_1), css(__styleYak.yak_2), {
         \\"style\\": {
           \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
             i
@@ -477,12 +477,12 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-  "import styles from \\"./page.module.css\\";
-  import { css } from \\"next-yak\\";
-  import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-  const x = Math.random();
-  const headline = css(__styleYak._yak_0, x > 0.5 && css(__styleYak._yak_1));"
-`);
+      "import styles from \\"./page.module.css\\";
+      import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const x = Math.random();
+      const headline = css(__styleYak.yak_0, x > 0.5 && css(__styleYak.yak_1));"
+    `);
   });
 
   it("should show error when a dynamic selector is used after a comma", async () => {
@@ -552,13 +552,13 @@ const Button = styled.button\`
      `
       )
     ).toMatchInlineSnapshot(`
-       "import styles from \\"./page.module.css\\";
-       import { styled, css } from \\"next-yak\\";
-       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-       const Icon = styled.svg(__styleYak.Icon);
-       const Button = styled.button(__styleYak.Button, ({
-         $primary
-       }) => $primary && css(__styleYak._yak_0));"
-     `);
+      "import styles from \\"./page.module.css\\";
+      import { styled, css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Icon = styled.svg(__styleYak.Icon);
+      const Button = styled.button(__styleYak.Button, ({
+        $primary
+      }) => $primary && css(__styleYak.primary_0));"
+    `);
   });
 });

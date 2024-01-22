@@ -5,6 +5,7 @@ const quasiClassifier = require("./lib/quasiClassifier.cjs");
 const localIdent = require("./lib/localIdent.cjs");
 const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
+const getCssName = require("./lib/getCssName.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative } = require("path");
 
@@ -192,11 +193,12 @@ module.exports = async function cssLoader(source) {
       const variableName =
         isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
           ? getStyledComponentName(path)
+          : isCssLiteral ? getCssName(path)
           : null
 
       const literalSelector = localIdent(
         variableName || "_yak",
-        variableName ? null : index++,
+        variableName && !isCssLiteral ? null : index++,
         isKeyFrameLiteral ? "keyframes" : "selector"
       );
 
