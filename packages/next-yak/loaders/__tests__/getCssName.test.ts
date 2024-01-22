@@ -7,6 +7,9 @@ import { describe, it, expect } from "vitest";
 function extractConditionsWithBabel(code: string) {
   let result: string = "";
   const ast = parse(code);
+  if (!ast) {
+    throw new Error("Could not parse code");
+  }
   traverse(ast, {
     TaggedTemplateExpression(path: NodePath<TaggedTemplateExpression>) {
       if (path.node.tag.type === "Identifier" && path.node.tag.name === "css") {
