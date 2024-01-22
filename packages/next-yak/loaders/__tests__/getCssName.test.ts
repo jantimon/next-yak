@@ -105,25 +105,33 @@ describe("getCssName", () => {
   });
 
   it("should guess the css name from a complex expression using AND and OR operators", () => {
-    const literal = getCssLiteral(`({$active, $visible, $enabled}) => ($active || $visible) && $enabled && css\`\``);
+    const literal = getCssLiteral(
+      `({$active, $visible, $enabled}) => ($active || $visible) && $enabled && css\`\``
+    );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_or_visible_and_enabled");
   });
 
   it("should guess the css name from nested logical expressions", () => {
-    const literal = getCssLiteral(`({$active, $visible, $enabled}) => ($active && ($visible || $enabled)) && css\`\``);
+    const literal = getCssLiteral(
+      `({$active, $visible, $enabled}) => ($active && ($visible || $enabled)) && css\`\``
+    );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_visible_or_enabled");
   });
 
   it("should guess the css name from an expression with multiple OR conditions", () => {
-    const literal = getCssLiteral(`({$active, $visible, $enabled}) => $active || $visible || $enabled && css\`\``);
+    const literal = getCssLiteral(
+      `({$active, $visible, $enabled}) => $active || $visible || $enabled && css\`\``
+    );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_or_visible_or_enabled");
   });
 
   it("should guess the css name from a complex combination of AND and OR operators", () => {
-    const literal = getCssLiteral(`({$active, $visible, $enabled}) => ($active && $visible) || ($visible && $enabled) && css\`\``);
+    const literal = getCssLiteral(
+      `({$active, $visible, $enabled}) => ($active && $visible) || ($visible && $enabled) && css\`\``
+    );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_visible_or_visible_and_enabled");
   });
@@ -144,5 +152,19 @@ describe("getCssName", () => {
     const literal = getCssLiteral(`const Mixin = css\`\``);
     const cssName = getCssName(literal);
     expect(cssName).toBe("Mixin");
+  });
+
+  it("should guess the css name from a single member expression and camelCase it", () => {
+    const literal = getCssLiteral(`({theme}) => theme.highContrast && css\`\``);
+    const cssName = getCssName(literal);
+    expect(cssName).toBe("themeHighContrast");
+  });
+
+  it("should guess the css name from a nested member expression and camelCase it", () => {
+    const literal = getCssLiteral(
+      `({$user}) => $user.auth.loggedIn && css\`\``
+    );
+    const cssName = getCssName(literal);
+    expect(cssName).toBe("userAuthLoggedIn");
   });
 });

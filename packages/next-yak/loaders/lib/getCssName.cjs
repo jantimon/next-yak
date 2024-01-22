@@ -29,16 +29,16 @@ function extractConditions(path) {
         conditions.push("or");
         getConditions(node.left, previousNode, isNegated);
       }
-    } 
+    }
     // Support for ternary operator e.g. disabled ? "disabled" : "enabled"
     else if (node.type === "ConditionalExpression") {
       conditions.push("and");
       getConditions(node.test, previousNode, node.alternate === previousNode);
-    } 
+    }
     // Support for ! operator e.g. !disabled
     else if (node.type === "UnaryExpression" && node.operator === "!") {
       getConditions(node.argument, previousNode, !isNegated);
-    } 
+    }
     // Support for Boolean() function e.g. Boolean(disabled)
     else if (
       node.type === "CallExpression" &&
@@ -46,9 +46,17 @@ function extractConditions(path) {
       node.callee.name === "Boolean"
     ) {
       getConditions(node.arguments[0], previousNode, isNegated);
-    } else if (node.type === "Identifier") {
+    }
+    // Get the name of the variable e.g. disabled
+    else if (node.type === "Identifier") {
       conditions.push((isNegated ? "not_" : "") + node.name);
-    } 
+    }
+    // Get the name of a member expression e.g. props.disabled
+    else if (node.type === "MemberExpression") {
+      conditions.push(
+        (isNegated ? "not_" : "") + getMemberExpressionName(node)
+      );
+    }
   };
   /** @type {babel.NodePath | null} */
   let currentPath = path;
@@ -75,16 +83,52 @@ function extractConditions(path) {
  */
 const getStyledComponentName = (taggedTemplateExpressionPath) => {
   const variableDeclaratorPath = taggedTemplateExpressionPath.findParent(
-    (path) => path.isVariableDeclarator(),
+    (path) => path.isVariableDeclarator()
   );
   if (
     !variableDeclaratorPath ||
     !("id" in variableDeclaratorPath.node) ||
     variableDeclaratorPath.node.id?.type !== "Identifier"
   ) {
-    return null
+    return null;
   }
   return variableDeclaratorPath.node.id.name;
+};
+
+/**
+ * Try to get the name of a member expression
+ *
+ * e.g. props.disabled -> "propsDisabled"
+ * e.g. props.user.disabled -> "propsUserDisabled
+ *
+ * @param {babel.types.MemberExpression} node
+ * @returns {string}
+ */
+function getMemberExpressionName(node) {
+  console.log(node.object, node.property.type);
+  if (
+    !node.object ||
+    !node.property ||
+    (node.object.type !== "Identifier" &&
+      node.object.type !== "MemberExpression")
+  ) {
+    return "";
+  }
+  const objectName =
+    node.object.type === "Identifier"
+      ? node.object.name
+      : getMemberExpressionName(node.object);
+  const property = node.property;
+  let propertyName = "";
+  if (property.type === "Identifier") {
+    propertyName = property.name;
+  } else if (property.type === "StringLiteral") {
+    propertyName = property.value;
+  }
+  if (!propertyName) {
+    return "";
+  }
+  return objectName + propertyName[0].toUpperCase() + propertyName.slice(1);
 }
 
 /**
