@@ -1,5 +1,4 @@
-import { parse } from "@babel/core";
-import traverse from "@babel/traverse";
+import { parse, traverse } from "@babel/core";
 import { NodePath } from "@babel/core";
 import getCssName from "../lib/getCssName.cjs";
 import type { TaggedTemplateExpression } from "@babel/types";
