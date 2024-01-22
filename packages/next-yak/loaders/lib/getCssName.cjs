@@ -3,129 +3,105 @@
 /** @typedef {import("@babel/types")} babel */
 
 /**
- * Try to get the name of a css literal
- *
- * e.g. ({$disabled}) => $disabled && css`...` -> "is_$disabled"
- *
+ * Extracts the conditions from a path
  * @param {babel.NodePath<babel.types.TaggedTemplateExpression>} path
- * @returns {string}
- */
-function getCssName(path) {
-  const conditions = extractConditions(path);
-  if (conditions.length === 0) {
-    return "yak";
-  }
-  return conditions
-    .map((condition) => {
-      if (condition === "&&") {
-        return "and";
-      }
-      if (condition === "||") {
-        return "or";
-      }
-      return condition;
-    })
-    .join("_")
-    .replace(/\$/g, "")
-    .replace(/!/g, "not_");
-}
-
-/**
- * Extracts the conditions from a given path.
- *
- * @param {babel.NodePath} path - The path to extract conditions from.
  */
 function extractConditions(path) {
+  /** @type {string[]} */
   const conditions = [];
-  let currentPath = path.parentPath;
-  let child = path.node;
-  while (
-    currentPath &&
-    (currentPath.isLogicalExpression() || currentPath.isConditionalExpression())
-  ) {
-    if (currentPath.isConditionalExpression() && conditions.length > 0) {
-      conditions.push(operatorToWord("&&", false));
-    }
-    let left = currentPath.isLogicalExpression()
-      ? currentPath.node.left
-      : currentPath.node.test;
-    const negated = currentPath.isConditionalExpression() && currentPath.node.alternate === child;
-    const leftName = extractIdentifier(left, negated);
-    if (leftName) {
-      conditions.push(leftName);
-    }
-    while (left && left.type === "LogicalExpression") {
-      if (left.type === "LogicalExpression" && left.right !== path.node) {
-        const rightName = extractIdentifier(left.right, negated);
-        if (rightName) {
-          conditions.push(rightName);
-          conditions.push(operatorToWord(left.operator, negated));
-        }
+  const visitedNodes = new Set();
+  /**
+   * @param {babel.types.Node} node
+   * @param {babel.types.Node} previousNode
+   * @param {boolean} isNegated
+   */
+  const getConditions = (node, previousNode, isNegated = false) => {
+    if (visitedNodes.has(node)) return;
+    visitedNodes.add(node);
+    // Support for && and || operators e.g. disabled && "disabled"
+    if (node.type === "LogicalExpression") {
+      if (node.operator === "&&") {
+        getConditions(node.right, previousNode, isNegated);
+        conditions.push("and");
+        getConditions(node.left, previousNode, isNegated);
+      } else if (node.operator === "||") {
+        getConditions(node.right, previousNode, isNegated);
+        conditions.push("or");
+        getConditions(node.left, previousNode, isNegated);
       }
-      left = left.left;
-      const leftName = extractIdentifier(left, negated);
-      if (leftName) {
-        conditions.push(leftName);
-      }
-    }
-    child = currentPath.node;
+    } 
+    // Support for ternary operator e.g. disabled ? "disabled" : "enabled"
+    else if (node.type === "ConditionalExpression") {
+      conditions.push("and");
+      getConditions(node.test, previousNode, node.alternate === previousNode);
+    } 
+    // Support for ! operator e.g. !disabled
+    else if (node.type === "UnaryExpression" && node.operator === "!") {
+      getConditions(node.argument, previousNode, !isNegated);
+    } 
+    // Support for Boolean() function e.g. Boolean(disabled)
+    else if (
+      node.type === "CallExpression" &&
+      node.callee.type === "Identifier" &&
+      node.callee.name === "Boolean"
+    ) {
+      getConditions(node.arguments[0], previousNode, isNegated);
+    } else if (node.type === "Identifier") {
+      conditions.push((isNegated ? "not_" : "") + node.name);
+    } 
+  };
+  /** @type {babel.NodePath | null} */
+  let currentPath = path;
+  /** @type {babel.NodePath} */
+  let previousPath = path;
+  while (currentPath) {
+    getConditions(currentPath.node, previousPath.node);
+    previousPath = currentPath;
     currentPath = currentPath.parentPath;
+  }
+  if (conditions[0] === "or" || conditions[0] === "and") {
+    conditions.shift();
   }
   return conditions.reverse();
 }
 
 /**
- * Extracts the identifier from a given node.
- * @param {babel.types.Node} node - The node to extract the identifier from.
- * @param {boolean} negated - Whether the node is negated.
- */
-function extractIdentifier(node, negated) {
-  if (node.type === "Identifier") {
-    return prepend(node.name, "!", negated);
-  }
-  if (node.type === "MemberExpression" && node.object.type === "Identifier" &&  node.property.type === "Identifier") {
-    return prepend(node.object.name + node.property.name[0].toUpperCase() + node.property.name.slice(1), "!", negated);
-  }
-  if (node.type === "UnaryExpression" && node.argument.type === "Identifier") {
-    return prepend(node.argument.name, "!", !negated);
-  }
-  if (
-    node.type === "UnaryExpression" &&
-    node.argument.type === "UnaryExpression" &&
-    node.argument.argument.type === "Identifier"
-  ) {
-    return prepend(node.argument.argument.name, "!", negated);
-  }
-  return null;
-}
-
-
-/**
- * Negates the operator if negated is true.
+ * Try to get the name of a css component from a literal expression
  *
- * @param {string} operator
- * @param {boolean} negated
-
+ * e.g. const mixin = css`...` -> "mixin"
+ *
+ * @param {babel.NodePath<babel.types.TaggedTemplateExpression>} taggedTemplateExpressionPath
+ * @returns {string | null}
  */
-function operatorToWord(operator, negated) {
-  switch (operator) {
-    case "&&":
-      return negated ? "or" : "and";
-    case "||":
-      return negated ? "and" : "or";
-    default:
-      return operator;
-  }  
+const getStyledComponentName = (taggedTemplateExpressionPath) => {
+  const variableDeclaratorPath = taggedTemplateExpressionPath.findParent(
+    (path) => path.isVariableDeclarator(),
+  );
+  if (
+    !variableDeclaratorPath ||
+    !("id" in variableDeclaratorPath.node) ||
+    variableDeclaratorPath.node.id?.type !== "Identifier"
+  ) {
+    return null
+  }
+  return variableDeclaratorPath.node.id.name;
 }
 
 /**
- * Prepends a prefix to a string if active is true.
- * @param {string} str - The string to prepend the prefix to.
- * @param {string} prefix - The prefix to prepend.
- * @param {boolean} active - Whether to prepend the prefix.
+ * Try to get the name of a css literal
+ *
+ * e.g. ({$disabled}) => $disabled && css`...` -> "is_$disabled"
+ *
+ * @param {babel.NodePath<babel.types.TaggedTemplateExpression>} literal
+ * @returns {string}
  */
-function prepend(str, prefix, active) {
-  return active ? prefix + str : str;
+function getCssName(literal) {
+  const conditions = extractConditions(literal);
+  if (conditions.length === 0) {
+    const mixinName = getStyledComponentName(literal);
+    return mixinName ? mixinName : "yak";
+  }
+  return conditions.join("_").replace(/\$/g, "");
 }
 
 module.exports = getCssName;
