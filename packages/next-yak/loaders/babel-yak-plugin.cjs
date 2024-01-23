@@ -247,13 +247,15 @@ module.exports = function (babel, options) {
         const variableName =
           styledApi || expressionType === "keyframesLiteral"
             ? getStyledComponentName(path)
-            : expressionType === "cssLiteral" ?
-              getCssName(path)
+            : expressionType === "cssLiteral"
+            ? getCssName(path)
             : null;
 
         const identifier = localIdent(
           variableName || "_yak",
-          variableName && expressionType !== "cssLiteral" ? null : this.classNameCount++,
+          variableName && expressionType !== "cssLiteral"
+            ? null
+            : this.classNameCount++,
           expressionType === "keyframesLiteral" ? "animation" : "className"
         );
 
@@ -345,7 +347,8 @@ module.exports = function (babel, options) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
                 // inside a nested scope a foreign css literal must not be used
                 // as we can not forward the scope
-                const isReferenceToMixin = t.isIdentifier(expression) || t.isCallExpression(expression);
+                const isReferenceToMixin =
+                  t.isIdentifier(expression) || t.isCallExpression(expression);
                 if (isReferenceToMixin) {
                   throw new InvalidPositionError(
                     `Mixins are not allowed inside nested selectors`,
