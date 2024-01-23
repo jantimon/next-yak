@@ -211,7 +211,7 @@ module.exports = function (babel, options) {
         replaceQuasiExpressionTokens(
           path.node.quasi,
           (name) => {
-            // Replace constatns from .yak files and
+            // Replace constants from .yak files and
             if (name in replaces) {
               return replaces[name];
             }
