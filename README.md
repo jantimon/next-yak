@@ -256,15 +256,14 @@ const Container = styled.div`
 ```
 
 | Feature          | Code                                            | Yak Constant files                             |
-|------------------|-------------------------------------------------|------------------------------------------------|
+|:-----------------|:------------------------------------------------|:-----------------------------------------------|
 | File Extension   | `.js`, `.jsx`, `.tsx`, etc.                     | `.yak.js`, `.yak.jsx`, `.yak.tsx`, etc.        | 
 | Runs at          |  Runtime (Node or Browser)                      | Compile time (Bundler)                         |
 | Side effects     | ✅                                              | 🚫                                             |
 | Yak Features     | All (`styled`, `css`, ...)                      | 🚫                                             | 
 
 
-[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/b0ed7240-571d-4b3b-ad59-23bbf8716a03)
-
+[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/6bdc44df-2996-40a3-9255-4b9ed0df464a)
 
 ## Todos:
 
