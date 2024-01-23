@@ -257,8 +257,8 @@ const Container = styled.div`
 
 | Feature          | Code                                            | Yak Constant files                             |
 |------------------|-------------------------------------------------|------------------------------------------------|
-| File Extension   | `.js`, `.jsx`, `.tsx`, etc.                     | `.yak.js`, `.yak.jsx`, `.yak.tsx`, etc.        |
-| Runs at          | Compile time (Bundler)                          | Runtime (Node or Browser)                      |
+| File Extension   | `.js`, `.jsx`, `.tsx`, etc.                     | `.yak.js`, `.yak.jsx`, `.yak.tsx`, etc.        | 
+| Runs at          |  Runtime (Node or Browser)                      | Compile time (Bundler)                         |
 | Side effects     | ✅                                              | 🚫                                             |
 | Yak Features     | All (`styled`, `css`, ...)                      | 🚫                                             | 
 
