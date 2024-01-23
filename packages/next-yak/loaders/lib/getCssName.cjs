@@ -105,7 +105,6 @@ const getStyledComponentName = (taggedTemplateExpressionPath) => {
  * @returns {string}
  */
 function getMemberExpressionName(node) {
-  console.log(node.object, node.property.type);
   if (
     !node.object ||
     !node.property ||
