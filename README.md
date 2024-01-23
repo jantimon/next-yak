@@ -235,6 +235,37 @@ const Button = styled.button`
 `;
 ```
 
+
+## Build Time Constants
+
+The downside of dynamic properties is that they require inline style attributes.  
+While this is not a problem for most cases, we can't use them for media queries.
+
+`next-yak` allows you to define build time constants which can be used in your styles:
+
+```jsx
+import { styled } from 'next-yak';
+import { breakpoints, spacings } from './constants.yak';
+
+const Container = styled.div`
+  padding: ${spacings.md};
+  ${breakpoints.md} {
+    padding: ${spacings.lg};
+  }
+`;
+```
+
+| Feature          | Code                                            | Yak Constant files                             |
+|------------------|-------------------------------------------------|------------------------------------------------|
+| File Extension   | `.js`, `.jsx`, `.tsx`, etc.                     | `.yak.js`, `.yak.jsx`, `.yak.tsx`, etc.        |
+| Runs at          | Compile time (Bundler)                          | Runtime (Node or Browser)                      |
+| Side effects     | ✅                                              | 🚫                                             |
+| Yak Features     | All (`styled`, `css`, ...)                      | 🚫                                             | 
+
+
+[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/b0ed7240-571d-4b3b-ad59-23bbf8716a03)
+
+
 ## Todos:
 
 next-yak is currently in the development phase, with several todos that must be completed before it is ready for production:
