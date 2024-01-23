@@ -145,7 +145,7 @@ module.exports = function (babel, options) {
           throw new Error("filePath is undefined");
         }
         const fileName = basename(filePath).replace(/\.tsx?/, "");
-        // Import 'yacijs' styles and assign to '__styleYak'
+        // Import 'next-yak' styles and assign to '__styleYak'
         // use webpacks !=! syntax to pretend that the typescript file is actually a css-module
         path.insertAfter(
           t.importDeclaration(
