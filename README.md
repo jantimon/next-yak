@@ -263,7 +263,7 @@ const Container = styled.div`
 | Yak Features     | All (`styled`, `css`, ...)                      | 🚫                                             | 
 
 
-[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/6bdc44df-2996-40a3-9255-4b9ed0df464a)
+[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/2c83246c-a03b-4c57-8814-32a7248983ac)
 
 ## Todos:
 
