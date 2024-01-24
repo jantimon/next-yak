@@ -1,12 +1,16 @@
 {
   "name": "next-yak",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "type": "module",
   "types": "./dist/",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./static": {
+      "import": "./dist/static/index.js",
+      "require": "./dist/static/index.cjs"
     },
     "./withYak": {
       "require": "./withYak/index.cjs"
@@ -27,15 +31,19 @@
     }
   },
   "scripts": {
-    "prepublishOnly": "npm run build && npm run test",
+    "prepublishOnly": "npm run build && npm run test && npm run test:types:code && npm run test:types:test",
     "build": "pnpm run --filter . \"/^build:/\"",
     "build:runtime": "tsup runtime/index.ts --target es2022 --clean --external react --external next-yak/context --format cjs,esm --minify --sourcemap --out-dir dist",
     "build:runtime:types": "tsup runtime/index.ts --target es2022 --clean --external react --dts-only --format cjs,esm --minify --sourcemap --out-dir dist",
+    "build:static": "tsup static/index.ts --target es2022 --clean --external react --external next-yak/context --format cjs,esm --minify --sourcemap --out-dir dist/static",
+    "build:static:types": "tsup static/index.ts --target es2022 --clean --external react --dts-only --format cjs,esm --minify --sourcemap --out-dir dist/static",
     "build:baseContext": "tsup runtime/context/baseContext.tsx --target es2022 --external react --dts --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:context:client": "tsup runtime/context/index.tsx --target es2022 --external react --external next-yak/context/baseContext --dts --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:context:server": "tsup runtime/context/index.server.tsx --target es2022 --external react --external next-yak/context/baseContext --external ./index.js --format cjs,esm --sourcemap --out-dir dist/context/",
     "build:withYak": "tsup withYak/index.ts --target es2022 --dts --format cjs --sourcemap --out-dir withYak --external ../loaders/tsloader.cjs --external ../loaders/cssloader.cjs",
-    "test": "vitest run && tsc -p tsconfig.json && tsc -p ./runtime/__tests__/tsconfig.json",
+    "test": "vitest run",
+    "test:types:code": "tsc -p tsconfig.json",
+    "test:types:test": "tsc -p ./runtime/__tests__/tsconfig.json",
     "test:watch": "vitest --watch"
   },
   "dependencies": {

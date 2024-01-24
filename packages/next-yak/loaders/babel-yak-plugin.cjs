@@ -145,7 +145,7 @@ module.exports = function (babel, options) {
           throw new Error("filePath is undefined");
         }
         const fileName = basename(filePath).replace(/\.tsx?/, "");
-        // Import 'yacijs' styles and assign to '__styleYak'
+        // Import 'next-yak' styles and assign to '__styleYak'
         // use webpacks !=! syntax to pretend that the typescript file is actually a css-module
         path.insertAfter(
           t.importDeclaration(
@@ -170,6 +170,7 @@ module.exports = function (babel, options) {
             specifier.imported
           );
           const localSpecifier = specifier.local || importSpecifier;
+
           if (
             importSpecifier.name === "styled" ||
             importSpecifier.name === "css" ||
@@ -211,7 +212,7 @@ module.exports = function (babel, options) {
         replaceQuasiExpressionTokens(
           path.node.quasi,
           (name) => {
-            // Replace constatns from .yak files and
+            // Replace constants from .yak files and
             if (name in replaces) {
               return replaces[name];
             }
@@ -247,13 +248,15 @@ module.exports = function (babel, options) {
         const variableName =
           styledApi || expressionType === "keyframesLiteral"
             ? getStyledComponentName(path)
-            : expressionType === "cssLiteral" ?
-              getCssName(path)
+            : expressionType === "cssLiteral"
+            ? getCssName(path)
             : null;
 
         const identifier = localIdent(
           variableName || "_yak",
-          variableName && expressionType !== "cssLiteral" ? null : this.classNameCount++,
+          variableName && expressionType !== "cssLiteral"
+            ? null
+            : this.classNameCount++,
           expressionType === "keyframesLiteral" ? "animation" : "className"
         );
 
@@ -345,7 +348,8 @@ module.exports = function (babel, options) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
                 // inside a nested scope a foreign css literal must not be used
                 // as we can not forward the scope
-                const isReferenceToMixin = t.isIdentifier(expression) || t.isCallExpression(expression);
+                const isReferenceToMixin =
+                  t.isIdentifier(expression) || t.isCallExpression(expression);
                 if (isReferenceToMixin) {
                   throw new InvalidPositionError(
                     `Mixins are not allowed inside nested selectors`,

@@ -4,10 +4,11 @@ import { queries, colors } from "@/theme/constants.yak";
 import { Clock } from "./Clock";
 import { Inputs } from "@/app/Input";
 import { HighContrastToggle } from "./HighContrastToggle";
+import { typography } from "./mixins/constants.yak";
 
 const headline = css<{ $primary?: boolean }>`
-  font-size: 2rem;
-  font-weight: bold;
+  ${typography.h1}
+
   filter: drop-shadow(0px 0px 1px #fff);
   ${({ theme }) =>
     theme.highContrast
