@@ -13,7 +13,7 @@ import { CSSInterpolation } from "./staticCssLiteral.js";
  * Hack to hide .yak from the type definition and to deal with ExoticComponents
  */
 const yakForwardRef: <TProps>(
-  component: ForwardRefRenderFunction<any, TProps>
+  component: ForwardRefRenderFunction<any, TProps>,
 ) => FunctionComponent<TProps> & {
   // type only identifier to allow targeting components
   // e.g. styled.svg`${Button}:hover & { fill: red; }`
@@ -63,7 +63,7 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
       TAttrsIn extends object = {},
       TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
     >(
-      attrs: Attrs<T, TAttrsIn, TAttrsOut>
+      attrs: Attrs<T, TAttrsIn, TAttrsOut>,
     ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
@@ -73,7 +73,7 @@ const yakStyled = <
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 >(
   Component: FunctionComponent<T> | HtmlTags,
-  attrs?: Attrs<T, TAttrsIn, TAttrsOut>
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
 ) => {
   return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
@@ -81,12 +81,12 @@ const yakStyled = <
   ) => {
     const getRuntimeStyles = __cssYak(
       styles as unknown as string,
-      ...(values as unknown as string[])
+      ...(values as unknown as string[]),
     );
     const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
       combineProps(
         props,
-        typeof attrs === "function" ? (attrs as Function)(props) : attrs
+        typeof attrs === "function" ? (attrs as Function)(props) : attrs,
       );
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
       /** The combined props are passed into the styled`` literal functions */
@@ -106,8 +106,8 @@ const yakStyled = <
           // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
           //       ^ must be have acces to theme
           attrs || getRuntimeStyles.length ? { theme: useTheme() } : {},
-          props
-        ) as Substitute<TCSSProps & T, TAttrsIn>
+          props,
+        ) as Substitute<TCSSProps & T, TAttrsIn>,
       );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
@@ -124,7 +124,7 @@ const yakStyled = <
       // user provided className and style prop
       (filteredProps as { className?: string }).className = mergeClassNames(
         (combinedProps as { className?: string }).className,
-        runtimeStyles.className as string
+        runtimeStyles.className as string,
       );
       (filteredProps as { style?: React.CSSProperties }).style =
         "style" in combinedProps
@@ -188,7 +188,7 @@ export const styled = new Proxy(
           TAttrsIn
         > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
       >(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
       ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
     };
   },
@@ -196,7 +196,7 @@ export const styled = new Proxy(
     get(target, TagName: keyof JSX.IntrinsicElements) {
       return target(TagName);
     },
-  }
+  },
 );
 
 // Remove all entries that start with a $ sign
@@ -233,7 +233,7 @@ const combineProps = <
   },
 >(
   props: T,
-  newProps: T
+  newProps: T,
 ) => {
   if (!newProps) return props;
   const combinedProps: T =
@@ -251,7 +251,7 @@ const combineProps = <
     ...combinedProps,
     className: mergeClassNames(
       props.className as string,
-      newProps.className as string
+      newProps.className as string,
     ),
     style: { ...(props.style || {}), ...(newProps.style || {}) },
     $__attrs: true,
