@@ -1,5 +1,5 @@
 import { ForwardRefRenderFunction, FunctionComponent } from "react";
-import { __cssYak } from "./cssLiteral.js";
+import { CSSInterpolation, css } from "./cssLiteral.js";
 import React from "react";
 
 // the following export is not relative as "next-yak/context"
@@ -7,7 +7,6 @@ import React from "react";
 // to another file for classic react components
 import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
-import { CSSInterpolation } from "./staticCssLiteral.js";
 
 /**
  * Hack to hide .yak from the type definition and to deal with ExoticComponents
@@ -79,10 +78,7 @@ const yakStyled = <
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
-    const getRuntimeStyles = __cssYak(
-      styles as unknown as string,
-      ...(values as unknown as string[]),
-    );
+    const getRuntimeStyles = css(styles, ...values);
     const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
       combineProps(
         props,

@@ -6,7 +6,7 @@
 import { it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import { styled } from "../styled";
-import { __cssYak } from "../cssLiteral";
+import { css } from "../cssLiteral";
 import React from "react";
 
 it("should render a literal element", () => {
@@ -118,9 +118,7 @@ it("should concatenate styles", () => {
 });
 
 it("should not add class if prop is not set", () => {
-  const Component = styled.input(
-    ({ testProp }) => testProp && __cssYak("test"),
-  );
+  const Component = styled.input(({ testProp }) => testProp && css("test"));
 
   const { container } = render(<Component />);
 
@@ -134,9 +132,7 @@ it("should not add class if prop is not set", () => {
 });
 
 it("should add class if prop is set", () => {
-  const Component = styled.input(
-    ({ $testProp }) => $testProp && __cssYak("test"),
-  );
+  const Component = styled.input(({ $testProp }) => $testProp && css("test"));
 
   const { container } = render(<Component $testProp />);
 
@@ -150,9 +146,7 @@ it("should add class if prop is set", () => {
 });
 
 it("should allow falsy values", () => {
-  const Component = styled.input(
-    ({ $testProp }) => $testProp && __cssYak("test"),
-  );
+  const Component = styled.input(({ $testProp }) => $testProp && css("test"));
 
   const { container } = render(
     <>
@@ -181,12 +175,10 @@ it("should execute runtime styles recursively", () => {
   const Component = styled.input<{ $testProp: boolean }>(
     ({ $testProp }) =>
       $testProp &&
-      __cssYak(
+      css(
         ({ $testProp }) =>
           $testProp &&
-          __cssYak(
-            ({ $testProp }) => $testProp && __cssYak("recursive-test-class"),
-          ),
+          css(({ $testProp }) => $testProp && css("recursive-test-class")),
       ),
   );
 

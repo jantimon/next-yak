@@ -1,8 +1,41 @@
-import type {
-  CSSFunction,
-  CSSStyles,
-  PropsToClassNameFn,
-} from "./staticCssLiteral.js";
+import type { YakTheme } from "./index.d.ts";
+
+type ComponentStyles<TProps = {}> = (props: TProps) => {
+  className: string;
+  style?: {
+    [key: string]: string;
+  };
+};
+
+export type CSSInterpolation<TProps = {}> =
+  | string
+  | number
+  | undefined
+  | null
+  | false
+  | ComponentStyles<TProps>
+  | {
+      // type only identifier to allow targeting components
+      // e.g. styled.svg`${Button}:hover & { fill: red; }`
+      __yak: true;
+    }
+  | ((props: TProps) => CSSInterpolation<TProps>);
+
+type CSSStyles<TProps = {}> = {
+  style: { [key: string]: string | ((props: TProps) => string) };
+};
+
+type CSSFunction = <TProps = {}>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
+) => ComponentStyles<TProps>;
+
+type PropsToClassNameFn = (props: unknown) =>
+  | {
+      className?: string;
+      style?: Record<string, string>;
+    }
+  | PropsToClassNameFn;
 
 /**
  * css() runtime factory of css``
@@ -16,7 +49,7 @@ import type {
  * Therefore this is only an internal function only and it must be cast to any
  * before exported to the user.
  */
-export const __cssYak = (
+const internalCssFactory = (
   ...args: Array<string | CSSFunction | CSSStyles<any>>
 ) => {
   const classNames: string[] = [];
@@ -128,3 +161,5 @@ const recursivePropExecution = (
   }
   return result;
 };
+
+export const css = internalCssFactory as any as CSSFunction;

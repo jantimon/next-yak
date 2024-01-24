@@ -179,21 +179,6 @@ module.exports = function (babel, options) {
             this.localVarNames[importSpecifier.name] = localSpecifier.name;
             this.isImportedInCurrentFile = true;
           }
-
-          /**
-           * By default, the runtime exports the staticCss
-           * function for all css`` literals.
-           *
-           * For all non-*.yak files the babel plugin will replace the
-           * css`` literal with the actual cssLiteral() function
-           *
-           * Here we rename the css import to __cssYak, so transpiled
-           * files will use the cssLiteral() stored in the local __cssYak
-           * function (that should not be used otherwise by directly importing it)
-           */
-          if (importSpecifier.name === "css") {
-            importSpecifier.name = "__cssYak";
-          }
         });
       },
       /**
