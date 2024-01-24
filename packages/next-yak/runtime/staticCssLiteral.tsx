@@ -70,8 +70,8 @@ const staticCss = (
       {
         const type = typeof value;
         return type === "number" || type === "string" ? value : "";
-      }
-    )
+      },
+    ),
   ).trim();
 
 export const css = staticCss as unknown as CSSFunction;

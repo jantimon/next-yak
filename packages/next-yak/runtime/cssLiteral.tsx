@@ -49,7 +49,7 @@ export const __cssYak = (
                 // const borderColor = (props: { theme: { mode: "dark" | "light" } }) => props.theme === "dark" ? "black" : "white";
                 // css`border-color: ${borderColor};`
                 // Therefore the value has to be extracted recursively
-                recursivePropExecution(props, value)
+                recursivePropExecution(props, value),
               ),
             },
           }));
@@ -84,7 +84,7 @@ const unwrapProps = (
   props: unknown,
   fn: PropsToClassNameFn,
   classNames: string[],
-  style: Record<string, string>
+  style: Record<string, string>,
 ) => {
   let result = fn(props);
   while (result) {
@@ -107,7 +107,7 @@ const unwrapProps = (
 
 const recursivePropExecution = (
   props: unknown,
-  fn: (props: unknown) => any
+  fn: (props: unknown) => any,
 ): string | number => {
   const result = fn(props);
   if (typeof result === "function") {
@@ -121,8 +121,8 @@ const recursivePropExecution = (
     ) {
       throw new Error(
         `Dynamic CSS functions must return a string or number but returned ${JSON.stringify(
-          result
-        )}`
+          result,
+        )}`,
       );
     }
   }

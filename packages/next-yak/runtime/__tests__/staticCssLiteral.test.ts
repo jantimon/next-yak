@@ -20,7 +20,7 @@ it("filter out null, undifined and false", () => {
     }
   `;
   expect(styles).toBe(
-    ".test {\n      color: red;\n      \n      \n      \n    }"
+    ".test {\n      color: red;\n      \n      \n      \n    }",
   );
 });
 
@@ -33,7 +33,7 @@ it("convert numbers to string", () => {
     }
   `;
   expect(styles).toBe(
-    ".test {\n      color: red;\n      line-height: 1em;\n      border: 0px;\n    }"
+    ".test {\n      color: red;\n      line-height: 1em;\n      border: 0px;\n    }",
   );
 });
 

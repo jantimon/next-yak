@@ -58,7 +58,7 @@ it("should forward children", () => {
   const { container } = render(
     <Component>
       <button>Click me!</button>
-    </Component>
+    </Component>,
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -119,7 +119,7 @@ it("should concatenate styles", () => {
 
 it("should not add class if prop is not set", () => {
   const Component = styled.input(
-    ({ testProp }) => testProp && __cssYak("test")
+    ({ testProp }) => testProp && __cssYak("test"),
   );
 
   const { container } = render(<Component />);
@@ -135,7 +135,7 @@ it("should not add class if prop is not set", () => {
 
 it("should add class if prop is set", () => {
   const Component = styled.input(
-    ({ $testProp }) => $testProp && __cssYak("test")
+    ({ $testProp }) => $testProp && __cssYak("test"),
   );
 
   const { container } = render(<Component $testProp />);
@@ -151,7 +151,7 @@ it("should add class if prop is set", () => {
 
 it("should allow falsy values", () => {
   const Component = styled.input(
-    ({ $testProp }) => $testProp && __cssYak("test")
+    ({ $testProp }) => $testProp && __cssYak("test"),
   );
 
   const { container } = render(
@@ -159,7 +159,7 @@ it("should allow falsy values", () => {
       <Component $testProp={null} />
       <Component $testProp={false} />
       <Component $testProp={undefined} />
-    </>
+    </>,
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -185,9 +185,9 @@ it("should execute runtime styles recursively", () => {
         ({ $testProp }) =>
           $testProp &&
           __cssYak(
-            ({ $testProp }) => $testProp && __cssYak("recursive-test-class")
-          )
-      )
+            ({ $testProp }) => $testProp && __cssYak("recursive-test-class"),
+          ),
+      ),
   );
 
   const { container } = render(<Component $testProp />);
@@ -210,7 +210,7 @@ it("should allow using refs", () => {
       ref={(element) => {
         elementFromRef = element;
       }}
-    />
+    />,
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
@@ -226,7 +226,7 @@ it("should allow using nested refs", () => {
       ref={(element) => {
         elementFromRef = element;
       }}
-    />
+    />,
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
