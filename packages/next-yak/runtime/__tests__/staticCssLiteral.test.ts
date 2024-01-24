@@ -1,8 +1,8 @@
 import { it, expect } from "vitest";
-import { staticCss } from "../staticCssLiteral";
+import { css } from "../staticCssLiteral";
 
 it("render static strings unchanged", () => {
-  const styles = staticCss`
+  const styles = css`
     .test {
       color: red;
     }
@@ -11,7 +11,7 @@ it("render static strings unchanged", () => {
 });
 
 it("filter out null, undifined and false", () => {
-  const styles = staticCss`
+  const styles = css`
     .test {
       color: red;
       ${null}
@@ -25,7 +25,7 @@ it("filter out null, undifined and false", () => {
 });
 
 it("convert numbers to string", () => {
-  const styles = staticCss`
+  const styles = css`
     .test {
       color: red;
       line-height: ${1}em;
@@ -38,14 +38,12 @@ it("convert numbers to string", () => {
 });
 
 it("work nested", () => {
-  const styles = staticCss`
+  const styles = css`
     .test {
-      ${
-        true &&
-        staticCss`
+      ${true &&
+      css`
         color: red;
-      `
-      }
+      `}
     }
   `;
   expect(styles).toBe(".test {\n      color: red;\n    }");

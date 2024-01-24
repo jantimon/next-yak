@@ -1,41 +1,8 @@
-import type { YakTheme } from "./index.d.ts";
-
-type ComponentStyles<TProps = {}> = (props: TProps) => {
-  className: string;
-  style?: {
-    [key: string]: string;
-  };
-};
-
-export type CSSInterpolation<TProps = {}> =
-  | string
-  | number
-  | undefined
-  | null
-  | false
-  | ComponentStyles<TProps>
-  | {
-      // type only identifier to allow targeting components
-      // e.g. styled.svg`${Button}:hover & { fill: red; }`
-      __yak: true;
-    }
-  | ((props: TProps) => CSSInterpolation<TProps>);
-
-type CSSStyles<TProps = {}> = {
-  style: { [key: string]: string | ((props: TProps) => string) };
-};
-
-type CSSFunction = <TProps = {}>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-) => ComponentStyles<TProps>;
-
-type PropsToClassNameFn = (props: unknown) =>
-  | {
-      className?: string;
-      style?: Record<string, string>;
-    }
-  | PropsToClassNameFn;
+import type {
+  CSSFunction,
+  CSSStyles,
+  PropsToClassNameFn,
+} from "./staticCssLiteral.js";
 
 /**
  * css() runtime factory of css``
@@ -49,7 +16,7 @@ type PropsToClassNameFn = (props: unknown) =>
  * Therefore this is only an internal function only and it must be cast to any
  * before exported to the user.
  */
-const internalCssFactory = (
+export const __cssYak = (
   ...args: Array<string | CSSFunction | CSSStyles<any>>
 ) => {
   const classNames: string[] = [];
@@ -82,7 +49,7 @@ const internalCssFactory = (
                 // const borderColor = (props: { theme: { mode: "dark" | "light" } }) => props.theme === "dark" ? "black" : "white";
                 // css`border-color: ${borderColor};`
                 // Therefore the value has to be extracted recursively
-                recursivePropExecution(props, value),
+                recursivePropExecution(props, value)
               ),
             },
           }));
@@ -117,7 +84,7 @@ const unwrapProps = (
   props: unknown,
   fn: PropsToClassNameFn,
   classNames: string[],
-  style: Record<string, string>,
+  style: Record<string, string>
 ) => {
   let result = fn(props);
   while (result) {
@@ -140,7 +107,7 @@ const unwrapProps = (
 
 const recursivePropExecution = (
   props: unknown,
-  fn: (props: unknown) => any,
+  fn: (props: unknown) => any
 ): string | number => {
   const result = fn(props);
   if (typeof result === "function") {
@@ -154,12 +121,10 @@ const recursivePropExecution = (
     ) {
       throw new Error(
         `Dynamic CSS functions must return a string or number but returned ${JSON.stringify(
-          result,
-        )}`,
+          result
+        )}`
       );
     }
   }
   return result;
 };
-
-export const css = internalCssFactory as any as CSSFunction;

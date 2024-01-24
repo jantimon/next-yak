@@ -9,10 +9,32 @@ type ComponentStyles<TProps = {}> = (props: TProps) => {
 type CSSInterpolation<TProps = {}> = string | number | undefined | null | false | ComponentStyles<TProps> | {
     __yak: true;
 } | ((props: TProps) => CSSInterpolation<TProps>);
+type CSSStyles<TProps = {}> = {
+    style: {
+        [key: string]: string | ((props: TProps) => string);
+    };
+};
 type CSSFunction = <TProps = {}>(styles: TemplateStringsArray, ...values: CSSInterpolation<TProps & {
     theme: YakTheme;
 }>[]) => ComponentStyles<TProps>;
 declare const css: CSSFunction;
+
+/**
+ * css() runtime factory of css``
+ *
+ * /!\ next-yak transpiles css`` and styled``
+ *
+ * This changes the typings of the css`` and styled`` functions.
+ * During development the user of next-yak wants to work with the
+ * typings BEFORE compilation.
+ *
+ * Therefore this is only an internal function only and it must be cast to any
+ * before exported to the user.
+ */
+declare const __cssYak: (...args: Array<string | CSSFunction | CSSStyles<any>>) => (props: unknown) => {
+    className: string;
+    style: Record<string, string>;
+};
 
 interface YakTheme {
 }
@@ -659,4 +681,4 @@ declare const atoms: (...atoms: string[]) => () => {
  */
 declare const keyframes: (styles: TemplateStringsArray, ...dynamic: never[]) => string;
 
-export { YakTheme, YakThemeProvider, atoms, css, keyframes, styled, useTheme };
+export { YakTheme, YakThemeProvider, __cssYak, atoms, css, keyframes, styled, useTheme };

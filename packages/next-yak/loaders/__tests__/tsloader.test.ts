@@ -57,7 +57,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       "\\"use client\\";
 
       import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
       const headline = css(__styleYak.headline_0);
@@ -88,7 +88,7 @@ const headline = css\`
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline = css(__styleYak.headline_0, x > 0.5 && css(__styleYak.headline_1));"
@@ -122,7 +122,7 @@ const FancyButton = styled(Button)\`
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button = styled.button(__styleYak.Button, x > 0.5 && css(__styleYak.Button_0));
@@ -157,7 +157,7 @@ const FancyButton = styled(Button)\`
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button = styled.button(__styleYak.Button, ({
@@ -237,7 +237,7 @@ const headline = css\`
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { easing } from \\"styleguide\\";
       const headline = css(__styleYak.headline_0, css(__styleYak.headline_1), css(__styleYak.headline_2), {
@@ -478,7 +478,7 @@ const headline = css\`
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline = css(__styleYak.headline_0, x > 0.5 && css(__styleYak.headline_1));"
@@ -525,12 +525,12 @@ const Button = styled.button\`
 `
       )
     ).toMatchInlineSnapshot(`
-  "import styles from \\"./page.module.css\\";
-  import { styled, css } from \\"next-yak\\";
-  import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-  const Icon = styled.svg(__styleYak.Icon);
-  const Button = styled.button(__styleYak.Button);"
-`);
+      "import styles from \\"./page.module.css\\";
+      import { styled, __cssYak as css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Icon = styled.svg(__styleYak.Icon);
+      const Button = styled.button(__styleYak.Button);"
+    `);
   });
 
   it("should allow allow using an inline nested css literal", async () => {
@@ -553,7 +553,7 @@ const Button = styled.button\`
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, __cssYak as css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Icon = styled.svg(__styleYak.Icon);
       const Button = styled.button(__styleYak.Button, ({
