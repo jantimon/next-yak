@@ -31,6 +31,9 @@ on the provided props.
 ## When should you use next-yak
 
 ### When you're familiar with styled-components
+
+See related documentation: [Migration from styled-components](/next-yak-styled-components)
+
 If you're familiar with styled-components next-yak enables you to use the same syntax in the new era of streaming and Server Components.
 Additionally it's really fast and has a small footprint.
 

@@ -162,10 +162,8 @@ const Paragraph = styled('p')(
 
 ## Animations
 
-// todo
-
 In order to create CSS animations you can use the `keyframes` API and specify the keyframes for the animation
-you want to create. It can be used by your animation declarations.
+you want to create. It can be used by your animation declarations in the same file.
 
 ```jsx
 import { keyframes, styled } from 'next-yak';
@@ -183,6 +181,49 @@ const FadeInButton = styled.button`
   animation: 1s ${fadeIn} ease-out;
 `
 ```
+
+:::details[See transformed output]
+
+:::code-group
+
+```jsx [input]
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const FadeInButton = styled.button`
+  animation: 1s ${fadeIn} ease-out;
+`
+```
+
+```jsx [output javascript]
+const fadeIn = keyframes('fadeIn')
+
+const FadeInButton = styled('button')('.yakClass1', {
+  style: { "--yakVar1": fadeIn }
+})
+```
+
+```css [output CSS]
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.yakClass1 {
+  animation: 1s var(--yakVar1) ease-out;
+}
+```
+:::
 
 ## Mixins
 
@@ -202,7 +243,7 @@ const MyComp = styled.div`
 `;
 ```
 
-You can even make it dynamic and optionally nested
+You can even make it dynamic where the props are passed to the mixin.
 
 ```jsx
 import { css, styled } from 'next-yak';
@@ -213,11 +254,13 @@ const mixin = css`
 
 const MyComp = styled.div`
   background-color: yellow;
-  ${props => props.$useMixin ? mixin : css`color: red`}
+  ${mixin}
 `;
 ```
 
-During build time the css literal is converted to a class name and can be referenced by other css styles.
+During build time the css literal is converted to a class name (or multiple) and can be referenced by other css styles.
+
+// TODO: Add transformed output
 
 ## Automatic CSS variables
 
@@ -225,17 +268,62 @@ You may noticed that we sometimes used css`` and sometimes just a literal string
 present and you want to have dynamic values of that property, you can just use literal strings that get transformed
 into CSS variables during build time.
 
-```jsx
+:::code-group
+
+```jsx [javascript]
 import { styled } from 'next-yak';
 
 const Box = styled.div`
-  color: ${props => props.color : 'blue' };
+  font-size: ${props => props.variant === "primary" ? "2rem" : "1rem" };
+  color: ${props => props.color};
   display: flex;
 `
 ```
 
+```tsx [typescript]
+import { styled } from 'next-yak';
+
+const Box = styled.div<{ variant: "primary" | "secondary", color: string }>`
+  font-size: ${props => props.variant === "primary" ? "2rem" : "1rem" };
+  color: ${props => props.color};
+  display: flex;
+`
+```
+
+:::
+
 The value of the CSS variable is set via the `style` property of that component to not interfer with potential
 CSS variable names that have the same name.
+
+:::details[See transformed output]
+
+:::code-group
+
+```jsx [input]
+const Box = styled.div`
+  font-size: ${props => props.variant === "primary" ? "2rem" : "1rem" };
+  color: ${props => props.color};
+  display: flex;
+`
+```
+
+```jsx [output javascript]
+const Box = styled('div')('.yakClass1', {
+  style: { 
+    '--var1': props.variant === "primary" ? "2rem" : "1rem", 
+    '--var2': props.color 
+  }
+})
+```
+
+```css [output CSS]
+.yakClass1 {
+  font-size: var(--var1);
+  color: var(--var2);
+  display: flex;
+}
+```
+:::
 
 ## Theming
 
@@ -244,8 +332,7 @@ next-yak integrates it in a hassle free manner that works for both Server Compon
 a difference in usage for you. Wrap your root with the Themeprovider and add a `yak.context.ts` file to your root directory
 and you're ready to go.
 
-```jsx
-// yak.context.ts
+```jsx [yak.context.ts]
 import { cookies } from 'next/headers'
 import { cache } from "react";
 
@@ -266,8 +353,9 @@ declare module "next-yak" {
 }
 ```
 
-```jsx
-// somewhere in your files
+Once this context file is in place, you can access the theme props on every component.
+
+```jsx [some-component.tsx]
 import { styled } from 'next-yak';
 
 const Button = styled.button`
