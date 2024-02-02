@@ -326,6 +326,20 @@ module.exports = function (babel, options) {
               (type.empty && wasInsideCssValue))
           ) {
             wasInsideCssValue = true;
+            // to prevent overuse of css variables, we only allow expressions
+            // for css variables for arrow function expressions
+            if (!t.isArrowFunctionExpression(expression)) {
+              throw new InvalidPositionError(
+                "Possible constant used as runtime value for a css variable\n" +
+                "Please move the constant to a .yak import or use an arrow function\n" + 
+                "e.g.:\n" +
+                "|   import { primaryColor } from './foo.yak'\n" +
+                "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
+                expression,
+                this.file
+              );
+            }
+
             if (!cssVariablesInlineStyle) {
               cssVariablesInlineStyle = t.objectExpression([]);
             }

@@ -228,7 +228,7 @@ import { css } from "next-yak";
 import { easing } from "styleguide";
 
 const headline = css\`
-  transition: color \${({i}) => i * 100 + "ms"} \${easing};
+  transition: color \${({i}) => i * 100 + "ms"} \${({easing}) => easing};
   display: block;
   \${css\`color: orange\`}
   \${css\`color: blue\`}
@@ -245,7 +245,9 @@ const headline = css\`
           \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
             i
           }) => i * 100 + \\"ms\\",
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": easing
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": ({
+            easing
+          }) => easing
         }
       });"
     `);
@@ -269,7 +271,7 @@ const fadeIn = keyframes\`
 \`
 
 const FadeInButton = styled.button\`
-  animation: 1s \${fadeIn} ease-out;
+  animation: 1s \${() => fadeIn} ease-out;
 \`
 `
       )
@@ -456,6 +458,30 @@ const Icon = styled.div\`
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 7: Expressions are not allowed as selectors
       found: \${test}"
+    `);
+  });
+
+
+  it("should show error when using a runtime value on top level", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const red = new Token("#E50914");
+const headline = css\`
+  color: \${red};
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 6: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${red}"
     `);
   });
 
