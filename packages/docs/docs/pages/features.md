@@ -227,7 +227,7 @@ const FadeInButton = styled('button')('.yakClass1', {
 
 ## Mixins
 
-Mixins are declarations of the `css\`\`` utility. You can declare a variable which holds the css declaration and
+Mixins are declarations of the `css` utility function. You can declare a variable which holds the css declaration and
 use it inside your `styled` declarations.
 
 ```jsx
@@ -260,7 +260,41 @@ const MyComp = styled.div`
 
 During build time the css literal is converted to a class name (or multiple) and can be referenced by other css styles.
 
-// TODO: Add transformed output
+:::details[See transformed output]
+
+:::code-group
+
+```jsx [input]
+const mixin = css`
+  color: ${(props) => props.$green ? 'green' : 'blue'};
+`;
+
+const MyComp = styled.div`
+  background-color: yellow;
+  ${mixin}
+`;
+```
+
+```jsx [output javascript]
+const mixin = css('yakClass1', {
+  style: {
+    "--yakVar1": props => props.$green ? 'green' : 'blue'
+  },
+});
+
+const MyComp = styled.div('yakClass2', mixin);
+```
+
+```css [output CSS]
+.yakClass1 { 
+  color: var(--yakVar1);
+}
+
+.yakClass2 { 
+  background-color: yellow;
+}
+```
+:::
 
 ## Automatic CSS variables
 
