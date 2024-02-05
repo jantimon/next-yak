@@ -484,7 +484,6 @@ const headline = css\`
     `);
   });
 
-
   it("should show error when using a runtime value form top level in a nested literal", async () => {
     await expect(() =>
       tsloader.call(
@@ -512,6 +511,60 @@ const headline = css\`
     `);
   });
 
+  it("should show error when using a runtime value form another module in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+        import $red from "./colors";
+        
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${$red};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${$red}"
+    `);
+  });
+
+  it("should show error when using a runtime object value form top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+
+        const colors = { red:  "#E50914" };
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${colors.red};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${colors.red}"
+    `);
+  });
+
   it("should show no error when using a scoped value", async () => {
     await expect(
       await tsloader.call(
@@ -530,7 +583,19 @@ const Button = styled.button\`
 `
       )
     ).toMatchInlineSnapshot(`
-      TODO
+      "import { styled, css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Button = styled.button(__styleYak.Button, ({
+        $primary,
+        $digits
+      }) => {
+        const indent = $digits * 10 + \\"px\\";
+        return $primary && css(__styleYak.primary_0, {
+          \\"style\\": {
+            \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": indent
+          }
+        });
+      });"
     `);
   });
 
