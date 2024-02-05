@@ -484,7 +484,7 @@ const headline = css\`
     `);
   });
 
-  it("should show error when using a runtime value form top level in a nested literal", async () => {
+  it("should show error when using a runtime value from top level in a nested literal", async () => {
     await expect(() =>
       tsloader.call(
         loaderContext,
@@ -511,7 +511,61 @@ const headline = css\`
     `);
   });
 
-  it("should show error when using a runtime value form another module in a nested literal", async () => {
+  it("should show error when calling a runtime value from top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+        import { red } from "./colors";
+
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${red()};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${red()}"
+    `);
+  });
+
+  it("should show error when calling a nested runtime value from top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+        import { colors } from "./colors";
+
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${colors.red()};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${colors.red()}"
+    `);
+  });
+
+  it("should show error when using a runtime value from another module in a nested literal", async () => {
     await expect(() =>
       tsloader.call(
         loaderContext,
@@ -538,7 +592,7 @@ const headline = css\`
     `);
   });
 
-  it("should show error when using a runtime object value form top level in a nested literal", async () => {
+  it("should show error when using a runtime object value from top level in a nested literal", async () => {
     await expect(() =>
       tsloader.call(
         loaderContext,

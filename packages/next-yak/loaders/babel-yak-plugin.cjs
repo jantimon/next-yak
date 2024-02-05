@@ -355,11 +355,24 @@ module.exports = function (babel, options) {
             // to prevent overuse of css variables, we only allow expressions
             // for css variables for arrow function expressions
             if (
+              // e.g. styled.div`color: ${x};`
               (t.isIdentifier(expression) &&
                 this.topLevelConstBindings.has(expression.name)) ||
+              // e.g. styled.div`color: ${x.y};`
               (t.isMemberExpression(expression) &&
                 t.isIdentifier(expression.object) &&
-                this.topLevelConstBindings.has(expression.object.name))
+                this.topLevelConstBindings.has(expression.object.name)) ||
+              // e.g. styled.div`color: ${x()};`
+              (t.isCallExpression(expression) &&
+                // x()
+                ((t.isIdentifier(expression.callee) &&
+                  this.topLevelConstBindings.has(expression.callee.name)) ||
+                  // x.y()
+                  (t.isMemberExpression(expression.callee) &&
+                    t.isIdentifier(expression.callee.object) &&
+                    this.topLevelConstBindings.has(
+                      expression.callee.object.name
+                    ))))
             ) {
               throw new InvalidPositionError(
                 "Possible constant used as runtime value for a css variable\n" +
