@@ -16,7 +16,8 @@
 - **Standard CSS Syntax**: Write styles in familiar, easy-to-use CSS
 - **Integrates with Atomic CSS**: Easily combines with atomic CSS frameworks like Tailwind CSS for more design options
 
-[Preview (Video)](https://github.com/jantimon/next-yak/assets/4113649/5383f60c-3bab-4aba-906c-d66070b6116c)
+[Preview (Video)](https://github.com/jantimon/next-yak/assets/4113649/f5a220fc-2a0f-46be-a8e7-c855f7faa337
+)
 
 ## Installation
 
@@ -263,7 +264,7 @@ const Container = styled.div`
 | Yak Features     | All (`styled`, `css`, ...)                      | 🚫                                             | 
 
 
-[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/6bdc44df-2996-40a3-9255-4b9ed0df464a)
+[Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/2c83246c-a03b-4c57-8814-32a7248983ac)
 
 ## Todos:
 
