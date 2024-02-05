@@ -11,7 +11,7 @@ const rotate = keyframes`
   `;
 
 const Headline = styled.h1`
-  animation: ${rotate} 3s linear infinite;
+  animation: ${() => rotate} 3s linear infinite;
 `;
 
 export default function Home() {
