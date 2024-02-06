@@ -3,8 +3,14 @@ name: codspeed-benchmarks
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'packages/next-yak/**'
+      - '.github/workflows/codspeed.yml'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'packages/next-yak/**'
+      - '.github/workflows/codspeed.yml'
   workflow_dispatch:
 
 jobs:
