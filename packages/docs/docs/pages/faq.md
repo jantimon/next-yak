@@ -2,13 +2,13 @@
 
 ## Is next-yak production ready?
 
-No, next-yak is still below the 1.0V mark but we are working hard to make it production ready.
+`next-yak` is still experimental but we are working hard to release a stable 1.0 version
 
 ## Can I use next-yak with other frameworks than next.js?
 
-Unfortunately not. If you want to use it in other frameworks just write an issue and we can discuss it.
+Not by now - feel free to ask for adding support for your framework in our github issue tracker and we will give it a thought.
 
-## Can I use next-yak with other CSS-in-JS libraries?
+## Can I mix/combine next-yak with other CSS-in-JS libraries?
 
 Yes, you can use next-yak with other CSS-in-JS libraries. You can use it with styled-components, emotion, or any other library that 
 adds css classes to your components.
@@ -44,7 +44,7 @@ and add errors if we detect that a value is static but a CSS variable is used.
 
 ## Can I use next-yak with TypeScript?
 
-Yes, of course. Almost all code of next-yak is written in TypeScript and we have some TypeScript tests.
+Yes, of course. `next-yak` is fully type safe.
 
 ## Can I contribute to next-yak?
 

@@ -1,7 +1,10 @@
 import { defineConfig } from 'vocs'
 
 export default defineConfig({
-  title: 'Docs',
+  title: 'Next-Yak',
+  description: "next-yak is a CSS-in-JS solution tailored for Next.js that seamlessly combines the expressive power of styled-components syntax with efficient build-time extraction of CSS using Next.js's built-in CSS configuration.",
+  iconUrl: '/yak-icon-light.svg',
+  logoUrl: {light: '/yak-icon-light.svg', dark: '/yak-icon-dark.svg'},
   sidebar: [
     {
       text: 'Getting Started',
