@@ -41,3 +41,11 @@ This doesn't work for components outside of the current file, as next-yak only c
 
 It's very hard to determine if a value is static or dynamic. We decided to always generate CSS variables to be on the safe side
 and add errors if we detect that a value is static but a CSS variable is used.
+
+## Can I use next-yak with TypeScript?
+
+Yes, of course. Almost all code of next-yak is written in TypeScript and we have some TypeScript tests.
+
+## Can I contribute to next-yak?
+
+Yes, of course. We are happy about every contribution. Just write an issue or a pull request [here](https://github.com/jantimon/next-yak)
