@@ -2,6 +2,27 @@
 
 Why should you choose next-yak instead of all the other options you have?
 
+Most of the existing CSS-in-JS libraries are either slow or have a complex api. This project tries to find a middle ground between speed and api complexity.
+
+The goal of this project is to create a CSS-in-JS library that has the following properties:
+
+- fast
+  - no runtime
+  - can be statically extracted
+  - can be optimized by postcss
+  - no processing during hydration
+  - can make use of 103 early hints
+- api
+  - ui colocation (mixing css and jsx)
+  - familiar styled.div api
+  - composable styled(Component)
+  - allows conditional styles
+  - allow to use props in styles
+  - allow to use a context based theme in styles
+  - typescript support
+
+Optimizations are done by postcss. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
+
 ## Our backstory
 
 In our company we have very big next.js project where currently around 120 engineers work on.
@@ -32,7 +53,7 @@ on the provided props.
 
 ### When you're familiar with styled-components
 
-See related documentation: [Migration from styled-components](/next-yak-styled-components)
+See related documentation: [Migration from styled-components](/migration-from-styled-components)
 
 If you're familiar with styled-components next-yak enables you to use the same syntax in the new era of streaming and Server Components.
 Additionally it's really fast and has a small footprint.

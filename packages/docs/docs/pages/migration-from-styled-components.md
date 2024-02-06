@@ -1,4 +1,4 @@
-# next-yak coming from styled-components
+# Migration from styled-components
 
 We tried to keep the changes you need to know if you're already familiar with styled-components 
 to a minimum. 

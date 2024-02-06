@@ -16,8 +16,8 @@ export default defineConfig({
       link: '/features',
     },
     {
-      text: 'Coming from styled-components',
-      link: '/next-yak-styled-components',
+      text: 'Migration from styled-components',
+      link: '/migration-from-styled-components',
     },
     {
       text: 'How does it work?',
@@ -32,8 +32,8 @@ export default defineConfig({
       link: '/examples',
     },
     {
-      text: 'Missing features',
-      link: '/missing-features',
+      text: 'Roadmap',
+      link: '/roadmap',
     },
   ],
   topNav: [
