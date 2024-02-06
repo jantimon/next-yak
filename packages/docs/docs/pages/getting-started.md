@@ -45,7 +45,8 @@ module.exports = withYak(nextConfig);
 
 ### Start using next-yak
 
-That's it. You're now ready to go and you can use next-yak directly in all your components. E.g.:
+With the installation and configuration done, you can now use next-yak directly in your components. Here's a simple example:
+
 
 ```jsx [pages/index.tsx]
 import { styled } from 'next-yak';
@@ -62,5 +63,7 @@ function HomePage() {
 
 export default HomePage;
 ```
+
+You're now ready to use next-yak in your Next.js project.
 
 ::::

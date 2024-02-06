@@ -21,41 +21,31 @@ The goal of this project is to create a CSS-in-JS library that has the following
   - allow to use a context based theme in styles
   - typescript support
 
-Optimizations are done by postcss. This allows to use the full power of postcss and its plugins. It also allows to use the same optimizations for css files and css-in-js.
+Optimizations are performed by postcss, allowing you to utilize its full potential and its plugins. 
+This also ensures consistency in optimizations across CSS files and CSS-in-JS.
 
-## Our backstory
+## Our Journey
 
-In our company we have very big next.js project where currently around 120 engineers work on.
-We rely heavily on styled-components to be very flexible and have colocated styles and code.
-Until now this setup served the purpose very well, despite having some trouble with performance during
-server side rendering, and we were pretty happy. 
+Our journey with next-yak began in our company's large Next.js project, where approximately 120 engineers work. We extensively used styled-components for flexibility and colocation of styles and code. Despite a few performance issues during server-side rendering, this setup served us well.
 
-The React ecosystem is constantly evolving and is focusing more and more on performance. The React team 
-introduced the concept of react-server-components (RSC) and next.js quickly picked it up with the app 
-router. The problem that arised from this is that all 3rd party packages had to think about how they want
-to implement the new possibilities with RSC's. 
+However, with the React ecosystem's constant evolution and increasing focus on performance, the introduction of React Server Components (RSC) by the React team, quickly adopted by Next.js with the app router, posed a new challenge. Third-party packages had to rethink their approach to accommodate RSC's new possibilities.
 
-Runtime CSS-in-JS libraries have the upside to be very flexible but with the downside that they don't play well with
-Server Components. To conquer this issue several other CSS-in-JS libraries were created that use a static extraction
-approach instead of being fully dynamic, but neither of those libraries made it easy for us to switch from styled-components
-as we would have to rewrite over 5000 styled components.
+While runtime CSS-in-JS libraries offer great flexibility, they often struggle to work well with Server Components. Several static extraction-based CSS-in-JS libraries were developed to address this issue, but none made the transition from styled-components easy for us, as it would require rewriting over 5000 styled components.
 
-We thought about a solution that is a minimal change for developers familiar with styled-components, but with the benefits
-of a static CSS-in-JS framework that works well with next.js and Server Components. This solution is next-yak:
+We envisioned a solution that would require minimal changes from developers familiar with styled-components, while offering the benefits of a static CSS-in-JS framework compatible with Next.js and Server Components. This vision led to the creation of next-yak:
 
-- **Static Analysis**: next-yak uses static analysis to parse and analyze your styles at build time, and generate CSS-Modules files
-that are already well integrated in next.js. Additionally, next-yak replaces the defined styles inside your files with an invocation
-of it's runtime.
-- **Runtime**: To have some kind of dynamic behaviour the runtime uses the generated class names and switches/adds/removes classes based
-on the provided props.
+- **Static Analysis**: next-yak employs static analysis to parse and analyze your styles at build time, generating CSS-Modules files well-integrated with Next.js. It also replaces the defined styles in your files with an invocation of its runtime.
+
+- **Runtime**: To retain some dynamic behavior, the runtime uses the generated class names and modifies classes based on the provided props.
+
 
 ## When should you use next-yak
 
-### When you're familiar with styled-components
+### If You're Familiar with styled-components
 
 See related documentation: [Migration from styled-components](/migration-from-styled-components)
 
-If you're familiar with styled-components next-yak enables you to use the same syntax in the new era of streaming and Server Components.
+If you're familiar with styled-components, next-yak enables you to use the same syntax in the new era of streaming and Server Components.
 Additionally it's really fast and has a small footprint.
 
 :::code-group
@@ -89,7 +79,7 @@ export MyComponent = () => {
 ```
 :::
 
-And if you use TypeScript next-yak is fully typed to help you
+And if you use TypeScript, next-yak is fully typed to help you
 
 ```tsx twoslash
 // @noErrors
@@ -108,11 +98,13 @@ export MyComponent = () => {
 };
 ```
 
-### Generally
+### In General
 
-::::steps
+Consider using next-yak if you value:
 
-#### Colocation of your styles with your code 
+#### Colocation 
+
+Having your styles and code together in one place.
 
 :::code-group
 
@@ -155,7 +147,9 @@ export const MyComponent = (props) => {
 
 :::
 
-#### A familiar interface for writing real CSS with the newest features available without a complicated setup 
+#### Familiarity
+
+Writing real CSS with the latest features without a complicated setup.
 
 ```jsx
 import { styled } from 'next-yak';
@@ -167,7 +161,9 @@ const Header = styled.div`
 `;
 ```
 
-#### Compatible with utility-first CSS frameworks like Tailwind
+#### Compatibility
+
+Working with utility-first CSS frameworks like Tailwind.
 
 :::code-group
 
@@ -195,7 +191,9 @@ const Header = styled.nav<{ $variant?: 'primary' | 'secondary' }>`
 
 :::
 
-#### Composable
+#### Composability
+
+Building complex components from simpler ones.
 
 ```jsx
 import { styled } from 'next-yak';
@@ -208,5 +206,3 @@ const FormElement = styled.div`
   }
 `;
 ```
-
-::::

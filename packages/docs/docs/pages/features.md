@@ -1,11 +1,11 @@
 # Features
-next-yak is a featured packed static CSS-in-JS framework with a small runtime part.
+next-yak is a featured packed static CSS-in-JS framework with a minimal runtime aspect.
 
 ## Static CSS
 
-The core functionality is the extraction of static CSS. You can write your normal styled-components
-styles and during build time the styles are extracted and your component gets a class that encapsulates
-those styles.
+At the heart of next-yak lies the extraction of static CSS. 
+You can write your styles as you normally would with styled-components. 
+During build time, these styles are extracted, and your component is assigned a class that encapsulates these styles.
 
 ```jsx
 import { styled } from 'next-yak';
@@ -50,8 +50,8 @@ const Headline = styled('h1')('.yakClass1');
 ## Dynamic styles
 
 The static functionality itself is already very useful, but the bread and butter is an easy way to 
-create dynamic styles. Styled-components made the approach, where props are responsible for driving the
-dynamic CSS parts, really easy and with next-yak you can use exactly the same known API.
+create dynamic styles. Styled-components popularized the approach of using props to drive dynamic CSS parts. 
+With next-yak, you can use the exact same familiar API.
 
 :::code-group
 
@@ -109,7 +109,7 @@ const Component = () => {
 
 :::
 
-The css templates create their own class which is referenced during runtime when the function returns them.
+The CSS templates create their own class which is referenced during runtime when the function returns them.
 The other function which returns strings directly without setting new CSS properties, will be changed to
 a CSS variable, which is set on the element itself directly based on the functions return value.
 
@@ -162,8 +162,8 @@ const Paragraph = styled('p')(
 
 ## Animations
 
-In order to create CSS animations you can use the `keyframes` API and specify the keyframes for the animation
-you want to create. It can be used by your animation declarations in the same file.
+In order to create CSS animations, you can use the `keyframes` API and specify the keyframes for the animation
+you want to create. This can be used in your animation declarations within the same file.
 
 ```jsx
 import { keyframes, styled } from 'next-yak';
@@ -243,7 +243,7 @@ const MyComp = styled.div`
 `;
 ```
 
-You can even make it dynamic where the props are passed to the mixin.
+You can also make it dynamic, where the props are passed to the mixin.
 
 ```jsx
 import { css, styled } from 'next-yak';
@@ -258,7 +258,7 @@ const MyComp = styled.div`
 `;
 ```
 
-During build time the css literal is converted to a class name (or multiple) and can be referenced by other css styles.
+During build time the CSS literal is converted to a class name (or multiple class names) and can be referenced by other CSS styles.
 
 :::details[See transformed output]
 
@@ -299,8 +299,7 @@ const MyComp = styled.div('yakClass2', mixin);
 ## Automatic CSS variables
 
 You may noticed that we sometimes used css`` and sometimes just a literal string. If the property name is already
-present and you want to have dynamic values of that property, you can just use literal strings that get transformed
-into CSS variables during build time.
+present and you want to have dynamic values of that property, you can just use literal strings. These get transformed into CSS variables during build time.
 
 :::code-group
 
@@ -326,8 +325,7 @@ const Box = styled.div<{ variant: "primary" | "secondary", color: string }>`
 
 :::
 
-The value of the CSS variable is set via the `style` property of that component to not interfer with potential
-CSS variable names that have the same name.
+The value of the CSS variable is set via the style property of the component, ensuring no interference with potential CSS variable names that share the same name.
 
 :::details[See transformed output]
 
@@ -361,9 +359,9 @@ const Box = styled('div')('.yakClass1', {
 
 ## Theming
 
-Theming becomes more important as your application grows and is a shortcut to pass the same values to components.
-next-yak integrates it in a hassle free manner that works for both Server Components and Client Components without
-a difference in usage for you. Wrap your root with the Themeprovider and add a `yak.context.ts` file to your root directory
+As your application grows, theming becomes increasingly important as a shortcut to pass the same values to components.
+Next-yak integrates it in a hassle free manner that works for both Server Components and Client Components without
+a difference in usage for you. Wrap your root with the ThemeProvider and add a `yak.context.ts` file to your root directory
 and you're ready to go.
 
 ```jsx [yak.context.ts]
@@ -404,6 +402,3 @@ const Button = styled.button`
         `}
 `;
 ```
-
-
-
