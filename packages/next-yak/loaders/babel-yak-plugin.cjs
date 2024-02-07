@@ -21,6 +21,7 @@ const getCssName = require("./lib/getCssName.cjs");
  *   localVarNames: YakLocalIdentifierNames,
  *   isImportedInCurrentFile: boolean,
  *   classNameCount: number,
+ *   topLevelConstBindings: Set<string>,
  *   varIndex: number,
  *   variableNameToStyledCall: Map<string, {
  *     wasAdded: boolean,
@@ -122,8 +123,33 @@ module.exports = function (babel, options) {
       this.classNameCount = 0;
       this.varIndex = 0;
       this.variableNameToStyledCall = new Map();
+      this.topLevelConstBindings = new Set();
     },
     visitor: {
+      Program(path, state) {
+        const bindings = Object.entries(path.scope.bindings);
+        const constBindings = bindings.filter(([_name, binding]) => {
+          if (binding.kind === "module") {
+            // it is unclear if this is a const binding
+            // however to be safe, all module bindings are considered consts
+            return true;
+          }
+          return (
+            // let and var might change but this would be very strange react code
+            // as states must use useState or useExternalStore
+            (binding.kind === "let" ||
+              binding.kind === "var" ||
+              binding.kind === "const") &&
+            // don't consider functions or arrow functions as constants
+            (!("init" in binding.path.node) ||
+              (!t.isFunctionDeclaration(binding.path.node.init) &&
+                !t.isArrowFunctionExpression(binding.path.node.init)))
+          );
+        });
+        constBindings.forEach(([name]) => {
+          this.topLevelConstBindings.add(name);
+        });
+      },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
        * - `import { css, styled } from 'next-yak'` -> { css: 'css', styled: 'styled' }
@@ -326,6 +352,39 @@ module.exports = function (babel, options) {
               (type.empty && wasInsideCssValue))
           ) {
             wasInsideCssValue = true;
+            // to prevent overuse of css variables, we only allow expressions
+            // for css variables for arrow function expressions
+            if (
+              // e.g. styled.div`color: ${x};`
+              (t.isIdentifier(expression) &&
+                this.topLevelConstBindings.has(expression.name)) ||
+              // e.g. styled.div`color: ${x.y};`
+              (t.isMemberExpression(expression) &&
+                t.isIdentifier(expression.object) &&
+                this.topLevelConstBindings.has(expression.object.name)) ||
+              // e.g. styled.div`color: ${x()};`
+              (t.isCallExpression(expression) &&
+                // x()
+                ((t.isIdentifier(expression.callee) &&
+                  this.topLevelConstBindings.has(expression.callee.name)) ||
+                  // x.y()
+                  (t.isMemberExpression(expression.callee) &&
+                    t.isIdentifier(expression.callee.object) &&
+                    this.topLevelConstBindings.has(
+                      expression.callee.object.name
+                    ))))
+            ) {
+              throw new InvalidPositionError(
+                "Possible constant used as runtime value for a css variable\n" +
+                  "Please move the constant to a .yak import or use an arrow function\n" +
+                  "e.g.:\n" +
+                  "|   import { primaryColor } from './foo.yak'\n" +
+                  "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
+                expression,
+                this.file
+              );
+            }
+
             if (!cssVariablesInlineStyle) {
               cssVariablesInlineStyle = t.objectExpression([]);
             }

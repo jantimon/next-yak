@@ -228,7 +228,7 @@ import { css } from "next-yak";
 import { easing } from "styleguide";
 
 const headline = css\`
-  transition: color \${({i}) => i * 100 + "ms"} \${easing};
+  transition: color \${({i}) => i * 100 + "ms"} \${({easing}) => easing};
   display: block;
   \${css\`color: orange\`}
   \${css\`color: blue\`}
@@ -245,7 +245,9 @@ const headline = css\`
           \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
             i
           }) => i * 100 + \\"ms\\",
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": easing
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": ({
+            easing
+          }) => easing
         }
       });"
     `);
@@ -269,7 +271,7 @@ const fadeIn = keyframes\`
 \`
 
 const FadeInButton = styled.button\`
-  animation: 1s \${fadeIn} ease-out;
+  animation: 1s \${() => fadeIn} ease-out;
 \`
 `
       )
@@ -280,7 +282,7 @@ const FadeInButton = styled.button\`
       const fadeIn = keyframes(__styleYak.fadeIn);
       const FadeInButton = styled.button(__styleYak.FadeInButton, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": fadeIn
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": () => fadeIn
         }
       });"
     `);
@@ -456,6 +458,198 @@ const Icon = styled.div\`
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 7: Expressions are not allowed as selectors
       found: \${test}"
+    `);
+  });
+
+  it("should show error when using a runtime value from top level", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const red = new Token("#E50914");
+const headline = css\`
+  color: \${red};
+\`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 6: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${red}"
+    `);
+  });
+
+  it("should show error when using a runtime value from top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+
+        const $red = "#E50914";
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${$red};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${$red}"
+    `);
+  });
+
+  it("should show error when calling a runtime value from top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+        import { red } from "./colors";
+
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${red()};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${red()}"
+    `);
+  });
+
+  it("should show error when calling a nested runtime value from top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+        import { colors } from "./colors";
+
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${colors.red()};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${colors.red()}"
+    `);
+  });
+
+  it("should show error when using a runtime value from another module in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+        import $red from "./colors";
+        
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${$red};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${$red}"
+    `);
+  });
+
+  it("should show error when using a runtime object value from top level in a nested literal", async () => {
+    await expect(() =>
+      tsloader.call(
+        loaderContext,
+        `
+        import { styled, css } from "next-yak";
+
+        const colors = { red:  "#E50914" };
+        const Button = styled.button\`
+          \${({ $primary, $digits }) => {
+            return $primary && css\`
+              background-color: #4CAF50;
+              color: \${colors.red};
+            \`}}
+        \`
+`
+      )
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`
+      found: \${colors.red}"
+    `);
+  });
+
+  it("should show no error when using a scoped value", async () => {
+    await expect(
+      await tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const Button = styled.button\`
+  \${({ $primary, $digits }) => {
+    const indent = $digits * 10 + "px";
+    return $primary && css\`
+      background-color: #4CAF50;
+      text-indent: \${indent};
+    \`}}
+\`
+`
+      )
+    ).toMatchInlineSnapshot(`
+      "import { styled, css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Button = styled.button(__styleYak.Button, ({
+        $primary,
+        $digits
+      }) => {
+        const indent = $digits * 10 + \\"px\\";
+        return $primary && css(__styleYak.primary_0, {
+          \\"style\\": {
+            \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": indent
+          }
+        });
+      });"
     `);
   });
 
