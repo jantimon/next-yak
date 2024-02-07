@@ -482,7 +482,7 @@ const headline = css\`
       const red = \\"#E50914\\";
       const zIndex = 14;
       const headline = css(__styleYak.headline_0);"
-    `)
+    `);
   });
 
   it("should show error when using a runtime value from top level", async () => {
@@ -780,28 +780,56 @@ const Button = styled.button\`
     `);
   });
 
-  it("should allow detect expressions with units automatically and correctly include them in the resulting css var", async () => {
+  it("should detect expressions with units automatically and correctly use them in the css variable", async () => {
     expect(
       await tsloader.call(
         loaderContext,
         `
      import styles from "./page.module.css";
-     import { styled, css } from "next-yak";
+     import { styled } from "next-yak";
      const Button = styled.button\`
         padding: \${10}rem;
+        margin: \${4 * 2}px;
+        z-index: \${10 + 4};
+        color: red;
+        transform: translateX(\${10}px) translateY(\${10 / 2}px);
      \`;
      
      `
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button = styled.button(__styleYak.Button, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 10 + \\"rem\\"
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 10 + \\"rem\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": 4 * 2 + \\"px\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": 10 + 4,
+          \\"--\\\\uD83E\\\\uDDAC18fi82j3\\": 10 + \\"px\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j4\\": 10 / 2 + \\"px\\"
         }
       });"
+    `);
+  });
+
+  it.only("should detect expressions with units automatically in arrow function expressions", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { css } from "next-yak";
+     const c = css\`\${({$indent}) => $indent > 4 ? 10 : $indent}px\`
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const c = css(__styleYak.c_0, ({
+        $indent
+      }) => ($indent > 4 ? 10 : $indent) + \\"px\\");"
     `);
   });
 });
