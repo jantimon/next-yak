@@ -59,7 +59,7 @@ const MyParagraph = styled.p`
   background-color: #f0f0f0;
 `;
 
-export MyComponent = () => {
+export const MyComponent = () => {
   return <MyParagraph>I work like styled-components</MyParagraph>;
 }
 ```
@@ -67,13 +67,13 @@ export MyComponent = () => {
 ```tsx [typescript]
 import { styled, css } from 'next-yak';
 
-const MyParagraph = styled.p<{ $primary: boolean }>`
+const MyParagraph = styled.p<{ $primary?: boolean }>`
   color: ${(props) => props.$primary ? "teal" : "orange"};
   ${(props) => props.$primary && css`padding: 16px;`}
   background-color: #f0f0f0;
 `;
 
-export MyComponent = () => {
+export const MyComponent = () => {
   return <MyParagraph>I work like styled-components</MyParagraph>;
 }
 ```
@@ -128,6 +128,7 @@ export const MyComponent = (props) => {
 
 
 ```tsx [typescript]
+import { FC } from 'react';
 import { styled } from 'next-yak';
 
 const MyParagraph = styled.p<{ $variant?: 'primary' | 'secondary' }>`
@@ -136,7 +137,7 @@ const MyParagraph = styled.p<{ $variant?: 'primary' | 'secondary' }>`
 
 const MyOtherComponent = styled.p``;
 
-export const MyComponent = (props) => {
+export const MyComponent: FC<{ $variant?: 'primary' | 'secondary'; children: ReactNode }> = (props) => {
   if(props.$variant) {
     return (<MyParagraph $variant={props.$variant}>{props.children}</MyParagraph>);
   }
@@ -168,10 +169,10 @@ Working with utility-first CSS frameworks like Tailwind.
 :::code-group
 
 ```jsx [javascript]
-import { styled } from 'next-yak';
+import { styled, atoms } from 'next-yak';
 
 const Header = styled.nav`
-  ${({variant}) => variant === "primary"
+  ${({$variant}) => $variant === "primary"
     ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
     : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
   }
@@ -179,10 +180,10 @@ const Header = styled.nav`
 ```
 
 ```tsx [typescript]
-import { styled } from 'next-yak';
+import { styled, atoms } from 'next-yak';
 
 const Header = styled.nav<{ $variant?: 'primary' | 'secondary' }>`
-  ${({variant}) => variant === "primary"
+  ${({$variant}) => $variant === "primary"
     ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
     : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
   }

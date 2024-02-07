@@ -387,7 +387,7 @@ declare module "next-yak" {
 
 Once this context file is in place, you can access the theme props on every component.
 
-```jsx [some-component.tsx]
+```jsx [some-component.jsx]
 import { styled } from 'next-yak';
 
 const Button = styled.button`
