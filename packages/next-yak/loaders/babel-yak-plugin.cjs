@@ -365,8 +365,13 @@ module.exports = function (babel, options) {
             }
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
+
+            const isAnimationExpression =
+              quasis[0].value.raw.includes("animation");
             const cssUnit =
-              quasis[i + 1] && extractCssUnit(quasis[i + 1].value.raw);
+              !isAnimationExpression &&
+              quasis[i + 1] &&
+              extractCssUnit(quasis[i + 1].value.raw);
             if (cssUnit) {
               const cssUnitLiteral = t.stringLiteral(cssUnit);
               const binaryExpression = t.binaryExpression(
