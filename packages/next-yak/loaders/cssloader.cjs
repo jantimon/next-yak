@@ -8,6 +8,10 @@ const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative } = require("path");
+const {
+  getConstantName,
+  getConstantValues,
+} = require("./lib/getConstantValues.cjs");
 
 /**
  * @typedef {{ selector: string, hasParent: boolean, quasiCode: Array<{ insideCssValue: boolean, code: string }>, cssPartExpressions: { [key: number]: CssPartExpression[]} }} CssPartExpression
@@ -86,7 +90,14 @@ module.exports = async function cssLoader(source) {
   /** @type {Map<string, string>} */
   const variableNameToStyledClassName = new Map();
 
+  /** @type {Map<string, number | string | null>} */
+  let topLevelConstBindings = new Map();
+
+
   babel.traverse(ast, {
+    Program(path) {
+      topLevelConstBindings = getConstantValues(path, t);
+    },
     /**
      * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
      */
@@ -240,13 +251,22 @@ module.exports = async function cssLoader(source) {
             const relativePath = relative(rootContext, resourcePath);
             hashedFile = murmurhash2_32_gc(relativePath);
           }
-          currentCssParts.quasiCode.push({
-            insideCssValue: true,
-            code:
-              unEscapeCssCode(quasi.value.raw) +
-              // replace the expression with a css variable
-              `var(--🦬${hashedFile}${varIndex++})`,
-          });
+          const variableName = t.isExpression(expression) && getConstantName(expression, t);
+          const variableConstValue = variableName && topLevelConstBindings.get(variableName);
+          if (variableConstValue === null || variableConstValue === undefined) {
+            currentCssParts.quasiCode.push({
+              insideCssValue: true,
+              code:
+                unEscapeCssCode(quasi.value.raw) +
+                // replace the expression with a css variable
+                `var(--🦬${hashedFile}${varIndex++})`,
+            });
+          } else {
+            currentCssParts.quasiCode.push({
+              insideCssValue: true,
+              code: unEscapeCssCode(quasi.value.raw) + String(variableConstValue),
+            });
+          }
         } else {
           wasInsideCssValue = false;
           // code is added
