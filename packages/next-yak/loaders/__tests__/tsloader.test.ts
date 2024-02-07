@@ -461,6 +461,30 @@ const Icon = styled.div\`
     `);
   });
 
+  it("should remove string and number constants from the ts code", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const red = "#E50914";
+const zIndex = 14;
+const headline = css\`
+  color: \${red};
+  z-index: \${zIndex};
+\`
+`
+      )
+    ).toMatchInlineSnapshot(`
+      "import { styled, css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const red = \\"#E50914\\";
+      const zIndex = 14;
+      const headline = css(__styleYak.headline_0);"
+    `)
+  });
+
   it("should show error when using a runtime value from top level", async () => {
     await expect(() =>
       tsloader.call(
@@ -491,7 +515,7 @@ const headline = css\`
         `
         import { styled, css } from "next-yak";
 
-        const $red = "#E50914";
+        const $red = new Token("#E50914");
         const Button = styled.button\`
           \${({ $primary, $digits }) => {
             return $primary && css\`

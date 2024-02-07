@@ -503,6 +503,29 @@ const Component2 = styled.div\`
     `);
   });
 
+  it("should inline constants", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+import { styled, css } from "next-yak";
+
+const red = "#E50914";
+const zIndex = 14;
+const headline = css\`
+  color: \${red};
+  z-index: \${zIndex};
+\`
+`
+      )
+    ).toMatchInlineSnapshot(`
+      ".headline_0 {
+        color: #E50914;
+        z-index: 14;
+      }"
+    `);
+  });
+
   it("should support conditional nested expressions", async () => {
     expect(
       await cssloader.call(
@@ -510,9 +533,9 @@ const Component2 = styled.div\`
         `
 import { styled, keyframes, css } from "next-yak";
 
-const color = "green";
-const duration = "1s";
-const easing = "ease-out";
+const color = new Token("green");
+const duration = new Token("1s");
+const easing = new Token("ease-out");
 
 const Component = styled.div\`
     background-color: red;
