@@ -1,17 +1,17 @@
 /**
  * Extracts the css unit from a css string and checks if it is a valid CSS unit
  *
- * @param {string} inputStr
+ * @param {string} quasi
  */
-function extractCssUnit(inputStr) {
+function extractCssUnit(quasi) {
   // Regex to match units composed of [a-z] or exactly "%"
   const regex = /^([a-z]+|%$)/;
 
   // Clean the input string by removing whitespace, line breaks, and semicolons
-  const [firstCssExpression] = inputStr.trim().split(";");
+  const [firstCssString] = quasi.trim().split(";");
 
   // Check if the cleaned input is a valid CSS unit
-  const match = firstCssExpression.match(regex);
+  const match = firstCssString.match(regex);
 
   if (match && match[1]) {
     // Return the found unit
