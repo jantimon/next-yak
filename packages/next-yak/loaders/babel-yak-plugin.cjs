@@ -365,20 +365,33 @@ module.exports = function (babel, options) {
             }
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
-            // expression: `x`
-            // { style: { --v0: x}}
             const cssUnit =
               quasis[i + 1] && extractCssUnit(quasis[i + 1].value.raw);
             if (cssUnit) {
-              // @ts-expect-error TODO: fix this
-              expression.value = expression.value + ` + "${cssUnit}"`;
+              const cssUnitLiteral = t.stringLiteral(cssUnit);
+              const binaryExpression = t.binaryExpression(
+                "+",
+                expression,
+                cssUnitLiteral
+              );
+              // expression: `x`
+              // { style: { --v0: x + "px"}}
+              cssVariablesInlineStyle.properties.push(
+                t.objectProperty(
+                  t.stringLiteral(cssVariableName),
+                  /** @type {babel.types.Expression} */ (binaryExpression)
+                )
+              );
+            } else {
+              // expression: `x`
+              // { style: { --v0: x}}
+              cssVariablesInlineStyle.properties.push(
+                t.objectProperty(
+                  t.stringLiteral(cssVariableName),
+                  /** @type {babel.types.Expression} */ (expression)
+                )
+              );
             }
-            cssVariablesInlineStyle.properties.push(
-              t.objectProperty(
-                t.stringLiteral(cssVariableName),
-                /** @type {babel.types.Expression} */ (expression)
-              )
-            );
           } else {
             wasInsideCssValue = false;
             if (expression) {

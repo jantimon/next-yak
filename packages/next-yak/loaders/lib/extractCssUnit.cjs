@@ -28,10 +28,10 @@ function extractCssUnit(inputStr) {
   const allValidUnits = Object.values(validCssUnits).flat();
 
   // Clean the input string by removing whitespace, line breaks, and semicolons
-  const cleanedInput = inputStr.trim().replace(/;|\n/g, "");
+  const [firstCssExpression] = inputStr.trim().split(";");
 
   // Check if the cleaned input is a valid CSS unit
-  const foundUnit = allValidUnits.find((unit) => cleanedInput === unit);
+  const foundUnit = allValidUnits.find((unit) => firstCssExpression === unit);
 
   if (foundUnit) {
     return foundUnit;
