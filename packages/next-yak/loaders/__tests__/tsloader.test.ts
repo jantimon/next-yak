@@ -779,4 +779,29 @@ const Button = styled.button\`
       }) => $primary && css(__styleYak.primary_0));"
     `);
   });
+
+  it("should allow detect expressions with units automatically and correctly include them in the resulting css var", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { styled, css } from "next-yak";
+     const Button = styled.button\`
+        padding: \${10}rem;
+     \`;
+     
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { styled, css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Button = styled.button(__styleYak.Button, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 10 + \\"rem\\"
+        }
+      });"
+    `);
+  });
 });

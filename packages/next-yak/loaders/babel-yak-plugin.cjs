@@ -5,6 +5,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
+const extractCssUnit = require("./lib/extractCssUnit.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
   getConstantName,
@@ -366,6 +367,12 @@ module.exports = function (babel, options) {
               .varIndex++}`;
             // expression: `x`
             // { style: { --v0: x}}
+            const cssUnit =
+              quasis[i + 1] && extractCssUnit(quasis[i + 1].value.raw);
+            if (cssUnit) {
+              // @ts-expect-error TODO: fix this
+              expression.value = expression.value + ` + "${cssUnit}"`;
+            }
             cssVariablesInlineStyle.properties.push(
               t.objectProperty(
                 t.stringLiteral(cssVariableName),
