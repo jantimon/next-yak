@@ -41,7 +41,7 @@ We envisioned a solution that would require minimal changes from developers fami
 
 ## When should you use next-yak
 
-### If You're Familiar with styled-components
+### If you're familiar with styled-components
 
 See related documentation: [Migration from styled-components](/migration-from-styled-components)
 

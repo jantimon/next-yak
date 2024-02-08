@@ -288,19 +288,25 @@ export const YakThemeProvider = ({ children }: { children: ReactNode }) => {
 };
 ```
 
-The `getYakThemeContext` function is imported from the user's `yak.context.ts` file. This file is a regular typescript file that exports a function that returns the theme context.
+The `getYakThemeContext` function is imported from the user's `yak.context.ts` file. This file is a regular typescript file that exports a function that returns the theme context. You can use every api that works with server components like [headers](https://nextjs.org/docs/app/api-reference/functions/headers) or [cookies](https://nextjs.org/docs/app/api-reference/functions/cookies) and use them
+to determine your values for the theme context.
 
 ```tsx [yak.context.ts]
+import { cookies } from 'next/headers'
+import { cache } from "react";
+
+const hasHighContrast = cache(() => {
+    const cookieStore = cookies()
+    return cookieStore.get("highContrast")?.value === "true"
+});
+
 export function getYakThemeContext() {
     return {
-        colors: {
-            primary: "red",
-            secondary: "blue",
-        },
+        highContrast: hasHighContrast()
     }
 }
 
-declare module "next-yak/context" {
+declare module "next-yak" {
     export interface YakTheme extends ReturnType<typeof getYakThemeContext> { }
 }
 ```
