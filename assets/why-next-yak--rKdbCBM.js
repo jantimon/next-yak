@@ -1,4 +1,4 @@
-import{u as a,j as i}from"./index-iu1Lzqxf.js";const n={title:"Motivation",description:"undefined"};function l(h){const s={a:"a",code:"code",div:"div",figure:"figure",h1:"h1",h2:"h2",h3:"h3",h4:"h4",header:"header",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a(),...h.components};return i.jsxs(i.Fragment,{children:[i.jsx(s.header,{children:i.jsxs(s.h1,{id:"motivation",children:["Motivation",i.jsx(s.a,{"aria-hidden":"true",tabIndex:"-1",href:"#motivation",children:i.jsx(s.div,{"data-autolink-icon":!0})})]})}),`
+import{u as a,j as i}from"./index-_fsKtjv1.js";const n={title:"Motivation",description:"undefined"};function l(h){const s={a:"a",code:"code",div:"div",figure:"figure",h1:"h1",h2:"h2",h3:"h3",h4:"h4",header:"header",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a(),...h.components};return i.jsxs(i.Fragment,{children:[i.jsx(s.header,{children:i.jsxs(s.h1,{id:"motivation",children:["Motivation",i.jsx(s.a,{"aria-hidden":"true",tabIndex:"-1",href:"#motivation",children:i.jsx(s.div,{"data-autolink-icon":!0})})]})}),`
 `,i.jsx(s.p,{children:"Why should you choose next-yak instead of all the other options you have?"}),`
 `,i.jsx(s.p,{children:"Most of the existing CSS-in-JS libraries are either slow or have a complex api. This project tries to find a middle ground between speed and api complexity."}),`
 `,i.jsx(s.p,{children:"The goal of this project is to create a CSS-in-JS library that has the following properties:"}),`
@@ -40,7 +40,7 @@ This also ensures consistency in optimizations across CSS files and CSS-in-JS.`}
 `]}),`
 `]}),`
 `,i.jsxs(s.h2,{id:"when-should-you-use-next-yak",children:["When should you use next-yak",i.jsx(s.a,{"aria-hidden":"true",tabIndex:"-1",href:"#when-should-you-use-next-yak",children:i.jsx(s.div,{"data-autolink-icon":!0})})]}),`
-`,i.jsxs(s.h3,{id:"if-youre-familiar-with-styled-components",children:["If You're Familiar with styled-components",i.jsx(s.a,{"aria-hidden":"true",tabIndex:"-1",href:"#if-youre-familiar-with-styled-components",children:i.jsx(s.div,{"data-autolink-icon":!0})})]}),`
+`,i.jsxs(s.h3,{id:"if-youre-familiar-with-styled-components",children:["If you're familiar with styled-components",i.jsx(s.a,{"aria-hidden":"true",tabIndex:"-1",href:"#if-youre-familiar-with-styled-components",children:i.jsx(s.div,{"data-autolink-icon":!0})})]}),`
 `,i.jsxs(s.p,{children:["See related documentation: ",i.jsx(s.a,{href:"/migration-from-styled-components",children:"Migration from styled-components"})]}),`
 `,i.jsx(s.p,{children:`If you're familiar with styled-components, next-yak enables you to use the same syntax in the new era of streaming and Server Components.
 Additionally it's really fast and has a small footprint.`}),`
