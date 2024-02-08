@@ -1,0 +1,209 @@
+# Motivation
+
+Why should you choose next-yak instead of all the other options you have?
+
+Most of the existing CSS-in-JS libraries are either slow or have a complex api. This project tries to find a middle ground between speed and api complexity.
+
+The goal of this project is to create a CSS-in-JS library that has the following properties:
+
+- fast
+  - no runtime
+  - can be statically extracted
+  - can be optimized by postcss
+  - no processing during hydration
+  - can make use of 103 early hints
+- api
+  - ui colocation (mixing css and jsx)
+  - familiar styled.div api
+  - composable styled(Component)
+  - allows conditional styles
+  - allow to use props in styles
+  - allow to use a context based theme in styles
+  - typescript support
+
+Optimizations are performed by postcss, allowing you to utilize its full potential and its plugins. 
+This also ensures consistency in optimizations across CSS files and CSS-in-JS.
+
+## Our Journey
+
+Our journey with next-yak began in our company's large Next.js project, where approximately 120 engineers work. We extensively used styled-components for flexibility and colocation of styles and code. Despite a few performance issues during server-side rendering, this setup served us well.
+
+However, with the React ecosystem's constant evolution and increasing focus on performance, the introduction of React Server Components (RSC) by the React team, quickly adopted by Next.js with the app router, posed a new challenge. Third-party packages had to rethink their approach to accommodate RSC's new possibilities.
+
+While runtime CSS-in-JS libraries offer great flexibility, they often struggle to work well with Server Components. Several static extraction-based CSS-in-JS libraries were developed to address this issue, but none made the transition from styled-components easy for us, as it would require rewriting over 5000 styled components.
+
+We envisioned a solution that would require minimal changes from developers familiar with styled-components, while offering the benefits of a static CSS-in-JS framework compatible with Next.js and Server Components. This vision led to the creation of next-yak:
+
+- **Static Analysis**: next-yak employs static analysis to parse and analyze your styles at build time, generating CSS-Modules files well-integrated with Next.js. It also replaces the defined styles in your files with an invocation of its runtime.
+
+- **Runtime**: To retain some dynamic behavior, the runtime uses the generated class names and modifies classes based on the provided props.
+
+
+## When should you use next-yak
+
+### If you're familiar with styled-components
+
+See related documentation: [Migration from styled-components](/migration-from-styled-components)
+
+If you're familiar with styled-components, next-yak enables you to use the same syntax in the new era of streaming and Server Components.
+Additionally it's really fast and has a small footprint.
+
+:::code-group
+
+```jsx [javascript]
+import { styled, css } from 'next-yak';
+
+const MyParagraph = styled.p`
+  color: ${(props) => props.$primary ? "teal" : "orange"};
+  ${(props) => props.$primary && css`padding: 16px;`}
+  background-color: #f0f0f0;
+`;
+
+export const MyComponent = () => {
+  return <MyParagraph>I work like styled-components</MyParagraph>;
+}
+```
+
+```tsx [typescript]
+import { styled, css } from 'next-yak';
+
+const MyParagraph = styled.p<{ $primary?: boolean }>`
+  color: ${(props) => props.$primary ? "teal" : "orange"};
+  ${(props) => props.$primary && css`padding: 16px;`}
+  background-color: #f0f0f0;
+`;
+
+export const MyComponent = () => {
+  return <MyParagraph>I work like styled-components</MyParagraph>;
+}
+```
+:::
+
+And if you use TypeScript, next-yak is fully typed to help you
+
+```tsx twoslash
+// @noErrors
+import { styled, css } from 'next-yak';
+
+const MyParagraph = styled.p<{ $primary: boolean; $secondary: boolean; }>`
+  ${(props => {
+    return props.$
+//                ^|
+  })}
+`;
+
+export MyComponent = () => {
+  return <MyParagraph $
+//                     ^|
+};
+```
+
+### In General
+
+Consider using next-yak if you value:
+
+#### Colocation 
+
+Having your styles and code together in one place.
+
+:::code-group
+
+```jsx [javascript]
+import { styled } from 'next-yak';
+
+const MyParagraph = styled.p`
+  color: ${({$variant}) => $variant === 'primary' ? "red" : "blue"}
+`;
+
+const MyOtherComponent = styled.p``;
+
+export const MyComponent = (props) => {
+  if(props.$variant) {
+    return (<MyParagraph $variant={props.$variant}>{props.children}</MyParagraph>);
+  }
+
+  return (<MyOtherComponent>{props.children}</MyOtherComponent>);
+}
+```
+
+
+```tsx [typescript]
+import { FC } from 'react';
+import { styled } from 'next-yak';
+
+const MyParagraph = styled.p<{ $variant?: 'primary' | 'secondary' }>`
+  color: ${({$variant}) => $variant === 'primary' ? "red" : "blue"}
+`;
+
+const MyOtherComponent = styled.p``;
+
+export const MyComponent: FC<{ $variant?: 'primary' | 'secondary'; children: ReactNode }> = (props) => {
+  if(props.$variant) {
+    return (<MyParagraph $variant={props.$variant}>{props.children}</MyParagraph>);
+  }
+
+  return (<MyOtherComponent>{props.children}</MyOtherComponent>);
+}
+```
+
+:::
+
+#### Familiarity
+
+Writing real CSS with the latest features without a complicated setup.
+
+```jsx
+import { styled } from 'next-yak';
+
+const Header = styled.div`
+  & > *:has(:checked) {
+    background-color: lab(87.6 125 104);
+  }
+`;
+```
+
+#### Compatibility
+
+Working with utility-first CSS frameworks like Tailwind.
+
+:::code-group
+
+```jsx [javascript]
+import { styled, atoms } from 'next-yak';
+
+const Header = styled.nav`
+  ${({$variant}) => $variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
+`
+```
+
+```tsx [typescript]
+import { styled, atoms } from 'next-yak';
+
+const Header = styled.nav<{ $variant?: 'primary' | 'secondary' }>`
+  ${({$variant}) => $variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
+`
+```
+
+:::
+
+#### Composability
+
+Building complex components from simpler ones.
+
+```jsx
+import { styled } from 'next-yak';
+
+const Input = styled.input``;
+const Label = styled.label``;
+const FormElement = styled.div`
+  :has(${Input}:checked) {
+    color: red;
+  }
+`;
+```
