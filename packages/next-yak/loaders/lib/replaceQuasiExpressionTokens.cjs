@@ -29,19 +29,15 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
     const expression = quasi.expressions[i];
     // find the value to replace the expression with
     const replacement = getReplacement(expression, replacer, t);
-    if (replacement === false) {
-      continue;
-    }
-    const replacementValue = getReplacementValueForExpression(
+    const replacementValue = replacement && getReplacementValueForExpression(
       expression,
       replacement,
       t
     );
-    if (replacementValue === false) {
-      continue;
-    }
-    replaceExpressionAndMergeQuasis(quasi, i, replacementValue);
-    i--;
+    if (replacementValue !== false) {
+      replaceExpressionAndMergeQuasis(quasi, i, replacementValue);
+      i--;
+    } 
   }
 };
 
