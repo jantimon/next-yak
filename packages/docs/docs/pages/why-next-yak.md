@@ -64,7 +64,8 @@ export const MyComponent = () => {
 }
 ```
 
-```tsx [typescript]
+```tsx twoslash [typescript]
+// @allowUMDGlobalAccess
 import { styled, css } from 'next-yak';
 
 const MyParagraph = styled.p<{ $primary?: boolean }>`
@@ -127,8 +128,9 @@ export const MyComponent = (props) => {
 ```
 
 
-```tsx [typescript]
-import { FC } from 'react';
+```tsx twoslash [typescript]
+// @noErrors
+import { FC, ReactNode } from 'react';
 import { styled } from 'next-yak';
 
 const MyParagraph = styled.p<{ $variant?: 'primary' | 'secondary' }>`
@@ -179,7 +181,7 @@ const Header = styled.nav`
 `
 ```
 
-```tsx [typescript]
+```tsx twoslash [typescript]
 import { styled, atoms } from 'next-yak';
 
 const Header = styled.nav<{ $variant?: 'primary' | 'secondary' }>`

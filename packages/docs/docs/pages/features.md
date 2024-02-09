@@ -17,7 +17,7 @@ const Headline = styled.h1`
 `;
 
 const Component = () => {
-  return <Headline> Hello there!</Headline>
+  return <Headline>Hello there!</Headline>
 }
 ```
 
@@ -34,7 +34,7 @@ const Headline = styled.h1`
 ```
 
 ```jsx [output javascript]
-const Headline = styled('h1')('.yakClass1');
+const Headline = styled.h1('.yakClass1');
 ```
 
 ```css [output CSS]
@@ -74,14 +74,15 @@ const Paragraph = styled.p`
 const Component = () => {
   return (
     <>
-      <Paragraph $primary> Hello there primary!</Paragraph>
-      <Paragraph> Hello there non-primary!</Paragraph>
+      <Paragraph $primary>Hello there primary!</Paragraph>
+      <Paragraph>Hello there non-primary!</Paragraph>
     </>
   );
 }
 ```
 
-```tsx [typescript]
+```tsx twoslash [typescript]
+//@allowUmdGlobalAccess
 import { css, styled } from 'next-yak';
 
 const Paragraph = styled.p<{ $primary?: boolean }>`
@@ -100,8 +101,8 @@ const Paragraph = styled.p<{ $primary?: boolean }>`
 const Component = () => {
   return (
     <>
-      <Paragraph $primary> Hello there primary!</Paragraph>
-      <Paragraph> Hello there non-primary!</Paragraph>
+      <Paragraph $primary>Hello there primary!</Paragraph>
+      <Paragraph >Hello there non-primary!</Paragraph>
     </>
   );
 }
@@ -133,11 +134,11 @@ const Paragraph = styled.p`
 ```
 
 ```jsx [output javascript]
-const Paragraph = styled('p')( 
+const Paragraph = styled.p( 
   '.yakClass1', 
-  props.$primary ? '.yakCSSClass1' : '.yakCSSClass2', 
+  props => props.$primary ? css('.yakCSSClass1') : css('.yakCSSClass2'), 
   {
-    style: { '--var1': props.$primary ? "#BF4F74" : "white" }
+    style: { '--var1': props => props.$primary ? "#BF4F74" : "white" }
   }
 );
 ```
@@ -145,20 +146,75 @@ const Paragraph = styled('p')(
 ```css [output CSS]
 .yakClass1 {
   background: var(--var1);
+
+  &:where(.yakCSSClass1) {
+    color: white;
+  }
+
+  &:where(.yakCSSClass2) {
+    color: #BF4F74;
+  }
+
   font-size: 2rem;
   font-weight: bold;
-}
-
-.yakCSSClass1 {
-  color: white;
-}
-
-.yakCSSClass2 {
-  color: #BF4F74;
 }
 ```
 :::
 
+
+## Compatible with utility-first CSS frameworks (e.g. Tailwind)
+
+next-yak is fully compatible with utility-first CSS frameworks like Tailwind. Just use the `atoms` function to
+reference classes from these frameworks.
+
+:::code-group
+
+```jsx [javascript]
+import { styled, atoms } from 'next-yak';
+
+const Header = styled.nav`
+  ${({$variant}) => $variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
+`
+```
+
+```tsx twoslash [typescript]
+//@allowUmdGlobalAccess
+import { styled, atoms } from 'next-yak';
+
+const Header = styled.nav<{ $variant?: 'primary' | 'secondary' }>`
+  ${({$variant}) => $variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
+`
+```
+
+:::
+
+:::details[See transformed output]
+
+:::code-group
+
+```jsx [input]
+const Header = styled.nav`
+  ${({$variant}) => $variant === "primary"
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8")
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow")
+  }
+`
+```
+
+```jsx [output javascript]
+const Header = styled.nav('.yakClass1',
+  ({$variant}) => $variant === "primary" 
+    ? atoms("mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8") 
+    : atoms("bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"))
+```
+
+:::
 
 ## Animations
 
@@ -204,7 +260,7 @@ const FadeInButton = styled.button`
 ```jsx [output javascript]
 const fadeIn = keyframes('fadeIn')
 
-const FadeInButton = styled('button')('.yakClass1', {
+const FadeInButton = styled.button('.yakClass1', {
   style: { "--yakVar1": fadeIn }
 })
 ```
@@ -307,18 +363,19 @@ present and you want to have dynamic values of that property, you can just use l
 import { styled } from 'next-yak';
 
 const Box = styled.div`
-  font-size: ${props => props.variant === "primary" ? "2rem" : "1rem" };
-  color: ${props => props.color};
+  font-size: ${props => props.$variant === "primary" ? "2rem" : "1rem" };
+  color: ${props => props.$color};
   display: flex;
 `
 ```
 
-```tsx [typescript]
+```tsx twoslash [typescript]
+//@allowUmdGlobalAccess
 import { styled } from 'next-yak';
 
-const Box = styled.div<{ variant: "primary" | "secondary", color: string }>`
-  font-size: ${props => props.variant === "primary" ? "2rem" : "1rem" };
-  color: ${props => props.color};
+const Box = styled.div<{ $variant: "primary" | "secondary", $color: string }>`
+  font-size: ${props => props.$variant === "primary" ? "2rem" : "1rem" };
+  color: ${props => props.$color};
   display: flex;
 `
 ```
@@ -333,17 +390,17 @@ The value of the CSS variable is set via the style property of the component, en
 
 ```jsx [input]
 const Box = styled.div`
-  font-size: ${props => props.variant === "primary" ? "2rem" : "1rem" };
-  color: ${props => props.color};
+  font-size: ${props => props.$variant === "primary" ? "2rem" : "1rem" };
+  color: ${props => props.$color};
   display: flex;
 `
 ```
 
 ```jsx [output javascript]
-const Box = styled('div')('.yakClass1', {
+const Box = styled.div('.yakClass1', {
   style: { 
-    '--var1': props.variant === "primary" ? "2rem" : "1rem", 
-    '--var2': props.color 
+    '--var1': props => props.$variant === "primary" ? "2rem" : "1rem", 
+    '--var2': props => props.$color 
   }
 })
 ```
@@ -364,10 +421,10 @@ Next-yak integrates it in a hassle free manner that works for both Server Compon
 a difference in usage for you. Wrap your root with the ThemeProvider and add a `yak.context.ts` file to your root directory
 and you're ready to go.
 
-```jsx [yak.context.ts]
+```tsx twoslash [yak.context.ts]
+// @noErrors
 import { cookies } from 'next/headers'
 import { cache } from "react";
-
 const hasHighContrast = cache(() => {
     const cookieStore = cookies()
     return cookieStore.get("highContrast")?.value === "true"
@@ -387,15 +444,53 @@ declare module "next-yak" {
 
 Once this context file is in place, you can access the theme props on every component.
 
+:::code-group
+
 ```jsx [some-component.jsx]
-import { styled } from 'next-yak';
+import { styled, css } from 'next-yak';
 
 const Button = styled.button`
   display: block;
   ${(props) =>
     props.theme.highContrast
       ? css`
-          color: ${colors.dark};
+          color: #000;
+        `
+      : css`
+          color: #009688;
+        `}
+`;
+```
+
+```tsx twoslash [some-component.tsx]
+//@allowUmdGlobalAccess
+import { cookies } from 'next/headers'
+import { cache } from "react";
+const hasHighContrast = cache(() => {
+    const cookieStore = cookies()
+    return cookieStore.get("highContrast")?.value === "true"
+});
+
+export function getYakThemeContext() {
+    return {
+        // here we provide a hightContrast to all components
+        highContrast: hasHighContrast()
+    }
+}
+
+declare module "next-yak" {
+    export interface YakTheme extends ReturnType<typeof getYakThemeContext> { }
+}
+
+// ---cut---
+import { styled, css } from 'next-yak';
+
+const Button = styled.button`
+  display: block;
+  ${(props) =>
+    props.theme.highContrast
+      ? css`
+          color: #000;
         `
       : css`
           color: #009688;
