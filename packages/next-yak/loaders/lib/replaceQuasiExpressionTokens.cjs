@@ -29,6 +29,8 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
     const expression = quasi.expressions[i];
     // find the value to replace the expression with
     const replacement = getReplacement(expression, replacer, t);
+    // if it is a nested value, find the value of the expression
+    // e.g. x.y.z -> find the value of z
     const replacementValue = replacement && getReplacementValueForExpression(
       expression,
       replacement,
