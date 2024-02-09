@@ -25,7 +25,9 @@
  * @param {import("@babel/types")} t
  */
 module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
-  for (let i = 0; i < quasi.expressions.length; i++) {
+  // Iterate over the expressions in reverse order
+  // so removing items won't affect the index of the next item
+  for (let i = quasi.expressions.length - 1; i >= 0; i--) {
     const expression = quasi.expressions[i];
     // find the value to replace the expression with
     const replacement = getReplacement(expression, replacer, t);
@@ -38,7 +40,6 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
     );
     if (replacementValue !== false) {
       replaceExpressionAndMergeQuasis(quasi, i, replacementValue);
-      i--;
     } 
   }
 };
