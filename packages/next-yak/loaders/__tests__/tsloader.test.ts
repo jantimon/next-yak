@@ -813,14 +813,37 @@ const Button = styled.button\`
     `);
   });
 
-  it.only("should detect expressions with units automatically in arrow function expressions", async () => {
+  it("should detect expressions with units automatically and correctly use them in the css function", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css } from "next-yak";
+      const mixin1 = css\`\${4}px\`;
+      const mixin2 = css\`\${size}px\`
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const mixin1 = css(__styleYak.mixin1_0, 4 + \\"px\\");
+      const mixin2 = css(__styleYak.mixin2_1, size + \\"px\\");"
+    `);
+  });
+
+  it("should detect expressions with units automatically in arrow function expressions", async () => {
     expect(
       await tsloader.call(
         loaderContext,
         `
      import styles from "./page.module.css";
      import { css } from "next-yak";
-     const c = css\`\${({$indent}) => $indent > 4 ? 10 : $indent}px\`
+     const case1 = css\`\${({$indent}) => $indent > 4 ? 10 : $indent}px\`
+     const case2 = css\`\${({$indent}) => $indent > 4 ? 10 : $indent}px\` 
+     const case3 = css\`\${({$indent}) => {
+       if ($indent > 4) return 10;
+       return $indent
+     }}px\`
      `
       )
     ).toMatchInlineSnapshot(`
@@ -828,9 +851,18 @@ const Button = styled.button\`
       import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const c = css(__styleYak.c_0, __yak_unitPostFix(({
+      const case1 = css(__styleYak.case1_0, __yak_unitPostFix(({
         $indent
-      }) => $indent > 4 ? 10 : $indent, \\"px\\"));"
+      }) => $indent > 4 ? 10 : $indent, \\"px\\"));
+      const case2 = css(__styleYak.case2_1, __yak_unitPostFix(({
+        $indent
+      }) => $indent > 4 ? 10 : $indent, \\"px\\"));
+      const case3 = css(__styleYak.case3_2, __yak_unitPostFix(({
+        $indent
+      }) => {
+        if ($indent > 4) return 10;
+        return $indent;
+      }, \\"px\\"));"
     `);
   });
 });

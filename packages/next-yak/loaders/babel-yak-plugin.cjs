@@ -356,6 +356,7 @@ module.exports = function (babel, options) {
               this.file
             );
           }
+          console.log({ expression });
 
           // expressions after a partial css are converted into css variables
           if (
@@ -443,12 +444,28 @@ module.exports = function (babel, options) {
                   );
                 }
               }
-              if (expression.type === "ArrowFunctionExpression") {
-                const nextQuasi = quasis[i + 1];
+              const nextQuasi = quasis[i + 1];
+              if (
+                expression.type === "NumericLiteral" ||
+                expression.type === "Identifier"
+              ) {
                 const cssUnit =
                   nextQuasi && extractCssUnit(nextQuasi.value.raw);
                 if (cssUnit) {
-                  const newCallExpression = t.callExpression(
+                  const cssUnitLiteral = t.stringLiteral(cssUnit);
+                  const binaryExpression = t.binaryExpression(
+                    "+",
+                    expression,
+                    cssUnitLiteral
+                  );
+                  newArguments.add(binaryExpression);
+                  continue;
+                }
+              } else if (expression.type === "ArrowFunctionExpression") {
+                const cssUnit =
+                  nextQuasi && extractCssUnit(nextQuasi.value.raw);
+                if (cssUnit) {
+                  const callExpression = t.callExpression(
                     t.identifier("__yak_unitPostFix"), // helperFn function name
                     [
                       expression, // The original arrow function expression
@@ -456,7 +473,7 @@ module.exports = function (babel, options) {
                     ]
                   );
                   state.needsUnitPostFixImport = true;
-                  newArguments.add(newCallExpression);
+                  newArguments.add(callExpression);
                   continue;
                 }
               }
