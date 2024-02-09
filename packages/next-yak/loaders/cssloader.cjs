@@ -93,7 +93,6 @@ module.exports = async function cssLoader(source) {
   /** @type {Map<string, number | string | null>} */
   let topLevelConstBindings = new Map();
 
-
   babel.traverse(ast, {
     Program(path) {
       topLevelConstBindings = getConstantValues(path, t);
@@ -204,8 +203,9 @@ module.exports = async function cssLoader(source) {
       const variableName =
         isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
           ? getStyledComponentName(path)
-          : isCssLiteral ? getCssName(path)
-          : null
+          : isCssLiteral
+          ? getCssName(path)
+          : null;
 
       const literalSelector = localIdent(
         variableName || "_yak",
@@ -217,14 +217,19 @@ module.exports = async function cssLoader(source) {
       const currentCssParts = {
         quasiCode: [],
         cssPartExpressions: [],
-        selector: !parentLocation ? literalSelector : `&:where(${literalSelector})`,
+        selector: !parentLocation
+          ? literalSelector
+          : `&:where(${literalSelector})`,
         hasParent: Boolean(parentLocation),
       };
-      const parentCssParts = parentLocation && cssParts.get(parentLocation.parent);
+      const parentCssParts =
+        parentLocation && cssParts.get(parentLocation.parent);
       cssParts.set(path, currentCssParts);
       if (parentCssParts) {
         parentCssParts.cssPartExpressions[parentLocation.currentIndex] ||= [];
-        parentCssParts.cssPartExpressions[parentLocation.currentIndex].push(currentCssParts);
+        parentCssParts.cssPartExpressions[parentLocation.currentIndex].push(
+          currentCssParts
+        );
       }
 
       // Replace the tagged template expression with a call to the 'styled' function
@@ -234,11 +239,19 @@ module.exports = async function cssLoader(source) {
       );
 
       let wasInsideCssValue = false;
+      let removeCssUnit = false;
       for (let i = 0; i < quasis.length; i++) {
         const quasi = quasis[i];
         const expression = path.node.quasi.expressions[i];
         // loop over all quasis belonging to the same css block
         const type = quasiTypes[i];
+
+        let code = unEscapeCssCode(quasi.value.raw);
+        if (removeCssUnit) {
+          code = code.replace(/^([a-z]+|%)/, "");
+          removeCssUnit = false;
+        }
+
         // expressions after a partial css are converted into css variables
         if (
           expression &&
@@ -251,20 +264,23 @@ module.exports = async function cssLoader(source) {
             const relativePath = relative(rootContext, resourcePath);
             hashedFile = murmurhash2_32_gc(relativePath);
           }
-          const variableName = t.isExpression(expression) && getConstantName(expression, t);
-          const variableConstValue = variableName && topLevelConstBindings.get(variableName);
+          const variableName =
+            t.isExpression(expression) && getConstantName(expression, t);
+          const variableConstValue =
+            variableName && topLevelConstBindings.get(variableName);
           if (variableConstValue === null || variableConstValue === undefined) {
             currentCssParts.quasiCode.push({
               insideCssValue: true,
               code:
-                unEscapeCssCode(quasi.value.raw) +
+                code +
                 // replace the expression with a css variable
                 `var(--🦬${hashedFile}${varIndex++})`,
             });
+            removeCssUnit = true;
           } else {
             currentCssParts.quasiCode.push({
               insideCssValue: true,
-              code: unEscapeCssCode(quasi.value.raw) + String(variableConstValue),
+              code: code + String(variableConstValue),
             });
           }
         } else {
@@ -273,7 +289,7 @@ module.exports = async function cssLoader(source) {
           // empty quasis are also added to keep spacings
           // e.g. `transition: color ${duration} ${easing};`
           currentCssParts.quasiCode.push({
-            code: unEscapeCssCode(quasi.value.raw),
+            code,
             insideCssValue: false,
           });
         }
@@ -285,10 +301,7 @@ module.exports = async function cssLoader(source) {
       // const Bar = styled.div` ${MyStyledDiv} { color: blue }`
       // "${MyStyledDiv} {" -> ".selector-0 {"
       if (variableName && (isStyledLiteral || isStyledCall || isAttrsCall)) {
-        variableNameToStyledClassName.set(
-          variableName,
-          literalSelector
-        );
+        variableNameToStyledClassName.set(variableName, literalSelector);
       }
     },
   });
@@ -310,7 +323,7 @@ const unEscapeCssCode = (code) => code.replace(/\\\\/gi, "\\");
 /**
  * Searches the closest parent TaggedTemplateExpression using a name from localNames
  * Returns the location inside this parent
- * 
+ *
  * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
  * @param {{ css?: string , styled?: string }} localNames
  */
@@ -325,7 +338,6 @@ const getClosestTemplateLiteralExpressionParentPath = (
   let parent = path.parentPath;
   const t = babel.types;
   while (parent) {
-
     if (t.isTaggedTemplateExpression(parent.node)) {
       const tag = parent.node.tag;
       const isCssLiteral =
@@ -353,16 +365,20 @@ const getClosestTemplateLiteralExpressionParentPath = (
         /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
           "attrs";
       if (isCssLiteral || isStyledLiteral || isStyledCall || isAttrsCall) {
-        if (!t.isTemplateLiteral(child.node) || !t.isExpression(grandChild.node)) {
+        if (
+          !t.isTemplateLiteral(child.node) ||
+          !t.isExpression(grandChild.node)
+        ) {
           throw new Error("Broken AST");
         }
         const currentIndex = child.node.expressions.indexOf(grandChild.node);
-        return  (
-          { parent: 
-              /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */(parent), 
-              currentIndex 
-            }
-        );
+        return {
+          parent:
+            /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */ (
+              parent
+            ),
+          currentIndex,
+        };
       }
     }
     if (!parent.parentPath) {
@@ -397,7 +413,8 @@ const mergeCssPartExpression = (cssPartExpression, level = 0) => {
       }
     }
     // Try to keep the same indentation as the original code
-    const indent = quasiCode[0]?.code.match(/^\n(  |\t)(\s*)/)?.[2] ?? "    ".repeat(level);
+    const indent =
+      quasiCode[0]?.code.match(/^\n(  |\t)(\s*)/)?.[2] ?? "    ".repeat(level);
     const hasCss = Boolean(cssPart.trim());
     css += !hasCss
       ? ""

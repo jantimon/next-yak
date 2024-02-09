@@ -813,6 +813,35 @@ const Button = styled.button\`
     `);
   });
 
+  it.only("should detect expressions with units automatically and correctly use them in the css variable", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { styled } from "next-yak";
+     const ClockNumber = styled.div<{ index: number; children: ReactNode }>\`
+       transform: translate(-50%, -50%) rotate(\${({ index }) =>
+         index * 30}deg);
+     \`;
+     
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { styled } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const ClockNumber = styled.div(__styleYak.ClockNumber, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
+            index
+          }) => index * 30, \\"px\\")
+        }
+      });"
+    `);
+  });
+
   it("should detect expressions with units automatically and correctly use them in the css function", async () => {
     expect(
       await tsloader.call(
@@ -863,6 +892,38 @@ const Button = styled.button\`
         if ($indent > 4) return 10;
         return $indent;
       }, \\"px\\"));"
+    `);
+  });
+
+  it("should detect expressions with units automatically in arrow function expressions", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { css } from "next-yak";
+     const case3 = css\`
+      padding: \${({$indent}) => {
+       if ($indent > 4) return 10;
+       return $indent
+     }}px;\`
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { css } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const case3 = css(__styleYak.case3_0, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
+            $indent
+          }) => {
+            if ($indent > 4) return 10;
+            return $indent;
+          }, \\"px\\")
+        }
+      });"
     `);
   });
 });

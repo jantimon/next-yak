@@ -1,7 +1,8 @@
 /// @ts-check
 const babel = require("@babel/core");
 const getYakImports = require("./lib/getYakImports.cjs");
-const InvalidPositionError = require("./babel-yak-plugin.cjs").InvalidPositionError;
+const InvalidPositionError =
+  require("./babel-yak-plugin.cjs").InvalidPositionError;
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function

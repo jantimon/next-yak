@@ -5,7 +5,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
-const extractCssUnit = require("./lib/extractCssUnit.cjs");
+const handleCssUnitInExpression = require("./lib/handleCssUnitInExpression.cjs");
 const importExists = require("./lib/importExists.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
@@ -34,6 +34,8 @@ const {
  *     className: string,
  *     astNode: import("@babel/types").CallExpression
  *   }>
+ *  yakImportPath?: import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration>
+ *  runtimeInternalHelpers: Set<string>
  * }>}
  */
 module.exports = function (babel, options) {
@@ -130,35 +132,24 @@ module.exports = function (babel, options) {
       this.varIndex = 0;
       this.variableNameToStyledCall = new Map();
       this.topLevelConstBindings = new Map();
+      this.runtimeInternalHelpers = new Set();
     },
     visitor: {
       Program: {
         enter(path, state) {
           this.topLevelConstBindings = getConstantValues(path, t);
           // Initialize a state flag to track whether the import should be added
-          state.needsUnitPostFixImport = false;
         },
         exit(path, state) {
           // Check the flag and add the import at the end of processing
-          if (
-            state.needsUnitPostFixImport &&
-            !importExists(
-              path,
-              t,
-              "next-yak/runtime-internals",
-              "__yak_unitPostFix"
-            )
-          ) {
+          if (this.runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
-              [
-                t.importSpecifier(
-                  t.identifier("__yak_unitPostFix"),
-                  t.identifier("__yak_unitPostFix")
-                ),
-              ],
+              [...this.runtimeInternalHelpers].map((helper) =>
+                t.importSpecifier(t.identifier(helper), t.identifier(helper))
+              ),
               t.stringLiteral("next-yak/runtime-internals")
             );
-            path.unshiftContainer("body", newImport);
+            this.yakImportPath.insertAfter(newImport);
           }
         },
       },
@@ -193,6 +184,7 @@ module.exports = function (babel, options) {
             )
           )
         );
+        this.yakImportPath = path;
 
         // Process import specifiers
         node.specifiers.forEach((specifier) => {
@@ -356,7 +348,6 @@ module.exports = function (babel, options) {
               this.file
             );
           }
-          console.log({ expression });
 
           // expressions after a partial css are converted into css variables
           if (
@@ -390,44 +381,33 @@ module.exports = function (babel, options) {
             if (!cssVariablesInlineStyle) {
               cssVariablesInlineStyle = t.objectExpression([]);
             }
-            // if (!cssVariablesInlineStyle) {
-            //   cssVariablesInlineStyle = t.objectExpression([]);
-            // }
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
 
             const isAnimationExpression =
               quasis[0].value.raw.includes("animation");
-            const cssUnit =
-              !isAnimationExpression &&
-              quasis[i + 1] &&
-              extractCssUnit(quasis[i + 1].value.raw);
-            if (cssUnit) {
-              const cssUnitLiteral = t.stringLiteral(cssUnit);
-              const binaryExpression = t.binaryExpression(
-                "+",
-                expression,
-                cssUnitLiteral
-              );
-              // expression: `x`
-              // { style: { --v0: x + "px"}}
-              cssVariablesInlineStyle.properties.push(
-                t.objectProperty(
-                  t.stringLiteral(cssVariableName),
-                  /** @type {babel.types.Expression} */ (binaryExpression)
-                )
-              );
-            } else {
-              // expression: `x`
-              // { style: { --v0: x}}
-              cssVariablesInlineStyle.properties.push(
-                t.objectProperty(
-                  t.stringLiteral(cssVariableName),
-                  /** @type {babel.types.Expression} */ (expression)
-                )
-              );
+
+            const {
+              expression: transformedExpression,
+              needsUnitPostFixImport,
+            } = !isAnimationExpression
+              ? handleCssUnitInExpression(quasis[i + 1], expression, t)
+              : { expression, needsUnitPostFixImport: false };
+            if (needsUnitPostFixImport) {
+              this.runtimeInternalHelpers.add("__yak_unitPostFix");
             }
-          } else {
+
+            // expression: `x`
+            // { style: { --v0: x}}
+            cssVariablesInlineStyle.properties.push(
+              t.objectProperty(
+                t.stringLiteral(cssVariableName),
+                /** @type {babel.types.Expression} */ (transformedExpression)
+              )
+            );
+          }
+          // handle mixins
+          else {
             wasInsideCssValue = false;
             if (expression) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {
@@ -442,39 +422,6 @@ module.exports = function (babel, options) {
                     this.file,
                     "Use an inline css literal instead or move the selector into the mixin"
                   );
-                }
-              }
-              const nextQuasi = quasis[i + 1];
-              if (
-                expression.type === "NumericLiteral" ||
-                expression.type === "Identifier"
-              ) {
-                const cssUnit =
-                  nextQuasi && extractCssUnit(nextQuasi.value.raw);
-                if (cssUnit) {
-                  const cssUnitLiteral = t.stringLiteral(cssUnit);
-                  const binaryExpression = t.binaryExpression(
-                    "+",
-                    expression,
-                    cssUnitLiteral
-                  );
-                  newArguments.add(binaryExpression);
-                  continue;
-                }
-              } else if (expression.type === "ArrowFunctionExpression") {
-                const cssUnit =
-                  nextQuasi && extractCssUnit(nextQuasi.value.raw);
-                if (cssUnit) {
-                  const callExpression = t.callExpression(
-                    t.identifier("__yak_unitPostFix"), // helperFn function name
-                    [
-                      expression, // The original arrow function expression
-                      t.stringLiteral("px"), // The string "px"
-                    ]
-                  );
-                  state.needsUnitPostFixImport = true;
-                  newArguments.add(callExpression);
-                  continue;
                 }
               }
               newArguments.add(expression);
