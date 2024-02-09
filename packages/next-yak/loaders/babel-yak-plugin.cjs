@@ -6,6 +6,7 @@ const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 const extractCssUnit = require("./lib/extractCssUnit.cjs");
+const importExists = require("./lib/importExists.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
   getConstantName,
@@ -131,8 +132,35 @@ module.exports = function (babel, options) {
       this.topLevelConstBindings = new Map();
     },
     visitor: {
-      Program(path) {
-        this.topLevelConstBindings = getConstantValues(path, t);
+      Program: {
+        enter(path, state) {
+          this.topLevelConstBindings = getConstantValues(path, t);
+          // Initialize a state flag to track whether the import should be added
+          state.needsUnitPostFixImport = false;
+        },
+        exit(path, state) {
+          // Check the flag and add the import at the end of processing
+          if (
+            state.needsUnitPostFixImport &&
+            !importExists(
+              path,
+              t,
+              "next-yak/runtime-internals",
+              "__yak_unitPostFix"
+            )
+          ) {
+            const newImport = t.importDeclaration(
+              [
+                t.importSpecifier(
+                  t.identifier("__yak_unitPostFix"),
+                  t.identifier("__yak_unitPostFix")
+                ),
+              ],
+              t.stringLiteral("next-yak/runtime-internals")
+            );
+            path.unshiftContainer("body", newImport);
+          }
+        },
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
@@ -328,6 +356,7 @@ module.exports = function (babel, options) {
               this.file
             );
           }
+
           // expressions after a partial css are converted into css variables
           if (
             expression &&
@@ -360,9 +389,9 @@ module.exports = function (babel, options) {
             if (!cssVariablesInlineStyle) {
               cssVariablesInlineStyle = t.objectExpression([]);
             }
-            if (!cssVariablesInlineStyle) {
-              cssVariablesInlineStyle = t.objectExpression([]);
-            }
+            // if (!cssVariablesInlineStyle) {
+            //   cssVariablesInlineStyle = t.objectExpression([]);
+            // }
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
 
@@ -412,6 +441,23 @@ module.exports = function (babel, options) {
                     this.file,
                     "Use an inline css literal instead or move the selector into the mixin"
                   );
+                }
+              }
+              if (expression.type === "ArrowFunctionExpression") {
+                const nextQuasi = quasis[i + 1];
+                const cssUnit =
+                  nextQuasi && extractCssUnit(nextQuasi.value.raw);
+                if (cssUnit) {
+                  const newCallExpression = t.callExpression(
+                    t.identifier("__yak_unitPostFix"), // helperFn function name
+                    [
+                      expression, // The original arrow function expression
+                      t.stringLiteral("px"), // The string "px"
+                    ]
+                  );
+                  state.needsUnitPostFixImport = true;
+                  newArguments.add(newCallExpression);
+                  continue;
                 }
               }
               newArguments.add(expression);

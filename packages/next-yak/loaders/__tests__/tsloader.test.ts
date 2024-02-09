@@ -824,12 +824,13 @@ const Button = styled.button\`
      `
       )
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
+      "import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
+      import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const c = css(__styleYak.c_0, ({
+      const c = css(__styleYak.c_0, __yak_unitPostFix(({
         $indent
-      }) => ($indent > 4 ? 10 : $indent) + \\"px\\");"
+      }) => $indent > 4 ? 10 : $indent, \\"px\\"));"
     `);
   });
 });
