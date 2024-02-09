@@ -20,6 +20,7 @@ const loaderContext = {
         4: "32px",
       },
       typography: {
+        "letter spacing": "0.05em",
         primary: {
           "font weight": 800,
         },
@@ -626,17 +627,25 @@ const Component = styled.div\`
         loaderContext,
         `
 import { css } from "next-yak";
-import { spacing, typography } from "@/theme.yak";
+import { queries, spacing, typography } from "@/theme.yak";
 
 const headline = css\`
+  \${queries["xl"]} {
+    color: red;
+  }
   margin: -\${spacing[2]};
   font-weight: \${typography.primary["font weight"]};
+  letter-spacing: \${typography["letter spacing"]};
 \``
       )
     ).toMatchInlineSnapshot(`
       ".headline_0 {
+        @media (min-width: 1280px) {
+          color: red;
+        }
         margin: -16px;
         font-weight: 800;
+        letter-spacing: 0.05em;
       }"
     `);
   });
