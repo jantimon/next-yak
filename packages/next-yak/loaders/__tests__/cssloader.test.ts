@@ -13,6 +13,18 @@ const loaderContext = {
         xl: "@media (min-width: 1280px)",
         xxl: "@media (min-width: 1536px)",
       },
+      spacing: {
+        0.5: "4px",
+        1: "8px",
+        2: "16px",
+        4: "32px",
+      },
+      typography: {
+        "letter spacing": "0.05em",
+        primary: {
+          "font weight": 800,
+        },
+      },
     };
   },
   getOptions: () => ({
@@ -500,7 +512,7 @@ const Component = styled.div\`
                 background-color: brown;
             \`}
         \`}
-        
+
         border: 2px solid pink;
     }
 \`;
@@ -606,6 +618,35 @@ const Component = styled.div\`
               transition: color var(--🦬18fi82j1) var(--🦬18fi82j2);
             }
         }"
+    `);
+  });
+
+  it("should replace all array like constants", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+import { css } from "next-yak";
+import { queries, spacing, typography } from "@/theme.yak";
+
+const headline = css\`
+  \${queries["xl"]} {
+    color: red;
+  }
+  margin: -\${spacing[2]};
+  font-weight: \${typography.primary["font weight"]};
+  letter-spacing: \${typography["letter spacing"]};
+\``
+      )
+    ).toMatchInlineSnapshot(`
+      ".headline_0 {
+        @media (min-width: 1280px) {
+          color: red;
+        }
+        margin: -16px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }"
     `);
   });
 });

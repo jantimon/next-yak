@@ -29,16 +29,18 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
   // so removing items won't affect the index of the next item
   for (let i = quasi.expressions.length - 1; i >= 0; i--) {
     const expression = quasi.expressions[i];
-    // find the value to replace the expression with
-    const replacement = getReplacement(expression, replacer, t);
+    // break the expression into parts
+    // e.g. x.y.z -> ["x", "y", "z"]
+    const parts = getExpressionParts(expression, t);
+    // find the replacement for the expression
+    const replacement = parts && replacer(parts[0]);
     // if it is a nested value, find the value of the expression
     // e.g. x.y.z -> find the value of z
-    const replacementValue = replacement && getReplacementValueForExpression(
-      expression,
+    const replacementValue = replacement && getReplacementValue(
       replacement,
-      t
+      parts
     );
-    if (replacementValue !== false) {
+    if (replacementValue !== false && replacementValue !== null) {
       replaceExpressionAndMergeQuasis(quasi, i, replacementValue);
     } 
   }
@@ -69,93 +71,68 @@ function replaceExpressionAndMergeQuasis(quasi, expressionIndex, replacement) {
  * Find the replacement for the expression
  *
  * searches for:
- *   - `x` -> x
- *   - `x.y` -> x
- *   - `x[0]` -> x
- *   - `x()` -> x
- *   - `x.y()` -> x
+ *   - `x` -> ["x"]
+ *   - `x.y` -> ["x", "y"]
+ *   - `x[0]` -> ["x", 0]
+ *   - `x()` -> ["x"]
+ *   - `x.y()` -> ["x", "y"]
+ *   - (1 + 2) -> null
  *
  * @param {import("@babel/types").Expression | import("@babel/types").TSType} expression
- * @param {(name: string) => unknown} replacer
  * @param {import("@babel/types")} t
  */
-function getReplacement(expression, replacer, t) {
-  if (t.isIdentifier(expression)) {
-    return replacer(expression.name);
+function getExpressionParts(expression, t) {
+  let currentExpression = expression;
+  /** @type {string[]} */
+  const tokens = [];
+  while (currentExpression) {
+    // e.g. x
+    if (t.isIdentifier(currentExpression)) {
+      tokens.unshift(currentExpression.name);
+      break;
+    }
+    // e.g. x.y
+    if (t.isMemberExpression(currentExpression)) {
+      if (currentExpression.computed === false && t.isIdentifier(currentExpression.property)) {
+        tokens.unshift(currentExpression.property.name);
+      } else if (t.isStringLiteral(currentExpression.property)) {
+        tokens.unshift(currentExpression.property.value);
+      } else if (t.isNumericLiteral(currentExpression.property)) {
+        tokens.unshift(String(currentExpression.property.value));
+      } else {
+        return null;
+      }
+      currentExpression = currentExpression.object;
+    } else if (t.isCallExpression(currentExpression)) {
+      if (!t.isExpression(currentExpression.callee)) {
+        return null;
+      }
+      currentExpression = currentExpression.callee;
+    } else {
+      return null;
+    }
   }
-  if (t.isMemberExpression(expression) && t.isIdentifier(expression.object)) {
-    return replacer(expression.object.name);
-  }
-  if (t.isCallExpression(expression) && t.isIdentifier(expression.callee)) {
-    return replacer(expression.callee.name);
-  }
-  if (
-    t.isCallExpression(expression) &&
-    t.isMemberExpression(expression.callee) &&
-    t.isIdentifier(expression.callee.object)
-  ) {
-    return replacer(expression.callee.object.name);
-  }
-  return false;
+  return tokens;
 }
 
 /**
- * The value for an expression can be a simple identifier e.g.
- * import { x } from "demo.yak";
- * console.log(x);
- *
- * However it could also be a nested value e.g.
- * import { x } from "demo.yak";
- * console.log(x.persons[0].hobbies["art"].name);
- *
- * This function recursively searches for the value of the expression
- * or returns false if the value is not found
- *
- * @param {import("@babel/types").Expression | import("@babel/types").TSType} expression
- * @param {any} value
- * @param {import("@babel/types")} t
+ * Get the value of the replacement
+ * 
+ * e.g. for `replacement.x.y[0]` and `replacement = { x: { y: [42] } }`
+ * parts = ["replacement", "x", "y", 0]
+ * --> 42
+ * 
+ * @param {any} replacement
+ * @param {string[]} parts
  */
-function getReplacementValueForExpression(expression, value, t) {
-  if (value === null || value === undefined || typeof value === "boolean") {
-    return false;
-  }
-  if (t.isIdentifier(expression)) {
-    if (typeof value === "string" || typeof value === "number") {
-      return value;
+function getReplacementValue(replacement, parts) {
+  let currentReplacement = replacement;
+  for (let i = 1; i < parts.length; i++) {
+    const part = parts[i];
+    if (currentReplacement == null || typeof currentReplacement !== "object") {
+      return false;
     }
+    currentReplacement = currentReplacement[part];
   }
-
-  if (typeof value === "object" && t.isMemberExpression(expression)) {
-    if (expression.computed) {
-      // e.g. x[0]
-      if (t.isNumericLiteral(expression.property)) {
-        return getReplacementValueForExpression(
-          expression.object,
-          value[expression.property.value],
-          t
-        );
-      }
-      // e.g. x["0"]
-      else if (t.isStringLiteral(expression.property)) {
-        return getReplacementValueForExpression(
-          expression.object,
-          value[expression.property.value],
-          t
-        );
-      } else {
-        // right now we don't support dynamic property names
-        // e.g. x[y]
-        return false;
-      }
-    }
-    // e.g. x.y
-    else if (t.isIdentifier(expression.property)) {
-      return getReplacementValueForExpression(
-        expression.object,
-        value[expression.property.name],
-        t
-      );
-    }
-  }
-  return false;
+  return currentReplacement;
 }
