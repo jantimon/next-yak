@@ -6,8 +6,7 @@
  * @param {import("@babel/types")} t
  */
 const handleCssUnitInExpression = (nextQuasi, expression, t) => {
-  const cssUnit = nextQuasi && extractCssUnit(nextQuasi.value.raw);
-  console.log({ type: expression.type });
+  const runtimeInternalHelpers = new Set();
   if (
     expression.type === "ArrowFunctionExpression" ||
     expression.type === "NumericLiteral" ||
@@ -17,13 +16,19 @@ const handleCssUnitInExpression = (nextQuasi, expression, t) => {
     const cssUnit = nextQuasi && extractCssUnit(nextQuasi.value.raw);
     if (cssUnit) {
       if (expression.type === "ArrowFunctionExpression") {
+        /**
+         * Functions that are not directly returing a value are wrapped with a helper function:
+         * (originalFunction, unit) => (...args) => originalFunction(...args) + unit;
+         */
+
         if (expression.body.type === "BlockStatement") {
           const callExpression = t.callExpression(
             t.identifier("__yak_unitPostFix"),
             [expression, t.stringLiteral(cssUnit)]
           );
+          runtimeInternalHelpers.add("__yak_unitPostFix");
           return {
-            needsUnitPostFixImport: true,
+            runtimeInternalHelpers,
             expression: callExpression,
           };
         }
@@ -36,15 +41,15 @@ const handleCssUnitInExpression = (nextQuasi, expression, t) => {
         cssUnitLiteral
       );
       return {
-        needsUnitPostFixImport: false,
+        runtimeInternalHelpers,
         expression: binaryExpression,
       };
     }
   }
 
-  // no unit found
+  // No unit found
   return {
-    needsUnitPostFixImport: false,
+    runtimeInternalHelpers,
     expression,
   };
 };

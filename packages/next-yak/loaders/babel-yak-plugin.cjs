@@ -6,7 +6,6 @@ const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 const handleCssUnitInExpression = require("./lib/handleCssUnitInExpression.cjs");
-const importExists = require("./lib/importExists.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
   getConstantName,
@@ -389,12 +388,14 @@ module.exports = function (babel, options) {
 
             const {
               expression: transformedExpression,
-              needsUnitPostFixImport,
+              runtimeInternalHelpers,
             } = !isAnimationExpression
               ? handleCssUnitInExpression(quasis[i + 1], expression, t)
-              : { expression, needsUnitPostFixImport: false };
-            if (needsUnitPostFixImport) {
-              this.runtimeInternalHelpers.add("__yak_unitPostFix");
+              : { expression, runtimeInternalHelpers: new Set() };
+            if (runtimeInternalHelpers.size > 0) {
+              runtimeInternalHelpers.forEach((helper) =>
+                this.runtimeInternalHelpers.add(helper)
+              );
             }
 
             // expression: `x`

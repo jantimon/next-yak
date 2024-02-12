@@ -842,36 +842,55 @@ const Button = styled.button\`
     `);
   });
 
-  it("should detect expressions with units in complex arrow functions and wrap them with __yak_unitPostFix helper", async () => {
+  it.only("should detect expressions with units in complex arrow functions and wrap them with __yak_unitPostFix helper", async () => {
     expect(
       await tsloader.call(
         loaderContext,
         `
      import styles from "./page.module.css";
      import { css } from "next-yak";
-     const case1 = css\`\${({$indent}) => $indent > 4 ? 10 : $indent}px\`
-     const case2 = css\`\${({$indent}) => $indent > 4 ? 10 : $indent}px\` 
-     const case3 = css\`\${({$indent}) => {
-       if ($indent > 4) return 10;
-       return $indent
-     }}px\`
+     const case1 = css\`
+        padding: \${({$indent}) => $indent > 4 ? 10 : $indent}px;
+     \`;
+     const case2 = css\`
+        margin: \${({$indent}) => $indent > 4 ? 10 : $indent}px;
+     \`;
+     const case3 = css\`
+        padding: \${({$indent}) => {
+          if ($indent > 4) return 10;
+          return $indent
+        }}px;
+     \`;
      `
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const case1 = css(__styleYak.case1_0, ({
-        $indent
-      }) => $indent > 4 ? 10 : $indent);
-      const case2 = css(__styleYak.case2_1, ({
-        $indent
-      }) => $indent > 4 ? 10 : $indent);
-      const case3 = css(__styleYak.case3_2, ({
-        $indent
-      }) => {
-        if ($indent > 4) return 10;
-        return $indent;
+      const case1 = css(__styleYak.case1_0, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": (({
+            $indent
+          }) => $indent > 4 ? 10 : $indent) + \\"px\\"
+        }
+      });
+      const case2 = css(__styleYak.case2_1, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": (({
+            $indent
+          }) => $indent > 4 ? 10 : $indent) + \\"px\\"
+        }
+      });
+      const case3 = css(__styleYak.case3_2, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": __yak_unitPostFix(({
+            $indent
+          }) => {
+            if ($indent > 4) return 10;
+            return $indent;
+          }, \\"px\\")
+        }
       });"
     `);
   });
