@@ -2,6 +2,8 @@ const { withYak } = require("next-yak/withYak");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  basePath: '/yak-performance-experiment',
   webpack: (config, { dev }) => {
     // totally optional -  minify css class names:
     // https://stackoverflow.com/questions/66744765/how-to-hash-css-class-names-in-nextjs
