@@ -13,6 +13,18 @@ const loaderContext = {
         xl: "@media (min-width: 1280px)",
         xxl: "@media (min-width: 1536px)",
       },
+      spacing: {
+        0.5: "4px",
+        1: "8px",
+        2: "16px",
+        4: "32px",
+      },
+      typography: {
+        "letter spacing": "0.05em",
+        primary: {
+          "font weight": 800,
+        },
+      },
     };
   },
   getOptions: () => ({
@@ -289,6 +301,40 @@ const headline = css\`
     `);
   });
 
+  it("should replace breakpoint references with actual media queries when using square brackets", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+import { css } from "next-yak";
+import { queries } from '@/theme.yak';
+
+const headline = css\`
+  color: blue;
+  \${queries["sm"]} {
+    color: red;
+  }
+  transition: color \${duration} \${easing};
+  display: block;
+  \${css\`color: orange\`}
+  \`;
+`
+      )
+    ).toMatchInlineSnapshot(`
+      ".headline_0 {
+        color: blue;
+        @media (min-width: 640px) {
+          color: red;
+        }
+        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        display: block;
+          &:where(.headline_1) {
+      color: orange
+          }
+      }"
+    `);
+  });
+
   it("should prevent double escaped chars", async () => {
     // in styled-components \\ is replaced with \
     // this test verifies that yak provides the same behavior
@@ -466,7 +512,7 @@ const Component = styled.div\`
                 background-color: brown;
             \`}
         \`}
-        
+
         border: 2px solid pink;
     }
 \`;
@@ -575,7 +621,36 @@ const Component = styled.div\`
     `);
   });
 
-  it.only("should detect expressions with units automatically in arrow function expressions", async () => {
+  it("should replace all array like constants", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+import { css } from "next-yak";
+import { queries, spacing, typography } from "@/theme.yak";
+
+const headline = css\`
+  \${queries["xl"]} {
+    color: red;
+  }
+  margin: -\${spacing[2]};
+  font-weight: \${typography.primary["font weight"]};
+  letter-spacing: \${typography["letter spacing"]};
+\``
+      )
+    ).toMatchInlineSnapshot(`
+      ".headline_0 {
+        @media (min-width: 1280px) {
+          color: red;
+        }
+        margin: -16px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }"
+    `);
+  });
+
+  it("should detect expressions with units automatically in arrow function expressions", async () => {
     expect(
       await cssloader.call(
         loaderContext,

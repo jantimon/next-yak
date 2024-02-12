@@ -842,7 +842,7 @@ const Button = styled.button\`
     `);
   });
 
-  it.only("should detect expressions with units in complex arrow functions and wrap them with __yak_unitPostFix helper", async () => {
+  it("should detect expressions with units in complex arrow functions and wrap them with __yak_unitPostFix helper", async () => {
     expect(
       await tsloader.call(
         loaderContext,

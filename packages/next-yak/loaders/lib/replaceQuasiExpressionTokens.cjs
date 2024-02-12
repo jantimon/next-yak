@@ -25,43 +25,24 @@
  * @param {import("@babel/types")} t
  */
 module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
-  for (let i = 0; i < quasi.expressions.length; i++) {
+  // Iterate over the expressions in reverse order
+  // so removing items won't affect the index of the next item
+  for (let i = quasi.expressions.length - 1; i >= 0; i--) {
     const expression = quasi.expressions[i];
-    // replace direct identifiers e.g. ${query}
-    if (t.isIdentifier(expression)) {
-      const replacement = replacer(expression.name);
-      if (replacement === false) {
-        continue;
-      }
-      replaceExpressionAndMergeQuasis(quasi, i, replacement);
-      i--;
-    }
-    // replace member expressions e.g. ${query.xs}
-    // replace deeply nested member expressions e.g. ${query.xs.min}
-    else if (
-      t.isMemberExpression(expression) &&
-      t.isIdentifier(expression.object)
-    ) {
-      /** @type {any} */
-      let replacement = replacer(expression.object.name);
-      if (replacement === false) {
-        continue;
-      }
-      /** @type {import("@babel/types").Expression} */
-      let object = expression;
-      while (t.isMemberExpression(object)) {
-        if (!t.isIdentifier(object.property)) {
-          break;
-        }
-        if (typeof replacement !== "object" || replacement === null) {
-          break;
-        }
-        replacement = replacement[object.property.name];
-        object = object.object;
-      }
-      replaceExpressionAndMergeQuasis(quasi, i, replacement);
-      i--;
-    }
+    // break the expression into parts
+    // e.g. x.y.z -> ["x", "y", "z"]
+    const parts = getExpressionParts(expression, t);
+    // find the replacement for the expression
+    const replacement = parts && replacer(parts[0]);
+    // if it is a nested value, find the value of the expression
+    // e.g. x.y.z -> find the value of z
+    const replacementValue = replacement && getReplacementValue(
+      replacement,
+      parts
+    );
+    if (replacementValue !== false && replacementValue !== null) {
+      replaceExpressionAndMergeQuasis(quasi, i, replacementValue);
+    } 
   }
 };
 
@@ -84,4 +65,74 @@ function replaceExpressionAndMergeQuasis(quasi, expressionIndex, replacement) {
   quasi.quasis[expressionIndex].value.cooked +=
     stringReplacement + quasi.quasis[expressionIndex + 1].value.cooked;
   quasi.quasis.splice(expressionIndex + 1, 1);
+}
+
+/**
+ * Find the replacement for the expression
+ *
+ * searches for:
+ *   - `x` -> ["x"]
+ *   - `x.y` -> ["x", "y"]
+ *   - `x[0]` -> ["x", 0]
+ *   - `x()` -> ["x"]
+ *   - `x.y()` -> ["x", "y"]
+ *   - (1 + 2) -> null
+ *
+ * @param {import("@babel/types").Expression | import("@babel/types").TSType} expression
+ * @param {import("@babel/types")} t
+ */
+function getExpressionParts(expression, t) {
+  let currentExpression = expression;
+  /** @type {string[]} */
+  const tokens = [];
+  while (currentExpression) {
+    // e.g. x
+    if (t.isIdentifier(currentExpression)) {
+      tokens.unshift(currentExpression.name);
+      break;
+    }
+    // e.g. x.y
+    if (t.isMemberExpression(currentExpression)) {
+      if (currentExpression.computed === false && t.isIdentifier(currentExpression.property)) {
+        tokens.unshift(currentExpression.property.name);
+      } else if (t.isStringLiteral(currentExpression.property)) {
+        tokens.unshift(currentExpression.property.value);
+      } else if (t.isNumericLiteral(currentExpression.property)) {
+        tokens.unshift(String(currentExpression.property.value));
+      } else {
+        return null;
+      }
+      currentExpression = currentExpression.object;
+    } else if (t.isCallExpression(currentExpression)) {
+      if (!t.isExpression(currentExpression.callee)) {
+        return null;
+      }
+      currentExpression = currentExpression.callee;
+    } else {
+      return null;
+    }
+  }
+  return tokens;
+}
+
+/**
+ * Get the value of the replacement
+ * 
+ * e.g. for `replacement.x.y[0]` and `replacement = { x: { y: [42] } }`
+ * parts = ["replacement", "x", "y", 0]
+ * --> 42
+ * 
+ * @param {any} replacement
+ * @param {string[]} parts
+ */
+function getReplacementValue(replacement, parts) {
+  let currentReplacement = replacement;
+  for (let i = 1; i < parts.length; i++) {
+    const part = parts[i];
+    if (currentReplacement == null || typeof currentReplacement !== "object") {
+      return false;
+    }
+    currentReplacement = currentReplacement[part];
+  }
+  return currentReplacement;
 }
