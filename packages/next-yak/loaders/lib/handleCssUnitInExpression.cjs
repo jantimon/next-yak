@@ -7,12 +7,28 @@
  */
 const handleCssUnitInExpression = (nextQuasi, expression, t) => {
   const cssUnit = nextQuasi && extractCssUnit(nextQuasi.value.raw);
+  console.log({ type: expression.type });
   if (
+    expression.type === "ArrowFunctionExpression" ||
     expression.type === "NumericLiteral" ||
+    expression.type === "BinaryExpression" ||
     expression.type === "Identifier"
   ) {
     const cssUnit = nextQuasi && extractCssUnit(nextQuasi.value.raw);
     if (cssUnit) {
+      if (expression.type === "ArrowFunctionExpression") {
+        if (expression.body.type === "BlockStatement") {
+          const callExpression = t.callExpression(
+            t.identifier("__yak_unitPostFix"),
+            [expression, t.stringLiteral(cssUnit)]
+          );
+          return {
+            needsUnitPostFixImport: true,
+            expression: callExpression,
+          };
+        }
+      }
+
       const cssUnitLiteral = t.stringLiteral(cssUnit);
       const binaryExpression = t.binaryExpression(
         "+",
@@ -24,29 +40,6 @@ const handleCssUnitInExpression = (nextQuasi, expression, t) => {
         expression: binaryExpression,
       };
     }
-  } else if (expression.type === "ArrowFunctionExpression") {
-    const cssUnit = nextQuasi && extractCssUnit(nextQuasi.value.raw);
-    if (cssUnit) {
-      const callExpression = t.callExpression(
-        t.identifier("__yak_unitPostFix"), // helperFn function name
-        [expression, t.stringLiteral(cssUnit)]
-      );
-      return {
-        needsUnitPostFixImport: true,
-        expression: callExpression,
-      };
-    }
-  } else if (cssUnit) {
-    const cssUnitLiteral = t.stringLiteral(cssUnit);
-    const binaryExpression = t.binaryExpression(
-      "+",
-      expression,
-      cssUnitLiteral
-    );
-    return {
-      needsUnitPostFixImport: false,
-      expression: binaryExpression,
-    };
   }
 
   // no unit found

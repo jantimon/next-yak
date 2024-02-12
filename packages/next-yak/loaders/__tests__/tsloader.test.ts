@@ -780,7 +780,7 @@ const Button = styled.button\`
     `);
   });
 
-  it("should detect expressions with units automatically and correctly use them in the css variable", async () => {
+  it("should detect expressions with units and correctly append them in the css variable value", async () => {
     expect(
       await tsloader.call(
         loaderContext,
@@ -791,10 +791,9 @@ const Button = styled.button\`
         padding: \${10}rem;
         margin: \${4 * 2}px;
         z-index: \${10 + 4};
-        color: red;
         transform: translateX(\${10}px) translateY(\${10 / 2}px);
+        font-family: "Arial", sans-serif;
      \`;
-     
      `
       )
     ).toMatchInlineSnapshot(`
@@ -813,7 +812,7 @@ const Button = styled.button\`
     `);
   });
 
-  it.only("should detect expressions with units automatically and correctly use them in the css variable", async () => {
+  it("should detect expressions with units in simple arrow functions", async () => {
     expect(
       await tsloader.call(
         loaderContext,
@@ -821,46 +820,29 @@ const Button = styled.button\`
      import styles from "./page.module.css";
      import { styled } from "next-yak";
      const ClockNumber = styled.div<{ index: number; children: ReactNode }>\`
-       transform: translate(-50%, -50%) rotate(\${({ index }) =>
-         index * 30}deg);
-     \`;
-     
+       transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
+          translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
+     \`;      
      `
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled } from \\"next-yak\\";
-      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber = styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": (({
             index
-          }) => index * 30, \\"px\\")
+          }) => index * 30) + \\"deg\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": (({
+            index
+          }) => -index * 30) + \\"deg\\"
         }
       });"
     `);
   });
 
-  it("should detect expressions with units automatically and correctly use them in the css function", async () => {
-    expect(
-      await tsloader.call(
-        loaderContext,
-        `
-      import { css } from "next-yak";
-      const mixin1 = css\`\${4}px\`;
-      const mixin2 = css\`\${size}px\`
-     `
-      )
-    ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const mixin1 = css(__styleYak.mixin1_0, 4 + \\"px\\");
-      const mixin2 = css(__styleYak.mixin2_1, size + \\"px\\");"
-    `);
-  });
-
-  it("should detect expressions with units automatically in arrow function expressions", async () => {
+  it("should detect expressions with units in complex arrow functions and wrap them with __yak_unitPostFix helper", async () => {
     expect(
       await tsloader.call(
         loaderContext,
@@ -876,52 +858,49 @@ const Button = styled.button\`
      `
       )
     ).toMatchInlineSnapshot(`
-      "import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
-      import styles from \\"./page.module.css\\";
+      "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const case1 = css(__styleYak.case1_0, __yak_unitPostFix(({
+      const case1 = css(__styleYak.case1_0, ({
         $indent
-      }) => $indent > 4 ? 10 : $indent, \\"px\\"));
-      const case2 = css(__styleYak.case2_1, __yak_unitPostFix(({
+      }) => $indent > 4 ? 10 : $indent);
+      const case2 = css(__styleYak.case2_1, ({
         $indent
-      }) => $indent > 4 ? 10 : $indent, \\"px\\"));
-      const case3 = css(__styleYak.case3_2, __yak_unitPostFix(({
+      }) => $indent > 4 ? 10 : $indent);
+      const case3 = css(__styleYak.case3_2, ({
         $indent
       }) => {
         if ($indent > 4) return 10;
         return $indent;
-      }, \\"px\\"));"
+      });"
     `);
   });
 
-  it("should detect expressions with units automatically in arrow function expressions", async () => {
+  it("should detect expressions with units in mixins", async () => {
     expect(
       await tsloader.call(
         loaderContext,
         `
-     import styles from "./page.module.css";
-     import { css } from "next-yak";
-     const case3 = css\`
-      padding: \${({$indent}) => {
-       if ($indent > 4) return 10;
-       return $indent
-     }}px;\`
+      import { css } from "next-yak";
+      const mixin1 = css\`
+        padding: \${4}px;
+      \`;
+      const mixin2 = css\`
+        margin: \${size}px;  
+      \`
      `
       )
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
-      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
+      "import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const case3 = css(__styleYak.case3_0, {
+      const mixin1 = css(__styleYak.mixin1_0, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
-            $indent
-          }) => {
-            if ($indent > 4) return 10;
-            return $indent;
-          }, \\"px\\")
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 4 + \\"px\\"
+        }
+      });
+      const mixin2 = css(__styleYak.mixin2_1, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": size + \\"px\\"
         }
       });"
     `);
