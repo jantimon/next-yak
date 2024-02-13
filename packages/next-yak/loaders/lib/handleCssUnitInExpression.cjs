@@ -20,30 +20,30 @@ const handleCssUnitInExpression = (nextQuasi, expression, t) => {
          * Functions that are not directly returing a value are wrapped with a helper function:
          * (originalFunction, unit) => (...args) => originalFunction(...args) + unit;
          */
-
-        if (expression.body.type === "BlockStatement") {
-          const callExpression = t.callExpression(
-            t.identifier("__yak_unitPostFix"),
-            [expression, t.stringLiteral(cssUnit)]
-          );
-          runtimeInternalHelpers.add("__yak_unitPostFix");
-          return {
-            runtimeInternalHelpers,
-            expression: callExpression,
-          };
-        }
+        // TODO: right now we need to wrap all cases with __yak_unitPostFix until we found a solution for simple arrow functions
+        // if (expression.body.type === "BlockStatement") {
+        const callExpression = t.callExpression(
+          t.identifier("__yak_unitPostFix"),
+          [expression, t.stringLiteral(cssUnit)]
+        );
+        runtimeInternalHelpers.add("__yak_unitPostFix");
+        return {
+          runtimeInternalHelpers,
+          expression: callExpression,
+        };
       }
+      // }
 
-      const cssUnitLiteral = t.stringLiteral(cssUnit);
-      const binaryExpression = t.binaryExpression(
-        "+",
-        expression,
-        cssUnitLiteral
-      );
-      return {
-        runtimeInternalHelpers,
-        expression: binaryExpression,
-      };
+      // const cssUnitLiteral = t.stringLiteral(cssUnit);
+      // const binaryExpression = t.binaryExpression(
+      //   "+",
+      //   expression,
+      //   cssUnitLiteral
+      // );
+      // return {
+      //   runtimeInternalHelpers,
+      //   expression: binaryExpression,
+      // };
     }
   }
 

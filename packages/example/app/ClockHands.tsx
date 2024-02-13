@@ -41,7 +41,7 @@ const ClockHand = styled.div<{ $angle: number }>`
   left: 50%;
   top: 50%;
   transform-origin: 50% 100%;
-  transform: translate(-50%, -100%) rotate(${({ $angle }) => `${$angle}deg`});
+  transform: translate(-50%, -100%) rotate(${({ $angle }) => $angle}deg);
 `;
 const SecondHand = styled(ClockHand)`
   width: 2px;

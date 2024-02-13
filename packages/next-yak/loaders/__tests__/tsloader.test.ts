@@ -924,4 +924,28 @@ const Button = styled.button\`
       });"
     `);
   });
+
+  it.only("should detect expressions with units in mixins", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css } from "next-yak";
+      const mixin1 = css\`
+        transform: rotate(\${({ $angle }) => $angle}deg);
+      \`;
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const mixin1 = css(__styleYak.mixin1_0, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": (({
+            $angle
+          }) => $angle) + \\"deg\\"
+        }
+      });"
+    `);
+  });
 });
