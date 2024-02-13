@@ -34,16 +34,16 @@ const handleCssUnitInExpression = (nextQuasi, expression, t) => {
       }
       // }
 
-      // const cssUnitLiteral = t.stringLiteral(cssUnit);
-      // const binaryExpression = t.binaryExpression(
-      //   "+",
-      //   expression,
-      //   cssUnitLiteral
-      // );
-      // return {
-      //   runtimeInternalHelpers,
-      //   expression: binaryExpression,
-      // };
+      const cssUnitLiteral = t.stringLiteral(cssUnit);
+      const binaryExpression = t.binaryExpression(
+        "+",
+        expression,
+        cssUnitLiteral
+      );
+      return {
+        runtimeInternalHelpers,
+        expression: binaryExpression,
+      };
     }
   }
 

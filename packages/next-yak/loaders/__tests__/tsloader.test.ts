@@ -828,15 +828,16 @@ const Button = styled.button\`
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber = styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": (({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
             index
-          }) => index * 30) + \\"deg\\",
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": (({
+          }) => index * 30, \\"deg\\"),
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": __yak_unitPostFix(({
             index
-          }) => -index * 30) + \\"deg\\"
+          }) => -index * 30, \\"deg\\")
         }
       });"
     `);
@@ -870,16 +871,16 @@ const Button = styled.button\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const case1 = css(__styleYak.case1_0, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": (({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
             $indent
-          }) => $indent > 4 ? 10 : $indent) + \\"px\\"
+          }) => $indent > 4 ? 10 : $indent, \\"px\\")
         }
       });
       const case2 = css(__styleYak.case2_1, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": (({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": __yak_unitPostFix(({
             $indent
-          }) => $indent > 4 ? 10 : $indent) + \\"px\\"
+          }) => $indent > 4 ? 10 : $indent, \\"px\\")
         }
       });
       const case3 = css(__styleYak.case3_2, {
@@ -920,30 +921,6 @@ const Button = styled.button\`
       const mixin2 = css(__styleYak.mixin2_1, {
         \\"style\\": {
           \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": size + \\"px\\"
-        }
-      });"
-    `);
-  });
-
-  it.only("should detect expressions with units in mixins", async () => {
-    expect(
-      await tsloader.call(
-        loaderContext,
-        `
-      import { css } from "next-yak";
-      const mixin1 = css\`
-        transform: rotate(\${({ $angle }) => $angle}deg);
-      \`;
-     `
-      )
-    ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const mixin1 = css(__styleYak.mixin1_0, {
-        \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": (({
-            $angle
-          }) => $angle) + \\"deg\\"
         }
       });"
     `);
