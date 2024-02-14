@@ -138,10 +138,8 @@ module.exports = function (babel, options) {
       Program: {
         enter(path, state) {
           this.topLevelConstBindings = getConstantValues(path, t);
-          // Initialize a state flag to track whether the import should be added
         },
         exit(path, state) {
-          // After processing the file add imports for all injected runtime helpers
           if (this.runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
               [...this.runtimeInternalHelpers].map((helper) =>
