@@ -5,8 +5,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
-const handleCssUnitInExpression = require("./lib/handleCssUnitInExpression.cjs");
-const extractCssUnit = require("./lib/extractCssUnit.cjs");
+const appendCssUnitToExpressionValue = require("./lib/appendCssUnitToExpressionValue.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
   getConstantName,
@@ -382,10 +381,10 @@ module.exports = function (babel, options) {
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
 
-            const cssUnit =
-              quasis[i + 1] && extractCssUnit(quasis[i + 1].value.raw);
+            // Extracts the css unit from a css string after the current expression
+            const cssUnit = quasis[i + 1]?.value.raw.match(/^([a-z]+|%)/i)?.[0];
             const transformedExpression = cssUnit
-              ? handleCssUnitInExpression(
+              ? appendCssUnitToExpressionValue(
                   cssUnit,
                   expression,
                   this.runtimeInternalHelpers,

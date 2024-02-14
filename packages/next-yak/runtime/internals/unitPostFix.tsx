@@ -12,7 +12,5 @@
  * `;
  * ```
  */
-export const unitPostFix =
-  (fn: any, unit: string) =>
-  (...args: any[]) =>
-    fn(...args) + unit;
+export const unitPostFix = (fn: any, unit: string) =>
+  typeof fn === "function" ? (...args: any[]) => fn(...args) + unit : fn + unit;

@@ -890,22 +890,32 @@ const Button = styled.button\`
       const mixin1 = css\`
         padding: \${4}px;
       \`;
+      const value = 10;
       const mixin2 = css\`
-        margin: \${size}px;  
+        margin: \${size}px;
+        top: \${spacing.xs}px;
+        bottom: \${spacing[0]}px;
+        left: \${spacing()}px;
+        right: \${value}px;
       \`
      `
       )
     ).toMatchInlineSnapshot(`
       "import { css } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const mixin1 = css(__styleYak.mixin1_0, {
         \\"style\\": {
           \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 4 + \\"px\\"
         }
       });
+      const value = 10;
       const mixin2 = css(__styleYak.mixin2_1, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": size + \\"px\\"
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": size + \\"px\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": __yak_unitPostFix(spacing.xs, \\"px\\"),
+          \\"--\\\\uD83E\\\\uDDAC18fi82j3\\": __yak_unitPostFix(spacing[0], \\"px\\"),
+          \\"--\\\\uD83E\\\\uDDAC18fi82j4\\": __yak_unitPostFix(spacing(), \\"px\\")
         }
       });"
     `);

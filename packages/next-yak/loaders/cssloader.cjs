@@ -251,7 +251,7 @@ module.exports = async function cssLoader(source) {
           // a quasi might start with a css unit e.g. css`margin: ${value}px 0;`
           // the css unit will be part of the typescript runtime code and must
           // must be removed from the css code as `var(--foo)px` would be invalid css
-          code = code.replace(/^([a-z]+|%)/, "");
+          code = code.replace(/^([a-z]+|%)/i, "");
           removeCssUnit = false;
         }
 
