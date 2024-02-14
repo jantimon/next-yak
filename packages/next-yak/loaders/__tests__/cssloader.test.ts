@@ -657,11 +657,17 @@ const headline = css\`
         `
 import { css } from "next-yak";
 
+
 const headline = css\`
   color: red;
   .dark-mode {
     color: black;
   }
+  .my-fancy-class,
+  .my-button {
+    color: blue;
+  }
+  letter-spacing: 0.05em;
 \``
       )
     ).toMatchInlineSnapshot(`
@@ -670,6 +676,11 @@ const headline = css\`
         :global(dark-mode) {
           color: black;
         }
+        :global(my-fancy-class),
+        :global(my-button) {
+          color: blue;
+        }
+        letter-spacing: 0.05em;
       }"
     `);
   });

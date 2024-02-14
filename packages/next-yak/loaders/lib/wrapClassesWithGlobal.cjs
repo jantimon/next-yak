@@ -17,9 +17,12 @@
  */
 const wrapClassesWithGlobal = (cssString) => {
   // Replace each matched class name with :global(className)
-  return cssString.replace(/\.([a-zA-Z0-9-_]+)/g, (_match, className) => {
-    return `:global(${className})`;
-  });
+  return cssString.replace(
+    /\.([a-zA-Z0-9-_]+)(?=[,\s{])/g,
+    (_match, className) => {
+      return `:global(${className})`;
+    }
+  );
 };
 
 module.exports = wrapClassesWithGlobal;
