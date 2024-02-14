@@ -657,7 +657,6 @@ const headline = css\`
         `
 import { css } from "next-yak";
 
-
 const headline = css\`
   color: red;
   .dark-mode {
@@ -667,6 +666,7 @@ const headline = css\`
   .my-button {
     color: blue;
   }
+  transition: all 0.3s ease-in-out;
   letter-spacing: 0.05em;
 \``
       )
@@ -680,6 +680,7 @@ const headline = css\`
         :global(my-button) {
           color: blue;
         }
+        transition: all 0.3s ease-in-out;
         letter-spacing: 0.05em;
       }"
     `);
