@@ -141,7 +141,7 @@ module.exports = function (babel, options) {
           // Initialize a state flag to track whether the import should be added
         },
         exit(path, state) {
-          // Check the flag and add the import at the end of processing
+          // After processing the file add imports for all injected runtime helpers
           if (this.runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
               [...this.runtimeInternalHelpers].map((helper) =>
