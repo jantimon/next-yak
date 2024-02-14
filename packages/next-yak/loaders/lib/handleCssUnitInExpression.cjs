@@ -1,38 +1,72 @@
+const CSS_ANIMATION_UNITS = [
+  "ease",
+  "linear",
+  "cubic",
+  "step",
+  "reverse",
+  "none",
+  "forwards",
+  "backwards",
+  "both",
+  "paused",
+  "running",
+  "alternate",
+  "slidein",
+  "slideout",
+  "jump",
+  "start",
+  "end",
+  "normal",
+];
+const FORBIDDEEN_UNITS = [...CSS_ANIMATION_UNITS];
+
 /**
  * Extracts the css unit from a css string and checks if it is a valid CSS unit
  *
- * @param {babel.types.TemplateElement} nextQuasi
+ * @param {string} cssUnit
  * @param {babel.types.Expression} expression
+ * @param {Set<string>} runtimeInternalHelpers
  * @param {import("@babel/types")} t
  */
-const handleCssUnitInExpression = (nextQuasi, expression, t) => {
-  const runtimeInternalHelpers = new Set();
+const handleCssUnitInExpression = (
+  cssUnit,
+  expression,
+  runtimeInternalHelpers,
+  t
+) => {
   if (
     expression.type === "ArrowFunctionExpression" ||
     expression.type === "NumericLiteral" ||
     expression.type === "BinaryExpression" ||
     expression.type === "Identifier"
   ) {
-    const cssUnit = nextQuasi && extractCssUnit(nextQuasi.value.raw);
-    if (cssUnit) {
+    if (!FORBIDDEEN_UNITS.includes(cssUnit)) {
       if (expression.type === "ArrowFunctionExpression") {
         /**
          * Functions that are not directly returing a value are wrapped with a helper function:
          * (originalFunction, unit) => (...args) => originalFunction(...args) + unit;
          */
-        // TODO: right now we need to wrap all cases with __yak_unitPostFix until we found a solution for simple arrow functions
-        // if (expression.body.type === "BlockStatement") {
-        const callExpression = t.callExpression(
-          t.identifier("__yak_unitPostFix"),
-          [expression, t.stringLiteral(cssUnit)]
-        );
-        runtimeInternalHelpers.add("__yak_unitPostFix");
-        return {
-          runtimeInternalHelpers,
-          expression: callExpression,
-        };
+        if (expression.body.type === "BlockStatement") {
+          const callExpression = t.callExpression(
+            t.identifier("__yak_unitPostFix"),
+            [expression, t.stringLiteral(cssUnit)]
+          );
+          runtimeInternalHelpers.add("__yak_unitPostFix");
+          return callExpression;
+        } else {
+          const newBody = t.binaryExpression(
+            "+",
+            t.parenthesizedExpression(expression.body),
+            t.stringLiteral(cssUnit)
+          );
+
+          const newArrowFunction = t.arrowFunctionExpression(
+            expression.params,
+            newBody
+          );
+          return newArrowFunction;
+        }
       }
-      // }
 
       const cssUnitLiteral = t.stringLiteral(cssUnit);
       const binaryExpression = t.binaryExpression(
@@ -40,41 +74,12 @@ const handleCssUnitInExpression = (nextQuasi, expression, t) => {
         expression,
         cssUnitLiteral
       );
-      return {
-        runtimeInternalHelpers,
-        expression: binaryExpression,
-      };
+      return binaryExpression;
     }
   }
 
   // No unit found
-  return {
-    runtimeInternalHelpers,
-    expression,
-  };
+  return expression;
 };
-
-/**
- * Extracts the css unit from a css string and checks if it is a valid CSS unit
- *
- * @param {string} quasi
- */
-function extractCssUnit(quasi) {
-  // Regex to match units composed of [a-z] or exactly "%"
-  const regex = /^([a-z]+|%)/;
-
-  // Clean the input string by removing whitespace, line breaks, and semicolons
-  const [firstCssString] = quasi.trim().split(";");
-
-  // Check if the cleaned input is a valid CSS unit
-  const match = firstCssString.match(regex);
-
-  if (match && match[1]) {
-    // Return the found unit
-    return match[1];
-  }
-
-  return null;
-}
 
 module.exports = handleCssUnitInExpression;

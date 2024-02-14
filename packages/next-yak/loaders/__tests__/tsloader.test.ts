@@ -271,7 +271,7 @@ const fadeIn = keyframes\`
 \`
 
 const FadeInButton = styled.button\`
-  animation: 1s \${() => fadeIn} ease-out;
+  animation: 1s \${() => fadeIn} ease-out 1s infinite reverse both paused slidein;
 \`
 `
       )
@@ -794,6 +794,7 @@ const Button = styled.button\`
         transform: translateX(\${10}px) translateY(\${10 / 2}px);
         font-family: "Arial", sans-serif;
      \`;
+
      `
       )
     ).toMatchInlineSnapshot(`
@@ -828,16 +829,15 @@ const Button = styled.button\`
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled } from \\"next-yak\\";
-      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber = styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
             index
-          }) => index * 30, \\"deg\\"),
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": __yak_unitPostFix(({
+          }) => (index * 30) + \\"deg\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": ({
             index
-          }) => -index * 30, \\"deg\\")
+          }) => (-index * 30) + \\"deg\\"
         }
       });"
     `);
@@ -851,46 +851,20 @@ const Button = styled.button\`
      import styles from "./page.module.css";
      import { css } from "next-yak";
      const case1 = css\`
-        padding: \${({$indent}) => $indent > 4 ? 10 : $indent}px;
+        padding: \${({$indent}) => $indent * 3}px;
      \`;
-     const case2 = css\`
-        margin: \${({$indent}) => $indent > 4 ? 10 : $indent}px;
-     \`;
-     const case3 = css\`
-        padding: \${({$indent}) => {
-          if ($indent > 4) return 10;
-          return $indent
-        }}px;
-     \`;
+     
      `
       )
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
-      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const case1 = css(__styleYak.case1_0, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
             $indent
-          }) => $indent > 4 ? 10 : $indent, \\"px\\")
-        }
-      });
-      const case2 = css(__styleYak.case2_1, {
-        \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": __yak_unitPostFix(({
-            $indent
-          }) => $indent > 4 ? 10 : $indent, \\"px\\")
-        }
-      });
-      const case3 = css(__styleYak.case3_2, {
-        \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": __yak_unitPostFix(({
-            $indent
-          }) => {
-            if ($indent > 4) return 10;
-            return $indent;
-          }, \\"px\\")
+          }) => ($indent * 3) + \\"px\\"
         }
       });"
     `);

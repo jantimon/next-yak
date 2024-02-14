@@ -6,6 +6,7 @@ const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
 const handleCssUnitInExpression = require("./lib/handleCssUnitInExpression.cjs");
+const extractCssUnit = require("./lib/extractCssUnit.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
   getConstantName,
@@ -383,20 +384,16 @@ module.exports = function (babel, options) {
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
 
-            const isAnimationExpression =
-              quasis[0].value.raw.includes("animation");
-
-            const {
-              expression: transformedExpression,
-              runtimeInternalHelpers,
-            } = !isAnimationExpression
-              ? handleCssUnitInExpression(quasis[i + 1], expression, t)
-              : { expression, runtimeInternalHelpers: new Set() };
-            if (runtimeInternalHelpers.size > 0) {
-              runtimeInternalHelpers.forEach((helper) =>
-                this.runtimeInternalHelpers.add(helper)
-              );
-            }
+            const cssUnit =
+              quasis[i + 1] && extractCssUnit(quasis[i + 1].value.raw);
+            const transformedExpression = cssUnit
+              ? handleCssUnitInExpression(
+                  cssUnit,
+                  expression,
+                  this.runtimeInternalHelpers,
+                  t
+                )
+              : expression;
 
             // expression: `x`
             // { style: { --v0: x}}
