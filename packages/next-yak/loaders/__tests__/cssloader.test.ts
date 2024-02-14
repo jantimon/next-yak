@@ -649,4 +649,28 @@ const headline = css\`
       }"
     `);
   });
+
+  it("should add :global automatically to inline css classes", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+import { css } from "next-yak";
+
+const headline = css\`
+  color: red;
+  .dark-mode {
+    color: black;
+  }
+\``
+      )
+    ).toMatchInlineSnapshot(`
+      ".headline_0 {
+        color: red;
+        :global(dark-mode) {
+          color: black;
+        }
+      }"
+    `);
+  });
 });
