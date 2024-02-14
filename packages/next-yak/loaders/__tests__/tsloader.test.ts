@@ -851,7 +851,12 @@ const Button = styled.button\`
      import styles from "./page.module.css";
      import { css } from "next-yak";
      const case1 = css\`
-        padding: \${({$indent}) => $indent * 3}px;
+        padding: \${({$indent}) => {
+          if ($indent > 0) {
+            return $indent * 3;
+          }
+          return 0;
+        }}px;
      \`;
      
      `
@@ -859,12 +864,18 @@ const Button = styled.button\`
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const case1 = css(__styleYak.case1_0, {
         \\"style\\": {
-          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
             $indent
-          }) => ($indent * 3) + \\"px\\"
+          }) => {
+            if ($indent > 0) {
+              return $indent * 3;
+            }
+            return 0;
+          }, \\"px\\")
         }
       });"
     `);
