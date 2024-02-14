@@ -673,11 +673,11 @@ const headline = css\`
     ).toMatchInlineSnapshot(`
       ".headline_0 {
         color: red;
-        :global(dark-mode) {
+       :global(dark-mode) {
           color: black;
         }
-        :global(my-fancy-class),
-        :global(my-button) {
+       :global(my-fancy-class),
+       :global(my-button) {
           color: blue;
         }
         transition: all 0.3s ease-in-out;
