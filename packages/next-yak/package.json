@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.0.30",
+  "version": "0.0.32",
   "type": "module",
   "types": "./dist/",
   "exports": {
