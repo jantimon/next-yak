@@ -4,7 +4,7 @@
  * example:
  * " "                                                      => null
  * ";\n  display: block;\n  "                               => null
- * " ease-out 1s infinite reverse both paused slidein;\n"   => ease
+ * " ease-out 1s infinite reverse both paused slidein;\n"   => null
  * ";\n    "                                                => null
  * "rem;\n        margin: "                                 => rem
  * "px;\n        z-index: "                                 => px
@@ -17,10 +17,8 @@
  * @param {string} quasi
  */
 function extractCssUnit(quasi) {
-  const nextQuasi = quasi.includes(";") ? quasi.split(";")[0] : quasi;
-  const match = nextQuasi.match(/([a-zA-Z%]+)/);
-
-  return match ? match[1] : null;
+  const match = quasi.match(/\s|([a-z%]+)(?=;|\s|\))/);
+  return match && match[1] ? match[1] : null;
 }
 
 module.exports = extractCssUnit;

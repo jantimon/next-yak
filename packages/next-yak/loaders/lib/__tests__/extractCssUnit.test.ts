@@ -24,7 +24,7 @@ describe("extractCssUnit", () => {
       [
         null,
         null,
-        "ease",
+        null,
         null,
         "rem",
         "px",
