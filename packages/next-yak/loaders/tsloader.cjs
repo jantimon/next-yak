@@ -53,7 +53,7 @@ module.exports = async function tsloader(source) {
           { isTSX: this.resourcePath.endsWith(".tsx") },
         ],
         [
-          require.resolve("./babel-yak-plugin.cjs"),
+          require("./babel-yak-plugin.cjs"),
           {
             replaces,
             rootContext,
