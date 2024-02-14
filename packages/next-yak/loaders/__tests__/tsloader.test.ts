@@ -894,7 +894,7 @@ const Button = styled.button\`
       const mixin2 = css\`
         margin: \${size}px;
         top: \${spacing.xs}px;
-        bottom: \${spacing[0]}px;
+        bottom: \${spacing[0]}PX;
         left: \${spacing()}px;
         right: \${value}px;
       \`
@@ -914,7 +914,7 @@ const Button = styled.button\`
         \\"style\\": {
           \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": size + \\"px\\",
           \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": __yak_unitPostFix(spacing.xs, \\"px\\"),
-          \\"--\\\\uD83E\\\\uDDAC18fi82j3\\": __yak_unitPostFix(spacing[0], \\"px\\"),
+          \\"--\\\\uD83E\\\\uDDAC18fi82j3\\": __yak_unitPostFix(spacing[0], \\"PX\\"),
           \\"--\\\\uD83E\\\\uDDAC18fi82j4\\": __yak_unitPostFix(spacing(), \\"px\\")
         }
       });"
