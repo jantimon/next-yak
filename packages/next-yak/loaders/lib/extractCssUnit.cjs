@@ -1,5 +1,10 @@
 /**
- * Extracts the css unit from a css string and checks if it is a valid CSS unit
+ * Extracts the css unit from the start of a css quasi e.g.:
+ *
+ * ```js
+ *   // in the AST this code would have two quasis: "margin: " and "px 0 14px;"
+ *   css`margin: ${size}px 0 14rem;` 
+ * ```
  *
  * @param {string} quasi
  */
