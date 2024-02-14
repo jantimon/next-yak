@@ -649,4 +649,58 @@ const headline = css\`
       }"
     `);
   });
+
+  it("should detect expressions with units automatically in arrow function expressions", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { css } from "next-yak";
+     const case3 = css\`
+      padding: \${({$indent}) => {
+       if ($indent > 4) return 10;
+       return $indent
+     }}px;
+      transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg);
+       translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
+    \`
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      ".case3_0 {
+            padding: var(--🦬18fi82j0);
+            transform: translate(-50%, -50%) rotate(var(--🦬18fi82j1));
+             translate(0, -88px) rotate(var(--🦬18fi82j2));
+          }"
+    `);
+  });
+
+  it("should detect expressions with units automatically in edge cases", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { css } from "next-yak";
+     const value = 10;
+     const case3 = css\`
+        margin: \${size}px;
+        top: \${spacing.xs}px;
+        bottom: \${spacing[0]}PX;
+        left: \${spacing()}px;
+        right: \${value}px;
+    \`
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      ".case3_0 {
+              margin: var(--🦬18fi82j0);
+              top: var(--🦬18fi82j1);
+              bottom: var(--🦬18fi82j2);
+              left: var(--🦬18fi82j3);
+              right: 10px;
+            }"
+    `);
+  });
 });

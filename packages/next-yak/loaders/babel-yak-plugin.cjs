@@ -5,6 +5,7 @@ const murmurhash2_32_gc = require("./lib/hash.cjs");
 const { relative, resolve, basename } = require("path");
 const localIdent = require("./lib/localIdent.cjs");
 const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
+const appendCssUnitToExpressionValue = require("./lib/appendCssUnitToExpressionValue.cjs");
 const getCssName = require("./lib/getCssName.cjs");
 const {
   getConstantName,
@@ -32,6 +33,8 @@ const {
  *     className: string,
  *     astNode: import("@babel/types").CallExpression
  *   }>
+ *  yakImportPath?: import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration>
+ *  runtimeInternalHelpers: Set<string>
  * }>}
  */
 module.exports = function (babel, options) {
@@ -128,10 +131,24 @@ module.exports = function (babel, options) {
       this.varIndex = 0;
       this.variableNameToStyledCall = new Map();
       this.topLevelConstBindings = new Map();
+      this.runtimeInternalHelpers = new Set();
     },
     visitor: {
-      Program(path) {
-        this.topLevelConstBindings = getConstantValues(path, t);
+      Program: {
+        enter(path, state) {
+          this.topLevelConstBindings = getConstantValues(path, t);
+        },
+        exit(path, state) {
+          if (this.runtimeInternalHelpers.size && this.yakImportPath) {
+            const newImport = t.importDeclaration(
+              [...this.runtimeInternalHelpers].map((helper) =>
+                t.importSpecifier(t.identifier(helper), t.identifier(helper))
+              ),
+              t.stringLiteral("next-yak/runtime-internals")
+            );
+            this.yakImportPath.insertAfter(newImport);
+          }
+        },
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
@@ -164,6 +181,7 @@ module.exports = function (babel, options) {
             )
           )
         );
+        this.yakImportPath = path;
 
         // Process import specifiers
         node.specifiers.forEach((specifier) => {
@@ -327,6 +345,7 @@ module.exports = function (babel, options) {
               this.file
             );
           }
+
           // expressions after a partial css are converted into css variables
           if (
             expression &&
@@ -359,20 +378,31 @@ module.exports = function (babel, options) {
             if (!cssVariablesInlineStyle) {
               cssVariablesInlineStyle = t.objectExpression([]);
             }
-            if (!cssVariablesInlineStyle) {
-              cssVariablesInlineStyle = t.objectExpression([]);
-            }
             const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
               .varIndex++}`;
+
+            // Extracts the css unit from a css string after the current expression
+            const cssUnit = quasis[i + 1]?.value.raw.match(/^([a-z]+|%)/i)?.[0];
+            const transformedExpression = cssUnit
+              ? appendCssUnitToExpressionValue(
+                  cssUnit,
+                  expression,
+                  this.runtimeInternalHelpers,
+                  t
+                )
+              : expression;
+
             // expression: `x`
             // { style: { --v0: x}}
             cssVariablesInlineStyle.properties.push(
               t.objectProperty(
                 t.stringLiteral(cssVariableName),
-                /** @type {babel.types.Expression} */ (expression)
+                /** @type {babel.types.Expression} */ (transformedExpression)
               )
             );
-          } else {
+          }
+          // handle mixins
+          else {
             wasInsideCssValue = false;
             if (expression) {
               if (quasiTypes[i].currentNestingScopes.length > 0) {

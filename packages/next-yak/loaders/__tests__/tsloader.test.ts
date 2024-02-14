@@ -271,7 +271,7 @@ const fadeIn = keyframes\`
 \`
 
 const FadeInButton = styled.button\`
-  animation: 1s \${() => fadeIn} ease-out;
+  animation: 1s \${() => fadeIn} ease-out 1s infinite reverse both paused slidein;
 \`
 `
       )
@@ -482,7 +482,7 @@ const headline = css\`
       const red = \\"#E50914\\";
       const zIndex = 14;
       const headline = css(__styleYak.headline_0);"
-    `)
+    `);
   });
 
   it("should show error when using a runtime value from top level", async () => {
@@ -777,6 +777,147 @@ const Button = styled.button\`
       const Button = styled.button(__styleYak.Button, ({
         $primary
       }) => $primary && css(__styleYak.primary_0));"
+    `);
+  });
+
+  it("should detect expressions with units and correctly append them in the css variable value", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { styled } from "next-yak";
+     const Button = styled.button\`
+        padding: \${10}rem;
+        margin: \${4 * 2}px;
+        z-index: \${10 + 4};
+        transform: translateX(\${10}px) translateY(\${10 / 2}px);
+        font-family: "Arial", sans-serif;
+     \`;
+
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Button = styled.button(__styleYak.Button, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 10 + \\"rem\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": 4 * 2 + \\"px\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": 10 + 4,
+          \\"--\\\\uD83E\\\\uDDAC18fi82j3\\": 10 + \\"px\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j4\\": 10 / 2 + \\"px\\"
+        }
+      });"
+    `);
+  });
+
+  it("should detect expressions with units in simple arrow functions", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { styled } from "next-yak";
+     const ClockNumber = styled.div<{ index: number; children: ReactNode }>\`
+       transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
+          translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
+     \`;      
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const ClockNumber = styled.div(__styleYak.ClockNumber, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": ({
+            index
+          }) => (index * 30) + \\"deg\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": ({
+            index
+          }) => (-index * 30) + \\"deg\\"
+        }
+      });"
+    `);
+  });
+
+  it("should detect expressions with units in complex arrow functions and wrap them with __yak_unitPostFix helper", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import styles from "./page.module.css";
+     import { css } from "next-yak";
+     const case1 = css\`
+        padding: \${({$indent}) => {
+          if ($indent > 0) {
+            return $indent * 3;
+          }
+          return 0;
+        }}px;
+     \`;
+     
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import styles from \\"./page.module.css\\";
+      import { css } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const case1 = css(__styleYak.case1_0, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": __yak_unitPostFix(({
+            $indent
+          }) => {
+            if ($indent > 0) {
+              return $indent * 3;
+            }
+            return 0;
+          }, \\"px\\")
+        }
+      });"
+    `);
+  });
+
+  it("should detect expressions with units in mixins", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css } from "next-yak";
+      const mixin1 = css\`
+        padding: \${4}px;
+      \`;
+      const value = 10;
+      const mixin2 = css\`
+        margin: \${size}px;
+        top: \${spacing.xs}px;
+        bottom: \${spacing[0]}PX;
+        left: \${spacing()}px;
+        right: \${value}px;
+      \`
+     `
+      )
+    ).toMatchInlineSnapshot(`
+      "import { css } from \\"next-yak\\";
+      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const mixin1 = css(__styleYak.mixin1_0, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j0\\": 4 + \\"px\\"
+        }
+      });
+      const value = 10;
+      const mixin2 = css(__styleYak.mixin2_1, {
+        \\"style\\": {
+          \\"--\\\\uD83E\\\\uDDAC18fi82j1\\": size + \\"px\\",
+          \\"--\\\\uD83E\\\\uDDAC18fi82j2\\": __yak_unitPostFix(spacing.xs, \\"px\\"),
+          \\"--\\\\uD83E\\\\uDDAC18fi82j3\\": __yak_unitPostFix(spacing[0], \\"PX\\"),
+          \\"--\\\\uD83E\\\\uDDAC18fi82j4\\": __yak_unitPostFix(spacing(), \\"px\\")
+        }
+      });"
     `);
   });
 });

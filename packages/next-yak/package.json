@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "type": "module",
   "types": "./dist/",
   "exports": {
@@ -11,6 +11,10 @@
     "./static": {
       "import": "./dist/static/index.js",
       "require": "./dist/static/index.cjs"
+    },
+    "./runtime-internals": {
+      "import": "./dist/runtime-internals/index.js",
+      "require": "./dist/runtime-internals/index.cjs"
     },
     "./withYak": {
       "require": "./withYak/index.cjs"
@@ -35,6 +39,7 @@
     "build": "pnpm run --filter . \"/^build:/\"",
     "build:runtime": "tsup runtime/index.ts --target es2022 --clean --external react --external next-yak/context --format cjs,esm --minify --sourcemap --out-dir dist",
     "build:runtime:types": "tsup runtime/index.ts --target es2022 --clean --external react --dts-only --format cjs,esm --minify --sourcemap --out-dir dist",
+    "build:runtimeInternals": "tsup runtime/internals/index.ts --target es2022 --clean --external react --external next-yak/runtime-internals --format cjs,esm --minify --sourcemap --out-dir dist/runtime-internals",
     "build:static": "tsup static/index.ts --target es2022 --clean --external react --external next-yak/context --format cjs,esm --minify --sourcemap --out-dir dist/static",
     "build:static:types": "tsup static/index.ts --target es2022 --clean --external react --dts-only --format cjs,esm --minify --sourcemap --out-dir dist/static",
     "build:baseContext": "tsup runtime/context/baseContext.tsx --target es2022 --external react --dts --format cjs,esm --sourcemap --out-dir dist/context/",
