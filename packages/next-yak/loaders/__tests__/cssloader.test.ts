@@ -649,4 +649,40 @@ const headline = css\`
       }"
     `);
   });
+
+  it("should add :global automatically to inline css classes", async () => {
+    expect(
+      await cssloader.call(
+        loaderContext,
+        `
+import { css } from "next-yak";
+
+const headline = css\`
+  color: red;
+  .dark-mode {
+    color: black;
+  }
+  .my-fancy-class,
+  .my-button {
+    color: blue;
+  }
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.05em;
+\``
+      )
+    ).toMatchInlineSnapshot(`
+      ".headline_0 {
+        color: red;
+       :global(dark-mode) {
+          color: black;
+        }
+       :global(my-fancy-class),
+       :global(my-button) {
+          color: blue;
+        }
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 0.05em;
+      }"
+    `);
+  });
 });
