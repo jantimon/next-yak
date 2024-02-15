@@ -98,23 +98,21 @@ const yakStyled = <
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
       //       ^ must be have acces to theme
-      const theme = attrs || getRuntimeStyles.length ? { theme: useTheme() } : {}
+      const theme =
+        attrs || getRuntimeStyles.length ? { theme: useTheme() } : {};
       /** The combined props are passed into the styled`` literal functions */
       const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs(
-        Object.assign(
-          theme,
-          props,
-        ) as Substitute<TCSSProps & T, TAttrsIn>,
+        Object.assign(theme, props) as Substitute<TCSSProps & T, TAttrsIn>,
       );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
       const runtimeStyles = getRuntimeStyles(combinedProps as any);
 
-      // delete the yak theme from the props 
+      // delete the yak theme from the props
       // this must happen after the runtimeStyles are calculated
       // prevents passing the theme prop to the DOM element of a styled component
-      if ((combinedProps as { theme?: unknown}).theme === theme.theme) {
-        delete (combinedProps as { theme?: unknown}).theme;
+      if ((combinedProps as { theme?: unknown }).theme === theme.theme) {
+        delete (combinedProps as { theme?: unknown }).theme;
       }
 
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
