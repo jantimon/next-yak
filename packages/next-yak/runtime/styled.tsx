@@ -98,11 +98,10 @@ const yakStyled = <
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
       //       ^ must be have acces to theme
-      const theme =
-        (attrs || getRuntimeStyles.length) ? useTheme() : {};
+      const theme = attrs || getRuntimeStyles.length ? useTheme() : {};
       /** The combined props are passed into the styled`` literal functions */
       const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs(
-        Object.assign({theme}, props) as Substitute<TCSSProps & T, TAttrsIn>,
+        Object.assign({ theme }, props) as Substitute<TCSSProps & T, TAttrsIn>,
       );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
