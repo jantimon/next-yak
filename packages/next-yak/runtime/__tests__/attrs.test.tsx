@@ -141,7 +141,7 @@ it("pass props to the attr function", () => {
       style={{}}
       type="submit"
     />
-  `
+  `,
   );
 });
 
@@ -234,8 +234,8 @@ it("should merge style", () => {
 
   expect(
     TestRenderer.create(
-      <Comp style={{ color: "green", borderStyle: "dotted" }} />
-    ).toJSON()
+      <Comp style={{ color: "green", borderStyle: "dotted" }} />,
+    ).toJSON(),
   ).toMatchInlineSnapshot(`
     <div
       className=""
@@ -450,7 +450,7 @@ it("should remap props", () => {
     (p) => ({
       type: p.$submit ? "submit" : "button",
       $primary: p.primary,
-    })
+    }),
   )<{ $primary?: boolean }>``;
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
