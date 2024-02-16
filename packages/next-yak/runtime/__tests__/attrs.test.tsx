@@ -2,16 +2,7 @@ import { it, expect, vi, beforeEach } from "vitest";
 import TestRenderer from "react-test-renderer";
 import { styled } from "../styled";
 import React, { FunctionComponent } from "react";
-// @ts-expect-error
-import { useTheme } from "next-yak/context";
-
-vi.mock("next-yak/context", () => ({
-  useTheme: vi.fn().mockReturnValue({ test: "test" }),
-}));
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
+import { YakThemeProvider } from "../context";
 
 beforeEach(() => {
   vi.spyOn(console, "warn");
@@ -141,7 +132,7 @@ it("pass props to the attr function", () => {
       style={{}}
       type="submit"
     />
-  `,
+  `
   );
 });
 
@@ -234,8 +225,8 @@ it("should merge style", () => {
 
   expect(
     TestRenderer.create(
-      <Comp style={{ color: "green", borderStyle: "dotted" }} />,
-    ).toJSON(),
+      <Comp style={{ color: "green", borderStyle: "dotted" }} />
+    ).toJSON()
   ).toMatchInlineSnapshot(`
     <div
       className=""
@@ -450,7 +441,7 @@ it("should remap props", () => {
     (p) => ({
       type: p.$submit ? "submit" : "button",
       $primary: p.primary,
-    }),
+    })
   )<{ $primary?: boolean }>``;
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
@@ -500,28 +491,37 @@ it("should have optional attrs props as component interface", () => {
 });
 
 it("should have access to theme", () => {
-  useTheme.mockReturnValue({ color: "red" });
   const Comp = styled.h1.attrs<DataAttributes>((p) => ({
     "data-color": (p.theme as { color: string }).color,
   }))``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(
+    TestRenderer.create(
+      <YakThemeProvider theme={{ color: "red" }}>
+        <Comp />
+      </YakThemeProvider>
+    ).toJSON()
+  ).toMatchInlineSnapshot(`
     <h1
       className=""
       data-color="red"
       style={{}}
     />
   `);
-  expect(useTheme).toHaveBeenCalledTimes(1);
 });
 
 it("should pass theme if theme is overwritten", () => {
-  useTheme.mockReturnValue({ color: "red" });
   const Comp = styled.h1.attrs({
     theme: { color: "blue" },
   })``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(
+    TestRenderer.create(
+      <YakThemeProvider theme={{ color: "red" }}>
+        <Comp />
+      </YakThemeProvider>
+    ).toJSON()
+  ).toMatchInlineSnapshot(`
     <h1
       className=""
       style={{}}
@@ -532,5 +532,4 @@ it("should pass theme if theme is overwritten", () => {
       }
     />
   `);
-  expect(useTheme).toHaveBeenCalledTimes(1);
 });
