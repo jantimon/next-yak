@@ -244,7 +244,10 @@ it("should remove theme if styled element", () => {
 });
 
 it("should not remove theme if theme is passed to element", () => {
-  const Link = styled.a((p) => p && css("test"));
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+  const Link = styled(ThemePrinter)((p) => p && css("test"));
 
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
@@ -254,10 +257,11 @@ it("should not remove theme if theme is passed to element", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <a
+      <pre
         class="test"
-        theme="[object Object]"
-      />
+      >
+        {"anything":"test"}
+      </pre>
     </div>
   `);
 });
@@ -282,7 +286,11 @@ it("should remove theme on wrapped element", () => {
 });
 
 it("should not remove theme if theme is passed to wrapped element", () => {
-  const BaseComponent = styled.input((p) => p && css("test"));
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+
+  const BaseComponent = styled(ThemePrinter)((p) => p && css("test"));
   const Component = styled(BaseComponent)((p) => p && css("test-wrapper"));
 
   const { container } = render(
@@ -293,10 +301,11 @@ it("should not remove theme if theme is passed to wrapped element", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <input
+      <pre
         class="test-wrapper test"
-        theme="[object Object]"
-      />
+      >
+        {"anything":"test"}
+      </pre>
     </div>
   `);
 });

@@ -132,7 +132,7 @@ it("pass props to the attr function", () => {
       style={{}}
       type="submit"
     />
-  `,
+  `
   );
 });
 
@@ -225,8 +225,8 @@ it("should merge style", () => {
 
   expect(
     TestRenderer.create(
-      <Comp style={{ color: "green", borderStyle: "dotted" }} />,
-    ).toJSON(),
+      <Comp style={{ color: "green", borderStyle: "dotted" }} />
+    ).toJSON()
   ).toMatchInlineSnapshot(`
     <div
       className=""
@@ -441,7 +441,7 @@ it("should remap props", () => {
     (p) => ({
       type: p.$submit ? "submit" : "button",
       $primary: p.primary,
-    }),
+    })
   )<{ $primary?: boolean }>``;
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
@@ -491,7 +491,10 @@ it("should have optional attrs props as component interface", () => {
 });
 
 it("should have access to theme", () => {
-  const Comp = styled.h1.attrs<DataAttributes>((p) => ({
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+  const Comp = styled(ThemePrinter).attrs<DataAttributes>((p) => ({
     "data-color": (p.theme as { color: string }).color,
   }))``;
 
@@ -499,10 +502,11 @@ it("should have access to theme", () => {
     TestRenderer.create(
       <YakThemeProvider theme={{ color: "red" }}>
         <Comp />
-      </YakThemeProvider>,
-    ).toJSON(),
+      </YakThemeProvider>
+    ).toJSON()
   ).toMatchInlineSnapshot(`
-    <h1
+    <pre
+      $__attrs={true}
       className=""
       data-color="red"
       style={{}}
@@ -511,7 +515,10 @@ it("should have access to theme", () => {
 });
 
 it("should pass theme if theme is overwritten", () => {
-  const Comp = styled.h1.attrs({
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+  const Comp = styled(ThemePrinter).attrs({
     theme: { color: "blue" },
   })``;
 
@@ -519,17 +526,15 @@ it("should pass theme if theme is overwritten", () => {
     TestRenderer.create(
       <YakThemeProvider theme={{ color: "red" }}>
         <Comp />
-      </YakThemeProvider>,
-    ).toJSON(),
+      </YakThemeProvider>
+    ).toJSON()
   ).toMatchInlineSnapshot(`
-    <h1
+    <pre
+      $__attrs={true}
       className=""
       style={{}}
-      theme={
-        {
-          "color": "blue",
-        }
-      }
-    />
+    >
+      {"color":"blue"}
+    </pre>
   `);
 });
