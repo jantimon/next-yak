@@ -101,7 +101,7 @@ const yakStyled = <
       const theme = attrs || getRuntimeStyles.length ? useTheme() : undefined;
       /** The combined props are passed into the styled`` literal functions */
       let combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs(
-        Object.assign({ theme }, props) as Substitute<TCSSProps & T, TAttrsIn>,
+        ({ theme, ...props}) as Substitute<TCSSProps & T, TAttrsIn>,
       );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
