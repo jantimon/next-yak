@@ -1,7 +1,8 @@
-import { it, expect, vi, beforeEach } from "vitest";
-import TestRenderer from "react-test-renderer";
-import { styled } from "../styled";
 import React, { FunctionComponent } from "react";
+import TestRenderer from "react-test-renderer";
+import { beforeEach, expect, it, vi } from "vitest";
+import { YakThemeProvider } from "../context";
+import { styled } from "../styled";
 
 beforeEach(() => {
   vi.spyOn(console, "warn");
@@ -486,5 +487,54 @@ it("should have optional attrs props as component interface", () => {
       className=""
       style={{}}
     />
+  `);
+});
+
+it("should have access to theme", () => {
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+  const Comp = styled(ThemePrinter).attrs<DataAttributes>((p) => ({
+    "data-color": (p.theme as { color: string }).color,
+  }))``;
+
+  expect(
+    TestRenderer.create(
+      <YakThemeProvider theme={{ color: "red" }}>
+        <Comp />
+      </YakThemeProvider>,
+    ).toJSON(),
+  ).toMatchInlineSnapshot(`
+    <pre
+      $__attrs={true}
+      className=""
+      data-color="red"
+      style={{}}
+    />
+  `);
+});
+
+it("should pass theme if theme is overwritten", () => {
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+  const Comp = styled(ThemePrinter).attrs({
+    theme: { color: "blue" },
+  })``;
+
+  expect(
+    TestRenderer.create(
+      <YakThemeProvider theme={{ color: "red" }}>
+        <Comp />
+      </YakThemeProvider>,
+    ).toJSON(),
+  ).toMatchInlineSnapshot(`
+    <pre
+      $__attrs={true}
+      className=""
+      style={{}}
+    >
+      {"color":"blue"}
+    </pre>
   `);
 });

@@ -8,6 +8,9 @@ import React from "react";
 import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
 
+/** Symbol */
+const noTheme = {};
+
 /**
  * Hack to hide .yak from the type definition and to deal with ExoticComponents
  */
@@ -85,47 +88,54 @@ const yakStyled = <
         typeof attrs === "function" ? (attrs as Function)(props) : attrs,
       );
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
-      /** The combined props are passed into the styled`` literal functions */
-      const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs(
-        Object.assign(
-          // if the css component does not require arguments
-          // it can be call without arguments and skip calling useTheme()
-          //
-          // `__yak` is NOT against the rule of hooks as
-          // getRuntimeStyles is a constant defined outside of the component
-          //
-          // for example
-          //
-          // const Button = styled.button`color: red;`
-          //       ^ does not need to have access to theme
-          //
-          // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
-          //       ^ must be have acces to theme
-          attrs || getRuntimeStyles.length ? { theme: useTheme() } : {},
-          props,
-        ) as Substitute<TCSSProps & T, TAttrsIn>,
-      );
+      // if the css component does not require arguments
+      // it can be call without arguments and skip calling useTheme()
+      //
+      // `__yak` is NOT against the rule of hooks as
+      // getRuntimeStyles is a constant defined outside of the component
+      //
+      // for example
+      //
+      // const Button = styled.button`color: red;`
+      //       ^ does not need to have access to theme
+      //
+      // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
+      //       ^ must be have acces to theme
+      const theme = attrs || getRuntimeStyles.length ? useTheme() : noTheme;
+      // execute attrs
+      const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs({
+        theme,
+        ...props,
+      } as Substitute<TCSSProps & T, TAttrsIn>);
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
       const runtimeStyles = getRuntimeStyles(combinedProps as any);
+
+      // delete the yak theme from the props
+      // this must happen after the runtimeStyles are calculated
+      // prevents passing the theme prop to the DOM element of a styled component
+      const { theme: themeAfterAttr, ...combinedPropsWithoutTheme } =
+        combinedProps as { theme?: unknown };
 
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
       const filteredProps =
         typeof Component === "string"
-          ? removePrefixedProperties(combinedProps)
+          ? removePrefixedProperties(combinedPropsWithoutTheme)
+          : themeAfterAttr === theme
+          ? combinedPropsWithoutTheme
           : combinedProps;
 
       // yak provides a className and style prop that needs to be merged with the
       // user provided className and style prop
       (filteredProps as { className?: string }).className = mergeClassNames(
-        (combinedProps as { className?: string }).className,
+        (filteredProps as { className?: string }).className,
         runtimeStyles.className as string,
       );
       (filteredProps as { style?: React.CSSProperties }).style =
-        "style" in combinedProps
+        "style" in filteredProps
           ? {
-              ...(combinedProps as { style?: React.CSSProperties }).style,
+              ...(filteredProps as { style?: React.CSSProperties }).style,
               ...runtimeStyles.style,
             }
           : runtimeStyles.style;
@@ -135,7 +145,7 @@ const yakStyled = <
       if (typeof Component !== "string" && "yak" in Component) {
         return (
           Component as typeof Component & {
-            yak: FunctionComponent<typeof combinedProps>;
+            yak: FunctionComponent<typeof filteredProps>;
           }
         ).yak(filteredProps, ref);
       }
@@ -199,7 +209,7 @@ export const styled = new Proxy(
 function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
   const result = {} as T;
   for (const key in obj) {
-    if (!key.startsWith("$") && key !== "theme") {
+    if (!key.startsWith("$")) {
       result[key] = obj[key];
     }
   }

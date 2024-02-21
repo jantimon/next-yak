@@ -1,13 +1,13 @@
-/// @ts-nocheck
+// @ts-nocheck
 // We are testing internal functionality which does not match
 // 1:1 the API exposed to the user before compilation.
 // Therfefore types are not matching and need to be ignored.
-
-import { it, expect } from "vitest";
 import { render } from "@testing-library/react";
-import { styled } from "../styled";
-import { css } from "../cssLiteral";
 import React from "react";
+import { expect, it } from "vitest";
+import { YakThemeProvider } from "../context";
+import { css } from "../cssLiteral";
+import { styled } from "../styled";
 
 it("should render a literal element", () => {
   const Component = styled.input``;
@@ -222,4 +222,89 @@ it("should allow using nested refs", () => {
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
+});
+
+it("should remove theme if styled element", () => {
+  const Link = styled.a((p) => p && css("test"));
+
+  const { container } = render(
+    <YakThemeProvider theme={{ color: "red" }}>
+      <Link />
+    </YakThemeProvider>,
+  );
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <a
+        class="test"
+      />
+    </div>
+  `);
+});
+
+it("should not remove theme if theme is passed to element", () => {
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+  const Link = styled(ThemePrinter)((p) => p && css("test"));
+
+  const { container } = render(
+    <YakThemeProvider theme={{ color: "red" }}>
+      <Link theme={{ anything: "test" }} />
+    </YakThemeProvider>,
+  );
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <pre
+        class="test"
+      >
+        {"anything":"test"}
+      </pre>
+    </div>
+  `);
+});
+
+it("should remove theme on wrapped element", () => {
+  const BaseComponent = styled.input((p) => p && css("test"));
+  const Component = styled(BaseComponent)((p) => p && css("test-wrapper"));
+
+  const { container } = render(
+    <YakThemeProvider theme={{ color: "red" }}>
+      <Component />
+    </YakThemeProvider>,
+  );
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <input
+        class="test-wrapper test"
+      />
+    </div>
+  `);
+});
+
+it("should not remove theme if theme is passed to wrapped element", () => {
+  const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
+    <pre {...props}>{JSON.stringify(theme)}</pre>
+  );
+
+  const BaseComponent = styled(ThemePrinter)((p) => p && css("test"));
+  const Component = styled(BaseComponent)((p) => p && css("test-wrapper"));
+
+  const { container } = render(
+    <YakThemeProvider theme={{ color: "red" }}>
+      <Component theme={{ anything: "test" }} />
+    </YakThemeProvider>,
+  );
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <pre
+        class="test-wrapper test"
+      >
+        {"anything":"test"}
+      </pre>
+    </div>
+  `);
 });
