@@ -116,6 +116,9 @@ const yakStyled = <
       // prevents passing the theme prop to the DOM element of a styled component
       const { theme: themeAfterAttr, ...combinedPropsWithoutTheme } =
         combinedProps as { theme?: unknown };
+      const propsBeforeFiltering = themeAfterAttr === theme
+        ? combinedPropsWithoutTheme
+        : combinedProps;
 
       const isYakComponent =
         typeof Component !== "string" && "yak" in Component;
@@ -123,10 +126,8 @@ const yakStyled = <
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
       const filteredProps = !isYakComponent
-        ? removePrefixedProperties(combinedPropsWithoutTheme)
-        : themeAfterAttr === theme
-        ? combinedPropsWithoutTheme
-        : combinedProps;
+        ? removePrefixedProperties(propsBeforeFiltering)
+        : propsBeforeFiltering;
 
       // yak provides a className and style prop that needs to be merged with the
       // user provided className and style prop

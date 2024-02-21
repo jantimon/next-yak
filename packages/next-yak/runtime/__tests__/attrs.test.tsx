@@ -519,6 +519,8 @@ it("should pass theme if theme is overwritten", () => {
     <pre
       className=""
       style={{}}
-    />
+    >
+      {"color":"blue"}
+    </pre>
   `);
 });

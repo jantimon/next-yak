@@ -271,11 +271,11 @@ it("should remove theme if styled element", () => {
   `);
 });
 
-it("should not remove theme if theme is passed to element", () => {
+it("should keep theme if theme is passed to element", () => {
   const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
     <pre {...props}>{JSON.stringify(theme)}</pre>
   );
-  const Link = styled(ThemePrinter)((p) => p && css("test"));
+  const Link = styled.p((p) => p && css("test"));
 
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
@@ -287,7 +287,9 @@ it("should not remove theme if theme is passed to element", () => {
     <div>
       <pre
         class="test"
-      />
+      >
+        {"anything":"test"}
+      </pre>
     </div>
   `);
 });
@@ -329,7 +331,9 @@ it("should not remove theme if theme is passed to wrapped element", () => {
     <div>
       <pre
         class="test-wrapper test"
-      />
+      >
+        {"anything":"test"}
+      </pre>
     </div>
   `);
 });
