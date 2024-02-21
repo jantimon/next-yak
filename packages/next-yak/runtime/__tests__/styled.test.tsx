@@ -90,12 +90,14 @@ it("should filter out properties starting with $", () => {
 
 it("should filter out properties starting with $ when passing to custom", () => {
   let forwardedProps = null;
-  const Component = ({ className, style, ...props}) => {
+  const Component = ({ className, style, ...props }) => {
     forwardedProps = props;
     return null;
   };
   const StyledComponent = styled(Component)``;
-  const { container } = render(<StyledComponent $forwardedProp="notForwarded" />);
+  const { container } = render(
+    <StyledComponent $forwardedProp="notForwarded" />,
+  );
 
   expect(forwardedProps).toEqual({});
 });
