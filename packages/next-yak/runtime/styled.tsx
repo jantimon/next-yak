@@ -116,9 +116,8 @@ const yakStyled = <
       // prevents passing the theme prop to the DOM element of a styled component
       const { theme: themeAfterAttr, ...combinedPropsWithoutTheme } =
         combinedProps as { theme?: unknown };
-      const propsBeforeFiltering = themeAfterAttr === theme
-        ? combinedPropsWithoutTheme
-        : combinedProps;
+      const propsBeforeFiltering =
+        themeAfterAttr === theme ? combinedPropsWithoutTheme : combinedProps;
 
       const isYakComponent =
         typeof Component !== "string" && "yak" in Component;
