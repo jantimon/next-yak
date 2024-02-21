@@ -95,15 +95,16 @@ it("should filter out properties starting with $ when passing to custom", () => 
     return null;
   };
   const StyledComponent = styled(Component)``;
-  render(<StyledComponent $forwardedProp="notForwarded" />);
+  render(
+    <StyledComponent $forwardedProp="notForwarded" />,
+  );
 
   expect(forwardedProps).toEqual({});
 });
 
+
 it("should forward properties to the next yak component", () => {
-  const Component = styled.input.attrs(({ $text }) => ({
-    "aria-label": $text,
-  }))``;
+  const Component = styled.input.attrs(({ $text }) => ({ "aria-label": $text }))``;
   const StyledComponent = styled(Component)``;
   const { container } = render(<StyledComponent $text="hello world" />);
 
@@ -275,7 +276,7 @@ it("should keep theme if theme is passed to element", () => {
   const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
     <pre {...props}>{JSON.stringify(theme)}</pre>
   );
-  const Link = styled.p((p) => p && css("test"));
+  const Link = styled(ThemePrinter)((p) => p && css("test"));
 
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
