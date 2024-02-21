@@ -22,7 +22,7 @@ const yakForwardRef: <TProps>(
   // warning: `__yak` is undefined during runtime
   __yak: true;
 } = (component) =>
-  Object.assign(React.forwardRef(component), { component }) as any;
+  Object.assign(React.forwardRef(component), { yak: component }) as any;
 
 /**
  * All valid html tags
@@ -116,15 +116,17 @@ const yakStyled = <
       // prevents passing the theme prop to the DOM element of a styled component
       const { theme: themeAfterAttr, ...combinedPropsWithoutTheme } =
         combinedProps as { theme?: unknown };
+      const propsBeforeFiltering =
+        themeAfterAttr === theme ? combinedPropsWithoutTheme : combinedProps;
+
+      const isYakComponent =
+        typeof Component !== "string" && "yak" in Component;
 
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
-      const filteredProps =
-        typeof Component === "string"
-          ? removePrefixedProperties(combinedPropsWithoutTheme)
-          : themeAfterAttr === theme
-          ? combinedPropsWithoutTheme
-          : combinedProps;
+      const filteredProps = !isYakComponent
+        ? removePrefixedProperties(propsBeforeFiltering)
+        : propsBeforeFiltering;
 
       // yak provides a className and style prop that needs to be merged with the
       // user provided className and style prop
@@ -142,14 +144,13 @@ const yakStyled = <
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
-      if (typeof Component !== "string" && "yak" in Component) {
+      if (isYakComponent) {
         return (
           Component as typeof Component & {
             yak: FunctionComponent<typeof filteredProps>;
           }
         ).yak(filteredProps, ref);
       }
-
       (filteredProps as { ref?: unknown }).ref = ref;
       return <Component {...(filteredProps as any)} />;
     };

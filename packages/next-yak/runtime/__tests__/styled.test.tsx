@@ -88,6 +88,35 @@ it("should filter out properties starting with $", () => {
   `);
 });
 
+it("should filter out properties starting with $ when passing to custom", () => {
+  let forwardedProps = null;
+  const Component = ({ className, style, ...props }) => {
+    forwardedProps = props;
+    return null;
+  };
+  const StyledComponent = styled(Component)``;
+  render(<StyledComponent $forwardedProp="notForwarded" />);
+
+  expect(forwardedProps).toEqual({});
+});
+
+it("should forward properties to the next yak component", () => {
+  const Component = styled.input.attrs(({ $text }) => ({
+    "aria-label": $text,
+  }))``;
+  const StyledComponent = styled(Component)``;
+  const { container } = render(<StyledComponent $text="hello world" />);
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <input
+        aria-label="hello world"
+        class=""
+      />
+    </div>
+  `);
+});
+
 it("should concatenate classNames", () => {
   const Component = styled.input("className1");
 
@@ -242,7 +271,7 @@ it("should remove theme if styled element", () => {
   `);
 });
 
-it("should not remove theme if theme is passed to element", () => {
+it("should keep theme if theme is passed to element", () => {
   const ThemePrinter = ({ theme, ...props }: { theme?: unknown }) => (
     <pre {...props}>{JSON.stringify(theme)}</pre>
   );
