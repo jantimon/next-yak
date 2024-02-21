@@ -256,18 +256,6 @@ it("should work with data and aria attributes", () => {
   `);
 });
 
-// it("merge attrs", () => {
-//   const Comp = styled.button
-//     .attrs(() => ({
-//       type: "button",
-//       tabIndex: 0,
-//     }))
-//     .attrs(() => ({
-//       type: "submit",
-//     }))``;
-//   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot();
-// });
-
 it("merge attrs when inheriting SC", () => {
   const Parent = styled.button.attrs(() => ({
     type: "button",
@@ -281,7 +269,7 @@ it("merge attrs when inheriting SC", () => {
       className=""
       style={{}}
       tabIndex={0}
-      type="button"
+      type="submit"
     />
   `);
 });

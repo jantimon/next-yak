@@ -95,11 +95,27 @@ it("should filter out properties starting with $ when passing to custom", () => 
     return null;
   };
   const StyledComponent = styled(Component)``;
-  const { container } = render(
+  render(
     <StyledComponent $forwardedProp="notForwarded" />,
   );
 
   expect(forwardedProps).toEqual({});
+});
+
+
+it("should forward properties to the next yak component", () => {
+  const Component = styled.input.attrs(({ $text }) => ({ "aria-label": $text }))``;
+  const StyledComponent = styled(Component)``;
+  const { container } = render(<StyledComponent $text="hello world" />);
+
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <input
+        aria-label="hello world"
+        class=""
+      />
+    </div>
+  `);
 });
 
 it("should concatenate classNames", () => {

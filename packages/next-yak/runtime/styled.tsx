@@ -22,7 +22,7 @@ const yakForwardRef: <TProps>(
   // warning: `__yak` is undefined during runtime
   __yak: true;
 } = (component) =>
-  Object.assign(React.forwardRef(component), { component }) as any;
+  Object.assign(React.forwardRef(component), { yak: component }) as any;
 
 /**
  * All valid html tags
