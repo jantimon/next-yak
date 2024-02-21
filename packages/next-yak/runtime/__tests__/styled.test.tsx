@@ -95,16 +95,15 @@ it("should filter out properties starting with $ when passing to custom", () => 
     return null;
   };
   const StyledComponent = styled(Component)``;
-  render(
-    <StyledComponent $forwardedProp="notForwarded" />,
-  );
+  render(<StyledComponent $forwardedProp="notForwarded" />);
 
   expect(forwardedProps).toEqual({});
 });
 
-
 it("should forward properties to the next yak component", () => {
-  const Component = styled.input.attrs(({ $text }) => ({ "aria-label": $text }))``;
+  const Component = styled.input.attrs(({ $text }) => ({
+    "aria-label": $text,
+  }))``;
   const StyledComponent = styled(Component)``;
   const { container } = render(<StyledComponent $text="hello world" />);
 
