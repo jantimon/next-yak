@@ -117,10 +117,11 @@ const yakStyled = <
       const { theme: themeAfterAttr, ...combinedPropsWithoutTheme } =
         combinedProps as { theme?: unknown };
 
+      const isYakComponent = typeof Component !== "string" && "yak" in Component;
+
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
-      const filteredProps =
-        typeof Component === "string"
+      const filteredProps = !isYakComponent
           ? removePrefixedProperties(combinedPropsWithoutTheme)
           : themeAfterAttr === theme
           ? combinedPropsWithoutTheme
@@ -142,14 +143,13 @@ const yakStyled = <
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
-      if (typeof Component !== "string" && "yak" in Component) {
+      if (isYakComponent) {
         return (
           Component as typeof Component & {
             yak: FunctionComponent<typeof filteredProps>;
           }
         ).yak(filteredProps, ref);
       }
-
       (filteredProps as { ref?: unknown }).ref = ref;
       return <Component {...(filteredProps as any)} />;
     };

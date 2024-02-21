@@ -281,7 +281,7 @@ it("merge attrs when inheriting SC", () => {
       className=""
       style={{}}
       tabIndex={0}
-      type="submit"
+      type="button"
     />
   `);
 });
@@ -506,7 +506,6 @@ it("should have access to theme", () => {
     ).toJSON(),
   ).toMatchInlineSnapshot(`
     <pre
-      $__attrs={true}
       className=""
       data-color="red"
       style={{}}
@@ -530,11 +529,8 @@ it("should pass theme if theme is overwritten", () => {
     ).toJSON(),
   ).toMatchInlineSnapshot(`
     <pre
-      $__attrs={true}
       className=""
       style={{}}
-    >
-      {"color":"blue"}
-    </pre>
+    />
   `);
 });

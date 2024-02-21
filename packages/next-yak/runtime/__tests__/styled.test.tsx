@@ -88,6 +88,18 @@ it("should filter out properties starting with $", () => {
   `);
 });
 
+it("should filter out properties starting with $ when passing to custom", () => {
+  let forwardedProps = null;
+  const Component = ({ className, style, ...props}) => {
+    forwardedProps = props;
+    return null;
+  };
+  const StyledComponent = styled(Component)``;
+  const { container } = render(<StyledComponent $forwardedProp="notForwarded" />);
+
+  expect(forwardedProps).toEqual({});
+});
+
 it("should concatenate classNames", () => {
   const Component = styled.input("className1");
 
@@ -258,9 +270,7 @@ it("should not remove theme if theme is passed to element", () => {
     <div>
       <pre
         class="test"
-      >
-        {"anything":"test"}
-      </pre>
+      />
     </div>
   `);
 });
@@ -302,9 +312,7 @@ it("should not remove theme if theme is passed to wrapped element", () => {
     <div>
       <pre
         class="test-wrapper test"
-      >
-        {"anything":"test"}
-      </pre>
+      />
     </div>
   `);
 });
