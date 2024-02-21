@@ -8,6 +8,9 @@ import React from "react";
 import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
 
+/** Symbol */
+const noTheme = {};
+
 /**
  * Hack to hide .yak from the type definition and to deal with ExoticComponents
  */
@@ -98,7 +101,7 @@ const yakStyled = <
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
       //       ^ must be have acces to theme
-      const theme = attrs || getRuntimeStyles.length ? useTheme() : undefined;
+      const theme = attrs || getRuntimeStyles.length ? useTheme() : noTheme;
       /** The combined props are passed into the styled`` literal functions */
       const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs({
         theme,
