@@ -1,8 +1,8 @@
-import { it, expect, vi, beforeEach } from "vitest";
-import TestRenderer from "react-test-renderer";
-import { styled } from "../styled";
 import React, { FunctionComponent } from "react";
+import TestRenderer from "react-test-renderer";
+import { beforeEach, expect, it, vi } from "vitest";
 import { YakThemeProvider } from "../context";
+import { styled } from "../styled";
 
 beforeEach(() => {
   vi.spyOn(console, "warn");

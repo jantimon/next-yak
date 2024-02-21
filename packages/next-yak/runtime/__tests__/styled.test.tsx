@@ -2,13 +2,12 @@
 // We are testing internal functionality which does not match
 // 1:1 the API exposed to the user before compilation.
 // Therfefore types are not matching and need to be ignored.
-
-import { it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
-import { styled } from "../styled";
-import { css } from "../cssLiteral";
 import React from "react";
+import { expect, it } from "vitest";
 import { YakThemeProvider } from "../context";
+import { css } from "../cssLiteral";
+import { styled } from "../styled";
 
 it("should render a literal element", () => {
   const Component = styled.input``;
