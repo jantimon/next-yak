@@ -266,12 +266,18 @@ const Container = styled.div`
 
 [Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/2c83246c-a03b-4c57-8814-32a7248983ac)
 
+## Yak shaving
+
+While trying to get next-yak to work properly we stumbled accross several bugs.  
+Thanks for merging our prs fixes in next.js and postcss ❤️
+
 <details>
-  <summary>prs</summary>
+  <summary>PRS</summary>
 
   - https://github.com/vercel/next.js/pull/51115
   - https://github.com/vercel/next.js/pull/53796
   - https://github.com/css-modules/postcss-modules-local-by-default/pull/64
+  - https://github.com/vercel/next.js/pull/62644
   - https://github.com/vercel/next.js/pull/62639
   
 </details>
