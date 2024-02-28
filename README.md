@@ -266,28 +266,13 @@ const Container = styled.div`
 
 [Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/2c83246c-a03b-4c57-8814-32a7248983ac)
 
-## Todos:
-
-next-yak is currently in the development phase, with several todos that must be completed before it is ready for production:
-
- - [ ] improve js parsing - right now it not reusing babel..
- - [ ] better sourcemaps
- - [ ] improve runtime code size and typings
- - [ ] maybe remove proxy by compiling `styled.button -> styled("button")`
- - [ ] better error messages
- - [x] replace the current config apporach with a solution similar to vanilla-extracts `.styles.ts` files
- - [x] add theme provider (which works for Server Components)
- - [x] add support for forwardRef
- - [x] add support for attrs
- - [x] config hot module reloading
- 
-
 <details>
   <summary>prs</summary>
 
   - https://github.com/vercel/next.js/pull/51115
   - https://github.com/vercel/next.js/pull/53796
   - https://github.com/css-modules/postcss-modules-local-by-default/pull/64
+  - https://github.com/vercel/next.js/pull/62639
   
 </details>
 
