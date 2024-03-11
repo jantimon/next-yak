@@ -11,6 +11,7 @@ const {
   getConstantName,
   getConstantValues,
 } = require("./lib/getConstantValues.cjs");
+const transpileCssProp = require("./lib/transpileCssProp.cjs");
 
 /** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
 /** @typedef {{ css: string | undefined, styled: string | undefined, keyframes: string | undefined }} YakLocalIdentifierNames */
@@ -34,7 +35,8 @@ const {
  *     astNode: import("@babel/types").CallExpression
  *   }>
  *  yakImportPath?: import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration>
- *  runtimeInternalHelpers: Set<string>
+ *  runtimeInternalHelpers: Set<string>,
+ *  rootPath: import("@babel/core").NodePath<import("@babel/types").Program> | null
  * }>}
  */
 module.exports = function (babel, options) {
@@ -132,11 +134,13 @@ module.exports = function (babel, options) {
       this.variableNameToStyledCall = new Map();
       this.topLevelConstBindings = new Map();
       this.runtimeInternalHelpers = new Set();
+      this.rootPath = null;
     },
     visitor: {
       Program: {
         enter(path, state) {
           this.topLevelConstBindings = getConstantValues(path, t);
+          this.rootPath = path;
         },
         exit(path, state) {
           if (this.runtimeInternalHelpers.size && this.yakImportPath) {
@@ -149,6 +153,21 @@ module.exports = function (babel, options) {
             this.yakImportPath.insertAfter(newImport);
           }
         },
+      },
+
+      /**
+       * @param {import("@babel/core").NodePath<import("@babel/types").JSXElement>} path
+       * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number, rootPath: import("@babel/core").NodePath<import("@babel/types").Program> | null}} state
+       */
+      JSXElement(path, state) {
+        if (!state.rootPath) {
+          throw new Error("rootPath is undefined");
+        }
+
+        if (!this.isImportedInCurrentFile) {
+          return;
+        }
+        transpileCssProp(path, state.rootPath, t, this.localVarNames);
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:

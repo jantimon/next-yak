@@ -12,6 +12,7 @@ const {
   getConstantName,
   getConstantValues,
 } = require("./lib/getConstantValues.cjs");
+const transpileCssProp = require("./lib/transpileCssProp.cjs");
 
 /**
  * @typedef {{ selector: string, hasParent: boolean, quasiCode: Array<{ insideCssValue: boolean, code: string }>, cssPartExpressions: { [key: number]: CssPartExpression[]} }} CssPartExpression
@@ -93,9 +94,13 @@ module.exports = async function cssLoader(source) {
   /** @type {Map<string, number | string | null>} */
   let topLevelConstBindings = new Map();
 
+  /** @type {import("@babel/core").NodePath<import("@babel/types").Program> | null} */
+  let rootPath = null;
+
   babel.traverse(ast, {
     Program(path) {
       topLevelConstBindings = getConstantValues(path, t);
+      rootPath = path;
     },
     /**
      * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
@@ -127,6 +132,17 @@ module.exports = async function cssLoader(source) {
           localVarNames[importSpecifier.name] = localSpecifier.name;
         }
       });
+    },
+
+    /**
+     * @param {import("@babel/core").NodePath<import("@babel/types").JSXElement>} path
+     */
+    JSXElement(path) {
+      if (!rootPath) {
+        throw new Error("rootPath is undefined");
+      }
+
+      transpileCssProp(path, rootPath, t, localVarNames);
     },
     /**
      * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path

@@ -703,4 +703,69 @@ const headline = css\`
             }"
     `);
   });
+
+  it("should work with css property", async () => {
+    expect(
+        await cssloader.call(
+          loaderContext,
+          `
+      import { css, styled } from "next-yak";
+      const Elem = () =>  
+        <div css={css\`
+        padding: 10px;
+        \`} />
+        `
+        )
+      ).toMatchInlineSnapshot(`
+        "._YakComp_0 {
+                padding: 10px;
+              }"
+      `);
+  })
+
+  it("should work with multiple components that use the css property", async () => {
+    expect(
+        await cssloader.call(
+          loaderContext,
+          `
+      import { css, styled } from "next-yak";
+      const Elem = () =>  
+        <div css={css\`
+        padding: 10px;
+        \`} />;
+      const OtherElem = () =>  
+        <div css={css\`
+        padding: 10px;
+        \`} />;
+        `
+        )
+      ).toMatchInlineSnapshot(`
+        "._YakComp_0 {
+                padding: 10px;
+              }
+              ._YakComp2_1 {
+                padding: 10px;
+              }"
+      `);
+  })
+
+it("should work with when css property reuses css", async () => {
+    expect(
+        await cssloader.call(
+          loaderContext,
+          `
+      import { css, styled } from "next-yak";
+      const padding = css\`
+        padding: 10px;
+        \`; 
+      const Elem = () =>  
+        <div css={padding} />;
+        `
+        )
+      ).toMatchInlineSnapshot(`
+        ".padding_0 {
+                padding: 10px;
+              }"
+      `);
+  })
 });

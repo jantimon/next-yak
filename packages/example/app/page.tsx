@@ -117,6 +117,14 @@ export default function Home() {
     <YakThemeProvider>
       <main className={styles.main}>
         <Headline $primary>Hello world</Headline>
+        <h2
+          css={css`
+            font-size: 1.5rem;
+            font-weight: 400;
+          `}
+        >
+          Subheading
+        </h2>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">
