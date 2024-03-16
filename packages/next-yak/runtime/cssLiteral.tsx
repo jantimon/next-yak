@@ -15,10 +15,10 @@ export type CSSInterpolation<TProps = {}> =
   | false
   | ComponentStyles<TProps>
   | {
-    // type only identifier to allow targeting components
-    // e.g. styled.svg`${Button}:hover & { fill: red; }`
-    __yak: true;
-  }
+      // type only identifier to allow targeting components
+      // e.g. styled.svg`${Button}:hover & { fill: red; }`
+      __yak: true;
+    }
   | ((props: TProps) => CSSInterpolation<TProps>);
 
 type CSSStyles<TProps = {}> = {
@@ -32,9 +32,9 @@ type CSSFunction = <TProps = {}>(
 
 type PropsToClassNameFn = (props: unknown) =>
   | {
-    className?: string;
-    style?: Record<string, string>;
-  }
+      className?: string;
+      style?: Record<string, string>;
+    }
   | PropsToClassNameFn;
 
 /**
