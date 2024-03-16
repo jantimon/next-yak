@@ -2,8 +2,6 @@
 import { NextConfig } from "../../example/node_modules/next/dist/server/config.js";
 import path from "node:path";
 import { existsSync } from "node:fs";
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import { createRequire } from "module";
 const isoRequire = import.meta?.url ? createRequire(import.meta.url) : require;
 
