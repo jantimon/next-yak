@@ -1,16 +1,9 @@
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined")
-    return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
-
 // withYak/index.ts
 import path from "path";
+import { fileURLToPath } from "url";
 import { existsSync } from "fs";
-import { createRequire } from "module";
-var isoRequire = import.meta?.url ? createRequire(import.meta.url) : __require;
+import { dirname } from "path";
+var currentDir = typeof __dirname !== "undefined" ? __dirname : dirname(fileURLToPath(import.meta.url));
 var addYak = (yakOptions, nextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
@@ -19,7 +12,7 @@ var addYak = (yakOptions, nextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: isoRequire.resolve("../loaders/tsloader.cjs"),
+      loader: path.join(currentDir, "../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -29,7 +22,7 @@ var addYak = (yakOptions, nextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: isoRequire.resolve("../loaders/cssloader.cjs"),
+      loader: path.join(currentDir, "../loaders/cssloader.cjs"),
       options: yakOptions
     });
     const yakContext = resolveYakContext(

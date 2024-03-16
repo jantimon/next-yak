@@ -34,10 +34,11 @@ __export(withYak_exports, {
 });
 module.exports = __toCommonJS(withYak_exports);
 var import_node_path = __toESM(require("path"), 1);
+var import_node_url = require("url");
 var import_node_fs = require("fs");
-var import_module = require("module");
+var import_node_path2 = require("path");
 var import_meta = {};
-var isoRequire = import_meta?.url ? (0, import_module.createRequire)(import_meta.url) : require;
+var currentDir = typeof __dirname !== "undefined" ? __dirname : (0, import_node_path2.dirname)((0, import_node_url.fileURLToPath)(import_meta.url));
 var addYak = (yakOptions, nextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
@@ -46,7 +47,7 @@ var addYak = (yakOptions, nextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: isoRequire.resolve("../loaders/tsloader.cjs"),
+      loader: import_node_path.default.join(currentDir, "../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -56,7 +57,7 @@ var addYak = (yakOptions, nextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: isoRequire.resolve("../loaders/cssloader.cjs"),
+      loader: import_node_path.default.join(currentDir, "../loaders/cssloader.cjs"),
       options: yakOptions
     });
     const yakContext = resolveYakContext(

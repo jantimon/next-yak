@@ -1,9 +1,14 @@
 /// <reference types="node" />
 import { NextConfig } from "../../example/node_modules/next/dist/server/config.js";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
-import { createRequire } from "module";
-const isoRequire = import.meta?.url ? createRequire(import.meta.url) : require;
+import { dirname } from "node:path";
+
+const currentDir =
+  typeof __dirname !== "undefined"
+    ? __dirname
+    : dirname(fileURLToPath(import.meta.url));
 
 export type YakConfigOptions = { contextPath?: string };
 
@@ -15,7 +20,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: isoRequire.resolve("../loaders/tsloader.cjs"),
+      loader: path.join(currentDir, "../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -25,7 +30,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: isoRequire.resolve("../loaders/cssloader.cjs"),
+      loader: path.join(currentDir, "../loaders/cssloader.cjs"),
       options: yakOptions,
     });
 
