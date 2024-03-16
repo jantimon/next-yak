@@ -30,8 +30,8 @@ const headline = css<{ $primary?: boolean }>`
   ${queries.sm} {
     font-size: 1.5rem;
     ${({ $primary }) =>
-    $primary &&
-    css`
+      $primary &&
+      css`
         font-size: 1.7rem;
       `}
   }
@@ -117,18 +117,16 @@ export default function Home() {
     <YakThemeProvider>
       <main className={styles.main}>
         <Headline $primary>Hello world</Headline>
-        <h2
-          css={headline}
-        >
-          Other heading
-        </h2>
+        <h2 css={headline}>Other heading</h2>
         <h3
           css={css`
             font-size: 1.5rem;
             font-weight: 400;
             color: #333;
           `}
-        >Subheading</h3>
+        >
+          Subheading
+        </h3>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">
