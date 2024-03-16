@@ -32,6 +32,7 @@ function transpileCssProp({
       t.isJSXIdentifier(prop.name) &&
       prop.name.name === "css"
   );
+  // if the css prop is not present, we don't need to do anything
   if (cssPropIndex === -1) {
     return;
   }
@@ -40,12 +41,20 @@ function transpileCssProp({
     openingElement.attributes[cssPropIndex]
   );
 
+  // if the css prop is not an expression, we don't need to do anything
+  // e.g. <div css="..." /> instead of <div css={css`...`} />
   if (!t.isJSXExpressionContainer(cssProp.value)) {
     return;
   }
 
   const cssValue = cssProp.value.expression;
 
+  // the css prop must be a css template literal or a variable that is a css template literal
+  // e.g.:
+  // const cssValue = css`...`
+  // <div css={cssValue} />
+  // or
+  // <div css={css`...`} />
   if (
     !(t.isIdentifier(cssValue) && topLevelConstBindings.has(cssValue.name)) &&
     !(
@@ -57,7 +66,8 @@ function transpileCssProp({
   }
 
 
-
+  // namespaced JSX is not supported (even by React itself)
+  // e.g. <MyComponent:div css={css`...`} />
   if (t.isJSXNamespacedName(openingElement.name)) {
     throw new Error("Namespaced JSX not supported");
   }
@@ -72,7 +82,12 @@ function transpileCssProp({
     }
   }
 
+  // remove the css prop
   openingElement.attributes.splice(cssPropIndex, 1);
+
+  // generate a new variable name for the styled component
+  // e.g.:
+  // const _YakComp = styled('div')(css`...`)
   const styledVar = path.scope.generateUidIdentifier("YakComp");
   const styledDeclaration = t.variableDeclaration("var", [
     t.variableDeclarator(
@@ -90,11 +105,13 @@ function transpileCssProp({
     ),
   ]);
 
+  // replace the original JSX element with the new component
   openingElement.name = t.jsxIdentifier(styledVar.name);
   if (closingElement) {
     closingElement.name = t.jsxIdentifier(styledVar.name);
   }
 
+  // add the new component to the bottom of the file (it's automatically hoisted to the top as it's a var declaration)
   rootPath.pushContainer("body", styledDeclaration);
 }
 
