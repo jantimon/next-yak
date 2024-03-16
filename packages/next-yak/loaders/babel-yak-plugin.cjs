@@ -164,10 +164,18 @@ module.exports = function (babel, options) {
           throw new Error("rootPath is undefined");
         }
 
-        if (!this.isImportedInCurrentFile) {
+        if (!this.isImportedInCurrentFile || !this.yakImportPath) {
           return;
         }
-        transpileCssProp(path, state.rootPath, t, this.localVarNames);
+
+        transpileCssProp({
+          path,
+          rootPath: state.rootPath,
+          t,
+          localVarNames: this.localVarNames,
+          topLevelConstBindings: this.topLevelConstBindings,
+          yakImportPath: this.yakImportPath,
+        });
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
@@ -295,8 +303,8 @@ module.exports = function (babel, options) {
           styledApi || expressionType === "keyframesLiteral"
             ? getStyledComponentName(path)
             : expressionType === "cssLiteral"
-            ? getCssName(path)
-            : null;
+              ? getCssName(path)
+              : null;
 
         const identifier = localIdent(
           variableName || "_yak",
@@ -385,10 +393,10 @@ module.exports = function (babel, options) {
 
               throw new InvalidPositionError(
                 "Possible constant used as runtime value for a css variable\n" +
-                  "Please move the constant to a .yak import or use an arrow function\n" +
-                  "e.g.:\n" +
-                  "|   import { primaryColor } from './foo.yak'\n" +
-                  "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
+                "Please move the constant to a .yak import or use an arrow function\n" +
+                "e.g.:\n" +
+                "|   import { primaryColor } from './foo.yak'\n" +
+                "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
                 expression,
                 this.file
               );
@@ -404,11 +412,11 @@ module.exports = function (babel, options) {
             const cssUnit = quasis[i + 1]?.value.raw.match(/^([a-z]+|%)/i)?.[0];
             const transformedExpression = cssUnit
               ? appendCssUnitToExpressionValue(
-                  cssUnit,
-                  expression,
-                  this.runtimeInternalHelpers,
-                  t
-                )
+                cssUnit,
+                expression,
+                this.runtimeInternalHelpers,
+                t
+              )
               : expression;
 
             // expression: `x`
@@ -416,7 +424,7 @@ module.exports = function (babel, options) {
             cssVariablesInlineStyle.properties.push(
               t.objectProperty(
                 t.stringLiteral(cssVariableName),
-                /** @type {babel.types.Expression} */ (transformedExpression)
+                /** @type {babel.types.Expression} */(transformedExpression)
               )
             );
           }

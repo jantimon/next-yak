@@ -1155,7 +1155,7 @@ const Button = styled.button\`
     `);
   });
 
-  it("should convert it when css property is conditionally applied", async () => {
+  it("should not convert it when css property is conditionally applied", async () => {
     expect(
       await tsloader.call(
         loaderContext,
@@ -1170,6 +1170,27 @@ const Button = styled.button\`
       "import { css, styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp = () => <div css={true && css(__styleYak.MyComp_0)}>anything</div>;"
+    `);
+  });
+  it("should work with when css property reuses css", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const padding = css\`
+        padding: 10px;
+        \`; 
+      const Elem = () =>  
+        <div css={padding} />;
+        `
+      )
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const padding = css(__styleYak.padding_0);
+      const Elem = () => <_YakComp />;
+      var _YakComp = styled(\\"div\\")(padding);"
     `);
   });
 });

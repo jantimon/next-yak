@@ -7,12 +7,23 @@
  * // will be transformed to
  * const x = <NewComponent />
  * var NewComponent = styled('div')(css`...`)
- * @param {import("@babel/core").NodePath<import("@babel/types").JSXElement>} path
- * @param {import("@babel/core").NodePath<import("@babel/types").Program>} rootPath
- * @param {import("@babel/types")} t
- * @param {YakLocalIdentifierNames} localVarNames
+ * @param {{
+ * path: import("@babel/core").NodePath<import("@babel/types").JSXElement>;
+ * rootPath: import("@babel/core").NodePath<import("@babel/types").Program>;
+ * t: import("@babel/types");
+ * localVarNames: YakLocalIdentifierNames;
+ * topLevelConstBindings: Map<string, number | string | null>;
+ * yakImportPath: import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration>
+ * }} props
  */
-function transpileCssProp(path, rootPath, t, localVarNames) {
+function transpileCssProp({
+  path,
+  rootPath,
+  t,
+  localVarNames,
+  topLevelConstBindings,
+  yakImportPath
+}) {
   const openingElement = path.node.openingElement;
   const closingElement = path.node.closingElement;
   const cssPropIndex = openingElement.attributes.findIndex(
@@ -35,35 +46,27 @@ function transpileCssProp(path, rootPath, t, localVarNames) {
 
   const cssValue = cssProp.value.expression;
 
-  if (!t.isTaggedTemplateExpression(cssValue)) {
+  if (
+    !(t.isIdentifier(cssValue) && topLevelConstBindings.has(cssValue.name)) &&
+    !(
+      t.isTaggedTemplateExpression(cssValue) &&
+      getYakExpressionType(cssValue.tag, localVarNames, t) === "cssLiteral"
+    )
+  ) {
     return;
   }
 
-  const expressionType = getYakExpressionType(cssValue.tag, localVarNames, t);
 
-  // todo: should work with references to the css function
-  if (expressionType !== "cssLiteral") {
-    return;
-  }
 
   if (t.isJSXNamespacedName(openingElement.name)) {
     throw new Error("Namespaced JSX not supported");
   }
 
-  // todo: cache the import declaration for "next-yak"
-  // if styled isn't imported, we need to access the module and import it
+  // if styled isn't imported, we need to access the module and add the import to it
   // e.g.: import {css} from "next-yak" -> import {css, styled} from "next-yak"
   if (localVarNames.styled == null) {
-    const nextYakImport =
-      /** @type {import("@babel/types").ImportDeclaration | undefined}  */ (
-        rootPath.node.body.find((node) => {
-          return (
-            t.isImportDeclaration(node) && node.source.value === "next-yak"
-          );
-        })
-      );
-    if (nextYakImport) {
-      nextYakImport.specifiers.push(
+    if (yakImportPath) {
+      yakImportPath.node.specifiers.push(
         t.importSpecifier(t.identifier("styled"), t.identifier("styled"))
       );
     }
