@@ -659,4 +659,4 @@ declare const atoms: (...atoms: string[]) => () => {
  */
 declare const keyframes: (styles: TemplateStringsArray, ...dynamic: never[]) => string;
 
-export { YakTheme, YakThemeProvider, atoms, css, keyframes, styled, useTheme };
+export { ComponentStyles, YakTheme, YakThemeProvider, atoms, css, keyframes, styled, useTheme };
