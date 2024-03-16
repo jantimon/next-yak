@@ -33,8 +33,11 @@ __export(withYak_exports, {
   withYak: () => withYak
 });
 module.exports = __toCommonJS(withYak_exports);
-var import_path = __toESM(require("path"), 1);
-var import_fs = require("fs");
+var import_node_path = __toESM(require("path"), 1);
+var import_node_fs = require("fs");
+var import_module = require("module");
+var import_meta = {};
+var isoRequire = import_meta?.url ? (0, import_module.createRequire)(import_meta.url) : require;
 var addYak = (yakOptions, nextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
@@ -43,7 +46,7 @@ var addYak = (yakOptions, nextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: require.resolve("../loaders/tsloader.cjs"),
+      loader: isoRequire.resolve("../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -53,10 +56,13 @@ var addYak = (yakOptions, nextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: require.resolve("../loaders/cssloader.cjs"),
+      loader: isoRequire.resolve("../loaders/cssloader.cjs"),
       options: yakOptions
     });
-    const yakContext = resolveYakContext(yakOptions.contextPath, webpackConfig.context);
+    const yakContext = resolveYakContext(
+      yakOptions.contextPath,
+      webpackConfig.context
+    );
     if (yakContext) {
       webpackConfig.resolve.alias["next-yak/context/baseContext"] = yakContext;
     }
@@ -65,11 +71,11 @@ var addYak = (yakOptions, nextConfig) => {
   return nextConfig;
 };
 function resolveYakContext(contextPath, cwd) {
-  const yakContext = contextPath ? import_path.default.resolve(cwd, contextPath) : import_path.default.resolve(cwd, "yak.context");
+  const yakContext = contextPath ? import_node_path.default.resolve(cwd, contextPath) : import_node_path.default.resolve(cwd, "yak.context");
   const extensions = ["", ".ts", ".tsx", ".js", ".jsx"];
   for (const extension in extensions) {
     const fileName = yakContext + extensions[extension];
-    if ((0, import_fs.existsSync)(fileName)) {
+    if ((0, import_node_fs.existsSync)(fileName)) {
       return fileName;
     }
   }

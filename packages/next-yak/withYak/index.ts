@@ -1,9 +1,13 @@
 /// <reference types="node" />
 import { NextConfig } from "../../example/node_modules/next/dist/server/config.js";
-import path from "path";
-import { existsSync } from "fs";
+import path from "node:path";
+import { existsSync } from "node:fs";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { createRequire } from "module";
+const isoRequire = import.meta?.url ? createRequire(import.meta.url) : require;
 
-export type YakConfigOptions = { contextPath?: string }
+export type YakConfigOptions = { contextPath?: string };
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
@@ -13,7 +17,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: require.resolve("../loaders/tsloader.cjs"),
+      loader: isoRequire.resolve("../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -23,15 +27,18 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: require.resolve("../loaders/cssloader.cjs"),
+      loader: isoRequire.resolve("../loaders/cssloader.cjs"),
       options: yakOptions,
     });
 
-    // With the following alias the internal next-yak code 
+    // With the following alias the internal next-yak code
     // is able to import a context which works for server components
-    const yakContext = resolveYakContext(yakOptions.contextPath, webpackConfig.context);
+    const yakContext = resolveYakContext(
+      yakOptions.contextPath,
+      webpackConfig.context
+    );
     if (yakContext) {
-      webpackConfig.resolve.alias['next-yak/context/baseContext'] = yakContext;
+      webpackConfig.resolve.alias["next-yak/context/baseContext"] = yakContext;
     }
 
     return webpackConfig;
@@ -43,8 +50,10 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
  * Try to resolve yak
  */
 function resolveYakContext(contextPath: string | undefined, cwd: string) {
-  const yakContext = contextPath ? path.resolve(cwd, contextPath) : path.resolve(cwd, "yak.context");
-  const extensions = ["", ".ts", ".tsx", ".js", ".jsx", ];
+  const yakContext = contextPath
+    ? path.resolve(cwd, contextPath)
+    : path.resolve(cwd, "yak.context");
+  const extensions = ["", ".ts", ".tsx", ".js", ".jsx"];
   for (const extension in extensions) {
     const fileName = yakContext + extensions[extension];
     if (existsSync(fileName)) {
@@ -59,7 +68,7 @@ function resolveYakContext(contextPath: string | undefined, cwd: string) {
 // Wrapper to allow sync, async, and function configuration of Next.js
 /**
  * Add Yak to your Next.js app
- * 
+ *
  * @usage
  *
  * ```ts
@@ -70,7 +79,7 @@ function resolveYakContext(contextPath: string | undefined, cwd: string) {
  * };
  * module.exports = withYak(nextConfig);
  * ```
- * 
+ *
  * With a custom yakConfig
  *
  * ```ts
@@ -86,29 +95,26 @@ function resolveYakContext(contextPath: string | undefined, cwd: string) {
  * ```
  */
 export const withYak: {
-  <T extends 
-    (
-      Record<string, any>
-      |
-      ((...args: any[]) => Record<string, any>)
-      |
-      ((...args: any[]) => Promise<Record<string, any>>)
-    )
-  >(yakOptions: YakConfigOptions, nextConfig: T): T;
+  <
+    T extends
+      | Record<string, any>
+      | ((...args: any[]) => Record<string, any>)
+      | ((...args: any[]) => Promise<Record<string, any>>),
+  >(
+    yakOptions: YakConfigOptions,
+    nextConfig: T
+  ): T;
   // no yakConfig
-  <T extends 
-    (
-      Record<string, any>
-      |
-      ((...args: any[]) => Record<string, any>)
-      |
-      ((...args: any[]) => Promise<Record<string, any>>)
-    )
-  >(nextConfig: T, _?: undefined): T;
-} = (
-  maybeYakOptions,
-  nextConfig
-) => {
+  <
+    T extends
+      | Record<string, any>
+      | ((...args: any[]) => Record<string, any>)
+      | ((...args: any[]) => Promise<Record<string, any>>),
+  >(
+    nextConfig: T,
+    _?: undefined
+  ): T;
+} = (maybeYakOptions, nextConfig) => {
   if (nextConfig === undefined) {
     return withYak({}, maybeYakOptions);
   }
