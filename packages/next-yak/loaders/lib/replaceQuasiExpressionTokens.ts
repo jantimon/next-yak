@@ -1,3 +1,5 @@
+import type { NodePath, types as babelTypes } from "@babel/core";
+
 /**
  * Replace tokens with predefined values e.g.
  *
@@ -19,12 +21,12 @@
  * }
  * `
  * ```
- *
- * @param {import("@babel/types").TemplateLiteral} quasi
- * @param {(name: string) => unknown} replacer
- * @param {import("@babel/types")} t
  */
-module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
+export default function replaceTokensInQuasiExpressions(
+  quasi: babelTypes.TemplateLiteral,
+  replacer: (name: string) => unknown,
+  t: typeof babelTypes
+) {
   // Iterate over the expressions in reverse order
   // so removing items won't affect the index of the next item
   for (let i = quasi.expressions.length - 1; i >= 0; i--) {
@@ -36,23 +38,22 @@ module.exports = function replaceTokensInQuasiExpressions(quasi, replacer, t) {
     const replacement = parts && replacer(parts[0]);
     // if it is a nested value, find the value of the expression
     // e.g. x.y.z -> find the value of z
-    const replacementValue = replacement && getReplacementValue(
-      replacement,
-      parts
-    );
+    const replacementValue =
+      replacement && getReplacementValue(replacement, parts);
     if (replacementValue !== false && replacementValue !== null) {
       replaceExpressionAndMergeQuasis(quasi, i, replacementValue);
-    } 
+    }
   }
-};
+}
 
 /**
  * Replace tokens with predefined values
- * @param {import("@babel/types").TemplateLiteral} quasi
- * @param {number} expressionIndex
- * @param {unknown} replacement
  */
-function replaceExpressionAndMergeQuasis(quasi, expressionIndex, replacement) {
+function replaceExpressionAndMergeQuasis(
+  quasi: babelTypes.TemplateLiteral,
+  expressionIndex: number,
+  replacement: unknown
+) {
   const stringReplacement =
     typeof replacement === "string"
       ? replacement
@@ -77,11 +78,11 @@ function replaceExpressionAndMergeQuasis(quasi, expressionIndex, replacement) {
  *   - `x()` -> ["x"]
  *   - `x.y()` -> ["x", "y"]
  *   - (1 + 2) -> null
- *
- * @param {import("@babel/types").Expression | import("@babel/types").TSType} expression
- * @param {import("@babel/types")} t
  */
-function getExpressionParts(expression, t) {
+function getExpressionParts(
+  expression: babelTypes.Expression | babelTypes.TSType,
+  t: typeof babelTypes
+) {
   let currentExpression = expression;
   /** @type {string[]} */
   const tokens = [];
@@ -93,7 +94,10 @@ function getExpressionParts(expression, t) {
     }
     // e.g. x.y
     if (t.isMemberExpression(currentExpression)) {
-      if (currentExpression.computed === false && t.isIdentifier(currentExpression.property)) {
+      if (
+        currentExpression.computed === false &&
+        t.isIdentifier(currentExpression.property)
+      ) {
         tokens.unshift(currentExpression.property.name);
       } else if (t.isStringLiteral(currentExpression.property)) {
         tokens.unshift(currentExpression.property.value);
@@ -117,15 +121,12 @@ function getExpressionParts(expression, t) {
 
 /**
  * Get the value of the replacement
- * 
+ *
  * e.g. for `replacement.x.y[0]` and `replacement = { x: { y: [42] } }`
  * parts = ["replacement", "x", "y", 0]
  * --> 42
- * 
- * @param {any} replacement
- * @param {string[]} parts
  */
-function getReplacementValue(replacement, parts) {
+function getReplacementValue(replacement: any, parts: string[]) {
   let currentReplacement = replacement;
   for (let i = 1; i < parts.length; i++) {
     const part = parts[i];

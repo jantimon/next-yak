@@ -1,12 +1,6 @@
-/// @ts-check
 // from https://github.com/sindresorhus/strip-css-comments/tree/main
-/**
- *
- * @param {string} cssString
- */
-module.exports = function stripCssComments(cssString) {
-  /** @type {string | false} */
-  let isInsideString = false;
+export default function stripCssComments(cssString: string) {
+  let isInsideString: string | false = false;
   let currentCharacter = "";
   let comment = "";
   let returnValue = "";
@@ -55,4 +49,4 @@ module.exports = function stripCssComments(cssString) {
     returnValue += currentCharacter;
   }
   return returnValue;
-};
+}

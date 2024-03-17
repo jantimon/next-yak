@@ -17,6 +17,7 @@
       "require": "./dist/runtime-internals/index.cjs"
     },
     "./withYak": {
+      "import": "./withYak/index.js",
       "require": "./withYak/index.cjs"
     },
     "./context/baseContext": {

@@ -1,10 +1,5 @@
-"use strict";
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -12,23 +7,6 @@ var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // loaders/lib/stripCssComments.ts
 function stripCssComments(cssString) {
@@ -443,6 +421,7 @@ __export(babel_yak_plugin_exports, {
   InvalidPositionError: () => InvalidPositionError,
   default: () => babel_yak_plugin_default
 });
+import { relative, resolve, basename } from "path";
 function babel_yak_plugin_default(babel2, options) {
   const { replaces } = options;
   const rootContext = options.rootContext || process.cwd();
@@ -457,9 +436,9 @@ function babel_yak_plugin_default(babel2, options) {
     if (!resourcePath) {
       throw new Error("resourcePath is undefined");
     }
-    const relativePath = (0, import_node_path.relative)(
+    const relativePath = relative(
       rootContext,
-      (0, import_node_path.resolve)(rootContext, resourcePath)
+      resolve(rootContext, resourcePath)
     );
     const hashedFilePath = murmurhash2_32_gc(relativePath);
     hashedFilePaths.set(file, hashedFilePath);
@@ -534,7 +513,7 @@ function babel_yak_plugin_default(babel2, options) {
         if (!filePath) {
           throw new Error("filePath is undefined");
         }
-        const fileName = (0, import_node_path.basename)(filePath).replace(/\.tsx?/, "");
+        const fileName = basename(filePath).replace(/\.tsx?/, "");
         path.insertAfter(
           t.importDeclaration(
             [t.importDefaultSpecifier(t.identifier("__styleYak"))],
@@ -715,14 +694,13 @@ function babel_yak_plugin_default(babel2, options) {
     }
   };
 }
-var import_node_path, InvalidPositionError;
+var InvalidPositionError;
 var init_babel_yak_plugin = __esm({
   "loaders/babel-yak-plugin.ts"() {
     "use strict";
     init_quasiClassifier();
     init_replaceQuasiExpressionTokens();
     init_hash();
-    import_node_path = require("path");
     init_localIdent();
     init_getStyledComponentName();
     init_appendCssUnitToExpressionValue();
@@ -757,12 +735,7 @@ ${recommendedFix}`;
 });
 
 // loaders/tsloader.ts
-var tsloader_exports = {};
-__export(tsloader_exports, {
-  default: () => tsloader
-});
-module.exports = __toCommonJS(tsloader_exports);
-var import_core = __toESM(require("@babel/core"), 1);
+import babel from "@babel/core";
 
 // loaders/lib/getYakImports.ts
 var getYakImports = (code) => {
@@ -813,7 +786,7 @@ async function tsloader(source) {
   );
   let result = null;
   try {
-    result = import_core.default.transformSync(source, {
+    result = babel.transformSync(source, {
       filename: resourcePath,
       configFile: false,
       plugins: [
@@ -841,4 +814,7 @@ async function tsloader(source) {
   }
   return callback(null, result.code, result.map);
 }
-//# sourceMappingURL=tsloader.cjs.map
+export {
+  tsloader as default
+};
+//# sourceMappingURL=tsloader.js.map

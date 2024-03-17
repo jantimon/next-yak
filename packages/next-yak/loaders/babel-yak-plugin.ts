@@ -1,43 +1,59 @@
-/// @ts-check;
-const quasiClassifier = require("./lib/quasiClassifier.cjs");
-const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
-const murmurhash2_32_gc = require("./lib/hash.cjs");
-const { relative, resolve, basename } = require("path");
-const localIdent = require("./lib/localIdent.cjs");
-const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
-const appendCssUnitToExpressionValue = require("./lib/appendCssUnitToExpressionValue.cjs");
-const getCssName = require("./lib/getCssName.cjs");
-const {
-  getConstantName,
-  getConstantValues,
-} = require("./lib/getConstantValues.cjs");
+import type babelCore from "@babel/core";
+import {
+  BabelFile,
+  NodePath,
+  PluginObj,
+  PluginPass,
+  types as babelTypes,
+} from "@babel/core";
+import quasiClassifier from "./lib/quasiClassifier.js";
+import replaceQuasiExpressionTokens from "./lib/replaceQuasiExpressionTokens.js";
+import murmurhash2_32_gc from "./lib/hash.js";
+import { relative, resolve, basename } from "node:path";
+import localIdent from "./lib/localIdent.js";
+import getStyledComponentName from "./lib/getStyledComponentName.js";
+import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue.js";
+import getCssName from "./lib/getCssName.js";
+import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
 
-/** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
-/** @typedef {{ css: string | undefined, styled: string | undefined, keyframes: string | undefined }} YakLocalIdentifierNames */
+type YakBabelPluginOptions = {
+  replaces: Record<string, unknown>;
+  rootContext?: string;
+};
+
+type YakLocalIdentifierNames = {
+  css: string | undefined;
+  styled: string | undefined;
+  keyframes: string | undefined;
+};
 
 /**
  * Babel plugin for typescript files that use yak - it will do things:
  * - inject the import to the css-module (with .yak.module.css extension)
  * - replace the css template literal with styles from the css-module
- *
- * @param {import("@babel/core")} babel
- * @param {YakBabelPluginOptions} options
- * @returns {babel.PluginObj<import("@babel/core").PluginPass & {
- *   localVarNames: YakLocalIdentifierNames,
- *   isImportedInCurrentFile: boolean,
- *   classNameCount: number,
- *   topLevelConstBindings: Map<string, number | string | null>,
- *   varIndex: number,
- *   variableNameToStyledCall: Map<string, {
- *     wasAdded: boolean,
- *     className: string,
- *     astNode: import("@babel/types").CallExpression
- *   }>
- *  yakImportPath?: import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration>
- *  runtimeInternalHelpers: Set<string>
- * }>}
  */
-module.exports = function (babel, options) {
+export default function (
+  babel: typeof babelCore,
+  options: YakBabelPluginOptions
+): PluginObj<
+  PluginPass & {
+    localVarNames: YakLocalIdentifierNames;
+    isImportedInCurrentFile: boolean;
+    classNameCount: number;
+    topLevelConstBindings: Map<string, number | string | null>;
+    varIndex: number;
+    variableNameToStyledCall: Map<
+      string,
+      {
+        wasAdded: boolean;
+        className: string;
+        astNode: babelTypes.CallExpression;
+      }
+    >;
+    yakImportPath?: NodePath<babelTypes.ImportDeclaration>;
+    runtimeInternalHelpers: Set<string>;
+  }
+> {
   const { replaces } = options;
   const rootContext = options.rootContext || process.cwd();
   const { types: t } = babel;
@@ -45,13 +61,9 @@ module.exports = function (babel, options) {
   /**
    * A unique prefix for each file to avoid collisions
    * (generated on first use by hashing the relative file path)
-   * @type {WeakMap<import("@babel/core").BabelFile, string>}
    */
-  const hashedFilePaths = new WeakMap();
-  /**
-   * @param {import("@babel/core").BabelFile} file
-   */
-  const getHashedFilePath = (file) => {
+  const hashedFilePaths = new WeakMap<BabelFile, string>();
+  const getHashedFilePath = (file: BabelFile) => {
     const fromCache = hashedFilePaths.get(file);
     if (fromCache) {
       return fromCache;
@@ -78,12 +90,11 @@ module.exports = function (babel, options) {
    * - styled(Component)`...` -> styledCall
    * - styled.div.attrs({})`...` -> attrsCall
    * - keyframes`...` -> keyframesLiteral
-   *
-   * @param {babel.types.Expression} tag
-   * @param {YakLocalIdentifierNames} localVarNames
-   * @returns {"cssLiteral" | "keyframesLiteral" | "styledLiteral" | "styledCall" | "attrsCall" | "unknown"}
    */
-  const getYakExpressionType = (tag, localVarNames) => {
+  const getYakExpressionType = (
+    tag: babelTypes.Expression,
+    localVarNames: YakLocalIdentifierNames
+  ) => {
     if (t.isIdentifier(tag)) {
       if (tag.name === localVarNames.css) {
         return "cssLiteral";
@@ -157,9 +168,6 @@ module.exports = function (babel, options) {
        *
        * Inject the import to the css-module (with .yak.module.css extension)
        * e.g. `import './App.yak.module.css!=!./App?./App.yak.module.css'`
-       *
-       * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
-       * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       ImportDeclaration(path, state) {
         const node = path.node;
@@ -193,9 +201,7 @@ module.exports = function (babel, options) {
             return;
           }
 
-          const importSpecifier = /** @type {babel.types.Identifier} */ (
-            specifier.imported
-          );
+          const importSpecifier = specifier.imported;
           const localSpecifier = specifier.local || importSpecifier;
 
           if (
@@ -215,9 +221,6 @@ module.exports = function (babel, options) {
        * - styled(Component)`...`
        * - styled.div.attrs({})`...`
        * - keyframes`...`
-       *
-       * @param {import("@babel/core").NodePath<import("@babel/core").types.TaggedTemplateExpression>} path
-       * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number}} state
        */
       TaggedTemplateExpression(path, state) {
         if (!this.isImportedInCurrentFile) {
@@ -300,10 +303,9 @@ module.exports = function (babel, options) {
          * e.g. css`` -> css(...)
          * newArguments is a set of all arguments that will be passed to the function
          */
-        const newArguments = new Set();
+        const newArguments = new Set<babelTypes.Expression>();
         const quasis = path.node.quasi.quasis;
-        /** @type {string[]} */
-        let currentNestingScopes = [];
+        let currentNestingScopes: string[] = [];
         const quasiTypes = quasis.map((quasi) => {
           const classification = quasiClassifier(
             quasi.value.raw,
@@ -314,8 +316,8 @@ module.exports = function (babel, options) {
         });
 
         const expressions = path.node.quasi.expressions.filter(
-          /** @type {(expression: babel.types.Expression | babel.types.TSType) => expression is babel.types.Expression} */
-          (expression) => t.isExpression(expression)
+          (expression): expression is babelTypes.Expression =>
+            t.isExpression(expression)
         );
 
         let cssVariablesInlineStyle;
@@ -397,7 +399,7 @@ module.exports = function (babel, options) {
             cssVariablesInlineStyle.properties.push(
               t.objectProperty(
                 t.stringLiteral(cssVariableName),
-                /** @type {babel.types.Expression} */ (transformedExpression)
+                transformedExpression
               )
             );
           }
@@ -455,18 +457,19 @@ module.exports = function (babel, options) {
       },
     },
   };
-};
+}
 
-class InvalidPositionError extends Error {
+export class InvalidPositionError extends Error {
   /**
    * Add the expression code that caused the error to the message
    * for better debugging
-   * @param {string} message
-   * @param {import("@babel/types").Expression} expression
-   * @param {import("@babel/core").BabelFile} file
-   * @param {string} [recommendedFix]
    */
-  constructor(message, expression, file, recommendedFix) {
+  constructor(
+    message: string,
+    expression: babelTypes.Expression,
+    file: BabelFile,
+    recommendedFix?: string
+  ) {
     let errorText = message;
     const line = expression.loc?.start.line ?? -1;
     if (line !== -1) {
@@ -484,5 +487,3 @@ class InvalidPositionError extends Error {
     super(errorText);
   }
 }
-
-module.exports.InvalidPositionError = InvalidPositionError;

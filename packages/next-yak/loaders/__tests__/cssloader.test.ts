@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import cssloader from "../cssloader.cjs";
+import cssloader from "../cssloader.js";
 
 const loaderContext = {
   resourcePath: "/some/special/path/page.tsx",

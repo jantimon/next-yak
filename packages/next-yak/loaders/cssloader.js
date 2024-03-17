@@ -1,39 +1,3 @@
-"use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// loaders/cssloader.ts
-var cssloader_exports = {};
-__export(cssloader_exports, {
-  default: () => cssLoader
-});
-module.exports = __toCommonJS(cssloader_exports);
-
 // loaders/lib/getYakImports.ts
 var getYakImports = (code) => {
   const codeWithoutComments = code.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -61,7 +25,7 @@ function parseDefaultImport(defaultImport) {
 var getYakImports_default = getYakImports;
 
 // loaders/cssloader.ts
-var import_core = __toESM(require("@babel/core"), 1);
+import babel from "@babel/core";
 
 // loaders/lib/stripCssComments.ts
 function stripCssComments(cssString) {
@@ -351,7 +315,7 @@ function murmurhash2_32_gc(str) {
 }
 
 // loaders/cssloader.ts
-var import_path = require("path");
+import { relative } from "path";
 
 // loaders/lib/getConstantValues.ts
 var getConstantName = (expression, t) => {
@@ -406,7 +370,7 @@ async function cssLoader(source) {
       });
     })
   );
-  const ast = import_core.default.parseSync(source, {
+  const ast = babel.parseSync(source, {
     filename: this.resourcePath,
     configFile: false,
     plugins: [
@@ -419,7 +383,7 @@ async function cssLoader(source) {
   if (ast === null) {
     return "";
   }
-  const { types: t } = import_core.default;
+  const { types: t } = babel;
   const localVarNames = {
     css: void 0,
     styled: void 0,
@@ -432,7 +396,7 @@ async function cssLoader(source) {
   let hashedFile = null;
   const variableNameToStyledClassName = /* @__PURE__ */ new Map();
   let topLevelConstBindings = /* @__PURE__ */ new Map();
-  import_core.default.traverse(ast, {
+  babel.traverse(ast, {
     Program(path) {
       topLevelConstBindings = getConstantValues(path, t);
     },
@@ -537,7 +501,7 @@ async function cssLoader(source) {
         if (expression && (type.unknownSelector || type.insideCssValue || type.empty && wasInsideCssValue)) {
           wasInsideCssValue = true;
           if (!hashedFile) {
-            const relativePath = (0, import_path.relative)(rootContext, resourcePath);
+            const relativePath = relative(rootContext, resourcePath);
             hashedFile = murmurhash2_32_gc(relativePath);
           }
           const variableName2 = t.isExpression(expression) && getConstantName(expression, t);
@@ -578,7 +542,7 @@ var getClosestTemplateLiteralExpressionParentPath = (path, { css, styled }) => {
   let grandChild = path;
   let child = path;
   let parent = path.parentPath;
-  const t = import_core.default.types;
+  const t = babel.types;
   while (parent) {
     if (t.isTaggedTemplateExpression(parent.node)) {
       const tag = parent.node.tag;
@@ -646,4 +610,7 @@ ${indent}}
   return css;
 };
 var trimNewLines = (str) => str.replace(/^\s*\n+|\s+$/g, "");
-//# sourceMappingURL=cssloader.cjs.map
+export {
+  cssLoader as default
+};
+//# sourceMappingURL=cssloader.js.map
