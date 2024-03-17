@@ -12,7 +12,7 @@ var addYak = (yakOptions, nextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: path.join(currentDir, "../loaders/tsloader.cjs"),
+      loader: path.join(currentDir, "../loaders/tsloader.js"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -22,7 +22,7 @@ var addYak = (yakOptions, nextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: path.join(currentDir, "../loaders/cssloader.cjs"),
+      loader: path.join(currentDir, "../loaders/cssloader.js"),
       options: yakOptions
     });
     const yakContext = resolveYakContext(
