@@ -1,6 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig([
+  // runtime
   {
     entryPoints: ["runtime/index.ts"],
     format: ["cjs", "esm"],
@@ -11,6 +12,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist",
   },
+  // runtime types (has to be separate because it includes context types)
   {
     entryPoints: ["runtime/index.ts"],
     format: ["cjs", "esm"],
@@ -21,6 +23,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist",
   },
+  // runtime internals
   {
     entryPoints: ["runtime/internals/index.ts"],
     format: ["cjs", "esm"],
@@ -31,6 +34,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/runtime-internals",
   },
+  // static
   {
     entryPoints: ["static/index.ts"],
     format: ["cjs", "esm"],
@@ -42,6 +46,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/static",
   },
+  // baseContext
   {
     entryPoints: ["runtime/context/baseContext.tsx"],
     format: ["cjs", "esm"],
@@ -53,6 +58,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/context",
   },
+  // client context
   {
     entryPoints: ["runtime/context/index.tsx"],
     format: ["cjs", "esm"],
@@ -64,6 +70,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/context",
   },
+  // server context
   {
     entryPoints: ["runtime/context/index.server.tsx"],
     format: ["cjs", "esm"],
@@ -74,6 +81,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/context",
   },
+  // withYak
   {
     entryPoints: ["withYak/index.ts"],
     format: ["cjs"],
