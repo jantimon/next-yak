@@ -47,7 +47,7 @@ var addYak = (yakOptions, nextConfig) => {
     }
     webpackConfig.module.rules.push({
       test: /\.tsx?$/,
-      loader: import_node_path.default.join(currentDir, "../loaders/tsloader.js"),
+      loader: import_node_path.default.join(currentDir, "../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -57,7 +57,7 @@ var addYak = (yakOptions, nextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: import_node_path.default.join(currentDir, "../loaders/cssloader.js"),
+      loader: import_node_path.default.join(currentDir, "../loaders/cssloader.cjs"),
       options: yakOptions
     });
     const yakContext = resolveYakContext(

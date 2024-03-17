@@ -30,8 +30,8 @@ type YakConfigOptions = {
  * ```
  */
 declare const withYak: {
-    <T extends (Record<string, any> | ((...args: any[]) => Record<string, any>) | ((...args: any[]) => Promise<Record<string, any>>))>(yakOptions: YakConfigOptions, nextConfig: T): T;
-    <T extends (Record<string, any> | ((...args: any[]) => Record<string, any>) | ((...args: any[]) => Promise<Record<string, any>>))>(nextConfig: T, _?: undefined): T;
+    <T extends Record<string, any> | ((...args: any[]) => Record<string, any>) | ((...args: any[]) => Promise<Record<string, any>>)>(yakOptions: YakConfigOptions, nextConfig: T): T;
+    <T extends Record<string, any> | ((...args: any[]) => Record<string, any>) | ((...args: any[]) => Promise<Record<string, any>>)>(nextConfig: T, _?: undefined): T;
 };
 
 export { YakConfigOptions, withYak };

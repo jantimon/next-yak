@@ -89,9 +89,8 @@ export default defineConfig([
     sourcemap: true,
     clean: false,
     dts: true,
-    external: ["../loaders/tsloader.cjs", "../loaders/cssloader.cjs"],
     target: "es2022",
-    outDir: "withYak",
+    outDir: "dist/withYak",
   },
   {
     entryPoints: ["loaders/cssloader.ts"],
@@ -103,7 +102,7 @@ export default defineConfig([
     platform: "node",
     splitting: false,
     target: "es2022",
-    outDir: "loaders",
+    outDir: "dist/loaders",
   },
   {
     entryPoints: ["loaders/tsloader.ts"],
@@ -114,7 +113,7 @@ export default defineConfig([
     dts: true,
     splitting: false,
     target: "es2022",
-    outDir: "loaders",
+    outDir: "dist/loaders",
   },
   {
     entryPoints: ["loaders/tsloader.ts"],
@@ -125,6 +124,6 @@ export default defineConfig([
     dts: true,
     splitting: false,
     target: "es2022",
-    outDir: "loaders",
+    outDir: "dist/loaders",
   },
 ]);
