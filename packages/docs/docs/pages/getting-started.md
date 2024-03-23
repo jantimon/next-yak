@@ -30,7 +30,19 @@ yarn add next-yak
 
 ### Enable next-yak
 
-Add next-yak to your `next.config.js`:
+Add next-yak to your `next.config.mjs` or `next.config.js`:
+
+:::code-group
+
+```js [next.config.mjs]
+import { withYak } from "next-yak/withYak";
+
+const nextConfig = {
+  // your next.js config
+};
+
+export default withYak(nextConfig);
+```
 
 ```js [next.config.js]
 const { withYak } = require("next-yak/withYak");
@@ -40,8 +52,9 @@ const nextConfig = {
 };
 
 module.exports = withYak(nextConfig);
-
 ```
+
+:::
 
 ### Start using next-yak
 

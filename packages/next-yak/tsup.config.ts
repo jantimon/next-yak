@@ -84,7 +84,7 @@ export default defineConfig([
   // withYak
   {
     entryPoints: ["withYak/index.ts"],
-    format: ["cjs"],
+    format: ["cjs", "esm"],
     minify: false,
     sourcemap: true,
     clean: false,

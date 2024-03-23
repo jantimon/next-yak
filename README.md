@@ -39,17 +39,17 @@ Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?fi
 
 1. Install **next-yak** in your Next.js project.
 
-2. Add next-yak to your `next.config.js`:
+2. Add next-yak to your `next.config.mjs`:
 
 ```js
 // next.config.js
-const { withYak } = require("next-yak/withYak");
+import { withYak } from "next-yak/withYak";
 
 const nextConfig = {
   // your next.js config
 };
 
-module.exports = withYak(nextConfig);
+export default withYak(nextConfig);
 ```
 
 3. Ready to go:
