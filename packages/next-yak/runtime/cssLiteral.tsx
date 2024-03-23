@@ -1,6 +1,6 @@
 import type { YakTheme } from "./index.d.ts";
 
-type ComponentStyles<TProps = {}> = (props: TProps) => {
+export type ComponentStyles<TProps = {}> = (props: TProps) => {
   className: string;
   style?: {
     [key: string]: string;

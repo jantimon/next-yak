@@ -12,6 +12,7 @@ const {
   getConstantName,
   getConstantValues,
 } = require("./lib/getConstantValues.cjs");
+const transpileCssProp = require("./lib/transpileCssProp.cjs");
 
 /**
  * @typedef {{ selector: string, hasParent: boolean, quasiCode: Array<{ insideCssValue: boolean, code: string }>, cssPartExpressions: { [key: number]: CssPartExpression[]} }} CssPartExpression
@@ -93,9 +94,16 @@ module.exports = async function cssLoader(source) {
   /** @type {Map<string, number | string | null>} */
   let topLevelConstBindings = new Map();
 
+  /** @type {import("@babel/core").NodePath<import("@babel/types").Program> | null} */
+  let rootPath = null;
+
+  /** @type {import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration> | null} */
+  let yakImportPath = null;
+
   babel.traverse(ast, {
     Program(path) {
       topLevelConstBindings = getConstantValues(path, t);
+      rootPath = path;
     },
     /**
      * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
@@ -105,6 +113,9 @@ module.exports = async function cssLoader(source) {
       if (node.source.value !== "next-yak") {
         return;
       }
+
+      yakImportPath = path;
+
       // Process import specifiers
       node.specifiers.forEach((specifier) => {
         if (
@@ -128,6 +139,21 @@ module.exports = async function cssLoader(source) {
         }
       });
     },
+
+    /**
+     * @param {import("@babel/core").NodePath<import("@babel/types").JSXElement>} path
+     */
+    JSXElement(path) {
+      if (!rootPath) {
+        throw new Error("rootPath is undefined");
+      }
+
+      if (!yakImportPath) {
+        return;
+      }
+
+      transpileCssProp({ path, rootPath, t, localVarNames, topLevelConstBindings, yakImportPath });
+    },
     /**
      * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
      */
@@ -142,12 +168,12 @@ module.exports = async function cssLoader(source) {
       const isKeyFrameLiteral =
         t.isIdentifier(tag) &&
         /** @type {babel.types.Identifier} */ (tag).name ===
-          localVarNames.keyframes;
+        localVarNames.keyframes;
 
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.MemberExpression} */ (tag).object
+          /** @type {babel.types.MemberExpression} */(tag).object
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.MemberExpression} */ (tag).object
@@ -156,7 +182,7 @@ module.exports = async function cssLoader(source) {
       const isStyledCall =
         t.isCallExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.CallExpression} */ (tag).callee
+          /** @type {babel.types.CallExpression} */(tag).callee
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.CallExpression} */ (tag).callee
@@ -166,7 +192,7 @@ module.exports = async function cssLoader(source) {
         t.isCallExpression(tag) &&
         t.isMemberExpression(tag.callee) &&
         /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
-          "attrs";
+        "attrs";
 
       if (
         !isCssLiteral &&
@@ -204,8 +230,8 @@ module.exports = async function cssLoader(source) {
         isStyledLiteral || isStyledCall || isAttrsCall || isKeyFrameLiteral
           ? getStyledComponentName(path)
           : isCssLiteral
-          ? getCssName(path)
-          : null;
+            ? getCssName(path)
+            : null;
 
       const literalSelector = localIdent(
         variableName || "_yak",
@@ -349,7 +375,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.MemberExpression} */ (tag).object
+          /** @type {babel.types.MemberExpression} */(tag).object
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.MemberExpression} */ (tag).object
@@ -357,7 +383,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
       const isStyledCall =
         t.isCallExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.CallExpression} */ (tag).callee
+          /** @type {babel.types.CallExpression} */(tag).callee
         ) &&
         /** @type {babel.types.Identifier} */ (
           /** @type {babel.types.CallExpression} */ (tag).callee
@@ -366,7 +392,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
         t.isCallExpression(tag) &&
         t.isMemberExpression(tag.callee) &&
         /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
-          "attrs";
+        "attrs";
       if (isCssLiteral || isStyledLiteral || isStyledCall || isAttrsCall) {
         if (
           !t.isTemplateLiteral(child.node) ||

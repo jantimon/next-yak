@@ -11,6 +11,7 @@ const {
   getConstantName,
   getConstantValues,
 } = require("./lib/getConstantValues.cjs");
+const transpileCssProp = require("./lib/transpileCssProp.cjs");
 
 /** @typedef {{replaces: Record<string, unknown>, rootContext?: string}} YakBabelPluginOptions */
 /** @typedef {{ css: string | undefined, styled: string | undefined, keyframes: string | undefined }} YakLocalIdentifierNames */
@@ -34,7 +35,8 @@ const {
  *     astNode: import("@babel/types").CallExpression
  *   }>
  *  yakImportPath?: import("@babel/core").NodePath<import("@babel/core").types.ImportDeclaration>
- *  runtimeInternalHelpers: Set<string>
+ *  runtimeInternalHelpers: Set<string>,
+ *  rootPath: import("@babel/core").NodePath<import("@babel/types").Program> | null
  * }>}
  */
 module.exports = function (babel, options) {
@@ -132,11 +134,13 @@ module.exports = function (babel, options) {
       this.variableNameToStyledCall = new Map();
       this.topLevelConstBindings = new Map();
       this.runtimeInternalHelpers = new Set();
+      this.rootPath = null;
     },
     visitor: {
       Program: {
         enter(path, state) {
           this.topLevelConstBindings = getConstantValues(path, t);
+          this.rootPath = path;
         },
         exit(path, state) {
           if (this.runtimeInternalHelpers.size && this.yakImportPath) {
@@ -149,6 +153,29 @@ module.exports = function (babel, options) {
             this.yakImportPath.insertAfter(newImport);
           }
         },
+      },
+
+      /**
+       * @param {import("@babel/core").NodePath<import("@babel/types").JSXElement>} path
+       * @param {babel.PluginPass & {localVarNames: YakLocalIdentifierNames, isImportedInCurrentFile: boolean, classNameCount: number, varIndex: number, rootPath: import("@babel/core").NodePath<import("@babel/types").Program> | null}} state
+       */
+      JSXElement(path, state) {
+        if (!state.rootPath) {
+          throw new Error("rootPath is undefined");
+        }
+
+        if (!this.isImportedInCurrentFile || !this.yakImportPath) {
+          return;
+        }
+
+        transpileCssProp({
+          path,
+          rootPath: state.rootPath,
+          t,
+          localVarNames: this.localVarNames,
+          topLevelConstBindings: this.topLevelConstBindings,
+          yakImportPath: this.yakImportPath,
+        });
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
@@ -276,8 +303,8 @@ module.exports = function (babel, options) {
           styledApi || expressionType === "keyframesLiteral"
             ? getStyledComponentName(path)
             : expressionType === "cssLiteral"
-            ? getCssName(path)
-            : null;
+              ? getCssName(path)
+              : null;
 
         const identifier = localIdent(
           variableName || "_yak",
@@ -366,10 +393,10 @@ module.exports = function (babel, options) {
 
               throw new InvalidPositionError(
                 "Possible constant used as runtime value for a css variable\n" +
-                  "Please move the constant to a .yak import or use an arrow function\n" +
-                  "e.g.:\n" +
-                  "|   import { primaryColor } from './foo.yak'\n" +
-                  "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
+                "Please move the constant to a .yak import or use an arrow function\n" +
+                "e.g.:\n" +
+                "|   import { primaryColor } from './foo.yak'\n" +
+                "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
                 expression,
                 this.file
               );
@@ -385,11 +412,11 @@ module.exports = function (babel, options) {
             const cssUnit = quasis[i + 1]?.value.raw.match(/^([a-z]+|%)/i)?.[0];
             const transformedExpression = cssUnit
               ? appendCssUnitToExpressionValue(
-                  cssUnit,
-                  expression,
-                  this.runtimeInternalHelpers,
-                  t
-                )
+                cssUnit,
+                expression,
+                this.runtimeInternalHelpers,
+                t
+              )
               : expression;
 
             // expression: `x`
@@ -397,7 +424,7 @@ module.exports = function (babel, options) {
             cssVariablesInlineStyle.properties.push(
               t.objectProperty(
                 t.stringLiteral(cssVariableName),
-                /** @type {babel.types.Expression} */ (transformedExpression)
+                /** @type {babel.types.Expression} */(transformedExpression)
               )
             );
           }

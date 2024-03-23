@@ -1,4 +1,5 @@
 export { css } from "./cssLiteral.js";
+export type { ComponentStyles } from "./cssLiteral.js";
 export { styled } from "./styled.js";
 export { atoms } from "./atoms.js";
 export { keyframes } from "./keyframes.js";
