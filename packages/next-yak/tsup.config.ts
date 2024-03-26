@@ -23,7 +23,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist",
   },
-  // runtime internals
+  // runtime internals (helpers which get injected by the compiler)
   {
     entryPoints: ["runtime/internals/index.ts"],
     format: ["cjs", "esm"],
@@ -81,16 +81,17 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/context",
   },
-  // withYak
+  // withYak (next.js config plugin)
   {
     entryPoints: ["withYak/index.ts"],
-    format: ["esm", "cjs"],
+    format: ["cjs", "esm"],
     minify: false,
     sourcemap: true,
     clean: false,
     dts: true,
+    external: ["../loaders/tsloader.cjs", "../loaders/cssloader.cjs"],
     target: "es2022",
-    outDir: "dist/withYak",
+    outDir: "withYak",
   },
   // loaders
   {
