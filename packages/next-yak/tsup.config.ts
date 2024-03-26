@@ -81,7 +81,7 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/context",
   },
-  // withYak
+  // withYak (next.js config plugin)
   {
     entryPoints: ["withYak/index.ts"],
     format: ["cjs", "esm"],
