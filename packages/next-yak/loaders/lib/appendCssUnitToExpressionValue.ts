@@ -1,16 +1,13 @@
+import type { types as babelTypes } from "@babel/core";
+
 /**
  * Extracts the css unit from a css string and checks if it is a valid CSS unit
- *
- * @param {string} cssUnit
- * @param {babel.types.Expression} expression
- * @param {Set<string>} runtimeInternalHelpers
- * @param {import("@babel/types")} t
  */
 const appendCssUnitToExpressionValue = (
-  cssUnit,
-  expression,
-  runtimeInternalHelpers,
-  t
+  cssUnit: string,
+  expression: babelTypes.Expression,
+  runtimeInternalHelpers: Set<string>,
+  t: typeof babelTypes
 ) => {
   if (expression.type === "ArrowFunctionExpression") {
     if (expression.body.type !== "BlockStatement") {
@@ -48,4 +45,4 @@ const appendCssUnitToExpressionValue = (
   return callExpression;
 };
 
-module.exports = appendCssUnitToExpressionValue;
+export default appendCssUnitToExpressionValue;

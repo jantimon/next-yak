@@ -9,12 +9,12 @@
  * localIdent("myVariableName", 1, "keyframes") // "@keyframes myVariableName_1"
  * localIdent("myVariableName", 1, "animation") // "myVariableName_1"
  * ```
- *
- * @param {string} variableName
- * @param {number | null} i
- * @param {"selector" | "className" | "keyframes" | "animation"} kind
  */
-function localIdent(variableName, i, kind) {
+export default function localIdent(
+  variableName: string,
+  i: number | null,
+  kind: "selector" | "className" | "keyframes" | "animation"
+) {
   switch (kind) {
     case "selector":
       return `.${variableName}${i === null ? "" : `_${i}`}`;
@@ -27,5 +27,3 @@ function localIdent(variableName, i, kind) {
       throw new Error("unknown kind");
   }
 }
-
-module.exports = localIdent;

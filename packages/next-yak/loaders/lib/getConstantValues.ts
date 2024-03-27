@@ -1,13 +1,12 @@
-// @ts-check
-
-/** @typedef {import("@babel/types")} babel */
+import type { NodePath, types as babelTypes } from "@babel/core";
 
 /**
  * Returns the name of the expression
- * @param {babel.types.Expression} expression
- * @param {import("@babel/types")} t
  */
-const getConstantName = (expression, t) => {
+export const getConstantName = (
+  expression: babelTypes.Expression,
+  t: typeof babelTypes
+) => {
   // e.g. styled.div`color: ${x};`
   if (t.isIdentifier(expression)) {
     // e.g. x
@@ -38,13 +37,12 @@ const getConstantName = (expression, t) => {
 
 /**
  * Extracts all top level constant values from a program path
- *
- * @param {babel.NodePath<babel.types.Program>} path
- * @param {import("@babel/types")} t
  */
-function getConstantValues(path, t) {
-  /** @type {Map<string, string | number | null>} */
-  const topLevelConstBindings = new Map();
+export function getConstantValues(
+  path: NodePath<babelTypes.Program>,
+  t: typeof babelTypes
+) {
+  const topLevelConstBindings = new Map<string, string | number | null>();
   const bindings = Object.entries(path.scope.bindings);
   for (const [name, binding] of bindings) {
     if (binding.kind === "module") {
@@ -76,8 +74,3 @@ function getConstantValues(path, t) {
   }
   return topLevelConstBindings;
 }
-
-module.exports = {
-  getConstantValues,
-  getConstantName,
-};

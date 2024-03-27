@@ -1,16 +1,14 @@
-/// @ts-check
-const babel = require("@babel/core");
-const getYakImports = require("./lib/getYakImports.cjs");
-const InvalidPositionError =
-  require("./babel-yak-plugin.cjs").InvalidPositionError;
+import babel, { BabelFileResult } from "@babel/core";
+import getYakImports from "./lib/getYakImports.js";
+import { InvalidPositionError } from "./babel-yak-plugin.js";
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
- * @param {string} source
- * @this {any}
- * @returns {Promise<string | void>}
  */
-module.exports = async function tsloader(source) {
+export default async function tsloader(
+  this: any,
+  source: string
+): Promise<string | void> {
   // ignore files if they don't use yak
   if (!source.includes("next-yak")) {
     return source;
@@ -26,8 +24,7 @@ module.exports = async function tsloader(source) {
   // However .yak files inside .yak files are not be compiled
   // to avoid performance overhead
   const importedYakConstants = isYakFile ? [] : getYakImports(source);
-  /** @type {Record<string, unknown>} */
-  const replaces = {};
+  const replaces: Record<string, unknown> = {};
   await Promise.all(
     importedYakConstants.map(async ({ imports, from }) => {
       const constantValues = await this.importModule(from, {
@@ -39,8 +36,7 @@ module.exports = async function tsloader(source) {
     })
   );
 
-  /** @type {babel.BabelFileResult | null} */
-  let result = null;
+  let result: BabelFileResult | null = null;
   try {
     // Compile the typescript file with babel - this will:
     // - inject the import to the css-module (with .yak.module.css extension)
@@ -54,7 +50,7 @@ module.exports = async function tsloader(source) {
           { isTSX: this.resourcePath.endsWith(".tsx") },
         ],
         [
-          require("./babel-yak-plugin.cjs"),
+          await import("./babel-yak-plugin.js").then((m) => m.default),
           {
             replaces,
             rootContext,
@@ -72,4 +68,4 @@ module.exports = async function tsloader(source) {
     return callback(new Error("babel transform failed"));
   }
   return callback(null, result.code, result.map);
-};
+}

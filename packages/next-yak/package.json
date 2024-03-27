@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "type": "module",
   "types": "./dist/",
   "exports": {
@@ -17,8 +17,8 @@
       "require": "./dist/runtime-internals/index.cjs"
     },
     "./withYak": {
-      "require": "./withYak/index.cjs",
-      "import": "./withYak/index.js"
+      "import": "./dist/withYak/index.js",
+      "require": "./dist/withYak/index.cjs"
     },
     "./context/baseContext": {
       "import": "./dist/context/baseContext.js",

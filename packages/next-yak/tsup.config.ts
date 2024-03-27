@@ -89,8 +89,20 @@ export default defineConfig([
     sourcemap: true,
     clean: false,
     dts: true,
-    external: ["../loaders/tsloader.cjs", "../loaders/cssloader.cjs"],
     target: "es2022",
-    outDir: "withYak",
+    outDir: "dist/withYak",
+  },
+  // loaders
+  {
+    entryPoints: ["loaders/cssloader.ts", "loaders/tsloader.ts"],
+    format: ["esm", "cjs"],
+    minify: false,
+    sourcemap: true,
+    clean: false,
+    dts: true,
+    platform: "node",
+    splitting: false,
+    target: "es2022",
+    outDir: "dist/loaders",
   },
 ]);

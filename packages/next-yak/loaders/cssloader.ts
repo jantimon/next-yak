@@ -1,29 +1,27 @@
-/// @ts-check
-const getYakImports = require("./lib/getYakImports.cjs");
-const babel = require("@babel/core");
-const quasiClassifier = require("./lib/quasiClassifier.cjs");
-const localIdent = require("./lib/localIdent.cjs");
-const replaceQuasiExpressionTokens = require("./lib/replaceQuasiExpressionTokens.cjs");
-const getStyledComponentName = require("./lib/getStyledComponentName.cjs");
-const getCssName = require("./lib/getCssName.cjs");
-const murmurhash2_32_gc = require("./lib/hash.cjs");
-const { relative } = require("path");
-const {
-  getConstantName,
-  getConstantValues,
-} = require("./lib/getConstantValues.cjs");
+import getYakImports from "./lib/getYakImports.js";
+import babel, { NodePath } from "@babel/core";
+import quasiClassifier from "./lib/quasiClassifier.js";
+import localIdent from "./lib/localIdent.js";
+import replaceQuasiExpressionTokens from "./lib/replaceQuasiExpressionTokens.js";
+import getStyledComponentName from "./lib/getStyledComponentName.js";
+import getCssName from "./lib/getCssName.js";
+import murmurhash2_32_gc from "./lib/hash.js";
+import { relative } from "path";
+import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
+import { Identifier, TaggedTemplateExpression } from "@babel/types";
 
-/**
- * @typedef {{ selector: string, hasParent: boolean, quasiCode: Array<{ insideCssValue: boolean, code: string }>, cssPartExpressions: { [key: number]: CssPartExpression[]} }} CssPartExpression
- * A CssPartExpression is the css code block for each tagged template expression
- */
+// A CssPartExpression is the css code block for each tagged template expression
+type CssPartExpression = {
+  selector: string;
+  hasParent: boolean;
+  quasiCode: Array<{ insideCssValue: boolean; code: string }>;
+  cssPartExpressions: { [key: number]: CssPartExpression[] };
+};
 
-/**
- * @param {string} source
- * @this {any}
- * @returns {Promise<string>}
- */
-module.exports = async function cssLoader(source) {
+export default async function cssLoader(
+  this: any,
+  source: string
+): Promise<string> {
   const { rootContext, resourcePath } = this;
 
   /** .yak files are constant definition files */
@@ -34,8 +32,7 @@ module.exports = async function cssLoader(source) {
   // However .yak files inside .yak files are not be compiled
   // to avoid performance overhead
   const importedYakConstants = isYakFile ? [] : getYakImports(source);
-  /** @type {Record<string, unknown>} */
-  const replaces = {};
+  const replaces: Record<string, unknown> = {};
   await Promise.all(
     importedYakConstants.map(async ({ imports, from }) => {
       const constantValues = await this.importModule(from, {
@@ -65,8 +62,12 @@ module.exports = async function cssLoader(source) {
 
   const { types: t } = babel;
 
-  /** @type {{css?: string, styled?: string, attrs?: "attrs", keyframes?: string}} */
-  const localVarNames = {
+  const localVarNames: {
+    css: string | undefined;
+    styled: string | undefined;
+    attrs: string;
+    keyframes: string | undefined;
+  } = {
     css: undefined,
     styled: undefined,
     attrs: "attrs",
@@ -78,28 +79,23 @@ module.exports = async function cssLoader(source) {
    *
    * Babel iterates over the full TaggedLiteralExpression before it iterates over their children
    * To keep the order as written in the original code the code fragments are stored in an ordered map
-   * @type {Map<import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>, CssPartExpression>}
    */
-  const cssParts = new Map();
+  const cssParts = new Map<
+    NodePath<TaggedTemplateExpression>,
+    CssPartExpression
+  >();
 
   let index = 0;
   let varIndex = 0;
-  /** @type {string | null} */
-  let hashedFile = null;
+  let hashedFile: string | null = null;
 
-  /** @type {Map<string, string>} */
-  const variableNameToStyledClassName = new Map();
-
-  /** @type {Map<string, number | string | null>} */
-  let topLevelConstBindings = new Map();
+  const variableNameToStyledClassName = new Map<string, string>();
+  let topLevelConstBindings = new Map<string, number | string | null>();
 
   babel.traverse(ast, {
     Program(path) {
       topLevelConstBindings = getConstantValues(path, t);
     },
-    /**
-     * @param {import("@babel/core").NodePath<import("@babel/types").ImportDeclaration>} path
-     */
     ImportDeclaration(path) {
       const node = path.node;
       if (node.source.value !== "next-yak") {
@@ -115,9 +111,8 @@ module.exports = async function cssLoader(source) {
           return;
         }
 
-        const importSpecifier = /** @type {babel.types.Identifier} */ (
-          specifier.imported
-        );
+        const importSpecifier =
+          /** @type {babel.types.Identifier} */ specifier.imported;
         const localSpecifier = specifier.local || importSpecifier;
         if (
           importSpecifier.name === "styled" ||
@@ -137,36 +132,31 @@ module.exports = async function cssLoader(source) {
 
       const isCssLiteral =
         t.isIdentifier(tag) &&
-        /** @type {babel.types.Identifier} */ (tag).name === localVarNames.css;
+        /** @type {babel.types.Identifier} */ tag.name === localVarNames.css;
 
       const isKeyFrameLiteral =
         t.isIdentifier(tag) &&
-        /** @type {babel.types.Identifier} */ (tag).name ===
+        /** @type {babel.types.Identifier} */ tag.name ===
           localVarNames.keyframes;
 
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.MemberExpression} */ (tag).object
+          /** @type {babel.types.MemberExpression} */ tag.object
         ) &&
-        /** @type {babel.types.Identifier} */ (
-          /** @type {babel.types.MemberExpression} */ (tag).object
-        ).name === localVarNames.styled;
+        /** @type {babel.types.Identifier} */ /** @type {babel.types.MemberExpression} */ tag
+          .object.name === localVarNames.styled;
 
       const isStyledCall =
         t.isCallExpression(tag) &&
-        t.isIdentifier(
-          /** @type {babel.types.CallExpression} */ (tag).callee
-        ) &&
-        /** @type {babel.types.Identifier} */ (
-          /** @type {babel.types.CallExpression} */ (tag).callee
-        ).name === localVarNames.styled;
+        t.isIdentifier(/** @type {babel.types.CallExpression} */ tag.callee) &&
+        /** @type {babel.types.Identifier} */ /** @type {babel.types.CallExpression} */ tag
+          .callee.name === localVarNames.styled;
 
       const isAttrsCall =
         t.isCallExpression(tag) &&
         t.isMemberExpression(tag.callee) &&
-        /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
-          "attrs";
+        (tag.callee.property as Identifier).name === "attrs";
 
       if (
         !isCssLiteral &&
@@ -213,8 +203,7 @@ module.exports = async function cssLoader(source) {
         isKeyFrameLiteral ? "keyframes" : "selector"
       );
 
-      /** @type {CssPartExpression} */
-      const currentCssParts = {
+      const currentCssParts: CssPartExpression = {
         quasiCode: [],
         cssPartExpressions: [],
         selector: !parentLocation
@@ -223,7 +212,10 @@ module.exports = async function cssLoader(source) {
         hasParent: Boolean(parentLocation),
       };
       const parentCssParts =
-        parentLocation && cssParts.get(parentLocation.parent);
+        parentLocation &&
+        cssParts.get(
+          parentLocation.parent as NodePath<TaggedTemplateExpression>
+        );
       cssParts.set(path, currentCssParts);
       if (parentCssParts) {
         parentCssParts.cssPartExpressions[parentLocation.currentIndex] ||= [];
@@ -313,31 +305,25 @@ module.exports = async function cssLoader(source) {
   );
 
   return mergeCssPartExpression(rootCssParts).trim();
-};
+}
 
 /**
  * In jscode slashes are escaped however in css code they are not
  * e.g. in javascript `:before { content: "\\f0c9"; }` would be `:before { content: "\f0c9"; }` in css
  * slashes are still possible with `:before { content: "\\\\"; }`
- * @param {string} code
  */
-const unEscapeCssCode = (code) => code.replace(/\\\\/gi, "\\");
+const unEscapeCssCode = (code: string) => code.replace(/\\\\/gi, "\\");
 
 /**
  * Searches the closest parent TaggedTemplateExpression using a name from localNames
  * Returns the location inside this parent
- *
- * @param {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} path
- * @param {{ css?: string , styled?: string }} localNames
  */
 const getClosestTemplateLiteralExpressionParentPath = (
-  path,
-  { css, styled }
+  path: NodePath<TaggedTemplateExpression>,
+  { css, styled }: { css?: string; styled?: string }
 ) => {
-  /** @type {import("@babel/core").NodePath} */
-  let grandChild = path;
-  /** @type {import("@babel/core").NodePath} */
-  let child = path;
+  let grandChild: NodePath = path;
+  let child: NodePath = path;
   let parent = path.parentPath;
   const t = babel.types;
   while (parent) {
@@ -345,28 +331,23 @@ const getClosestTemplateLiteralExpressionParentPath = (
       const tag = parent.node.tag;
       const isCssLiteral =
         t.isIdentifier(tag) &&
-        /** @type {babel.types.Identifier} */ (tag).name === css;
+        /** @type {babel.types.Identifier} */ tag.name === css;
       const isStyledLiteral =
         t.isMemberExpression(tag) &&
         t.isIdentifier(
-          /** @type {babel.types.MemberExpression} */ (tag).object
+          /** @type {babel.types.MemberExpression} */ tag.object
         ) &&
-        /** @type {babel.types.Identifier} */ (
-          /** @type {babel.types.MemberExpression} */ (tag).object
-        ).name === styled;
+        /** @type {babel.types.Identifier} */ /** @type {babel.types.MemberExpression} */ tag
+          .object.name === styled;
       const isStyledCall =
         t.isCallExpression(tag) &&
-        t.isIdentifier(
-          /** @type {babel.types.CallExpression} */ (tag).callee
-        ) &&
-        /** @type {babel.types.Identifier} */ (
-          /** @type {babel.types.CallExpression} */ (tag).callee
-        ).name === styled;
+        t.isIdentifier(/** @type {babel.types.CallExpression} */ tag.callee) &&
+        /** @type {babel.types.Identifier} */ /** @type {babel.types.CallExpression} */ tag
+          .callee.name === styled;
       const isAttrsCall =
         t.isCallExpression(tag) &&
         t.isMemberExpression(tag.callee) &&
-        /** @type {babel.types.Identifier} */ (tag.callee.property).name ===
-          "attrs";
+        (tag.callee.property as Identifier).name === "attrs";
       if (isCssLiteral || isStyledLiteral || isStyledCall || isAttrsCall) {
         if (
           !t.isTemplateLiteral(child.node) ||
@@ -377,9 +358,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
         const currentIndex = child.node.expressions.indexOf(grandChild.node);
         return {
           parent:
-            /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */ (
-              parent
-            ),
+            /** @type {import("@babel/core").NodePath<import("@babel/types").TaggedTemplateExpression>} */ parent,
           currentIndex,
         };
       }
@@ -396,11 +375,11 @@ const getClosestTemplateLiteralExpressionParentPath = (
 
 /**
  * depthFirst traversal of the css parts
- * @param {CssPartExpression[]} cssPartExpression
- * @param {number} [level]
- * @returns
  */
-const mergeCssPartExpression = (cssPartExpression, level = 0) => {
+const mergeCssPartExpression = (
+  cssPartExpression: CssPartExpression[],
+  level = 0
+) => {
   let css = "";
   for (const { quasiCode, cssPartExpressions, selector } of cssPartExpression) {
     let cssPart = "";
@@ -426,7 +405,4 @@ const mergeCssPartExpression = (cssPartExpression, level = 0) => {
   return css;
 };
 
-/**
- * @param {string} str
- */
-const trimNewLines = (str) => str.replace(/^\s*\n+|\s+$/g, "");
+const trimNewLines = (str: string) => str.replace(/^\s*\n+|\s+$/g, "");

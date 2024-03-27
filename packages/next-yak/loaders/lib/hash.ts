@@ -6,10 +6,10 @@
  * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
  * @see http://sites.google.com/site/murmurhash/
  *
- * @param {string} str ASCII only
- * @return {string} Base 36 encoded hash result
+ * @param str ASCII only
+ * @return Base 36 encoded hash result
  */
-function murmurhash2_32_gc(str) {
+export default function murmurhash2_32_gc(str: string) {
   let l = str.length;
   let h = l;
   let i = 0;
@@ -56,5 +56,3 @@ function murmurhash2_32_gc(str) {
 
   return (h >>> 0).toString(36);
 }
-
-module.exports = murmurhash2_32_gc;

@@ -1,5 +1,4 @@
-/// @ts-check
-const stripCssComments = require("./stripCssComments.cjs");
+import stripCssComments from "./stripCssComments.js";
 
 /**
  * Checks a quasiValue and returns its type
@@ -7,18 +6,11 @@ const stripCssComments = require("./stripCssComments.cjs");
  * - empty: no expressions, no text
  * - unknownSelector: starts with a `{` e.g. `{ opacity: 0.5; }` or `,` e.g. `, bar { ... }`
  * - insideCssValue: does not end with a `{` or `}` or `;` e.g. `color: `
- *
- * @param {string} quasiValue
- * @param {string[]} currentNestingScopes - the current nesting scope
- *
- * @returns {{
- *  empty: boolean,
- *  unknownSelector: boolean,
- *  insideCssValue: boolean,
- *  currentNestingScopes: string[],
- * }}
  */
-module.exports = function quasiClassifier(quasiValue, currentNestingScopes) {
+export default function quasiClassifier(
+  quasiValue: string,
+  currentNestingScopes: string[]
+) {
   // TODO - for better performance we could move the comment skipping logic
   // directly in the for loop below instead of calling stripCssComments
   const trimmedCssString = stripCssComments(quasiValue).trim();
@@ -30,8 +22,7 @@ module.exports = function quasiClassifier(quasiValue, currentNestingScopes) {
       currentNestingScopes,
     };
   }
-  /** @type {'"' | "'" | false} */
-  let isInsideString = false;
+  let isInsideString: '"' | "'" | false = false;
   let currentCharacter = "";
   let newNestingLevel = [...currentNestingScopes];
   let currentSelector = "";
@@ -87,4 +78,4 @@ module.exports = function quasiClassifier(quasiValue, currentNestingScopes) {
       currentCharacter !== ";",
     currentNestingScopes: newNestingLevel,
   };
-};
+}

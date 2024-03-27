@@ -1,6 +1,6 @@
 import { parse, traverse } from "@babel/core";
 import { NodePath } from "@babel/core";
-import getCssName from "../lib/getCssName.cjs";
+import getCssName from "../lib/getCssName.js";
 import type { TaggedTemplateExpression } from "@babel/types";
 import { describe, it, expect } from "vitest";
 

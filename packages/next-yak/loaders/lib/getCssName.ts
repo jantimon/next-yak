@@ -1,21 +1,18 @@
-// @ts-check
-
-/** @typedef {import("@babel/types")} babel */
+import type { NodePath, types as babelTypes } from "@babel/core";
 
 /**
  * Extracts the conditions from a path
- * @param {babel.NodePath<babel.types.TaggedTemplateExpression>} path
  */
-function extractConditions(path) {
-  /** @type {string[]} */
-  const conditions = [];
+function extractConditions(
+  path: NodePath<babelTypes.TaggedTemplateExpression>
+) {
+  const conditions: string[] = [];
   const visitedNodes = new Set();
-  /**
-   * @param {babel.types.Node} node
-   * @param {babel.types.Node} previousNode
-   * @param {boolean} isNegated
-   */
-  const getConditions = (node, previousNode, isNegated = false) => {
+  const getConditions = (
+    node: babelTypes.Node,
+    previousNode: babelTypes.Node,
+    isNegated = false
+  ) => {
     if (visitedNodes.has(node)) return;
     visitedNodes.add(node);
     // Support for && and || operators e.g. disabled && "disabled"
@@ -58,10 +55,8 @@ function extractConditions(path) {
       );
     }
   };
-  /** @type {babel.NodePath | null} */
-  let currentPath = path;
-  /** @type {babel.NodePath} */
-  let previousPath = path;
+  let currentPath: NodePath | null = path;
+  let previousPath: NodePath = path;
   while (currentPath) {
     getConditions(currentPath.node, previousPath.node);
     previousPath = currentPath;
@@ -77,11 +72,10 @@ function extractConditions(path) {
  * Try to get the name of a css component from a literal expression
  *
  * e.g. const mixin = css`...` -> "mixin"
- *
- * @param {babel.NodePath<babel.types.TaggedTemplateExpression>} taggedTemplateExpressionPath
- * @returns {string | null}
  */
-const getStyledComponentName = (taggedTemplateExpressionPath) => {
+const getStyledComponentName = (
+  taggedTemplateExpressionPath: NodePath<babelTypes.TaggedTemplateExpression>
+) => {
   const variableDeclaratorPath = taggedTemplateExpressionPath.findParent(
     (path) => path.isVariableDeclarator()
   );
@@ -100,11 +94,8 @@ const getStyledComponentName = (taggedTemplateExpressionPath) => {
  *
  * e.g. props.disabled -> "propsDisabled"
  * e.g. props.user.disabled -> "propsUserDisabled
- *
- * @param {babel.types.MemberExpression} node
- * @returns {string}
  */
-function getMemberExpressionName(node) {
+function getMemberExpressionName(node: babelTypes.MemberExpression): string {
   if (
     !node.object ||
     !node.property ||
@@ -134,11 +125,10 @@ function getMemberExpressionName(node) {
  * Try to get the name of a css literal
  *
  * e.g. ({$disabled}) => $disabled && css`...` -> "is_$disabled"
- *
- * @param {babel.NodePath<babel.types.TaggedTemplateExpression>} literal
- * @returns {string}
  */
-function getCssName(literal) {
+export default function getCssName(
+  literal: NodePath<babelTypes.TaggedTemplateExpression>
+) {
   const conditions = extractConditions(literal);
   if (conditions.length === 0) {
     const mixinName = getStyledComponentName(literal);
@@ -146,5 +136,3 @@ function getCssName(literal) {
   }
   return conditions.join("_").replace(/\$/g, "");
 }
-
-module.exports = getCssName;
