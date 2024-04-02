@@ -17,7 +17,12 @@ const headline = css<{ $primary?: boolean }>`
         `
       : css`
           color: blue;
-          background: linear-gradient(149deg, #ae52eb 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+          background: linear-gradient(
+            149deg,
+            #ae52eb 0%,
+            rgba(253, 29, 29, 1) 50%,
+            rgba(252, 176, 69, 1) 100%
+          );
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         `}
