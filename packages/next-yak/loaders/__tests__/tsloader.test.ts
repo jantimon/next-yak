@@ -433,7 +433,7 @@ const fadeIn = keyframes\`
 \`
 
 const FadeInButton = styled.button\`
-  animation: 1s \${() => fadeIn} ease-out 1s infinite reverse both paused slidein;
+  animation: 1s \${fadeIn} ease-out 1s infinite reverse both paused slidein;
 \`
 `
       )
@@ -455,13 +455,9 @@ const FadeInButton = styled.button\`
       const FadeInButton =
       /*YAK Extracted CSS:
       .FadeInButton {
-        animation: 1s var(--FadeInButton-animation_18fi82j) ease-out 1s infinite reverse both paused slidein;
+        animation: 1s fadeIn ease-out 1s infinite reverse both paused slidein;
       }*/
-      styled.button(__styleYak.FadeInButton, {
-        \\"style\\": {
-          \\"--FadeInButton-animation_18fi82j\\": () => fadeIn
-        }
-      });"
+      styled.button(__styleYak.FadeInButton);"
     `);
   });
 
@@ -511,26 +507,22 @@ const Wrapper = styled.div\`
         fill: currentColor;
         width: 1em;
         height: 1em;
-        :hover & {
+        .Link:hover & {
           color: red;
         }
-        :focus & {
+        .Link:focus & {
           color: red;
         }
       }*/
-      styled.svg(__styleYak.Icon, Link, Link);
+      styled.svg(__styleYak.Icon);
       const Wrapper =
       /*YAK Extracted CSS:
       .Wrapper {
-        ) {
+        &:has(> .Link) {
           padding: 10px;
         }
       }*/
-      styled.div(__styleYak.Wrapper, {
-        \\"style\\": {
-          \\"--Wrapper-&_18fi82j\\": Link
-        }
-      });"
+      styled.div(__styleYak.Wrapper);"
     `);
   });
 
@@ -548,7 +540,9 @@ const Icon = styled.svg\`
 \`
 
 const Wrapper = styled.div\`
-  &:has(> \${Icon}) {
+  color: red;
+  &:has(> \${Icon}),
+  &:has(> \${Link}) {
     padding: 10px;
   }
 \`
@@ -563,15 +557,13 @@ const Wrapper = styled.div\`
       const Wrapper =
       /*YAK Extracted CSS:
       .Wrapper {
-        ) {
+        color: red;
+        &:has(> .Icon),
+      &:has(> .Link) {
           padding: 10px;
         }
       }*/
-      styled.div(__styleYak.Wrapper, {
-        \\"style\\": {
-          \\"--Wrapper-&_18fi82j\\": Icon
-        }
-      });"
+      styled.div(__styleYak.Wrapper);"
     `);
   });
 
@@ -933,15 +925,11 @@ const Button = styled.button\`
       const Button =
       /*YAK Extracted CSS:
       .Button {
-        ) {
+        &:has(.Icon) {
           color: red;
         }
       }*/
-      styled.button(__styleYak.Button, {
-        \\"style\\": {
-          \\"--Button-&_18fi82j\\": Icon
-        }
-      });"
+      styled.button(__styleYak.Button);"
     `);
   });
 
@@ -1073,7 +1061,8 @@ const Button = styled.button\`
       const ClockNumber =
       /*YAK Extracted CSS:
       .ClockNumber {
-        transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))\\\\ntranslate(0, -88px) rotate(var(--ClockNumber-transform_1_18fi82j));
+        transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))
+      translate(0, -88px) rotate(var(--ClockNumber-transform_1_18fi82j));
       }*/
       styled.div(__styleYak.ClockNumber, {
         \\"style\\": {

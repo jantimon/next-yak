@@ -557,7 +557,8 @@ function babel_yak_plugin_default(babel2, options) {
                 cssParserState,
                 visitChildren,
                 createUniqueName,
-                runtimeInternalHelpers
+                runtimeInternalHelpers,
+                getComponentTypes(this.yakTemplateExpressions)
               );
             }
           );
@@ -706,7 +707,7 @@ function visitYakExpression(yakTemplateExpressions, visitor) {
     recursiveVisitor(expression, expression, initialParserState.state);
   });
 }
-function transformYakExpressions(expression, rootExpression, cssParserState, visitChildren, createUniqueName, runtimeInternalHelpers) {
+function transformYakExpressions(expression, rootExpression, cssParserState, visitChildren, createUniqueName, runtimeInternalHelpers, componentTypeMapping) {
   const identifier = createUniqueName(
     expression === rootExpression ? expression.name : `${rootExpression.name}__${expression.name}`
   );
@@ -719,12 +720,15 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
   let addedOwnClassName = false;
   let currentCssParserState = cssParserState;
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
-    const parsedCss = parseCss(
-      expression.cssPartQuasis[i],
-      currentCssParserState
-    );
-    currentCssParserState = parsedCss.state;
+    let cssChunk = expression.cssPartQuasis[i];
     const quasiExpression = expression.path.node.quasi.expressions[i];
+    if (babelTypes.isIdentifier(quasiExpression) && componentTypeMapping[quasiExpression.name]) {
+      const selector = componentTypeMapping[quasiExpression.name] === "keyframesLiteral" ? quasiExpression.name : `.${quasiExpression.name}`;
+      expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i] + selector + (expression.cssPartQuasis[i + 1] || "");
+      continue;
+    }
+    const parsedCss = parseCss(cssChunk, currentCssParserState);
+    currentCssParserState = parsedCss.state;
     if (babelTypes.isTSType(quasiExpression)) {
       throw new Error(
         "Type annotations are not allowed in css template literals"
@@ -798,6 +802,10 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
     }
   }
+}
+function getComponentTypes(yakTemplateExpressions) {
+  const nameTypeMap = Array.from(yakTemplateExpressions.values()).filter((expression) => !expression.hasParent).map((expression) => [expression.name, expression.type]);
+  return Object.fromEntries(nameTypeMap);
 }
 var InvalidPositionError, getClosestTemplateLiteralExpressionParentPath, rootExpressionCssDeclarations;
 var init_babel_yak_plugin = __esm({

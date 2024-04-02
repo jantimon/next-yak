@@ -193,7 +193,8 @@ export default function (
                 cssParserState,
                 visitChildren,
                 createUniqueName,
-                runtimeInternalHelpers
+                runtimeInternalHelpers,
+                getComponentTypes(this.yakTemplateExpressions)
               );
             }
           );
@@ -474,7 +475,8 @@ function transformYakExpressions(
   cssParserState: ParserState,
   visitChildren: (quasiIndex: number, cssParserState: ParserState) => void,
   createUniqueName: (name: string, hash?: boolean) => string,
-  runtimeInternalHelpers: Set<string>
+  runtimeInternalHelpers: Set<string>,
+  componentTypeMapping: Record<string, YakTemplateLiteral["type"]>
 ) {
   // Get className / keyframes name
   const identifier = createUniqueName(
@@ -498,12 +500,30 @@ function transformYakExpressions(
   let currentCssParserState = cssParserState;
   // Iterate over the css parts
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
-    const parsedCss = parseCss(
-      expression.cssPartQuasis[i],
-      currentCssParserState
-    );
-    currentCssParserState = parsedCss.state;
+    let cssChunk = expression.cssPartQuasis[i];
     const quasiExpression = expression.path.node.quasi.expressions[i];
+
+    // Merge Component References directly into the css code before parsing
+    // e.g.:
+    // const Icon = styled.div``
+    // const Button = styled.button`&:${Icon} { color: red; }`
+    if (
+      babelTypes.isIdentifier(quasiExpression) &&
+      componentTypeMapping[quasiExpression.name]
+    ) {
+      const selector =
+        componentTypeMapping[quasiExpression.name] === "keyframesLiteral"
+          ? quasiExpression.name
+          : `.${quasiExpression.name}`;
+      expression.cssPartQuasis[i + 1] =
+        expression.cssPartQuasis[i] +
+        selector +
+        (expression.cssPartQuasis[i + 1] || "");
+      continue;
+    }
+
+    const parsedCss = parseCss(cssChunk, currentCssParserState);
+    currentCssParserState = parsedCss.state;
 
     if (babelTypes.isTSType(quasiExpression)) {
       throw new Error(
@@ -618,4 +638,16 @@ function transformYakExpressions(
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
     }
   }
+}
+
+function getComponentTypes(
+  yakTemplateExpressions: Map<
+    babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+    YakTemplateLiteral
+  >
+) {
+  const nameTypeMap = Array.from(yakTemplateExpressions.values())
+    .filter((expression) => !expression.hasParent)
+    .map((expression) => [expression.name, expression.type] as const);
+  return Object.fromEntries(nameTypeMap);
 }
