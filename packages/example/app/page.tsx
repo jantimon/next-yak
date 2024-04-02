@@ -3,9 +3,11 @@ import { queries, colors } from "@/theme/constants.yak";
 
 const Headline = styled.h1<{ $primary?: boolean }>`
   color: orange;
-  ${({ $primary }) => $primary && css`
-    font-size: 2rem;
-  `}
+  ${({ $primary }) =>
+    $primary &&
+    css`
+      font-size: 2rem;
+    `}
 `;
 
 export default function Home() {
