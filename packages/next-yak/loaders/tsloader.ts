@@ -50,7 +50,7 @@ export default async function tsloader(
           { isTSX: this.resourcePath.endsWith(".tsx") },
         ],
         [
-          await import("./babel-yak-plugin.js").then((m) => m.default),
+          await import("./babel-yak-plugin2.js").then((m) => m.default),
           {
             replaces,
             rootContext,
@@ -62,7 +62,7 @@ export default async function tsloader(
     if (error instanceof InvalidPositionError) {
       return callback(new Error(error.message));
     }
-    return callback(new Error("babel transform failed"));
+    return callback(error instanceof Error ? error : new Error("babel transform failed"));
   }
   if (!result?.code) {
     return callback(new Error("babel transform failed"));

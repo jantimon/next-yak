@@ -704,3 +704,32 @@ const headline = css\`
     `);
   });
 });
+
+it.only ("should allow allow using an inline nested css literal", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+   import styles from "./page.module.css";
+   import { styled, css } from "next-yak";
+   const Icon = styled.svg\`\`;
+   const Button = styled.button\`
+     &:has(\${Icon}) {
+       \${({$primary}) => $primary && css\`
+         color: red;
+       \`}
+     }
+   \`;
+   
+   `
+    )
+  ).toMatchInlineSnapshot(`
+    ".Button {
+         &:has(.Icon) {
+           &:where(.primary_0) {
+             color: red;
+           }
+         }
+       }"
+  `);
+});
