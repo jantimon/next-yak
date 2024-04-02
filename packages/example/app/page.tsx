@@ -4,13 +4,16 @@ import { queries, colors } from "@/theme/constants.yak";
 const Headline = styled.h1<{ $primary?: boolean }>`
   color: orange;
   ${queries.sm} {
-    ${({ $primary }) => $primary && css`
-      font-size: 2rem
-    `}
-    ${({ $primary }) => $primary && css`
-      transform: rotate(10deg)
-        translateY(10px)
-    `}
+    ${({ $primary }) =>
+      $primary &&
+      css`
+        font-size: 2rem;
+      `}
+    ${({ $primary }) =>
+      $primary &&
+      css`
+        transform: rotate(10deg) translateY(10px);
+      `}
   }
 `;
 
