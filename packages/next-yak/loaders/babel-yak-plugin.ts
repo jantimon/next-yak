@@ -574,6 +574,12 @@ function transformYakExpressions(
       else {
         // Add the expression to the arguments of the styled call
         newArguments.add(quasiExpression);
+        // Remove semicolon from the following css part
+        // e.g.: css`color: ${({$primary}) => $primary ? 'red' : 'blue'};`
+        if (expression.cssPartQuasis[i + 1]?.startsWith(";")) {
+          expression.cssPartQuasis[i + 1] =
+            expression.cssPartQuasis[i + 1].substring(1);
+        }
       }
     }
     // Store all css declarions for the rootDeclaration comment
@@ -609,10 +615,7 @@ function transformYakExpressions(
   if (rootExpression === expression) {
     const cssCode = toCss(rootDeclarations).trimStart();
     if (cssCode) {
-    expression.path.addComment(
-      "leading",
-      "YAK Extracted CSS:\n" + cssCode
-    );
+      expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
     }
   }
 }

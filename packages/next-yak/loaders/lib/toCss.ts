@@ -34,7 +34,7 @@ export const toCss = (declarations: Declaration[]): string => {
     }
     css += `\n${'  '.repeat(scopes.length)}${
       declaration.property
-    }: ${declaration.value.replace(/\n/g, '\\n')};`;
+    }: ${declaration.value};`;
     previousScopes = scopes;
   }
   // close all scopes

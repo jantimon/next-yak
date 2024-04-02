@@ -739,3 +739,18 @@ it("should allow allow using an inline nested css literal", async () => {
        }"
   `);
 });
+
+it("should support linebreaks in content", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+   import { styled, css } from "next-yak";
+   const Button = styled.button\`
+     :before {
+      content: '🦄\nHello World';
+     }
+   \`;`
+    )
+  ).includes("\\nHello World");
+});

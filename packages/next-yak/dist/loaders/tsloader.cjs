@@ -434,7 +434,7 @@ var init_toCss = __esm({
           }
         }
         css += `
-${"  ".repeat(scopes.length)}${declaration.property}: ${declaration.value.replace(/\n/g, "\\n")};`;
+${"  ".repeat(scopes.length)}${declaration.property}: ${declaration.value};`;
         previousScopes = scopes;
       }
       for (let i = previousScopes.length - 1; i >= 0; i--) {
@@ -785,6 +785,9 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
         scopedDeclarations.pop();
       } else {
         newArguments.add(quasiExpression);
+        if (expression.cssPartQuasis[i + 1]?.startsWith(";")) {
+          expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i + 1].substring(1);
+        }
       }
     }
     rootDeclarations.push(...scopedDeclarations);
@@ -810,10 +813,7 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
   if (rootExpression === expression) {
     const cssCode = toCss(rootDeclarations).trimStart();
     if (cssCode) {
-      expression.path.addComment(
-        "leading",
-        "YAK Extracted CSS:\n" + cssCode
-      );
+      expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
     }
   }
 }
