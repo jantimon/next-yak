@@ -30,101 +30,67 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// loaders/lib/stripCssComments.ts
-function stripCssComments(cssString) {
-  let isInsideString = false;
-  let currentCharacter = "";
-  let comment = "";
-  let returnValue = "";
-  for (let index = 0; index < cssString.length; index++) {
-    currentCharacter = cssString[index];
-    if (cssString[index - 1] !== "\\" && (currentCharacter === '"' || currentCharacter === "'")) {
-      if (isInsideString === currentCharacter) {
-        isInsideString = false;
-      } else if (!isInsideString) {
-        isInsideString = currentCharacter;
-      }
-    }
-    if (!isInsideString && currentCharacter === "/" && cssString[index + 1] === "*") {
-      let index2 = index + 2;
-      for (; index2 < cssString.length; index2++) {
-        if (cssString[index2] === "*" && cssString[index2 + 1] === "/") {
-          if (cssString[index2 + 2] === "\n") {
-            index2++;
-          } else if (cssString[index2 + 2] + cssString[index2 + 3] === "\r\n") {
-            index2 += 2;
-          }
-          comment = "";
-          break;
-        }
-        comment += cssString[index2];
-      }
-      index = index2 + 1;
+// loaders/lib/getConstantValues.ts
+function getConstantValues(path, t) {
+  const topLevelConstBindings = /* @__PURE__ */ new Map();
+  const bindings = Object.entries(path.scope.bindings);
+  for (const [name, binding] of bindings) {
+    if (binding.kind === "module") {
+      topLevelConstBindings.set(name, null);
       continue;
     }
-    returnValue += currentCharacter;
+    if (binding.kind === "let" || binding.kind === "var" || binding.kind === "const") {
+      if (!("init" in binding.path.node) || t.isFunctionDeclaration(binding.path.node.init) || t.isArrowFunctionExpression(binding.path.node.init)) {
+        topLevelConstBindings.set(name, null);
+        continue;
+      }
+      const value = binding.path.node.init;
+      topLevelConstBindings.set(
+        name,
+        t.isStringLiteral(value) || t.isNumericLiteral(value) ? value.value : null
+      );
+    }
   }
-  return returnValue;
+  return topLevelConstBindings;
 }
-var init_stripCssComments = __esm({
-  "loaders/lib/stripCssComments.ts"() {
+var init_getConstantValues = __esm({
+  "loaders/lib/getConstantValues.ts"() {
     "use strict";
   }
 });
 
-// loaders/lib/quasiClassifier.ts
-function quasiClassifier(quasiValue, currentNestingScopes) {
-  const trimmedCssString = stripCssComments(quasiValue).trim();
-  if (trimmedCssString === "") {
-    return {
-      empty: true,
-      unknownSelector: false,
-      insideCssValue: false,
-      currentNestingScopes
-    };
+// loaders/lib/hash.ts
+function murmurhash2_32_gc(str) {
+  let l = str.length;
+  let h = l;
+  let i = 0;
+  let k;
+  while (l >= 4) {
+    k = str.charCodeAt(i) & 255 | (str.charCodeAt(++i) & 255) << 8 | (str.charCodeAt(++i) & 255) << 16 | (str.charCodeAt(++i) & 255) << 24;
+    k = (k & 65535) * 1540483477 + (((k >>> 16) * 1540483477 & 65535) << 16);
+    k ^= k >>> 24;
+    k = (k & 65535) * 1540483477 + (((k >>> 16) * 1540483477 & 65535) << 16);
+    h = (h & 65535) * 1540483477 + (((h >>> 16) * 1540483477 & 65535) << 16) ^ k;
+    l -= 4;
+    ++i;
   }
-  let isInsideString = false;
-  let currentCharacter = "";
-  let newNestingLevel = [...currentNestingScopes];
-  let currentSelector = "";
-  for (let index = 0; index < trimmedCssString.length; index++) {
-    currentCharacter = trimmedCssString[index];
-    if (trimmedCssString[index - 1] !== "\\" && (currentCharacter === '"' || currentCharacter === "'")) {
-      if (isInsideString === currentCharacter) {
-        isInsideString = false;
-      } else if (!isInsideString) {
-        isInsideString = currentCharacter;
-      }
-    }
-    if (isInsideString) {
-      continue;
-    }
-    if (currentCharacter === "{") {
-      const selector = currentSelector.trim();
-      if (selector !== "") {
-        newNestingLevel.push(selector);
-      }
-      currentSelector = "";
-    } else if (currentCharacter === "}") {
-      newNestingLevel.pop();
-      currentSelector = "";
-    } else if (currentCharacter === ";") {
-      currentSelector = "";
-    } else {
-      currentSelector += currentCharacter;
-    }
+  switch (l) {
+    case 3:
+      h ^= (str.charCodeAt(i + 2) & 255) << 16;
+    case 2:
+      h ^= (str.charCodeAt(i + 1) & 255) << 8;
+    case 1:
+      h ^= str.charCodeAt(i) & 255;
+      h = (h & 65535) * 1540483477 + (((h >>> 16) * 1540483477 & 65535) << 16);
   }
-  return {
-    empty: false,
-    unknownSelector: trimmedCssString[0] === "{" || trimmedCssString[0] === ",",
-    insideCssValue: currentCharacter !== "{" && currentCharacter !== "}" && currentCharacter !== ";",
-    currentNestingScopes: newNestingLevel
-  };
+  h ^= h >>> 13;
+  h = (h & 65535) * 1540483477 + (((h >>> 16) * 1540483477 & 65535) << 16);
+  h ^= h >>> 15;
+  return (h >>> 0).toString(36);
 }
-var init_quasiClassifier = __esm({
-  "loaders/lib/quasiClassifier.ts"() {
+var init_hash = __esm({
+  "loaders/lib/hash.ts"() {
     "use strict";
-    init_stripCssComments();
   }
 });
 
@@ -194,61 +160,6 @@ var init_replaceQuasiExpressionTokens = __esm({
   }
 });
 
-// loaders/lib/hash.ts
-function murmurhash2_32_gc(str) {
-  let l = str.length;
-  let h = l;
-  let i = 0;
-  let k;
-  while (l >= 4) {
-    k = str.charCodeAt(i) & 255 | (str.charCodeAt(++i) & 255) << 8 | (str.charCodeAt(++i) & 255) << 16 | (str.charCodeAt(++i) & 255) << 24;
-    k = (k & 65535) * 1540483477 + (((k >>> 16) * 1540483477 & 65535) << 16);
-    k ^= k >>> 24;
-    k = (k & 65535) * 1540483477 + (((k >>> 16) * 1540483477 & 65535) << 16);
-    h = (h & 65535) * 1540483477 + (((h >>> 16) * 1540483477 & 65535) << 16) ^ k;
-    l -= 4;
-    ++i;
-  }
-  switch (l) {
-    case 3:
-      h ^= (str.charCodeAt(i + 2) & 255) << 16;
-    case 2:
-      h ^= (str.charCodeAt(i + 1) & 255) << 8;
-    case 1:
-      h ^= str.charCodeAt(i) & 255;
-      h = (h & 65535) * 1540483477 + (((h >>> 16) * 1540483477 & 65535) << 16);
-  }
-  h ^= h >>> 13;
-  h = (h & 65535) * 1540483477 + (((h >>> 16) * 1540483477 & 65535) << 16);
-  h ^= h >>> 15;
-  return (h >>> 0).toString(36);
-}
-var init_hash = __esm({
-  "loaders/lib/hash.ts"() {
-    "use strict";
-  }
-});
-
-// loaders/lib/localIdent.ts
-function localIdent(variableName, i, kind) {
-  switch (kind) {
-    case "selector":
-      return `.${variableName}${i === null ? "" : `_${i}`}`;
-    case "className":
-    case "animation":
-      return `${variableName}${i === null ? "" : `_${i}`}`;
-    case "keyframes":
-      return `@keyframes ${variableName}${i === null ? "" : `_${i}`}`;
-    default:
-      throw new Error("unknown kind");
-  }
-}
-var init_localIdent = __esm({
-  "loaders/lib/localIdent.ts"() {
-    "use strict";
-  }
-});
-
 // loaders/lib/getStyledComponentName.ts
 var getStyledComponentName, getStyledComponentName_default;
 var init_getStyledComponentName = __esm({
@@ -266,45 +177,6 @@ var init_getStyledComponentName = __esm({
       return variableDeclaratorPath.node.id.name;
     };
     getStyledComponentName_default = getStyledComponentName;
-  }
-});
-
-// loaders/lib/appendCssUnitToExpressionValue.ts
-var appendCssUnitToExpressionValue, appendCssUnitToExpressionValue_default;
-var init_appendCssUnitToExpressionValue = __esm({
-  "loaders/lib/appendCssUnitToExpressionValue.ts"() {
-    "use strict";
-    appendCssUnitToExpressionValue = (cssUnit, expression, runtimeInternalHelpers, t) => {
-      if (expression.type === "ArrowFunctionExpression") {
-        if (expression.body.type !== "BlockStatement") {
-          const newBody = t.binaryExpression(
-            "+",
-            t.parenthesizedExpression(expression.body),
-            t.stringLiteral(cssUnit)
-          );
-          const newArrowFunction = t.arrowFunctionExpression(
-            expression.params,
-            newBody
-          );
-          return newArrowFunction;
-        }
-      } else if (expression.type === "NumericLiteral" || expression.type === "BinaryExpression" || expression.type === "Identifier") {
-        const cssUnitLiteral = t.stringLiteral(cssUnit);
-        const binaryExpression = t.binaryExpression(
-          "+",
-          expression,
-          cssUnitLiteral
-        );
-        return binaryExpression;
-      }
-      const callExpression = t.callExpression(t.identifier("__yak_unitPostFix"), [
-        expression,
-        t.stringLiteral(cssUnit)
-      ]);
-      runtimeInternalHelpers.add("__yak_unitPostFix");
-      return callExpression;
-    };
-    appendCssUnitToExpressionValue_default = appendCssUnitToExpressionValue;
   }
 });
 
@@ -394,46 +266,221 @@ var init_getCssName = __esm({
   }
 });
 
-// loaders/lib/getConstantValues.ts
-function getConstantValues(path, t) {
-  const topLevelConstBindings = /* @__PURE__ */ new Map();
-  const bindings = Object.entries(path.scope.bindings);
-  for (const [name, binding] of bindings) {
-    if (binding.kind === "module") {
-      topLevelConstBindings.set(name, null);
-      continue;
+// loaders/lib/parseCss.ts
+function parseCss(cssString, initialState = {
+  isInsideString: false,
+  isInsideComment: false,
+  isInsidePropertyValue: false,
+  isInsideAtRule: false,
+  currentScopes: [],
+  currentDeclaration: newDeclaration()
+}) {
+  let isInsideString = initialState.isInsideString;
+  let isInsideComment = initialState.isInsideComment;
+  let isInsidePropertyValue = initialState.isInsidePropertyValue;
+  let currentScopes = [...initialState.currentScopes];
+  let currentCode = "";
+  let isInsideAtRule = initialState.isInsideAtRule;
+  let currentDeclaration = { ...initialState.currentDeclaration, scope: currentScopes };
+  let backSlashes = 0;
+  const declarations = [currentDeclaration];
+  for (let index = 0; index < cssString.length; index++) {
+    let previousBackSlashes = backSlashes;
+    const currentCharacter = cssString[index];
+    if (currentCharacter === "\\") {
+      backSlashes++;
+    } else {
+      backSlashes = 0;
     }
-    if (binding.kind === "let" || binding.kind === "var" || binding.kind === "const") {
-      if (!("init" in binding.path.node) || t.isFunctionDeclaration(binding.path.node.init) || t.isArrowFunctionExpression(binding.path.node.init)) {
-        topLevelConstBindings.set(name, null);
-        continue;
+    if (previousBackSlashes % 2 === 0 && (currentCharacter === '"' || currentCharacter === "'")) {
+      if (isInsideString === currentCharacter) {
+        isInsideString = false;
+      } else if (!isInsideString) {
+        isInsideString = currentCharacter;
       }
-      const value = binding.path.node.init;
-      topLevelConstBindings.set(
-        name,
-        t.isStringLiteral(value) || t.isNumericLiteral(value) ? value.value : null
-      );
+    }
+    if (isInsideString) {
+      currentCode += currentCharacter;
+      currentDeclaration.value += currentCharacter;
+    } else if (currentCharacter === "/" && cssString[index + 1] === "*") {
+      let index2 = index + 2;
+      isInsideComment = true;
+      for (; index2 < cssString.length; index2++) {
+        if (cssString[index2] === "*" && cssString[index2 + 1] === "/") {
+          isInsideComment = false;
+          if (cssString[index2 + 2] === "\n") {
+            index2++;
+          } else if (cssString[index2 + 2] + cssString[index2 + 3] === "\r\n") {
+            index2 += 2;
+          }
+          break;
+        }
+      }
+      index = index2 + 1;
+      continue;
+    } else if (currentCharacter === "/" && cssString[index + 1] === "/") {
+      let index2 = index + 2;
+      isInsideComment = true;
+      for (; index2 < cssString.length; index2++) {
+        if (cssString[index2] === "\n") {
+          isInsideComment = false;
+          break;
+        }
+      }
+      index = index2 + 1;
+      continue;
+    } else if (currentCharacter === "}") {
+      currentScopes.pop();
+      currentCode = "";
+      isInsidePropertyValue = false;
+      currentDeclaration.scope = [...currentScopes];
+      if (currentDeclaration.property) {
+        currentDeclaration.closed = true;
+        currentDeclaration = newDeclaration();
+        declarations.push(currentDeclaration);
+      }
+    } else if (currentCharacter === "{") {
+      currentScopes.push({
+        name: currentCode.trim(),
+        type: isInsideAtRule ? "at-rule" : "selector"
+      });
+      currentCode = "";
+      isInsidePropertyValue = false;
+      isInsideAtRule = false;
+      currentDeclaration.property = "";
+      currentDeclaration.value = "";
+    } else if (currentCharacter === ";") {
+      currentCode = "";
+      isInsidePropertyValue = false;
+      isInsideAtRule = false;
+      currentDeclaration.closed = true;
+      currentDeclaration.scope = [...currentScopes];
+      currentDeclaration = newDeclaration();
+      declarations.push(currentDeclaration);
+    } else if (!isInsidePropertyValue && !isInsideAtRule && currentCharacter === ":") {
+      isInsidePropertyValue = true;
+      currentCode += currentCharacter;
+    } else if (!isInsidePropertyValue && currentCharacter === "@") {
+      isInsideAtRule = true;
+      currentCode += currentCharacter;
+    } else {
+      const previousCharacter = index === 0 ? currentDeclaration.value.at(-1) : cssString[index - 1];
+      const isPreviousCharacterEmpty = index > 0 && !currentCode || !previousCharacter || previousCharacter === " " || previousCharacter === "\n" || previousCharacter === "\r" || previousCharacter === "	";
+      const isCurrentCharacterEmpty = currentCharacter === " " || currentCharacter === "\n" || currentCharacter === "\r" || currentCharacter === "	";
+      if (!isPreviousCharacterEmpty || !isCurrentCharacterEmpty) {
+        currentCode += currentCharacter;
+        if (isInsidePropertyValue) {
+          if (!isCurrentCharacterEmpty || currentDeclaration.value) {
+            currentDeclaration.value += currentCharacter;
+          }
+        } else {
+          currentDeclaration.property += currentCharacter;
+        }
+      }
     }
   }
-  return topLevelConstBindings;
+  if (!currentDeclaration.property) {
+    declarations.pop();
+  }
+  return {
+    state: {
+      isInsideString,
+      isInsideComment,
+      isInsidePropertyValue,
+      isInsideAtRule,
+      currentDeclaration,
+      currentScopes
+    },
+    declarations
+  };
 }
-var getConstantName;
-var init_getConstantValues = __esm({
-  "loaders/lib/getConstantValues.ts"() {
+var newDeclaration;
+var init_parseCss = __esm({
+  "loaders/lib/parseCss.ts"() {
     "use strict";
-    getConstantName = (expression, t) => {
-      if (t.isIdentifier(expression)) {
-        return expression.name;
-      } else if (t.isMemberExpression(expression) && t.isIdentifier(expression.object)) {
-        return expression.object.name;
-      } else if (t.isCallExpression(expression) && t.isIdentifier(expression.callee)) {
-        return expression.callee.name;
-      } else if (t.isCallExpression(expression) && t.isMemberExpression(expression.callee) && t.isIdentifier(expression.callee.object)) {
-        return expression.callee.object.name;
-      } else {
-        return null;
+    newDeclaration = () => ({
+      scope: [],
+      property: "",
+      value: "",
+      closed: false
+    });
+  }
+});
+
+// loaders/lib/toCss.ts
+var toCss;
+var init_toCss = __esm({
+  "loaders/lib/toCss.ts"() {
+    "use strict";
+    toCss = (declarations) => {
+      let css = "";
+      let previousScopes = [];
+      for (const declaration of declarations) {
+        const scopes = declaration.scope;
+        for (let i = previousScopes.length - 1; i >= 0; i--) {
+          if (!scopes[i] || scopes[i].name !== previousScopes[i].name || scopes[i].type !== previousScopes[i].type) {
+            for (let j = previousScopes.length - 1; j >= i; j--) {
+              css += "\n" + "  ".repeat(j) + "}";
+            }
+            break;
+          }
+        }
+        for (let i = 0; i < scopes.length; i++) {
+          if (!previousScopes[i] || scopes[i].name !== previousScopes[i].name || scopes[i].type !== previousScopes[i].type) {
+            for (let j = i; j < scopes.length; j++) {
+              css += "\n" + "  ".repeat(j) + scopes[j].name + " {";
+            }
+            break;
+          }
+        }
+        css += `
+${"  ".repeat(scopes.length)}${declaration.property}: ${declaration.value.replace(/\n/g, "\\n")};`;
+        previousScopes = scopes;
       }
+      for (let i = previousScopes.length - 1; i >= 0; i--) {
+        css += "\n" + "  ".repeat(i) + "}";
+      }
+      return css;
     };
+  }
+});
+
+// loaders/lib/appendCssUnitToExpressionValue.ts
+var appendCssUnitToExpressionValue, appendCssUnitToExpressionValue_default;
+var init_appendCssUnitToExpressionValue = __esm({
+  "loaders/lib/appendCssUnitToExpressionValue.ts"() {
+    "use strict";
+    appendCssUnitToExpressionValue = (cssUnit, expression, runtimeInternalHelpers, t) => {
+      if (expression.type === "ArrowFunctionExpression") {
+        if (expression.body.type !== "BlockStatement") {
+          const newBody = t.binaryExpression(
+            "+",
+            t.parenthesizedExpression(expression.body),
+            t.stringLiteral(cssUnit)
+          );
+          const newArrowFunction = t.arrowFunctionExpression(
+            expression.params,
+            newBody
+          );
+          return newArrowFunction;
+        }
+      } else if (expression.type === "NumericLiteral" || expression.type === "BinaryExpression" || expression.type === "Identifier") {
+        const cssUnitLiteral = t.stringLiteral(cssUnit);
+        const binaryExpression = t.binaryExpression(
+          "+",
+          expression,
+          cssUnitLiteral
+        );
+        return binaryExpression;
+      }
+      const callExpression = t.callExpression(t.identifier("__yak_unitPostFix"), [
+        expression,
+        t.stringLiteral(cssUnit)
+      ]);
+      runtimeInternalHelpers.add("__yak_unitPostFix");
+      return callExpression;
+    };
+    appendCssUnitToExpressionValue_default = appendCssUnitToExpressionValue;
   }
 });
 
@@ -494,21 +541,47 @@ function babel_yak_plugin_default(babel2, options) {
         keyframes: void 0
       };
       this.isImportedInCurrentFile = false;
-      this.classNameCount = 0;
-      this.varIndex = 0;
       this.variableNameToStyledCall = /* @__PURE__ */ new Map();
       this.topLevelConstBindings = /* @__PURE__ */ new Map();
-      this.runtimeInternalHelpers = /* @__PURE__ */ new Set();
+      this.yakTemplateExpressions = /* @__PURE__ */ new Map();
     },
     visitor: {
       Program: {
-        enter(path, state) {
+        enter(path) {
           this.topLevelConstBindings = getConstantValues(path, t);
         },
         exit(path, state) {
-          if (this.runtimeInternalHelpers.size && this.yakImportPath) {
+          if (!this.isImportedInCurrentFile) {
+            return;
+          }
+          const runtimeInternalHelpers = /* @__PURE__ */ new Set();
+          const existingNames = /* @__PURE__ */ new Set();
+          const createUniqueName = (name, hash) => {
+            let i = 0;
+            let uniqueName = name;
+            while (existingNames.has(uniqueName)) {
+              i++;
+              uniqueName = `${name}_${i}`;
+            }
+            existingNames.add(uniqueName);
+            return hash ? uniqueName + "_" + getHashedFilePath(state.file) : uniqueName;
+          };
+          visitYakExpression(
+            this.yakTemplateExpressions,
+            (expression, rootExpression, cssParserState, visitChildren) => {
+              transformYakExpressions(
+                expression,
+                rootExpression,
+                cssParserState,
+                visitChildren,
+                createUniqueName,
+                runtimeInternalHelpers
+              );
+            }
+          );
+          if (runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
-              [...this.runtimeInternalHelpers].map(
+              [...runtimeInternalHelpers].map(
                 (helper) => t.importSpecifier(t.identifier(helper), t.identifier(helper))
               ),
               t.stringLiteral("next-yak/runtime-internals")
@@ -573,18 +646,17 @@ function babel_yak_plugin_default(babel2, options) {
         if (expressionType === "unknown") {
           return;
         }
-        const styledApi = expressionType === "styledLiteral" || expressionType === "styledCall" || expressionType === "attrsCall";
         replaceTokensInQuasiExpressions(
           path.node.quasi,
-          (name) => {
-            if (name in replaces) {
-              return replaces[name];
+          (name2) => {
+            if (name2 in replaces) {
+              return replaces[name2];
             }
-            const styledCall2 = this.variableNameToStyledCall.get(name);
-            if (styledCall2) {
-              const { wasAdded, className, astNode } = styledCall2;
+            const styledCall = this.variableNameToStyledCall.get(name2);
+            if (styledCall) {
+              const { wasAdded, className, astNode } = styledCall;
               if (!wasAdded) {
-                styledCall2.wasAdded = true;
+                styledCall.wasAdded = true;
                 astNode.arguments.unshift(
                   t.memberExpression(
                     t.identifier("__styleYak"),
@@ -598,136 +670,167 @@ function babel_yak_plugin_default(babel2, options) {
           },
           t
         );
-        const variableName = styledApi || expressionType === "keyframesLiteral" ? getStyledComponentName_default(path) : expressionType === "cssLiteral" ? getCssName(path) : null;
-        const identifier = localIdent(
-          variableName || "_yak",
-          variableName && expressionType !== "cssLiteral" ? null : this.classNameCount++,
-          expressionType === "keyframesLiteral" ? "animation" : "className"
+        const parentPosition = getClosestTemplateLiteralExpressionParentPath(
+          path,
+          this.yakTemplateExpressions
         );
-        let literalSelectorWasUsed = false;
-        const classNameExpression = t.memberExpression(
-          t.identifier("__styleYak"),
-          t.identifier(identifier)
+        const name = !parentPosition ? (
+          // root name e.g. const MyButton = styled.div`...` -> "MyButton"
+          getStyledComponentName_default(path)
+        ) : (
+          // nested name e.g. `... ${({$active}) => $active && css`color:red`} ...` -> "active"
+          getCssName(path)
         );
-        const newArguments = /* @__PURE__ */ new Set();
-        const quasis = path.node.quasi.quasis;
-        let currentNestingScopes = [];
-        const quasiTypes = quasis.map((quasi) => {
-          const classification = quasiClassifier(
-            quasi.value.raw,
-            currentNestingScopes
-          );
-          currentNestingScopes = classification.currentNestingScopes;
-          return classification;
-        });
-        const expressions = path.node.quasi.expressions.filter(
-          (expression) => t.isExpression(expression)
-        );
-        let cssVariablesInlineStyle;
-        if (quasiTypes.length > 1 || quasiTypes.length === 1 && !quasiTypes[0].empty) {
-          newArguments.add(classNameExpression);
-          literalSelectorWasUsed = true;
-        }
-        let wasInsideCssValue = false;
-        for (let i = 0; i < quasis.length; i++) {
-          const expression = expressions[i];
-          const type = quasiTypes[i];
-          if (type.unknownSelector) {
-            const expression2 = expressions[i - 1];
-            if (!expression2) {
-              throw new Error(`Invalid css "${quasis[i].value.raw}"`);
-            }
-            throw new InvalidPositionError(
-              "Expressions are not allowed as selectors",
-              expression2,
-              this.file
-            );
-          }
-          if (expression && (type.unknownSelector || type.insideCssValue || type.empty && wasInsideCssValue)) {
-            wasInsideCssValue = true;
-            const variableName2 = getConstantName(expression, t);
-            if (variableName2 && this.topLevelConstBindings.has(variableName2)) {
-              const value = this.topLevelConstBindings.get(variableName2);
-              if (value !== null) {
-                continue;
-              }
-              throw new InvalidPositionError(
-                "Possible constant used as runtime value for a css variable\nPlease move the constant to a .yak import or use an arrow function\ne.g.:\n|   import { primaryColor } from './foo.yak'\n|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
-                expression,
-                this.file
-              );
-            }
-            if (!cssVariablesInlineStyle) {
-              cssVariablesInlineStyle = t.objectExpression([]);
-            }
-            const cssVariableName = `--\u{1F9AC}${getHashedFilePath(state.file)}${this.varIndex++}`;
-            const cssUnit = quasis[i + 1]?.value.raw.match(/^([a-z]+|%)/i)?.[0];
-            const transformedExpression = cssUnit ? appendCssUnitToExpressionValue_default(
-              cssUnit,
-              expression,
-              this.runtimeInternalHelpers,
-              t
-            ) : expression;
-            cssVariablesInlineStyle.properties.push(
-              t.objectProperty(
-                t.stringLiteral(cssVariableName),
-                transformedExpression
-              )
-            );
-          } else {
-            wasInsideCssValue = false;
-            if (expression) {
-              if (quasiTypes[i].currentNestingScopes.length > 0) {
-                const isReferenceToMixin = t.isIdentifier(expression) || t.isCallExpression(expression);
-                if (isReferenceToMixin) {
-                  throw new InvalidPositionError(
-                    `Mixins are not allowed inside nested selectors`,
-                    expression,
-                    this.file,
-                    "Use an inline css literal instead or move the selector into the mixin"
-                  );
-                }
-              }
-              newArguments.add(expression);
-            }
-          }
-        }
-        if (cssVariablesInlineStyle) {
-          newArguments.add(
-            t.objectExpression([
-              t.objectProperty(
-                t.stringLiteral(`style`),
-                cssVariablesInlineStyle
-              )
-            ])
+        const takTemplateExpression = {
+          name,
+          path,
+          cssPartQuasis: path.node.quasi.quasis.map((quasi) => quasi.value.raw),
+          cssPartExpressions: {},
+          hasParent: Boolean(parentPosition?.parent),
+          type: expressionType
+        };
+        const parent = parentPosition?.parent && this.yakTemplateExpressions.get(parentPosition.parent);
+        if (parent) {
+          parent.cssPartExpressions[parentPosition.currentIndex] ||= [];
+          parent.cssPartExpressions[parentPosition.currentIndex].push(
+            takTemplateExpression
           );
         }
-        const styledCall = t.callExpression(tag, [...newArguments]);
-        path.replaceWith(styledCall);
-        if (styledApi && variableName) {
-          this.variableNameToStyledCall.set(variableName, {
-            wasAdded: literalSelectorWasUsed,
-            className: identifier,
-            astNode: styledCall
-          });
-        }
+        this.yakTemplateExpressions.set(path, takTemplateExpression);
       }
     }
   };
 }
-var import_node_path, InvalidPositionError;
+function visitYakExpression(yakTemplateExpressions, visitor) {
+  const rootYakTemplateExpressions = Array.from(
+    yakTemplateExpressions.values()
+  ).filter((expression) => !expression.hasParent);
+  const recursiveVisitor = (expression, rootExpression, cssParserState) => {
+    visitor(
+      expression,
+      rootExpression,
+      cssParserState,
+      (quasiIndex, cssParserState2) => {
+        expression.cssPartExpressions[quasiIndex]?.forEach(
+          (childExpression) => {
+            recursiveVisitor(childExpression, rootExpression, cssParserState2);
+          }
+        );
+      }
+    );
+  };
+  rootYakTemplateExpressions.forEach((expression) => {
+    const initialParserState = parseCss("");
+    recursiveVisitor(expression, expression, initialParserState.state);
+  });
+}
+function transformYakExpressions(expression, rootExpression, cssParserState, visitChildren, createUniqueName, runtimeInternalHelpers) {
+  const identifier = createUniqueName(
+    expression === rootExpression ? expression.name : `${rootExpression.name}__${expression.name}`
+  );
+  const rootDeclarations = rootExpressionCssDeclarations.get(rootExpression) || [];
+  if (rootExpression === expression) {
+    rootExpressionCssDeclarations.set(rootExpression, rootDeclarations);
+  }
+  const newArguments = /* @__PURE__ */ new Set();
+  const cssVariables = {};
+  let addedOwnClassName = false;
+  let currentCssParserState = cssParserState;
+  for (let i = 0; i < expression.cssPartQuasis.length; i++) {
+    const parsedCss = parseCss(
+      expression.cssPartQuasis[i],
+      currentCssParserState
+    );
+    currentCssParserState = parsedCss.state;
+    const quasiExpression = expression.path.node.quasi.expressions[i];
+    if (import_core.types.isTSType(quasiExpression)) {
+      throw new Error(
+        "Type annotations are not allowed in css template literals"
+      );
+    }
+    if (parsedCss.declarations.length > 0 && !addedOwnClassName) {
+      newArguments.add(
+        import_core.types.memberExpression(
+          import_core.types.identifier("__styleYak"),
+          import_core.types.identifier(identifier)
+        )
+      );
+      addedOwnClassName = true;
+    }
+    const scopedDeclarations = parsedCss.declarations.map((declaration) => ({
+      ...declaration,
+      scope: [
+        expression.type === "keyframesLiteral" ? { name: `@keyframes ${identifier}`, type: "at-rule" } : { name: `.${identifier}`, type: "selector" },
+        ...declaration.scope
+      ]
+    }));
+    if (quasiExpression) {
+      if (currentCssParserState.isInsidePropertyValue) {
+        const cssVarName = createUniqueName(
+          `${identifier}-${parsedCss.state.currentDeclaration.property}`,
+          true
+        );
+        cssVariables[`--${cssVarName}`] = quasiExpression;
+        currentCssParserState.currentDeclaration.value += `var(--${cssVarName})`;
+        const cssUnit = expression.cssPartQuasis[i + 1]?.match(/^([a-z]+|%)/i)?.[0];
+        if (cssUnit) {
+          cssVariables[`--${cssVarName}`] = appendCssUnitToExpressionValue_default(
+            cssUnit,
+            quasiExpression,
+            runtimeInternalHelpers,
+            import_core.types
+          );
+          expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i + 1].substring(cssUnit.length);
+        }
+        scopedDeclarations.pop();
+      } else {
+        newArguments.add(quasiExpression);
+      }
+    }
+    rootDeclarations.push(...scopedDeclarations);
+    visitChildren(i, parsedCss.state);
+  }
+  if (Object.keys(cssVariables).length) {
+    newArguments.add(
+      import_core.types.objectExpression([
+        import_core.types.objectProperty(
+          import_core.types.stringLiteral(`style`),
+          import_core.types.objectExpression(
+            Object.entries(cssVariables).map(
+              ([key, value]) => import_core.types.objectProperty(import_core.types.stringLiteral(key), value)
+            )
+          )
+        )
+      ])
+    );
+  }
+  expression.path.replaceWith(
+    import_core.types.callExpression(expression.path.node.tag, [...newArguments])
+  );
+  if (rootExpression === expression) {
+    const cssCode = toCss(rootDeclarations).trimStart();
+    if (cssCode) {
+      expression.path.addComment(
+        "leading",
+        "YAK Extracted CSS:\n" + cssCode
+      );
+    }
+  }
+}
+var import_core, import_node_path, InvalidPositionError, getClosestTemplateLiteralExpressionParentPath, rootExpressionCssDeclarations;
 var init_babel_yak_plugin = __esm({
   "loaders/babel-yak-plugin.ts"() {
     "use strict";
-    init_quasiClassifier();
-    init_replaceQuasiExpressionTokens();
-    init_hash();
+    import_core = require("@babel/core");
     import_node_path = require("path");
-    init_localIdent();
-    init_getStyledComponentName();
-    init_appendCssUnitToExpressionValue();
-    init_getCssName();
     init_getConstantValues();
+    init_hash();
+    init_replaceQuasiExpressionTokens();
+    init_getStyledComponentName();
+    init_getCssName();
+    init_parseCss();
+    init_toCss();
+    init_appendCssUnitToExpressionValue();
     InvalidPositionError = class extends Error {
       /**
        * Add the expression code that caused the error to the message
@@ -753,6 +856,33 @@ ${recommendedFix}`;
         super(errorText);
       }
     };
+    getClosestTemplateLiteralExpressionParentPath = (path, knownParents) => {
+      let grandChild = path;
+      let child = path;
+      let parent = path.parentPath;
+      while (parent) {
+        if (import_core.types.isTaggedTemplateExpression(parent.node) && knownParents.has(
+          parent
+        )) {
+          if (!import_core.types.isTemplateLiteral(child.node) || !import_core.types.isExpression(grandChild.node)) {
+            throw new Error("Broken AST");
+          }
+          const currentIndex = child.node.expressions.indexOf(grandChild.node);
+          return {
+            parent,
+            currentIndex
+          };
+        }
+        if (!parent.parentPath) {
+          return null;
+        }
+        grandChild = child;
+        child = parent;
+        parent = parent.parentPath;
+      }
+      return null;
+    };
+    rootExpressionCssDeclarations = /* @__PURE__ */ new WeakMap();
   }
 });
 
@@ -762,7 +892,7 @@ __export(tsloader_exports, {
   default: () => tsloader
 });
 module.exports = __toCommonJS(tsloader_exports);
-var import_core = __toESM(require("@babel/core"), 1);
+var import_core2 = __toESM(require("@babel/core"), 1);
 
 // loaders/lib/getYakImports.ts
 var getYakImports = (code) => {
@@ -813,7 +943,7 @@ async function tsloader(source) {
   );
   let result = null;
   try {
-    result = import_core.default.transformSync(source, {
+    result = import_core2.default.transformSync(source, {
       filename: resourcePath,
       configFile: false,
       plugins: [
@@ -834,7 +964,7 @@ async function tsloader(source) {
     if (error instanceof InvalidPositionError) {
       return callback(new Error(error.message));
     }
-    return callback(new Error("babel transform failed"));
+    return callback(error instanceof Error ? error : new Error("babel transform failed"));
   }
   if (!result?.code) {
     return callback(new Error("babel transform failed"));

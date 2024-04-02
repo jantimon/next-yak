@@ -30,6 +30,12 @@ const loaderContext = {
   getOptions: () => ({
     configPath: "/some/special/path/config",
   }),
+  async: () => (err, result) => {
+    if (err) {
+      throw err;
+    }
+    return result;
+  },
 };
 
 describe("cssloader", () => {
@@ -705,7 +711,7 @@ const headline = css\`
   });
 });
 
-it.only ("should allow allow using an inline nested css literal", async () => {
+it("should allow allow using an inline nested css literal", async () => {
   expect(
     await cssloader.call(
       loaderContext,

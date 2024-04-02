@@ -6,15 +6,16 @@ import {
   PluginPass,
   types as babelTypes,
 } from "@babel/core";
-import quasiClassifier from "./lib/quasiClassifier.js";
-import replaceQuasiExpressionTokens from "./lib/replaceQuasiExpressionTokens.js";
+import { TaggedTemplateExpression } from "@babel/types";
+import { basename, relative, resolve } from "node:path";
+import { getConstantValues } from "./lib/getConstantValues.js";
 import murmurhash2_32_gc from "./lib/hash.js";
-import { relative, resolve, basename } from "node:path";
-import localIdent from "./lib/localIdent.js";
+import replaceQuasiExpressionTokens from "./lib/replaceQuasiExpressionTokens.js";
 import getStyledComponentName from "./lib/getStyledComponentName.js";
-import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue.js";
 import getCssName from "./lib/getCssName.js";
-import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
+import { Declaration, ParserState, parseCss } from "./lib/parseCss.js";
+import { toCss } from "./lib/toCss.js";
+import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue.js";
 
 type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
@@ -25,6 +26,21 @@ type YakLocalIdentifierNames = {
   css: string | undefined;
   styled: string | undefined;
   keyframes: string | undefined;
+};
+
+// A CssPartExpression is the css code block for each tagged template expression
+type YakTemplateLiteral = {
+  name: string;
+  path: NodePath<babelTypes.TaggedTemplateExpression>;
+  hasParent: boolean;
+  cssPartQuasis: string[];
+  cssPartExpressions: { [key: number]: YakTemplateLiteral[] };
+  type:
+    | "cssLiteral"
+    | "keyframesLiteral"
+    | "styledLiteral"
+    | "styledCall"
+    | "attrsCall";
 };
 
 /**
@@ -39,9 +55,7 @@ export default function (
   PluginPass & {
     localVarNames: YakLocalIdentifierNames;
     isImportedInCurrentFile: boolean;
-    classNameCount: number;
     topLevelConstBindings: Map<string, number | string | null>;
-    varIndex: number;
     variableNameToStyledCall: Map<
       string,
       {
@@ -51,7 +65,10 @@ export default function (
       }
     >;
     yakImportPath?: NodePath<babelTypes.ImportDeclaration>;
-    runtimeInternalHelpers: Set<string>;
+    yakTemplateExpressions: Map<
+      babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+      YakTemplateLiteral
+    >;
   }
 > {
   const { replaces } = options;
@@ -138,21 +155,53 @@ export default function (
         keyframes: undefined,
       };
       this.isImportedInCurrentFile = false;
-      this.classNameCount = 0;
-      this.varIndex = 0;
       this.variableNameToStyledCall = new Map();
       this.topLevelConstBindings = new Map();
-      this.runtimeInternalHelpers = new Set();
+      this.yakTemplateExpressions = new Map();
     },
     visitor: {
       Program: {
-        enter(path, state) {
+        enter(path) {
           this.topLevelConstBindings = getConstantValues(path, t);
         },
         exit(path, state) {
-          if (this.runtimeInternalHelpers.size && this.yakImportPath) {
+          if (!this.isImportedInCurrentFile) {
+            return;
+          }
+          const runtimeInternalHelpers = new Set<string>();
+          // Util to create a unique identifiers per file name
+          const existingNames = new Set<string>();
+          const createUniqueName = (name: string, hash?: boolean) => {
+            let i = 0;
+            let uniqueName = name;
+            while (existingNames.has(uniqueName)) {
+              i++;
+              uniqueName = `${name}_${i}`;
+            }
+            existingNames.add(uniqueName);
+            return hash
+              ? uniqueName + "_" + getHashedFilePath(state.file)
+              : uniqueName;
+          };
+          // Iteratate and transform all found yak template literals
+          visitYakExpression(
+            this.yakTemplateExpressions,
+            (expression, rootExpression, cssParserState, visitChildren) => {
+              transformYakExpressions(
+                expression,
+                rootExpression,
+                cssParserState,
+                visitChildren,
+                createUniqueName,
+                runtimeInternalHelpers
+              );
+            }
+          );
+
+          // Add used runtime helpers to the import
+          if (runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
-              [...this.runtimeInternalHelpers].map((helper) =>
+              [...runtimeInternalHelpers].map((helper) =>
                 t.importSpecifier(t.identifier(helper), t.identifier(helper))
               ),
               t.stringLiteral("next-yak/runtime-internals")
@@ -234,11 +283,6 @@ export default function (
           return;
         }
 
-        const styledApi =
-          expressionType === "styledLiteral" ||
-          expressionType === "styledCall" ||
-          expressionType === "attrsCall";
-
         replaceQuasiExpressionTokens(
           path.node.quasi,
           (name) => {
@@ -272,188 +316,37 @@ export default function (
           t
         );
 
-        // Store class name for the created variable for later replacements
-        // e.g. const MyStyledDiv = styled.div`color: red;`
-        // "MyStyledDiv" -> "selector-0"
-        const variableName =
-          styledApi || expressionType === "keyframesLiteral"
-            ? getStyledComponentName(path)
-            : expressionType === "cssLiteral"
-            ? getCssName(path)
-            : null;
-
-        const identifier = localIdent(
-          variableName || "_yak",
-          variableName && expressionType !== "cssLiteral"
-            ? null
-            : this.classNameCount++,
-          expressionType === "keyframesLiteral" ? "animation" : "className"
+        const parentPosition = getClosestTemplateLiteralExpressionParentPath(
+          path,
+          this.yakTemplateExpressions
         );
 
-        let literalSelectorWasUsed = false;
-        // AutoGenerate a unique className for the current template literal
-        const classNameExpression = t.memberExpression(
-          t.identifier("__styleYak"),
-          t.identifier(identifier)
-        );
+        const name = !parentPosition
+          ? // root name e.g. const MyButton = styled.div`...` -> "MyButton"
+            getStyledComponentName(path)
+          : // nested name e.g. `... ${({$active}) => $active && css`color:red`} ...` -> "active"
+            getCssName(path);
 
-        /**
-         * The expression is replaced with a call to the 'styled' or 'css' function
-         * e.g. styled.div`` -> styled.div(...)
-         * e.g. css`` -> css(...)
-         * newArguments is a set of all arguments that will be passed to the function
-         */
-        const newArguments = new Set<babelTypes.Expression>();
-        const quasis = path.node.quasi.quasis;
-        let currentNestingScopes: string[] = [];
-        const quasiTypes = quasis.map((quasi) => {
-          const classification = quasiClassifier(
-            quasi.value.raw,
-            currentNestingScopes
-          );
-          currentNestingScopes = classification.currentNestingScopes;
-          return classification;
-        });
+        const takTemplateExpression: YakTemplateLiteral = {
+          name,
+          path,
+          cssPartQuasis: path.node.quasi.quasis.map((quasi) => quasi.value.raw),
+          cssPartExpressions: {},
+          hasParent: Boolean(parentPosition?.parent),
+          type: expressionType,
+        };
 
-        const expressions = path.node.quasi.expressions.filter(
-          (expression): expression is babelTypes.Expression =>
-            t.isExpression(expression)
-        );
-
-        let cssVariablesInlineStyle;
-
-        // Add the className if the template literal contains css
-        if (
-          quasiTypes.length > 1 ||
-          (quasiTypes.length === 1 && !quasiTypes[0].empty)
-        ) {
-          newArguments.add(classNameExpression);
-          literalSelectorWasUsed = true;
-        }
-
-        let wasInsideCssValue = false;
-        for (let i = 0; i < quasis.length; i++) {
-          const expression = expressions[i];
-          // loop over all quasis belonging to the same css block
-          const type = quasiTypes[i];
-          if (type.unknownSelector) {
-            const expression = expressions[i - 1];
-            if (!expression) {
-              throw new Error(`Invalid css "${quasis[i].value.raw}"`);
-            }
-            throw new InvalidPositionError(
-              "Expressions are not allowed as selectors",
-              expression,
-              this.file
-            );
-          }
-
-          // expressions after a partial css are converted into css variables
-          if (
-            expression &&
-            (type.unknownSelector ||
-              type.insideCssValue ||
-              (type.empty && wasInsideCssValue))
-          ) {
-            wasInsideCssValue = true;
-            // to prevent overuse of css variables, we only allow expressions
-            // for css variables for arrow function expressions
-            const variableName = getConstantName(expression, t);
-            if (variableName && this.topLevelConstBindings.has(variableName)) {
-              // Ignore constants that have a static string or number value
-              const value = this.topLevelConstBindings.get(variableName);
-              if (value !== null) {
-                continue;
-              }
-
-              throw new InvalidPositionError(
-                "Possible constant used as runtime value for a css variable\n" +
-                  "Please move the constant to a .yak import or use an arrow function\n" +
-                  "e.g.:\n" +
-                  "|   import { primaryColor } from './foo.yak'\n" +
-                  "|   const MyStyledDiv = styled.div`color: ${primaryColor};`",
-                expression,
-                this.file
-              );
-            }
-
-            if (!cssVariablesInlineStyle) {
-              cssVariablesInlineStyle = t.objectExpression([]);
-            }
-            const cssVariableName = `--🦬${getHashedFilePath(state.file)}${this
-              .varIndex++}`;
-
-            // Extracts the css unit from a css string after the current expression
-            const cssUnit = quasis[i + 1]?.value.raw.match(/^([a-z]+|%)/i)?.[0];
-            const transformedExpression = cssUnit
-              ? appendCssUnitToExpressionValue(
-                  cssUnit,
-                  expression,
-                  this.runtimeInternalHelpers,
-                  t
-                )
-              : expression;
-
-            // expression: `x`
-            // { style: { --v0: x}}
-            cssVariablesInlineStyle.properties.push(
-              t.objectProperty(
-                t.stringLiteral(cssVariableName),
-                transformedExpression
-              )
-            );
-          }
-          // handle mixins
-          else {
-            wasInsideCssValue = false;
-            if (expression) {
-              if (quasiTypes[i].currentNestingScopes.length > 0) {
-                // inside a nested scope a foreign css literal must not be used
-                // as we can not forward the scope
-                const isReferenceToMixin =
-                  t.isIdentifier(expression) || t.isCallExpression(expression);
-                if (isReferenceToMixin) {
-                  throw new InvalidPositionError(
-                    `Mixins are not allowed inside nested selectors`,
-                    expression,
-                    this.file,
-                    "Use an inline css literal instead or move the selector into the mixin"
-                  );
-                }
-              }
-              newArguments.add(expression);
-            }
-          }
-        }
-
-        // Add the inline style object to the arguments
-        // e.g. styled.div`color: ${x};` -> styled.div({ style: { --yak43: x } })
-        if (cssVariablesInlineStyle) {
-          newArguments.add(
-            t.objectExpression([
-              t.objectProperty(
-                t.stringLiteral(`style`),
-                cssVariablesInlineStyle
-              ),
-            ])
+        const parent =
+          parentPosition?.parent &&
+          this.yakTemplateExpressions.get(parentPosition.parent);
+        if (parent) {
+          parent.cssPartExpressions[parentPosition.currentIndex] ||= [];
+          parent.cssPartExpressions[parentPosition.currentIndex].push(
+            takTemplateExpression
           );
         }
 
-        const styledCall = t.callExpression(tag, [...newArguments]);
-        path.replaceWith(styledCall);
-
-        // Store the AST node of the `styled` node for later selector replacements
-        // e.g.
-        // const MyStyledDiv = styled.div`color: red;`
-        // const Bar = styled.div` ${MyStyledDiv} { color: blue }`
-        // "${MyStyledDiv} {" -> ".selector-0 {"
-        if (styledApi && variableName) {
-          this.variableNameToStyledCall.set(variableName, {
-            wasAdded: literalSelectorWasUsed,
-            className: identifier,
-            astNode: styledCall,
-          });
-        }
+        this.yakTemplateExpressions.set(path, takTemplateExpression);
       },
     },
   };
@@ -485,5 +378,241 @@ export class InvalidPositionError extends Error {
       errorText += `\n${recommendedFix}`;
     }
     super(errorText);
+  }
+}
+
+/**
+ * Searches the closest parent TaggedTemplateExpression using a name from localNames
+ * Returns the location inside this parent
+ */
+const getClosestTemplateLiteralExpressionParentPath = (
+  path: NodePath<TaggedTemplateExpression>,
+  knownParents: Map<
+    import("@babel/core").NodePath<babelTypes.TaggedTemplateExpression>,
+    unknown
+  >
+) => {
+  let grandChild: NodePath = path;
+  let child: NodePath = path;
+  let parent = path.parentPath;
+  while (parent) {
+    if (
+      babelTypes.isTaggedTemplateExpression(parent.node) &&
+      knownParents.has(
+        parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>
+      )
+    ) {
+      if (
+        !babelTypes.isTemplateLiteral(child.node) ||
+        !babelTypes.isExpression(grandChild.node)
+      ) {
+        throw new Error("Broken AST");
+      }
+      const currentIndex = child.node.expressions.indexOf(grandChild.node);
+      return {
+        parent:
+          parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+        currentIndex,
+      };
+    }
+    if (!parent.parentPath) {
+      return null;
+    }
+    grandChild = child;
+    child = parent;
+    parent = parent.parentPath;
+  }
+  return null;
+};
+
+function visitYakExpression(
+  yakTemplateExpressions: Map<
+    babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+    YakTemplateLiteral
+  >,
+  visitor: (
+    expression: YakTemplateLiteral,
+    rootExpression: YakTemplateLiteral,
+    cssParserState: ParserState,
+    visitChildren: (quasiIndex: number, cssParserState: ParserState) => void
+  ) => void
+) {
+  const rootYakTemplateExpressions = Array.from(
+    yakTemplateExpressions.values()
+  ).filter((expression) => !expression.hasParent);
+  const recursiveVisitor = (
+    expression: YakTemplateLiteral,
+    rootExpression: YakTemplateLiteral,
+    cssParserState: ParserState
+  ) => {
+    visitor(
+      expression,
+      rootExpression,
+      cssParserState,
+      (quasiIndex, cssParserState) => {
+        expression.cssPartExpressions[quasiIndex]?.forEach(
+          (childExpression) => {
+            recursiveVisitor(childExpression, rootExpression, cssParserState);
+          }
+        );
+      }
+    );
+  };
+  rootYakTemplateExpressions.forEach((expression) => {
+    const initialParserState = parseCss("");
+    recursiveVisitor(expression, expression, initialParserState.state);
+  });
+}
+
+const rootExpressionCssDeclarations = new WeakMap<
+  YakTemplateLiteral,
+  Declaration[]
+>();
+function transformYakExpressions(
+  expression: YakTemplateLiteral,
+  rootExpression: YakTemplateLiteral,
+  cssParserState: ParserState,
+  visitChildren: (quasiIndex: number, cssParserState: ParserState) => void,
+  createUniqueName: (name: string, hash?: boolean) => string,
+  runtimeInternalHelpers: Set<string>
+) {
+  // Get className / keyframes name
+  const identifier = createUniqueName(
+    expression === rootExpression
+      ? expression.name
+      : `${rootExpression.name}__${expression.name}`
+  );
+
+  // Initialize Declarations
+  const rootDeclarations =
+    rootExpressionCssDeclarations.get(rootExpression) || [];
+  if (rootExpression === expression) {
+    rootExpressionCssDeclarations.set(rootExpression, rootDeclarations);
+  }
+
+  // Arguments for the replaced styled call
+  const newArguments = new Set<babelTypes.Expression>();
+  const cssVariables: Record<string, babelCore.types.Expression> = {};
+  let addedOwnClassName = false;
+
+  let currentCssParserState = cssParserState;
+  // Iterate over the css parts
+  for (let i = 0; i < expression.cssPartQuasis.length; i++) {
+    const parsedCss = parseCss(
+      expression.cssPartQuasis[i],
+      currentCssParserState
+    );
+    currentCssParserState = parsedCss.state;
+    const quasiExpression = expression.path.node.quasi.expressions[i];
+
+    if (babelTypes.isTSType(quasiExpression)) {
+      throw new Error(
+        "Type annotations are not allowed in css template literals"
+      );
+    }
+
+    // If the styled component has any top-level css declarations
+    // the className must be added to the react component
+    if (parsedCss.declarations.length > 0 && !addedOwnClassName) {
+      newArguments.add(
+        babelTypes.memberExpression(
+          babelTypes.identifier("__styleYak"),
+          babelTypes.identifier(identifier)
+        )
+      );
+      addedOwnClassName = true;
+    }
+    // Add a scope of the current css class name
+    const scopedDeclarations = parsedCss.declarations.map((declaration) => ({
+      ...declaration,
+      scope: [
+        expression.type === "keyframesLiteral"
+          ? { name: `@keyframes ${identifier}`, type: "at-rule" as const }
+          : { name: `.${identifier}`, type: "selector" as const },
+        ...declaration.scope,
+      ],
+    }));
+
+    // Handle expressions inside the css template literal
+    if (quasiExpression) {
+      // Convert expressions inside property values to css variables
+      // e.g.
+      // css`color: ${({$primary}) => $primary ? 'red' : 'blue'}`
+      if (currentCssParserState.isInsidePropertyValue) {
+        const cssVarName = createUniqueName(
+          `${identifier}-${parsedCss.state.currentDeclaration.property}`,
+          true
+        );
+        cssVariables[`--${cssVarName}`] = quasiExpression;
+        currentCssParserState.currentDeclaration.value += `var(--${cssVarName})`;
+
+        // In styled components, css units can be after the expression
+        // e.g.:
+        // const MyButton = styled.button`width: ${({$width}) => $width}px`
+        // translating that to css variables would be: `width: var(--width)px`
+        // Unfortunately, this is not valid CSS, so we need to move the unit to the expression
+        const cssUnit =
+          expression.cssPartQuasis[i + 1]?.match(/^([a-z]+|%)/i)?.[0];
+        if (cssUnit) {
+          cssVariables[`--${cssVarName}`] = appendCssUnitToExpressionValue(
+            cssUnit,
+            quasiExpression,
+            runtimeInternalHelpers,
+            babelTypes
+          );
+          expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[
+            i + 1
+          ].substring(cssUnit.length);
+        }
+
+        // The declaration is not closed yet so it should not be added to the rootDeclarations
+        scopedDeclarations.pop();
+      }
+      // Keep Mixin logic in js code
+      // e.g.:
+      // const mixin = ${({$primary}) => $primary ? css`color: red` : css`color: blue`};
+      else {
+        // Add the expression to the arguments of the styled call
+        newArguments.add(quasiExpression);
+      }
+    }
+    // Store all css declarions for the rootDeclaration comment
+    rootDeclarations.push(...scopedDeclarations);
+    // Transform nested css`` literals
+    visitChildren(i, parsedCss.state);
+  }
+
+  // Merge all CSS Variables in one single object to reduce code size
+  // e.g.: { style: { "--var": expression, "--var2": expression } }
+  if (Object.keys(cssVariables).length) {
+    newArguments.add(
+      babelTypes.objectExpression([
+        babelTypes.objectProperty(
+          babelTypes.stringLiteral(`style`),
+          babelTypes.objectExpression(
+            Object.entries(cssVariables).map(([key, value]) =>
+              babelTypes.objectProperty(babelTypes.stringLiteral(key), value)
+            )
+          )
+        ),
+      ])
+    );
+  }
+
+  // Replace the css template literal with a function call
+  // to match the runtime api
+  expression.path.replaceWith(
+    babelTypes.callExpression(expression.path.node.tag, [...newArguments])
+  );
+  // Prepand the css as a comment to the styled component
+  // for later debugging and extraction
+  if (rootExpression === expression) {
+    const cssCode = toCss(rootDeclarations).trimStart();
+    if (cssCode) {
+    expression.path.addComment(
+      "leading",
+      "YAK Extracted CSS:\n" + cssCode
+    );
+    }
   }
 }

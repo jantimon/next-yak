@@ -38,6 +38,7 @@
   "scripts": {
     "prepublishOnly": "npm run build && npm run test && npm run test:types:code && npm run test:types:test",
     "build": "tsup",
+    "watch": "tsup --watch",
     "test": "vitest run",
     "test:types:code": "tsc -p tsconfig.json",
     "test:types:test": "tsc -p ./runtime/__tests__/tsconfig.json",
