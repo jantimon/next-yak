@@ -559,8 +559,8 @@ const headline = css\`
       )
     ).toMatchInlineSnapshot(`
       ".headline {
-        color: var(--headline-color_18fi82j);
-        z-index: var(--headline-z-index_18fi82j);
+        color: #E50914;
+        z-index: 14;
       }"
     `);
   });
@@ -582,13 +582,13 @@ const Component = styled.div\`
     \${({ active }) => active ? css\`
         background-color: blue;
     \` : css\`
-        background-color: \${color};
+        background-color: \${() => color};
     \`}
     border: 1px solid black;
     \${({ active }) => active ? css\`
         color: orange;
     \` : css\`
-        transition: color \${duration} \${easing};
+        transition: color \${() => duration} \${() => easing};
     \`}
 \`;
 `

@@ -75,9 +75,6 @@ function extractCss(code: string): string {
   const codeParts = code.split('/*YAK Extracted CSS:\n');
   let result = "";
   for (let i = 1; i < codeParts.length; i++) {
-    if (i % 2 === 0) {
-      continue;
-    }
     const codeUntilEnd = codeParts[i].split('*/')[0];
     result += codeUntilEnd;
   }

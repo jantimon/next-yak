@@ -395,7 +395,7 @@ var init_toCss = __esm({
       let previousScopes = [];
       for (const declaration of declarations) {
         const scopes = declaration.scope;
-        for (let i = previousScopes.length - 1; i >= 0; i--) {
+        for (let i = 0; i < previousScopes.length; i++) {
           if (!scopes[i] || scopes[i].name !== previousScopes[i].name || scopes[i].type !== previousScopes[i].type) {
             for (let j = previousScopes.length - 1; j >= i; j--) {
               css += "\n" + "  ".repeat(j) + "}";
@@ -558,7 +558,9 @@ function babel_yak_plugin_default(babel2, options) {
                 visitChildren,
                 createUniqueName,
                 runtimeInternalHelpers,
-                getComponentTypes(this.yakTemplateExpressions)
+                getComponentTypes(this.yakTemplateExpressions),
+                this.topLevelConstBindings,
+                state.file
               );
             }
           );
@@ -707,7 +709,7 @@ function visitYakExpression(yakTemplateExpressions, visitor) {
     recursiveVisitor(expression, expression, initialParserState.state);
   });
 }
-function transformYakExpressions(expression, rootExpression, cssParserState, visitChildren, createUniqueName, runtimeInternalHelpers, componentTypeMapping) {
+function transformYakExpressions(expression, rootExpression, cssParserState, visitChildren, createUniqueName, runtimeInternalHelpers, componentTypeMapping, constantValues, file) {
   const identifier = createUniqueName(
     expression === rootExpression ? expression.name : `${rootExpression.name}__${expression.name}`
   );
@@ -722,8 +724,20 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
     let cssChunk = expression.cssPartQuasis[i];
     const quasiExpression = expression.path.node.quasi.expressions[i];
-    if (babelTypes.isIdentifier(quasiExpression) && componentTypeMapping[quasiExpression.name]) {
-      const selector = componentTypeMapping[quasiExpression.name] === "keyframesLiteral" ? quasiExpression.name : `.${quasiExpression.name}`;
+    if (babelTypes.isIdentifier(quasiExpression)) {
+      let selector;
+      if (componentTypeMapping[quasiExpression.name]) {
+        selector = componentTypeMapping[quasiExpression.name] === "keyframesLiteral" ? quasiExpression.name : `.${quasiExpression.name}`;
+      } else if (constantValues.has(quasiExpression.name)) {
+        const constantValue = constantValues.get(quasiExpression.name);
+        selector = constantValue === null ? "" : String(constantValue);
+      } else {
+        throw new InvalidPositionError(
+          `Unknown identifier ${quasiExpression.name}`,
+          quasiExpression,
+          file
+        );
+      }
       expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i] + selector + (expression.cssPartQuasis[i + 1] || "");
       continue;
     }

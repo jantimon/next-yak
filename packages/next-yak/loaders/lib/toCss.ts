@@ -7,7 +7,7 @@ export const toCss = (declarations: Declaration[]): string => {
     // sort scopes by type to have selectors first
     const scopes = declaration.scope
     // close scopes that are not in the current declaration
-    for (let i = previousScopes.length - 1; i >= 0; i--) {
+    for (let i = 0; i < previousScopes.length; i++) {
       if (
         !scopes[i] ||
         scopes[i].name !== previousScopes[i].name ||

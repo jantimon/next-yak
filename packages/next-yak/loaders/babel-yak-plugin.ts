@@ -194,7 +194,9 @@ export default function (
                 visitChildren,
                 createUniqueName,
                 runtimeInternalHelpers,
-                getComponentTypes(this.yakTemplateExpressions)
+                getComponentTypes(this.yakTemplateExpressions),
+                this.topLevelConstBindings,
+                state.file
               );
             }
           );
@@ -476,7 +478,9 @@ function transformYakExpressions(
   visitChildren: (quasiIndex: number, cssParserState: ParserState) => void,
   createUniqueName: (name: string, hash?: boolean) => string,
   runtimeInternalHelpers: Set<string>,
-  componentTypeMapping: Record<string, YakTemplateLiteral["type"]>
+  componentTypeMapping: Record<string, YakTemplateLiteral["type"]>,
+  constantValues: Map<string, string | number | null>,
+  file: BabelFile
 ) {
   // Get className / keyframes name
   const identifier = createUniqueName(
@@ -508,13 +512,30 @@ function transformYakExpressions(
     // const Icon = styled.div``
     // const Button = styled.button`&:${Icon} { color: red; }`
     if (
-      babelTypes.isIdentifier(quasiExpression) &&
-      componentTypeMapping[quasiExpression.name]
+      babelTypes.isIdentifier(quasiExpression)
     ) {
-      const selector =
+      let selector: string;
+      // Component References
+      if (componentTypeMapping[quasiExpression.name]) {
+        selector =
         componentTypeMapping[quasiExpression.name] === "keyframesLiteral"
           ? quasiExpression.name
           : `.${quasiExpression.name}`;
+      }
+      // Constant values
+      else if (constantValues.has(quasiExpression.name)) {
+        const constantValue = constantValues.get(quasiExpression.name);
+        selector = constantValue === null ? "" : String(constantValue);
+      }
+      // Unknown identifier
+      else {
+        throw new InvalidPositionError(
+          `Unknown identifier ${quasiExpression.name}`,
+          quasiExpression,
+          file
+        );
+      }
+      // Merge into next css chunk
       expression.cssPartQuasis[i + 1] =
         expression.cssPartQuasis[i] +
         selector +

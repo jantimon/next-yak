@@ -567,6 +567,49 @@ const Wrapper = styled.div\`
     `);
   });
 
+  it("should allow to use queries", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `import { css } from "next-yak";
+        import { queries } from "@/theme/constants.yak";
+        const headline = css\`
+        @media (min-width: 640px) {
+          font-size: 1.5rem;
+          \${({ $primary }) =>
+            $primary &&  css\`font-size: 1.7rem;\`}
+        }
+
+  &:before {
+    content: "\\2022";
+  }
+  \``)).toMatchInlineSnapshot(`
+    "import { css } from \\"next-yak\\";
+    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+    import { queries } from \\"@/theme/constants.yak\\";
+    const headline =
+    /*YAK Extracted CSS:
+    .headline {
+      @media (min-width: 640px) {
+        font-size: 1.5rem;
+      }
+    }
+    .headline__primary {
+      @media (min-width: 640px) {
+        font-size: 1.7rem;
+      }
+    }
+    .headline {
+      &:before {
+        content: \\"\\\\2022\\";
+      }
+    }*/
+    css(__styleYak.headline, ({
+      $primary
+    }) => $primary && css(__styleYak.headline__primary));"
+  `)
+});
+
   it("should show error when mixin is used in nested selector", async () => {
     await expect(() =>
       tsloader.call(
@@ -682,15 +725,10 @@ const headline = css\`
       const headline =
       /*YAK Extracted CSS:
       .headline {
-        color: var(--headline-color_18fi82j);
-        z-index: var(--headline-z-index_18fi82j);
+        color: #E50914;
+        z-index: 14;
       }*/
-      css(__styleYak.headline, {
-        \\"style\\": {
-          \\"--headline-color_18fi82j\\": red,
-          \\"--headline-z-index_18fi82j\\": zIndex
-        }
-      });"
+      css(__styleYak.headline);"
     `);
   });
 
