@@ -722,15 +722,19 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
   let addedOwnClassName = false;
   let currentCssParserState = cssParserState;
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
-    let cssChunk = expression.cssPartQuasis[i];
+    let cssChunk = expression.cssPartQuasis[i].replace(/\\\\/g, "\\");
     const quasiExpression = expression.path.node.quasi.expressions[i];
     if (babelTypes.isIdentifier(quasiExpression)) {
-      let selector;
+      let replaceValue = null;
       if (componentTypeMapping[quasiExpression.name]) {
-        selector = componentTypeMapping[quasiExpression.name] === "keyframesLiteral" ? quasiExpression.name : `.${quasiExpression.name}`;
+        if (componentTypeMapping[quasiExpression.name] === "keyframesLiteral") {
+          replaceValue = quasiExpression.name;
+        } else if (componentTypeMapping[quasiExpression.name] === "styledLiteral" || componentTypeMapping[quasiExpression.name] === "styledCall" || componentTypeMapping[quasiExpression.name] === "attrsCall") {
+          replaceValue = `.${quasiExpression.name}`;
+        }
       } else if (constantValues.has(quasiExpression.name)) {
         const constantValue = constantValues.get(quasiExpression.name);
-        selector = constantValue === null ? "" : String(constantValue);
+        replaceValue = constantValue === null ? "" : String(constantValue);
       } else {
         throw new InvalidPositionError(
           `Unknown identifier ${quasiExpression.name}`,
@@ -738,8 +742,10 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
           file
         );
       }
-      expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i] + selector + (expression.cssPartQuasis[i + 1] || "");
-      continue;
+      if (replaceValue !== null) {
+        expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i] + replaceValue + (expression.cssPartQuasis[i + 1] || "");
+        continue;
+      }
     }
     const parsedCss = parseCss(cssChunk, currentCssParserState);
     currentCssParserState = parsedCss.state;

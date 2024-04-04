@@ -204,6 +204,8 @@ const newHeadline = styled(headline).attrs({
     ).toMatchInlineSnapshot(`
       ".headline {
         color: red;
+      }.newHeadline {
+        color: black;
       }"
     `);
   });
@@ -217,7 +219,7 @@ import styles from "./page.module.css";
 import { css } from "next-yak";
 
 const headline = css\`
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
@@ -363,9 +365,9 @@ const headline = css\`
           content: \\"\\\\2022\\";
         }
         :after {
-          content: \\"\\\\\\\\2022\\";
+          content: \\"\\\\2022\\";
         }
-        content: \\"\\\\\\\\\\\\\\\\\\"
+        content: \\"\\\\\\\\\\"
       ;
       }"
     `);
@@ -401,6 +403,8 @@ const FadeInButton = styled.button\`
         100% {
           opacity: 1;
         }
+      }.FadeInButton {
+        animation: 1s fadeIn ease-out;
       }"
     `);
   });
@@ -438,6 +442,16 @@ const Wrapper = styled.div\`
     ).toMatchInlineSnapshot(`
       ".Link {
         color: palevioletred;
+      }.Icon {
+        fill: currentColor;
+        width: 1em;
+        height: 1em;
+        .Link:hover & {
+          color: red;
+        }
+        .Link:focus & {
+          color: red;
+        }
       }.Wrapper {
         &:has(> .Link) {
           padding: 10px;
@@ -538,6 +552,8 @@ const Component2 = styled.div\`
         &:focus {
           border: 2px solid pink;
         }
+      }.Component2 {
+        color: hotpink;
       }"
     `);
   });

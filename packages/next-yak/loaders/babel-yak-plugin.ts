@@ -504,7 +504,7 @@ function transformYakExpressions(
   let currentCssParserState = cssParserState;
   // Iterate over the css parts
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
-    let cssChunk = expression.cssPartQuasis[i];
+    let cssChunk = expression.cssPartQuasis[i].replace(/\\\\/g, "\\");
     const quasiExpression = expression.path.node.quasi.expressions[i];
 
     // Merge Component References directly into the css code before parsing
@@ -514,18 +514,24 @@ function transformYakExpressions(
     if (
       babelTypes.isIdentifier(quasiExpression)
     ) {
-      let selector: string;
+      let replaceValue: string | null = null;
       // Component References
       if (componentTypeMapping[quasiExpression.name]) {
-        selector =
-        componentTypeMapping[quasiExpression.name] === "keyframesLiteral"
-          ? quasiExpression.name
-          : `.${quasiExpression.name}`;
+        if (componentTypeMapping[quasiExpression.name] === "keyframesLiteral") {
+          // Keyframes can be used as is e.g. animation: ${keyframes} 1s infinite;
+          replaceValue = quasiExpression.name;
+        } else if (componentTypeMapping[quasiExpression.name] === "styledLiteral" 
+           || componentTypeMapping[quasiExpression.name] === "styledCall"
+            || componentTypeMapping[quasiExpression.name] === "attrsCall"
+           ) {
+          // Styled components are referenced by their className
+          replaceValue = `.${quasiExpression.name}`;
+        }
       }
       // Constant values
       else if (constantValues.has(quasiExpression.name)) {
         const constantValue = constantValues.get(quasiExpression.name);
-        selector = constantValue === null ? "" : String(constantValue);
+        replaceValue = constantValue === null ? "" : String(constantValue);
       }
       // Unknown identifier
       else {
@@ -536,11 +542,13 @@ function transformYakExpressions(
         );
       }
       // Merge into next css chunk
-      expression.cssPartQuasis[i + 1] =
-        expression.cssPartQuasis[i] +
-        selector +
-        (expression.cssPartQuasis[i + 1] || "");
-      continue;
+      if (replaceValue !== null) {
+        expression.cssPartQuasis[i + 1] =
+          expression.cssPartQuasis[i] +
+          replaceValue +
+          (expression.cssPartQuasis[i + 1] || "");
+          continue;
+      }
     }
 
     const parsedCss = parseCss(cssChunk, currentCssParserState);

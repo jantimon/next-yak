@@ -1011,6 +1011,7 @@ const Button = styled.button\`
         form & {
           color: red;
         }
+      }
       .Button__primary {
         .Icon {
           background: black;
@@ -1030,6 +1031,7 @@ const Button = styled.button\`
         .Icon {
           background: white;
         }
+      }
       .Button {
         display: block;
       }*/
@@ -1169,17 +1171,16 @@ const Button = styled.button\`
       \`;
       const value = 10;
       const mixin2 = css\`
-        margin: \${size}px;
-        top: \${spacing.xs}px;
-        bottom: \${spacing[0]}PX;
-        left: \${spacing()}px;
-        right: \${value}px;
+        margin: \${() => size}px;
+        top: \${() => spacing.xs}px;
+        bottom: \${() => spacing[0]}PX;
+        left: \${() => spacing()}px;
+        right: \${() => value}px;
       \`
      `
       )
     ).toMatchInlineSnapshot(`
       "import { css } from \\"next-yak\\";
-      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const mixin1 =
       /*YAK Extracted CSS:
@@ -1203,11 +1204,11 @@ const Button = styled.button\`
       }*/
       css(__styleYak.mixin2, {
         \\"style\\": {
-          \\"--mixin2-margin_18fi82j\\": size + \\"px\\",
-          \\"--mixin2-top_18fi82j\\": __yak_unitPostFix(spacing.xs, \\"px\\"),
-          \\"--mixin2-bottom_18fi82j\\": __yak_unitPostFix(spacing[0], \\"PX\\"),
-          \\"--mixin2-left_18fi82j\\": __yak_unitPostFix(spacing(), \\"px\\"),
-          \\"--mixin2-right_18fi82j\\": value + \\"px\\"
+          \\"--mixin2-margin_18fi82j\\": () => (size) + \\"px\\",
+          \\"--mixin2-top_18fi82j\\": () => (spacing.xs) + \\"px\\",
+          \\"--mixin2-bottom_18fi82j\\": () => (spacing[0]) + \\"PX\\",
+          \\"--mixin2-left_18fi82j\\": () => (spacing()) + \\"px\\",
+          \\"--mixin2-right_18fi82j\\": () => (value) + \\"px\\"
         }
       });"
     `);
