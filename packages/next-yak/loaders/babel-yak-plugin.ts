@@ -8,7 +8,7 @@ import {
 } from "@babel/core";
 import { TaggedTemplateExpression } from "@babel/types";
 import { basename, relative, resolve } from "node:path";
-import { getConstantValues } from "./lib/getConstantValues.js";
+import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
 import murmurhash2_32_gc from "./lib/hash.js";
 import replaceQuasiExpressionTokens from "./lib/replaceQuasiExpressionTokens.js";
 import getStyledComponentName from "./lib/getStyledComponentName.js";
@@ -557,13 +557,14 @@ function transformYakExpressions(
         }
         replaceValue = String(constantValue?.value);
       }
-      // Unknown identifier
+      // Identifier without program scope definition 
+      // e.g. 
+      // const Button = styled.button`$({$size}) => {
+      //    const ident = $size * 2 + "px";
+      //    return css`width: ${ident}`
+      // }`;
       else {
-        throw new InvalidPositionError(
-          `Unknown identifier ${quasiExpression.name}`,
-          quasiExpression,
-          file
-        );
+        // Allow the usage of the identifier for now
       }
       // Merge into next css chunk
       if (replaceValue !== null) {
@@ -616,7 +617,19 @@ function transformYakExpressions(
         // technically this is supported however it is a bad practice
         // as it creates the overhead of a css variable although the value
         // is a constant
-        if (!babelTypes.isArrowFunctionExpression(quasiExpression)) {
+        const constantName = getConstantName(quasiExpression, babelTypes);
+        if (
+            !babelTypes.isArrowFunctionExpression(quasiExpression)
+            && (
+            // On top level only arrow functions are allowed as css prop values
+              !expression.hasParent
+            ||
+            // Is using root constant inside for a css prop value:
+            // const primary = 'red';
+            // const Button = styled.button`color: ${({$primary}) => $primary && primaryColor}`
+              (constantName && constantValues.has(constantName))
+            )
+        ) { 
           throw new InvalidPositionError(
             "Possible constant used as runtime value for a css variable",
             quasiExpression,

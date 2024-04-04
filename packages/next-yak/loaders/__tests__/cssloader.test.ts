@@ -89,7 +89,7 @@ const headline = css\`
     color: teal;
   \`}
   &:hover {
-    color: \${x ? "red" : "blue"\};
+    color: \${() => x ? "red" : "blue"\};
   }
 \`;
 `
@@ -148,7 +148,7 @@ import { css } from "next-yak";
 
 const headline = css\`
   &:hover {
-    color: \${x ? "red" : "blue"\};
+    color: \${() => x ? "red" : "blue"\};
   }
   \`;
 `
