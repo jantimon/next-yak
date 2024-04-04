@@ -36,26 +36,53 @@ function getConstantValues(path, t) {
   const bindings = Object.entries(path.scope.bindings);
   for (const [name, binding] of bindings) {
     if (binding.kind === "module") {
-      topLevelConstBindings.set(name, null);
+      topLevelConstBindings.set(name, {
+        value: null,
+        type: "module"
+      });
       continue;
     }
     if (binding.kind === "let" || binding.kind === "var" || binding.kind === "const") {
-      if (!("init" in binding.path.node) || t.isFunctionDeclaration(binding.path.node.init) || t.isArrowFunctionExpression(binding.path.node.init)) {
-        topLevelConstBindings.set(name, null);
+      if (!("init" in binding.path.node)) {
+        topLevelConstBindings.set(name, {
+          type: "variable",
+          value: null
+        });
         continue;
       }
       const value = binding.path.node.init;
-      topLevelConstBindings.set(
-        name,
-        t.isStringLiteral(value) || t.isNumericLiteral(value) ? value.value : null
-      );
+      if (t.isFunctionDeclaration(value) || t.isArrowFunctionExpression(value)) {
+        topLevelConstBindings.set(name, {
+          type: "function",
+          value: null
+        });
+        continue;
+      }
+      topLevelConstBindings.set(name, {
+        type: "variable",
+        value: t.isStringLiteral(value) || t.isNumericLiteral(value) ? value.value : null
+      });
     }
   }
   return topLevelConstBindings;
 }
+var getConstantName;
 var init_getConstantValues = __esm({
   "loaders/lib/getConstantValues.ts"() {
     "use strict";
+    getConstantName = (expression, t) => {
+      if (t.isIdentifier(expression)) {
+        return expression.name;
+      } else if (t.isMemberExpression(expression) && t.isIdentifier(expression.object)) {
+        return expression.object.name;
+      } else if (t.isCallExpression(expression) && t.isIdentifier(expression.callee)) {
+        return expression.callee.name;
+      } else if (t.isCallExpression(expression) && t.isMemberExpression(expression.callee) && t.isIdentifier(expression.callee.object)) {
+        return expression.callee.object.name;
+      } else {
+        return null;
+      }
+    };
   }
 });
 
@@ -752,13 +779,30 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
         }
       } else if (constantValues.has(quasiExpression.name)) {
         const constantValue = constantValues.get(quasiExpression.name);
-        replaceValue = constantValue === null ? "" : String(constantValue);
+        if (!constantValue || constantValue.type === "variable" && constantValue.value === null) {
+          throw new InvalidPositionError(
+            `Could not resolve value for ${quasiExpression.name}`,
+            quasiExpression,
+            file
+          );
+        }
+        if (constantValue.type === "module") {
+          throw new InvalidPositionError(
+            `Imported values cannot be used as constants`,
+            quasiExpression,
+            file,
+            "Move the constant into the current file or into a .yak file"
+          );
+        }
+        if (constantValue.type === "function") {
+          throw new InvalidPositionError(
+            `Function constants are not supported yet`,
+            quasiExpression,
+            file
+          );
+        }
+        replaceValue = String(constantValue?.value);
       } else {
-        throw new InvalidPositionError(
-          `Unknown identifier ${quasiExpression.name}`,
-          quasiExpression,
-          file
-        );
       }
       if (replaceValue !== null) {
         expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i] + replaceValue + (expression.cssPartQuasis[i + 1] || "");
@@ -790,6 +834,22 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
     }));
     if (quasiExpression) {
       if (currentCssParserState.isInsidePropertyValue) {
+        const constantName = getConstantName(quasiExpression, import_core.types);
+        if (!import_core.types.isArrowFunctionExpression(quasiExpression) && // On top level only arrow functions are allowed as css prop values
+        (!expression.hasParent || // Is using root constant inside for a css prop value:
+        // const primary = 'red';
+        // const Button = styled.button`color: ${({$primary}) => $primary && primaryColor}`
+        constantName && constantValues.has(constantName))) {
+          throw new InvalidPositionError(
+            "Possible constant used as runtime value for a css variable",
+            quasiExpression,
+            file,
+            `Please move the constant to a .yak import or use an arrow function
+e.g.:
+|   import { primaryColor } from './foo.yak'
+|   const MyStyledDiv = styled.div\`color: \${primaryColor};\``
+          );
+        }
         const cssVarName = createUniqueName(
           `${identifier}-${parsedCss.state.currentDeclaration.property}`,
           true
@@ -808,6 +868,14 @@ function transformYakExpressions(expression, rootExpression, cssParserState, vis
         }
         scopedDeclarations.pop();
       } else {
+        if (currentCssParserState.currentScopes.length > 0 && quasiExpression.type !== "TaggedTemplateExpression" && quasiExpression.type !== "ArrowFunctionExpression") {
+          throw new InvalidPositionError(
+            "Mixins are not allowed inside nested selectors",
+            quasiExpression,
+            file,
+            "Use an inline css literal instead or move the selector into the mixin"
+          );
+        }
         newArguments.add(quasiExpression);
         if (expression.cssPartQuasis[i + 1]?.startsWith(";")) {
           expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[i + 1].substring(1);
