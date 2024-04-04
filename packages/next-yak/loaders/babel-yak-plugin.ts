@@ -55,7 +55,7 @@ export default function (
   PluginPass & {
     localVarNames: YakLocalIdentifierNames;
     isImportedInCurrentFile: boolean;
-    topLevelConstBindings: Map<string, number | string | null>;
+    topLevelConstBindings: ReturnType<typeof getConstantValues>;
     variableNameToStyledCall: Map<
       string,
       {
@@ -479,7 +479,7 @@ function transformYakExpressions(
   createUniqueName: (name: string, hash?: boolean) => string,
   runtimeInternalHelpers: Set<string>,
   componentTypeMapping: Record<string, YakTemplateLiteral["type"]>,
-  constantValues: Map<string, string | number | null>,
+  constantValues: ReturnType<typeof getConstantValues>,
   file: BabelFile
 ) {
   // Get className / keyframes name
@@ -530,7 +530,32 @@ function transformYakExpressions(
       // Constant values
       else if (constantValues.has(quasiExpression.name)) {
         const constantValue = constantValues.get(quasiExpression.name);
-        replaceValue = constantValue === null ? "" : String(constantValue);
+        if (
+          !constantValue ||
+          (constantValue.type === "variable" && constantValue.value === null)
+        ) {
+          throw new InvalidPositionError(
+            `Could not resolve value for ${quasiExpression.name}`,
+            quasiExpression,
+            file
+          );
+        }
+        if (constantValue.type === "module") {
+          throw new InvalidPositionError(
+            `Imported values cannot be used as constants`,
+            quasiExpression,
+            file,
+            "Move the constant into the current file or into a .yak file"
+          );
+        }
+        if (constantValue.type === "function") {
+          throw new InvalidPositionError(
+            `Function constants are not supported yet`,
+            quasiExpression,
+            file
+          );
+        }
+        replaceValue = String(constantValue?.value);
       }
       // Unknown identifier
       else {
@@ -587,6 +612,22 @@ function transformYakExpressions(
       // e.g.
       // css`color: ${({$primary}) => $primary ? 'red' : 'blue'}`
       if (currentCssParserState.isInsidePropertyValue) {
+        // Imported consants are not allowed inside property values
+        // technically this is supported however it is a bad practice
+        // as it creates the overhead of a css variable although the value
+        // is a constant
+        if (!babelTypes.isArrowFunctionExpression(quasiExpression)) {
+          throw new InvalidPositionError(
+            "Possible constant used as runtime value for a css variable",
+            quasiExpression,
+            file,
+            `Please move the constant to a .yak import or use an arrow function
+e.g.:
+|   import { primaryColor } from './foo.yak'
+|   const MyStyledDiv = styled.div\`color: \${primaryColor};\``
+          );
+        }
+
         const cssVarName = createUniqueName(
           `${identifier}-${parsedCss.state.currentDeclaration.property}`,
           true
@@ -629,9 +670,10 @@ function transformYakExpressions(
           quasiExpression.type !== "ArrowFunctionExpression"
         ) {
           throw new InvalidPositionError(
-            "Mixins are not supported in nested css scopes",
+            "Mixins are not allowed inside nested selectors",
             quasiExpression,
-            file
+            file,
+            "Use an inline css literal instead or move the selector into the mixin"
           );
         }
 

@@ -610,7 +610,7 @@ const Wrapper = styled.div\`
   `)
 });
 
-  it.only("should show error when mixin is used in nested selector", async () => {
+  it("should show error when mixin is used in nested selector", async () => {
     await expect(() =>
       tsloader.call(
         loaderContext,
@@ -631,8 +631,9 @@ const Icon = styled.div\`
 `
       )
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 11: Mixins are not supported in nested css scopes
-      found: \${bold}"
+      "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
+      found: \${bold}
+      Use an inline css literal instead or move the selector into the mixin"
     `);
   });
 
@@ -656,7 +657,11 @@ const Icon = styled.div\`
 \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
+      found: \${bold()}
+      Use an inline css literal instead or move the selector into the mixin"
+    `);
   });
 
   // TODO: this test was temporarily disabled because it was failing when inline css literals were introduced
@@ -692,8 +697,7 @@ const Icon = styled.div\`
         loaderContext,
         `
 import { styled, css } from "next-yak";
-
-const test = "bar";
+import { test } from "another-module";
 
 const Icon = styled.div\`
   \${test} {
@@ -702,7 +706,11 @@ const Icon = styled.div\`
 \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 6: Imported values cannot be used as constants
+      found: \${test}
+      Move the constant into the current file or into a .yak file"
+    `);
   });
 
   it("should remove string and number constants from the ts code", async () => {
@@ -748,7 +756,10 @@ const headline = css\`
 \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 6: Could not resolve value for red
+      found: \${red}"
+    `);
   });
 
   it("should show error when using a runtime value from top level in a nested literal", async () => {
@@ -768,7 +779,10 @@ const headline = css\`
         \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Could not resolve value for $red
+      found: \${$red}"
+    `);
   });
 
   it("should show error when calling a runtime value from top level in a nested literal", async () => {
@@ -788,7 +802,14 @@ const headline = css\`
         \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      found: \${red()}
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`"
+    `);
   });
 
   it("should show error when calling a nested runtime value from top level in a nested literal", async () => {
@@ -808,7 +829,14 @@ const headline = css\`
         \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      found: \${colors.red()}
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`"
+    `);
   });
 
   it("should show error when using a runtime value from another module in a nested literal", async () => {
@@ -828,7 +856,11 @@ const headline = css\`
         \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Imported values cannot be used as constants
+      found: \${$red}
+      Move the constant into the current file or into a .yak file"
+    `);
   });
 
   it("should show error when using a runtime object value from top level in a nested literal", async () => {
@@ -848,7 +880,14 @@ const headline = css\`
         \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      found: \${colors.red}
+      Please move the constant to a .yak import or use an arrow function
+      e.g.:
+      |   import { primaryColor } from './foo.yak'
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`"
+    `);
   });
 
   it("should show no error when using a scoped value", async () => {
@@ -928,8 +967,7 @@ const headline = css\`
         loaderContext,
         `
 import { styled, css } from "next-yak";
-
-const test = "bar";
+import { test } from "another-module";
 
 const Icon = styled.div\`
   \${test}, baz {
@@ -938,7 +976,11 @@ const Icon = styled.div\`
 \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 6: Imported values cannot be used as constants
+      found: \${test}
+      Move the constant into the current file or into a .yak file"
+    `);
   });
 
   it("should allow allow using a styled component as selector in the same file", async () => {
@@ -1050,10 +1092,10 @@ const Button = styled.button\`
      import styles from "./page.module.css";
      import { styled } from "next-yak";
      const Button = styled.button\`
-        padding: \${10}rem;
-        margin: \${4 * 2}px;
-        z-index: \${10 + 4};
-        transform: translateX(\${10}px) translateY(\${10 / 2}px);
+        padding: \${() => 10}rem;
+        margin: \${() => 4 * 2}px;
+        z-index: \${() => 10 + 4};
+        transform: translateX(\${() => 10}px) translateY(\${() => 10 / 2}px);
         font-family: "Arial", sans-serif;
      \`;
 
@@ -1074,11 +1116,11 @@ const Button = styled.button\`
       }*/
       styled.button(__styleYak.Button, {
         \\"style\\": {
-          \\"--Button-padding_18fi82j\\": 10 + \\"rem\\",
-          \\"--Button-margin_18fi82j\\": 4 * 2 + \\"px\\",
-          \\"--Button-z-index_18fi82j\\": 10 + 4,
-          \\"--Button-transform_18fi82j\\": 10 + \\"px\\",
-          \\"--Button-transform_1_18fi82j\\": 10 / 2 + \\"px\\"
+          \\"--Button-padding_18fi82j\\": () => (10) + \\"rem\\",
+          \\"--Button-margin_18fi82j\\": () => (4 * 2) + \\"px\\",
+          \\"--Button-z-index_18fi82j\\": () => 10 + 4,
+          \\"--Button-transform_18fi82j\\": () => (10) + \\"px\\",
+          \\"--Button-transform_1_18fi82j\\": () => (10 / 2) + \\"px\\"
         }
       });"
     `);
@@ -1170,7 +1212,7 @@ const Button = styled.button\`
         `
       import { css } from "next-yak";
       const mixin1 = css\`
-        padding: \${4}px;
+        padding: \${() => 4}px;
       \`;
       const value = 10;
       const mixin2 = css\`
@@ -1178,7 +1220,7 @@ const Button = styled.button\`
         top: \${() => spacing.xs}px;
         bottom: \${() => spacing[0]}PX;
         left: \${() => spacing()}px;
-        right: \${() => value}px;
+        right: \${value}px;
       \`
      `
       )
@@ -1192,7 +1234,7 @@ const Button = styled.button\`
       }*/
       css(__styleYak.mixin1, {
         \\"style\\": {
-          \\"--mixin1-padding_18fi82j\\": 4 + \\"px\\"
+          \\"--mixin1-padding_18fi82j\\": () => (4) + \\"px\\"
         }
       });
       const value = 10;
@@ -1203,15 +1245,14 @@ const Button = styled.button\`
         top: var(--mixin2-top_18fi82j);
         bottom: var(--mixin2-bottom_18fi82j);
         left: var(--mixin2-left_18fi82j);
-        right: var(--mixin2-right_18fi82j);
+        right: 10px;
       }*/
       css(__styleYak.mixin2, {
         \\"style\\": {
           \\"--mixin2-margin_18fi82j\\": () => (size) + \\"px\\",
           \\"--mixin2-top_18fi82j\\": () => (spacing.xs) + \\"px\\",
           \\"--mixin2-bottom_18fi82j\\": () => (spacing[0]) + \\"PX\\",
-          \\"--mixin2-left_18fi82j\\": () => (spacing()) + \\"px\\",
-          \\"--mixin2-right_18fi82j\\": () => (value) + \\"px\\"
+          \\"--mixin2-left_18fi82j\\": () => (spacing()) + \\"px\\"
         }
       });"
     `);
