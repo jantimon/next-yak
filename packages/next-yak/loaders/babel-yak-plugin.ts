@@ -511,19 +511,18 @@ function transformYakExpressions(
     // e.g.:
     // const Icon = styled.div``
     // const Button = styled.button`&:${Icon} { color: red; }`
-    if (
-      babelTypes.isIdentifier(quasiExpression)
-    ) {
+    if (babelTypes.isIdentifier(quasiExpression)) {
       let replaceValue: string | null = null;
       // Component References
       if (componentTypeMapping[quasiExpression.name]) {
         if (componentTypeMapping[quasiExpression.name] === "keyframesLiteral") {
           // Keyframes can be used as is e.g. animation: ${keyframes} 1s infinite;
           replaceValue = quasiExpression.name;
-        } else if (componentTypeMapping[quasiExpression.name] === "styledLiteral" 
-           || componentTypeMapping[quasiExpression.name] === "styledCall"
-            || componentTypeMapping[quasiExpression.name] === "attrsCall"
-           ) {
+        } else if (
+          componentTypeMapping[quasiExpression.name] === "styledLiteral" ||
+          componentTypeMapping[quasiExpression.name] === "styledCall" ||
+          componentTypeMapping[quasiExpression.name] === "attrsCall"
+        ) {
           // Styled components are referenced by their className
           replaceValue = `.${quasiExpression.name}`;
         }
@@ -547,7 +546,7 @@ function transformYakExpressions(
           expression.cssPartQuasis[i] +
           replaceValue +
           (expression.cssPartQuasis[i + 1] || "");
-          continue;
+        continue;
       }
     }
 
@@ -621,6 +620,21 @@ function transformYakExpressions(
       // e.g.:
       // const mixin = ${({$primary}) => $primary ? css`color: red` : css`color: blue`};
       else {
+        // Right now we can't recieve the value of imported mixin values
+        // This becomes a problem in nested selector scopess as we would have to merge
+        // the scopes and the css code
+        if (
+          currentCssParserState.currentScopes.length > 0 &&
+          quasiExpression.type !== "TaggedTemplateExpression" &&
+          quasiExpression.type !== "ArrowFunctionExpression"
+        ) {
+          throw new InvalidPositionError(
+            "Mixins are not supported in nested css scopes",
+            quasiExpression,
+            file
+          );
+        }
+
         // Add the expression to the arguments of the styled call
         newArguments.add(quasiExpression);
         // Remove semicolon from the following css part

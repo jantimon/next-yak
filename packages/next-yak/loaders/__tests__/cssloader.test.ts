@@ -249,7 +249,7 @@ const headline = css\`
   \${queries.sm} {
     color: red;
   }
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
@@ -283,7 +283,7 @@ const headline = css\`
   \${queries.sm} {
     color: red;
   }
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
@@ -317,7 +317,7 @@ const headline = css\`
   \${queries["sm"]} {
     color: red;
   }
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
@@ -697,10 +697,10 @@ const headline = css\`
      import { css } from "next-yak";
      const value = 10;
      const case3 = css\`
-        margin: \${size}px;
-        top: \${spacing.xs}px;
-        bottom: \${spacing[0]}PX;
-        left: \${spacing()}px;
+        margin: \${() => size}px;
+        top: \${() => spacing.xs}px;
+        bottom: \${() => spacing[0]}PX;
+        left: \${() => spacing()}px;
         right: \${value}px;
     \`
      `
@@ -711,7 +711,7 @@ const headline = css\`
         top: var(--case3-top_18fi82j);
         bottom: var(--case3-bottom_18fi82j);
         left: var(--case3-left_18fi82j);
-        right: var(--case3-right_18fi82j);
+        right: 10px;
       }"
     `);
   });
@@ -746,15 +746,15 @@ it("should allow allow using an inline nested css literal", async () => {
 
 it("should support linebreaks in content", async () => {
   expect(
-    await cssloader.call(
+    (await cssloader.call(
       loaderContext,
       `
    import { styled, css } from "next-yak";
    const Button = styled.button\`
      :before {
-      content: '🦄\nHello World';
+      content: '🦄\\nHello World';
      }
    \`;`
-    )
+    )).split("content")[1]
   ).includes("\\nHello World");
 });

@@ -610,7 +610,7 @@ const Wrapper = styled.div\`
   `)
 });
 
-  it("should show error when mixin is used in nested selector", async () => {
+  it.only("should show error when mixin is used in nested selector", async () => {
     await expect(() =>
       tsloader.call(
         loaderContext,
@@ -630,7 +630,10 @@ const Icon = styled.div\`
 \`
 `
       )
-    ).rejects.toThrowErrorMatchingInlineSnapshot('"babel transform failed"');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      "/some/special/path/page.tsx: line 11: Mixins are not supported in nested css scopes
+      found: \${bold}"
+    `);
   });
 
   it("should show error when a mixin function is used in nested selector", async () => {
