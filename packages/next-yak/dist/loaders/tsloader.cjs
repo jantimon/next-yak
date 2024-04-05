@@ -594,7 +594,7 @@ function babel_yak_plugin_default(babel2, options) {
             let uniqueName = baseName;
             while (existingNames.has(uniqueName)) {
               i++;
-              uniqueName = devMode ? `${name}_${i}` : `${name}${i.toString(32)}`;
+              uniqueName = devMode ? `${baseName}_${i}` : `${baseName}${i.toString(32)}`;
             }
             existingNames.add(uniqueName);
             return uniqueName;

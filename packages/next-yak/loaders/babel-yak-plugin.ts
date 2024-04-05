@@ -184,8 +184,8 @@ export default function (
             while (existingNames.has(uniqueName)) {
               i++;
               uniqueName = devMode
-                ? `${name}_${i}`
-                : `${name}${i.toString(32)}`;
+                ? `${baseName}_${i}`
+                : `${baseName}${i.toString(32)}`;
             }
             existingNames.add(uniqueName);
             return uniqueName;
