@@ -4,6 +4,7 @@ import cssloader from "../cssloader.js";
 const loaderContext = {
   resourcePath: "/some/special/path/page.tsx",
   rootContext: "/some",
+  mode: "development",
   importModule: () => {
     return {
       queries: {

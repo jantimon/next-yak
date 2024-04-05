@@ -563,6 +563,7 @@ function babel_yak_plugin_default(babel2, options) {
           if (!this.isImportedInCurrentFile) {
             return;
           }
+          const devMode = options.devMode || false;
           const runtimeInternalHelpers = /* @__PURE__ */ new Set();
           const existingNames = /* @__PURE__ */ new Set();
           const createUniqueName = (name, hash) => {
@@ -573,7 +574,10 @@ function babel_yak_plugin_default(babel2, options) {
               uniqueName = `${name}_${i}`;
             }
             existingNames.add(uniqueName);
-            return hash ? uniqueName + "_" + getHashedFilePath(state.file) : uniqueName;
+            if (hash) {
+              return devMode ? uniqueName + "_" + getHashedFilePath(state.file) : getHashedFilePath(state.file);
+            }
+            return uniqueName;
           };
           visitYakExpression(
             this.yakTemplateExpressions,
@@ -941,7 +945,9 @@ ${recommendedFix}`;
           parent
         )) {
           if (!babelTypes.isTemplateLiteral(child.node) || !babelTypes.isExpression(grandChild.node)) {
-            throw new Error("Unexpected Error - This AST structure is unexpected - please open an issue in the repository");
+            throw new Error(
+              "Unexpected Error - This AST structure is unexpected - please open an issue in the repository"
+            );
           }
           const currentIndex = child.node.expressions.indexOf(grandChild.node);
           return {
@@ -1026,7 +1032,8 @@ async function tsloader(source) {
           await Promise.resolve().then(() => (init_babel_yak_plugin(), babel_yak_plugin_exports)).then((m) => m.default),
           {
             replaces,
-            rootContext
+            rootContext,
+            devMode: this.mode === "development"
           }
         ]
       ]
@@ -1035,7 +1042,9 @@ async function tsloader(source) {
     if (error instanceof InvalidPositionError) {
       return callback(new Error(error.message));
     }
-    return callback(error instanceof Error ? error : new Error("babel transform failed"));
+    return callback(
+      error instanceof Error ? error : new Error("babel transform failed")
+    );
   }
   if (!result?.code) {
     return callback(new Error("babel transform failed"));

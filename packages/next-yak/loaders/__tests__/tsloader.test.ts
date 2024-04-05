@@ -4,6 +4,7 @@ import { describe, it, expect } from "vitest";
 const loaderContext = {
   resourcePath: "/some/special/path/page.tsx",
   rootContext: "/some",
+  mode: "development",
   importModule: () => {
     return {
       replaces: {

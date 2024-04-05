@@ -54,6 +54,7 @@ export default async function tsloader(
           {
             replaces,
             rootContext,
+            devMode: this.mode === "development",
           },
         ],
       ],
@@ -62,7 +63,9 @@ export default async function tsloader(
     if (error instanceof InvalidPositionError) {
       return callback(new Error(error.message));
     }
-    return callback(error instanceof Error ? error : new Error("babel transform failed"));
+    return callback(
+      error instanceof Error ? error : new Error("babel transform failed")
+    );
   }
   if (!result?.code) {
     return callback(new Error("babel transform failed"));

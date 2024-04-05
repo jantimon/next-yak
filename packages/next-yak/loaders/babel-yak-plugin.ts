@@ -20,6 +20,7 @@ import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue
 type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
   rootContext?: string;
+  devMode?: boolean;
 };
 
 type YakLocalIdentifierNames = {
@@ -168,6 +169,7 @@ export default function (
           if (!this.isImportedInCurrentFile) {
             return;
           }
+          const devMode = options.devMode || false;
           const runtimeInternalHelpers = new Set<string>();
           // Util to create a unique identifiers per file name
           const existingNames = new Set<string>();
@@ -179,9 +181,14 @@ export default function (
               uniqueName = `${name}_${i}`;
             }
             existingNames.add(uniqueName);
-            return hash
-              ? uniqueName + "_" + getHashedFilePath(state.file)
-              : uniqueName;
+            // Hashes will only be used for identifiers which can not be minified
+            // therefore the readable name will only be used if development is enabled
+            if (hash) {
+              return devMode
+                ? uniqueName + "_" + getHashedFilePath(state.file)
+                : getHashedFilePath(state.file);
+            }
+            return uniqueName;
           };
           // Iteratate and transform all found yak template literals
           visitYakExpression(
@@ -409,7 +416,9 @@ const getClosestTemplateLiteralExpressionParentPath = (
         !babelTypes.isTemplateLiteral(child.node) ||
         !babelTypes.isExpression(grandChild.node)
       ) {
-        throw new Error("Unexpected Error - This AST structure is unexpected - please open an issue in the repository");
+        throw new Error(
+          "Unexpected Error - This AST structure is unexpected - please open an issue in the repository"
+        );
       }
       const currentIndex = child.node.expressions.indexOf(grandChild.node);
       return {
@@ -557,8 +566,8 @@ function transformYakExpressions(
         }
         replaceValue = String(constantValue?.value);
       }
-      // Identifier without program scope definition 
-      // e.g. 
+      // Identifier without program scope definition
+      // e.g.
       // const Button = styled.button`$({$size}) => {
       //    const ident = $size * 2 + "px";
       //    return css`width: ${ident}`
@@ -619,17 +628,14 @@ function transformYakExpressions(
         // is a constant
         const constantName = getConstantName(quasiExpression, babelTypes);
         if (
-            !babelTypes.isArrowFunctionExpression(quasiExpression)
-            && (
-            // On top level only arrow functions are allowed as css prop values
-              !expression.hasParent
-            ||
+          !babelTypes.isArrowFunctionExpression(quasiExpression) &&
+          // On top level only arrow functions are allowed as css prop values
+          (!expression.hasParent ||
             // Is using root constant inside for a css prop value:
             // const primary = 'red';
             // const Button = styled.button`color: ${({$primary}) => $primary && primaryColor}`
-              (constantName && constantValues.has(constantName))
-            )
-        ) { 
+            (constantName && constantValues.has(constantName)))
+        ) {
           throw new InvalidPositionError(
             "Possible constant used as runtime value for a css variable",
             quasiExpression,
