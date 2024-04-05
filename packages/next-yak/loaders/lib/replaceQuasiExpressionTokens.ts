@@ -25,7 +25,7 @@ import type { NodePath, types as babelTypes } from "@babel/core";
 export default function replaceTokensInQuasiExpressions(
   quasi: babelTypes.TemplateLiteral,
   replacer: (name: string) => unknown,
-  t: typeof babelTypes
+  t: typeof babelTypes,
 ) {
   // Iterate over the expressions in reverse order
   // so removing items won't affect the index of the next item
@@ -52,7 +52,7 @@ export default function replaceTokensInQuasiExpressions(
 function replaceExpressionAndMergeQuasis(
   quasi: babelTypes.TemplateLiteral,
   expressionIndex: number,
-  replacement: unknown
+  replacement: unknown,
 ) {
   const stringReplacement =
     typeof replacement === "string"
@@ -81,7 +81,7 @@ function replaceExpressionAndMergeQuasis(
  */
 function getExpressionParts(
   expression: babelTypes.Expression | babelTypes.TSType,
-  t: typeof babelTypes
+  t: typeof babelTypes,
 ) {
   let currentExpression = expression;
   /** @type {string[]} */

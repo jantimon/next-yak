@@ -7,7 +7,7 @@
 const getYakImports = (code: string) => {
   const codeWithoutComments = code.replace(/\/\*[\s\S]*?\*\//g, "");
   const allImports = codeWithoutComments.matchAll(
-    /(^|\n|;)\s*import\s+(?:(\w+(?:\s+as\s+\w+)?)\s*,?\s*)?(?:{([^}]*)})?\s+from\s+["']([^'"]+\.yak)["'](;|\n)/g
+    /(^|\n|;)\s*import\s+(?:(\w+(?:\s+as\s+\w+)?)\s*,?\s*)?(?:{([^}]*)})?\s+from\s+["']([^'"]+\.yak)["'](;|\n)/g,
   );
   return [...allImports].map(([, , defaultImport, namedImports, from]) => {
     // parse named imports to { localName: string, importedName: string }[]

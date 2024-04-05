@@ -7,10 +7,10 @@ import type { NodePath, types as babelTypes } from "@babel/core";
  * e.g. const FancyButton = styled(MyButton)`...` -> "FancyButton"
  */
 const getStyledComponentName = (
-  taggedTemplateExpressionPath: NodePath<babelTypes.TaggedTemplateExpression>
+  taggedTemplateExpressionPath: NodePath<babelTypes.TaggedTemplateExpression>,
 ) => {
   const variableDeclaratorPath = taggedTemplateExpressionPath.findParent(
-    (path) => path.isVariableDeclarator()
+    (path) => path.isVariableDeclarator(),
   );
   if (
     !variableDeclaratorPath ||
@@ -19,7 +19,7 @@ const getStyledComponentName = (
   ) {
     throw new Error(
       "Could not find variable declaration for styled component at " +
-        taggedTemplateExpressionPath.node.loc
+        taggedTemplateExpressionPath.node.loc,
     );
   }
   return variableDeclaratorPath.node.id.name;

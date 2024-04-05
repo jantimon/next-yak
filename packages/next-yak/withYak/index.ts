@@ -38,7 +38,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     // is able to import a context which works for server components
     const yakContext = resolveYakContext(
       yakOptions.contextPath,
-      webpackConfig.context
+      webpackConfig.context,
     );
     if (yakContext) {
       webpackConfig.resolve.alias["next-yak/context/baseContext"] = yakContext;
@@ -105,7 +105,7 @@ export const withYak: {
       | ((...args: any[]) => Promise<Record<string, any>>),
   >(
     yakOptions: YakConfigOptions,
-    nextConfig: T
+    nextConfig: T,
   ): T;
   // no yakConfig
   <
@@ -115,7 +115,7 @@ export const withYak: {
       | ((...args: any[]) => Promise<Record<string, any>>),
   >(
     nextConfig: T,
-    _?: undefined
+    _?: undefined,
   ): T;
 } = (maybeYakOptions, nextConfig) => {
   if (nextConfig === undefined) {

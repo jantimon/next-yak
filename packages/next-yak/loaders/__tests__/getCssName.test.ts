@@ -50,7 +50,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a logical expression with multiple conditions", () => {
     const literal = getCssLiteral(
-      `({$active, $visible}) => $active && $visible && css\`\``
+      `({$active, $visible}) => $active && $visible && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_visible");
@@ -58,7 +58,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a ternary expression with multiple conditions", () => {
     const literal = getCssLiteral(
-      `({$active, $visible}) => $active ? ($visible ? css\`\` : null) : null`
+      `({$active, $visible}) => $active ? ($visible ? css\`\` : null) : null`,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_visible");
@@ -66,7 +66,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a logical expression with negation and multiple conditions", () => {
     const literal = getCssLiteral(
-      `({$active, $visible}) => !$active && $visible && css\`\``
+      `({$active, $visible}) => !$active && $visible && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("not_active_and_visible");
@@ -74,7 +74,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a ternary expression with negation and multiple conditions", () => {
     const literal = getCssLiteral(
-      `({$active, $visible}) => !$active ? ($visible ? css\`\`: null) : null`
+      `({$active, $visible}) => !$active ? ($visible ? css\`\`: null) : null`,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("not_active_and_visible");
@@ -82,7 +82,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a logical expression with negation and multiple conditions for the else case", () => {
     const literal = getCssLiteral(
-      `({$active, $visible}) => $active && !$visible && css\`\``
+      `({$active, $visible}) => $active && !$visible && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_not_visible");
@@ -90,7 +90,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a ternary expression with negation and multiple conditions for the else case", () => {
     const literal = getCssLiteral(
-      `({$active, $visible}) => $active ? ($visible ? null : css\`\`) : null`
+      `({$active, $visible}) => $active ? ($visible ? null : css\`\`) : null`,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_not_visible");
@@ -98,7 +98,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from the condition of a nested logical expression", () => {
     const literal = getCssLiteral(
-      `({ $visible }) => $visible && (({ $active }) => $active && css\`\`)`
+      `({ $visible }) => $visible && (({ $active }) => $active && css\`\`)`,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("visible_and_active");
@@ -106,7 +106,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from a complex expression using AND and OR operators", () => {
     const literal = getCssLiteral(
-      `({$active, $visible, $enabled}) => ($active || $visible) && $enabled && css\`\``
+      `({$active, $visible, $enabled}) => ($active || $visible) && $enabled && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_or_visible_and_enabled");
@@ -114,7 +114,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from nested logical expressions", () => {
     const literal = getCssLiteral(
-      `({$active, $visible, $enabled}) => ($active && ($visible || $enabled)) && css\`\``
+      `({$active, $visible, $enabled}) => ($active && ($visible || $enabled)) && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_visible_or_enabled");
@@ -122,7 +122,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from an expression with multiple OR conditions", () => {
     const literal = getCssLiteral(
-      `({$active, $visible, $enabled}) => $active || $visible || $enabled && css\`\``
+      `({$active, $visible, $enabled}) => $active || $visible || $enabled && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_or_visible_or_enabled");
@@ -130,7 +130,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from a complex combination of AND and OR operators", () => {
     const literal = getCssLiteral(
-      `({$active, $visible, $enabled}) => ($active && $visible) || ($visible && $enabled) && css\`\``
+      `({$active, $visible, $enabled}) => ($active && $visible) || ($visible && $enabled) && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("active_and_visible_or_visible_and_enabled");
@@ -162,7 +162,7 @@ describe("getCssName", () => {
 
   it("should guess the css name from a nested member expression and camelCase it", () => {
     const literal = getCssLiteral(
-      `({$user}) => $user.auth.loggedIn && css\`\``
+      `({$user}) => $user.auth.loggedIn && css\`\``,
     );
     const cssName = getCssName(literal);
     expect(cssName).toBe("userAuthLoggedIn");
