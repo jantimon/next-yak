@@ -175,19 +175,18 @@ export default function (
           const existingNames = new Set<string>();
           const createUniqueName = (name: string, hash?: boolean) => {
             let i = 0;
-            let uniqueName = name;
+            let uniqueName = hash
+              ? // Hashes will only be used for identifiers which can not be minified
+                // therefore the readable name will only be used if development is enabled
+                `${devMode ? `${name}_` : ""}${getHashedFilePath(state.file)}`
+              : name;
             while (existingNames.has(uniqueName)) {
               i++;
-              uniqueName = `${name}_${i}`;
+              uniqueName = devMode
+                ? `${name}_${i}`
+                : `${name}${i.toString(32)}`;
             }
             existingNames.add(uniqueName);
-            // Hashes will only be used for identifiers which can not be minified
-            // therefore the readable name will only be used if development is enabled
-            if (hash) {
-              return devMode
-                ? uniqueName + "_" + getHashedFilePath(state.file)
-                : getHashedFilePath(state.file);
-            }
             return uniqueName;
           };
           // Iteratate and transform all found yak template literals

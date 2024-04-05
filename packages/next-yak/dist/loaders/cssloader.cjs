@@ -586,15 +586,16 @@ function babel_yak_plugin_default(babel2, options) {
           const existingNames = /* @__PURE__ */ new Set();
           const createUniqueName = (name, hash) => {
             let i = 0;
-            let uniqueName = name;
+            let uniqueName = hash ? (
+              // Hashes will only be used for identifiers which can not be minified
+              // therefore the readable name will only be used if development is enabled
+              `${devMode ? `${name}_` : ""}${getHashedFilePath(state.file)}`
+            ) : name;
             while (existingNames.has(uniqueName)) {
               i++;
-              uniqueName = `${name}_${i}`;
+              uniqueName = devMode ? `${name}_${i}` : `${name}${i.toString(32)}`;
             }
             existingNames.add(uniqueName);
-            if (hash) {
-              return devMode ? uniqueName + "_" + getHashedFilePath(state.file) : getHashedFilePath(state.file);
-            }
             return uniqueName;
           };
           visitYakExpression(
