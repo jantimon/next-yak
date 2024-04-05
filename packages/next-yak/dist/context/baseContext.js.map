@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../runtime/context/baseContext.tsx"],"sourcesContent":["export function getYakThemeContext() {\n  return {};\n}\n"],"mappings":";AAAO,SAAS,qBAAqB;AACnC,SAAO,CAAC;AACV;","names":[]}
