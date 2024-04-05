@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm run build:yak && pnpm run build:next",
+    "build:next": "next build",
+    "build:yak": "pnpm run --filter next-yak build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
