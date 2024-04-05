@@ -5,7 +5,7 @@ import type { NodePath, types as babelTypes } from "@babel/core";
  */
 export const getConstantName = (
   expression: babelTypes.Expression,
-  t: typeof babelTypes
+  t: typeof babelTypes,
 ) => {
   // e.g. styled.div`color: ${x};`
   if (t.isIdentifier(expression)) {
@@ -40,7 +40,7 @@ export const getConstantName = (
  */
 export function getConstantValues(
   path: NodePath<babelTypes.Program>,
-  t: typeof babelTypes
+  t: typeof babelTypes,
 ) {
   const topLevelConstBindings = new Map<
     string,

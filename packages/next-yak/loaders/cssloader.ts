@@ -7,7 +7,7 @@ import tsloader from "./tsloader.js";
  */
 export default async function cssloader(
   this: any,
-  source: string
+  source: string,
 ): Promise<string | void> {
   const callback = this.async();
   return tsloader.call(
@@ -20,7 +20,7 @@ export default async function cssloader(
         return callback(null, extractCss(code));
       },
     },
-    source
+    source,
   );
 }
 

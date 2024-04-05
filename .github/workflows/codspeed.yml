@@ -41,6 +41,8 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
+      - name: Build Yak
+        run: pnpm run build
       - name: Build benchmark suite
         run: cd packages/benchmark && pnpm run codspeed 
       - name: Run benchmarks

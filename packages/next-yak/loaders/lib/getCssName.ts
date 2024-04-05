@@ -4,14 +4,14 @@ import type { NodePath, types as babelTypes } from "@babel/core";
  * Extracts the conditions from a path
  */
 function extractConditions(
-  path: NodePath<babelTypes.TaggedTemplateExpression>
+  path: NodePath<babelTypes.TaggedTemplateExpression>,
 ) {
   const conditions: string[] = [];
   const visitedNodes = new Set();
   const getConditions = (
     node: babelTypes.Node,
     previousNode: babelTypes.Node,
-    isNegated = false
+    isNegated = false,
   ) => {
     if (visitedNodes.has(node)) return;
     visitedNodes.add(node);
@@ -51,7 +51,7 @@ function extractConditions(
     // Get the name of a member expression e.g. props.disabled
     else if (node.type === "MemberExpression") {
       conditions.push(
-        (isNegated ? "not_" : "") + getMemberExpressionName(node)
+        (isNegated ? "not_" : "") + getMemberExpressionName(node),
       );
     }
   };
@@ -74,10 +74,10 @@ function extractConditions(
  * e.g. const mixin = css`...` -> "mixin"
  */
 const getStyledComponentName = (
-  taggedTemplateExpressionPath: NodePath<babelTypes.TaggedTemplateExpression>
+  taggedTemplateExpressionPath: NodePath<babelTypes.TaggedTemplateExpression>,
 ) => {
   const variableDeclaratorPath = taggedTemplateExpressionPath.findParent(
-    (path) => path.isVariableDeclarator()
+    (path) => path.isVariableDeclarator(),
   );
   if (
     !variableDeclaratorPath ||
@@ -127,7 +127,7 @@ function getMemberExpressionName(node: babelTypes.MemberExpression): string {
  * e.g. ({$disabled}) => $disabled && css`...` -> "is_$disabled"
  */
 export default function getCssName(
-  literal: NodePath<babelTypes.TaggedTemplateExpression>
+  literal: NodePath<babelTypes.TaggedTemplateExpression>,
 ) {
   const conditions = extractConditions(literal);
   if (conditions.length === 0) {

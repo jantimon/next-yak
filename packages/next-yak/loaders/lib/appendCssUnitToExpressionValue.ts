@@ -7,19 +7,19 @@ const appendCssUnitToExpressionValue = (
   cssUnit: string,
   expression: babelTypes.Expression,
   runtimeInternalHelpers: Set<string>,
-  t: typeof babelTypes
+  t: typeof babelTypes,
 ) => {
   if (expression.type === "ArrowFunctionExpression") {
     if (expression.body.type !== "BlockStatement") {
       const newBody = t.binaryExpression(
         "+",
         t.parenthesizedExpression(expression.body),
-        t.stringLiteral(cssUnit)
+        t.stringLiteral(cssUnit),
       );
 
       const newArrowFunction = t.arrowFunctionExpression(
         expression.params,
-        newBody
+        newBody,
       );
       return newArrowFunction;
     }
@@ -32,7 +32,7 @@ const appendCssUnitToExpressionValue = (
     const binaryExpression = t.binaryExpression(
       "+",
       expression,
-      cssUnitLiteral
+      cssUnitLiteral,
     );
     return binaryExpression;
   }

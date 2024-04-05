@@ -52,7 +52,7 @@ type YakTemplateLiteral = {
  */
 export default function (
   babel: typeof babelCore,
-  options: YakBabelPluginOptions
+  options: YakBabelPluginOptions,
 ): PluginObj<
   PluginPass & {
     localVarNames: YakLocalIdentifierNames;
@@ -94,7 +94,7 @@ export default function (
     }
     const relativePath = relative(
       rootContext,
-      resolve(rootContext, resourcePath)
+      resolve(rootContext, resourcePath),
     );
     const hashedFilePath = murmurhash2_32_gc(relativePath);
     hashedFilePaths.set(file, hashedFilePath);
@@ -113,7 +113,7 @@ export default function (
    */
   const getYakExpressionType = (
     tag: babelTypes.Expression,
-    localVarNames: YakLocalIdentifierNames
+    localVarNames: YakLocalIdentifierNames,
   ) => {
     if (t.isIdentifier(tag)) {
       if (tag.name === localVarNames.css) {
@@ -206,18 +206,18 @@ export default function (
                 runtimeInternalHelpers,
                 getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
-                state.file
+                state.file,
               );
-            }
+            },
           );
 
           // Add used runtime helpers to the import
           if (runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
               [...runtimeInternalHelpers].map((helper) =>
-                t.importSpecifier(t.identifier(helper), t.identifier(helper))
+                t.importSpecifier(t.identifier(helper), t.identifier(helper)),
               ),
-              t.stringLiteral("next-yak/runtime-internals")
+              t.stringLiteral("next-yak/runtime-internals"),
             );
             this.yakImportPath.insertAfter(newImport);
           }
@@ -247,9 +247,9 @@ export default function (
           t.importDeclaration(
             [t.importDefaultSpecifier(t.identifier("__styleYak"))],
             t.stringLiteral(
-              `./${fileName}.yak.module.css!=!./${fileName}?./${fileName}.yak.module.css`
-            )
-          )
+              `./${fileName}.yak.module.css!=!./${fileName}?./${fileName}.yak.module.css`,
+            ),
+          ),
         );
         this.yakImportPath = path;
 
@@ -318,20 +318,20 @@ export default function (
                 astNode.arguments.unshift(
                   t.memberExpression(
                     t.identifier("__styleYak"),
-                    t.identifier(className)
-                  )
+                    t.identifier(className),
+                  ),
                 );
               }
               return className;
             }
             return false;
           },
-          t
+          t,
         );
 
         const parentPosition = getClosestTemplateLiteralExpressionParentPath(
           path,
-          this.yakTemplateExpressionsByPath
+          this.yakTemplateExpressionsByPath,
         );
 
         const name = !parentPosition
@@ -365,7 +365,7 @@ export default function (
         if (parent) {
           parent.cssPartExpressions[parentPosition.currentIndex] ||= [];
           parent.cssPartExpressions[parentPosition.currentIndex].push(
-            yakTemplateExpression
+            yakTemplateExpression,
           );
         }
 
@@ -385,7 +385,7 @@ export class InvalidPositionError extends Error {
     message: string,
     expression: babelTypes.Expression,
     file: BabelFile,
-    recommendedFix?: string
+    recommendedFix?: string,
   ) {
     let errorText = message;
     const line = expression.loc?.start.line ?? -1;
@@ -395,7 +395,7 @@ export class InvalidPositionError extends Error {
     if (expression.start && expression.end) {
       errorText += `\nfound: \${${file.code.slice(
         expression.start,
-        expression.end
+        expression.end,
       )}}`;
     }
     if (recommendedFix) {
@@ -414,7 +414,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
   knownParents: Map<
     import("@babel/core").NodePath<babelTypes.TaggedTemplateExpression>,
     unknown
-  >
+  >,
 ) => {
   let grandChild: NodePath = path;
   let child: NodePath = path;
@@ -423,7 +423,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
     if (
       babelTypes.isTaggedTemplateExpression(parent.node) &&
       knownParents.has(
-        parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>
+        parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
       )
     ) {
       if (
@@ -431,7 +431,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
         !babelTypes.isExpression(grandChild.node)
       ) {
         throw new Error(
-          "Unexpected Error - This AST structure is unexpected - please open an issue in the repository"
+          "Unexpected Error - This AST structure is unexpected - please open an issue in the repository",
         );
       }
       const currentIndex = child.node.expressions.indexOf(grandChild.node);
@@ -452,7 +452,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
 };
 
 function getIdentifierNamesUsedInExpression(
-  path: NodePath<TaggedTemplateExpression>
+  path: NodePath<TaggedTemplateExpression>,
 ) {
   const names = new Set<string>();
   for (const node of path.node.quasi.expressions) {
@@ -472,16 +472,16 @@ function visitYakExpression(
     expression: YakTemplateLiteral,
     rootExpression: YakTemplateLiteral,
     cssParserState: ParserState,
-    visitChildren: (quasiIndex: number, cssParserState: ParserState) => void
-  ) => void
+    visitChildren: (quasiIndex: number, cssParserState: ParserState) => void,
+  ) => void,
 ) {
   const rootYakTemplateExpressions = Array.from(
-    yakTemplateExpressions.values()
+    yakTemplateExpressions.values(),
   ).filter((expression) => !expression.hasParent);
   const recursiveVisitor = (
     expression: YakTemplateLiteral,
     rootExpression: YakTemplateLiteral,
-    cssParserState: ParserState
+    cssParserState: ParserState,
   ) => {
     visitor(
       expression,
@@ -491,9 +491,9 @@ function visitYakExpression(
         expression.cssPartExpressions[quasiIndex]?.forEach(
           (childExpression) => {
             recursiveVisitor(childExpression, rootExpression, cssParserState);
-          }
+          },
         );
-      }
+      },
     );
   };
   rootYakTemplateExpressions.forEach((expression) => {
@@ -515,13 +515,13 @@ function transformYakExpressions(
   runtimeInternalHelpers: Set<string>,
   componentTypeMapping: Record<string, YakTemplateLiteral["type"]>,
   constantValues: ReturnType<typeof getConstantValues>,
-  file: BabelFile
+  file: BabelFile,
 ) {
   // Get className / keyframes name
   const identifier = createUniqueName(
     expression === rootExpression
       ? expression.name
-      : `${rootExpression.name}__${expression.name}`
+      : `${rootExpression.name}__${expression.name}`,
   );
 
   // Initialize Declarations
@@ -571,7 +571,7 @@ function transformYakExpressions(
           throw new InvalidPositionError(
             `Could not resolve value for ${quasiExpression.name}`,
             quasiExpression,
-            file
+            file,
           );
         }
         if (constantValue.type === "module") {
@@ -579,14 +579,14 @@ function transformYakExpressions(
             `Imported values cannot be used as constants`,
             quasiExpression,
             file,
-            "Move the constant into the current file or into a .yak file"
+            "Move the constant into the current file or into a .yak file",
           );
         }
         if (constantValue.type === "function") {
           throw new InvalidPositionError(
             `Function constants are not supported yet`,
             quasiExpression,
-            file
+            file,
           );
         }
         replaceValue = String(constantValue?.value);
@@ -615,7 +615,7 @@ function transformYakExpressions(
 
     if (babelTypes.isTSType(quasiExpression)) {
       throw new Error(
-        "Type annotations are not allowed in css template literals"
+        "Type annotations are not allowed in css template literals",
       );
     }
 
@@ -625,8 +625,8 @@ function transformYakExpressions(
       newArguments.add(
         babelTypes.memberExpression(
           babelTypes.identifier("__styleYak"),
-          babelTypes.identifier(identifier)
-        )
+          babelTypes.identifier(identifier),
+        ),
       );
       addedOwnClassName = true;
     }
@@ -668,13 +668,13 @@ function transformYakExpressions(
             `Please move the constant to a .yak import or use an arrow function
 e.g.:
 |   import { primaryColor } from './foo.yak'
-|   const MyStyledDiv = styled.div\`color: \${primaryColor};\``
+|   const MyStyledDiv = styled.div\`color: \${primaryColor};\``,
           );
         }
 
         const cssVarName = createUniqueName(
           `${identifier}-${parsedCss.state.currentDeclaration.property}`,
-          true
+          true,
         );
         cssVariables[`--${cssVarName}`] = quasiExpression;
         currentCssParserState.currentDeclaration.value += `var(--${cssVarName})`;
@@ -691,7 +691,7 @@ e.g.:
             cssUnit,
             quasiExpression,
             runtimeInternalHelpers,
-            babelTypes
+            babelTypes,
           );
           expression.cssPartQuasis[i + 1] = expression.cssPartQuasis[
             i + 1
@@ -717,7 +717,7 @@ e.g.:
             "Mixins are not allowed inside nested selectors",
             quasiExpression,
             file,
-            "Use an inline css literal instead or move the selector into the mixin"
+            "Use an inline css literal instead or move the selector into the mixin",
           );
         }
 
@@ -746,11 +746,11 @@ e.g.:
           babelTypes.stringLiteral(`style`),
           babelTypes.objectExpression(
             Object.entries(cssVariables).map(([key, value]) =>
-              babelTypes.objectProperty(babelTypes.stringLiteral(key), value)
-            )
-          )
+              babelTypes.objectProperty(babelTypes.stringLiteral(key), value),
+            ),
+          ),
         ),
-      ])
+      ]),
     );
   }
 
@@ -764,8 +764,8 @@ e.g.:
       newArguments.add(
         babelTypes.memberExpression(
           babelTypes.identifier("__styleYak"),
-          babelTypes.identifier(identifier)
-        )
+          babelTypes.identifier(identifier),
+        ),
       );
       cssCode = `.${identifier} {}\n${cssCode}`;
     }
@@ -779,7 +779,7 @@ e.g.:
   // Replace the css template literal with a function call
   // to match the runtime api
   expression.path.replaceWith(
-    babelTypes.callExpression(expression.path.node.tag, [...newArguments])
+    babelTypes.callExpression(expression.path.node.tag, [...newArguments]),
   );
 }
 
@@ -787,7 +787,7 @@ function getComponentTypes(
   yakTemplateExpressions: Map<
     babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
     YakTemplateLiteral
-  >
+  >,
 ) {
   const nameTypeMap = Array.from(yakTemplateExpressions.values())
     .filter((expression) => !expression.hasParent)

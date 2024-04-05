@@ -1,2 +1,0 @@
-var e=Object.defineProperty;var o=(t,n)=>{for(var r in n)e(t,r,{get:n[r],enumerable:!0})};var i={};o(i,{css:()=>s});var s=(t,...n)=>String.raw(t,...n.map(r=>typeof r=="number"||typeof r=="string"?r:"")).trim();export{i as mixin};
-//# sourceMappingURL=index.js.map

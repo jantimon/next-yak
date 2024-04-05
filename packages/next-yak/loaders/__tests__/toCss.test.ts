@@ -1,8 +1,8 @@
-import { test, expect } from 'vitest';
-import { toCss } from '../lib/toCss.js';
-import { parseCss } from '../lib/parseCss.js';
+import { test, expect } from "vitest";
+import { toCss } from "../lib/toCss.js";
+import { parseCss } from "../lib/parseCss.js";
 
-test('parseCss inComplete css 1', () => {
+test("parseCss inComplete css 1", () => {
   expect(
     toCss(
       parseCss(`
@@ -10,8 +10,8 @@ test('parseCss inComplete css 1', () => {
                 .fancy {
                         /* hello .world { color: red; } */
                         color: blue;
-    `).declarations
-    )
+    `).declarations,
+    ),
   ).toMatchInlineSnapshot(`
     "
     .foo {
@@ -22,7 +22,7 @@ test('parseCss inComplete css 1', () => {
   `);
 });
 
-test('parseCss combine two independent css chunks', () => {
+test("parseCss combine two independent css chunks", () => {
   expect(
     toCss(
       parseCss(`
@@ -36,9 +36,9 @@ test('parseCss combine two independent css chunks', () => {
               .fancy {
                       /* hello .world { color: red; } */
                       background: red;
-  `).declarations
-      )
-    )
+  `).declarations,
+      ),
+    ),
   ).toMatchInlineSnapshot(`
     "
     .foo {
@@ -50,7 +50,7 @@ test('parseCss combine two independent css chunks', () => {
   `);
 });
 
-test('parseCss merge two css chunks', () => {
+test("parseCss merge two css chunks", () => {
   const part1 = parseCss(`
   .foo {
           .fancy {
@@ -63,7 +63,7 @@ test('parseCss merge two css chunks', () => {
     &:hover {
       color: orange;
 `,
-    part1.state
+    part1.state,
   );
 
   expect(toCss([...part1.declarations, ...part2.declarations]))
@@ -80,7 +80,7 @@ test('parseCss merge two css chunks', () => {
     `);
 });
 
-test('parseCss merge two css chunks and inject a scope', () => {
+test("parseCss merge two css chunks and inject a scope", () => {
   const part1 = parseCss(`
   .foo {
           .fancy {
@@ -93,12 +93,12 @@ test('parseCss merge two css chunks and inject a scope', () => {
     &:hover {
       color: orange;
 `,
-    part1.state
+    part1.state,
   );
 
   part2.declarations[0].scope.unshift({
-    name: '.isActive',
-    type: 'selector',
+    name: ".isActive",
+    type: "selector",
   });
 
   expect(toCss([...part1.declarations, ...part2.declarations]))
@@ -119,15 +119,15 @@ test('parseCss merge two css chunks and inject a scope', () => {
     `);
 });
 
-test('handles escapes correctly', () => {
+test("handles escapes correctly", () => {
   expect(
     toCss(
       parseCss(`
         .foo {
           content: "line1\\\nline2";
         }
-    `).declarations
-    )
+    `).declarations,
+    ),
   ).toMatchInlineSnapshot(`
     "
     .foo {

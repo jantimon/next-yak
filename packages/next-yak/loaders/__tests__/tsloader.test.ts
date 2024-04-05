@@ -52,8 +52,8 @@ const headline = css\`
         \`;
 
 export const Main = () => <h1 className={headline({}).className}>Hello World</h1>;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "\\"use client\\";
 
@@ -95,8 +95,8 @@ const headline = css\`
     color: red;
   }
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
@@ -144,8 +144,8 @@ const Button = styled.button\`
 const FancyButton = styled(Button)\`
   background-color: green;
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled, css } from \\"next-yak\\";
@@ -200,8 +200,8 @@ const FancyButton = styled(Button)\`
         const FancyButton = styled(Button)\`
           background-color: green;
         \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -268,8 +268,8 @@ const Button = styled.button\`
 const FancyButton = styled(Button)\`
   background-color: green;
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled, css } from \\"next-yak\\";
@@ -314,8 +314,8 @@ const headline = styled.input.attrs({
 })\`
   color: red;
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -346,8 +346,8 @@ const newHeadline = styled(headline).attrs({
 })\`
   color: black;
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -383,8 +383,8 @@ const headline = css\`
   \${css\`color: orange\`}
   \${css\`color: blue\`}
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
@@ -435,8 +435,8 @@ const fadeIn = keyframes\`
 const FadeInButton = styled.button\`
   animation: 1s \${fadeIn} ease-out 1s infinite reverse both paused slidein;
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled, keyframes } from \\"next-yak\\";
@@ -490,8 +490,8 @@ const Wrapper = styled.div\`
   }
 \`
 
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -550,8 +550,8 @@ const Wrapper = styled.div\`
   }
 \`
 
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -595,8 +595,8 @@ const Wrapper = styled.div\`
   &:before {
     content: "\\2022";
   }
-  \``
-      )
+  \``,
+      ),
     ).toMatchInlineSnapshot(`
     "import { css } from \\"next-yak\\";
     import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -642,8 +642,8 @@ const Icon = styled.div\`
     }
   }
 \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
       found: \${bold}
@@ -669,8 +669,8 @@ const Icon = styled.div\`
     }
   }
 \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
       found: \${bold()}
@@ -697,8 +697,8 @@ const Icon = styled.div\`
     }
   }
 \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
       found: \${bold}
@@ -718,8 +718,8 @@ const Icon = styled.div\`
     font-weight: bold;
   }
 \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 6: Imported values cannot be used as constants
       found: \${test}
@@ -740,8 +740,8 @@ const headline = css\`
   color: \${red};
   z-index: \${zIndex};
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -768,8 +768,8 @@ const red = new Token("#E50914");
 const headline = css\`
   color: \${red};
 \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 6: Could not resolve value for red
       found: \${red}"
@@ -791,8 +791,8 @@ const headline = css\`
               color: \${$red};
             \`}}
         \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 9: Could not resolve value for $red
       found: \${$red}"
@@ -814,8 +814,8 @@ const headline = css\`
               color: \${red()};
             \`}}
         \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
       found: \${red()}
@@ -841,8 +841,8 @@ const headline = css\`
               color: \${colors.red()};
             \`}}
         \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
       found: \${colors.red()}
@@ -868,8 +868,8 @@ const headline = css\`
               color: \${$red};
             \`}}
         \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 9: Imported values cannot be used as constants
       found: \${$red}
@@ -892,8 +892,8 @@ const headline = css\`
               color: \${colors.red};
             \`}}
         \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
       found: \${colors.red}
@@ -919,8 +919,8 @@ const Button = styled.button\`
       text-indent: \${indent};
     \`}}
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -959,8 +959,8 @@ const headline = css\`
     color: blue;
   \`}
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
@@ -988,8 +988,8 @@ const Icon = styled.div\`
     font-weight: bold;
   }
 \`
-`
-      )
+`,
+      ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
       "/some/special/path/page.tsx: line 6: Imported values cannot be used as constants
       found: \${test}
@@ -1012,8 +1012,8 @@ const Button = styled.button\`
   }
 \`;
 
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled, css } from \\"next-yak\\";
@@ -1060,8 +1060,8 @@ const Button = styled.button\`
 
       display: block;
     }\`;
-    `
-      )
+    `,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled, css } from \\"next-yak\\";
@@ -1117,8 +1117,8 @@ const Button = styled.button\`
         font-family: "Arial", sans-serif;
      \`;
 
-     `
-      )
+     `,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled } from \\"next-yak\\";
@@ -1155,8 +1155,8 @@ const Button = styled.button\`
        transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
           translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
      \`;      
-     `
-      )
+     `,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { styled } from \\"next-yak\\";
@@ -1196,8 +1196,8 @@ const Button = styled.button\`
         }}px;
      \`;
      
-     `
-      )
+     `,
+      ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
       import { css } from \\"next-yak\\";
@@ -1240,8 +1240,8 @@ const Button = styled.button\`
         left: \${() => spacing()}px;
         right: \${value}px;
       \`
-     `
-      )
+     `,
+      ),
     ).toMatchInlineSnapshot(`
       "import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
@@ -1287,7 +1287,7 @@ it("should minify css variables for production", async () => {
    transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
       translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
  \`;      
- `
+ `,
   );
   const variableNames = code.match(/var\(--[a-zA-Z0-9_-]*\)/g);
   expect(variableNames.join("\n")).toMatchInlineSnapshot(`

@@ -12,7 +12,8 @@
     "example": "pnpm --filter=next-yak-example run dev",
     "test": "pnpm --filter=next-yak run \"/test($|:types)/\"",
     "test:watch": "pnpm --filter=next-yak run test:watch",
-    "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak"
+    "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak",
+    "prettier": "pnpm run --recursive --if-present prettier"
   },
   "engines": {
     "node": ">=20",

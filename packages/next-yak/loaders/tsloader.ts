@@ -7,7 +7,7 @@ import { InvalidPositionError } from "./babel-yak-plugin.js";
  */
 export default async function tsloader(
   this: any,
-  source: string
+  source: string,
 ): Promise<string | void> {
   // ignore files if they don't use yak
   if (!source.includes("next-yak")) {
@@ -33,7 +33,7 @@ export default async function tsloader(
       imports.forEach(({ localName, importedName }) => {
         replaces[localName] = constantValues[importedName];
       });
-    })
+    }),
   );
 
   let result: BabelFileResult | null = null;
@@ -64,7 +64,7 @@ export default async function tsloader(
       return callback(new Error(error.message));
     }
     return callback(
-      error instanceof Error ? error : new Error("babel transform failed")
+      error instanceof Error ? error : new Error("babel transform failed"),
     );
   }
   if (!result?.code) {
