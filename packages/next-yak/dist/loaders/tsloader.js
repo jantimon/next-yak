@@ -941,7 +941,7 @@ ${recommendedFix}`;
           parent
         )) {
           if (!babelTypes.isTemplateLiteral(child.node) || !babelTypes.isExpression(grandChild.node)) {
-            throw new Error("Broken AST");
+            throw new Error("Unexpected Error - This AST structure is unexpected - please open an issue in the repository");
           }
           const currentIndex = child.node.expressions.indexOf(grandChild.node);
           return {

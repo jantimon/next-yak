@@ -941,7 +941,7 @@ ${recommendedFix}`;
           parent
         )) {
           if (!babelTypes.isTemplateLiteral(child.node) || !babelTypes.isExpression(grandChild.node)) {
-            throw new Error("Broken AST");
+            throw new Error("Unexpected Error - This AST structure is unexpected - please open an issue in the repository");
           }
           const currentIndex = child.node.expressions.indexOf(grandChild.node);
           return {
@@ -962,7 +962,7 @@ ${recommendedFix}`;
   }
 });
 
-// loaders/cssloader.ts
+// loaders/tsloader.ts
 import babel from "@babel/core";
 
 // loaders/lib/getYakImports.ts
@@ -991,9 +991,9 @@ function parseDefaultImport(defaultImport) {
 }
 var getYakImports_default = getYakImports;
 
-// loaders/cssloader.ts
+// loaders/tsloader.ts
 init_babel_yak_plugin();
-async function cssloader(source) {
+async function tsloader(source) {
   if (!source.includes("next-yak")) {
     return source;
   }
@@ -1040,7 +1040,24 @@ async function cssloader(source) {
   if (!result?.code) {
     return callback(new Error("babel transform failed"));
   }
-  return callback(null, extractCss(result.code), result.map);
+  return callback(null, result.code, result.map);
+}
+
+// loaders/cssloader.ts
+async function cssloader(source) {
+  const callback = this.async();
+  return tsloader.call(
+    {
+      ...this,
+      async: () => (err, code) => {
+        if (err || !code) {
+          return callback(err || new Error("No code returned"));
+        }
+        return callback(null, extractCss(code));
+      }
+    },
+    source
+  );
 }
 function extractCss(code) {
   const codeParts = code.split("/*YAK Extracted CSS:\n");
