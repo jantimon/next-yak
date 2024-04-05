@@ -4,6 +4,7 @@ import cssloader from "../cssloader.js";
 const loaderContext = {
   resourcePath: "/some/special/path/page.tsx",
   rootContext: "/some",
+  mode: "development",
   importModule: () => {
     return {
       queries: {
@@ -30,6 +31,12 @@ const loaderContext = {
   getOptions: () => ({
     configPath: "/some/special/path/config",
   }),
+  async: () => (err, result) => {
+    if (err) {
+      throw err;
+    }
+    return result;
+  },
 };
 
 describe("cssloader", () => {
@@ -52,7 +59,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         font-size: 2rem;
         font-weight: bold;
         color: red;
@@ -83,25 +90,26 @@ const headline = css\`
     color: teal;
   \`}
   &:hover {
-    color: \${x ? "red" : "blue"\};
+    color: \${() => x ? "red" : "blue"\};
   }
 \`;
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         font-size: 2rem;
         font-weight: bold;
         color: red;
-        &:where(.headline_1) {
-          color: orange;
-        }
-
-        &:where(.headline_2) {
-          color: teal;
-        }
+      }
+      .headline__headline {
+        color: orange;
+      }
+      .headline__headline_1 {
+        color: teal;
+      }
+      .headline {
         &:hover {
-          color: var(--🦬18fi82j0);
+          color: var(--headline-color_18fi82j);
         }
       }"
     `);
@@ -125,11 +133,8 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
-        /* comment */
-        &:where(.headline_1) {
-          color: blue;
-        }
+      ".headline__headline {
+        color: blue;
       }"
     `);
   });
@@ -144,15 +149,15 @@ import { css } from "next-yak";
 
 const headline = css\`
   &:hover {
-    color: \${x ? "red" : "blue"\};
+    color: \${() => x ? "red" : "blue"\};
   }
   \`;
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         &:hover {
-          color: var(--🦬18fi82j0);
+          color: var(--headline-color_18fi82j);
         }
       }"
     `);
@@ -200,8 +205,7 @@ const newHeadline = styled(headline).attrs({
     ).toMatchInlineSnapshot(`
       ".headline {
         color: red;
-      }
-      .newHeadline {
+      }.newHeadline {
         color: black;
       }"
     `);
@@ -216,19 +220,19 @@ import styles from "./page.module.css";
 import { css } from "next-yak";
 
 const headline = css\`
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
-        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+      ".headline {
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
         display: block;
-          &:where(.headline_1) {
-      color: orange
-          }
+      }
+      .headline__headline {
+        color: orange;
       }"
     `);
   });
@@ -246,23 +250,23 @@ const headline = css\`
   \${queries.sm} {
     color: red;
   }
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
         display: block;
-          &:where(.headline_1) {
-      color: orange
-          }
+      }
+      .headline__headline {
+        color: orange;
       }"
     `);
   });
@@ -280,23 +284,23 @@ const headline = css\`
   \${queries.sm} {
     color: red;
   }
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
         display: block;
-          &:where(.headline_1) {
-      color: orange
-          }
+      }
+      .headline__headline {
+        color: orange;
       }"
     `);
   });
@@ -314,23 +318,23 @@ const headline = css\`
   \${queries["sm"]} {
     color: red;
   }
-  transition: color \${duration} \${easing};
+  transition: color \${({$duration}) => $duration} \${({$easing}) => $easing};
   display: block;
   \${css\`color: orange\`}
   \`;
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         color: blue;
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--🦬18fi82j0) var(--🦬18fi82j1);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
         display: block;
-          &:where(.headline_1) {
-      color: orange
-          }
+      }
+      .headline__headline {
+        color: orange;
       }"
     `);
   });
@@ -357,7 +361,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         :before {
           content: \\"\\\\2022\\";
         }
@@ -365,6 +369,7 @@ const headline = css\`
           content: \\"\\\\2022\\";
         }
         content: \\"\\\\\\\\\\"
+      ;
       }"
     `);
   });
@@ -399,9 +404,8 @@ const FadeInButton = styled.button\`
         100% {
           opacity: 1;
         }
-      }
-      .FadeInButton {
-        animation: 1s var(--🦬18fi82j0) ease-out;
+      }.FadeInButton {
+        animation: 1s fadeIn ease-out;
       }"
     `);
   });
@@ -439,8 +443,7 @@ const Wrapper = styled.div\`
     ).toMatchInlineSnapshot(`
       ".Link {
         color: palevioletred;
-      }
-      .Icon {
+      }.Icon {
         fill: currentColor;
         width: 1em;
         height: 1em;
@@ -450,8 +453,7 @@ const Wrapper = styled.div\`
         .Link:focus & {
           color: red;
         }
-      }
-      .Wrapper {
+      }.Wrapper {
         &:has(> .Link) {
           padding: 10px;
         }
@@ -481,7 +483,8 @@ const Wrapper = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".Wrapper {
+      ".Icon {}
+      .Wrapper {
         &:has(> .Icon) {
           padding: 10px;
         }
@@ -525,27 +528,35 @@ const Component2 = styled.div\`
       )
     ).toMatchInlineSnapshot(`
       ".Component {
-          background-color: red;
-          color: white;
-            &:where(.active_0) {
-              background-color: blue;
-            }
-          border: 1px solid black;
-
-          &:focus {
-              background-color: green;
-                &:where(.active_1) {
-                  background-color: blue;
-                    &:where(.active_and_active_2) {
-                      background-color: brown;
-                    }
-                }
-              border: 2px solid pink;
-          }
+        background-color: red;
+        color: white;
+      }
+      .Component__active {
+        background-color: blue;
+      }
+      .Component {
+        border: 1px solid black;
+        &:focus {
+          background-color: green;
         }
-        .Component2 {
-          color: hotpink;
-        }"
+      }
+      .Component__active_1 {
+        &:focus {
+          background-color: blue;
+        }
+      }
+      .Component__active_and_active {
+        &:focus {
+          background-color: brown;
+        }
+      }
+      .Component {
+        &:focus {
+          border: 2px solid pink;
+        }
+      }.Component2 {
+        color: hotpink;
+      }"
     `);
   });
 
@@ -565,7 +576,7 @@ const headline = css\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         color: #E50914;
         z-index: 14;
       }"
@@ -589,35 +600,37 @@ const Component = styled.div\`
     \${({ active }) => active ? css\`
         background-color: blue;
     \` : css\`
-        background-color: \${color};
+        background-color: \${() => color};
     \`}
     border: 1px solid black;
     \${({ active }) => active ? css\`
         color: orange;
     \` : css\`
-        transition: color \${duration} \${easing};
+        transition: color \${() => duration} \${() => easing};
     \`}
 \`;
 `
       )
     ).toMatchInlineSnapshot(`
       ".Component {
-          background-color: red;
-          color: white;
-            &:where(.active_0) {
-              background-color: blue;
-            }
-            &:where(.not_active_1) {
-              background-color: var(--🦬18fi82j0);
-            }
-          border: 1px solid black;
-            &:where(.active_2) {
-              color: orange;
-            }
-            &:where(.not_active_3) {
-              transition: color var(--🦬18fi82j1) var(--🦬18fi82j2);
-            }
-        }"
+        background-color: red;
+        color: white;
+      }
+      .Component__active {
+        background-color: blue;
+      }
+      .Component__not_active {
+        background-color: var(--Component__not_active-background-color_18fi82j);
+      }
+      .Component {
+        border: 1px solid black;
+      }
+      .Component__active_1 {
+        color: orange;
+      }
+      .Component__not_active_1 {
+        transition: color var(--Component__not_active_1-transition_18fi82j) var(--Component__not_active_1-transition_18fi82j_1);
+      }"
     `);
   });
 
@@ -639,7 +652,7 @@ const headline = css\`
 \``
       )
     ).toMatchInlineSnapshot(`
-      ".headline_0 {
+      ".headline {
         @media (min-width: 1280px) {
           color: red;
         }
@@ -662,17 +675,17 @@ const headline = css\`
        if ($indent > 4) return 10;
        return $indent
      }}px;
-      transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg);
+      transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
        translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
     \`
      `
       )
     ).toMatchInlineSnapshot(`
-      ".case3_0 {
-            padding: var(--🦬18fi82j0);
-            transform: translate(-50%, -50%) rotate(var(--🦬18fi82j1));
-             translate(0, -88px) rotate(var(--🦬18fi82j2));
-          }"
+      ".case3 {
+        padding: var(--case3-padding_18fi82j);
+        transform: translate(-50%, -50%) rotate(var(--case3-transform_18fi82j))
+      translate(0, -88px) rotate(var(--case3-transform_18fi82j_1));
+      }"
     `);
   });
 
@@ -685,22 +698,65 @@ const headline = css\`
      import { css } from "next-yak";
      const value = 10;
      const case3 = css\`
-        margin: \${size}px;
-        top: \${spacing.xs}px;
-        bottom: \${spacing[0]}PX;
-        left: \${spacing()}px;
+        margin: \${() => size}px;
+        top: \${() => spacing.xs}px;
+        bottom: \${() => spacing[0]}PX;
+        left: \${() => spacing()}px;
         right: \${value}px;
     \`
      `
       )
     ).toMatchInlineSnapshot(`
-      ".case3_0 {
-              margin: var(--🦬18fi82j0);
-              top: var(--🦬18fi82j1);
-              bottom: var(--🦬18fi82j2);
-              left: var(--🦬18fi82j3);
-              right: 10px;
-            }"
+      ".case3 {
+        margin: var(--case3-margin_18fi82j);
+        top: var(--case3-top_18fi82j);
+        bottom: var(--case3-bottom_18fi82j);
+        left: var(--case3-left_18fi82j);
+        right: 10px;
+      }"
     `);
   });
+});
+
+it("should allow allow using an inline nested css literal", async () => {
+  expect(
+    await cssloader.call(
+      loaderContext,
+      `
+   import styles from "./page.module.css";
+   import { styled, css } from "next-yak";
+   const Icon = styled.svg\`\`;
+   const Button = styled.button\`
+     &:has(\${Icon}) {
+       \${({$primary}) => $primary && css\`
+         color: red;
+       \`}
+     }
+   \`;
+   
+   `
+    )
+  ).toMatchInlineSnapshot(`
+    ".Icon {}
+    .Button__primary {
+      &:has(.Icon) {
+        color: red;
+      }
+    }"
+  `);
+});
+
+it("should support linebreaks in content", async () => {
+  expect(
+    (await cssloader.call(
+      loaderContext,
+      `
+   import { styled, css } from "next-yak";
+   const Button = styled.button\`
+     :before {
+      content: '🦄\\nHello World';
+     }
+   \`;`
+    )).split("content")[1]
+  ).includes("\\nHello World");
 });

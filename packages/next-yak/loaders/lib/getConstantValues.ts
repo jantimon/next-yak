@@ -42,11 +42,24 @@ export function getConstantValues(
   path: NodePath<babelTypes.Program>,
   t: typeof babelTypes
 ) {
-  const topLevelConstBindings = new Map<string, string | number | null>();
+  const topLevelConstBindings = new Map<
+    string,
+    | {
+        value: string | number | null;
+        type: "variable";
+      }
+    | {
+        value: null;
+        type: "module" | "function";
+      }
+  >();
   const bindings = Object.entries(path.scope.bindings);
   for (const [name, binding] of bindings) {
     if (binding.kind === "module") {
-      topLevelConstBindings.set(name, null);
+      topLevelConstBindings.set(name, {
+        value: null,
+        type: "module",
+      });
       continue;
     }
     if (
@@ -54,22 +67,33 @@ export function getConstantValues(
       binding.kind === "var" ||
       binding.kind === "const"
     ) {
-      // don't consider function declarations or arrow functions as constants
-      if (
-        !("init" in binding.path.node) ||
-        t.isFunctionDeclaration(binding.path.node.init) ||
-        t.isArrowFunctionExpression(binding.path.node.init)
-      ) {
-        topLevelConstBindings.set(name, null);
+      // variable without value e.g. let x;
+      if (!("init" in binding.path.node)) {
+        topLevelConstBindings.set(name, {
+          type: "variable",
+          value: null,
+        });
         continue;
       }
       const value = binding.path.node.init;
-      topLevelConstBindings.set(
-        name,
-        t.isStringLiteral(value) || t.isNumericLiteral(value)
-          ? value.value
-          : null
-      );
+      // don't consider function declarations or arrow functions as constants
+      if (
+        t.isFunctionDeclaration(value) ||
+        t.isArrowFunctionExpression(value)
+      ) {
+        topLevelConstBindings.set(name, {
+          type: "function",
+          value: null,
+        });
+        continue;
+      }
+      topLevelConstBindings.set(name, {
+        type: "variable",
+        value:
+          t.isStringLiteral(value) || t.isNumericLiteral(value)
+            ? value.value
+            : null,
+      });
     }
   }
   return topLevelConstBindings;
