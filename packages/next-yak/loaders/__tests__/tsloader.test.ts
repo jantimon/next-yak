@@ -539,6 +539,9 @@ const Link = styled.a\`
 const Icon = styled.svg\`
 \`
 
+const Text = styled.span\`
+\`
+
 const Wrapper = styled.div\`
   color: red;
   &:has(> \${Icon}),
@@ -552,8 +555,17 @@ const Wrapper = styled.div\`
     ).toMatchInlineSnapshot(`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Link = styled.a();
-      const Icon = styled.svg();
+      const Link =
+      /*YAK Extracted CSS:
+      .Link {}
+      */
+      styled.a(__styleYak.Link);
+      const Icon =
+      /*YAK Extracted CSS:
+      .Icon {}
+      */
+      styled.svg(__styleYak.Icon);
+      const Text = styled.span();
       const Wrapper =
       /*YAK Extracted CSS:
       .Wrapper {
@@ -1006,7 +1018,11 @@ const Button = styled.button\`
       "import styles from \\"./page.module.css\\";
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Icon = styled.svg();
+      const Icon =
+      /*YAK Extracted CSS:
+      .Icon {}
+      */
+      styled.svg(__styleYak.Icon);
       const Button =
       /*YAK Extracted CSS:
       .Button {

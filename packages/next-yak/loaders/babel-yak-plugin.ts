@@ -36,6 +36,7 @@ type YakTemplateLiteral = {
   hasParent: boolean;
   cssPartQuasis: string[];
   cssPartExpressions: { [key: number]: YakTemplateLiteral[] };
+  referencedBy: Set<YakTemplateLiteral>;
   type:
     | "cssLiteral"
     | "keyframesLiteral"
@@ -66,10 +67,11 @@ export default function (
       }
     >;
     yakImportPath?: NodePath<babelTypes.ImportDeclaration>;
-    yakTemplateExpressions: Map<
+    yakTemplateExpressionsByPath: Map<
       babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
       YakTemplateLiteral
     >;
+    yakTemplateExpressionsByName: Map<string, YakTemplateLiteral>;
   }
 > {
   const { replaces } = options;
@@ -158,7 +160,8 @@ export default function (
       this.isImportedInCurrentFile = false;
       this.variableNameToStyledCall = new Map();
       this.topLevelConstBindings = new Map();
-      this.yakTemplateExpressions = new Map();
+      this.yakTemplateExpressionsByPath = new Map();
+      this.yakTemplateExpressionsByName = new Map();
     },
     visitor: {
       Program: {
@@ -192,7 +195,7 @@ export default function (
           };
           // Iteratate and transform all found yak template literals
           visitYakExpression(
-            this.yakTemplateExpressions,
+            this.yakTemplateExpressionsByPath,
             (expression, rootExpression, cssParserState, visitChildren) => {
               transformYakExpressions(
                 expression,
@@ -201,7 +204,7 @@ export default function (
                 visitChildren,
                 createUniqueName,
                 runtimeInternalHelpers,
-                getComponentTypes(this.yakTemplateExpressions),
+                getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
                 state.file
               );
@@ -328,7 +331,7 @@ export default function (
 
         const parentPosition = getClosestTemplateLiteralExpressionParentPath(
           path,
-          this.yakTemplateExpressions
+          this.yakTemplateExpressionsByPath
         );
 
         const name = !parentPosition
@@ -337,26 +340,37 @@ export default function (
           : // nested name e.g. `... ${({$active}) => $active && css`color:red`} ...` -> "active"
             getCssName(path);
 
-        const takTemplateExpression: YakTemplateLiteral = {
+        const yakTemplateExpression: YakTemplateLiteral = {
           name,
           path,
           cssPartQuasis: path.node.quasi.quasis.map((quasi) => quasi.value.raw),
           cssPartExpressions: {},
           hasParent: Boolean(parentPosition?.parent),
           type: expressionType,
+          referencedBy: new Set(),
         };
+
+        const referencedIdentifiers = getIdentifierNamesUsedInExpression(path);
+        referencedIdentifiers.forEach((referencedIdentifier) => {
+          const referencedExpression =
+            this.yakTemplateExpressionsByName.get(referencedIdentifier);
+          if (referencedExpression) {
+            referencedExpression.referencedBy.add(yakTemplateExpression);
+          }
+        });
 
         const parent =
           parentPosition?.parent &&
-          this.yakTemplateExpressions.get(parentPosition.parent);
+          this.yakTemplateExpressionsByPath.get(parentPosition.parent);
         if (parent) {
           parent.cssPartExpressions[parentPosition.currentIndex] ||= [];
           parent.cssPartExpressions[parentPosition.currentIndex].push(
-            takTemplateExpression
+            yakTemplateExpression
           );
         }
 
-        this.yakTemplateExpressions.set(path, takTemplateExpression);
+        this.yakTemplateExpressionsByPath.set(path, yakTemplateExpression);
+        this.yakTemplateExpressionsByName.set(name, yakTemplateExpression);
       },
     },
   };
@@ -437,6 +451,18 @@ const getClosestTemplateLiteralExpressionParentPath = (
   return null;
 };
 
+function getIdentifierNamesUsedInExpression(
+  path: NodePath<TaggedTemplateExpression>
+) {
+  const names = new Set<string>();
+  for (const node of path.node.quasi.expressions) {
+    if (babelTypes.isIdentifier(node)) {
+      names.add(node.name);
+    }
+  }
+  return names;
+}
+
 function visitYakExpression(
   yakTemplateExpressions: Map<
     babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
@@ -509,7 +535,6 @@ function transformYakExpressions(
   const newArguments = new Set<babelTypes.Expression>();
   const cssVariables: Record<string, babelCore.types.Expression> = {};
   let addedOwnClassName = false;
-
   let currentCssParserState = cssParserState;
   // Iterate over the css parts
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
@@ -729,19 +754,33 @@ e.g.:
     );
   }
 
+  // The root expression is the styled component or keyframes or root mixin
+  if (rootExpression === expression) {
+    let cssCode = toCss(rootDeclarations).trimStart();
+    const isReferencedByOtherYakComponents = expression.referencedBy.size > 0;
+    // If another component is using the component as selector it must
+    // have a className to be targetable
+    if (addedOwnClassName === false && isReferencedByOtherYakComponents) {
+      newArguments.add(
+        babelTypes.memberExpression(
+          babelTypes.identifier("__styleYak"),
+          babelTypes.identifier(identifier)
+        )
+      );
+      cssCode = `.${identifier} {}\n${cssCode}`;
+    }
+    // Prepand the css as a comment to the styled component
+    // for later debugging and extraction
+    if (cssCode) {
+      expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
+    }
+  }
+
   // Replace the css template literal with a function call
   // to match the runtime api
   expression.path.replaceWith(
     babelTypes.callExpression(expression.path.node.tag, [...newArguments])
   );
-  // Prepand the css as a comment to the styled component
-  // for later debugging and extraction
-  if (rootExpression === expression) {
-    const cssCode = toCss(rootDeclarations).trimStart();
-    if (cssCode) {
-      expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
-    }
-  }
 }
 
 function getComponentTypes(

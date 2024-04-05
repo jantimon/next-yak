@@ -570,7 +570,8 @@ function babel_yak_plugin_default(babel2, options) {
       this.isImportedInCurrentFile = false;
       this.variableNameToStyledCall = /* @__PURE__ */ new Map();
       this.topLevelConstBindings = /* @__PURE__ */ new Map();
-      this.yakTemplateExpressions = /* @__PURE__ */ new Map();
+      this.yakTemplateExpressionsByPath = /* @__PURE__ */ new Map();
+      this.yakTemplateExpressionsByName = /* @__PURE__ */ new Map();
     },
     visitor: {
       Program: {
@@ -600,7 +601,7 @@ function babel_yak_plugin_default(babel2, options) {
             return uniqueName;
           };
           visitYakExpression(
-            this.yakTemplateExpressions,
+            this.yakTemplateExpressionsByPath,
             (expression, rootExpression, cssParserState, visitChildren) => {
               transformYakExpressions(
                 expression,
@@ -609,7 +610,7 @@ function babel_yak_plugin_default(babel2, options) {
                 visitChildren,
                 createUniqueName,
                 runtimeInternalHelpers,
-                getComponentTypes(this.yakTemplateExpressions),
+                getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
                 state.file
               );
@@ -708,7 +709,7 @@ function babel_yak_plugin_default(babel2, options) {
         );
         const parentPosition = getClosestTemplateLiteralExpressionParentPath(
           path,
-          this.yakTemplateExpressions
+          this.yakTemplateExpressionsByPath
         );
         const name = !parentPosition ? (
           // root name e.g. const MyButton = styled.div`...` -> "MyButton"
@@ -717,25 +718,43 @@ function babel_yak_plugin_default(babel2, options) {
           // nested name e.g. `... ${({$active}) => $active && css`color:red`} ...` -> "active"
           getCssName(path)
         );
-        const takTemplateExpression = {
+        const yakTemplateExpression = {
           name,
           path,
           cssPartQuasis: path.node.quasi.quasis.map((quasi) => quasi.value.raw),
           cssPartExpressions: {},
           hasParent: Boolean(parentPosition?.parent),
-          type: expressionType
+          type: expressionType,
+          referencedBy: /* @__PURE__ */ new Set()
         };
-        const parent = parentPosition?.parent && this.yakTemplateExpressions.get(parentPosition.parent);
+        const referencedIdentifiers = getIdentifierNamesUsedInExpression(path);
+        referencedIdentifiers.forEach((referencedIdentifier) => {
+          const referencedExpression = this.yakTemplateExpressionsByName.get(referencedIdentifier);
+          if (referencedExpression) {
+            referencedExpression.referencedBy.add(yakTemplateExpression);
+          }
+        });
+        const parent = parentPosition?.parent && this.yakTemplateExpressionsByPath.get(parentPosition.parent);
         if (parent) {
           parent.cssPartExpressions[parentPosition.currentIndex] ||= [];
           parent.cssPartExpressions[parentPosition.currentIndex].push(
-            takTemplateExpression
+            yakTemplateExpression
           );
         }
-        this.yakTemplateExpressions.set(path, takTemplateExpression);
+        this.yakTemplateExpressionsByPath.set(path, yakTemplateExpression);
+        this.yakTemplateExpressionsByName.set(name, yakTemplateExpression);
       }
     }
   };
+}
+function getIdentifierNamesUsedInExpression(path) {
+  const names = /* @__PURE__ */ new Set();
+  for (const node of path.node.quasi.expressions) {
+    if (import_core.types.isIdentifier(node)) {
+      names.add(node.name);
+    }
+  }
+  return names;
 }
 function visitYakExpression(yakTemplateExpressions, visitor) {
   const rootYakTemplateExpressions = Array.from(
@@ -905,15 +924,26 @@ e.g.:
       ])
     );
   }
-  expression.path.replaceWith(
-    import_core.types.callExpression(expression.path.node.tag, [...newArguments])
-  );
   if (rootExpression === expression) {
-    const cssCode = toCss(rootDeclarations).trimStart();
+    let cssCode = toCss(rootDeclarations).trimStart();
+    const isReferencedByOtherYakComponents = expression.referencedBy.size > 0;
+    if (addedOwnClassName === false && isReferencedByOtherYakComponents) {
+      newArguments.add(
+        import_core.types.memberExpression(
+          import_core.types.identifier("__styleYak"),
+          import_core.types.identifier(identifier)
+        )
+      );
+      cssCode = `.${identifier} {}
+${cssCode}`;
+    }
     if (cssCode) {
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
     }
   }
+  expression.path.replaceWith(
+    import_core.types.callExpression(expression.path.node.tag, [...newArguments])
+  );
 }
 function getComponentTypes(yakTemplateExpressions) {
   const nameTypeMap = Array.from(yakTemplateExpressions.values()).filter((expression) => !expression.hasParent).map((expression) => [expression.name, expression.type]);

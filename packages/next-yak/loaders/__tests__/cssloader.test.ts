@@ -483,7 +483,8 @@ const Wrapper = styled.div\`
 `
       )
     ).toMatchInlineSnapshot(`
-      ".Wrapper {
+      ".Icon {}
+      .Wrapper {
         &:has(> .Icon) {
           padding: 10px;
         }
@@ -737,7 +738,8 @@ it("should allow allow using an inline nested css literal", async () => {
    `
     )
   ).toMatchInlineSnapshot(`
-    ".Button__primary {
+    ".Icon {}
+    .Button__primary {
       &:has(.Icon) {
         color: red;
       }
