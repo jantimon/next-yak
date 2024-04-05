@@ -228,7 +228,7 @@ const headline = css\`
       )
     ).toMatchInlineSnapshot(`
       ".headline {
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1_18fi82j);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1);
         display: block;
       }
       .headline__headline {
@@ -262,7 +262,7 @@ const headline = css\`
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1_18fi82j);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1);
         display: block;
       }
       .headline__headline {
@@ -296,7 +296,7 @@ const headline = css\`
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1_18fi82j);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1);
         display: block;
       }
       .headline__headline {
@@ -330,7 +330,7 @@ const headline = css\`
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1_18fi82j);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1);
         display: block;
       }
       .headline__headline {
@@ -628,7 +628,7 @@ const Component = styled.div\`
         color: orange;
       }
       .Component__not_active_1 {
-        transition: color var(--Component__not_active_1-transition_18fi82j) var(--Component__not_active_1-transition_1_18fi82j);
+        transition: color var(--Component__not_active_1-transition_18fi82j) var(--Component__not_active_1-transition_1);
       }"
     `);
   });

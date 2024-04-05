@@ -394,7 +394,7 @@ const headline = css\`
       const headline =
       /*YAK Extracted CSS:
       .headline {
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1_18fi82j);
+        transition: color var(--headline-transition_18fi82j) var(--headline-transition_1);
         display: block;
       }
       .headline__headline {
@@ -408,7 +408,7 @@ const headline = css\`
           \\"--headline-transition_18fi82j\\": ({
             i
           }) => i * 100 + \\"ms\\",
-          \\"--headline-transition_1_18fi82j\\": ({
+          \\"--headline-transition_1\\": ({
             easing
           }) => easing
         }
@@ -1112,7 +1112,7 @@ const Button = styled.button\`
         padding: var(--Button-padding_18fi82j);
         margin: var(--Button-margin_18fi82j);
         z-index: var(--Button-z-index_18fi82j);
-        transform: translateX(var(--Button-transform_18fi82j)) translateY(var(--Button-transform_1_18fi82j));
+        transform: translateX(var(--Button-transform_18fi82j)) translateY(var(--Button-transform_1));
         font-family: \\"Arial\\", sans-serif;
       }*/
       styled.button(__styleYak.Button, {
@@ -1121,7 +1121,7 @@ const Button = styled.button\`
           \\"--Button-margin_18fi82j\\": () => (4 * 2) + \\"px\\",
           \\"--Button-z-index_18fi82j\\": () => 10 + 4,
           \\"--Button-transform_18fi82j\\": () => (10) + \\"px\\",
-          \\"--Button-transform_1_18fi82j\\": () => (10 / 2) + \\"px\\"
+          \\"--Button-transform_1\\": () => (10 / 2) + \\"px\\"
         }
       });"
     `);
@@ -1148,14 +1148,14 @@ const Button = styled.button\`
       /*YAK Extracted CSS:
       .ClockNumber {
         transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))
-      translate(0, -88px) rotate(var(--ClockNumber-transform_1_18fi82j));
+      translate(0, -88px) rotate(var(--ClockNumber-transform_1));
       }*/
       styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
           \\"--ClockNumber-transform_18fi82j\\": ({
             index
           }) => (index * 30) + \\"deg\\",
-          \\"--ClockNumber-transform_1_18fi82j\\": ({
+          \\"--ClockNumber-transform_1\\": ({
             index
           }) => (-index * 30) + \\"deg\\"
         }

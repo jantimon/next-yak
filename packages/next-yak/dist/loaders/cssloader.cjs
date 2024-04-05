@@ -586,11 +586,12 @@ function babel_yak_plugin_default(babel2, options) {
           const existingNames = /* @__PURE__ */ new Set();
           const createUniqueName = (name, hash) => {
             let i = 0;
-            let uniqueName = hash ? (
+            const baseName = hash ? (
               // Hashes will only be used for identifiers which can not be minified
               // therefore the readable name will only be used if development is enabled
               `${devMode ? `${name}_` : ""}${getHashedFilePath(state.file)}`
             ) : name;
+            let uniqueName = baseName;
             while (existingNames.has(uniqueName)) {
               i++;
               uniqueName = devMode ? `${name}_${i}` : `${name}${i.toString(32)}`;

@@ -175,11 +175,12 @@ export default function (
           const existingNames = new Set<string>();
           const createUniqueName = (name: string, hash?: boolean) => {
             let i = 0;
-            let uniqueName = hash
+            const baseName = hash
               ? // Hashes will only be used for identifiers which can not be minified
                 // therefore the readable name will only be used if development is enabled
                 `${devMode ? `${name}_` : ""}${getHashedFilePath(state.file)}`
               : name;
+            let uniqueName = baseName;
             while (existingNames.has(uniqueName)) {
               i++;
               uniqueName = devMode
