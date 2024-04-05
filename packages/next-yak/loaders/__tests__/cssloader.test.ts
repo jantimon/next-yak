@@ -675,7 +675,7 @@ const headline = css\`
        if ($indent > 4) return 10;
        return $indent
      }}px;
-      transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg);
+      transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
        translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
     \`
      `
@@ -683,9 +683,8 @@ const headline = css\`
     ).toMatchInlineSnapshot(`
       ".case3 {
         padding: var(--case3-padding_18fi82j);
-        transform: translate(-50%, -50%) rotate(var(--case3-transform_18fi82j));
-        translate(0, -88px) rotate(: ;
-        translate(0, -88px) rotate(deg): ;
+        transform: translate(-50%, -50%) rotate(var(--case3-transform_18fi82j))
+      translate(0, -88px) rotate(var(--case3-transform_18fi82j_1));
       }"
     `);
   });
