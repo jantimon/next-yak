@@ -28,7 +28,7 @@ type YakLocalIdentifierNames = {
   keyframes: string | undefined;
 };
 
-// A CssPartExpression is the css code block for each tagged template expression
+// `YakTemplateLiteral` is an AST node for a `style` or `css` usage in the user code with its css code and expressions
 type YakTemplateLiteral = {
   name: string;
   path: NodePath<babelTypes.TaggedTemplateExpression>;
@@ -409,7 +409,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
         !babelTypes.isTemplateLiteral(child.node) ||
         !babelTypes.isExpression(grandChild.node)
       ) {
-        throw new Error("Broken AST");
+        throw new Error("Unexpected Error - This AST structure is unexpected - please open an issue in the repository");
       }
       const currentIndex = child.node.expressions.indexOf(grandChild.node);
       return {
@@ -613,7 +613,7 @@ function transformYakExpressions(
       // e.g.
       // css`color: ${({$primary}) => $primary ? 'red' : 'blue'}`
       if (currentCssParserState.isInsidePropertyValue) {
-        // Imported consants are not allowed inside property values
+        // Imported constants are not allowed inside property values
         // technically this is supported however it is a bad practice
         // as it creates the overhead of a css variable although the value
         // is a constant
@@ -675,7 +675,7 @@ e.g.:
       // const mixin = ${({$primary}) => $primary ? css`color: red` : css`color: blue`};
       else {
         // Right now we can't recieve the value of imported mixin values
-        // This becomes a problem in nested selector scopess as we would have to merge
+        // This becomes a problem in nested selector scopes as we would have to merge
         // the scopes and the css code
         if (
           currentCssParserState.currentScopes.length > 0 &&

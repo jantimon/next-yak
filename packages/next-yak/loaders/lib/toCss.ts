@@ -4,7 +4,6 @@ export const toCss = (declarations: Declaration[]): string => {
   let css = '';
   let previousScopes: CssScope[] = [];
   for (const declaration of declarations) {
-    // sort scopes by type to have selectors first
     const scopes = declaration.scope
     // close scopes that are not in the current declaration
     for (let i = 0; i < previousScopes.length; i++) {
