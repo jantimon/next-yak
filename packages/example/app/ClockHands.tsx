@@ -17,6 +17,7 @@ export const ClockHands = () => {
 const useCurrentTime = () => {
   const [time, setTime] = useState<Date | undefined>();
   useEffect(() => {
+    setTime(new Date());
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
