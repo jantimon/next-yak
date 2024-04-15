@@ -62,7 +62,6 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         font-size: 2rem;
@@ -72,6 +71,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
           color: red;
         }
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline);
       export const Main = () => <h1 className={headline({}).className}>Hello World</h1>;"
     `);
@@ -104,7 +104,6 @@ const headline = css\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         font-size: 2rem;
@@ -119,6 +118,7 @@ const headline = css\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline, x > 0.5 && css(__styleYak.headline__headline));"
     `);
   });
@@ -154,7 +154,6 @@ const FancyButton = styled(Button)\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -169,13 +168,14 @@ const FancyButton = styled(Button)\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, x > 0.5 && css(__styleYak.Button__Button));
       const FancyButton =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
       }*/
+      /*#__PURE__*/
       styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -210,7 +210,6 @@ const FancyButton = styled(Button)\`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -232,6 +231,7 @@ const FancyButton = styled(Button)\`
         }
         display: block;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         $primary
       }) => $primary ? css(__styleYak.Button__primary) : css(__styleYak.Button__not_primary), {
@@ -242,11 +242,11 @@ const FancyButton = styled(Button)\`
         }
       });
       const FancyButton =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
       }*/
+      /*#__PURE__*/
       styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -282,7 +282,6 @@ const FancyButton = styled(Button)\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -297,15 +296,16 @@ const FancyButton = styled(Button)\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         theme
       }) => theme.mode === \\"dark\\" && css(__styleYak.Button__Button));
       const FancyButton =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
       }*/
+      /*#__PURE__*/
       styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -328,11 +328,11 @@ const headline = styled.input.attrs({
       "import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         color: red;
       }*/
+      /*#__PURE__*/
       styled.input.attrs({
         type: \\"text\\"
       })(__styleYak.headline);"
@@ -361,18 +361,18 @@ const newHeadline = styled(headline).attrs({
       "import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         color: red;
       }*/
+      /*#__PURE__*/
       styled.input(__styleYak.headline);
       const newHeadline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .newHeadline {
         color: black;
       }*/
+      /*#__PURE__*/
       styled(headline).attrs({
         type: \\"text\\"
       })(__styleYak.newHeadline);"
@@ -402,7 +402,6 @@ const headline = css\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { easing } from \\"styleguide\\";
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
@@ -414,6 +413,7 @@ const headline = css\`
       .headline__headline_1 {
         color: blue;
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline, css\`color: orange\`, css\`color: blue\`, {
         \\"style\\": {
           \\"--headline-transition_18fi82j\\": ({
@@ -454,7 +454,6 @@ const FadeInButton = styled.button\`
       import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const fadeIn =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       @keyframes fadeIn {
         0% {
@@ -464,13 +463,14 @@ const FadeInButton = styled.button\`
           opacity: 1;
         }
       }*/
+      /*#__PURE__*/
       keyframes(__styleYak.fadeIn);
       const FadeInButton =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FadeInButton {
         animation: 1s fadeIn ease-out 1s infinite reverse both paused slidein;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.FadeInButton);"
     `);
   });
@@ -510,14 +510,13 @@ const Wrapper = styled.div\`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Link =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Link {
         color: palevioletred;
       }*/
+      /*#__PURE__*/
       styled.a(__styleYak.Link);
       const Icon =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Icon {
         fill: currentColor;
@@ -530,15 +529,16 @@ const Wrapper = styled.div\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.svg(__styleYak.Icon);
       const Wrapper =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Wrapper {
         &:has(> .Link) {
           padding: 10px;
         }
       }*/
+      /*#__PURE__*/
       styled.div(__styleYak.Wrapper);"
     `);
   });
@@ -573,20 +573,19 @@ const Wrapper = styled.div\`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Link =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Link {}
       */
+      /*#__PURE__*/
       styled.a(__styleYak.Link);
       const Icon =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Icon {}
       */
+      /*#__PURE__*/
       styled.svg(__styleYak.Icon);
       const Text = styled.span();
       const Wrapper =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Wrapper {
         color: red;
@@ -595,6 +594,7 @@ const Wrapper = styled.div\`
           padding: 10px;
         }
       }*/
+      /*#__PURE__*/
       styled.div(__styleYak.Wrapper);"
     `);
   });
@@ -622,7 +622,6 @@ const Wrapper = styled.div\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { queries } from \\"@/theme/constants.yak\\";
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         @media (min-width: 640px) {
@@ -639,6 +638,7 @@ const Wrapper = styled.div\`
           content: \\"\\\\2022\\";
         }
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline, ({
         $primary
       }) => $primary && css(__styleYak.headline__primary));"
@@ -769,12 +769,12 @@ const headline = css\`
       const red = \\"#E50914\\";
       const zIndex = 14;
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         color: #E50914;
         z-index: 14;
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline);"
     `);
   });
@@ -947,12 +947,12 @@ const Button = styled.button\`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button__primary {
         background-color: #4CAF50;
         text-indent: var(--Button__primary-text-indent_18fi82j);
       }*/
+      /*#__PURE__*/
       styled.button(({
         $primary,
         $digits
@@ -990,11 +990,11 @@ const headline = css\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline__headline {
         color: blue;
       }*/
+      /*#__PURE__*/
       css(x > 0.5 && css(__styleYak.headline__headline));"
     `);
   });
@@ -1043,19 +1043,19 @@ const Button = styled.button\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Icon =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Icon {}
       */
+      /*#__PURE__*/
       styled.svg(__styleYak.Icon);
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         &:has(.Icon) {
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button);"
     `);
   });
@@ -1093,7 +1093,6 @@ const Button = styled.button\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -1125,6 +1124,7 @@ const Button = styled.button\`
       .Button {
         display: block;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, $primary => $primary ? css(__styleYak.Button__primary, $active => $active && css(__styleYak.Button__primary_and_active), $active => $active && Math.random() && css(__styleYak.Button__primary_and_active_and)) : css(__styleYak.Button__not_primary));"
     `);
   });
@@ -1151,7 +1151,6 @@ const Button = styled.button\`
       import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         padding: var(--Button-padding_18fi82j);
@@ -1160,6 +1159,7 @@ const Button = styled.button\`
         transform: translateX(var(--Button-transform_18fi82j)) translateY(var(--Button-transform_18fi82j_1));
         font-family: \\"Arial\\", sans-serif;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, {
         \\"style\\": {
           \\"--Button-padding_18fi82j\\": () => (10) + \\"rem\\",
@@ -1190,12 +1190,12 @@ const Button = styled.button\`
       import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .ClockNumber {
         transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))
       translate(0, -88px) rotate(var(--ClockNumber-transform_18fi82j_1));
       }*/
+      /*#__PURE__*/
       styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
           \\"--ClockNumber-transform_18fi82j\\": ({
@@ -1233,11 +1233,11 @@ const Button = styled.button\`
       import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const case1 =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .case1 {
         padding: var(--case1-padding_18fi82j);
       }*/
+      /*#__PURE__*/
       css(__styleYak.case1, {
         \\"style\\": {
           \\"--case1-padding_18fi82j\\": __yak_unitPostFix(({
@@ -1276,11 +1276,11 @@ const Button = styled.button\`
       "import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const mixin1 =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .mixin1 {
         padding: var(--mixin1-padding_18fi82j);
       }*/
+      /*#__PURE__*/
       css(__styleYak.mixin1, {
         \\"style\\": {
           \\"--mixin1-padding_18fi82j\\": () => (4) + \\"px\\"
@@ -1288,7 +1288,6 @@ const Button = styled.button\`
       });
       const value = 10;
       const mixin2 =
-      /*#__PURE__*/
       /*YAK Extracted CSS:
       .mixin2 {
         margin: var(--mixin2-margin_18fi82j);
@@ -1297,6 +1296,7 @@ const Button = styled.button\`
         left: var(--mixin2-left_18fi82j);
         right: 10px;
       }*/
+      /*#__PURE__*/
       css(__styleYak.mixin2, {
         \\"style\\": {
           \\"--mixin2-margin_18fi82j\\": () => (size) + \\"px\\",
