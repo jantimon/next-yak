@@ -773,6 +773,10 @@ e.g.:
     // for later debugging and extraction
     if (cssCode) {
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
+      // Unused Yak Components, Yak Mixins and Keyframes are save to be removed
+      // as yak has no side effects
+      // https://stackoverflow.com/questions/68187576/whats-the-meaning-of-pure-in-some-javascript-source-code
+      expression.path.addComment("leading", "#__PURE__");
     }
   }
 

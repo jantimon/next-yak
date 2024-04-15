@@ -62,6 +62,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         font-size: 2rem;
@@ -103,6 +104,7 @@ const headline = css\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         font-size: 2rem;
@@ -152,6 +154,7 @@ const FancyButton = styled(Button)\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -168,6 +171,7 @@ const FancyButton = styled(Button)\`
       }*/
       styled.button(__styleYak.Button, x > 0.5 && css(__styleYak.Button__Button));
       const FancyButton =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
@@ -206,6 +210,7 @@ const FancyButton = styled(Button)\`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -237,6 +242,7 @@ const FancyButton = styled(Button)\`
         }
       });
       const FancyButton =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
@@ -276,6 +282,7 @@ const FancyButton = styled(Button)\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -294,6 +301,7 @@ const FancyButton = styled(Button)\`
         theme
       }) => theme.mode === \\"dark\\" && css(__styleYak.Button__Button));
       const FancyButton =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
@@ -320,6 +328,7 @@ const headline = styled.input.attrs({
       "import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         color: red;
@@ -352,12 +361,14 @@ const newHeadline = styled(headline).attrs({
       "import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         color: red;
       }*/
       styled.input(__styleYak.headline);
       const newHeadline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .newHeadline {
         color: black;
@@ -391,6 +402,7 @@ const headline = css\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { easing } from \\"styleguide\\";
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
@@ -442,6 +454,7 @@ const FadeInButton = styled.button\`
       import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const fadeIn =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       @keyframes fadeIn {
         0% {
@@ -453,6 +466,7 @@ const FadeInButton = styled.button\`
       }*/
       keyframes(__styleYak.fadeIn);
       const FadeInButton =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .FadeInButton {
         animation: 1s fadeIn ease-out 1s infinite reverse both paused slidein;
@@ -496,12 +510,14 @@ const Wrapper = styled.div\`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Link =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Link {
         color: palevioletred;
       }*/
       styled.a(__styleYak.Link);
       const Icon =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Icon {
         fill: currentColor;
@@ -516,6 +532,7 @@ const Wrapper = styled.div\`
       }*/
       styled.svg(__styleYak.Icon);
       const Wrapper =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Wrapper {
         &:has(> .Link) {
@@ -556,17 +573,20 @@ const Wrapper = styled.div\`
       "import { styled, keyframes } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Link =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Link {}
       */
       styled.a(__styleYak.Link);
       const Icon =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Icon {}
       */
       styled.svg(__styleYak.Icon);
       const Text = styled.span();
       const Wrapper =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Wrapper {
         color: red;
@@ -598,30 +618,31 @@ const Wrapper = styled.div\`
   \``,
       ),
     ).toMatchInlineSnapshot(`
-    "import { css } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    import { queries } from \\"@/theme/constants.yak\\";
-    const headline =
-    /*YAK Extracted CSS:
-    .headline {
-      @media (min-width: 640px) {
-        font-size: 1.5rem;
+      "import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      import { queries } from \\"@/theme/constants.yak\\";
+      const headline =
+      /*#__PURE__*/
+      /*YAK Extracted CSS:
+      .headline {
+        @media (min-width: 640px) {
+          font-size: 1.5rem;
+        }
       }
-    }
-    .headline__primary {
-      @media (min-width: 640px) {
-        font-size: 1.7rem;
+      .headline__primary {
+        @media (min-width: 640px) {
+          font-size: 1.7rem;
+        }
       }
-    }
-    .headline {
-      &:before {
-        content: \\"\\\\2022\\";
-      }
-    }*/
-    css(__styleYak.headline, ({
-      $primary
-    }) => $primary && css(__styleYak.headline__primary));"
-  `);
+      .headline {
+        &:before {
+          content: \\"\\\\2022\\";
+        }
+      }*/
+      css(__styleYak.headline, ({
+        $primary
+      }) => $primary && css(__styleYak.headline__primary));"
+    `);
   });
 
   it("should show error when mixin is used in nested selector", async () => {
@@ -748,6 +769,7 @@ const headline = css\`
       const red = \\"#E50914\\";
       const zIndex = 14;
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline {
         color: #E50914;
@@ -925,6 +947,7 @@ const Button = styled.button\`
       "import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button__primary {
         background-color: #4CAF50;
@@ -967,6 +990,7 @@ const headline = css\`
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .headline__headline {
         color: blue;
@@ -1019,11 +1043,13 @@ const Button = styled.button\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Icon =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Icon {}
       */
       styled.svg(__styleYak.Icon);
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         &:has(.Icon) {
@@ -1067,6 +1093,7 @@ const Button = styled.button\`
       import { styled, css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
@@ -1124,6 +1151,7 @@ const Button = styled.button\`
       import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .Button {
         padding: var(--Button-padding_18fi82j);
@@ -1162,6 +1190,7 @@ const Button = styled.button\`
       import { styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .ClockNumber {
         transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))
@@ -1204,6 +1233,7 @@ const Button = styled.button\`
       import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const case1 =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .case1 {
         padding: var(--case1-padding_18fi82j);
@@ -1246,6 +1276,7 @@ const Button = styled.button\`
       "import { css } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const mixin1 =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .mixin1 {
         padding: var(--mixin1-padding_18fi82j);
@@ -1257,6 +1288,7 @@ const Button = styled.button\`
       });
       const value = 10;
       const mixin2 =
+      /*#__PURE__*/
       /*YAK Extracted CSS:
       .mixin2 {
         margin: var(--mixin2-margin_18fi82j);
