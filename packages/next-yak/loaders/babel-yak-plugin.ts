@@ -69,8 +69,7 @@ export default function (
   }
 > {
   const { replaces } = options;
-  // we could get rid of node API's by passing the current path here
-  const rootContext = options.rootContext || process.cwd();
+  const rootContext = options.rootContext || "./";
   const { types: t } = babel;
 
   /**

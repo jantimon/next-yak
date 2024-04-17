@@ -9,9 +9,6 @@ export default defineConfig({
     // used for bundling @babel/core into the browser bundle
     nodePolyfills({
       include: ["path", "fs"],
-      globals: {
-        process: true,
-      },
     }),
   ],
   build: {
