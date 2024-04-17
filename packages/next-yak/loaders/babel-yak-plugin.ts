@@ -1,6 +1,5 @@
 import * as babelTypes from "@babel/types";
 import type { BabelFile, NodePath, PluginObj, PluginPass } from "@babel/core";
-import type babelCore from "@babel/core";
 import { TaggedTemplateExpression } from "@babel/types";
 import { basename, relative, resolve } from "node:path";
 import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
@@ -46,7 +45,7 @@ type YakTemplateLiteral = {
  * - replace the css template literal with styles from the css-module
  */
 export default function (
-  babel: typeof babelCore,
+  babel: { types: typeof babelTypes },
   options: YakBabelPluginOptions,
 ): PluginObj<
   PluginPass & {
