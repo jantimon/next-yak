@@ -1,10 +1,5 @@
 import * as babelTypes from "@babel/types";
-import type {
-  BabelFile,
-  NodePath,
-  PluginObj,
-  PluginPass,
-} from "@babel/core";
+import type { BabelFile, NodePath, PluginObj, PluginPass } from "@babel/core";
 import type babelCore from "@babel/core";
 import { TaggedTemplateExpression } from "@babel/types";
 import { basename, relative, resolve } from "node:path";
@@ -423,9 +418,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
   while (parent) {
     if (
       babelTypes.isTaggedTemplateExpression(parent.node) &&
-      knownParents.has(
-        parent as NodePath<babelTypes.TaggedTemplateExpression>,
-      )
+      knownParents.has(parent as NodePath<babelTypes.TaggedTemplateExpression>)
     ) {
       if (
         !babelTypes.isTemplateLiteral(child.node) ||
@@ -437,8 +430,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
       }
       const currentIndex = child.node.expressions.indexOf(grandChild.node);
       return {
-        parent:
-          parent as NodePath<babelTypes.TaggedTemplateExpression>,
+        parent: parent as NodePath<babelTypes.TaggedTemplateExpression>,
         currentIndex,
       };
     }
@@ -770,9 +762,13 @@ e.g.:
       );
       cssCode = `.${identifier} {}\n${cssCode}`;
     }
-    // Prepand the css as a comment to the styled component
-    // for later debugging and extraction
     if (cssCode) {
+      // Unused Yak Components, Yak Mixins and Keyframes are save to be removed
+      // as yak has no side effects
+      // https://stackoverflow.com/questions/68187576/whats-the-meaning-of-pure-in-some-javascript-source-code
+      expression.path.addComment("leading", "#__PURE__");
+      // Prepand the css as a comment to the styled component
+      // for later debugging and extraction
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
     }
   }

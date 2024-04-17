@@ -50,10 +50,7 @@ export default async function tsloader(
       filename: resourcePath,
       configFile: false,
       plugins: [
-        [
-          babelPlugin,
-          { isTSX: this.resourcePath.endsWith(".tsx") },
-        ],
+        [babelPlugin, { isTSX: this.resourcePath.endsWith(".tsx") }],
         [
           await import("./babel-yak-plugin.js").then((m) => m.default),
           {
