@@ -6,7 +6,13 @@ import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 
+let highlighterPromise: ReturnType<typeof getHighlighterCore>;
+
 export const setupMonaco = async () => {
+  if (highlighterPromise) {
+    return highlighterPromise;
+  }
+
   window.MonacoEnvironment = {
     getWorker: function (_, label) {
       switch (label) {
@@ -27,7 +33,7 @@ export const setupMonaco = async () => {
     },
   };
 
-  const highlighter = await getHighlighterCore({
+  highlighterPromise = getHighlighterCore({
     themes: [
       import("shiki/themes/vitesse-dark.mjs"),
       import("shiki/themes/vitesse-light.mjs"),
@@ -43,6 +49,8 @@ export const setupMonaco = async () => {
     ],
     loadWasm: getWasm,
   });
+
+  const highlighter = await highlighterPromise;
 
   monaco.languages.register({ id: "tsx" });
 

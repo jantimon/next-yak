@@ -1,6 +1,6 @@
 import cssLoader from "next-yak/cssloader";
 
-export const compileCSS = async (css: string) => {
+export const compileCSS = async (css: string): Promise<string> => {
   const loaderContext = {
     resourcePath: "/some/path/to/file.tsx",
     rootContext: "/some",
@@ -22,5 +22,5 @@ export const compileCSS = async (css: string) => {
       return result;
     },
   };
-  return await cssLoader.call(loaderContext, css);
+  return (await cssLoader.call(loaderContext, css))!;
 };

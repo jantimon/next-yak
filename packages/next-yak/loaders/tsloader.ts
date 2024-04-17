@@ -5,7 +5,7 @@ import type { BabelFileResult } from "@babel/core";
 // @ts-expect-error - this should be a dynamic import
 import babelPlugin from "@babel/plugin-syntax-typescript";
 import getYakImports from "./lib/getYakImports.js";
-import { InvalidPositionError } from "./babel-yak-plugin.js";
+import YakBabelPlugin, { InvalidPositionError } from "./babel-yak-plugin.js";
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
@@ -52,7 +52,7 @@ export default async function tsloader(
       plugins: [
         [babelPlugin, { isTSX: this.resourcePath.endsWith(".tsx") }],
         [
-          await import("./babel-yak-plugin.js").then((m) => m.default),
+          YakBabelPlugin,
           {
             replaces,
             rootContext,

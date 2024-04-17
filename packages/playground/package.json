@@ -3,6 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "exports": {
+    "./useYakCompiler": {
+      "types": "./src/useYakCompiler/useYakCompiler.ts",
+      "default": "./dist/useYakCompiler.js"
+    },
+    ".": {
+      "types": "./src/Playground.tsx",
+      "default": "./dist/playground.js"
+    }
+  },
   "scripts": {
     "dev": "vite --force",
     "build": "tsc && vite build",
