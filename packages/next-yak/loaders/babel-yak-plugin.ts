@@ -1,11 +1,11 @@
-import type babelCore from "@babel/core";
-import {
+import * as babelTypes from "@babel/types";
+import type {
   BabelFile,
   NodePath,
   PluginObj,
   PluginPass,
-  types as babelTypes,
 } from "@babel/core";
+import type babelCore from "@babel/core";
 import { TaggedTemplateExpression } from "@babel/types";
 import { basename, relative, resolve } from "node:path";
 import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
@@ -68,13 +68,14 @@ export default function (
     >;
     yakImportPath?: NodePath<babelTypes.ImportDeclaration>;
     yakTemplateExpressionsByPath: Map<
-      babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+      NodePath<babelTypes.TaggedTemplateExpression>,
       YakTemplateLiteral
     >;
     yakTemplateExpressionsByName: Map<string, YakTemplateLiteral>;
   }
 > {
   const { replaces } = options;
+  // we could get rid of node API's by passing the current path here
   const rootContext = options.rootContext || process.cwd();
   const { types: t } = babel;
 
@@ -423,7 +424,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
     if (
       babelTypes.isTaggedTemplateExpression(parent.node) &&
       knownParents.has(
-        parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+        parent as NodePath<babelTypes.TaggedTemplateExpression>,
       )
     ) {
       if (
@@ -437,7 +438,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
       const currentIndex = child.node.expressions.indexOf(grandChild.node);
       return {
         parent:
-          parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+          parent as NodePath<babelTypes.TaggedTemplateExpression>,
         currentIndex,
       };
     }
@@ -465,7 +466,7 @@ function getIdentifierNamesUsedInExpression(
 
 function visitYakExpression(
   yakTemplateExpressions: Map<
-    babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+    NodePath<babelTypes.TaggedTemplateExpression>,
     YakTemplateLiteral
   >,
   visitor: (
@@ -533,7 +534,7 @@ function transformYakExpressions(
 
   // Arguments for the replaced styled call
   const newArguments = new Set<babelTypes.Expression>();
-  const cssVariables: Record<string, babelCore.types.Expression> = {};
+  const cssVariables: Record<string, babelTypes.Expression> = {};
   let addedOwnClassName = false;
   let currentCssParserState = cssParserState;
   // Iterate over the css parts
@@ -785,7 +786,7 @@ e.g.:
 
 function getComponentTypes(
   yakTemplateExpressions: Map<
-    babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+    NodePath<babelTypes.TaggedTemplateExpression>,
     YakTemplateLiteral
   >,
 ) {

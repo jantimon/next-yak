@@ -1,4 +1,5 @@
-import type { NodePath, types as babelTypes } from "@babel/core";
+import * as babelTypes from "@babel/types";
+import type { NodePath } from "@babel/core";
 
 /**
  * Returns the name of the expression

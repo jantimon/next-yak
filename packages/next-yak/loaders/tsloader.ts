@@ -1,4 +1,9 @@
-import babel, { BabelFileResult } from "@babel/core";
+// we need this import like this, because Vite's DEV server doesn't handle it properly https://github.com/vitejs/vite/issues/16435
+import * as babel from "@babel/core";
+import type { BabelFileResult } from "@babel/core";
+// This let's vite bundle this dependency correctly (used for the playground)
+// @ts-expect-error - this should be a dynamic import
+import babelPlugin from "@babel/plugin-syntax-typescript";
 import getYakImports from "./lib/getYakImports.js";
 import { InvalidPositionError } from "./babel-yak-plugin.js";
 
@@ -46,7 +51,7 @@ export default async function tsloader(
       configFile: false,
       plugins: [
         [
-          "@babel/plugin-syntax-typescript",
+          babelPlugin,
           { isTSX: this.resourcePath.endsWith(".tsx") },
         ],
         [
