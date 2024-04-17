@@ -141,7 +141,8 @@ function App({
               <div
                 dangerouslySetInnerHTML={{
                   __html: highlighter.codeToHtml(outputCSS, {
-                    lang: "css",
+                    // better hightlight than bare css (especially for nesting)
+                    lang: "css-styled",
                     theme: "vitesse-dark",
                   }),
                 }}

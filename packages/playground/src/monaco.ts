@@ -33,6 +33,8 @@ export const setupMonaco = async () => {
       import("shiki/themes/vitesse-light.mjs"),
     ],
     langs: [
+      import("./langs/css-styled"),
+      import("./langs/styled"),
       import("shiki/langs/javascript.mjs"),
       import("shiki/langs/typescript.mjs"),
       import("shiki/langs/css.mjs"),
@@ -40,17 +42,8 @@ export const setupMonaco = async () => {
       import("shiki/langs/tsx.mjs"),
     ],
     loadWasm: getWasm,
-    langAlias: {
-      // this is needed, as monaco doesn't support jsx and tsx as language
-      typescript: "tsx",
-      javascript: "jsx",
-    },
   });
 
-  monaco.languages.register({ id: "typescript" });
-  monaco.languages.register({ id: "javascript" });
-  monaco.languages.register({ id: "css" });
-  monaco.languages.register({ id: "jsx" });
   monaco.languages.register({ id: "tsx" });
 
   const yakTypes = import.meta.glob("/node_modules/next-yak/dist/**/*.d.ts", {
