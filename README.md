@@ -281,6 +281,7 @@ Thanks for merging our prs fixes in next.js and postcss ❤️
   - https://github.com/vercel/next.js/pull/62639
   - https://github.com/webpack-contrib/mini-css-extract-plugin/pull/1084
   - https://github.com/vercel/next.js/pull/62733
+  - https://github.com/vercel/next.js/pull/64551
   
 </details>
 

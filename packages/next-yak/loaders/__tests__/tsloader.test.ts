@@ -71,6 +71,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
           color: red;
         }
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline);
       export const Main = () => <h1 className={headline({}).className}>Hello World</h1>;"
     `);
@@ -117,6 +118,7 @@ const headline = css\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline, x > 0.5 && css(__styleYak.headline__headline));"
     `);
   });
@@ -166,12 +168,14 @@ const FancyButton = styled(Button)\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, x > 0.5 && css(__styleYak.Button__Button));
       const FancyButton =
       /*YAK Extracted CSS:
       .FancyButton {
         background-color: green;
       }*/
+      /*#__PURE__*/
       styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -227,6 +231,7 @@ const FancyButton = styled(Button)\`
         }
         display: block;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         $primary
       }) => $primary ? css(__styleYak.Button__primary) : css(__styleYak.Button__not_primary), {
@@ -241,6 +246,7 @@ const FancyButton = styled(Button)\`
       .FancyButton {
         background-color: green;
       }*/
+      /*#__PURE__*/
       styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -290,6 +296,7 @@ const FancyButton = styled(Button)\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         theme
       }) => theme.mode === \\"dark\\" && css(__styleYak.Button__Button));
@@ -298,6 +305,7 @@ const FancyButton = styled(Button)\`
       .FancyButton {
         background-color: green;
       }*/
+      /*#__PURE__*/
       styled(Button)(__styleYak.FancyButton);"
     `);
   });
@@ -324,6 +332,7 @@ const headline = styled.input.attrs({
       .headline {
         color: red;
       }*/
+      /*#__PURE__*/
       styled.input.attrs({
         type: \\"text\\"
       })(__styleYak.headline);"
@@ -356,12 +365,14 @@ const newHeadline = styled(headline).attrs({
       .headline {
         color: red;
       }*/
+      /*#__PURE__*/
       styled.input(__styleYak.headline);
       const newHeadline =
       /*YAK Extracted CSS:
       .newHeadline {
         color: black;
       }*/
+      /*#__PURE__*/
       styled(headline).attrs({
         type: \\"text\\"
       })(__styleYak.newHeadline);"
@@ -402,6 +413,7 @@ const headline = css\`
       .headline__headline_1 {
         color: blue;
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline, css\`color: orange\`, css\`color: blue\`, {
         \\"style\\": {
           \\"--headline-transition_18fi82j\\": ({
@@ -451,12 +463,14 @@ const FadeInButton = styled.button\`
           opacity: 1;
         }
       }*/
+      /*#__PURE__*/
       keyframes(__styleYak.fadeIn);
       const FadeInButton =
       /*YAK Extracted CSS:
       .FadeInButton {
         animation: 1s fadeIn ease-out 1s infinite reverse both paused slidein;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.FadeInButton);"
     `);
   });
@@ -500,6 +514,7 @@ const Wrapper = styled.div\`
       .Link {
         color: palevioletred;
       }*/
+      /*#__PURE__*/
       styled.a(__styleYak.Link);
       const Icon =
       /*YAK Extracted CSS:
@@ -514,6 +529,7 @@ const Wrapper = styled.div\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.svg(__styleYak.Icon);
       const Wrapper =
       /*YAK Extracted CSS:
@@ -522,6 +538,7 @@ const Wrapper = styled.div\`
           padding: 10px;
         }
       }*/
+      /*#__PURE__*/
       styled.div(__styleYak.Wrapper);"
     `);
   });
@@ -559,11 +576,13 @@ const Wrapper = styled.div\`
       /*YAK Extracted CSS:
       .Link {}
       */
+      /*#__PURE__*/
       styled.a(__styleYak.Link);
       const Icon =
       /*YAK Extracted CSS:
       .Icon {}
       */
+      /*#__PURE__*/
       styled.svg(__styleYak.Icon);
       const Text = styled.span();
       const Wrapper =
@@ -575,6 +594,7 @@ const Wrapper = styled.div\`
           padding: 10px;
         }
       }*/
+      /*#__PURE__*/
       styled.div(__styleYak.Wrapper);"
     `);
   });
@@ -598,30 +618,31 @@ const Wrapper = styled.div\`
   \``,
       ),
     ).toMatchInlineSnapshot(`
-    "import { css } from \\"next-yak\\";
-    import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-    import { queries } from \\"@/theme/constants.yak\\";
-    const headline =
-    /*YAK Extracted CSS:
-    .headline {
-      @media (min-width: 640px) {
-        font-size: 1.5rem;
+      "import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      import { queries } from \\"@/theme/constants.yak\\";
+      const headline =
+      /*YAK Extracted CSS:
+      .headline {
+        @media (min-width: 640px) {
+          font-size: 1.5rem;
+        }
       }
-    }
-    .headline__primary {
-      @media (min-width: 640px) {
-        font-size: 1.7rem;
+      .headline__primary {
+        @media (min-width: 640px) {
+          font-size: 1.7rem;
+        }
       }
-    }
-    .headline {
-      &:before {
-        content: \\"\\\\2022\\";
-      }
-    }*/
-    css(__styleYak.headline, ({
-      $primary
-    }) => $primary && css(__styleYak.headline__primary));"
-  `);
+      .headline {
+        &:before {
+          content: \\"\\\\2022\\";
+        }
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.headline, ({
+        $primary
+      }) => $primary && css(__styleYak.headline__primary));"
+    `);
   });
 
   it("should show error when mixin is used in nested selector", async () => {
@@ -753,6 +774,7 @@ const headline = css\`
         color: #E50914;
         z-index: 14;
       }*/
+      /*#__PURE__*/
       css(__styleYak.headline);"
     `);
   });
@@ -930,6 +952,7 @@ const Button = styled.button\`
         background-color: #4CAF50;
         text-indent: var(--Button__primary-text-indent_18fi82j);
       }*/
+      /*#__PURE__*/
       styled.button(({
         $primary,
         $digits
@@ -971,6 +994,7 @@ const headline = css\`
       .headline__headline {
         color: blue;
       }*/
+      /*#__PURE__*/
       css(x > 0.5 && css(__styleYak.headline__headline));"
     `);
   });
@@ -1022,6 +1046,7 @@ const Button = styled.button\`
       /*YAK Extracted CSS:
       .Icon {}
       */
+      /*#__PURE__*/
       styled.svg(__styleYak.Icon);
       const Button =
       /*YAK Extracted CSS:
@@ -1030,6 +1055,7 @@ const Button = styled.button\`
           color: red;
         }
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button);"
     `);
   });
@@ -1098,6 +1124,7 @@ const Button = styled.button\`
       .Button {
         display: block;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, $primary => $primary ? css(__styleYak.Button__primary, $active => $active && css(__styleYak.Button__primary_and_active), $active => $active && Math.random() && css(__styleYak.Button__primary_and_active_and)) : css(__styleYak.Button__not_primary));"
     `);
   });
@@ -1132,6 +1159,7 @@ const Button = styled.button\`
         transform: translateX(var(--Button-transform_18fi82j)) translateY(var(--Button-transform_18fi82j_1));
         font-family: \\"Arial\\", sans-serif;
       }*/
+      /*#__PURE__*/
       styled.button(__styleYak.Button, {
         \\"style\\": {
           \\"--Button-padding_18fi82j\\": () => (10) + \\"rem\\",
@@ -1167,6 +1195,7 @@ const Button = styled.button\`
         transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))
       translate(0, -88px) rotate(var(--ClockNumber-transform_18fi82j_1));
       }*/
+      /*#__PURE__*/
       styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
           \\"--ClockNumber-transform_18fi82j\\": ({
@@ -1208,6 +1237,7 @@ const Button = styled.button\`
       .case1 {
         padding: var(--case1-padding_18fi82j);
       }*/
+      /*#__PURE__*/
       css(__styleYak.case1, {
         \\"style\\": {
           \\"--case1-padding_18fi82j\\": __yak_unitPostFix(({
@@ -1250,6 +1280,7 @@ const Button = styled.button\`
       .mixin1 {
         padding: var(--mixin1-padding_18fi82j);
       }*/
+      /*#__PURE__*/
       css(__styleYak.mixin1, {
         \\"style\\": {
           \\"--mixin1-padding_18fi82j\\": () => (4) + \\"px\\"
@@ -1265,6 +1296,7 @@ const Button = styled.button\`
         left: var(--mixin2-left_18fi82j);
         right: 10px;
       }*/
+      /*#__PURE__*/
       css(__styleYak.mixin2, {
         \\"style\\": {
           \\"--mixin2-margin_18fi82j\\": () => (size) + \\"px\\",
