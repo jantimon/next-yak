@@ -122,11 +122,17 @@ export function parseCss(
     // check if the current selector got closed
     // closes also the current declaration
     else if (currentCharacter === "}") {
-      currentScopes.pop();
+      const closedScope = currentScopes.pop();
       currentCode = "";
       isInsidePropertyValue = false;
       currentDeclaration.scope = [...currentScopes];
       if (currentDeclaration.property) {
+        // whenever a `}` closes a declaration e.g.:
+        // .foo { color: red }
+        // the declaration is part of this closed scope
+        if (closedScope) {
+          currentDeclaration.scope.push(closedScope);
+        }
         currentDeclaration.closed = true;
         currentDeclaration = newDeclaration();
         declarations.push(currentDeclaration);

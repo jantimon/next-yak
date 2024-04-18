@@ -381,25 +381,22 @@ test("parseCss inComplete css 1 with @media rule", () => {
 test("parseCss complete css with @media rule", () => {
   expect(
     parseCss(`
-                .foo {
-                                .fancy {
-                                                background: url('https://example.com');
-                                
-                
-
-                @media (max-width: 600px) {
-                                .baz {
-                                                color: red;
-                                }
-                            }
-                        }
-                        background: url('https://example.com');
-                        body {
-                            padding: 0;
-                        }
-                    }
-                                
-        `),
+    .foo {
+      .fancy {
+        background: url("https://example.com");
+    
+        @media (max-width: 600px) {
+          .baz {
+            color: red;
+          }
+        }
+      }
+      background: url("https://example.com");
+      body {
+        padding: 0;
+      }
+    }    
+  `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -416,7 +413,7 @@ test("parseCss complete css with @media rule", () => {
               "type": "selector",
             },
           ],
-          "value": "url('https://example.com')",
+          "value": "url(\\"https://example.com\\")",
         },
         {
           "closed": true,
@@ -450,7 +447,7 @@ test("parseCss complete css with @media rule", () => {
               "type": "selector",
             },
           ],
-          "value": "url('https://example.com')",
+          "value": "url(\\"https://example.com\\")",
         },
         {
           "closed": true,
@@ -714,4 +711,37 @@ test("Handles newlines in property values", () => {
         },
       ]
     `);
+});
+
+test("parseCss css with missing semicolon", () => {
+  const parsed = parseCss(`
+  .foo {
+    &:hover {
+      color: red
+    }
+  `);
+
+  expect(parsed.declarations).toMatchInlineSnapshot(`
+    [
+      {
+        "closed": true,
+        "property": "color",
+        "scope": [
+          {
+            "name": ".foo",
+            "type": "selector",
+          },
+          {
+            "name": "&:hover",
+            "type": "selector",
+          },
+        ],
+        "value": "red
+    ",
+      },
+    ]
+  `);
+
+  expect(parsed.declarations.length).toBe(1);
+  expect(parsed.declarations[0].scope.length).toBe(2);
 });
