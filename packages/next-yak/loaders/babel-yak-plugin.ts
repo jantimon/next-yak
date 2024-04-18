@@ -1,11 +1,5 @@
-import type babelCore from "@babel/core";
-import {
-  BabelFile,
-  NodePath,
-  PluginObj,
-  PluginPass,
-  types as babelTypes,
-} from "@babel/core";
+import * as babelTypes from "@babel/types";
+import type { BabelFile, NodePath, PluginObj, PluginPass } from "@babel/core";
 import { TaggedTemplateExpression } from "@babel/types";
 import { basename, relative, resolve } from "node:path";
 import { getConstantName, getConstantValues } from "./lib/getConstantValues.js";
@@ -51,7 +45,7 @@ type YakTemplateLiteral = {
  * - replace the css template literal with styles from the css-module
  */
 export default function (
-  babel: typeof babelCore,
+  babel: { types: typeof babelTypes },
   options: YakBabelPluginOptions,
 ): PluginObj<
   PluginPass & {
@@ -68,14 +62,14 @@ export default function (
     >;
     yakImportPath?: NodePath<babelTypes.ImportDeclaration>;
     yakTemplateExpressionsByPath: Map<
-      babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+      NodePath<babelTypes.TaggedTemplateExpression>,
       YakTemplateLiteral
     >;
     yakTemplateExpressionsByName: Map<string, YakTemplateLiteral>;
   }
 > {
   const { replaces } = options;
-  const rootContext = options.rootContext || process.cwd();
+  const rootContext = options.rootContext || "./";
   const { types: t } = babel;
 
   /**
@@ -422,9 +416,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
   while (parent) {
     if (
       babelTypes.isTaggedTemplateExpression(parent.node) &&
-      knownParents.has(
-        parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
-      )
+      knownParents.has(parent as NodePath<babelTypes.TaggedTemplateExpression>)
     ) {
       if (
         !babelTypes.isTemplateLiteral(child.node) ||
@@ -436,8 +428,7 @@ const getClosestTemplateLiteralExpressionParentPath = (
       }
       const currentIndex = child.node.expressions.indexOf(grandChild.node);
       return {
-        parent:
-          parent as babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+        parent: parent as NodePath<babelTypes.TaggedTemplateExpression>,
         currentIndex,
       };
     }
@@ -465,7 +456,7 @@ function getIdentifierNamesUsedInExpression(
 
 function visitYakExpression(
   yakTemplateExpressions: Map<
-    babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+    NodePath<babelTypes.TaggedTemplateExpression>,
     YakTemplateLiteral
   >,
   visitor: (
@@ -533,7 +524,7 @@ function transformYakExpressions(
 
   // Arguments for the replaced styled call
   const newArguments = new Set<babelTypes.Expression>();
-  const cssVariables: Record<string, babelCore.types.Expression> = {};
+  const cssVariables: Record<string, babelTypes.Expression> = {};
   let addedOwnClassName = false;
   let currentCssParserState = cssParserState;
   // Iterate over the css parts
@@ -754,6 +745,11 @@ e.g.:
     );
   }
 
+  // Unused Yak Components, Yak Mixins and Keyframes are save to be removed
+  // as yak has no side effects
+  // https://stackoverflow.com/questions/68187576/whats-the-meaning-of-pure-in-some-javascript-source-code
+  expression.path.addComment("leading", "#__PURE__");
+
   // The root expression is the styled component or keyframes or root mixin
   if (rootExpression === expression) {
     let cssCode = toCss(rootDeclarations).trimStart();
@@ -770,10 +766,6 @@ e.g.:
       cssCode = `.${identifier} {}\n${cssCode}`;
     }
     if (cssCode) {
-      // Unused Yak Components, Yak Mixins and Keyframes are save to be removed
-      // as yak has no side effects
-      // https://stackoverflow.com/questions/68187576/whats-the-meaning-of-pure-in-some-javascript-source-code
-      expression.path.addComment("leading", "#__PURE__");
       // Prepand the css as a comment to the styled component
       // for later debugging and extraction
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);
@@ -789,7 +781,7 @@ e.g.:
 
 function getComponentTypes(
   yakTemplateExpressions: Map<
-    babelCore.NodePath<babelTypes.TaggedTemplateExpression>,
+    NodePath<babelTypes.TaggedTemplateExpression>,
     YakTemplateLiteral
   >,
 ) {
