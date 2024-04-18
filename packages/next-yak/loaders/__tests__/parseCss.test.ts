@@ -7,7 +7,7 @@ test("parseCss inComplete css 1", () => {
                 .fancy {
                         /* hello .world { color: red; } */
                         color: blue;
-    `)
+    `),
   ).toMatchInlineSnapshot(`
       {
         "declarations": [
@@ -59,7 +59,7 @@ test("parseCss inComplete css 1 ending inside a comment", () => {
         .foo {
                 .fancy {
                         /* hello .world { color: red; }
-    `)
+    `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [],
@@ -104,7 +104,7 @@ test("parseCss inComplete css 1 ending inside a string", () => {
         .foo {
                 .fancy {
                         background: url('https://example.com
-    `)
+    `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -167,7 +167,7 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
         .foo {
                 .fancy {
                         background: url("https://example.com
-    `)
+    `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -231,7 +231,7 @@ test("parseCss inComplete css 1 ending outside a comment", () => {
                 .fancy {
                         /* background: url("https://example.com */
                         color: blue
-    `)
+    `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -301,7 +301,7 @@ test("parseCss inComplete css 1 with @media rule", () => {
                                 .baz {
                                                 color: red;
                                 
-        `)
+        `),
   ).toMatchInlineSnapshot(`
           {
             "declarations": [
@@ -396,7 +396,7 @@ test("parseCss complete css with @media rule", () => {
         padding: 0;
       }
     }    
-  `)
+  `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -499,7 +499,7 @@ test("parseCss inComplete css 1 with @keyframes rule", () => {
                                     transform: translateX(0);
                     }
                 }
-        `)
+        `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -573,7 +573,7 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
                 .fancy section {
                         // background: url("https://example.com
                         color: blue
-    `)
+    `),
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -632,14 +632,14 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
 
 test("Handles escaped backslashes in strings", () => {
   expect(
-    parseCss(`a { content: "\\\\"; }`).declarations[0].value
+    parseCss(`a { content: "\\\\"; }`).declarations[0].value,
   ).toMatchInlineSnapshot('"\\"\\\\\\\\\\""');
 });
 
 test("Handles empty declarations", () => {
   expect(
     parseCss(`a { color: "blue";
-    ; }`).declarations
+    ; }`).declarations,
   ).toMatchInlineSnapshot(`
     [
       {
@@ -675,7 +675,7 @@ test("Handles multiline comments", () => {
   a multiline
   comment
   */
-  p { color: red; }`).declarations
+  p { color: red; }`).declarations,
   ).toMatchInlineSnapshot(`
     [
       {

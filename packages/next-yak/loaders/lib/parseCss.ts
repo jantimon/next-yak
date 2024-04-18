@@ -39,7 +39,7 @@ export function parseCss(
     isInsideAtRule: false,
     currentScopes: [],
     currentDeclaration: newDeclaration(),
-  }
+  },
 ): { state: ParserState; declarations: Declaration[] } {
   let isInsideString: "'" | '"' | false = initialState.isInsideString;
   let isInsideComment = initialState.isInsideComment;
