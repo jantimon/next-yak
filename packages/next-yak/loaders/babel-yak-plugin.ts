@@ -745,6 +745,11 @@ e.g.:
     );
   }
 
+  // Unused Yak Components, Yak Mixins and Keyframes are save to be removed
+  // as yak has no side effects
+  // https://stackoverflow.com/questions/68187576/whats-the-meaning-of-pure-in-some-javascript-source-code
+  expression.path.addComment("leading", "#__PURE__");
+
   // The root expression is the styled component or keyframes or root mixin
   if (rootExpression === expression) {
     let cssCode = toCss(rootDeclarations).trimStart();
@@ -761,10 +766,6 @@ e.g.:
       cssCode = `.${identifier} {}\n${cssCode}`;
     }
     if (cssCode) {
-      // Unused Yak Components, Yak Mixins and Keyframes are save to be removed
-      // as yak has no side effects
-      // https://stackoverflow.com/questions/68187576/whats-the-meaning-of-pure-in-some-javascript-source-code
-      expression.path.addComment("leading", "#__PURE__");
       // Prepand the css as a comment to the styled component
       // for later debugging and extraction
       expression.path.addComment("leading", "YAK Extracted CSS:\n" + cssCode);

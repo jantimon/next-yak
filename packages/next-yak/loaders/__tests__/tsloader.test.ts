@@ -119,7 +119,7 @@ const headline = css\`
         }
       }*/
       /*#__PURE__*/
-      css(__styleYak.headline, x > 0.5 && css(__styleYak.headline__headline));"
+      css(__styleYak.headline, x > 0.5 && /*#__PURE__*/css(__styleYak.headline__headline));"
     `);
   });
 
@@ -169,7 +169,7 @@ const FancyButton = styled(Button)\`
         }
       }*/
       /*#__PURE__*/
-      styled.button(__styleYak.Button, x > 0.5 && css(__styleYak.Button__Button));
+      styled.button(__styleYak.Button, x > 0.5 && /*#__PURE__*/css(__styleYak.Button__Button));
       const FancyButton =
       /*YAK Extracted CSS:
       .FancyButton {
@@ -234,7 +234,7 @@ const FancyButton = styled(Button)\`
       /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         $primary
-      }) => $primary ? css(__styleYak.Button__primary) : css(__styleYak.Button__not_primary), {
+      }) => $primary ? /*#__PURE__*/css(__styleYak.Button__primary) : /*#__PURE__*/css(__styleYak.Button__not_primary), {
         \\"style\\": {
           \\"--Button-width_18fi82j\\": ({
             $iconWidth
@@ -299,7 +299,7 @@ const FancyButton = styled(Button)\`
       /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         theme
-      }) => theme.mode === \\"dark\\" && css(__styleYak.Button__Button));
+      }) => theme.mode === \\"dark\\" && /*#__PURE__*/css(__styleYak.Button__Button));
       const FancyButton =
       /*YAK Extracted CSS:
       .FancyButton {
@@ -584,7 +584,7 @@ const Wrapper = styled.div\`
       */
       /*#__PURE__*/
       styled.svg(__styleYak.Icon);
-      const Text = styled.span();
+      const Text = /*#__PURE__*/styled.span();
       const Wrapper =
       /*YAK Extracted CSS:
       .Wrapper {
@@ -641,7 +641,7 @@ const Wrapper = styled.div\`
       /*#__PURE__*/
       css(__styleYak.headline, ({
         $primary
-      }) => $primary && css(__styleYak.headline__primary));"
+      }) => $primary && /*#__PURE__*/css(__styleYak.headline__primary));"
     `);
   });
 
@@ -958,7 +958,7 @@ const Button = styled.button\`
         $digits
       }) => {
         const indent = $digits * 10 + \\"px\\";
-        return $primary && css(__styleYak.Button__primary, {
+        return $primary && /*#__PURE__*/css(__styleYak.Button__primary, {
           \\"style\\": {
             \\"--Button__primary-text-indent_18fi82j\\": indent
           }
@@ -995,7 +995,7 @@ const headline = css\`
         color: blue;
       }*/
       /*#__PURE__*/
-      css(x > 0.5 && css(__styleYak.headline__headline));"
+      css(x > 0.5 && /*#__PURE__*/css(__styleYak.headline__headline));"
     `);
   });
 
@@ -1125,7 +1125,7 @@ const Button = styled.button\`
         display: block;
       }*/
       /*#__PURE__*/
-      styled.button(__styleYak.Button, $primary => $primary ? css(__styleYak.Button__primary, $active => $active && css(__styleYak.Button__primary_and_active), $active => $active && Math.random() && css(__styleYak.Button__primary_and_active_and)) : css(__styleYak.Button__not_primary));"
+      styled.button(__styleYak.Button, $primary => $primary ? /*#__PURE__*/css(__styleYak.Button__primary, $active => $active && /*#__PURE__*/css(__styleYak.Button__primary_and_active), $active => $active && Math.random() && /*#__PURE__*/css(__styleYak.Button__primary_and_active_and)) : /*#__PURE__*/css(__styleYak.Button__not_primary));"
     `);
   });
 
