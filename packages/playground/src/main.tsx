@@ -1,14 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import "./index.css"
-import { setupMonaco } from './monaco.ts';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Playground } from './Playground.tsx';
+import "./index.css";
 
-
-setupMonaco().then(highlighter => {
-  ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <App highlighter={highlighter} />
+      <Playground />
     </React.StrictMode>,
   )
-})

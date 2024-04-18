@@ -60,6 +60,9 @@ importers:
       next-yak:
         specifier: ^0.0.22
         version: 0.0.22(postcss@8.4.38)
+      next-yak-playground:
+        specifier: workspace:*
+        version: link:../playground
       react:
         specifier: latest
         version: 18.2.0
