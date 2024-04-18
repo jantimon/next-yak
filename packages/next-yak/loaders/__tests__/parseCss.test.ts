@@ -7,7 +7,7 @@ test("parseCss inComplete css 1", () => {
                 .fancy {
                         /* hello .world { color: red; } */
                         color: blue;
-    `),
+    `)
   ).toMatchInlineSnapshot(`
       {
         "declarations": [
@@ -59,7 +59,7 @@ test("parseCss inComplete css 1 ending inside a comment", () => {
         .foo {
                 .fancy {
                         /* hello .world { color: red; }
-    `),
+    `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [],
@@ -104,7 +104,7 @@ test("parseCss inComplete css 1 ending inside a string", () => {
         .foo {
                 .fancy {
                         background: url('https://example.com
-    `),
+    `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -167,7 +167,7 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
         .foo {
                 .fancy {
                         background: url("https://example.com
-    `),
+    `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -231,7 +231,7 @@ test("parseCss inComplete css 1 ending outside a comment", () => {
                 .fancy {
                         /* background: url("https://example.com */
                         color: blue
-    `),
+    `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -301,7 +301,7 @@ test("parseCss inComplete css 1 with @media rule", () => {
                                 .baz {
                                                 color: red;
                                 
-        `),
+        `)
   ).toMatchInlineSnapshot(`
           {
             "declarations": [
@@ -381,25 +381,22 @@ test("parseCss inComplete css 1 with @media rule", () => {
 test("parseCss complete css with @media rule", () => {
   expect(
     parseCss(`
-                .foo {
-                                .fancy {
-                                                background: url('https://example.com');
-                                
-                
-
-                @media (max-width: 600px) {
-                                .baz {
-                                                color: red;
-                                }
-                            }
-                        }
-                        background: url('https://example.com');
-                        body {
-                            padding: 0;
-                        }
-                    }
-                                
-        `),
+    .foo {
+      .fancy {
+        background: url("https://example.com");
+    
+        @media (max-width: 600px) {
+          .baz {
+            color: red;
+          }
+        }
+      }
+      background: url("https://example.com");
+      body {
+        padding: 0;
+      }
+    }    
+  `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -416,7 +413,7 @@ test("parseCss complete css with @media rule", () => {
               "type": "selector",
             },
           ],
-          "value": "url('https://example.com')",
+          "value": "url(\\"https://example.com\\")",
         },
         {
           "closed": true,
@@ -450,7 +447,7 @@ test("parseCss complete css with @media rule", () => {
               "type": "selector",
             },
           ],
-          "value": "url('https://example.com')",
+          "value": "url(\\"https://example.com\\")",
         },
         {
           "closed": true,
@@ -502,7 +499,7 @@ test("parseCss inComplete css 1 with @keyframes rule", () => {
                                     transform: translateX(0);
                     }
                 }
-        `),
+        `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -576,7 +573,7 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
                 .fancy section {
                         // background: url("https://example.com
                         color: blue
-    `),
+    `)
   ).toMatchInlineSnapshot(`
     {
       "declarations": [
@@ -635,14 +632,14 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
 
 test("Handles escaped backslashes in strings", () => {
   expect(
-    parseCss(`a { content: "\\\\"; }`).declarations[0].value,
+    parseCss(`a { content: "\\\\"; }`).declarations[0].value
   ).toMatchInlineSnapshot('"\\"\\\\\\\\\\""');
 });
 
 test("Handles empty declarations", () => {
   expect(
     parseCss(`a { color: "blue";
-    ; }`).declarations,
+    ; }`).declarations
   ).toMatchInlineSnapshot(`
     [
       {
@@ -678,7 +675,7 @@ test("Handles multiline comments", () => {
   a multiline
   comment
   */
-  p { color: red; }`).declarations,
+  p { color: red; }`).declarations
   ).toMatchInlineSnapshot(`
     [
       {
@@ -714,4 +711,37 @@ test("Handles newlines in property values", () => {
         },
       ]
     `);
+});
+
+test("parseCss css with missing semicolon", () => {
+  const parsed = parseCss(`
+  .foo {
+    &:hover {
+      color: red
+    }
+  `);
+
+  expect(parsed.declarations).toMatchInlineSnapshot(`
+    [
+      {
+        "closed": true,
+        "property": "color",
+        "scope": [
+          {
+            "name": ".foo",
+            "type": "selector",
+          },
+          {
+            "name": "&:hover",
+            "type": "selector",
+          },
+        ],
+        "value": "red
+    ",
+      },
+    ]
+  `);
+
+  expect(parsed.declarations.length).toBe(1);
+  expect(parsed.declarations[0].scope.length).toBe(2);
 });
