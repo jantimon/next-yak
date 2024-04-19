@@ -23,27 +23,30 @@ export function Playground() {
       <PanelGroup
         autoSaveId="example"
         direction="horizontal"
-        style={{ width: "90vw", height: "90vh" }}
+        style={{ width: "100%", minHeight: "90vh", height: "100%" }}
       >
         <Panel
-          defaultSize={50}
+          defaultSize={60}
           style={{
             border: "1px solid #27272a",
           }}
         >
-          <YakEditor initialValue={
-            defaultInputValue
-          } onChange={
-            (value) => {
+          <YakEditor
+            initialValue={defaultInputValue}
+            onChange={(value) => {
               setCode(value);
-            }
-          } />
+            }}
+          />
         </Panel>
-        <PanelResizeHandle />
-        <Panel defaultSize={50}>
+        <PanelResizeHandle
+          style={{
+            width: 5,
+          }}
+        />
+        <Panel defaultSize={40}>
           <PanelGroup direction="vertical">
             <Panel
-              defaultSize={50}
+              defaultSize={60}
               style={{
                 border: "1px solid #27272a",
                 display: "flex",
@@ -57,10 +60,15 @@ export function Playground() {
                 dangerouslySetInnerHTML={{
                   __html: result.tsOutput,
                 }}
-                style={{ width: "100%", height: "100%", overflow: "scroll", paddingLeft: 10 }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  overflow: "scroll",
+                  paddingLeft: 10,
+                }}
               ></div>
             </Panel>
-            <PanelResizeHandle />
+            <PanelResizeHandle style={{ height: 5 }} />
             <Panel
               style={{
                 border: "1px solid #27272a",
@@ -73,9 +81,14 @@ export function Playground() {
               <p>Output CSS</p>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: result.cssOutput
+                  __html: result.cssOutput,
                 }}
-                style={{ width: "100%", height: "100%", overflow: "scroll", paddingLeft: 10 }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  overflow: "scroll",
+                  paddingLeft: 10,
+                }}
               ></div>
             </Panel>
           </PanelGroup>
@@ -97,11 +110,11 @@ const useHighlighter = (code: string) => {
       setHighlightedResult({
         tsOutput: highlighter.codeToHtml(result.tsOutput, {
           lang: "tsx",
-          theme: "vitesse-dark",
+          themes: { dark: "vitesse-dark", light: "vitesse-light" },
         }),
         cssOutput: highlighter.codeToHtml(result.cssOutput, {
           lang: "css-styled",
-          theme: "vitesse-dark",
+          themes: { dark: "vitesse-dark", light: "vitesse-light" },
         }),
       });
     });

@@ -1,5 +1,6 @@
 import * as monaco from "monaco-editor";
 import { useEffect, useRef } from "react";
+import { useVocsTheme } from "../useVocsTheme";
 
 export const YakEditor = ({
   initialValue,
@@ -9,6 +10,7 @@ export const YakEditor = ({
   onChange: (value: string) => void;
 }) => {
   const inputEditor = useRef<HTMLDivElement>(null);
+  const theme = useVocsTheme();
   useEffect(() => {
     if (monaco.editor.getModels().length > 0) {
       return;
@@ -40,6 +42,11 @@ export const YakEditor = ({
       onChange(editor.getModel()?.getValue() ?? "");
     });
   }, []);
+
+  useEffect(() => {
+    if (!monaco.editor.getModels().length) return;
+    monaco.editor.setTheme(theme === "dark" ? "vitesse-dark" : "vitesse-light");
+  }, [theme]);
 
   return <div ref={inputEditor} style={{ width: "100%", height: "100%" }} />;
 };

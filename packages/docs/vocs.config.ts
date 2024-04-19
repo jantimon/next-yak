@@ -49,4 +49,10 @@ export default defineConfig({
       link: 'https://github.com/jantimon/next-yak',
     },
   ],
+  vite: {
+    build: {
+      // correct minification of babel
+      minify: 'terser',
+    }
+  }
 })
