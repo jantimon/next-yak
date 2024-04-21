@@ -10,6 +10,7 @@ import getCssName from "./lib/getCssName.js";
 import { Declaration, ParserState, parseCss } from "./lib/parseCss.js";
 import { toCss } from "./lib/toCss.js";
 import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue.js";
+import { transpileCssProp } from "./lib/transpileCssProp.js";
 
 type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
@@ -216,6 +217,12 @@ export default function (
             this.yakImportPath.insertAfter(newImport);
           }
         },
+      },
+      JSXElement(path, state) {
+        if (!this.isImportedInCurrentFile || !this.yakImportPath) {
+          return;
+        }
+        transpileCssProp(t, path);
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
