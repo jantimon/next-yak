@@ -1329,3 +1329,266 @@ it("should minify css variables for production", async () => {
   const variableNameMaxLength = Math.max(...variableNames.map((v) => v.length));
   expect(variableNameMaxLength).toBeLessThanOrEqual("var(--hash___1)".length);
 });
+
+describe("css prop", () => {
+  it("should work with a css property", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css } from "next-yak";
+     const elem = <div css={css\`
+      padding: 10px;
+      \`} />
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const elem = <div {...css(
+      /*YAK Extracted CSS:
+      .elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.elem))({})} />;"
+    `);
+  });
+  it("should work with a css property that is not in the root jsx element", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const MyComp = () => <div><p><div css={css\`
+      padding: 10px;
+      \`}>anything</div></p></div>
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const MyComp = () => <div><p><div {...css(
+          /*YAK Extracted CSS:
+          .MyComp {
+            padding: 10px;
+          }*/
+          /*#__PURE__*/
+          css(__styleYak.MyComp))({})}>anything</div></p></div>;"
+    `);
+  });
+
+  it("should work with css that is spreaded into another component", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const MyComp = (p) => <div {...p} >anything</div>;
+     const MyComp2 = () => <MyComp css={css\`
+          padding: 10px;
+      \`} />
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const MyComp = p => <div {...p}>anything</div>;
+      const MyComp2 = () => <MyComp {...css(
+      /*YAK Extracted CSS:
+      .MyComp2 {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.MyComp2))({})} />;"
+    `);
+  });
+
+  it("should work with an object identifier", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const TestObj = {
+      TestMem: (p) => <div {...p} >anything</div>,
+     }
+     const MyComp2 = () => <TestObj.TestMem css={css\`
+          padding: 10px;
+      \`} />
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const TestObj = {
+        TestMem: p => <div {...p}>anything</div>
+      };
+      const MyComp2 = () => <TestObj.TestMem {...css(
+      /*YAK Extracted CSS:
+      .MyComp2 {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.MyComp2))({})} />;"
+    `);
+  });
+
+  it("should work with nested object identifier", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const test = {
+      nested: {
+        TestMem: (p) => <div {...p} >anything</div>,
+      }
+     }
+     const MyComp2 = () => <test.nested.TestMem css={css\`
+          padding: 10px;
+      \`} />
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const test = {
+        nested: {
+          TestMem: p => <div {...p}>anything</div>
+        }
+      };
+      const MyComp2 = () => <test.nested.TestMem {...css(
+      /*YAK Extracted CSS:
+      .MyComp2 {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.MyComp2))({})} />;"
+    `);
+  });
+
+  it("should work with custom elements", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const MyComp2 = () => <custom-element css={css\`
+          padding: 10px;
+      \`} />
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const MyComp2 = () => <custom-element {...css(
+      /*YAK Extracted CSS:
+      .MyComp2 {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.MyComp2))({})} />;"
+    `);
+  });
+
+  it.skip("shouldn't convert it when css prop is a simple string", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const MyComp = () => <div css={\`
+        padding: 10px;
+      \`}>anything</div>
+      `,
+      ),
+    ).toMatchInlineSnapshot();
+  });
+
+  it("should work with when css property reuses css", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const padding = css\`
+        padding: 10px;
+        \`; 
+      const Elem = () =>  
+        <div css={padding} />;
+        `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const padding =
+      /*YAK Extracted CSS:
+      .padding {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.padding);
+      const Elem = () => <div {...css(padding)({})} />;"
+    `);
+  });
+
+  it("should work when css property is conditionally applied", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const MyComp = () => <div css={true && css\`
+        padding: 10px;
+      \`}>anything</div>
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const MyComp = () => <div {...css(true &&
+      /*YAK Extracted CSS:
+      .MyComp {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.MyComp))({})}>anything</div>;"
+    `);
+  });
+
+  it("should allow conditional css properties", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const padding = css\`
+        padding: 10px;
+        \`; 
+      const Elem = () =>  
+        <div css={true ? padding : css\`
+          padding: 20px;
+        \`} />;
+        `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const padding =
+      /*YAK Extracted CSS:
+      .padding {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.padding);
+      const Elem = () => <div {...css(true ? padding :
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 20px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({})} />;"
+    `);
+  });
+});
