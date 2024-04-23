@@ -2,3 +2,4 @@
 node_modules
 packages/docs/docs/dist
 packages/next-yak/dist
+packages/playground/dist

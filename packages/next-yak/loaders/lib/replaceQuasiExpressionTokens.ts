@@ -1,4 +1,4 @@
-import type { NodePath, types as babelTypes } from "@babel/core";
+import babelTypes from "@babel/types";
 
 /**
  * Replace tokens with predefined values e.g.

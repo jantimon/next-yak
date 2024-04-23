@@ -5,13 +5,16 @@
   "private": true,
   "scripts": {
     "dev": "vocs dev",
-    "build": "vocs build",
+    "build": "pnpm run build:playground && pnpm run build:vocs",
+    "build:playground": "pnpm run --filter next-yak-playground build",
+    "build:vocs": "vocs build",
     "preview": "vocs preview"
   },
   "dependencies": {
     "next-yak": "^0.0.22",
     "react": "latest",
     "react-dom": "latest",
-    "vocs": "latest"
+    "vocs": "latest",
+    "next-yak-playground": "workspace:*"
   }
 }

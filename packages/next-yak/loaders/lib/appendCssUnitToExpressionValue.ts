@@ -1,4 +1,4 @@
-import type { types as babelTypes } from "@babel/core";
+import type babelTypes from "@babel/types";
 
 /**
  * Extracts the css unit from a css string and checks if it is a valid CSS unit

@@ -1,6 +1,11 @@
-import babel, { BabelFileResult } from "@babel/core";
+// we need this import like this, because Vite's DEV server doesn't handle it properly https://github.com/vitejs/vite/issues/16435
+import * as babel from "@babel/core";
+import type { BabelFileResult } from "@babel/core";
+// This let's vite bundle this dependency correctly (used for the playground)
+// @ts-expect-error - this should be a dynamic import
+import babelPlugin from "@babel/plugin-syntax-typescript";
 import getYakImports from "./lib/getYakImports.js";
-import { InvalidPositionError } from "./babel-yak-plugin.js";
+import YakBabelPlugin, { InvalidPositionError } from "./babel-yak-plugin.js";
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
@@ -45,12 +50,9 @@ export default async function tsloader(
       filename: resourcePath,
       configFile: false,
       plugins: [
+        [babelPlugin, { isTSX: this.resourcePath.endsWith(".tsx") }],
         [
-          "@babel/plugin-syntax-typescript",
-          { isTSX: this.resourcePath.endsWith(".tsx") },
-        ],
-        [
-          await import("./babel-yak-plugin.js").then((m) => m.default),
+          YakBabelPlugin,
           {
             replaces,
             rootContext,
