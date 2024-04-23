@@ -5,6 +5,7 @@ import { shikiToMonaco } from "@shikijs/monaco";
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+import { getStoredTheme } from "./getStoredTheme";
 
 let highlighterPromise: ReturnType<typeof getHighlighterCore>;
 
@@ -98,5 +99,8 @@ export const setupMonaco = async () => {
 
   // Register the themes from Shiki, and provide syntax highlighting for Monaco.
   shikiToMonaco(highlighter, monaco);
+  // monaco is loaded after the theme is set, so we need to set it again
+  monaco.editor.setTheme( getStoredTheme() === "dark" ? "vitesse-dark" : "vitesse-light");
+
   return highlighter;
 };

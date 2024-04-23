@@ -23,7 +23,7 @@ export const YakEditor = ({
     const editor = monaco.editor.create(inputEditor.current!, {
       value: initialValue,
       language: "typescript",
-      theme: "vitesse-dark",
+      theme: theme === "dark" ? "vitesse-dark" : "vitesse-light",
       automaticLayout: true,
       minimap: {
         enabled: false,
