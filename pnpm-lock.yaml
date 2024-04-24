@@ -58,8 +58,8 @@ importers:
   packages/docs:
     dependencies:
       next-yak:
-        specifier: ^0.0.22
-        version: 0.0.22(postcss@8.4.38)
+        specifier: workspace:*
+        version: link:../next-yak
       next-yak-playground:
         specifier: workspace:*
         version: link:../playground
@@ -7655,17 +7655,6 @@ packages:
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
-    dev: false
-
-  /next-yak@0.0.22(postcss@8.4.38):
-    resolution: {integrity: sha512-czmPNfsGAPl90sD0BjJ1x01D05LVUiXiZjNyA0DUTdHkhVY1ielmWj9WIXeBEmMbwOK4t4JQTZkCsIcmNDOF2g==}
-    dependencies:
-      '@babel/core': 7.23.2
-      '@babel/plugin-syntax-typescript': 7.22.5(@babel/core@7.23.2)
-      postcss-nested: 6.0.1(postcss@8.4.38)
-    transitivePeerDependencies:
-      - postcss
-      - supports-color
     dev: false
 
   /next@14.0.0(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0):
