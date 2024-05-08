@@ -18,7 +18,7 @@ const IntroText = styled.p`
 `;
 
 // Looks like a fancy ghost button with a cool hover border effect
-const PerfromanceTestStartLink = styled(Link)`
+const PerformanceTestStartLink = styled(Link)`
   display: inline-block;
   padding: 10px 20px;
   border: 2px solid #000;
