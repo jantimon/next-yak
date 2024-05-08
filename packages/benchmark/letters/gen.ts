@@ -7,7 +7,7 @@ async function generateKanjiComponentFile() {
 
   const kanjiCharacters = Array.from(
     { length: endCodePoint - startCodePoint },
-    (_, index) => String.fromCodePoint(startCodePoint + index)
+    (_, index) => String.fromCodePoint(startCodePoint + index),
   );
   const libs = {
     "next-yak": "styledYak",
@@ -20,7 +20,9 @@ async function generateKanjiComponentFile() {
     const fileContent = `
 "use client";    
 import React, { type FunctionComponent } from 'react';
-import ${lib === "next-yak" ? `{ styled as ${styled}, css }` : `{ ${styled}, css }`} from '${lib}';
+import ${
+      lib === "next-yak" ? `{ styled as ${styled}, css }` : `{ ${styled}, css }`
+    } from '${lib}';
 
 const JapaneseCard = ${styled}.div\`
     width: 100px;
@@ -48,7 +50,7 @@ const Kanji${index + 1}Character = ${styled}(JapaneseCard)\`
     content: '${kanji}';
   }
 \`;
-`
+`,
   )
   .join("")}
 
@@ -165,7 +167,9 @@ export const KanjiLetterComponent${
 
   return (
     <>
-    <LibHeader onClick={() => document.location.href = "${lib === "next-yak" ? "/styled" : "/yak"}"  }>${lib}</LibHeader>
+    <LibHeader onClick={() => document.location.href = "${
+      lib === "next-yak" ? "/styled" : "/yak"
+    }"  }>${lib}</LibHeader>
     <Wrapper style={{ 
       // @ts-ignore
       "--count0": count0 
@@ -209,12 +213,16 @@ export const KanjiLetterComponent${
 };
 `;
 
-    fs.writeFile(`${__dirname}/KanjiLetterComponent.${lib}.tsx`, fileContent, (err) => {
-      if (err) throw err;
-      console.log(
-        `KanjiLetterComponent.${lib}.tsx has been created successfully.`
-      );
-    });
+    fs.writeFile(
+      `${__dirname}/KanjiLetterComponent.${lib}.tsx`,
+      fileContent,
+      (err) => {
+        if (err) throw err;
+        console.log(
+          `KanjiLetterComponent.${lib}.tsx has been created successfully.`,
+        );
+      },
+    );
 
     // Precompile yak similar to how it would be compiled by our loader
     if (lib === "next-yak") {
@@ -247,19 +255,21 @@ export const KanjiLetterComponent${
       };
       const tsLoader = require("../../next-yak/loaders/tsloader").default;
       let i = 0;
-      const compiled = "// @ts-nocheck\n" + (await tsLoader.call(loaderContext,fileContent)).replace(
-        /`__styleYak.(\S+)`/g,
-        (_, content) => `("$1")`
-      );
+      const compiled =
+        "// @ts-nocheck\n" +
+        (await tsLoader.call(loaderContext, fileContent)).replace(
+          /`__styleYak.(\S+)`/g,
+          (_, content) => `("$1")`,
+        );
       fs.writeFile(
         `${__dirname}/KanjiLetterComponent.${lib}.compiled.tsx`,
         compiled,
         (err) => {
           if (err) throw err;
           console.log(
-            `KanjiLetterComponent.${lib}.compiled.tsx has been created successfully.`
+            `KanjiLetterComponent.${lib}.compiled.tsx has been created successfully.`,
           );
-        }
+        },
       );
     }
   }
