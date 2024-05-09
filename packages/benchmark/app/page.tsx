@@ -34,11 +34,11 @@ export default function Home() {
   return (
     <Centered>
       <div>
-        <IntroText>Render Perfromance Benchmark</IntroText>
-        <PerfromanceTestStartLink href="/styled">
+        <IntroText>Render Performance Benchmark</IntroText>
+        <PerformanceTestStartLink href="/styled">
           styled-components
-        </PerfromanceTestStartLink>
-        <PerfromanceTestStartLink href="/yak">yak</PerfromanceTestStartLink>
+        </PerformanceTestStartLink>
+        <PerformanceTestStartLink href="/yak">yak</PerformanceTestStartLink>
       </div>
     </Centered>
   );
