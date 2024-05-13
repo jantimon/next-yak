@@ -22628,11 +22628,14 @@ export const KanjiLetterComponentStyled: FunctionComponent = () => {
   const [count2, setCount2] = React.useState(0);
   const [count3, setCount3] = React.useState(0);
   const [count4, setCount4] = React.useState(0);
+  const [count5, setCount5] = React.useState(0);
 
   return (
     <>
     <LibHeader onClick={() => document.location.href = "/yak"  }>styled-components</LibHeader>
-    <Wrapper style={{ 
+    <Wrapper 
+      className={`count5-${count5}`}
+      style={{ 
       // @ts-ignore
       "--count0": count0 
     }}>
@@ -22662,6 +22665,11 @@ export const KanjiLetterComponentStyled: FunctionComponent = () => {
           performance.mark("RenderButtonDynamicMediaClick - styled-components");
           setCount4(count4 + 1)
         }} $count={count4}>{count4}</RenderButtonDynamicMedia>
+
+        <BaseButton title="add className to wrapper" onClick={() => {
+          performance.mark("BaseButtonAddClassClick - styled-components");
+          setCount5(count5 + 1)
+        }}>{count5}</BaseButton>
       </ButtonWrapper>
 
       <Kanji1Character />
