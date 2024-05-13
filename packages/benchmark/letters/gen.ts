@@ -261,7 +261,7 @@ export const KanjiLetterComponent${
           // Remove __styleYak import
           .replace(/import __styleYak from "[^"]+";/, "")
           // Replace __styleYak usage to a string
-          .replace(/`__styleYak.(\S+)`/g, (_, content) => `("$1")`);
+          .replace(/__styleYak.(\w+)/g, `"$1"`);
       writeFile(
         `${__dirname}/KanjiLetterComponent.${lib}.compiled.tsx`,
         compiled,

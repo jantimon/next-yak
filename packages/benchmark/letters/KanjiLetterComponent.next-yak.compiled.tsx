@@ -21,7 +21,7 @@ const JapaneseCard =
   }
 }*/
 /*#__PURE__*/
-styledYak.div(__styleYak.JapaneseCard);
+styledYak.div("JapaneseCard");
 const Kanji1Character =
 /*YAK Extracted CSS:
 .Kanji1Character {
@@ -33,7 +33,7 @@ const Kanji1Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1Character);
+styledYak(JapaneseCard)("Kanji1Character");
 const Kanji2Character =
 /*YAK Extracted CSS:
 .Kanji2Character {
@@ -45,7 +45,7 @@ const Kanji2Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2Character);
+styledYak(JapaneseCard)("Kanji2Character");
 const Kanji3Character =
 /*YAK Extracted CSS:
 .Kanji3Character {
@@ -57,7 +57,7 @@ const Kanji3Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji3Character);
+styledYak(JapaneseCard)("Kanji3Character");
 const Kanji4Character =
 /*YAK Extracted CSS:
 .Kanji4Character {
@@ -69,7 +69,7 @@ const Kanji4Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji4Character);
+styledYak(JapaneseCard)("Kanji4Character");
 const Kanji5Character =
 /*YAK Extracted CSS:
 .Kanji5Character {
@@ -81,7 +81,7 @@ const Kanji5Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji5Character);
+styledYak(JapaneseCard)("Kanji5Character");
 const Kanji6Character =
 /*YAK Extracted CSS:
 .Kanji6Character {
@@ -93,7 +93,7 @@ const Kanji6Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji6Character);
+styledYak(JapaneseCard)("Kanji6Character");
 const Kanji7Character =
 /*YAK Extracted CSS:
 .Kanji7Character {
@@ -105,7 +105,7 @@ const Kanji7Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji7Character);
+styledYak(JapaneseCard)("Kanji7Character");
 const Kanji8Character =
 /*YAK Extracted CSS:
 .Kanji8Character {
@@ -117,7 +117,7 @@ const Kanji8Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji8Character);
+styledYak(JapaneseCard)("Kanji8Character");
 const Kanji9Character =
 /*YAK Extracted CSS:
 .Kanji9Character {
@@ -129,7 +129,7 @@ const Kanji9Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji9Character);
+styledYak(JapaneseCard)("Kanji9Character");
 const Kanji10Character =
 /*YAK Extracted CSS:
 .Kanji10Character {
@@ -141,7 +141,7 @@ const Kanji10Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji10Character);
+styledYak(JapaneseCard)("Kanji10Character");
 const Kanji11Character =
 /*YAK Extracted CSS:
 .Kanji11Character {
@@ -153,7 +153,7 @@ const Kanji11Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji11Character);
+styledYak(JapaneseCard)("Kanji11Character");
 const Kanji12Character =
 /*YAK Extracted CSS:
 .Kanji12Character {
@@ -165,7 +165,7 @@ const Kanji12Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji12Character);
+styledYak(JapaneseCard)("Kanji12Character");
 const Kanji13Character =
 /*YAK Extracted CSS:
 .Kanji13Character {
@@ -177,7 +177,7 @@ const Kanji13Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji13Character);
+styledYak(JapaneseCard)("Kanji13Character");
 const Kanji14Character =
 /*YAK Extracted CSS:
 .Kanji14Character {
@@ -189,7 +189,7 @@ const Kanji14Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji14Character);
+styledYak(JapaneseCard)("Kanji14Character");
 const Kanji15Character =
 /*YAK Extracted CSS:
 .Kanji15Character {
@@ -201,7 +201,7 @@ const Kanji15Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji15Character);
+styledYak(JapaneseCard)("Kanji15Character");
 const Kanji16Character =
 /*YAK Extracted CSS:
 .Kanji16Character {
@@ -213,7 +213,7 @@ const Kanji16Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji16Character);
+styledYak(JapaneseCard)("Kanji16Character");
 const Kanji17Character =
 /*YAK Extracted CSS:
 .Kanji17Character {
@@ -225,7 +225,7 @@ const Kanji17Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji17Character);
+styledYak(JapaneseCard)("Kanji17Character");
 const Kanji18Character =
 /*YAK Extracted CSS:
 .Kanji18Character {
@@ -237,7 +237,7 @@ const Kanji18Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji18Character);
+styledYak(JapaneseCard)("Kanji18Character");
 const Kanji19Character =
 /*YAK Extracted CSS:
 .Kanji19Character {
@@ -249,7 +249,7 @@ const Kanji19Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji19Character);
+styledYak(JapaneseCard)("Kanji19Character");
 const Kanji20Character =
 /*YAK Extracted CSS:
 .Kanji20Character {
@@ -261,7 +261,7 @@ const Kanji20Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji20Character);
+styledYak(JapaneseCard)("Kanji20Character");
 const Kanji21Character =
 /*YAK Extracted CSS:
 .Kanji21Character {
@@ -273,7 +273,7 @@ const Kanji21Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji21Character);
+styledYak(JapaneseCard)("Kanji21Character");
 const Kanji22Character =
 /*YAK Extracted CSS:
 .Kanji22Character {
@@ -285,7 +285,7 @@ const Kanji22Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji22Character);
+styledYak(JapaneseCard)("Kanji22Character");
 const Kanji23Character =
 /*YAK Extracted CSS:
 .Kanji23Character {
@@ -297,7 +297,7 @@ const Kanji23Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji23Character);
+styledYak(JapaneseCard)("Kanji23Character");
 const Kanji24Character =
 /*YAK Extracted CSS:
 .Kanji24Character {
@@ -309,7 +309,7 @@ const Kanji24Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji24Character);
+styledYak(JapaneseCard)("Kanji24Character");
 const Kanji25Character =
 /*YAK Extracted CSS:
 .Kanji25Character {
@@ -321,7 +321,7 @@ const Kanji25Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji25Character);
+styledYak(JapaneseCard)("Kanji25Character");
 const Kanji26Character =
 /*YAK Extracted CSS:
 .Kanji26Character {
@@ -333,7 +333,7 @@ const Kanji26Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji26Character);
+styledYak(JapaneseCard)("Kanji26Character");
 const Kanji27Character =
 /*YAK Extracted CSS:
 .Kanji27Character {
@@ -345,7 +345,7 @@ const Kanji27Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji27Character);
+styledYak(JapaneseCard)("Kanji27Character");
 const Kanji28Character =
 /*YAK Extracted CSS:
 .Kanji28Character {
@@ -357,7 +357,7 @@ const Kanji28Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji28Character);
+styledYak(JapaneseCard)("Kanji28Character");
 const Kanji29Character =
 /*YAK Extracted CSS:
 .Kanji29Character {
@@ -369,7 +369,7 @@ const Kanji29Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji29Character);
+styledYak(JapaneseCard)("Kanji29Character");
 const Kanji30Character =
 /*YAK Extracted CSS:
 .Kanji30Character {
@@ -381,7 +381,7 @@ const Kanji30Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji30Character);
+styledYak(JapaneseCard)("Kanji30Character");
 const Kanji31Character =
 /*YAK Extracted CSS:
 .Kanji31Character {
@@ -393,7 +393,7 @@ const Kanji31Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji31Character);
+styledYak(JapaneseCard)("Kanji31Character");
 const Kanji32Character =
 /*YAK Extracted CSS:
 .Kanji32Character {
@@ -405,7 +405,7 @@ const Kanji32Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji32Character);
+styledYak(JapaneseCard)("Kanji32Character");
 const Kanji33Character =
 /*YAK Extracted CSS:
 .Kanji33Character {
@@ -417,7 +417,7 @@ const Kanji33Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji33Character);
+styledYak(JapaneseCard)("Kanji33Character");
 const Kanji34Character =
 /*YAK Extracted CSS:
 .Kanji34Character {
@@ -429,7 +429,7 @@ const Kanji34Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji34Character);
+styledYak(JapaneseCard)("Kanji34Character");
 const Kanji35Character =
 /*YAK Extracted CSS:
 .Kanji35Character {
@@ -441,7 +441,7 @@ const Kanji35Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji35Character);
+styledYak(JapaneseCard)("Kanji35Character");
 const Kanji36Character =
 /*YAK Extracted CSS:
 .Kanji36Character {
@@ -453,7 +453,7 @@ const Kanji36Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji36Character);
+styledYak(JapaneseCard)("Kanji36Character");
 const Kanji37Character =
 /*YAK Extracted CSS:
 .Kanji37Character {
@@ -465,7 +465,7 @@ const Kanji37Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji37Character);
+styledYak(JapaneseCard)("Kanji37Character");
 const Kanji38Character =
 /*YAK Extracted CSS:
 .Kanji38Character {
@@ -477,7 +477,7 @@ const Kanji38Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji38Character);
+styledYak(JapaneseCard)("Kanji38Character");
 const Kanji39Character =
 /*YAK Extracted CSS:
 .Kanji39Character {
@@ -489,7 +489,7 @@ const Kanji39Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji39Character);
+styledYak(JapaneseCard)("Kanji39Character");
 const Kanji40Character =
 /*YAK Extracted CSS:
 .Kanji40Character {
@@ -501,7 +501,7 @@ const Kanji40Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji40Character);
+styledYak(JapaneseCard)("Kanji40Character");
 const Kanji41Character =
 /*YAK Extracted CSS:
 .Kanji41Character {
@@ -513,7 +513,7 @@ const Kanji41Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji41Character);
+styledYak(JapaneseCard)("Kanji41Character");
 const Kanji42Character =
 /*YAK Extracted CSS:
 .Kanji42Character {
@@ -525,7 +525,7 @@ const Kanji42Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji42Character);
+styledYak(JapaneseCard)("Kanji42Character");
 const Kanji43Character =
 /*YAK Extracted CSS:
 .Kanji43Character {
@@ -537,7 +537,7 @@ const Kanji43Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji43Character);
+styledYak(JapaneseCard)("Kanji43Character");
 const Kanji44Character =
 /*YAK Extracted CSS:
 .Kanji44Character {
@@ -549,7 +549,7 @@ const Kanji44Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji44Character);
+styledYak(JapaneseCard)("Kanji44Character");
 const Kanji45Character =
 /*YAK Extracted CSS:
 .Kanji45Character {
@@ -561,7 +561,7 @@ const Kanji45Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji45Character);
+styledYak(JapaneseCard)("Kanji45Character");
 const Kanji46Character =
 /*YAK Extracted CSS:
 .Kanji46Character {
@@ -573,7 +573,7 @@ const Kanji46Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji46Character);
+styledYak(JapaneseCard)("Kanji46Character");
 const Kanji47Character =
 /*YAK Extracted CSS:
 .Kanji47Character {
@@ -585,7 +585,7 @@ const Kanji47Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji47Character);
+styledYak(JapaneseCard)("Kanji47Character");
 const Kanji48Character =
 /*YAK Extracted CSS:
 .Kanji48Character {
@@ -597,7 +597,7 @@ const Kanji48Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji48Character);
+styledYak(JapaneseCard)("Kanji48Character");
 const Kanji49Character =
 /*YAK Extracted CSS:
 .Kanji49Character {
@@ -609,7 +609,7 @@ const Kanji49Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji49Character);
+styledYak(JapaneseCard)("Kanji49Character");
 const Kanji50Character =
 /*YAK Extracted CSS:
 .Kanji50Character {
@@ -621,7 +621,7 @@ const Kanji50Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji50Character);
+styledYak(JapaneseCard)("Kanji50Character");
 const Kanji51Character =
 /*YAK Extracted CSS:
 .Kanji51Character {
@@ -633,7 +633,7 @@ const Kanji51Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji51Character);
+styledYak(JapaneseCard)("Kanji51Character");
 const Kanji52Character =
 /*YAK Extracted CSS:
 .Kanji52Character {
@@ -645,7 +645,7 @@ const Kanji52Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji52Character);
+styledYak(JapaneseCard)("Kanji52Character");
 const Kanji53Character =
 /*YAK Extracted CSS:
 .Kanji53Character {
@@ -657,7 +657,7 @@ const Kanji53Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji53Character);
+styledYak(JapaneseCard)("Kanji53Character");
 const Kanji54Character =
 /*YAK Extracted CSS:
 .Kanji54Character {
@@ -669,7 +669,7 @@ const Kanji54Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji54Character);
+styledYak(JapaneseCard)("Kanji54Character");
 const Kanji55Character =
 /*YAK Extracted CSS:
 .Kanji55Character {
@@ -681,7 +681,7 @@ const Kanji55Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji55Character);
+styledYak(JapaneseCard)("Kanji55Character");
 const Kanji56Character =
 /*YAK Extracted CSS:
 .Kanji56Character {
@@ -693,7 +693,7 @@ const Kanji56Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji56Character);
+styledYak(JapaneseCard)("Kanji56Character");
 const Kanji57Character =
 /*YAK Extracted CSS:
 .Kanji57Character {
@@ -705,7 +705,7 @@ const Kanji57Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji57Character);
+styledYak(JapaneseCard)("Kanji57Character");
 const Kanji58Character =
 /*YAK Extracted CSS:
 .Kanji58Character {
@@ -717,7 +717,7 @@ const Kanji58Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji58Character);
+styledYak(JapaneseCard)("Kanji58Character");
 const Kanji59Character =
 /*YAK Extracted CSS:
 .Kanji59Character {
@@ -729,7 +729,7 @@ const Kanji59Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji59Character);
+styledYak(JapaneseCard)("Kanji59Character");
 const Kanji60Character =
 /*YAK Extracted CSS:
 .Kanji60Character {
@@ -741,7 +741,7 @@ const Kanji60Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji60Character);
+styledYak(JapaneseCard)("Kanji60Character");
 const Kanji61Character =
 /*YAK Extracted CSS:
 .Kanji61Character {
@@ -753,7 +753,7 @@ const Kanji61Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji61Character);
+styledYak(JapaneseCard)("Kanji61Character");
 const Kanji62Character =
 /*YAK Extracted CSS:
 .Kanji62Character {
@@ -765,7 +765,7 @@ const Kanji62Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji62Character);
+styledYak(JapaneseCard)("Kanji62Character");
 const Kanji63Character =
 /*YAK Extracted CSS:
 .Kanji63Character {
@@ -777,7 +777,7 @@ const Kanji63Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji63Character);
+styledYak(JapaneseCard)("Kanji63Character");
 const Kanji64Character =
 /*YAK Extracted CSS:
 .Kanji64Character {
@@ -789,7 +789,7 @@ const Kanji64Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji64Character);
+styledYak(JapaneseCard)("Kanji64Character");
 const Kanji65Character =
 /*YAK Extracted CSS:
 .Kanji65Character {
@@ -801,7 +801,7 @@ const Kanji65Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji65Character);
+styledYak(JapaneseCard)("Kanji65Character");
 const Kanji66Character =
 /*YAK Extracted CSS:
 .Kanji66Character {
@@ -813,7 +813,7 @@ const Kanji66Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji66Character);
+styledYak(JapaneseCard)("Kanji66Character");
 const Kanji67Character =
 /*YAK Extracted CSS:
 .Kanji67Character {
@@ -825,7 +825,7 @@ const Kanji67Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji67Character);
+styledYak(JapaneseCard)("Kanji67Character");
 const Kanji68Character =
 /*YAK Extracted CSS:
 .Kanji68Character {
@@ -837,7 +837,7 @@ const Kanji68Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji68Character);
+styledYak(JapaneseCard)("Kanji68Character");
 const Kanji69Character =
 /*YAK Extracted CSS:
 .Kanji69Character {
@@ -849,7 +849,7 @@ const Kanji69Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji69Character);
+styledYak(JapaneseCard)("Kanji69Character");
 const Kanji70Character =
 /*YAK Extracted CSS:
 .Kanji70Character {
@@ -861,7 +861,7 @@ const Kanji70Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji70Character);
+styledYak(JapaneseCard)("Kanji70Character");
 const Kanji71Character =
 /*YAK Extracted CSS:
 .Kanji71Character {
@@ -873,7 +873,7 @@ const Kanji71Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji71Character);
+styledYak(JapaneseCard)("Kanji71Character");
 const Kanji72Character =
 /*YAK Extracted CSS:
 .Kanji72Character {
@@ -885,7 +885,7 @@ const Kanji72Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji72Character);
+styledYak(JapaneseCard)("Kanji72Character");
 const Kanji73Character =
 /*YAK Extracted CSS:
 .Kanji73Character {
@@ -897,7 +897,7 @@ const Kanji73Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji73Character);
+styledYak(JapaneseCard)("Kanji73Character");
 const Kanji74Character =
 /*YAK Extracted CSS:
 .Kanji74Character {
@@ -909,7 +909,7 @@ const Kanji74Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji74Character);
+styledYak(JapaneseCard)("Kanji74Character");
 const Kanji75Character =
 /*YAK Extracted CSS:
 .Kanji75Character {
@@ -921,7 +921,7 @@ const Kanji75Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji75Character);
+styledYak(JapaneseCard)("Kanji75Character");
 const Kanji76Character =
 /*YAK Extracted CSS:
 .Kanji76Character {
@@ -933,7 +933,7 @@ const Kanji76Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji76Character);
+styledYak(JapaneseCard)("Kanji76Character");
 const Kanji77Character =
 /*YAK Extracted CSS:
 .Kanji77Character {
@@ -945,7 +945,7 @@ const Kanji77Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji77Character);
+styledYak(JapaneseCard)("Kanji77Character");
 const Kanji78Character =
 /*YAK Extracted CSS:
 .Kanji78Character {
@@ -957,7 +957,7 @@ const Kanji78Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji78Character);
+styledYak(JapaneseCard)("Kanji78Character");
 const Kanji79Character =
 /*YAK Extracted CSS:
 .Kanji79Character {
@@ -969,7 +969,7 @@ const Kanji79Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji79Character);
+styledYak(JapaneseCard)("Kanji79Character");
 const Kanji80Character =
 /*YAK Extracted CSS:
 .Kanji80Character {
@@ -981,7 +981,7 @@ const Kanji80Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji80Character);
+styledYak(JapaneseCard)("Kanji80Character");
 const Kanji81Character =
 /*YAK Extracted CSS:
 .Kanji81Character {
@@ -993,7 +993,7 @@ const Kanji81Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji81Character);
+styledYak(JapaneseCard)("Kanji81Character");
 const Kanji82Character =
 /*YAK Extracted CSS:
 .Kanji82Character {
@@ -1005,7 +1005,7 @@ const Kanji82Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji82Character);
+styledYak(JapaneseCard)("Kanji82Character");
 const Kanji83Character =
 /*YAK Extracted CSS:
 .Kanji83Character {
@@ -1017,7 +1017,7 @@ const Kanji83Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji83Character);
+styledYak(JapaneseCard)("Kanji83Character");
 const Kanji84Character =
 /*YAK Extracted CSS:
 .Kanji84Character {
@@ -1029,7 +1029,7 @@ const Kanji84Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji84Character);
+styledYak(JapaneseCard)("Kanji84Character");
 const Kanji85Character =
 /*YAK Extracted CSS:
 .Kanji85Character {
@@ -1041,7 +1041,7 @@ const Kanji85Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji85Character);
+styledYak(JapaneseCard)("Kanji85Character");
 const Kanji86Character =
 /*YAK Extracted CSS:
 .Kanji86Character {
@@ -1053,7 +1053,7 @@ const Kanji86Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji86Character);
+styledYak(JapaneseCard)("Kanji86Character");
 const Kanji87Character =
 /*YAK Extracted CSS:
 .Kanji87Character {
@@ -1065,7 +1065,7 @@ const Kanji87Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji87Character);
+styledYak(JapaneseCard)("Kanji87Character");
 const Kanji88Character =
 /*YAK Extracted CSS:
 .Kanji88Character {
@@ -1077,7 +1077,7 @@ const Kanji88Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji88Character);
+styledYak(JapaneseCard)("Kanji88Character");
 const Kanji89Character =
 /*YAK Extracted CSS:
 .Kanji89Character {
@@ -1089,7 +1089,7 @@ const Kanji89Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji89Character);
+styledYak(JapaneseCard)("Kanji89Character");
 const Kanji90Character =
 /*YAK Extracted CSS:
 .Kanji90Character {
@@ -1101,7 +1101,7 @@ const Kanji90Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji90Character);
+styledYak(JapaneseCard)("Kanji90Character");
 const Kanji91Character =
 /*YAK Extracted CSS:
 .Kanji91Character {
@@ -1113,7 +1113,7 @@ const Kanji91Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji91Character);
+styledYak(JapaneseCard)("Kanji91Character");
 const Kanji92Character =
 /*YAK Extracted CSS:
 .Kanji92Character {
@@ -1125,7 +1125,7 @@ const Kanji92Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji92Character);
+styledYak(JapaneseCard)("Kanji92Character");
 const Kanji93Character =
 /*YAK Extracted CSS:
 .Kanji93Character {
@@ -1137,7 +1137,7 @@ const Kanji93Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji93Character);
+styledYak(JapaneseCard)("Kanji93Character");
 const Kanji94Character =
 /*YAK Extracted CSS:
 .Kanji94Character {
@@ -1149,7 +1149,7 @@ const Kanji94Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji94Character);
+styledYak(JapaneseCard)("Kanji94Character");
 const Kanji95Character =
 /*YAK Extracted CSS:
 .Kanji95Character {
@@ -1161,7 +1161,7 @@ const Kanji95Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji95Character);
+styledYak(JapaneseCard)("Kanji95Character");
 const Kanji96Character =
 /*YAK Extracted CSS:
 .Kanji96Character {
@@ -1173,7 +1173,7 @@ const Kanji96Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji96Character);
+styledYak(JapaneseCard)("Kanji96Character");
 const Kanji97Character =
 /*YAK Extracted CSS:
 .Kanji97Character {
@@ -1185,7 +1185,7 @@ const Kanji97Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji97Character);
+styledYak(JapaneseCard)("Kanji97Character");
 const Kanji98Character =
 /*YAK Extracted CSS:
 .Kanji98Character {
@@ -1197,7 +1197,7 @@ const Kanji98Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji98Character);
+styledYak(JapaneseCard)("Kanji98Character");
 const Kanji99Character =
 /*YAK Extracted CSS:
 .Kanji99Character {
@@ -1209,7 +1209,7 @@ const Kanji99Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji99Character);
+styledYak(JapaneseCard)("Kanji99Character");
 const Kanji100Character =
 /*YAK Extracted CSS:
 .Kanji100Character {
@@ -1221,7 +1221,7 @@ const Kanji100Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji100Character);
+styledYak(JapaneseCard)("Kanji100Character");
 const Kanji101Character =
 /*YAK Extracted CSS:
 .Kanji101Character {
@@ -1233,7 +1233,7 @@ const Kanji101Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji101Character);
+styledYak(JapaneseCard)("Kanji101Character");
 const Kanji102Character =
 /*YAK Extracted CSS:
 .Kanji102Character {
@@ -1245,7 +1245,7 @@ const Kanji102Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji102Character);
+styledYak(JapaneseCard)("Kanji102Character");
 const Kanji103Character =
 /*YAK Extracted CSS:
 .Kanji103Character {
@@ -1257,7 +1257,7 @@ const Kanji103Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji103Character);
+styledYak(JapaneseCard)("Kanji103Character");
 const Kanji104Character =
 /*YAK Extracted CSS:
 .Kanji104Character {
@@ -1269,7 +1269,7 @@ const Kanji104Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji104Character);
+styledYak(JapaneseCard)("Kanji104Character");
 const Kanji105Character =
 /*YAK Extracted CSS:
 .Kanji105Character {
@@ -1281,7 +1281,7 @@ const Kanji105Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji105Character);
+styledYak(JapaneseCard)("Kanji105Character");
 const Kanji106Character =
 /*YAK Extracted CSS:
 .Kanji106Character {
@@ -1293,7 +1293,7 @@ const Kanji106Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji106Character);
+styledYak(JapaneseCard)("Kanji106Character");
 const Kanji107Character =
 /*YAK Extracted CSS:
 .Kanji107Character {
@@ -1305,7 +1305,7 @@ const Kanji107Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji107Character);
+styledYak(JapaneseCard)("Kanji107Character");
 const Kanji108Character =
 /*YAK Extracted CSS:
 .Kanji108Character {
@@ -1317,7 +1317,7 @@ const Kanji108Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji108Character);
+styledYak(JapaneseCard)("Kanji108Character");
 const Kanji109Character =
 /*YAK Extracted CSS:
 .Kanji109Character {
@@ -1329,7 +1329,7 @@ const Kanji109Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji109Character);
+styledYak(JapaneseCard)("Kanji109Character");
 const Kanji110Character =
 /*YAK Extracted CSS:
 .Kanji110Character {
@@ -1341,7 +1341,7 @@ const Kanji110Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji110Character);
+styledYak(JapaneseCard)("Kanji110Character");
 const Kanji111Character =
 /*YAK Extracted CSS:
 .Kanji111Character {
@@ -1353,7 +1353,7 @@ const Kanji111Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji111Character);
+styledYak(JapaneseCard)("Kanji111Character");
 const Kanji112Character =
 /*YAK Extracted CSS:
 .Kanji112Character {
@@ -1365,7 +1365,7 @@ const Kanji112Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji112Character);
+styledYak(JapaneseCard)("Kanji112Character");
 const Kanji113Character =
 /*YAK Extracted CSS:
 .Kanji113Character {
@@ -1377,7 +1377,7 @@ const Kanji113Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji113Character);
+styledYak(JapaneseCard)("Kanji113Character");
 const Kanji114Character =
 /*YAK Extracted CSS:
 .Kanji114Character {
@@ -1389,7 +1389,7 @@ const Kanji114Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji114Character);
+styledYak(JapaneseCard)("Kanji114Character");
 const Kanji115Character =
 /*YAK Extracted CSS:
 .Kanji115Character {
@@ -1401,7 +1401,7 @@ const Kanji115Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji115Character);
+styledYak(JapaneseCard)("Kanji115Character");
 const Kanji116Character =
 /*YAK Extracted CSS:
 .Kanji116Character {
@@ -1413,7 +1413,7 @@ const Kanji116Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji116Character);
+styledYak(JapaneseCard)("Kanji116Character");
 const Kanji117Character =
 /*YAK Extracted CSS:
 .Kanji117Character {
@@ -1425,7 +1425,7 @@ const Kanji117Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji117Character);
+styledYak(JapaneseCard)("Kanji117Character");
 const Kanji118Character =
 /*YAK Extracted CSS:
 .Kanji118Character {
@@ -1437,7 +1437,7 @@ const Kanji118Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji118Character);
+styledYak(JapaneseCard)("Kanji118Character");
 const Kanji119Character =
 /*YAK Extracted CSS:
 .Kanji119Character {
@@ -1449,7 +1449,7 @@ const Kanji119Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji119Character);
+styledYak(JapaneseCard)("Kanji119Character");
 const Kanji120Character =
 /*YAK Extracted CSS:
 .Kanji120Character {
@@ -1461,7 +1461,7 @@ const Kanji120Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji120Character);
+styledYak(JapaneseCard)("Kanji120Character");
 const Kanji121Character =
 /*YAK Extracted CSS:
 .Kanji121Character {
@@ -1473,7 +1473,7 @@ const Kanji121Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji121Character);
+styledYak(JapaneseCard)("Kanji121Character");
 const Kanji122Character =
 /*YAK Extracted CSS:
 .Kanji122Character {
@@ -1485,7 +1485,7 @@ const Kanji122Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji122Character);
+styledYak(JapaneseCard)("Kanji122Character");
 const Kanji123Character =
 /*YAK Extracted CSS:
 .Kanji123Character {
@@ -1497,7 +1497,7 @@ const Kanji123Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji123Character);
+styledYak(JapaneseCard)("Kanji123Character");
 const Kanji124Character =
 /*YAK Extracted CSS:
 .Kanji124Character {
@@ -1509,7 +1509,7 @@ const Kanji124Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji124Character);
+styledYak(JapaneseCard)("Kanji124Character");
 const Kanji125Character =
 /*YAK Extracted CSS:
 .Kanji125Character {
@@ -1521,7 +1521,7 @@ const Kanji125Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji125Character);
+styledYak(JapaneseCard)("Kanji125Character");
 const Kanji126Character =
 /*YAK Extracted CSS:
 .Kanji126Character {
@@ -1533,7 +1533,7 @@ const Kanji126Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji126Character);
+styledYak(JapaneseCard)("Kanji126Character");
 const Kanji127Character =
 /*YAK Extracted CSS:
 .Kanji127Character {
@@ -1545,7 +1545,7 @@ const Kanji127Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji127Character);
+styledYak(JapaneseCard)("Kanji127Character");
 const Kanji128Character =
 /*YAK Extracted CSS:
 .Kanji128Character {
@@ -1557,7 +1557,7 @@ const Kanji128Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji128Character);
+styledYak(JapaneseCard)("Kanji128Character");
 const Kanji129Character =
 /*YAK Extracted CSS:
 .Kanji129Character {
@@ -1569,7 +1569,7 @@ const Kanji129Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji129Character);
+styledYak(JapaneseCard)("Kanji129Character");
 const Kanji130Character =
 /*YAK Extracted CSS:
 .Kanji130Character {
@@ -1581,7 +1581,7 @@ const Kanji130Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji130Character);
+styledYak(JapaneseCard)("Kanji130Character");
 const Kanji131Character =
 /*YAK Extracted CSS:
 .Kanji131Character {
@@ -1593,7 +1593,7 @@ const Kanji131Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji131Character);
+styledYak(JapaneseCard)("Kanji131Character");
 const Kanji132Character =
 /*YAK Extracted CSS:
 .Kanji132Character {
@@ -1605,7 +1605,7 @@ const Kanji132Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji132Character);
+styledYak(JapaneseCard)("Kanji132Character");
 const Kanji133Character =
 /*YAK Extracted CSS:
 .Kanji133Character {
@@ -1617,7 +1617,7 @@ const Kanji133Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji133Character);
+styledYak(JapaneseCard)("Kanji133Character");
 const Kanji134Character =
 /*YAK Extracted CSS:
 .Kanji134Character {
@@ -1629,7 +1629,7 @@ const Kanji134Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji134Character);
+styledYak(JapaneseCard)("Kanji134Character");
 const Kanji135Character =
 /*YAK Extracted CSS:
 .Kanji135Character {
@@ -1641,7 +1641,7 @@ const Kanji135Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji135Character);
+styledYak(JapaneseCard)("Kanji135Character");
 const Kanji136Character =
 /*YAK Extracted CSS:
 .Kanji136Character {
@@ -1653,7 +1653,7 @@ const Kanji136Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji136Character);
+styledYak(JapaneseCard)("Kanji136Character");
 const Kanji137Character =
 /*YAK Extracted CSS:
 .Kanji137Character {
@@ -1665,7 +1665,7 @@ const Kanji137Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji137Character);
+styledYak(JapaneseCard)("Kanji137Character");
 const Kanji138Character =
 /*YAK Extracted CSS:
 .Kanji138Character {
@@ -1677,7 +1677,7 @@ const Kanji138Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji138Character);
+styledYak(JapaneseCard)("Kanji138Character");
 const Kanji139Character =
 /*YAK Extracted CSS:
 .Kanji139Character {
@@ -1689,7 +1689,7 @@ const Kanji139Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji139Character);
+styledYak(JapaneseCard)("Kanji139Character");
 const Kanji140Character =
 /*YAK Extracted CSS:
 .Kanji140Character {
@@ -1701,7 +1701,7 @@ const Kanji140Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji140Character);
+styledYak(JapaneseCard)("Kanji140Character");
 const Kanji141Character =
 /*YAK Extracted CSS:
 .Kanji141Character {
@@ -1713,7 +1713,7 @@ const Kanji141Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji141Character);
+styledYak(JapaneseCard)("Kanji141Character");
 const Kanji142Character =
 /*YAK Extracted CSS:
 .Kanji142Character {
@@ -1725,7 +1725,7 @@ const Kanji142Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji142Character);
+styledYak(JapaneseCard)("Kanji142Character");
 const Kanji143Character =
 /*YAK Extracted CSS:
 .Kanji143Character {
@@ -1737,7 +1737,7 @@ const Kanji143Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji143Character);
+styledYak(JapaneseCard)("Kanji143Character");
 const Kanji144Character =
 /*YAK Extracted CSS:
 .Kanji144Character {
@@ -1749,7 +1749,7 @@ const Kanji144Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji144Character);
+styledYak(JapaneseCard)("Kanji144Character");
 const Kanji145Character =
 /*YAK Extracted CSS:
 .Kanji145Character {
@@ -1761,7 +1761,7 @@ const Kanji145Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji145Character);
+styledYak(JapaneseCard)("Kanji145Character");
 const Kanji146Character =
 /*YAK Extracted CSS:
 .Kanji146Character {
@@ -1773,7 +1773,7 @@ const Kanji146Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji146Character);
+styledYak(JapaneseCard)("Kanji146Character");
 const Kanji147Character =
 /*YAK Extracted CSS:
 .Kanji147Character {
@@ -1785,7 +1785,7 @@ const Kanji147Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji147Character);
+styledYak(JapaneseCard)("Kanji147Character");
 const Kanji148Character =
 /*YAK Extracted CSS:
 .Kanji148Character {
@@ -1797,7 +1797,7 @@ const Kanji148Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji148Character);
+styledYak(JapaneseCard)("Kanji148Character");
 const Kanji149Character =
 /*YAK Extracted CSS:
 .Kanji149Character {
@@ -1809,7 +1809,7 @@ const Kanji149Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji149Character);
+styledYak(JapaneseCard)("Kanji149Character");
 const Kanji150Character =
 /*YAK Extracted CSS:
 .Kanji150Character {
@@ -1821,7 +1821,7 @@ const Kanji150Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji150Character);
+styledYak(JapaneseCard)("Kanji150Character");
 const Kanji151Character =
 /*YAK Extracted CSS:
 .Kanji151Character {
@@ -1833,7 +1833,7 @@ const Kanji151Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji151Character);
+styledYak(JapaneseCard)("Kanji151Character");
 const Kanji152Character =
 /*YAK Extracted CSS:
 .Kanji152Character {
@@ -1845,7 +1845,7 @@ const Kanji152Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji152Character);
+styledYak(JapaneseCard)("Kanji152Character");
 const Kanji153Character =
 /*YAK Extracted CSS:
 .Kanji153Character {
@@ -1857,7 +1857,7 @@ const Kanji153Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji153Character);
+styledYak(JapaneseCard)("Kanji153Character");
 const Kanji154Character =
 /*YAK Extracted CSS:
 .Kanji154Character {
@@ -1869,7 +1869,7 @@ const Kanji154Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji154Character);
+styledYak(JapaneseCard)("Kanji154Character");
 const Kanji155Character =
 /*YAK Extracted CSS:
 .Kanji155Character {
@@ -1881,7 +1881,7 @@ const Kanji155Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji155Character);
+styledYak(JapaneseCard)("Kanji155Character");
 const Kanji156Character =
 /*YAK Extracted CSS:
 .Kanji156Character {
@@ -1893,7 +1893,7 @@ const Kanji156Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji156Character);
+styledYak(JapaneseCard)("Kanji156Character");
 const Kanji157Character =
 /*YAK Extracted CSS:
 .Kanji157Character {
@@ -1905,7 +1905,7 @@ const Kanji157Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji157Character);
+styledYak(JapaneseCard)("Kanji157Character");
 const Kanji158Character =
 /*YAK Extracted CSS:
 .Kanji158Character {
@@ -1917,7 +1917,7 @@ const Kanji158Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji158Character);
+styledYak(JapaneseCard)("Kanji158Character");
 const Kanji159Character =
 /*YAK Extracted CSS:
 .Kanji159Character {
@@ -1929,7 +1929,7 @@ const Kanji159Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji159Character);
+styledYak(JapaneseCard)("Kanji159Character");
 const Kanji160Character =
 /*YAK Extracted CSS:
 .Kanji160Character {
@@ -1941,7 +1941,7 @@ const Kanji160Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji160Character);
+styledYak(JapaneseCard)("Kanji160Character");
 const Kanji161Character =
 /*YAK Extracted CSS:
 .Kanji161Character {
@@ -1953,7 +1953,7 @@ const Kanji161Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji161Character);
+styledYak(JapaneseCard)("Kanji161Character");
 const Kanji162Character =
 /*YAK Extracted CSS:
 .Kanji162Character {
@@ -1965,7 +1965,7 @@ const Kanji162Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji162Character);
+styledYak(JapaneseCard)("Kanji162Character");
 const Kanji163Character =
 /*YAK Extracted CSS:
 .Kanji163Character {
@@ -1977,7 +1977,7 @@ const Kanji163Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji163Character);
+styledYak(JapaneseCard)("Kanji163Character");
 const Kanji164Character =
 /*YAK Extracted CSS:
 .Kanji164Character {
@@ -1989,7 +1989,7 @@ const Kanji164Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji164Character);
+styledYak(JapaneseCard)("Kanji164Character");
 const Kanji165Character =
 /*YAK Extracted CSS:
 .Kanji165Character {
@@ -2001,7 +2001,7 @@ const Kanji165Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji165Character);
+styledYak(JapaneseCard)("Kanji165Character");
 const Kanji166Character =
 /*YAK Extracted CSS:
 .Kanji166Character {
@@ -2013,7 +2013,7 @@ const Kanji166Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji166Character);
+styledYak(JapaneseCard)("Kanji166Character");
 const Kanji167Character =
 /*YAK Extracted CSS:
 .Kanji167Character {
@@ -2025,7 +2025,7 @@ const Kanji167Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji167Character);
+styledYak(JapaneseCard)("Kanji167Character");
 const Kanji168Character =
 /*YAK Extracted CSS:
 .Kanji168Character {
@@ -2037,7 +2037,7 @@ const Kanji168Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji168Character);
+styledYak(JapaneseCard)("Kanji168Character");
 const Kanji169Character =
 /*YAK Extracted CSS:
 .Kanji169Character {
@@ -2049,7 +2049,7 @@ const Kanji169Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji169Character);
+styledYak(JapaneseCard)("Kanji169Character");
 const Kanji170Character =
 /*YAK Extracted CSS:
 .Kanji170Character {
@@ -2061,7 +2061,7 @@ const Kanji170Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji170Character);
+styledYak(JapaneseCard)("Kanji170Character");
 const Kanji171Character =
 /*YAK Extracted CSS:
 .Kanji171Character {
@@ -2073,7 +2073,7 @@ const Kanji171Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji171Character);
+styledYak(JapaneseCard)("Kanji171Character");
 const Kanji172Character =
 /*YAK Extracted CSS:
 .Kanji172Character {
@@ -2085,7 +2085,7 @@ const Kanji172Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji172Character);
+styledYak(JapaneseCard)("Kanji172Character");
 const Kanji173Character =
 /*YAK Extracted CSS:
 .Kanji173Character {
@@ -2097,7 +2097,7 @@ const Kanji173Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji173Character);
+styledYak(JapaneseCard)("Kanji173Character");
 const Kanji174Character =
 /*YAK Extracted CSS:
 .Kanji174Character {
@@ -2109,7 +2109,7 @@ const Kanji174Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji174Character);
+styledYak(JapaneseCard)("Kanji174Character");
 const Kanji175Character =
 /*YAK Extracted CSS:
 .Kanji175Character {
@@ -2121,7 +2121,7 @@ const Kanji175Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji175Character);
+styledYak(JapaneseCard)("Kanji175Character");
 const Kanji176Character =
 /*YAK Extracted CSS:
 .Kanji176Character {
@@ -2133,7 +2133,7 @@ const Kanji176Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji176Character);
+styledYak(JapaneseCard)("Kanji176Character");
 const Kanji177Character =
 /*YAK Extracted CSS:
 .Kanji177Character {
@@ -2145,7 +2145,7 @@ const Kanji177Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji177Character);
+styledYak(JapaneseCard)("Kanji177Character");
 const Kanji178Character =
 /*YAK Extracted CSS:
 .Kanji178Character {
@@ -2157,7 +2157,7 @@ const Kanji178Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji178Character);
+styledYak(JapaneseCard)("Kanji178Character");
 const Kanji179Character =
 /*YAK Extracted CSS:
 .Kanji179Character {
@@ -2169,7 +2169,7 @@ const Kanji179Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji179Character);
+styledYak(JapaneseCard)("Kanji179Character");
 const Kanji180Character =
 /*YAK Extracted CSS:
 .Kanji180Character {
@@ -2181,7 +2181,7 @@ const Kanji180Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji180Character);
+styledYak(JapaneseCard)("Kanji180Character");
 const Kanji181Character =
 /*YAK Extracted CSS:
 .Kanji181Character {
@@ -2193,7 +2193,7 @@ const Kanji181Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji181Character);
+styledYak(JapaneseCard)("Kanji181Character");
 const Kanji182Character =
 /*YAK Extracted CSS:
 .Kanji182Character {
@@ -2205,7 +2205,7 @@ const Kanji182Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji182Character);
+styledYak(JapaneseCard)("Kanji182Character");
 const Kanji183Character =
 /*YAK Extracted CSS:
 .Kanji183Character {
@@ -2217,7 +2217,7 @@ const Kanji183Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji183Character);
+styledYak(JapaneseCard)("Kanji183Character");
 const Kanji184Character =
 /*YAK Extracted CSS:
 .Kanji184Character {
@@ -2229,7 +2229,7 @@ const Kanji184Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji184Character);
+styledYak(JapaneseCard)("Kanji184Character");
 const Kanji185Character =
 /*YAK Extracted CSS:
 .Kanji185Character {
@@ -2241,7 +2241,7 @@ const Kanji185Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji185Character);
+styledYak(JapaneseCard)("Kanji185Character");
 const Kanji186Character =
 /*YAK Extracted CSS:
 .Kanji186Character {
@@ -2253,7 +2253,7 @@ const Kanji186Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji186Character);
+styledYak(JapaneseCard)("Kanji186Character");
 const Kanji187Character =
 /*YAK Extracted CSS:
 .Kanji187Character {
@@ -2265,7 +2265,7 @@ const Kanji187Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji187Character);
+styledYak(JapaneseCard)("Kanji187Character");
 const Kanji188Character =
 /*YAK Extracted CSS:
 .Kanji188Character {
@@ -2277,7 +2277,7 @@ const Kanji188Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji188Character);
+styledYak(JapaneseCard)("Kanji188Character");
 const Kanji189Character =
 /*YAK Extracted CSS:
 .Kanji189Character {
@@ -2289,7 +2289,7 @@ const Kanji189Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji189Character);
+styledYak(JapaneseCard)("Kanji189Character");
 const Kanji190Character =
 /*YAK Extracted CSS:
 .Kanji190Character {
@@ -2301,7 +2301,7 @@ const Kanji190Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji190Character);
+styledYak(JapaneseCard)("Kanji190Character");
 const Kanji191Character =
 /*YAK Extracted CSS:
 .Kanji191Character {
@@ -2313,7 +2313,7 @@ const Kanji191Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji191Character);
+styledYak(JapaneseCard)("Kanji191Character");
 const Kanji192Character =
 /*YAK Extracted CSS:
 .Kanji192Character {
@@ -2325,7 +2325,7 @@ const Kanji192Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji192Character);
+styledYak(JapaneseCard)("Kanji192Character");
 const Kanji193Character =
 /*YAK Extracted CSS:
 .Kanji193Character {
@@ -2337,7 +2337,7 @@ const Kanji193Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji193Character);
+styledYak(JapaneseCard)("Kanji193Character");
 const Kanji194Character =
 /*YAK Extracted CSS:
 .Kanji194Character {
@@ -2349,7 +2349,7 @@ const Kanji194Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji194Character);
+styledYak(JapaneseCard)("Kanji194Character");
 const Kanji195Character =
 /*YAK Extracted CSS:
 .Kanji195Character {
@@ -2361,7 +2361,7 @@ const Kanji195Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji195Character);
+styledYak(JapaneseCard)("Kanji195Character");
 const Kanji196Character =
 /*YAK Extracted CSS:
 .Kanji196Character {
@@ -2373,7 +2373,7 @@ const Kanji196Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji196Character);
+styledYak(JapaneseCard)("Kanji196Character");
 const Kanji197Character =
 /*YAK Extracted CSS:
 .Kanji197Character {
@@ -2385,7 +2385,7 @@ const Kanji197Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji197Character);
+styledYak(JapaneseCard)("Kanji197Character");
 const Kanji198Character =
 /*YAK Extracted CSS:
 .Kanji198Character {
@@ -2397,7 +2397,7 @@ const Kanji198Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji198Character);
+styledYak(JapaneseCard)("Kanji198Character");
 const Kanji199Character =
 /*YAK Extracted CSS:
 .Kanji199Character {
@@ -2409,7 +2409,7 @@ const Kanji199Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji199Character);
+styledYak(JapaneseCard)("Kanji199Character");
 const Kanji200Character =
 /*YAK Extracted CSS:
 .Kanji200Character {
@@ -2421,7 +2421,7 @@ const Kanji200Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji200Character);
+styledYak(JapaneseCard)("Kanji200Character");
 const Kanji201Character =
 /*YAK Extracted CSS:
 .Kanji201Character {
@@ -2433,7 +2433,7 @@ const Kanji201Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji201Character);
+styledYak(JapaneseCard)("Kanji201Character");
 const Kanji202Character =
 /*YAK Extracted CSS:
 .Kanji202Character {
@@ -2445,7 +2445,7 @@ const Kanji202Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji202Character);
+styledYak(JapaneseCard)("Kanji202Character");
 const Kanji203Character =
 /*YAK Extracted CSS:
 .Kanji203Character {
@@ -2457,7 +2457,7 @@ const Kanji203Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji203Character);
+styledYak(JapaneseCard)("Kanji203Character");
 const Kanji204Character =
 /*YAK Extracted CSS:
 .Kanji204Character {
@@ -2469,7 +2469,7 @@ const Kanji204Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji204Character);
+styledYak(JapaneseCard)("Kanji204Character");
 const Kanji205Character =
 /*YAK Extracted CSS:
 .Kanji205Character {
@@ -2481,7 +2481,7 @@ const Kanji205Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji205Character);
+styledYak(JapaneseCard)("Kanji205Character");
 const Kanji206Character =
 /*YAK Extracted CSS:
 .Kanji206Character {
@@ -2493,7 +2493,7 @@ const Kanji206Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji206Character);
+styledYak(JapaneseCard)("Kanji206Character");
 const Kanji207Character =
 /*YAK Extracted CSS:
 .Kanji207Character {
@@ -2505,7 +2505,7 @@ const Kanji207Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji207Character);
+styledYak(JapaneseCard)("Kanji207Character");
 const Kanji208Character =
 /*YAK Extracted CSS:
 .Kanji208Character {
@@ -2517,7 +2517,7 @@ const Kanji208Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji208Character);
+styledYak(JapaneseCard)("Kanji208Character");
 const Kanji209Character =
 /*YAK Extracted CSS:
 .Kanji209Character {
@@ -2529,7 +2529,7 @@ const Kanji209Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji209Character);
+styledYak(JapaneseCard)("Kanji209Character");
 const Kanji210Character =
 /*YAK Extracted CSS:
 .Kanji210Character {
@@ -2541,7 +2541,7 @@ const Kanji210Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji210Character);
+styledYak(JapaneseCard)("Kanji210Character");
 const Kanji211Character =
 /*YAK Extracted CSS:
 .Kanji211Character {
@@ -2553,7 +2553,7 @@ const Kanji211Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji211Character);
+styledYak(JapaneseCard)("Kanji211Character");
 const Kanji212Character =
 /*YAK Extracted CSS:
 .Kanji212Character {
@@ -2565,7 +2565,7 @@ const Kanji212Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji212Character);
+styledYak(JapaneseCard)("Kanji212Character");
 const Kanji213Character =
 /*YAK Extracted CSS:
 .Kanji213Character {
@@ -2577,7 +2577,7 @@ const Kanji213Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji213Character);
+styledYak(JapaneseCard)("Kanji213Character");
 const Kanji214Character =
 /*YAK Extracted CSS:
 .Kanji214Character {
@@ -2589,7 +2589,7 @@ const Kanji214Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji214Character);
+styledYak(JapaneseCard)("Kanji214Character");
 const Kanji215Character =
 /*YAK Extracted CSS:
 .Kanji215Character {
@@ -2601,7 +2601,7 @@ const Kanji215Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji215Character);
+styledYak(JapaneseCard)("Kanji215Character");
 const Kanji216Character =
 /*YAK Extracted CSS:
 .Kanji216Character {
@@ -2613,7 +2613,7 @@ const Kanji216Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji216Character);
+styledYak(JapaneseCard)("Kanji216Character");
 const Kanji217Character =
 /*YAK Extracted CSS:
 .Kanji217Character {
@@ -2625,7 +2625,7 @@ const Kanji217Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji217Character);
+styledYak(JapaneseCard)("Kanji217Character");
 const Kanji218Character =
 /*YAK Extracted CSS:
 .Kanji218Character {
@@ -2637,7 +2637,7 @@ const Kanji218Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji218Character);
+styledYak(JapaneseCard)("Kanji218Character");
 const Kanji219Character =
 /*YAK Extracted CSS:
 .Kanji219Character {
@@ -2649,7 +2649,7 @@ const Kanji219Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji219Character);
+styledYak(JapaneseCard)("Kanji219Character");
 const Kanji220Character =
 /*YAK Extracted CSS:
 .Kanji220Character {
@@ -2661,7 +2661,7 @@ const Kanji220Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji220Character);
+styledYak(JapaneseCard)("Kanji220Character");
 const Kanji221Character =
 /*YAK Extracted CSS:
 .Kanji221Character {
@@ -2673,7 +2673,7 @@ const Kanji221Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji221Character);
+styledYak(JapaneseCard)("Kanji221Character");
 const Kanji222Character =
 /*YAK Extracted CSS:
 .Kanji222Character {
@@ -2685,7 +2685,7 @@ const Kanji222Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji222Character);
+styledYak(JapaneseCard)("Kanji222Character");
 const Kanji223Character =
 /*YAK Extracted CSS:
 .Kanji223Character {
@@ -2697,7 +2697,7 @@ const Kanji223Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji223Character);
+styledYak(JapaneseCard)("Kanji223Character");
 const Kanji224Character =
 /*YAK Extracted CSS:
 .Kanji224Character {
@@ -2709,7 +2709,7 @@ const Kanji224Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji224Character);
+styledYak(JapaneseCard)("Kanji224Character");
 const Kanji225Character =
 /*YAK Extracted CSS:
 .Kanji225Character {
@@ -2721,7 +2721,7 @@ const Kanji225Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji225Character);
+styledYak(JapaneseCard)("Kanji225Character");
 const Kanji226Character =
 /*YAK Extracted CSS:
 .Kanji226Character {
@@ -2733,7 +2733,7 @@ const Kanji226Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji226Character);
+styledYak(JapaneseCard)("Kanji226Character");
 const Kanji227Character =
 /*YAK Extracted CSS:
 .Kanji227Character {
@@ -2745,7 +2745,7 @@ const Kanji227Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji227Character);
+styledYak(JapaneseCard)("Kanji227Character");
 const Kanji228Character =
 /*YAK Extracted CSS:
 .Kanji228Character {
@@ -2757,7 +2757,7 @@ const Kanji228Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji228Character);
+styledYak(JapaneseCard)("Kanji228Character");
 const Kanji229Character =
 /*YAK Extracted CSS:
 .Kanji229Character {
@@ -2769,7 +2769,7 @@ const Kanji229Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji229Character);
+styledYak(JapaneseCard)("Kanji229Character");
 const Kanji230Character =
 /*YAK Extracted CSS:
 .Kanji230Character {
@@ -2781,7 +2781,7 @@ const Kanji230Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji230Character);
+styledYak(JapaneseCard)("Kanji230Character");
 const Kanji231Character =
 /*YAK Extracted CSS:
 .Kanji231Character {
@@ -2793,7 +2793,7 @@ const Kanji231Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji231Character);
+styledYak(JapaneseCard)("Kanji231Character");
 const Kanji232Character =
 /*YAK Extracted CSS:
 .Kanji232Character {
@@ -2805,7 +2805,7 @@ const Kanji232Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji232Character);
+styledYak(JapaneseCard)("Kanji232Character");
 const Kanji233Character =
 /*YAK Extracted CSS:
 .Kanji233Character {
@@ -2817,7 +2817,7 @@ const Kanji233Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji233Character);
+styledYak(JapaneseCard)("Kanji233Character");
 const Kanji234Character =
 /*YAK Extracted CSS:
 .Kanji234Character {
@@ -2829,7 +2829,7 @@ const Kanji234Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji234Character);
+styledYak(JapaneseCard)("Kanji234Character");
 const Kanji235Character =
 /*YAK Extracted CSS:
 .Kanji235Character {
@@ -2841,7 +2841,7 @@ const Kanji235Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji235Character);
+styledYak(JapaneseCard)("Kanji235Character");
 const Kanji236Character =
 /*YAK Extracted CSS:
 .Kanji236Character {
@@ -2853,7 +2853,7 @@ const Kanji236Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji236Character);
+styledYak(JapaneseCard)("Kanji236Character");
 const Kanji237Character =
 /*YAK Extracted CSS:
 .Kanji237Character {
@@ -2865,7 +2865,7 @@ const Kanji237Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji237Character);
+styledYak(JapaneseCard)("Kanji237Character");
 const Kanji238Character =
 /*YAK Extracted CSS:
 .Kanji238Character {
@@ -2877,7 +2877,7 @@ const Kanji238Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji238Character);
+styledYak(JapaneseCard)("Kanji238Character");
 const Kanji239Character =
 /*YAK Extracted CSS:
 .Kanji239Character {
@@ -2889,7 +2889,7 @@ const Kanji239Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji239Character);
+styledYak(JapaneseCard)("Kanji239Character");
 const Kanji240Character =
 /*YAK Extracted CSS:
 .Kanji240Character {
@@ -2901,7 +2901,7 @@ const Kanji240Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji240Character);
+styledYak(JapaneseCard)("Kanji240Character");
 const Kanji241Character =
 /*YAK Extracted CSS:
 .Kanji241Character {
@@ -2913,7 +2913,7 @@ const Kanji241Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji241Character);
+styledYak(JapaneseCard)("Kanji241Character");
 const Kanji242Character =
 /*YAK Extracted CSS:
 .Kanji242Character {
@@ -2925,7 +2925,7 @@ const Kanji242Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji242Character);
+styledYak(JapaneseCard)("Kanji242Character");
 const Kanji243Character =
 /*YAK Extracted CSS:
 .Kanji243Character {
@@ -2937,7 +2937,7 @@ const Kanji243Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji243Character);
+styledYak(JapaneseCard)("Kanji243Character");
 const Kanji244Character =
 /*YAK Extracted CSS:
 .Kanji244Character {
@@ -2949,7 +2949,7 @@ const Kanji244Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji244Character);
+styledYak(JapaneseCard)("Kanji244Character");
 const Kanji245Character =
 /*YAK Extracted CSS:
 .Kanji245Character {
@@ -2961,7 +2961,7 @@ const Kanji245Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji245Character);
+styledYak(JapaneseCard)("Kanji245Character");
 const Kanji246Character =
 /*YAK Extracted CSS:
 .Kanji246Character {
@@ -2973,7 +2973,7 @@ const Kanji246Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji246Character);
+styledYak(JapaneseCard)("Kanji246Character");
 const Kanji247Character =
 /*YAK Extracted CSS:
 .Kanji247Character {
@@ -2985,7 +2985,7 @@ const Kanji247Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji247Character);
+styledYak(JapaneseCard)("Kanji247Character");
 const Kanji248Character =
 /*YAK Extracted CSS:
 .Kanji248Character {
@@ -2997,7 +2997,7 @@ const Kanji248Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji248Character);
+styledYak(JapaneseCard)("Kanji248Character");
 const Kanji249Character =
 /*YAK Extracted CSS:
 .Kanji249Character {
@@ -3009,7 +3009,7 @@ const Kanji249Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji249Character);
+styledYak(JapaneseCard)("Kanji249Character");
 const Kanji250Character =
 /*YAK Extracted CSS:
 .Kanji250Character {
@@ -3021,7 +3021,7 @@ const Kanji250Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji250Character);
+styledYak(JapaneseCard)("Kanji250Character");
 const Kanji251Character =
 /*YAK Extracted CSS:
 .Kanji251Character {
@@ -3033,7 +3033,7 @@ const Kanji251Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji251Character);
+styledYak(JapaneseCard)("Kanji251Character");
 const Kanji252Character =
 /*YAK Extracted CSS:
 .Kanji252Character {
@@ -3045,7 +3045,7 @@ const Kanji252Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji252Character);
+styledYak(JapaneseCard)("Kanji252Character");
 const Kanji253Character =
 /*YAK Extracted CSS:
 .Kanji253Character {
@@ -3057,7 +3057,7 @@ const Kanji253Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji253Character);
+styledYak(JapaneseCard)("Kanji253Character");
 const Kanji254Character =
 /*YAK Extracted CSS:
 .Kanji254Character {
@@ -3069,7 +3069,7 @@ const Kanji254Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji254Character);
+styledYak(JapaneseCard)("Kanji254Character");
 const Kanji255Character =
 /*YAK Extracted CSS:
 .Kanji255Character {
@@ -3081,7 +3081,7 @@ const Kanji255Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji255Character);
+styledYak(JapaneseCard)("Kanji255Character");
 const Kanji256Character =
 /*YAK Extracted CSS:
 .Kanji256Character {
@@ -3093,7 +3093,7 @@ const Kanji256Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji256Character);
+styledYak(JapaneseCard)("Kanji256Character");
 const Kanji257Character =
 /*YAK Extracted CSS:
 .Kanji257Character {
@@ -3105,7 +3105,7 @@ const Kanji257Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji257Character);
+styledYak(JapaneseCard)("Kanji257Character");
 const Kanji258Character =
 /*YAK Extracted CSS:
 .Kanji258Character {
@@ -3117,7 +3117,7 @@ const Kanji258Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji258Character);
+styledYak(JapaneseCard)("Kanji258Character");
 const Kanji259Character =
 /*YAK Extracted CSS:
 .Kanji259Character {
@@ -3129,7 +3129,7 @@ const Kanji259Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji259Character);
+styledYak(JapaneseCard)("Kanji259Character");
 const Kanji260Character =
 /*YAK Extracted CSS:
 .Kanji260Character {
@@ -3141,7 +3141,7 @@ const Kanji260Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji260Character);
+styledYak(JapaneseCard)("Kanji260Character");
 const Kanji261Character =
 /*YAK Extracted CSS:
 .Kanji261Character {
@@ -3153,7 +3153,7 @@ const Kanji261Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji261Character);
+styledYak(JapaneseCard)("Kanji261Character");
 const Kanji262Character =
 /*YAK Extracted CSS:
 .Kanji262Character {
@@ -3165,7 +3165,7 @@ const Kanji262Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji262Character);
+styledYak(JapaneseCard)("Kanji262Character");
 const Kanji263Character =
 /*YAK Extracted CSS:
 .Kanji263Character {
@@ -3177,7 +3177,7 @@ const Kanji263Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji263Character);
+styledYak(JapaneseCard)("Kanji263Character");
 const Kanji264Character =
 /*YAK Extracted CSS:
 .Kanji264Character {
@@ -3189,7 +3189,7 @@ const Kanji264Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji264Character);
+styledYak(JapaneseCard)("Kanji264Character");
 const Kanji265Character =
 /*YAK Extracted CSS:
 .Kanji265Character {
@@ -3201,7 +3201,7 @@ const Kanji265Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji265Character);
+styledYak(JapaneseCard)("Kanji265Character");
 const Kanji266Character =
 /*YAK Extracted CSS:
 .Kanji266Character {
@@ -3213,7 +3213,7 @@ const Kanji266Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji266Character);
+styledYak(JapaneseCard)("Kanji266Character");
 const Kanji267Character =
 /*YAK Extracted CSS:
 .Kanji267Character {
@@ -3225,7 +3225,7 @@ const Kanji267Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji267Character);
+styledYak(JapaneseCard)("Kanji267Character");
 const Kanji268Character =
 /*YAK Extracted CSS:
 .Kanji268Character {
@@ -3237,7 +3237,7 @@ const Kanji268Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji268Character);
+styledYak(JapaneseCard)("Kanji268Character");
 const Kanji269Character =
 /*YAK Extracted CSS:
 .Kanji269Character {
@@ -3249,7 +3249,7 @@ const Kanji269Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji269Character);
+styledYak(JapaneseCard)("Kanji269Character");
 const Kanji270Character =
 /*YAK Extracted CSS:
 .Kanji270Character {
@@ -3261,7 +3261,7 @@ const Kanji270Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji270Character);
+styledYak(JapaneseCard)("Kanji270Character");
 const Kanji271Character =
 /*YAK Extracted CSS:
 .Kanji271Character {
@@ -3273,7 +3273,7 @@ const Kanji271Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji271Character);
+styledYak(JapaneseCard)("Kanji271Character");
 const Kanji272Character =
 /*YAK Extracted CSS:
 .Kanji272Character {
@@ -3285,7 +3285,7 @@ const Kanji272Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji272Character);
+styledYak(JapaneseCard)("Kanji272Character");
 const Kanji273Character =
 /*YAK Extracted CSS:
 .Kanji273Character {
@@ -3297,7 +3297,7 @@ const Kanji273Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji273Character);
+styledYak(JapaneseCard)("Kanji273Character");
 const Kanji274Character =
 /*YAK Extracted CSS:
 .Kanji274Character {
@@ -3309,7 +3309,7 @@ const Kanji274Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji274Character);
+styledYak(JapaneseCard)("Kanji274Character");
 const Kanji275Character =
 /*YAK Extracted CSS:
 .Kanji275Character {
@@ -3321,7 +3321,7 @@ const Kanji275Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji275Character);
+styledYak(JapaneseCard)("Kanji275Character");
 const Kanji276Character =
 /*YAK Extracted CSS:
 .Kanji276Character {
@@ -3333,7 +3333,7 @@ const Kanji276Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji276Character);
+styledYak(JapaneseCard)("Kanji276Character");
 const Kanji277Character =
 /*YAK Extracted CSS:
 .Kanji277Character {
@@ -3345,7 +3345,7 @@ const Kanji277Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji277Character);
+styledYak(JapaneseCard)("Kanji277Character");
 const Kanji278Character =
 /*YAK Extracted CSS:
 .Kanji278Character {
@@ -3357,7 +3357,7 @@ const Kanji278Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji278Character);
+styledYak(JapaneseCard)("Kanji278Character");
 const Kanji279Character =
 /*YAK Extracted CSS:
 .Kanji279Character {
@@ -3369,7 +3369,7 @@ const Kanji279Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji279Character);
+styledYak(JapaneseCard)("Kanji279Character");
 const Kanji280Character =
 /*YAK Extracted CSS:
 .Kanji280Character {
@@ -3381,7 +3381,7 @@ const Kanji280Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji280Character);
+styledYak(JapaneseCard)("Kanji280Character");
 const Kanji281Character =
 /*YAK Extracted CSS:
 .Kanji281Character {
@@ -3393,7 +3393,7 @@ const Kanji281Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji281Character);
+styledYak(JapaneseCard)("Kanji281Character");
 const Kanji282Character =
 /*YAK Extracted CSS:
 .Kanji282Character {
@@ -3405,7 +3405,7 @@ const Kanji282Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji282Character);
+styledYak(JapaneseCard)("Kanji282Character");
 const Kanji283Character =
 /*YAK Extracted CSS:
 .Kanji283Character {
@@ -3417,7 +3417,7 @@ const Kanji283Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji283Character);
+styledYak(JapaneseCard)("Kanji283Character");
 const Kanji284Character =
 /*YAK Extracted CSS:
 .Kanji284Character {
@@ -3429,7 +3429,7 @@ const Kanji284Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji284Character);
+styledYak(JapaneseCard)("Kanji284Character");
 const Kanji285Character =
 /*YAK Extracted CSS:
 .Kanji285Character {
@@ -3441,7 +3441,7 @@ const Kanji285Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji285Character);
+styledYak(JapaneseCard)("Kanji285Character");
 const Kanji286Character =
 /*YAK Extracted CSS:
 .Kanji286Character {
@@ -3453,7 +3453,7 @@ const Kanji286Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji286Character);
+styledYak(JapaneseCard)("Kanji286Character");
 const Kanji287Character =
 /*YAK Extracted CSS:
 .Kanji287Character {
@@ -3465,7 +3465,7 @@ const Kanji287Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji287Character);
+styledYak(JapaneseCard)("Kanji287Character");
 const Kanji288Character =
 /*YAK Extracted CSS:
 .Kanji288Character {
@@ -3477,7 +3477,7 @@ const Kanji288Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji288Character);
+styledYak(JapaneseCard)("Kanji288Character");
 const Kanji289Character =
 /*YAK Extracted CSS:
 .Kanji289Character {
@@ -3489,7 +3489,7 @@ const Kanji289Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji289Character);
+styledYak(JapaneseCard)("Kanji289Character");
 const Kanji290Character =
 /*YAK Extracted CSS:
 .Kanji290Character {
@@ -3501,7 +3501,7 @@ const Kanji290Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji290Character);
+styledYak(JapaneseCard)("Kanji290Character");
 const Kanji291Character =
 /*YAK Extracted CSS:
 .Kanji291Character {
@@ -3513,7 +3513,7 @@ const Kanji291Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji291Character);
+styledYak(JapaneseCard)("Kanji291Character");
 const Kanji292Character =
 /*YAK Extracted CSS:
 .Kanji292Character {
@@ -3525,7 +3525,7 @@ const Kanji292Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji292Character);
+styledYak(JapaneseCard)("Kanji292Character");
 const Kanji293Character =
 /*YAK Extracted CSS:
 .Kanji293Character {
@@ -3537,7 +3537,7 @@ const Kanji293Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji293Character);
+styledYak(JapaneseCard)("Kanji293Character");
 const Kanji294Character =
 /*YAK Extracted CSS:
 .Kanji294Character {
@@ -3549,7 +3549,7 @@ const Kanji294Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji294Character);
+styledYak(JapaneseCard)("Kanji294Character");
 const Kanji295Character =
 /*YAK Extracted CSS:
 .Kanji295Character {
@@ -3561,7 +3561,7 @@ const Kanji295Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji295Character);
+styledYak(JapaneseCard)("Kanji295Character");
 const Kanji296Character =
 /*YAK Extracted CSS:
 .Kanji296Character {
@@ -3573,7 +3573,7 @@ const Kanji296Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji296Character);
+styledYak(JapaneseCard)("Kanji296Character");
 const Kanji297Character =
 /*YAK Extracted CSS:
 .Kanji297Character {
@@ -3585,7 +3585,7 @@ const Kanji297Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji297Character);
+styledYak(JapaneseCard)("Kanji297Character");
 const Kanji298Character =
 /*YAK Extracted CSS:
 .Kanji298Character {
@@ -3597,7 +3597,7 @@ const Kanji298Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji298Character);
+styledYak(JapaneseCard)("Kanji298Character");
 const Kanji299Character =
 /*YAK Extracted CSS:
 .Kanji299Character {
@@ -3609,7 +3609,7 @@ const Kanji299Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji299Character);
+styledYak(JapaneseCard)("Kanji299Character");
 const Kanji300Character =
 /*YAK Extracted CSS:
 .Kanji300Character {
@@ -3621,7 +3621,7 @@ const Kanji300Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji300Character);
+styledYak(JapaneseCard)("Kanji300Character");
 const Kanji301Character =
 /*YAK Extracted CSS:
 .Kanji301Character {
@@ -3633,7 +3633,7 @@ const Kanji301Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji301Character);
+styledYak(JapaneseCard)("Kanji301Character");
 const Kanji302Character =
 /*YAK Extracted CSS:
 .Kanji302Character {
@@ -3645,7 +3645,7 @@ const Kanji302Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji302Character);
+styledYak(JapaneseCard)("Kanji302Character");
 const Kanji303Character =
 /*YAK Extracted CSS:
 .Kanji303Character {
@@ -3657,7 +3657,7 @@ const Kanji303Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji303Character);
+styledYak(JapaneseCard)("Kanji303Character");
 const Kanji304Character =
 /*YAK Extracted CSS:
 .Kanji304Character {
@@ -3669,7 +3669,7 @@ const Kanji304Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji304Character);
+styledYak(JapaneseCard)("Kanji304Character");
 const Kanji305Character =
 /*YAK Extracted CSS:
 .Kanji305Character {
@@ -3681,7 +3681,7 @@ const Kanji305Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji305Character);
+styledYak(JapaneseCard)("Kanji305Character");
 const Kanji306Character =
 /*YAK Extracted CSS:
 .Kanji306Character {
@@ -3693,7 +3693,7 @@ const Kanji306Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji306Character);
+styledYak(JapaneseCard)("Kanji306Character");
 const Kanji307Character =
 /*YAK Extracted CSS:
 .Kanji307Character {
@@ -3705,7 +3705,7 @@ const Kanji307Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji307Character);
+styledYak(JapaneseCard)("Kanji307Character");
 const Kanji308Character =
 /*YAK Extracted CSS:
 .Kanji308Character {
@@ -3717,7 +3717,7 @@ const Kanji308Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji308Character);
+styledYak(JapaneseCard)("Kanji308Character");
 const Kanji309Character =
 /*YAK Extracted CSS:
 .Kanji309Character {
@@ -3729,7 +3729,7 @@ const Kanji309Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji309Character);
+styledYak(JapaneseCard)("Kanji309Character");
 const Kanji310Character =
 /*YAK Extracted CSS:
 .Kanji310Character {
@@ -3741,7 +3741,7 @@ const Kanji310Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji310Character);
+styledYak(JapaneseCard)("Kanji310Character");
 const Kanji311Character =
 /*YAK Extracted CSS:
 .Kanji311Character {
@@ -3753,7 +3753,7 @@ const Kanji311Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji311Character);
+styledYak(JapaneseCard)("Kanji311Character");
 const Kanji312Character =
 /*YAK Extracted CSS:
 .Kanji312Character {
@@ -3765,7 +3765,7 @@ const Kanji312Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji312Character);
+styledYak(JapaneseCard)("Kanji312Character");
 const Kanji313Character =
 /*YAK Extracted CSS:
 .Kanji313Character {
@@ -3777,7 +3777,7 @@ const Kanji313Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji313Character);
+styledYak(JapaneseCard)("Kanji313Character");
 const Kanji314Character =
 /*YAK Extracted CSS:
 .Kanji314Character {
@@ -3789,7 +3789,7 @@ const Kanji314Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji314Character);
+styledYak(JapaneseCard)("Kanji314Character");
 const Kanji315Character =
 /*YAK Extracted CSS:
 .Kanji315Character {
@@ -3801,7 +3801,7 @@ const Kanji315Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji315Character);
+styledYak(JapaneseCard)("Kanji315Character");
 const Kanji316Character =
 /*YAK Extracted CSS:
 .Kanji316Character {
@@ -3813,7 +3813,7 @@ const Kanji316Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji316Character);
+styledYak(JapaneseCard)("Kanji316Character");
 const Kanji317Character =
 /*YAK Extracted CSS:
 .Kanji317Character {
@@ -3825,7 +3825,7 @@ const Kanji317Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji317Character);
+styledYak(JapaneseCard)("Kanji317Character");
 const Kanji318Character =
 /*YAK Extracted CSS:
 .Kanji318Character {
@@ -3837,7 +3837,7 @@ const Kanji318Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji318Character);
+styledYak(JapaneseCard)("Kanji318Character");
 const Kanji319Character =
 /*YAK Extracted CSS:
 .Kanji319Character {
@@ -3849,7 +3849,7 @@ const Kanji319Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji319Character);
+styledYak(JapaneseCard)("Kanji319Character");
 const Kanji320Character =
 /*YAK Extracted CSS:
 .Kanji320Character {
@@ -3861,7 +3861,7 @@ const Kanji320Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji320Character);
+styledYak(JapaneseCard)("Kanji320Character");
 const Kanji321Character =
 /*YAK Extracted CSS:
 .Kanji321Character {
@@ -3873,7 +3873,7 @@ const Kanji321Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji321Character);
+styledYak(JapaneseCard)("Kanji321Character");
 const Kanji322Character =
 /*YAK Extracted CSS:
 .Kanji322Character {
@@ -3885,7 +3885,7 @@ const Kanji322Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji322Character);
+styledYak(JapaneseCard)("Kanji322Character");
 const Kanji323Character =
 /*YAK Extracted CSS:
 .Kanji323Character {
@@ -3897,7 +3897,7 @@ const Kanji323Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji323Character);
+styledYak(JapaneseCard)("Kanji323Character");
 const Kanji324Character =
 /*YAK Extracted CSS:
 .Kanji324Character {
@@ -3909,7 +3909,7 @@ const Kanji324Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji324Character);
+styledYak(JapaneseCard)("Kanji324Character");
 const Kanji325Character =
 /*YAK Extracted CSS:
 .Kanji325Character {
@@ -3921,7 +3921,7 @@ const Kanji325Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji325Character);
+styledYak(JapaneseCard)("Kanji325Character");
 const Kanji326Character =
 /*YAK Extracted CSS:
 .Kanji326Character {
@@ -3933,7 +3933,7 @@ const Kanji326Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji326Character);
+styledYak(JapaneseCard)("Kanji326Character");
 const Kanji327Character =
 /*YAK Extracted CSS:
 .Kanji327Character {
@@ -3945,7 +3945,7 @@ const Kanji327Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji327Character);
+styledYak(JapaneseCard)("Kanji327Character");
 const Kanji328Character =
 /*YAK Extracted CSS:
 .Kanji328Character {
@@ -3957,7 +3957,7 @@ const Kanji328Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji328Character);
+styledYak(JapaneseCard)("Kanji328Character");
 const Kanji329Character =
 /*YAK Extracted CSS:
 .Kanji329Character {
@@ -3969,7 +3969,7 @@ const Kanji329Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji329Character);
+styledYak(JapaneseCard)("Kanji329Character");
 const Kanji330Character =
 /*YAK Extracted CSS:
 .Kanji330Character {
@@ -3981,7 +3981,7 @@ const Kanji330Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji330Character);
+styledYak(JapaneseCard)("Kanji330Character");
 const Kanji331Character =
 /*YAK Extracted CSS:
 .Kanji331Character {
@@ -3993,7 +3993,7 @@ const Kanji331Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji331Character);
+styledYak(JapaneseCard)("Kanji331Character");
 const Kanji332Character =
 /*YAK Extracted CSS:
 .Kanji332Character {
@@ -4005,7 +4005,7 @@ const Kanji332Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji332Character);
+styledYak(JapaneseCard)("Kanji332Character");
 const Kanji333Character =
 /*YAK Extracted CSS:
 .Kanji333Character {
@@ -4017,7 +4017,7 @@ const Kanji333Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji333Character);
+styledYak(JapaneseCard)("Kanji333Character");
 const Kanji334Character =
 /*YAK Extracted CSS:
 .Kanji334Character {
@@ -4029,7 +4029,7 @@ const Kanji334Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji334Character);
+styledYak(JapaneseCard)("Kanji334Character");
 const Kanji335Character =
 /*YAK Extracted CSS:
 .Kanji335Character {
@@ -4041,7 +4041,7 @@ const Kanji335Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji335Character);
+styledYak(JapaneseCard)("Kanji335Character");
 const Kanji336Character =
 /*YAK Extracted CSS:
 .Kanji336Character {
@@ -4053,7 +4053,7 @@ const Kanji336Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji336Character);
+styledYak(JapaneseCard)("Kanji336Character");
 const Kanji337Character =
 /*YAK Extracted CSS:
 .Kanji337Character {
@@ -4065,7 +4065,7 @@ const Kanji337Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji337Character);
+styledYak(JapaneseCard)("Kanji337Character");
 const Kanji338Character =
 /*YAK Extracted CSS:
 .Kanji338Character {
@@ -4077,7 +4077,7 @@ const Kanji338Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji338Character);
+styledYak(JapaneseCard)("Kanji338Character");
 const Kanji339Character =
 /*YAK Extracted CSS:
 .Kanji339Character {
@@ -4089,7 +4089,7 @@ const Kanji339Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji339Character);
+styledYak(JapaneseCard)("Kanji339Character");
 const Kanji340Character =
 /*YAK Extracted CSS:
 .Kanji340Character {
@@ -4101,7 +4101,7 @@ const Kanji340Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji340Character);
+styledYak(JapaneseCard)("Kanji340Character");
 const Kanji341Character =
 /*YAK Extracted CSS:
 .Kanji341Character {
@@ -4113,7 +4113,7 @@ const Kanji341Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji341Character);
+styledYak(JapaneseCard)("Kanji341Character");
 const Kanji342Character =
 /*YAK Extracted CSS:
 .Kanji342Character {
@@ -4125,7 +4125,7 @@ const Kanji342Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji342Character);
+styledYak(JapaneseCard)("Kanji342Character");
 const Kanji343Character =
 /*YAK Extracted CSS:
 .Kanji343Character {
@@ -4137,7 +4137,7 @@ const Kanji343Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji343Character);
+styledYak(JapaneseCard)("Kanji343Character");
 const Kanji344Character =
 /*YAK Extracted CSS:
 .Kanji344Character {
@@ -4149,7 +4149,7 @@ const Kanji344Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji344Character);
+styledYak(JapaneseCard)("Kanji344Character");
 const Kanji345Character =
 /*YAK Extracted CSS:
 .Kanji345Character {
@@ -4161,7 +4161,7 @@ const Kanji345Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji345Character);
+styledYak(JapaneseCard)("Kanji345Character");
 const Kanji346Character =
 /*YAK Extracted CSS:
 .Kanji346Character {
@@ -4173,7 +4173,7 @@ const Kanji346Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji346Character);
+styledYak(JapaneseCard)("Kanji346Character");
 const Kanji347Character =
 /*YAK Extracted CSS:
 .Kanji347Character {
@@ -4185,7 +4185,7 @@ const Kanji347Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji347Character);
+styledYak(JapaneseCard)("Kanji347Character");
 const Kanji348Character =
 /*YAK Extracted CSS:
 .Kanji348Character {
@@ -4197,7 +4197,7 @@ const Kanji348Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji348Character);
+styledYak(JapaneseCard)("Kanji348Character");
 const Kanji349Character =
 /*YAK Extracted CSS:
 .Kanji349Character {
@@ -4209,7 +4209,7 @@ const Kanji349Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji349Character);
+styledYak(JapaneseCard)("Kanji349Character");
 const Kanji350Character =
 /*YAK Extracted CSS:
 .Kanji350Character {
@@ -4221,7 +4221,7 @@ const Kanji350Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji350Character);
+styledYak(JapaneseCard)("Kanji350Character");
 const Kanji351Character =
 /*YAK Extracted CSS:
 .Kanji351Character {
@@ -4233,7 +4233,7 @@ const Kanji351Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji351Character);
+styledYak(JapaneseCard)("Kanji351Character");
 const Kanji352Character =
 /*YAK Extracted CSS:
 .Kanji352Character {
@@ -4245,7 +4245,7 @@ const Kanji352Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji352Character);
+styledYak(JapaneseCard)("Kanji352Character");
 const Kanji353Character =
 /*YAK Extracted CSS:
 .Kanji353Character {
@@ -4257,7 +4257,7 @@ const Kanji353Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji353Character);
+styledYak(JapaneseCard)("Kanji353Character");
 const Kanji354Character =
 /*YAK Extracted CSS:
 .Kanji354Character {
@@ -4269,7 +4269,7 @@ const Kanji354Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji354Character);
+styledYak(JapaneseCard)("Kanji354Character");
 const Kanji355Character =
 /*YAK Extracted CSS:
 .Kanji355Character {
@@ -4281,7 +4281,7 @@ const Kanji355Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji355Character);
+styledYak(JapaneseCard)("Kanji355Character");
 const Kanji356Character =
 /*YAK Extracted CSS:
 .Kanji356Character {
@@ -4293,7 +4293,7 @@ const Kanji356Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji356Character);
+styledYak(JapaneseCard)("Kanji356Character");
 const Kanji357Character =
 /*YAK Extracted CSS:
 .Kanji357Character {
@@ -4305,7 +4305,7 @@ const Kanji357Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji357Character);
+styledYak(JapaneseCard)("Kanji357Character");
 const Kanji358Character =
 /*YAK Extracted CSS:
 .Kanji358Character {
@@ -4317,7 +4317,7 @@ const Kanji358Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji358Character);
+styledYak(JapaneseCard)("Kanji358Character");
 const Kanji359Character =
 /*YAK Extracted CSS:
 .Kanji359Character {
@@ -4329,7 +4329,7 @@ const Kanji359Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji359Character);
+styledYak(JapaneseCard)("Kanji359Character");
 const Kanji360Character =
 /*YAK Extracted CSS:
 .Kanji360Character {
@@ -4341,7 +4341,7 @@ const Kanji360Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji360Character);
+styledYak(JapaneseCard)("Kanji360Character");
 const Kanji361Character =
 /*YAK Extracted CSS:
 .Kanji361Character {
@@ -4353,7 +4353,7 @@ const Kanji361Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji361Character);
+styledYak(JapaneseCard)("Kanji361Character");
 const Kanji362Character =
 /*YAK Extracted CSS:
 .Kanji362Character {
@@ -4365,7 +4365,7 @@ const Kanji362Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji362Character);
+styledYak(JapaneseCard)("Kanji362Character");
 const Kanji363Character =
 /*YAK Extracted CSS:
 .Kanji363Character {
@@ -4377,7 +4377,7 @@ const Kanji363Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji363Character);
+styledYak(JapaneseCard)("Kanji363Character");
 const Kanji364Character =
 /*YAK Extracted CSS:
 .Kanji364Character {
@@ -4389,7 +4389,7 @@ const Kanji364Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji364Character);
+styledYak(JapaneseCard)("Kanji364Character");
 const Kanji365Character =
 /*YAK Extracted CSS:
 .Kanji365Character {
@@ -4401,7 +4401,7 @@ const Kanji365Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji365Character);
+styledYak(JapaneseCard)("Kanji365Character");
 const Kanji366Character =
 /*YAK Extracted CSS:
 .Kanji366Character {
@@ -4413,7 +4413,7 @@ const Kanji366Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji366Character);
+styledYak(JapaneseCard)("Kanji366Character");
 const Kanji367Character =
 /*YAK Extracted CSS:
 .Kanji367Character {
@@ -4425,7 +4425,7 @@ const Kanji367Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji367Character);
+styledYak(JapaneseCard)("Kanji367Character");
 const Kanji368Character =
 /*YAK Extracted CSS:
 .Kanji368Character {
@@ -4437,7 +4437,7 @@ const Kanji368Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji368Character);
+styledYak(JapaneseCard)("Kanji368Character");
 const Kanji369Character =
 /*YAK Extracted CSS:
 .Kanji369Character {
@@ -4449,7 +4449,7 @@ const Kanji369Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji369Character);
+styledYak(JapaneseCard)("Kanji369Character");
 const Kanji370Character =
 /*YAK Extracted CSS:
 .Kanji370Character {
@@ -4461,7 +4461,7 @@ const Kanji370Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji370Character);
+styledYak(JapaneseCard)("Kanji370Character");
 const Kanji371Character =
 /*YAK Extracted CSS:
 .Kanji371Character {
@@ -4473,7 +4473,7 @@ const Kanji371Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji371Character);
+styledYak(JapaneseCard)("Kanji371Character");
 const Kanji372Character =
 /*YAK Extracted CSS:
 .Kanji372Character {
@@ -4485,7 +4485,7 @@ const Kanji372Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji372Character);
+styledYak(JapaneseCard)("Kanji372Character");
 const Kanji373Character =
 /*YAK Extracted CSS:
 .Kanji373Character {
@@ -4497,7 +4497,7 @@ const Kanji373Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji373Character);
+styledYak(JapaneseCard)("Kanji373Character");
 const Kanji374Character =
 /*YAK Extracted CSS:
 .Kanji374Character {
@@ -4509,7 +4509,7 @@ const Kanji374Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji374Character);
+styledYak(JapaneseCard)("Kanji374Character");
 const Kanji375Character =
 /*YAK Extracted CSS:
 .Kanji375Character {
@@ -4521,7 +4521,7 @@ const Kanji375Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji375Character);
+styledYak(JapaneseCard)("Kanji375Character");
 const Kanji376Character =
 /*YAK Extracted CSS:
 .Kanji376Character {
@@ -4533,7 +4533,7 @@ const Kanji376Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji376Character);
+styledYak(JapaneseCard)("Kanji376Character");
 const Kanji377Character =
 /*YAK Extracted CSS:
 .Kanji377Character {
@@ -4545,7 +4545,7 @@ const Kanji377Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji377Character);
+styledYak(JapaneseCard)("Kanji377Character");
 const Kanji378Character =
 /*YAK Extracted CSS:
 .Kanji378Character {
@@ -4557,7 +4557,7 @@ const Kanji378Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji378Character);
+styledYak(JapaneseCard)("Kanji378Character");
 const Kanji379Character =
 /*YAK Extracted CSS:
 .Kanji379Character {
@@ -4569,7 +4569,7 @@ const Kanji379Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji379Character);
+styledYak(JapaneseCard)("Kanji379Character");
 const Kanji380Character =
 /*YAK Extracted CSS:
 .Kanji380Character {
@@ -4581,7 +4581,7 @@ const Kanji380Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji380Character);
+styledYak(JapaneseCard)("Kanji380Character");
 const Kanji381Character =
 /*YAK Extracted CSS:
 .Kanji381Character {
@@ -4593,7 +4593,7 @@ const Kanji381Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji381Character);
+styledYak(JapaneseCard)("Kanji381Character");
 const Kanji382Character =
 /*YAK Extracted CSS:
 .Kanji382Character {
@@ -4605,7 +4605,7 @@ const Kanji382Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji382Character);
+styledYak(JapaneseCard)("Kanji382Character");
 const Kanji383Character =
 /*YAK Extracted CSS:
 .Kanji383Character {
@@ -4617,7 +4617,7 @@ const Kanji383Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji383Character);
+styledYak(JapaneseCard)("Kanji383Character");
 const Kanji384Character =
 /*YAK Extracted CSS:
 .Kanji384Character {
@@ -4629,7 +4629,7 @@ const Kanji384Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji384Character);
+styledYak(JapaneseCard)("Kanji384Character");
 const Kanji385Character =
 /*YAK Extracted CSS:
 .Kanji385Character {
@@ -4641,7 +4641,7 @@ const Kanji385Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji385Character);
+styledYak(JapaneseCard)("Kanji385Character");
 const Kanji386Character =
 /*YAK Extracted CSS:
 .Kanji386Character {
@@ -4653,7 +4653,7 @@ const Kanji386Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji386Character);
+styledYak(JapaneseCard)("Kanji386Character");
 const Kanji387Character =
 /*YAK Extracted CSS:
 .Kanji387Character {
@@ -4665,7 +4665,7 @@ const Kanji387Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji387Character);
+styledYak(JapaneseCard)("Kanji387Character");
 const Kanji388Character =
 /*YAK Extracted CSS:
 .Kanji388Character {
@@ -4677,7 +4677,7 @@ const Kanji388Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji388Character);
+styledYak(JapaneseCard)("Kanji388Character");
 const Kanji389Character =
 /*YAK Extracted CSS:
 .Kanji389Character {
@@ -4689,7 +4689,7 @@ const Kanji389Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji389Character);
+styledYak(JapaneseCard)("Kanji389Character");
 const Kanji390Character =
 /*YAK Extracted CSS:
 .Kanji390Character {
@@ -4701,7 +4701,7 @@ const Kanji390Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji390Character);
+styledYak(JapaneseCard)("Kanji390Character");
 const Kanji391Character =
 /*YAK Extracted CSS:
 .Kanji391Character {
@@ -4713,7 +4713,7 @@ const Kanji391Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji391Character);
+styledYak(JapaneseCard)("Kanji391Character");
 const Kanji392Character =
 /*YAK Extracted CSS:
 .Kanji392Character {
@@ -4725,7 +4725,7 @@ const Kanji392Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji392Character);
+styledYak(JapaneseCard)("Kanji392Character");
 const Kanji393Character =
 /*YAK Extracted CSS:
 .Kanji393Character {
@@ -4737,7 +4737,7 @@ const Kanji393Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji393Character);
+styledYak(JapaneseCard)("Kanji393Character");
 const Kanji394Character =
 /*YAK Extracted CSS:
 .Kanji394Character {
@@ -4749,7 +4749,7 @@ const Kanji394Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji394Character);
+styledYak(JapaneseCard)("Kanji394Character");
 const Kanji395Character =
 /*YAK Extracted CSS:
 .Kanji395Character {
@@ -4761,7 +4761,7 @@ const Kanji395Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji395Character);
+styledYak(JapaneseCard)("Kanji395Character");
 const Kanji396Character =
 /*YAK Extracted CSS:
 .Kanji396Character {
@@ -4773,7 +4773,7 @@ const Kanji396Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji396Character);
+styledYak(JapaneseCard)("Kanji396Character");
 const Kanji397Character =
 /*YAK Extracted CSS:
 .Kanji397Character {
@@ -4785,7 +4785,7 @@ const Kanji397Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji397Character);
+styledYak(JapaneseCard)("Kanji397Character");
 const Kanji398Character =
 /*YAK Extracted CSS:
 .Kanji398Character {
@@ -4797,7 +4797,7 @@ const Kanji398Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji398Character);
+styledYak(JapaneseCard)("Kanji398Character");
 const Kanji399Character =
 /*YAK Extracted CSS:
 .Kanji399Character {
@@ -4809,7 +4809,7 @@ const Kanji399Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji399Character);
+styledYak(JapaneseCard)("Kanji399Character");
 const Kanji400Character =
 /*YAK Extracted CSS:
 .Kanji400Character {
@@ -4821,7 +4821,7 @@ const Kanji400Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji400Character);
+styledYak(JapaneseCard)("Kanji400Character");
 const Kanji401Character =
 /*YAK Extracted CSS:
 .Kanji401Character {
@@ -4833,7 +4833,7 @@ const Kanji401Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji401Character);
+styledYak(JapaneseCard)("Kanji401Character");
 const Kanji402Character =
 /*YAK Extracted CSS:
 .Kanji402Character {
@@ -4845,7 +4845,7 @@ const Kanji402Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji402Character);
+styledYak(JapaneseCard)("Kanji402Character");
 const Kanji403Character =
 /*YAK Extracted CSS:
 .Kanji403Character {
@@ -4857,7 +4857,7 @@ const Kanji403Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji403Character);
+styledYak(JapaneseCard)("Kanji403Character");
 const Kanji404Character =
 /*YAK Extracted CSS:
 .Kanji404Character {
@@ -4869,7 +4869,7 @@ const Kanji404Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji404Character);
+styledYak(JapaneseCard)("Kanji404Character");
 const Kanji405Character =
 /*YAK Extracted CSS:
 .Kanji405Character {
@@ -4881,7 +4881,7 @@ const Kanji405Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji405Character);
+styledYak(JapaneseCard)("Kanji405Character");
 const Kanji406Character =
 /*YAK Extracted CSS:
 .Kanji406Character {
@@ -4893,7 +4893,7 @@ const Kanji406Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji406Character);
+styledYak(JapaneseCard)("Kanji406Character");
 const Kanji407Character =
 /*YAK Extracted CSS:
 .Kanji407Character {
@@ -4905,7 +4905,7 @@ const Kanji407Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji407Character);
+styledYak(JapaneseCard)("Kanji407Character");
 const Kanji408Character =
 /*YAK Extracted CSS:
 .Kanji408Character {
@@ -4917,7 +4917,7 @@ const Kanji408Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji408Character);
+styledYak(JapaneseCard)("Kanji408Character");
 const Kanji409Character =
 /*YAK Extracted CSS:
 .Kanji409Character {
@@ -4929,7 +4929,7 @@ const Kanji409Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji409Character);
+styledYak(JapaneseCard)("Kanji409Character");
 const Kanji410Character =
 /*YAK Extracted CSS:
 .Kanji410Character {
@@ -4941,7 +4941,7 @@ const Kanji410Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji410Character);
+styledYak(JapaneseCard)("Kanji410Character");
 const Kanji411Character =
 /*YAK Extracted CSS:
 .Kanji411Character {
@@ -4953,7 +4953,7 @@ const Kanji411Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji411Character);
+styledYak(JapaneseCard)("Kanji411Character");
 const Kanji412Character =
 /*YAK Extracted CSS:
 .Kanji412Character {
@@ -4965,7 +4965,7 @@ const Kanji412Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji412Character);
+styledYak(JapaneseCard)("Kanji412Character");
 const Kanji413Character =
 /*YAK Extracted CSS:
 .Kanji413Character {
@@ -4977,7 +4977,7 @@ const Kanji413Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji413Character);
+styledYak(JapaneseCard)("Kanji413Character");
 const Kanji414Character =
 /*YAK Extracted CSS:
 .Kanji414Character {
@@ -4989,7 +4989,7 @@ const Kanji414Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji414Character);
+styledYak(JapaneseCard)("Kanji414Character");
 const Kanji415Character =
 /*YAK Extracted CSS:
 .Kanji415Character {
@@ -5001,7 +5001,7 @@ const Kanji415Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji415Character);
+styledYak(JapaneseCard)("Kanji415Character");
 const Kanji416Character =
 /*YAK Extracted CSS:
 .Kanji416Character {
@@ -5013,7 +5013,7 @@ const Kanji416Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji416Character);
+styledYak(JapaneseCard)("Kanji416Character");
 const Kanji417Character =
 /*YAK Extracted CSS:
 .Kanji417Character {
@@ -5025,7 +5025,7 @@ const Kanji417Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji417Character);
+styledYak(JapaneseCard)("Kanji417Character");
 const Kanji418Character =
 /*YAK Extracted CSS:
 .Kanji418Character {
@@ -5037,7 +5037,7 @@ const Kanji418Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji418Character);
+styledYak(JapaneseCard)("Kanji418Character");
 const Kanji419Character =
 /*YAK Extracted CSS:
 .Kanji419Character {
@@ -5049,7 +5049,7 @@ const Kanji419Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji419Character);
+styledYak(JapaneseCard)("Kanji419Character");
 const Kanji420Character =
 /*YAK Extracted CSS:
 .Kanji420Character {
@@ -5061,7 +5061,7 @@ const Kanji420Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji420Character);
+styledYak(JapaneseCard)("Kanji420Character");
 const Kanji421Character =
 /*YAK Extracted CSS:
 .Kanji421Character {
@@ -5073,7 +5073,7 @@ const Kanji421Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji421Character);
+styledYak(JapaneseCard)("Kanji421Character");
 const Kanji422Character =
 /*YAK Extracted CSS:
 .Kanji422Character {
@@ -5085,7 +5085,7 @@ const Kanji422Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji422Character);
+styledYak(JapaneseCard)("Kanji422Character");
 const Kanji423Character =
 /*YAK Extracted CSS:
 .Kanji423Character {
@@ -5097,7 +5097,7 @@ const Kanji423Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji423Character);
+styledYak(JapaneseCard)("Kanji423Character");
 const Kanji424Character =
 /*YAK Extracted CSS:
 .Kanji424Character {
@@ -5109,7 +5109,7 @@ const Kanji424Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji424Character);
+styledYak(JapaneseCard)("Kanji424Character");
 const Kanji425Character =
 /*YAK Extracted CSS:
 .Kanji425Character {
@@ -5121,7 +5121,7 @@ const Kanji425Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji425Character);
+styledYak(JapaneseCard)("Kanji425Character");
 const Kanji426Character =
 /*YAK Extracted CSS:
 .Kanji426Character {
@@ -5133,7 +5133,7 @@ const Kanji426Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji426Character);
+styledYak(JapaneseCard)("Kanji426Character");
 const Kanji427Character =
 /*YAK Extracted CSS:
 .Kanji427Character {
@@ -5145,7 +5145,7 @@ const Kanji427Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji427Character);
+styledYak(JapaneseCard)("Kanji427Character");
 const Kanji428Character =
 /*YAK Extracted CSS:
 .Kanji428Character {
@@ -5157,7 +5157,7 @@ const Kanji428Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji428Character);
+styledYak(JapaneseCard)("Kanji428Character");
 const Kanji429Character =
 /*YAK Extracted CSS:
 .Kanji429Character {
@@ -5169,7 +5169,7 @@ const Kanji429Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji429Character);
+styledYak(JapaneseCard)("Kanji429Character");
 const Kanji430Character =
 /*YAK Extracted CSS:
 .Kanji430Character {
@@ -5181,7 +5181,7 @@ const Kanji430Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji430Character);
+styledYak(JapaneseCard)("Kanji430Character");
 const Kanji431Character =
 /*YAK Extracted CSS:
 .Kanji431Character {
@@ -5193,7 +5193,7 @@ const Kanji431Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji431Character);
+styledYak(JapaneseCard)("Kanji431Character");
 const Kanji432Character =
 /*YAK Extracted CSS:
 .Kanji432Character {
@@ -5205,7 +5205,7 @@ const Kanji432Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji432Character);
+styledYak(JapaneseCard)("Kanji432Character");
 const Kanji433Character =
 /*YAK Extracted CSS:
 .Kanji433Character {
@@ -5217,7 +5217,7 @@ const Kanji433Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji433Character);
+styledYak(JapaneseCard)("Kanji433Character");
 const Kanji434Character =
 /*YAK Extracted CSS:
 .Kanji434Character {
@@ -5229,7 +5229,7 @@ const Kanji434Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji434Character);
+styledYak(JapaneseCard)("Kanji434Character");
 const Kanji435Character =
 /*YAK Extracted CSS:
 .Kanji435Character {
@@ -5241,7 +5241,7 @@ const Kanji435Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji435Character);
+styledYak(JapaneseCard)("Kanji435Character");
 const Kanji436Character =
 /*YAK Extracted CSS:
 .Kanji436Character {
@@ -5253,7 +5253,7 @@ const Kanji436Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji436Character);
+styledYak(JapaneseCard)("Kanji436Character");
 const Kanji437Character =
 /*YAK Extracted CSS:
 .Kanji437Character {
@@ -5265,7 +5265,7 @@ const Kanji437Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji437Character);
+styledYak(JapaneseCard)("Kanji437Character");
 const Kanji438Character =
 /*YAK Extracted CSS:
 .Kanji438Character {
@@ -5277,7 +5277,7 @@ const Kanji438Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji438Character);
+styledYak(JapaneseCard)("Kanji438Character");
 const Kanji439Character =
 /*YAK Extracted CSS:
 .Kanji439Character {
@@ -5289,7 +5289,7 @@ const Kanji439Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji439Character);
+styledYak(JapaneseCard)("Kanji439Character");
 const Kanji440Character =
 /*YAK Extracted CSS:
 .Kanji440Character {
@@ -5301,7 +5301,7 @@ const Kanji440Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji440Character);
+styledYak(JapaneseCard)("Kanji440Character");
 const Kanji441Character =
 /*YAK Extracted CSS:
 .Kanji441Character {
@@ -5313,7 +5313,7 @@ const Kanji441Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji441Character);
+styledYak(JapaneseCard)("Kanji441Character");
 const Kanji442Character =
 /*YAK Extracted CSS:
 .Kanji442Character {
@@ -5325,7 +5325,7 @@ const Kanji442Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji442Character);
+styledYak(JapaneseCard)("Kanji442Character");
 const Kanji443Character =
 /*YAK Extracted CSS:
 .Kanji443Character {
@@ -5337,7 +5337,7 @@ const Kanji443Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji443Character);
+styledYak(JapaneseCard)("Kanji443Character");
 const Kanji444Character =
 /*YAK Extracted CSS:
 .Kanji444Character {
@@ -5349,7 +5349,7 @@ const Kanji444Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji444Character);
+styledYak(JapaneseCard)("Kanji444Character");
 const Kanji445Character =
 /*YAK Extracted CSS:
 .Kanji445Character {
@@ -5361,7 +5361,7 @@ const Kanji445Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji445Character);
+styledYak(JapaneseCard)("Kanji445Character");
 const Kanji446Character =
 /*YAK Extracted CSS:
 .Kanji446Character {
@@ -5373,7 +5373,7 @@ const Kanji446Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji446Character);
+styledYak(JapaneseCard)("Kanji446Character");
 const Kanji447Character =
 /*YAK Extracted CSS:
 .Kanji447Character {
@@ -5385,7 +5385,7 @@ const Kanji447Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji447Character);
+styledYak(JapaneseCard)("Kanji447Character");
 const Kanji448Character =
 /*YAK Extracted CSS:
 .Kanji448Character {
@@ -5397,7 +5397,7 @@ const Kanji448Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji448Character);
+styledYak(JapaneseCard)("Kanji448Character");
 const Kanji449Character =
 /*YAK Extracted CSS:
 .Kanji449Character {
@@ -5409,7 +5409,7 @@ const Kanji449Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji449Character);
+styledYak(JapaneseCard)("Kanji449Character");
 const Kanji450Character =
 /*YAK Extracted CSS:
 .Kanji450Character {
@@ -5421,7 +5421,7 @@ const Kanji450Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji450Character);
+styledYak(JapaneseCard)("Kanji450Character");
 const Kanji451Character =
 /*YAK Extracted CSS:
 .Kanji451Character {
@@ -5433,7 +5433,7 @@ const Kanji451Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji451Character);
+styledYak(JapaneseCard)("Kanji451Character");
 const Kanji452Character =
 /*YAK Extracted CSS:
 .Kanji452Character {
@@ -5445,7 +5445,7 @@ const Kanji452Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji452Character);
+styledYak(JapaneseCard)("Kanji452Character");
 const Kanji453Character =
 /*YAK Extracted CSS:
 .Kanji453Character {
@@ -5457,7 +5457,7 @@ const Kanji453Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji453Character);
+styledYak(JapaneseCard)("Kanji453Character");
 const Kanji454Character =
 /*YAK Extracted CSS:
 .Kanji454Character {
@@ -5469,7 +5469,7 @@ const Kanji454Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji454Character);
+styledYak(JapaneseCard)("Kanji454Character");
 const Kanji455Character =
 /*YAK Extracted CSS:
 .Kanji455Character {
@@ -5481,7 +5481,7 @@ const Kanji455Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji455Character);
+styledYak(JapaneseCard)("Kanji455Character");
 const Kanji456Character =
 /*YAK Extracted CSS:
 .Kanji456Character {
@@ -5493,7 +5493,7 @@ const Kanji456Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji456Character);
+styledYak(JapaneseCard)("Kanji456Character");
 const Kanji457Character =
 /*YAK Extracted CSS:
 .Kanji457Character {
@@ -5505,7 +5505,7 @@ const Kanji457Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji457Character);
+styledYak(JapaneseCard)("Kanji457Character");
 const Kanji458Character =
 /*YAK Extracted CSS:
 .Kanji458Character {
@@ -5517,7 +5517,7 @@ const Kanji458Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji458Character);
+styledYak(JapaneseCard)("Kanji458Character");
 const Kanji459Character =
 /*YAK Extracted CSS:
 .Kanji459Character {
@@ -5529,7 +5529,7 @@ const Kanji459Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji459Character);
+styledYak(JapaneseCard)("Kanji459Character");
 const Kanji460Character =
 /*YAK Extracted CSS:
 .Kanji460Character {
@@ -5541,7 +5541,7 @@ const Kanji460Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji460Character);
+styledYak(JapaneseCard)("Kanji460Character");
 const Kanji461Character =
 /*YAK Extracted CSS:
 .Kanji461Character {
@@ -5553,7 +5553,7 @@ const Kanji461Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji461Character);
+styledYak(JapaneseCard)("Kanji461Character");
 const Kanji462Character =
 /*YAK Extracted CSS:
 .Kanji462Character {
@@ -5565,7 +5565,7 @@ const Kanji462Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji462Character);
+styledYak(JapaneseCard)("Kanji462Character");
 const Kanji463Character =
 /*YAK Extracted CSS:
 .Kanji463Character {
@@ -5577,7 +5577,7 @@ const Kanji463Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji463Character);
+styledYak(JapaneseCard)("Kanji463Character");
 const Kanji464Character =
 /*YAK Extracted CSS:
 .Kanji464Character {
@@ -5589,7 +5589,7 @@ const Kanji464Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji464Character);
+styledYak(JapaneseCard)("Kanji464Character");
 const Kanji465Character =
 /*YAK Extracted CSS:
 .Kanji465Character {
@@ -5601,7 +5601,7 @@ const Kanji465Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji465Character);
+styledYak(JapaneseCard)("Kanji465Character");
 const Kanji466Character =
 /*YAK Extracted CSS:
 .Kanji466Character {
@@ -5613,7 +5613,7 @@ const Kanji466Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji466Character);
+styledYak(JapaneseCard)("Kanji466Character");
 const Kanji467Character =
 /*YAK Extracted CSS:
 .Kanji467Character {
@@ -5625,7 +5625,7 @@ const Kanji467Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji467Character);
+styledYak(JapaneseCard)("Kanji467Character");
 const Kanji468Character =
 /*YAK Extracted CSS:
 .Kanji468Character {
@@ -5637,7 +5637,7 @@ const Kanji468Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji468Character);
+styledYak(JapaneseCard)("Kanji468Character");
 const Kanji469Character =
 /*YAK Extracted CSS:
 .Kanji469Character {
@@ -5649,7 +5649,7 @@ const Kanji469Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji469Character);
+styledYak(JapaneseCard)("Kanji469Character");
 const Kanji470Character =
 /*YAK Extracted CSS:
 .Kanji470Character {
@@ -5661,7 +5661,7 @@ const Kanji470Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji470Character);
+styledYak(JapaneseCard)("Kanji470Character");
 const Kanji471Character =
 /*YAK Extracted CSS:
 .Kanji471Character {
@@ -5673,7 +5673,7 @@ const Kanji471Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji471Character);
+styledYak(JapaneseCard)("Kanji471Character");
 const Kanji472Character =
 /*YAK Extracted CSS:
 .Kanji472Character {
@@ -5685,7 +5685,7 @@ const Kanji472Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji472Character);
+styledYak(JapaneseCard)("Kanji472Character");
 const Kanji473Character =
 /*YAK Extracted CSS:
 .Kanji473Character {
@@ -5697,7 +5697,7 @@ const Kanji473Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji473Character);
+styledYak(JapaneseCard)("Kanji473Character");
 const Kanji474Character =
 /*YAK Extracted CSS:
 .Kanji474Character {
@@ -5709,7 +5709,7 @@ const Kanji474Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji474Character);
+styledYak(JapaneseCard)("Kanji474Character");
 const Kanji475Character =
 /*YAK Extracted CSS:
 .Kanji475Character {
@@ -5721,7 +5721,7 @@ const Kanji475Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji475Character);
+styledYak(JapaneseCard)("Kanji475Character");
 const Kanji476Character =
 /*YAK Extracted CSS:
 .Kanji476Character {
@@ -5733,7 +5733,7 @@ const Kanji476Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji476Character);
+styledYak(JapaneseCard)("Kanji476Character");
 const Kanji477Character =
 /*YAK Extracted CSS:
 .Kanji477Character {
@@ -5745,7 +5745,7 @@ const Kanji477Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji477Character);
+styledYak(JapaneseCard)("Kanji477Character");
 const Kanji478Character =
 /*YAK Extracted CSS:
 .Kanji478Character {
@@ -5757,7 +5757,7 @@ const Kanji478Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji478Character);
+styledYak(JapaneseCard)("Kanji478Character");
 const Kanji479Character =
 /*YAK Extracted CSS:
 .Kanji479Character {
@@ -5769,7 +5769,7 @@ const Kanji479Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji479Character);
+styledYak(JapaneseCard)("Kanji479Character");
 const Kanji480Character =
 /*YAK Extracted CSS:
 .Kanji480Character {
@@ -5781,7 +5781,7 @@ const Kanji480Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji480Character);
+styledYak(JapaneseCard)("Kanji480Character");
 const Kanji481Character =
 /*YAK Extracted CSS:
 .Kanji481Character {
@@ -5793,7 +5793,7 @@ const Kanji481Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji481Character);
+styledYak(JapaneseCard)("Kanji481Character");
 const Kanji482Character =
 /*YAK Extracted CSS:
 .Kanji482Character {
@@ -5805,7 +5805,7 @@ const Kanji482Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji482Character);
+styledYak(JapaneseCard)("Kanji482Character");
 const Kanji483Character =
 /*YAK Extracted CSS:
 .Kanji483Character {
@@ -5817,7 +5817,7 @@ const Kanji483Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji483Character);
+styledYak(JapaneseCard)("Kanji483Character");
 const Kanji484Character =
 /*YAK Extracted CSS:
 .Kanji484Character {
@@ -5829,7 +5829,7 @@ const Kanji484Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji484Character);
+styledYak(JapaneseCard)("Kanji484Character");
 const Kanji485Character =
 /*YAK Extracted CSS:
 .Kanji485Character {
@@ -5841,7 +5841,7 @@ const Kanji485Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji485Character);
+styledYak(JapaneseCard)("Kanji485Character");
 const Kanji486Character =
 /*YAK Extracted CSS:
 .Kanji486Character {
@@ -5853,7 +5853,7 @@ const Kanji486Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji486Character);
+styledYak(JapaneseCard)("Kanji486Character");
 const Kanji487Character =
 /*YAK Extracted CSS:
 .Kanji487Character {
@@ -5865,7 +5865,7 @@ const Kanji487Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji487Character);
+styledYak(JapaneseCard)("Kanji487Character");
 const Kanji488Character =
 /*YAK Extracted CSS:
 .Kanji488Character {
@@ -5877,7 +5877,7 @@ const Kanji488Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji488Character);
+styledYak(JapaneseCard)("Kanji488Character");
 const Kanji489Character =
 /*YAK Extracted CSS:
 .Kanji489Character {
@@ -5889,7 +5889,7 @@ const Kanji489Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji489Character);
+styledYak(JapaneseCard)("Kanji489Character");
 const Kanji490Character =
 /*YAK Extracted CSS:
 .Kanji490Character {
@@ -5901,7 +5901,7 @@ const Kanji490Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji490Character);
+styledYak(JapaneseCard)("Kanji490Character");
 const Kanji491Character =
 /*YAK Extracted CSS:
 .Kanji491Character {
@@ -5913,7 +5913,7 @@ const Kanji491Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji491Character);
+styledYak(JapaneseCard)("Kanji491Character");
 const Kanji492Character =
 /*YAK Extracted CSS:
 .Kanji492Character {
@@ -5925,7 +5925,7 @@ const Kanji492Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji492Character);
+styledYak(JapaneseCard)("Kanji492Character");
 const Kanji493Character =
 /*YAK Extracted CSS:
 .Kanji493Character {
@@ -5937,7 +5937,7 @@ const Kanji493Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji493Character);
+styledYak(JapaneseCard)("Kanji493Character");
 const Kanji494Character =
 /*YAK Extracted CSS:
 .Kanji494Character {
@@ -5949,7 +5949,7 @@ const Kanji494Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji494Character);
+styledYak(JapaneseCard)("Kanji494Character");
 const Kanji495Character =
 /*YAK Extracted CSS:
 .Kanji495Character {
@@ -5961,7 +5961,7 @@ const Kanji495Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji495Character);
+styledYak(JapaneseCard)("Kanji495Character");
 const Kanji496Character =
 /*YAK Extracted CSS:
 .Kanji496Character {
@@ -5973,7 +5973,7 @@ const Kanji496Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji496Character);
+styledYak(JapaneseCard)("Kanji496Character");
 const Kanji497Character =
 /*YAK Extracted CSS:
 .Kanji497Character {
@@ -5985,7 +5985,7 @@ const Kanji497Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji497Character);
+styledYak(JapaneseCard)("Kanji497Character");
 const Kanji498Character =
 /*YAK Extracted CSS:
 .Kanji498Character {
@@ -5997,7 +5997,7 @@ const Kanji498Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji498Character);
+styledYak(JapaneseCard)("Kanji498Character");
 const Kanji499Character =
 /*YAK Extracted CSS:
 .Kanji499Character {
@@ -6009,7 +6009,7 @@ const Kanji499Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji499Character);
+styledYak(JapaneseCard)("Kanji499Character");
 const Kanji500Character =
 /*YAK Extracted CSS:
 .Kanji500Character {
@@ -6021,7 +6021,7 @@ const Kanji500Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji500Character);
+styledYak(JapaneseCard)("Kanji500Character");
 const Kanji501Character =
 /*YAK Extracted CSS:
 .Kanji501Character {
@@ -6033,7 +6033,7 @@ const Kanji501Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji501Character);
+styledYak(JapaneseCard)("Kanji501Character");
 const Kanji502Character =
 /*YAK Extracted CSS:
 .Kanji502Character {
@@ -6045,7 +6045,7 @@ const Kanji502Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji502Character);
+styledYak(JapaneseCard)("Kanji502Character");
 const Kanji503Character =
 /*YAK Extracted CSS:
 .Kanji503Character {
@@ -6057,7 +6057,7 @@ const Kanji503Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji503Character);
+styledYak(JapaneseCard)("Kanji503Character");
 const Kanji504Character =
 /*YAK Extracted CSS:
 .Kanji504Character {
@@ -6069,7 +6069,7 @@ const Kanji504Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji504Character);
+styledYak(JapaneseCard)("Kanji504Character");
 const Kanji505Character =
 /*YAK Extracted CSS:
 .Kanji505Character {
@@ -6081,7 +6081,7 @@ const Kanji505Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji505Character);
+styledYak(JapaneseCard)("Kanji505Character");
 const Kanji506Character =
 /*YAK Extracted CSS:
 .Kanji506Character {
@@ -6093,7 +6093,7 @@ const Kanji506Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji506Character);
+styledYak(JapaneseCard)("Kanji506Character");
 const Kanji507Character =
 /*YAK Extracted CSS:
 .Kanji507Character {
@@ -6105,7 +6105,7 @@ const Kanji507Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji507Character);
+styledYak(JapaneseCard)("Kanji507Character");
 const Kanji508Character =
 /*YAK Extracted CSS:
 .Kanji508Character {
@@ -6117,7 +6117,7 @@ const Kanji508Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji508Character);
+styledYak(JapaneseCard)("Kanji508Character");
 const Kanji509Character =
 /*YAK Extracted CSS:
 .Kanji509Character {
@@ -6129,7 +6129,7 @@ const Kanji509Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji509Character);
+styledYak(JapaneseCard)("Kanji509Character");
 const Kanji510Character =
 /*YAK Extracted CSS:
 .Kanji510Character {
@@ -6141,7 +6141,7 @@ const Kanji510Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji510Character);
+styledYak(JapaneseCard)("Kanji510Character");
 const Kanji511Character =
 /*YAK Extracted CSS:
 .Kanji511Character {
@@ -6153,7 +6153,7 @@ const Kanji511Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji511Character);
+styledYak(JapaneseCard)("Kanji511Character");
 const Kanji512Character =
 /*YAK Extracted CSS:
 .Kanji512Character {
@@ -6165,7 +6165,7 @@ const Kanji512Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji512Character);
+styledYak(JapaneseCard)("Kanji512Character");
 const Kanji513Character =
 /*YAK Extracted CSS:
 .Kanji513Character {
@@ -6177,7 +6177,7 @@ const Kanji513Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji513Character);
+styledYak(JapaneseCard)("Kanji513Character");
 const Kanji514Character =
 /*YAK Extracted CSS:
 .Kanji514Character {
@@ -6189,7 +6189,7 @@ const Kanji514Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji514Character);
+styledYak(JapaneseCard)("Kanji514Character");
 const Kanji515Character =
 /*YAK Extracted CSS:
 .Kanji515Character {
@@ -6201,7 +6201,7 @@ const Kanji515Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji515Character);
+styledYak(JapaneseCard)("Kanji515Character");
 const Kanji516Character =
 /*YAK Extracted CSS:
 .Kanji516Character {
@@ -6213,7 +6213,7 @@ const Kanji516Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji516Character);
+styledYak(JapaneseCard)("Kanji516Character");
 const Kanji517Character =
 /*YAK Extracted CSS:
 .Kanji517Character {
@@ -6225,7 +6225,7 @@ const Kanji517Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji517Character);
+styledYak(JapaneseCard)("Kanji517Character");
 const Kanji518Character =
 /*YAK Extracted CSS:
 .Kanji518Character {
@@ -6237,7 +6237,7 @@ const Kanji518Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji518Character);
+styledYak(JapaneseCard)("Kanji518Character");
 const Kanji519Character =
 /*YAK Extracted CSS:
 .Kanji519Character {
@@ -6249,7 +6249,7 @@ const Kanji519Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji519Character);
+styledYak(JapaneseCard)("Kanji519Character");
 const Kanji520Character =
 /*YAK Extracted CSS:
 .Kanji520Character {
@@ -6261,7 +6261,7 @@ const Kanji520Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji520Character);
+styledYak(JapaneseCard)("Kanji520Character");
 const Kanji521Character =
 /*YAK Extracted CSS:
 .Kanji521Character {
@@ -6273,7 +6273,7 @@ const Kanji521Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji521Character);
+styledYak(JapaneseCard)("Kanji521Character");
 const Kanji522Character =
 /*YAK Extracted CSS:
 .Kanji522Character {
@@ -6285,7 +6285,7 @@ const Kanji522Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji522Character);
+styledYak(JapaneseCard)("Kanji522Character");
 const Kanji523Character =
 /*YAK Extracted CSS:
 .Kanji523Character {
@@ -6297,7 +6297,7 @@ const Kanji523Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji523Character);
+styledYak(JapaneseCard)("Kanji523Character");
 const Kanji524Character =
 /*YAK Extracted CSS:
 .Kanji524Character {
@@ -6309,7 +6309,7 @@ const Kanji524Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji524Character);
+styledYak(JapaneseCard)("Kanji524Character");
 const Kanji525Character =
 /*YAK Extracted CSS:
 .Kanji525Character {
@@ -6321,7 +6321,7 @@ const Kanji525Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji525Character);
+styledYak(JapaneseCard)("Kanji525Character");
 const Kanji526Character =
 /*YAK Extracted CSS:
 .Kanji526Character {
@@ -6333,7 +6333,7 @@ const Kanji526Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji526Character);
+styledYak(JapaneseCard)("Kanji526Character");
 const Kanji527Character =
 /*YAK Extracted CSS:
 .Kanji527Character {
@@ -6345,7 +6345,7 @@ const Kanji527Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji527Character);
+styledYak(JapaneseCard)("Kanji527Character");
 const Kanji528Character =
 /*YAK Extracted CSS:
 .Kanji528Character {
@@ -6357,7 +6357,7 @@ const Kanji528Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji528Character);
+styledYak(JapaneseCard)("Kanji528Character");
 const Kanji529Character =
 /*YAK Extracted CSS:
 .Kanji529Character {
@@ -6369,7 +6369,7 @@ const Kanji529Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji529Character);
+styledYak(JapaneseCard)("Kanji529Character");
 const Kanji530Character =
 /*YAK Extracted CSS:
 .Kanji530Character {
@@ -6381,7 +6381,7 @@ const Kanji530Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji530Character);
+styledYak(JapaneseCard)("Kanji530Character");
 const Kanji531Character =
 /*YAK Extracted CSS:
 .Kanji531Character {
@@ -6393,7 +6393,7 @@ const Kanji531Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji531Character);
+styledYak(JapaneseCard)("Kanji531Character");
 const Kanji532Character =
 /*YAK Extracted CSS:
 .Kanji532Character {
@@ -6405,7 +6405,7 @@ const Kanji532Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji532Character);
+styledYak(JapaneseCard)("Kanji532Character");
 const Kanji533Character =
 /*YAK Extracted CSS:
 .Kanji533Character {
@@ -6417,7 +6417,7 @@ const Kanji533Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji533Character);
+styledYak(JapaneseCard)("Kanji533Character");
 const Kanji534Character =
 /*YAK Extracted CSS:
 .Kanji534Character {
@@ -6429,7 +6429,7 @@ const Kanji534Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji534Character);
+styledYak(JapaneseCard)("Kanji534Character");
 const Kanji535Character =
 /*YAK Extracted CSS:
 .Kanji535Character {
@@ -6441,7 +6441,7 @@ const Kanji535Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji535Character);
+styledYak(JapaneseCard)("Kanji535Character");
 const Kanji536Character =
 /*YAK Extracted CSS:
 .Kanji536Character {
@@ -6453,7 +6453,7 @@ const Kanji536Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji536Character);
+styledYak(JapaneseCard)("Kanji536Character");
 const Kanji537Character =
 /*YAK Extracted CSS:
 .Kanji537Character {
@@ -6465,7 +6465,7 @@ const Kanji537Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji537Character);
+styledYak(JapaneseCard)("Kanji537Character");
 const Kanji538Character =
 /*YAK Extracted CSS:
 .Kanji538Character {
@@ -6477,7 +6477,7 @@ const Kanji538Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji538Character);
+styledYak(JapaneseCard)("Kanji538Character");
 const Kanji539Character =
 /*YAK Extracted CSS:
 .Kanji539Character {
@@ -6489,7 +6489,7 @@ const Kanji539Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji539Character);
+styledYak(JapaneseCard)("Kanji539Character");
 const Kanji540Character =
 /*YAK Extracted CSS:
 .Kanji540Character {
@@ -6501,7 +6501,7 @@ const Kanji540Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji540Character);
+styledYak(JapaneseCard)("Kanji540Character");
 const Kanji541Character =
 /*YAK Extracted CSS:
 .Kanji541Character {
@@ -6513,7 +6513,7 @@ const Kanji541Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji541Character);
+styledYak(JapaneseCard)("Kanji541Character");
 const Kanji542Character =
 /*YAK Extracted CSS:
 .Kanji542Character {
@@ -6525,7 +6525,7 @@ const Kanji542Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji542Character);
+styledYak(JapaneseCard)("Kanji542Character");
 const Kanji543Character =
 /*YAK Extracted CSS:
 .Kanji543Character {
@@ -6537,7 +6537,7 @@ const Kanji543Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji543Character);
+styledYak(JapaneseCard)("Kanji543Character");
 const Kanji544Character =
 /*YAK Extracted CSS:
 .Kanji544Character {
@@ -6549,7 +6549,7 @@ const Kanji544Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji544Character);
+styledYak(JapaneseCard)("Kanji544Character");
 const Kanji545Character =
 /*YAK Extracted CSS:
 .Kanji545Character {
@@ -6561,7 +6561,7 @@ const Kanji545Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji545Character);
+styledYak(JapaneseCard)("Kanji545Character");
 const Kanji546Character =
 /*YAK Extracted CSS:
 .Kanji546Character {
@@ -6573,7 +6573,7 @@ const Kanji546Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji546Character);
+styledYak(JapaneseCard)("Kanji546Character");
 const Kanji547Character =
 /*YAK Extracted CSS:
 .Kanji547Character {
@@ -6585,7 +6585,7 @@ const Kanji547Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji547Character);
+styledYak(JapaneseCard)("Kanji547Character");
 const Kanji548Character =
 /*YAK Extracted CSS:
 .Kanji548Character {
@@ -6597,7 +6597,7 @@ const Kanji548Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji548Character);
+styledYak(JapaneseCard)("Kanji548Character");
 const Kanji549Character =
 /*YAK Extracted CSS:
 .Kanji549Character {
@@ -6609,7 +6609,7 @@ const Kanji549Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji549Character);
+styledYak(JapaneseCard)("Kanji549Character");
 const Kanji550Character =
 /*YAK Extracted CSS:
 .Kanji550Character {
@@ -6621,7 +6621,7 @@ const Kanji550Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji550Character);
+styledYak(JapaneseCard)("Kanji550Character");
 const Kanji551Character =
 /*YAK Extracted CSS:
 .Kanji551Character {
@@ -6633,7 +6633,7 @@ const Kanji551Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji551Character);
+styledYak(JapaneseCard)("Kanji551Character");
 const Kanji552Character =
 /*YAK Extracted CSS:
 .Kanji552Character {
@@ -6645,7 +6645,7 @@ const Kanji552Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji552Character);
+styledYak(JapaneseCard)("Kanji552Character");
 const Kanji553Character =
 /*YAK Extracted CSS:
 .Kanji553Character {
@@ -6657,7 +6657,7 @@ const Kanji553Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji553Character);
+styledYak(JapaneseCard)("Kanji553Character");
 const Kanji554Character =
 /*YAK Extracted CSS:
 .Kanji554Character {
@@ -6669,7 +6669,7 @@ const Kanji554Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji554Character);
+styledYak(JapaneseCard)("Kanji554Character");
 const Kanji555Character =
 /*YAK Extracted CSS:
 .Kanji555Character {
@@ -6681,7 +6681,7 @@ const Kanji555Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji555Character);
+styledYak(JapaneseCard)("Kanji555Character");
 const Kanji556Character =
 /*YAK Extracted CSS:
 .Kanji556Character {
@@ -6693,7 +6693,7 @@ const Kanji556Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji556Character);
+styledYak(JapaneseCard)("Kanji556Character");
 const Kanji557Character =
 /*YAK Extracted CSS:
 .Kanji557Character {
@@ -6705,7 +6705,7 @@ const Kanji557Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji557Character);
+styledYak(JapaneseCard)("Kanji557Character");
 const Kanji558Character =
 /*YAK Extracted CSS:
 .Kanji558Character {
@@ -6717,7 +6717,7 @@ const Kanji558Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji558Character);
+styledYak(JapaneseCard)("Kanji558Character");
 const Kanji559Character =
 /*YAK Extracted CSS:
 .Kanji559Character {
@@ -6729,7 +6729,7 @@ const Kanji559Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji559Character);
+styledYak(JapaneseCard)("Kanji559Character");
 const Kanji560Character =
 /*YAK Extracted CSS:
 .Kanji560Character {
@@ -6741,7 +6741,7 @@ const Kanji560Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji560Character);
+styledYak(JapaneseCard)("Kanji560Character");
 const Kanji561Character =
 /*YAK Extracted CSS:
 .Kanji561Character {
@@ -6753,7 +6753,7 @@ const Kanji561Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji561Character);
+styledYak(JapaneseCard)("Kanji561Character");
 const Kanji562Character =
 /*YAK Extracted CSS:
 .Kanji562Character {
@@ -6765,7 +6765,7 @@ const Kanji562Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji562Character);
+styledYak(JapaneseCard)("Kanji562Character");
 const Kanji563Character =
 /*YAK Extracted CSS:
 .Kanji563Character {
@@ -6777,7 +6777,7 @@ const Kanji563Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji563Character);
+styledYak(JapaneseCard)("Kanji563Character");
 const Kanji564Character =
 /*YAK Extracted CSS:
 .Kanji564Character {
@@ -6789,7 +6789,7 @@ const Kanji564Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji564Character);
+styledYak(JapaneseCard)("Kanji564Character");
 const Kanji565Character =
 /*YAK Extracted CSS:
 .Kanji565Character {
@@ -6801,7 +6801,7 @@ const Kanji565Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji565Character);
+styledYak(JapaneseCard)("Kanji565Character");
 const Kanji566Character =
 /*YAK Extracted CSS:
 .Kanji566Character {
@@ -6813,7 +6813,7 @@ const Kanji566Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji566Character);
+styledYak(JapaneseCard)("Kanji566Character");
 const Kanji567Character =
 /*YAK Extracted CSS:
 .Kanji567Character {
@@ -6825,7 +6825,7 @@ const Kanji567Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji567Character);
+styledYak(JapaneseCard)("Kanji567Character");
 const Kanji568Character =
 /*YAK Extracted CSS:
 .Kanji568Character {
@@ -6837,7 +6837,7 @@ const Kanji568Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji568Character);
+styledYak(JapaneseCard)("Kanji568Character");
 const Kanji569Character =
 /*YAK Extracted CSS:
 .Kanji569Character {
@@ -6849,7 +6849,7 @@ const Kanji569Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji569Character);
+styledYak(JapaneseCard)("Kanji569Character");
 const Kanji570Character =
 /*YAK Extracted CSS:
 .Kanji570Character {
@@ -6861,7 +6861,7 @@ const Kanji570Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji570Character);
+styledYak(JapaneseCard)("Kanji570Character");
 const Kanji571Character =
 /*YAK Extracted CSS:
 .Kanji571Character {
@@ -6873,7 +6873,7 @@ const Kanji571Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji571Character);
+styledYak(JapaneseCard)("Kanji571Character");
 const Kanji572Character =
 /*YAK Extracted CSS:
 .Kanji572Character {
@@ -6885,7 +6885,7 @@ const Kanji572Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji572Character);
+styledYak(JapaneseCard)("Kanji572Character");
 const Kanji573Character =
 /*YAK Extracted CSS:
 .Kanji573Character {
@@ -6897,7 +6897,7 @@ const Kanji573Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji573Character);
+styledYak(JapaneseCard)("Kanji573Character");
 const Kanji574Character =
 /*YAK Extracted CSS:
 .Kanji574Character {
@@ -6909,7 +6909,7 @@ const Kanji574Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji574Character);
+styledYak(JapaneseCard)("Kanji574Character");
 const Kanji575Character =
 /*YAK Extracted CSS:
 .Kanji575Character {
@@ -6921,7 +6921,7 @@ const Kanji575Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji575Character);
+styledYak(JapaneseCard)("Kanji575Character");
 const Kanji576Character =
 /*YAK Extracted CSS:
 .Kanji576Character {
@@ -6933,7 +6933,7 @@ const Kanji576Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji576Character);
+styledYak(JapaneseCard)("Kanji576Character");
 const Kanji577Character =
 /*YAK Extracted CSS:
 .Kanji577Character {
@@ -6945,7 +6945,7 @@ const Kanji577Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji577Character);
+styledYak(JapaneseCard)("Kanji577Character");
 const Kanji578Character =
 /*YAK Extracted CSS:
 .Kanji578Character {
@@ -6957,7 +6957,7 @@ const Kanji578Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji578Character);
+styledYak(JapaneseCard)("Kanji578Character");
 const Kanji579Character =
 /*YAK Extracted CSS:
 .Kanji579Character {
@@ -6969,7 +6969,7 @@ const Kanji579Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji579Character);
+styledYak(JapaneseCard)("Kanji579Character");
 const Kanji580Character =
 /*YAK Extracted CSS:
 .Kanji580Character {
@@ -6981,7 +6981,7 @@ const Kanji580Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji580Character);
+styledYak(JapaneseCard)("Kanji580Character");
 const Kanji581Character =
 /*YAK Extracted CSS:
 .Kanji581Character {
@@ -6993,7 +6993,7 @@ const Kanji581Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji581Character);
+styledYak(JapaneseCard)("Kanji581Character");
 const Kanji582Character =
 /*YAK Extracted CSS:
 .Kanji582Character {
@@ -7005,7 +7005,7 @@ const Kanji582Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji582Character);
+styledYak(JapaneseCard)("Kanji582Character");
 const Kanji583Character =
 /*YAK Extracted CSS:
 .Kanji583Character {
@@ -7017,7 +7017,7 @@ const Kanji583Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji583Character);
+styledYak(JapaneseCard)("Kanji583Character");
 const Kanji584Character =
 /*YAK Extracted CSS:
 .Kanji584Character {
@@ -7029,7 +7029,7 @@ const Kanji584Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji584Character);
+styledYak(JapaneseCard)("Kanji584Character");
 const Kanji585Character =
 /*YAK Extracted CSS:
 .Kanji585Character {
@@ -7041,7 +7041,7 @@ const Kanji585Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji585Character);
+styledYak(JapaneseCard)("Kanji585Character");
 const Kanji586Character =
 /*YAK Extracted CSS:
 .Kanji586Character {
@@ -7053,7 +7053,7 @@ const Kanji586Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji586Character);
+styledYak(JapaneseCard)("Kanji586Character");
 const Kanji587Character =
 /*YAK Extracted CSS:
 .Kanji587Character {
@@ -7065,7 +7065,7 @@ const Kanji587Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji587Character);
+styledYak(JapaneseCard)("Kanji587Character");
 const Kanji588Character =
 /*YAK Extracted CSS:
 .Kanji588Character {
@@ -7077,7 +7077,7 @@ const Kanji588Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji588Character);
+styledYak(JapaneseCard)("Kanji588Character");
 const Kanji589Character =
 /*YAK Extracted CSS:
 .Kanji589Character {
@@ -7089,7 +7089,7 @@ const Kanji589Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji589Character);
+styledYak(JapaneseCard)("Kanji589Character");
 const Kanji590Character =
 /*YAK Extracted CSS:
 .Kanji590Character {
@@ -7101,7 +7101,7 @@ const Kanji590Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji590Character);
+styledYak(JapaneseCard)("Kanji590Character");
 const Kanji591Character =
 /*YAK Extracted CSS:
 .Kanji591Character {
@@ -7113,7 +7113,7 @@ const Kanji591Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji591Character);
+styledYak(JapaneseCard)("Kanji591Character");
 const Kanji592Character =
 /*YAK Extracted CSS:
 .Kanji592Character {
@@ -7125,7 +7125,7 @@ const Kanji592Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji592Character);
+styledYak(JapaneseCard)("Kanji592Character");
 const Kanji593Character =
 /*YAK Extracted CSS:
 .Kanji593Character {
@@ -7137,7 +7137,7 @@ const Kanji593Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji593Character);
+styledYak(JapaneseCard)("Kanji593Character");
 const Kanji594Character =
 /*YAK Extracted CSS:
 .Kanji594Character {
@@ -7149,7 +7149,7 @@ const Kanji594Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji594Character);
+styledYak(JapaneseCard)("Kanji594Character");
 const Kanji595Character =
 /*YAK Extracted CSS:
 .Kanji595Character {
@@ -7161,7 +7161,7 @@ const Kanji595Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji595Character);
+styledYak(JapaneseCard)("Kanji595Character");
 const Kanji596Character =
 /*YAK Extracted CSS:
 .Kanji596Character {
@@ -7173,7 +7173,7 @@ const Kanji596Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji596Character);
+styledYak(JapaneseCard)("Kanji596Character");
 const Kanji597Character =
 /*YAK Extracted CSS:
 .Kanji597Character {
@@ -7185,7 +7185,7 @@ const Kanji597Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji597Character);
+styledYak(JapaneseCard)("Kanji597Character");
 const Kanji598Character =
 /*YAK Extracted CSS:
 .Kanji598Character {
@@ -7197,7 +7197,7 @@ const Kanji598Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji598Character);
+styledYak(JapaneseCard)("Kanji598Character");
 const Kanji599Character =
 /*YAK Extracted CSS:
 .Kanji599Character {
@@ -7209,7 +7209,7 @@ const Kanji599Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji599Character);
+styledYak(JapaneseCard)("Kanji599Character");
 const Kanji600Character =
 /*YAK Extracted CSS:
 .Kanji600Character {
@@ -7221,7 +7221,7 @@ const Kanji600Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji600Character);
+styledYak(JapaneseCard)("Kanji600Character");
 const Kanji601Character =
 /*YAK Extracted CSS:
 .Kanji601Character {
@@ -7233,7 +7233,7 @@ const Kanji601Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji601Character);
+styledYak(JapaneseCard)("Kanji601Character");
 const Kanji602Character =
 /*YAK Extracted CSS:
 .Kanji602Character {
@@ -7245,7 +7245,7 @@ const Kanji602Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji602Character);
+styledYak(JapaneseCard)("Kanji602Character");
 const Kanji603Character =
 /*YAK Extracted CSS:
 .Kanji603Character {
@@ -7257,7 +7257,7 @@ const Kanji603Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji603Character);
+styledYak(JapaneseCard)("Kanji603Character");
 const Kanji604Character =
 /*YAK Extracted CSS:
 .Kanji604Character {
@@ -7269,7 +7269,7 @@ const Kanji604Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji604Character);
+styledYak(JapaneseCard)("Kanji604Character");
 const Kanji605Character =
 /*YAK Extracted CSS:
 .Kanji605Character {
@@ -7281,7 +7281,7 @@ const Kanji605Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji605Character);
+styledYak(JapaneseCard)("Kanji605Character");
 const Kanji606Character =
 /*YAK Extracted CSS:
 .Kanji606Character {
@@ -7293,7 +7293,7 @@ const Kanji606Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji606Character);
+styledYak(JapaneseCard)("Kanji606Character");
 const Kanji607Character =
 /*YAK Extracted CSS:
 .Kanji607Character {
@@ -7305,7 +7305,7 @@ const Kanji607Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji607Character);
+styledYak(JapaneseCard)("Kanji607Character");
 const Kanji608Character =
 /*YAK Extracted CSS:
 .Kanji608Character {
@@ -7317,7 +7317,7 @@ const Kanji608Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji608Character);
+styledYak(JapaneseCard)("Kanji608Character");
 const Kanji609Character =
 /*YAK Extracted CSS:
 .Kanji609Character {
@@ -7329,7 +7329,7 @@ const Kanji609Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji609Character);
+styledYak(JapaneseCard)("Kanji609Character");
 const Kanji610Character =
 /*YAK Extracted CSS:
 .Kanji610Character {
@@ -7341,7 +7341,7 @@ const Kanji610Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji610Character);
+styledYak(JapaneseCard)("Kanji610Character");
 const Kanji611Character =
 /*YAK Extracted CSS:
 .Kanji611Character {
@@ -7353,7 +7353,7 @@ const Kanji611Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji611Character);
+styledYak(JapaneseCard)("Kanji611Character");
 const Kanji612Character =
 /*YAK Extracted CSS:
 .Kanji612Character {
@@ -7365,7 +7365,7 @@ const Kanji612Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji612Character);
+styledYak(JapaneseCard)("Kanji612Character");
 const Kanji613Character =
 /*YAK Extracted CSS:
 .Kanji613Character {
@@ -7377,7 +7377,7 @@ const Kanji613Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji613Character);
+styledYak(JapaneseCard)("Kanji613Character");
 const Kanji614Character =
 /*YAK Extracted CSS:
 .Kanji614Character {
@@ -7389,7 +7389,7 @@ const Kanji614Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji614Character);
+styledYak(JapaneseCard)("Kanji614Character");
 const Kanji615Character =
 /*YAK Extracted CSS:
 .Kanji615Character {
@@ -7401,7 +7401,7 @@ const Kanji615Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji615Character);
+styledYak(JapaneseCard)("Kanji615Character");
 const Kanji616Character =
 /*YAK Extracted CSS:
 .Kanji616Character {
@@ -7413,7 +7413,7 @@ const Kanji616Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji616Character);
+styledYak(JapaneseCard)("Kanji616Character");
 const Kanji617Character =
 /*YAK Extracted CSS:
 .Kanji617Character {
@@ -7425,7 +7425,7 @@ const Kanji617Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji617Character);
+styledYak(JapaneseCard)("Kanji617Character");
 const Kanji618Character =
 /*YAK Extracted CSS:
 .Kanji618Character {
@@ -7437,7 +7437,7 @@ const Kanji618Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji618Character);
+styledYak(JapaneseCard)("Kanji618Character");
 const Kanji619Character =
 /*YAK Extracted CSS:
 .Kanji619Character {
@@ -7449,7 +7449,7 @@ const Kanji619Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji619Character);
+styledYak(JapaneseCard)("Kanji619Character");
 const Kanji620Character =
 /*YAK Extracted CSS:
 .Kanji620Character {
@@ -7461,7 +7461,7 @@ const Kanji620Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji620Character);
+styledYak(JapaneseCard)("Kanji620Character");
 const Kanji621Character =
 /*YAK Extracted CSS:
 .Kanji621Character {
@@ -7473,7 +7473,7 @@ const Kanji621Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji621Character);
+styledYak(JapaneseCard)("Kanji621Character");
 const Kanji622Character =
 /*YAK Extracted CSS:
 .Kanji622Character {
@@ -7485,7 +7485,7 @@ const Kanji622Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji622Character);
+styledYak(JapaneseCard)("Kanji622Character");
 const Kanji623Character =
 /*YAK Extracted CSS:
 .Kanji623Character {
@@ -7497,7 +7497,7 @@ const Kanji623Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji623Character);
+styledYak(JapaneseCard)("Kanji623Character");
 const Kanji624Character =
 /*YAK Extracted CSS:
 .Kanji624Character {
@@ -7509,7 +7509,7 @@ const Kanji624Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji624Character);
+styledYak(JapaneseCard)("Kanji624Character");
 const Kanji625Character =
 /*YAK Extracted CSS:
 .Kanji625Character {
@@ -7521,7 +7521,7 @@ const Kanji625Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji625Character);
+styledYak(JapaneseCard)("Kanji625Character");
 const Kanji626Character =
 /*YAK Extracted CSS:
 .Kanji626Character {
@@ -7533,7 +7533,7 @@ const Kanji626Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji626Character);
+styledYak(JapaneseCard)("Kanji626Character");
 const Kanji627Character =
 /*YAK Extracted CSS:
 .Kanji627Character {
@@ -7545,7 +7545,7 @@ const Kanji627Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji627Character);
+styledYak(JapaneseCard)("Kanji627Character");
 const Kanji628Character =
 /*YAK Extracted CSS:
 .Kanji628Character {
@@ -7557,7 +7557,7 @@ const Kanji628Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji628Character);
+styledYak(JapaneseCard)("Kanji628Character");
 const Kanji629Character =
 /*YAK Extracted CSS:
 .Kanji629Character {
@@ -7569,7 +7569,7 @@ const Kanji629Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji629Character);
+styledYak(JapaneseCard)("Kanji629Character");
 const Kanji630Character =
 /*YAK Extracted CSS:
 .Kanji630Character {
@@ -7581,7 +7581,7 @@ const Kanji630Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji630Character);
+styledYak(JapaneseCard)("Kanji630Character");
 const Kanji631Character =
 /*YAK Extracted CSS:
 .Kanji631Character {
@@ -7593,7 +7593,7 @@ const Kanji631Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji631Character);
+styledYak(JapaneseCard)("Kanji631Character");
 const Kanji632Character =
 /*YAK Extracted CSS:
 .Kanji632Character {
@@ -7605,7 +7605,7 @@ const Kanji632Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji632Character);
+styledYak(JapaneseCard)("Kanji632Character");
 const Kanji633Character =
 /*YAK Extracted CSS:
 .Kanji633Character {
@@ -7617,7 +7617,7 @@ const Kanji633Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji633Character);
+styledYak(JapaneseCard)("Kanji633Character");
 const Kanji634Character =
 /*YAK Extracted CSS:
 .Kanji634Character {
@@ -7629,7 +7629,7 @@ const Kanji634Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji634Character);
+styledYak(JapaneseCard)("Kanji634Character");
 const Kanji635Character =
 /*YAK Extracted CSS:
 .Kanji635Character {
@@ -7641,7 +7641,7 @@ const Kanji635Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji635Character);
+styledYak(JapaneseCard)("Kanji635Character");
 const Kanji636Character =
 /*YAK Extracted CSS:
 .Kanji636Character {
@@ -7653,7 +7653,7 @@ const Kanji636Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji636Character);
+styledYak(JapaneseCard)("Kanji636Character");
 const Kanji637Character =
 /*YAK Extracted CSS:
 .Kanji637Character {
@@ -7665,7 +7665,7 @@ const Kanji637Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji637Character);
+styledYak(JapaneseCard)("Kanji637Character");
 const Kanji638Character =
 /*YAK Extracted CSS:
 .Kanji638Character {
@@ -7677,7 +7677,7 @@ const Kanji638Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji638Character);
+styledYak(JapaneseCard)("Kanji638Character");
 const Kanji639Character =
 /*YAK Extracted CSS:
 .Kanji639Character {
@@ -7689,7 +7689,7 @@ const Kanji639Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji639Character);
+styledYak(JapaneseCard)("Kanji639Character");
 const Kanji640Character =
 /*YAK Extracted CSS:
 .Kanji640Character {
@@ -7701,7 +7701,7 @@ const Kanji640Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji640Character);
+styledYak(JapaneseCard)("Kanji640Character");
 const Kanji641Character =
 /*YAK Extracted CSS:
 .Kanji641Character {
@@ -7713,7 +7713,7 @@ const Kanji641Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji641Character);
+styledYak(JapaneseCard)("Kanji641Character");
 const Kanji642Character =
 /*YAK Extracted CSS:
 .Kanji642Character {
@@ -7725,7 +7725,7 @@ const Kanji642Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji642Character);
+styledYak(JapaneseCard)("Kanji642Character");
 const Kanji643Character =
 /*YAK Extracted CSS:
 .Kanji643Character {
@@ -7737,7 +7737,7 @@ const Kanji643Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji643Character);
+styledYak(JapaneseCard)("Kanji643Character");
 const Kanji644Character =
 /*YAK Extracted CSS:
 .Kanji644Character {
@@ -7749,7 +7749,7 @@ const Kanji644Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji644Character);
+styledYak(JapaneseCard)("Kanji644Character");
 const Kanji645Character =
 /*YAK Extracted CSS:
 .Kanji645Character {
@@ -7761,7 +7761,7 @@ const Kanji645Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji645Character);
+styledYak(JapaneseCard)("Kanji645Character");
 const Kanji646Character =
 /*YAK Extracted CSS:
 .Kanji646Character {
@@ -7773,7 +7773,7 @@ const Kanji646Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji646Character);
+styledYak(JapaneseCard)("Kanji646Character");
 const Kanji647Character =
 /*YAK Extracted CSS:
 .Kanji647Character {
@@ -7785,7 +7785,7 @@ const Kanji647Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji647Character);
+styledYak(JapaneseCard)("Kanji647Character");
 const Kanji648Character =
 /*YAK Extracted CSS:
 .Kanji648Character {
@@ -7797,7 +7797,7 @@ const Kanji648Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji648Character);
+styledYak(JapaneseCard)("Kanji648Character");
 const Kanji649Character =
 /*YAK Extracted CSS:
 .Kanji649Character {
@@ -7809,7 +7809,7 @@ const Kanji649Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji649Character);
+styledYak(JapaneseCard)("Kanji649Character");
 const Kanji650Character =
 /*YAK Extracted CSS:
 .Kanji650Character {
@@ -7821,7 +7821,7 @@ const Kanji650Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji650Character);
+styledYak(JapaneseCard)("Kanji650Character");
 const Kanji651Character =
 /*YAK Extracted CSS:
 .Kanji651Character {
@@ -7833,7 +7833,7 @@ const Kanji651Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji651Character);
+styledYak(JapaneseCard)("Kanji651Character");
 const Kanji652Character =
 /*YAK Extracted CSS:
 .Kanji652Character {
@@ -7845,7 +7845,7 @@ const Kanji652Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji652Character);
+styledYak(JapaneseCard)("Kanji652Character");
 const Kanji653Character =
 /*YAK Extracted CSS:
 .Kanji653Character {
@@ -7857,7 +7857,7 @@ const Kanji653Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji653Character);
+styledYak(JapaneseCard)("Kanji653Character");
 const Kanji654Character =
 /*YAK Extracted CSS:
 .Kanji654Character {
@@ -7869,7 +7869,7 @@ const Kanji654Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji654Character);
+styledYak(JapaneseCard)("Kanji654Character");
 const Kanji655Character =
 /*YAK Extracted CSS:
 .Kanji655Character {
@@ -7881,7 +7881,7 @@ const Kanji655Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji655Character);
+styledYak(JapaneseCard)("Kanji655Character");
 const Kanji656Character =
 /*YAK Extracted CSS:
 .Kanji656Character {
@@ -7893,7 +7893,7 @@ const Kanji656Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji656Character);
+styledYak(JapaneseCard)("Kanji656Character");
 const Kanji657Character =
 /*YAK Extracted CSS:
 .Kanji657Character {
@@ -7905,7 +7905,7 @@ const Kanji657Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji657Character);
+styledYak(JapaneseCard)("Kanji657Character");
 const Kanji658Character =
 /*YAK Extracted CSS:
 .Kanji658Character {
@@ -7917,7 +7917,7 @@ const Kanji658Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji658Character);
+styledYak(JapaneseCard)("Kanji658Character");
 const Kanji659Character =
 /*YAK Extracted CSS:
 .Kanji659Character {
@@ -7929,7 +7929,7 @@ const Kanji659Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji659Character);
+styledYak(JapaneseCard)("Kanji659Character");
 const Kanji660Character =
 /*YAK Extracted CSS:
 .Kanji660Character {
@@ -7941,7 +7941,7 @@ const Kanji660Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji660Character);
+styledYak(JapaneseCard)("Kanji660Character");
 const Kanji661Character =
 /*YAK Extracted CSS:
 .Kanji661Character {
@@ -7953,7 +7953,7 @@ const Kanji661Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji661Character);
+styledYak(JapaneseCard)("Kanji661Character");
 const Kanji662Character =
 /*YAK Extracted CSS:
 .Kanji662Character {
@@ -7965,7 +7965,7 @@ const Kanji662Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji662Character);
+styledYak(JapaneseCard)("Kanji662Character");
 const Kanji663Character =
 /*YAK Extracted CSS:
 .Kanji663Character {
@@ -7977,7 +7977,7 @@ const Kanji663Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji663Character);
+styledYak(JapaneseCard)("Kanji663Character");
 const Kanji664Character =
 /*YAK Extracted CSS:
 .Kanji664Character {
@@ -7989,7 +7989,7 @@ const Kanji664Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji664Character);
+styledYak(JapaneseCard)("Kanji664Character");
 const Kanji665Character =
 /*YAK Extracted CSS:
 .Kanji665Character {
@@ -8001,7 +8001,7 @@ const Kanji665Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji665Character);
+styledYak(JapaneseCard)("Kanji665Character");
 const Kanji666Character =
 /*YAK Extracted CSS:
 .Kanji666Character {
@@ -8013,7 +8013,7 @@ const Kanji666Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji666Character);
+styledYak(JapaneseCard)("Kanji666Character");
 const Kanji667Character =
 /*YAK Extracted CSS:
 .Kanji667Character {
@@ -8025,7 +8025,7 @@ const Kanji667Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji667Character);
+styledYak(JapaneseCard)("Kanji667Character");
 const Kanji668Character =
 /*YAK Extracted CSS:
 .Kanji668Character {
@@ -8037,7 +8037,7 @@ const Kanji668Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji668Character);
+styledYak(JapaneseCard)("Kanji668Character");
 const Kanji669Character =
 /*YAK Extracted CSS:
 .Kanji669Character {
@@ -8049,7 +8049,7 @@ const Kanji669Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji669Character);
+styledYak(JapaneseCard)("Kanji669Character");
 const Kanji670Character =
 /*YAK Extracted CSS:
 .Kanji670Character {
@@ -8061,7 +8061,7 @@ const Kanji670Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji670Character);
+styledYak(JapaneseCard)("Kanji670Character");
 const Kanji671Character =
 /*YAK Extracted CSS:
 .Kanji671Character {
@@ -8073,7 +8073,7 @@ const Kanji671Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji671Character);
+styledYak(JapaneseCard)("Kanji671Character");
 const Kanji672Character =
 /*YAK Extracted CSS:
 .Kanji672Character {
@@ -8085,7 +8085,7 @@ const Kanji672Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji672Character);
+styledYak(JapaneseCard)("Kanji672Character");
 const Kanji673Character =
 /*YAK Extracted CSS:
 .Kanji673Character {
@@ -8097,7 +8097,7 @@ const Kanji673Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji673Character);
+styledYak(JapaneseCard)("Kanji673Character");
 const Kanji674Character =
 /*YAK Extracted CSS:
 .Kanji674Character {
@@ -8109,7 +8109,7 @@ const Kanji674Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji674Character);
+styledYak(JapaneseCard)("Kanji674Character");
 const Kanji675Character =
 /*YAK Extracted CSS:
 .Kanji675Character {
@@ -8121,7 +8121,7 @@ const Kanji675Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji675Character);
+styledYak(JapaneseCard)("Kanji675Character");
 const Kanji676Character =
 /*YAK Extracted CSS:
 .Kanji676Character {
@@ -8133,7 +8133,7 @@ const Kanji676Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji676Character);
+styledYak(JapaneseCard)("Kanji676Character");
 const Kanji677Character =
 /*YAK Extracted CSS:
 .Kanji677Character {
@@ -8145,7 +8145,7 @@ const Kanji677Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji677Character);
+styledYak(JapaneseCard)("Kanji677Character");
 const Kanji678Character =
 /*YAK Extracted CSS:
 .Kanji678Character {
@@ -8157,7 +8157,7 @@ const Kanji678Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji678Character);
+styledYak(JapaneseCard)("Kanji678Character");
 const Kanji679Character =
 /*YAK Extracted CSS:
 .Kanji679Character {
@@ -8169,7 +8169,7 @@ const Kanji679Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji679Character);
+styledYak(JapaneseCard)("Kanji679Character");
 const Kanji680Character =
 /*YAK Extracted CSS:
 .Kanji680Character {
@@ -8181,7 +8181,7 @@ const Kanji680Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji680Character);
+styledYak(JapaneseCard)("Kanji680Character");
 const Kanji681Character =
 /*YAK Extracted CSS:
 .Kanji681Character {
@@ -8193,7 +8193,7 @@ const Kanji681Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji681Character);
+styledYak(JapaneseCard)("Kanji681Character");
 const Kanji682Character =
 /*YAK Extracted CSS:
 .Kanji682Character {
@@ -8205,7 +8205,7 @@ const Kanji682Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji682Character);
+styledYak(JapaneseCard)("Kanji682Character");
 const Kanji683Character =
 /*YAK Extracted CSS:
 .Kanji683Character {
@@ -8217,7 +8217,7 @@ const Kanji683Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji683Character);
+styledYak(JapaneseCard)("Kanji683Character");
 const Kanji684Character =
 /*YAK Extracted CSS:
 .Kanji684Character {
@@ -8229,7 +8229,7 @@ const Kanji684Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji684Character);
+styledYak(JapaneseCard)("Kanji684Character");
 const Kanji685Character =
 /*YAK Extracted CSS:
 .Kanji685Character {
@@ -8241,7 +8241,7 @@ const Kanji685Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji685Character);
+styledYak(JapaneseCard)("Kanji685Character");
 const Kanji686Character =
 /*YAK Extracted CSS:
 .Kanji686Character {
@@ -8253,7 +8253,7 @@ const Kanji686Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji686Character);
+styledYak(JapaneseCard)("Kanji686Character");
 const Kanji687Character =
 /*YAK Extracted CSS:
 .Kanji687Character {
@@ -8265,7 +8265,7 @@ const Kanji687Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji687Character);
+styledYak(JapaneseCard)("Kanji687Character");
 const Kanji688Character =
 /*YAK Extracted CSS:
 .Kanji688Character {
@@ -8277,7 +8277,7 @@ const Kanji688Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji688Character);
+styledYak(JapaneseCard)("Kanji688Character");
 const Kanji689Character =
 /*YAK Extracted CSS:
 .Kanji689Character {
@@ -8289,7 +8289,7 @@ const Kanji689Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji689Character);
+styledYak(JapaneseCard)("Kanji689Character");
 const Kanji690Character =
 /*YAK Extracted CSS:
 .Kanji690Character {
@@ -8301,7 +8301,7 @@ const Kanji690Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji690Character);
+styledYak(JapaneseCard)("Kanji690Character");
 const Kanji691Character =
 /*YAK Extracted CSS:
 .Kanji691Character {
@@ -8313,7 +8313,7 @@ const Kanji691Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji691Character);
+styledYak(JapaneseCard)("Kanji691Character");
 const Kanji692Character =
 /*YAK Extracted CSS:
 .Kanji692Character {
@@ -8325,7 +8325,7 @@ const Kanji692Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji692Character);
+styledYak(JapaneseCard)("Kanji692Character");
 const Kanji693Character =
 /*YAK Extracted CSS:
 .Kanji693Character {
@@ -8337,7 +8337,7 @@ const Kanji693Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji693Character);
+styledYak(JapaneseCard)("Kanji693Character");
 const Kanji694Character =
 /*YAK Extracted CSS:
 .Kanji694Character {
@@ -8349,7 +8349,7 @@ const Kanji694Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji694Character);
+styledYak(JapaneseCard)("Kanji694Character");
 const Kanji695Character =
 /*YAK Extracted CSS:
 .Kanji695Character {
@@ -8361,7 +8361,7 @@ const Kanji695Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji695Character);
+styledYak(JapaneseCard)("Kanji695Character");
 const Kanji696Character =
 /*YAK Extracted CSS:
 .Kanji696Character {
@@ -8373,7 +8373,7 @@ const Kanji696Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji696Character);
+styledYak(JapaneseCard)("Kanji696Character");
 const Kanji697Character =
 /*YAK Extracted CSS:
 .Kanji697Character {
@@ -8385,7 +8385,7 @@ const Kanji697Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji697Character);
+styledYak(JapaneseCard)("Kanji697Character");
 const Kanji698Character =
 /*YAK Extracted CSS:
 .Kanji698Character {
@@ -8397,7 +8397,7 @@ const Kanji698Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji698Character);
+styledYak(JapaneseCard)("Kanji698Character");
 const Kanji699Character =
 /*YAK Extracted CSS:
 .Kanji699Character {
@@ -8409,7 +8409,7 @@ const Kanji699Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji699Character);
+styledYak(JapaneseCard)("Kanji699Character");
 const Kanji700Character =
 /*YAK Extracted CSS:
 .Kanji700Character {
@@ -8421,7 +8421,7 @@ const Kanji700Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji700Character);
+styledYak(JapaneseCard)("Kanji700Character");
 const Kanji701Character =
 /*YAK Extracted CSS:
 .Kanji701Character {
@@ -8433,7 +8433,7 @@ const Kanji701Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji701Character);
+styledYak(JapaneseCard)("Kanji701Character");
 const Kanji702Character =
 /*YAK Extracted CSS:
 .Kanji702Character {
@@ -8445,7 +8445,7 @@ const Kanji702Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji702Character);
+styledYak(JapaneseCard)("Kanji702Character");
 const Kanji703Character =
 /*YAK Extracted CSS:
 .Kanji703Character {
@@ -8457,7 +8457,7 @@ const Kanji703Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji703Character);
+styledYak(JapaneseCard)("Kanji703Character");
 const Kanji704Character =
 /*YAK Extracted CSS:
 .Kanji704Character {
@@ -8469,7 +8469,7 @@ const Kanji704Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji704Character);
+styledYak(JapaneseCard)("Kanji704Character");
 const Kanji705Character =
 /*YAK Extracted CSS:
 .Kanji705Character {
@@ -8481,7 +8481,7 @@ const Kanji705Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji705Character);
+styledYak(JapaneseCard)("Kanji705Character");
 const Kanji706Character =
 /*YAK Extracted CSS:
 .Kanji706Character {
@@ -8493,7 +8493,7 @@ const Kanji706Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji706Character);
+styledYak(JapaneseCard)("Kanji706Character");
 const Kanji707Character =
 /*YAK Extracted CSS:
 .Kanji707Character {
@@ -8505,7 +8505,7 @@ const Kanji707Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji707Character);
+styledYak(JapaneseCard)("Kanji707Character");
 const Kanji708Character =
 /*YAK Extracted CSS:
 .Kanji708Character {
@@ -8517,7 +8517,7 @@ const Kanji708Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji708Character);
+styledYak(JapaneseCard)("Kanji708Character");
 const Kanji709Character =
 /*YAK Extracted CSS:
 .Kanji709Character {
@@ -8529,7 +8529,7 @@ const Kanji709Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji709Character);
+styledYak(JapaneseCard)("Kanji709Character");
 const Kanji710Character =
 /*YAK Extracted CSS:
 .Kanji710Character {
@@ -8541,7 +8541,7 @@ const Kanji710Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji710Character);
+styledYak(JapaneseCard)("Kanji710Character");
 const Kanji711Character =
 /*YAK Extracted CSS:
 .Kanji711Character {
@@ -8553,7 +8553,7 @@ const Kanji711Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji711Character);
+styledYak(JapaneseCard)("Kanji711Character");
 const Kanji712Character =
 /*YAK Extracted CSS:
 .Kanji712Character {
@@ -8565,7 +8565,7 @@ const Kanji712Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji712Character);
+styledYak(JapaneseCard)("Kanji712Character");
 const Kanji713Character =
 /*YAK Extracted CSS:
 .Kanji713Character {
@@ -8577,7 +8577,7 @@ const Kanji713Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji713Character);
+styledYak(JapaneseCard)("Kanji713Character");
 const Kanji714Character =
 /*YAK Extracted CSS:
 .Kanji714Character {
@@ -8589,7 +8589,7 @@ const Kanji714Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji714Character);
+styledYak(JapaneseCard)("Kanji714Character");
 const Kanji715Character =
 /*YAK Extracted CSS:
 .Kanji715Character {
@@ -8601,7 +8601,7 @@ const Kanji715Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji715Character);
+styledYak(JapaneseCard)("Kanji715Character");
 const Kanji716Character =
 /*YAK Extracted CSS:
 .Kanji716Character {
@@ -8613,7 +8613,7 @@ const Kanji716Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji716Character);
+styledYak(JapaneseCard)("Kanji716Character");
 const Kanji717Character =
 /*YAK Extracted CSS:
 .Kanji717Character {
@@ -8625,7 +8625,7 @@ const Kanji717Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji717Character);
+styledYak(JapaneseCard)("Kanji717Character");
 const Kanji718Character =
 /*YAK Extracted CSS:
 .Kanji718Character {
@@ -8637,7 +8637,7 @@ const Kanji718Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji718Character);
+styledYak(JapaneseCard)("Kanji718Character");
 const Kanji719Character =
 /*YAK Extracted CSS:
 .Kanji719Character {
@@ -8649,7 +8649,7 @@ const Kanji719Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji719Character);
+styledYak(JapaneseCard)("Kanji719Character");
 const Kanji720Character =
 /*YAK Extracted CSS:
 .Kanji720Character {
@@ -8661,7 +8661,7 @@ const Kanji720Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji720Character);
+styledYak(JapaneseCard)("Kanji720Character");
 const Kanji721Character =
 /*YAK Extracted CSS:
 .Kanji721Character {
@@ -8673,7 +8673,7 @@ const Kanji721Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji721Character);
+styledYak(JapaneseCard)("Kanji721Character");
 const Kanji722Character =
 /*YAK Extracted CSS:
 .Kanji722Character {
@@ -8685,7 +8685,7 @@ const Kanji722Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji722Character);
+styledYak(JapaneseCard)("Kanji722Character");
 const Kanji723Character =
 /*YAK Extracted CSS:
 .Kanji723Character {
@@ -8697,7 +8697,7 @@ const Kanji723Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji723Character);
+styledYak(JapaneseCard)("Kanji723Character");
 const Kanji724Character =
 /*YAK Extracted CSS:
 .Kanji724Character {
@@ -8709,7 +8709,7 @@ const Kanji724Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji724Character);
+styledYak(JapaneseCard)("Kanji724Character");
 const Kanji725Character =
 /*YAK Extracted CSS:
 .Kanji725Character {
@@ -8721,7 +8721,7 @@ const Kanji725Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji725Character);
+styledYak(JapaneseCard)("Kanji725Character");
 const Kanji726Character =
 /*YAK Extracted CSS:
 .Kanji726Character {
@@ -8733,7 +8733,7 @@ const Kanji726Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji726Character);
+styledYak(JapaneseCard)("Kanji726Character");
 const Kanji727Character =
 /*YAK Extracted CSS:
 .Kanji727Character {
@@ -8745,7 +8745,7 @@ const Kanji727Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji727Character);
+styledYak(JapaneseCard)("Kanji727Character");
 const Kanji728Character =
 /*YAK Extracted CSS:
 .Kanji728Character {
@@ -8757,7 +8757,7 @@ const Kanji728Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji728Character);
+styledYak(JapaneseCard)("Kanji728Character");
 const Kanji729Character =
 /*YAK Extracted CSS:
 .Kanji729Character {
@@ -8769,7 +8769,7 @@ const Kanji729Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji729Character);
+styledYak(JapaneseCard)("Kanji729Character");
 const Kanji730Character =
 /*YAK Extracted CSS:
 .Kanji730Character {
@@ -8781,7 +8781,7 @@ const Kanji730Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji730Character);
+styledYak(JapaneseCard)("Kanji730Character");
 const Kanji731Character =
 /*YAK Extracted CSS:
 .Kanji731Character {
@@ -8793,7 +8793,7 @@ const Kanji731Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji731Character);
+styledYak(JapaneseCard)("Kanji731Character");
 const Kanji732Character =
 /*YAK Extracted CSS:
 .Kanji732Character {
@@ -8805,7 +8805,7 @@ const Kanji732Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji732Character);
+styledYak(JapaneseCard)("Kanji732Character");
 const Kanji733Character =
 /*YAK Extracted CSS:
 .Kanji733Character {
@@ -8817,7 +8817,7 @@ const Kanji733Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji733Character);
+styledYak(JapaneseCard)("Kanji733Character");
 const Kanji734Character =
 /*YAK Extracted CSS:
 .Kanji734Character {
@@ -8829,7 +8829,7 @@ const Kanji734Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji734Character);
+styledYak(JapaneseCard)("Kanji734Character");
 const Kanji735Character =
 /*YAK Extracted CSS:
 .Kanji735Character {
@@ -8841,7 +8841,7 @@ const Kanji735Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji735Character);
+styledYak(JapaneseCard)("Kanji735Character");
 const Kanji736Character =
 /*YAK Extracted CSS:
 .Kanji736Character {
@@ -8853,7 +8853,7 @@ const Kanji736Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji736Character);
+styledYak(JapaneseCard)("Kanji736Character");
 const Kanji737Character =
 /*YAK Extracted CSS:
 .Kanji737Character {
@@ -8865,7 +8865,7 @@ const Kanji737Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji737Character);
+styledYak(JapaneseCard)("Kanji737Character");
 const Kanji738Character =
 /*YAK Extracted CSS:
 .Kanji738Character {
@@ -8877,7 +8877,7 @@ const Kanji738Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji738Character);
+styledYak(JapaneseCard)("Kanji738Character");
 const Kanji739Character =
 /*YAK Extracted CSS:
 .Kanji739Character {
@@ -8889,7 +8889,7 @@ const Kanji739Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji739Character);
+styledYak(JapaneseCard)("Kanji739Character");
 const Kanji740Character =
 /*YAK Extracted CSS:
 .Kanji740Character {
@@ -8901,7 +8901,7 @@ const Kanji740Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji740Character);
+styledYak(JapaneseCard)("Kanji740Character");
 const Kanji741Character =
 /*YAK Extracted CSS:
 .Kanji741Character {
@@ -8913,7 +8913,7 @@ const Kanji741Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji741Character);
+styledYak(JapaneseCard)("Kanji741Character");
 const Kanji742Character =
 /*YAK Extracted CSS:
 .Kanji742Character {
@@ -8925,7 +8925,7 @@ const Kanji742Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji742Character);
+styledYak(JapaneseCard)("Kanji742Character");
 const Kanji743Character =
 /*YAK Extracted CSS:
 .Kanji743Character {
@@ -8937,7 +8937,7 @@ const Kanji743Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji743Character);
+styledYak(JapaneseCard)("Kanji743Character");
 const Kanji744Character =
 /*YAK Extracted CSS:
 .Kanji744Character {
@@ -8949,7 +8949,7 @@ const Kanji744Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji744Character);
+styledYak(JapaneseCard)("Kanji744Character");
 const Kanji745Character =
 /*YAK Extracted CSS:
 .Kanji745Character {
@@ -8961,7 +8961,7 @@ const Kanji745Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji745Character);
+styledYak(JapaneseCard)("Kanji745Character");
 const Kanji746Character =
 /*YAK Extracted CSS:
 .Kanji746Character {
@@ -8973,7 +8973,7 @@ const Kanji746Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji746Character);
+styledYak(JapaneseCard)("Kanji746Character");
 const Kanji747Character =
 /*YAK Extracted CSS:
 .Kanji747Character {
@@ -8985,7 +8985,7 @@ const Kanji747Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji747Character);
+styledYak(JapaneseCard)("Kanji747Character");
 const Kanji748Character =
 /*YAK Extracted CSS:
 .Kanji748Character {
@@ -8997,7 +8997,7 @@ const Kanji748Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji748Character);
+styledYak(JapaneseCard)("Kanji748Character");
 const Kanji749Character =
 /*YAK Extracted CSS:
 .Kanji749Character {
@@ -9009,7 +9009,7 @@ const Kanji749Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji749Character);
+styledYak(JapaneseCard)("Kanji749Character");
 const Kanji750Character =
 /*YAK Extracted CSS:
 .Kanji750Character {
@@ -9021,7 +9021,7 @@ const Kanji750Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji750Character);
+styledYak(JapaneseCard)("Kanji750Character");
 const Kanji751Character =
 /*YAK Extracted CSS:
 .Kanji751Character {
@@ -9033,7 +9033,7 @@ const Kanji751Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji751Character);
+styledYak(JapaneseCard)("Kanji751Character");
 const Kanji752Character =
 /*YAK Extracted CSS:
 .Kanji752Character {
@@ -9045,7 +9045,7 @@ const Kanji752Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji752Character);
+styledYak(JapaneseCard)("Kanji752Character");
 const Kanji753Character =
 /*YAK Extracted CSS:
 .Kanji753Character {
@@ -9057,7 +9057,7 @@ const Kanji753Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji753Character);
+styledYak(JapaneseCard)("Kanji753Character");
 const Kanji754Character =
 /*YAK Extracted CSS:
 .Kanji754Character {
@@ -9069,7 +9069,7 @@ const Kanji754Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji754Character);
+styledYak(JapaneseCard)("Kanji754Character");
 const Kanji755Character =
 /*YAK Extracted CSS:
 .Kanji755Character {
@@ -9081,7 +9081,7 @@ const Kanji755Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji755Character);
+styledYak(JapaneseCard)("Kanji755Character");
 const Kanji756Character =
 /*YAK Extracted CSS:
 .Kanji756Character {
@@ -9093,7 +9093,7 @@ const Kanji756Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji756Character);
+styledYak(JapaneseCard)("Kanji756Character");
 const Kanji757Character =
 /*YAK Extracted CSS:
 .Kanji757Character {
@@ -9105,7 +9105,7 @@ const Kanji757Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji757Character);
+styledYak(JapaneseCard)("Kanji757Character");
 const Kanji758Character =
 /*YAK Extracted CSS:
 .Kanji758Character {
@@ -9117,7 +9117,7 @@ const Kanji758Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji758Character);
+styledYak(JapaneseCard)("Kanji758Character");
 const Kanji759Character =
 /*YAK Extracted CSS:
 .Kanji759Character {
@@ -9129,7 +9129,7 @@ const Kanji759Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji759Character);
+styledYak(JapaneseCard)("Kanji759Character");
 const Kanji760Character =
 /*YAK Extracted CSS:
 .Kanji760Character {
@@ -9141,7 +9141,7 @@ const Kanji760Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji760Character);
+styledYak(JapaneseCard)("Kanji760Character");
 const Kanji761Character =
 /*YAK Extracted CSS:
 .Kanji761Character {
@@ -9153,7 +9153,7 @@ const Kanji761Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji761Character);
+styledYak(JapaneseCard)("Kanji761Character");
 const Kanji762Character =
 /*YAK Extracted CSS:
 .Kanji762Character {
@@ -9165,7 +9165,7 @@ const Kanji762Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji762Character);
+styledYak(JapaneseCard)("Kanji762Character");
 const Kanji763Character =
 /*YAK Extracted CSS:
 .Kanji763Character {
@@ -9177,7 +9177,7 @@ const Kanji763Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji763Character);
+styledYak(JapaneseCard)("Kanji763Character");
 const Kanji764Character =
 /*YAK Extracted CSS:
 .Kanji764Character {
@@ -9189,7 +9189,7 @@ const Kanji764Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji764Character);
+styledYak(JapaneseCard)("Kanji764Character");
 const Kanji765Character =
 /*YAK Extracted CSS:
 .Kanji765Character {
@@ -9201,7 +9201,7 @@ const Kanji765Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji765Character);
+styledYak(JapaneseCard)("Kanji765Character");
 const Kanji766Character =
 /*YAK Extracted CSS:
 .Kanji766Character {
@@ -9213,7 +9213,7 @@ const Kanji766Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji766Character);
+styledYak(JapaneseCard)("Kanji766Character");
 const Kanji767Character =
 /*YAK Extracted CSS:
 .Kanji767Character {
@@ -9225,7 +9225,7 @@ const Kanji767Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji767Character);
+styledYak(JapaneseCard)("Kanji767Character");
 const Kanji768Character =
 /*YAK Extracted CSS:
 .Kanji768Character {
@@ -9237,7 +9237,7 @@ const Kanji768Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji768Character);
+styledYak(JapaneseCard)("Kanji768Character");
 const Kanji769Character =
 /*YAK Extracted CSS:
 .Kanji769Character {
@@ -9249,7 +9249,7 @@ const Kanji769Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji769Character);
+styledYak(JapaneseCard)("Kanji769Character");
 const Kanji770Character =
 /*YAK Extracted CSS:
 .Kanji770Character {
@@ -9261,7 +9261,7 @@ const Kanji770Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji770Character);
+styledYak(JapaneseCard)("Kanji770Character");
 const Kanji771Character =
 /*YAK Extracted CSS:
 .Kanji771Character {
@@ -9273,7 +9273,7 @@ const Kanji771Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji771Character);
+styledYak(JapaneseCard)("Kanji771Character");
 const Kanji772Character =
 /*YAK Extracted CSS:
 .Kanji772Character {
@@ -9285,7 +9285,7 @@ const Kanji772Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji772Character);
+styledYak(JapaneseCard)("Kanji772Character");
 const Kanji773Character =
 /*YAK Extracted CSS:
 .Kanji773Character {
@@ -9297,7 +9297,7 @@ const Kanji773Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji773Character);
+styledYak(JapaneseCard)("Kanji773Character");
 const Kanji774Character =
 /*YAK Extracted CSS:
 .Kanji774Character {
@@ -9309,7 +9309,7 @@ const Kanji774Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji774Character);
+styledYak(JapaneseCard)("Kanji774Character");
 const Kanji775Character =
 /*YAK Extracted CSS:
 .Kanji775Character {
@@ -9321,7 +9321,7 @@ const Kanji775Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji775Character);
+styledYak(JapaneseCard)("Kanji775Character");
 const Kanji776Character =
 /*YAK Extracted CSS:
 .Kanji776Character {
@@ -9333,7 +9333,7 @@ const Kanji776Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji776Character);
+styledYak(JapaneseCard)("Kanji776Character");
 const Kanji777Character =
 /*YAK Extracted CSS:
 .Kanji777Character {
@@ -9345,7 +9345,7 @@ const Kanji777Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji777Character);
+styledYak(JapaneseCard)("Kanji777Character");
 const Kanji778Character =
 /*YAK Extracted CSS:
 .Kanji778Character {
@@ -9357,7 +9357,7 @@ const Kanji778Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji778Character);
+styledYak(JapaneseCard)("Kanji778Character");
 const Kanji779Character =
 /*YAK Extracted CSS:
 .Kanji779Character {
@@ -9369,7 +9369,7 @@ const Kanji779Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji779Character);
+styledYak(JapaneseCard)("Kanji779Character");
 const Kanji780Character =
 /*YAK Extracted CSS:
 .Kanji780Character {
@@ -9381,7 +9381,7 @@ const Kanji780Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji780Character);
+styledYak(JapaneseCard)("Kanji780Character");
 const Kanji781Character =
 /*YAK Extracted CSS:
 .Kanji781Character {
@@ -9393,7 +9393,7 @@ const Kanji781Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji781Character);
+styledYak(JapaneseCard)("Kanji781Character");
 const Kanji782Character =
 /*YAK Extracted CSS:
 .Kanji782Character {
@@ -9405,7 +9405,7 @@ const Kanji782Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji782Character);
+styledYak(JapaneseCard)("Kanji782Character");
 const Kanji783Character =
 /*YAK Extracted CSS:
 .Kanji783Character {
@@ -9417,7 +9417,7 @@ const Kanji783Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji783Character);
+styledYak(JapaneseCard)("Kanji783Character");
 const Kanji784Character =
 /*YAK Extracted CSS:
 .Kanji784Character {
@@ -9429,7 +9429,7 @@ const Kanji784Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji784Character);
+styledYak(JapaneseCard)("Kanji784Character");
 const Kanji785Character =
 /*YAK Extracted CSS:
 .Kanji785Character {
@@ -9441,7 +9441,7 @@ const Kanji785Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji785Character);
+styledYak(JapaneseCard)("Kanji785Character");
 const Kanji786Character =
 /*YAK Extracted CSS:
 .Kanji786Character {
@@ -9453,7 +9453,7 @@ const Kanji786Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji786Character);
+styledYak(JapaneseCard)("Kanji786Character");
 const Kanji787Character =
 /*YAK Extracted CSS:
 .Kanji787Character {
@@ -9465,7 +9465,7 @@ const Kanji787Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji787Character);
+styledYak(JapaneseCard)("Kanji787Character");
 const Kanji788Character =
 /*YAK Extracted CSS:
 .Kanji788Character {
@@ -9477,7 +9477,7 @@ const Kanji788Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji788Character);
+styledYak(JapaneseCard)("Kanji788Character");
 const Kanji789Character =
 /*YAK Extracted CSS:
 .Kanji789Character {
@@ -9489,7 +9489,7 @@ const Kanji789Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji789Character);
+styledYak(JapaneseCard)("Kanji789Character");
 const Kanji790Character =
 /*YAK Extracted CSS:
 .Kanji790Character {
@@ -9501,7 +9501,7 @@ const Kanji790Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji790Character);
+styledYak(JapaneseCard)("Kanji790Character");
 const Kanji791Character =
 /*YAK Extracted CSS:
 .Kanji791Character {
@@ -9513,7 +9513,7 @@ const Kanji791Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji791Character);
+styledYak(JapaneseCard)("Kanji791Character");
 const Kanji792Character =
 /*YAK Extracted CSS:
 .Kanji792Character {
@@ -9525,7 +9525,7 @@ const Kanji792Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji792Character);
+styledYak(JapaneseCard)("Kanji792Character");
 const Kanji793Character =
 /*YAK Extracted CSS:
 .Kanji793Character {
@@ -9537,7 +9537,7 @@ const Kanji793Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji793Character);
+styledYak(JapaneseCard)("Kanji793Character");
 const Kanji794Character =
 /*YAK Extracted CSS:
 .Kanji794Character {
@@ -9549,7 +9549,7 @@ const Kanji794Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji794Character);
+styledYak(JapaneseCard)("Kanji794Character");
 const Kanji795Character =
 /*YAK Extracted CSS:
 .Kanji795Character {
@@ -9561,7 +9561,7 @@ const Kanji795Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji795Character);
+styledYak(JapaneseCard)("Kanji795Character");
 const Kanji796Character =
 /*YAK Extracted CSS:
 .Kanji796Character {
@@ -9573,7 +9573,7 @@ const Kanji796Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji796Character);
+styledYak(JapaneseCard)("Kanji796Character");
 const Kanji797Character =
 /*YAK Extracted CSS:
 .Kanji797Character {
@@ -9585,7 +9585,7 @@ const Kanji797Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji797Character);
+styledYak(JapaneseCard)("Kanji797Character");
 const Kanji798Character =
 /*YAK Extracted CSS:
 .Kanji798Character {
@@ -9597,7 +9597,7 @@ const Kanji798Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji798Character);
+styledYak(JapaneseCard)("Kanji798Character");
 const Kanji799Character =
 /*YAK Extracted CSS:
 .Kanji799Character {
@@ -9609,7 +9609,7 @@ const Kanji799Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji799Character);
+styledYak(JapaneseCard)("Kanji799Character");
 const Kanji800Character =
 /*YAK Extracted CSS:
 .Kanji800Character {
@@ -9621,7 +9621,7 @@ const Kanji800Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji800Character);
+styledYak(JapaneseCard)("Kanji800Character");
 const Kanji801Character =
 /*YAK Extracted CSS:
 .Kanji801Character {
@@ -9633,7 +9633,7 @@ const Kanji801Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji801Character);
+styledYak(JapaneseCard)("Kanji801Character");
 const Kanji802Character =
 /*YAK Extracted CSS:
 .Kanji802Character {
@@ -9645,7 +9645,7 @@ const Kanji802Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji802Character);
+styledYak(JapaneseCard)("Kanji802Character");
 const Kanji803Character =
 /*YAK Extracted CSS:
 .Kanji803Character {
@@ -9657,7 +9657,7 @@ const Kanji803Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji803Character);
+styledYak(JapaneseCard)("Kanji803Character");
 const Kanji804Character =
 /*YAK Extracted CSS:
 .Kanji804Character {
@@ -9669,7 +9669,7 @@ const Kanji804Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji804Character);
+styledYak(JapaneseCard)("Kanji804Character");
 const Kanji805Character =
 /*YAK Extracted CSS:
 .Kanji805Character {
@@ -9681,7 +9681,7 @@ const Kanji805Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji805Character);
+styledYak(JapaneseCard)("Kanji805Character");
 const Kanji806Character =
 /*YAK Extracted CSS:
 .Kanji806Character {
@@ -9693,7 +9693,7 @@ const Kanji806Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji806Character);
+styledYak(JapaneseCard)("Kanji806Character");
 const Kanji807Character =
 /*YAK Extracted CSS:
 .Kanji807Character {
@@ -9705,7 +9705,7 @@ const Kanji807Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji807Character);
+styledYak(JapaneseCard)("Kanji807Character");
 const Kanji808Character =
 /*YAK Extracted CSS:
 .Kanji808Character {
@@ -9717,7 +9717,7 @@ const Kanji808Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji808Character);
+styledYak(JapaneseCard)("Kanji808Character");
 const Kanji809Character =
 /*YAK Extracted CSS:
 .Kanji809Character {
@@ -9729,7 +9729,7 @@ const Kanji809Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji809Character);
+styledYak(JapaneseCard)("Kanji809Character");
 const Kanji810Character =
 /*YAK Extracted CSS:
 .Kanji810Character {
@@ -9741,7 +9741,7 @@ const Kanji810Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji810Character);
+styledYak(JapaneseCard)("Kanji810Character");
 const Kanji811Character =
 /*YAK Extracted CSS:
 .Kanji811Character {
@@ -9753,7 +9753,7 @@ const Kanji811Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji811Character);
+styledYak(JapaneseCard)("Kanji811Character");
 const Kanji812Character =
 /*YAK Extracted CSS:
 .Kanji812Character {
@@ -9765,7 +9765,7 @@ const Kanji812Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji812Character);
+styledYak(JapaneseCard)("Kanji812Character");
 const Kanji813Character =
 /*YAK Extracted CSS:
 .Kanji813Character {
@@ -9777,7 +9777,7 @@ const Kanji813Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji813Character);
+styledYak(JapaneseCard)("Kanji813Character");
 const Kanji814Character =
 /*YAK Extracted CSS:
 .Kanji814Character {
@@ -9789,7 +9789,7 @@ const Kanji814Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji814Character);
+styledYak(JapaneseCard)("Kanji814Character");
 const Kanji815Character =
 /*YAK Extracted CSS:
 .Kanji815Character {
@@ -9801,7 +9801,7 @@ const Kanji815Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji815Character);
+styledYak(JapaneseCard)("Kanji815Character");
 const Kanji816Character =
 /*YAK Extracted CSS:
 .Kanji816Character {
@@ -9813,7 +9813,7 @@ const Kanji816Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji816Character);
+styledYak(JapaneseCard)("Kanji816Character");
 const Kanji817Character =
 /*YAK Extracted CSS:
 .Kanji817Character {
@@ -9825,7 +9825,7 @@ const Kanji817Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji817Character);
+styledYak(JapaneseCard)("Kanji817Character");
 const Kanji818Character =
 /*YAK Extracted CSS:
 .Kanji818Character {
@@ -9837,7 +9837,7 @@ const Kanji818Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji818Character);
+styledYak(JapaneseCard)("Kanji818Character");
 const Kanji819Character =
 /*YAK Extracted CSS:
 .Kanji819Character {
@@ -9849,7 +9849,7 @@ const Kanji819Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji819Character);
+styledYak(JapaneseCard)("Kanji819Character");
 const Kanji820Character =
 /*YAK Extracted CSS:
 .Kanji820Character {
@@ -9861,7 +9861,7 @@ const Kanji820Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji820Character);
+styledYak(JapaneseCard)("Kanji820Character");
 const Kanji821Character =
 /*YAK Extracted CSS:
 .Kanji821Character {
@@ -9873,7 +9873,7 @@ const Kanji821Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji821Character);
+styledYak(JapaneseCard)("Kanji821Character");
 const Kanji822Character =
 /*YAK Extracted CSS:
 .Kanji822Character {
@@ -9885,7 +9885,7 @@ const Kanji822Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji822Character);
+styledYak(JapaneseCard)("Kanji822Character");
 const Kanji823Character =
 /*YAK Extracted CSS:
 .Kanji823Character {
@@ -9897,7 +9897,7 @@ const Kanji823Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji823Character);
+styledYak(JapaneseCard)("Kanji823Character");
 const Kanji824Character =
 /*YAK Extracted CSS:
 .Kanji824Character {
@@ -9909,7 +9909,7 @@ const Kanji824Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji824Character);
+styledYak(JapaneseCard)("Kanji824Character");
 const Kanji825Character =
 /*YAK Extracted CSS:
 .Kanji825Character {
@@ -9921,7 +9921,7 @@ const Kanji825Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji825Character);
+styledYak(JapaneseCard)("Kanji825Character");
 const Kanji826Character =
 /*YAK Extracted CSS:
 .Kanji826Character {
@@ -9933,7 +9933,7 @@ const Kanji826Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji826Character);
+styledYak(JapaneseCard)("Kanji826Character");
 const Kanji827Character =
 /*YAK Extracted CSS:
 .Kanji827Character {
@@ -9945,7 +9945,7 @@ const Kanji827Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji827Character);
+styledYak(JapaneseCard)("Kanji827Character");
 const Kanji828Character =
 /*YAK Extracted CSS:
 .Kanji828Character {
@@ -9957,7 +9957,7 @@ const Kanji828Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji828Character);
+styledYak(JapaneseCard)("Kanji828Character");
 const Kanji829Character =
 /*YAK Extracted CSS:
 .Kanji829Character {
@@ -9969,7 +9969,7 @@ const Kanji829Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji829Character);
+styledYak(JapaneseCard)("Kanji829Character");
 const Kanji830Character =
 /*YAK Extracted CSS:
 .Kanji830Character {
@@ -9981,7 +9981,7 @@ const Kanji830Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji830Character);
+styledYak(JapaneseCard)("Kanji830Character");
 const Kanji831Character =
 /*YAK Extracted CSS:
 .Kanji831Character {
@@ -9993,7 +9993,7 @@ const Kanji831Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji831Character);
+styledYak(JapaneseCard)("Kanji831Character");
 const Kanji832Character =
 /*YAK Extracted CSS:
 .Kanji832Character {
@@ -10005,7 +10005,7 @@ const Kanji832Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji832Character);
+styledYak(JapaneseCard)("Kanji832Character");
 const Kanji833Character =
 /*YAK Extracted CSS:
 .Kanji833Character {
@@ -10017,7 +10017,7 @@ const Kanji833Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji833Character);
+styledYak(JapaneseCard)("Kanji833Character");
 const Kanji834Character =
 /*YAK Extracted CSS:
 .Kanji834Character {
@@ -10029,7 +10029,7 @@ const Kanji834Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji834Character);
+styledYak(JapaneseCard)("Kanji834Character");
 const Kanji835Character =
 /*YAK Extracted CSS:
 .Kanji835Character {
@@ -10041,7 +10041,7 @@ const Kanji835Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji835Character);
+styledYak(JapaneseCard)("Kanji835Character");
 const Kanji836Character =
 /*YAK Extracted CSS:
 .Kanji836Character {
@@ -10053,7 +10053,7 @@ const Kanji836Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji836Character);
+styledYak(JapaneseCard)("Kanji836Character");
 const Kanji837Character =
 /*YAK Extracted CSS:
 .Kanji837Character {
@@ -10065,7 +10065,7 @@ const Kanji837Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji837Character);
+styledYak(JapaneseCard)("Kanji837Character");
 const Kanji838Character =
 /*YAK Extracted CSS:
 .Kanji838Character {
@@ -10077,7 +10077,7 @@ const Kanji838Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji838Character);
+styledYak(JapaneseCard)("Kanji838Character");
 const Kanji839Character =
 /*YAK Extracted CSS:
 .Kanji839Character {
@@ -10089,7 +10089,7 @@ const Kanji839Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji839Character);
+styledYak(JapaneseCard)("Kanji839Character");
 const Kanji840Character =
 /*YAK Extracted CSS:
 .Kanji840Character {
@@ -10101,7 +10101,7 @@ const Kanji840Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji840Character);
+styledYak(JapaneseCard)("Kanji840Character");
 const Kanji841Character =
 /*YAK Extracted CSS:
 .Kanji841Character {
@@ -10113,7 +10113,7 @@ const Kanji841Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji841Character);
+styledYak(JapaneseCard)("Kanji841Character");
 const Kanji842Character =
 /*YAK Extracted CSS:
 .Kanji842Character {
@@ -10125,7 +10125,7 @@ const Kanji842Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji842Character);
+styledYak(JapaneseCard)("Kanji842Character");
 const Kanji843Character =
 /*YAK Extracted CSS:
 .Kanji843Character {
@@ -10137,7 +10137,7 @@ const Kanji843Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji843Character);
+styledYak(JapaneseCard)("Kanji843Character");
 const Kanji844Character =
 /*YAK Extracted CSS:
 .Kanji844Character {
@@ -10149,7 +10149,7 @@ const Kanji844Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji844Character);
+styledYak(JapaneseCard)("Kanji844Character");
 const Kanji845Character =
 /*YAK Extracted CSS:
 .Kanji845Character {
@@ -10161,7 +10161,7 @@ const Kanji845Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji845Character);
+styledYak(JapaneseCard)("Kanji845Character");
 const Kanji846Character =
 /*YAK Extracted CSS:
 .Kanji846Character {
@@ -10173,7 +10173,7 @@ const Kanji846Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji846Character);
+styledYak(JapaneseCard)("Kanji846Character");
 const Kanji847Character =
 /*YAK Extracted CSS:
 .Kanji847Character {
@@ -10185,7 +10185,7 @@ const Kanji847Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji847Character);
+styledYak(JapaneseCard)("Kanji847Character");
 const Kanji848Character =
 /*YAK Extracted CSS:
 .Kanji848Character {
@@ -10197,7 +10197,7 @@ const Kanji848Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji848Character);
+styledYak(JapaneseCard)("Kanji848Character");
 const Kanji849Character =
 /*YAK Extracted CSS:
 .Kanji849Character {
@@ -10209,7 +10209,7 @@ const Kanji849Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji849Character);
+styledYak(JapaneseCard)("Kanji849Character");
 const Kanji850Character =
 /*YAK Extracted CSS:
 .Kanji850Character {
@@ -10221,7 +10221,7 @@ const Kanji850Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji850Character);
+styledYak(JapaneseCard)("Kanji850Character");
 const Kanji851Character =
 /*YAK Extracted CSS:
 .Kanji851Character {
@@ -10233,7 +10233,7 @@ const Kanji851Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji851Character);
+styledYak(JapaneseCard)("Kanji851Character");
 const Kanji852Character =
 /*YAK Extracted CSS:
 .Kanji852Character {
@@ -10245,7 +10245,7 @@ const Kanji852Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji852Character);
+styledYak(JapaneseCard)("Kanji852Character");
 const Kanji853Character =
 /*YAK Extracted CSS:
 .Kanji853Character {
@@ -10257,7 +10257,7 @@ const Kanji853Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji853Character);
+styledYak(JapaneseCard)("Kanji853Character");
 const Kanji854Character =
 /*YAK Extracted CSS:
 .Kanji854Character {
@@ -10269,7 +10269,7 @@ const Kanji854Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji854Character);
+styledYak(JapaneseCard)("Kanji854Character");
 const Kanji855Character =
 /*YAK Extracted CSS:
 .Kanji855Character {
@@ -10281,7 +10281,7 @@ const Kanji855Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji855Character);
+styledYak(JapaneseCard)("Kanji855Character");
 const Kanji856Character =
 /*YAK Extracted CSS:
 .Kanji856Character {
@@ -10293,7 +10293,7 @@ const Kanji856Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji856Character);
+styledYak(JapaneseCard)("Kanji856Character");
 const Kanji857Character =
 /*YAK Extracted CSS:
 .Kanji857Character {
@@ -10305,7 +10305,7 @@ const Kanji857Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji857Character);
+styledYak(JapaneseCard)("Kanji857Character");
 const Kanji858Character =
 /*YAK Extracted CSS:
 .Kanji858Character {
@@ -10317,7 +10317,7 @@ const Kanji858Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji858Character);
+styledYak(JapaneseCard)("Kanji858Character");
 const Kanji859Character =
 /*YAK Extracted CSS:
 .Kanji859Character {
@@ -10329,7 +10329,7 @@ const Kanji859Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji859Character);
+styledYak(JapaneseCard)("Kanji859Character");
 const Kanji860Character =
 /*YAK Extracted CSS:
 .Kanji860Character {
@@ -10341,7 +10341,7 @@ const Kanji860Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji860Character);
+styledYak(JapaneseCard)("Kanji860Character");
 const Kanji861Character =
 /*YAK Extracted CSS:
 .Kanji861Character {
@@ -10353,7 +10353,7 @@ const Kanji861Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji861Character);
+styledYak(JapaneseCard)("Kanji861Character");
 const Kanji862Character =
 /*YAK Extracted CSS:
 .Kanji862Character {
@@ -10365,7 +10365,7 @@ const Kanji862Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji862Character);
+styledYak(JapaneseCard)("Kanji862Character");
 const Kanji863Character =
 /*YAK Extracted CSS:
 .Kanji863Character {
@@ -10377,7 +10377,7 @@ const Kanji863Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji863Character);
+styledYak(JapaneseCard)("Kanji863Character");
 const Kanji864Character =
 /*YAK Extracted CSS:
 .Kanji864Character {
@@ -10389,7 +10389,7 @@ const Kanji864Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji864Character);
+styledYak(JapaneseCard)("Kanji864Character");
 const Kanji865Character =
 /*YAK Extracted CSS:
 .Kanji865Character {
@@ -10401,7 +10401,7 @@ const Kanji865Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji865Character);
+styledYak(JapaneseCard)("Kanji865Character");
 const Kanji866Character =
 /*YAK Extracted CSS:
 .Kanji866Character {
@@ -10413,7 +10413,7 @@ const Kanji866Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji866Character);
+styledYak(JapaneseCard)("Kanji866Character");
 const Kanji867Character =
 /*YAK Extracted CSS:
 .Kanji867Character {
@@ -10425,7 +10425,7 @@ const Kanji867Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji867Character);
+styledYak(JapaneseCard)("Kanji867Character");
 const Kanji868Character =
 /*YAK Extracted CSS:
 .Kanji868Character {
@@ -10437,7 +10437,7 @@ const Kanji868Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji868Character);
+styledYak(JapaneseCard)("Kanji868Character");
 const Kanji869Character =
 /*YAK Extracted CSS:
 .Kanji869Character {
@@ -10449,7 +10449,7 @@ const Kanji869Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji869Character);
+styledYak(JapaneseCard)("Kanji869Character");
 const Kanji870Character =
 /*YAK Extracted CSS:
 .Kanji870Character {
@@ -10461,7 +10461,7 @@ const Kanji870Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji870Character);
+styledYak(JapaneseCard)("Kanji870Character");
 const Kanji871Character =
 /*YAK Extracted CSS:
 .Kanji871Character {
@@ -10473,7 +10473,7 @@ const Kanji871Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji871Character);
+styledYak(JapaneseCard)("Kanji871Character");
 const Kanji872Character =
 /*YAK Extracted CSS:
 .Kanji872Character {
@@ -10485,7 +10485,7 @@ const Kanji872Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji872Character);
+styledYak(JapaneseCard)("Kanji872Character");
 const Kanji873Character =
 /*YAK Extracted CSS:
 .Kanji873Character {
@@ -10497,7 +10497,7 @@ const Kanji873Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji873Character);
+styledYak(JapaneseCard)("Kanji873Character");
 const Kanji874Character =
 /*YAK Extracted CSS:
 .Kanji874Character {
@@ -10509,7 +10509,7 @@ const Kanji874Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji874Character);
+styledYak(JapaneseCard)("Kanji874Character");
 const Kanji875Character =
 /*YAK Extracted CSS:
 .Kanji875Character {
@@ -10521,7 +10521,7 @@ const Kanji875Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji875Character);
+styledYak(JapaneseCard)("Kanji875Character");
 const Kanji876Character =
 /*YAK Extracted CSS:
 .Kanji876Character {
@@ -10533,7 +10533,7 @@ const Kanji876Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji876Character);
+styledYak(JapaneseCard)("Kanji876Character");
 const Kanji877Character =
 /*YAK Extracted CSS:
 .Kanji877Character {
@@ -10545,7 +10545,7 @@ const Kanji877Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji877Character);
+styledYak(JapaneseCard)("Kanji877Character");
 const Kanji878Character =
 /*YAK Extracted CSS:
 .Kanji878Character {
@@ -10557,7 +10557,7 @@ const Kanji878Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji878Character);
+styledYak(JapaneseCard)("Kanji878Character");
 const Kanji879Character =
 /*YAK Extracted CSS:
 .Kanji879Character {
@@ -10569,7 +10569,7 @@ const Kanji879Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji879Character);
+styledYak(JapaneseCard)("Kanji879Character");
 const Kanji880Character =
 /*YAK Extracted CSS:
 .Kanji880Character {
@@ -10581,7 +10581,7 @@ const Kanji880Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji880Character);
+styledYak(JapaneseCard)("Kanji880Character");
 const Kanji881Character =
 /*YAK Extracted CSS:
 .Kanji881Character {
@@ -10593,7 +10593,7 @@ const Kanji881Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji881Character);
+styledYak(JapaneseCard)("Kanji881Character");
 const Kanji882Character =
 /*YAK Extracted CSS:
 .Kanji882Character {
@@ -10605,7 +10605,7 @@ const Kanji882Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji882Character);
+styledYak(JapaneseCard)("Kanji882Character");
 const Kanji883Character =
 /*YAK Extracted CSS:
 .Kanji883Character {
@@ -10617,7 +10617,7 @@ const Kanji883Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji883Character);
+styledYak(JapaneseCard)("Kanji883Character");
 const Kanji884Character =
 /*YAK Extracted CSS:
 .Kanji884Character {
@@ -10629,7 +10629,7 @@ const Kanji884Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji884Character);
+styledYak(JapaneseCard)("Kanji884Character");
 const Kanji885Character =
 /*YAK Extracted CSS:
 .Kanji885Character {
@@ -10641,7 +10641,7 @@ const Kanji885Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji885Character);
+styledYak(JapaneseCard)("Kanji885Character");
 const Kanji886Character =
 /*YAK Extracted CSS:
 .Kanji886Character {
@@ -10653,7 +10653,7 @@ const Kanji886Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji886Character);
+styledYak(JapaneseCard)("Kanji886Character");
 const Kanji887Character =
 /*YAK Extracted CSS:
 .Kanji887Character {
@@ -10665,7 +10665,7 @@ const Kanji887Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji887Character);
+styledYak(JapaneseCard)("Kanji887Character");
 const Kanji888Character =
 /*YAK Extracted CSS:
 .Kanji888Character {
@@ -10677,7 +10677,7 @@ const Kanji888Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji888Character);
+styledYak(JapaneseCard)("Kanji888Character");
 const Kanji889Character =
 /*YAK Extracted CSS:
 .Kanji889Character {
@@ -10689,7 +10689,7 @@ const Kanji889Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji889Character);
+styledYak(JapaneseCard)("Kanji889Character");
 const Kanji890Character =
 /*YAK Extracted CSS:
 .Kanji890Character {
@@ -10701,7 +10701,7 @@ const Kanji890Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji890Character);
+styledYak(JapaneseCard)("Kanji890Character");
 const Kanji891Character =
 /*YAK Extracted CSS:
 .Kanji891Character {
@@ -10713,7 +10713,7 @@ const Kanji891Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji891Character);
+styledYak(JapaneseCard)("Kanji891Character");
 const Kanji892Character =
 /*YAK Extracted CSS:
 .Kanji892Character {
@@ -10725,7 +10725,7 @@ const Kanji892Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji892Character);
+styledYak(JapaneseCard)("Kanji892Character");
 const Kanji893Character =
 /*YAK Extracted CSS:
 .Kanji893Character {
@@ -10737,7 +10737,7 @@ const Kanji893Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji893Character);
+styledYak(JapaneseCard)("Kanji893Character");
 const Kanji894Character =
 /*YAK Extracted CSS:
 .Kanji894Character {
@@ -10749,7 +10749,7 @@ const Kanji894Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji894Character);
+styledYak(JapaneseCard)("Kanji894Character");
 const Kanji895Character =
 /*YAK Extracted CSS:
 .Kanji895Character {
@@ -10761,7 +10761,7 @@ const Kanji895Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji895Character);
+styledYak(JapaneseCard)("Kanji895Character");
 const Kanji896Character =
 /*YAK Extracted CSS:
 .Kanji896Character {
@@ -10773,7 +10773,7 @@ const Kanji896Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji896Character);
+styledYak(JapaneseCard)("Kanji896Character");
 const Kanji897Character =
 /*YAK Extracted CSS:
 .Kanji897Character {
@@ -10785,7 +10785,7 @@ const Kanji897Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji897Character);
+styledYak(JapaneseCard)("Kanji897Character");
 const Kanji898Character =
 /*YAK Extracted CSS:
 .Kanji898Character {
@@ -10797,7 +10797,7 @@ const Kanji898Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji898Character);
+styledYak(JapaneseCard)("Kanji898Character");
 const Kanji899Character =
 /*YAK Extracted CSS:
 .Kanji899Character {
@@ -10809,7 +10809,7 @@ const Kanji899Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji899Character);
+styledYak(JapaneseCard)("Kanji899Character");
 const Kanji900Character =
 /*YAK Extracted CSS:
 .Kanji900Character {
@@ -10821,7 +10821,7 @@ const Kanji900Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji900Character);
+styledYak(JapaneseCard)("Kanji900Character");
 const Kanji901Character =
 /*YAK Extracted CSS:
 .Kanji901Character {
@@ -10833,7 +10833,7 @@ const Kanji901Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji901Character);
+styledYak(JapaneseCard)("Kanji901Character");
 const Kanji902Character =
 /*YAK Extracted CSS:
 .Kanji902Character {
@@ -10845,7 +10845,7 @@ const Kanji902Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji902Character);
+styledYak(JapaneseCard)("Kanji902Character");
 const Kanji903Character =
 /*YAK Extracted CSS:
 .Kanji903Character {
@@ -10857,7 +10857,7 @@ const Kanji903Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji903Character);
+styledYak(JapaneseCard)("Kanji903Character");
 const Kanji904Character =
 /*YAK Extracted CSS:
 .Kanji904Character {
@@ -10869,7 +10869,7 @@ const Kanji904Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji904Character);
+styledYak(JapaneseCard)("Kanji904Character");
 const Kanji905Character =
 /*YAK Extracted CSS:
 .Kanji905Character {
@@ -10881,7 +10881,7 @@ const Kanji905Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji905Character);
+styledYak(JapaneseCard)("Kanji905Character");
 const Kanji906Character =
 /*YAK Extracted CSS:
 .Kanji906Character {
@@ -10893,7 +10893,7 @@ const Kanji906Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji906Character);
+styledYak(JapaneseCard)("Kanji906Character");
 const Kanji907Character =
 /*YAK Extracted CSS:
 .Kanji907Character {
@@ -10905,7 +10905,7 @@ const Kanji907Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji907Character);
+styledYak(JapaneseCard)("Kanji907Character");
 const Kanji908Character =
 /*YAK Extracted CSS:
 .Kanji908Character {
@@ -10917,7 +10917,7 @@ const Kanji908Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji908Character);
+styledYak(JapaneseCard)("Kanji908Character");
 const Kanji909Character =
 /*YAK Extracted CSS:
 .Kanji909Character {
@@ -10929,7 +10929,7 @@ const Kanji909Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji909Character);
+styledYak(JapaneseCard)("Kanji909Character");
 const Kanji910Character =
 /*YAK Extracted CSS:
 .Kanji910Character {
@@ -10941,7 +10941,7 @@ const Kanji910Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji910Character);
+styledYak(JapaneseCard)("Kanji910Character");
 const Kanji911Character =
 /*YAK Extracted CSS:
 .Kanji911Character {
@@ -10953,7 +10953,7 @@ const Kanji911Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji911Character);
+styledYak(JapaneseCard)("Kanji911Character");
 const Kanji912Character =
 /*YAK Extracted CSS:
 .Kanji912Character {
@@ -10965,7 +10965,7 @@ const Kanji912Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji912Character);
+styledYak(JapaneseCard)("Kanji912Character");
 const Kanji913Character =
 /*YAK Extracted CSS:
 .Kanji913Character {
@@ -10977,7 +10977,7 @@ const Kanji913Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji913Character);
+styledYak(JapaneseCard)("Kanji913Character");
 const Kanji914Character =
 /*YAK Extracted CSS:
 .Kanji914Character {
@@ -10989,7 +10989,7 @@ const Kanji914Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji914Character);
+styledYak(JapaneseCard)("Kanji914Character");
 const Kanji915Character =
 /*YAK Extracted CSS:
 .Kanji915Character {
@@ -11001,7 +11001,7 @@ const Kanji915Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji915Character);
+styledYak(JapaneseCard)("Kanji915Character");
 const Kanji916Character =
 /*YAK Extracted CSS:
 .Kanji916Character {
@@ -11013,7 +11013,7 @@ const Kanji916Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji916Character);
+styledYak(JapaneseCard)("Kanji916Character");
 const Kanji917Character =
 /*YAK Extracted CSS:
 .Kanji917Character {
@@ -11025,7 +11025,7 @@ const Kanji917Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji917Character);
+styledYak(JapaneseCard)("Kanji917Character");
 const Kanji918Character =
 /*YAK Extracted CSS:
 .Kanji918Character {
@@ -11037,7 +11037,7 @@ const Kanji918Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji918Character);
+styledYak(JapaneseCard)("Kanji918Character");
 const Kanji919Character =
 /*YAK Extracted CSS:
 .Kanji919Character {
@@ -11049,7 +11049,7 @@ const Kanji919Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji919Character);
+styledYak(JapaneseCard)("Kanji919Character");
 const Kanji920Character =
 /*YAK Extracted CSS:
 .Kanji920Character {
@@ -11061,7 +11061,7 @@ const Kanji920Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji920Character);
+styledYak(JapaneseCard)("Kanji920Character");
 const Kanji921Character =
 /*YAK Extracted CSS:
 .Kanji921Character {
@@ -11073,7 +11073,7 @@ const Kanji921Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji921Character);
+styledYak(JapaneseCard)("Kanji921Character");
 const Kanji922Character =
 /*YAK Extracted CSS:
 .Kanji922Character {
@@ -11085,7 +11085,7 @@ const Kanji922Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji922Character);
+styledYak(JapaneseCard)("Kanji922Character");
 const Kanji923Character =
 /*YAK Extracted CSS:
 .Kanji923Character {
@@ -11097,7 +11097,7 @@ const Kanji923Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji923Character);
+styledYak(JapaneseCard)("Kanji923Character");
 const Kanji924Character =
 /*YAK Extracted CSS:
 .Kanji924Character {
@@ -11109,7 +11109,7 @@ const Kanji924Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji924Character);
+styledYak(JapaneseCard)("Kanji924Character");
 const Kanji925Character =
 /*YAK Extracted CSS:
 .Kanji925Character {
@@ -11121,7 +11121,7 @@ const Kanji925Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji925Character);
+styledYak(JapaneseCard)("Kanji925Character");
 const Kanji926Character =
 /*YAK Extracted CSS:
 .Kanji926Character {
@@ -11133,7 +11133,7 @@ const Kanji926Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji926Character);
+styledYak(JapaneseCard)("Kanji926Character");
 const Kanji927Character =
 /*YAK Extracted CSS:
 .Kanji927Character {
@@ -11145,7 +11145,7 @@ const Kanji927Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji927Character);
+styledYak(JapaneseCard)("Kanji927Character");
 const Kanji928Character =
 /*YAK Extracted CSS:
 .Kanji928Character {
@@ -11157,7 +11157,7 @@ const Kanji928Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji928Character);
+styledYak(JapaneseCard)("Kanji928Character");
 const Kanji929Character =
 /*YAK Extracted CSS:
 .Kanji929Character {
@@ -11169,7 +11169,7 @@ const Kanji929Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji929Character);
+styledYak(JapaneseCard)("Kanji929Character");
 const Kanji930Character =
 /*YAK Extracted CSS:
 .Kanji930Character {
@@ -11181,7 +11181,7 @@ const Kanji930Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji930Character);
+styledYak(JapaneseCard)("Kanji930Character");
 const Kanji931Character =
 /*YAK Extracted CSS:
 .Kanji931Character {
@@ -11193,7 +11193,7 @@ const Kanji931Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji931Character);
+styledYak(JapaneseCard)("Kanji931Character");
 const Kanji932Character =
 /*YAK Extracted CSS:
 .Kanji932Character {
@@ -11205,7 +11205,7 @@ const Kanji932Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji932Character);
+styledYak(JapaneseCard)("Kanji932Character");
 const Kanji933Character =
 /*YAK Extracted CSS:
 .Kanji933Character {
@@ -11217,7 +11217,7 @@ const Kanji933Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji933Character);
+styledYak(JapaneseCard)("Kanji933Character");
 const Kanji934Character =
 /*YAK Extracted CSS:
 .Kanji934Character {
@@ -11229,7 +11229,7 @@ const Kanji934Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji934Character);
+styledYak(JapaneseCard)("Kanji934Character");
 const Kanji935Character =
 /*YAK Extracted CSS:
 .Kanji935Character {
@@ -11241,7 +11241,7 @@ const Kanji935Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji935Character);
+styledYak(JapaneseCard)("Kanji935Character");
 const Kanji936Character =
 /*YAK Extracted CSS:
 .Kanji936Character {
@@ -11253,7 +11253,7 @@ const Kanji936Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji936Character);
+styledYak(JapaneseCard)("Kanji936Character");
 const Kanji937Character =
 /*YAK Extracted CSS:
 .Kanji937Character {
@@ -11265,7 +11265,7 @@ const Kanji937Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji937Character);
+styledYak(JapaneseCard)("Kanji937Character");
 const Kanji938Character =
 /*YAK Extracted CSS:
 .Kanji938Character {
@@ -11277,7 +11277,7 @@ const Kanji938Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji938Character);
+styledYak(JapaneseCard)("Kanji938Character");
 const Kanji939Character =
 /*YAK Extracted CSS:
 .Kanji939Character {
@@ -11289,7 +11289,7 @@ const Kanji939Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji939Character);
+styledYak(JapaneseCard)("Kanji939Character");
 const Kanji940Character =
 /*YAK Extracted CSS:
 .Kanji940Character {
@@ -11301,7 +11301,7 @@ const Kanji940Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji940Character);
+styledYak(JapaneseCard)("Kanji940Character");
 const Kanji941Character =
 /*YAK Extracted CSS:
 .Kanji941Character {
@@ -11313,7 +11313,7 @@ const Kanji941Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji941Character);
+styledYak(JapaneseCard)("Kanji941Character");
 const Kanji942Character =
 /*YAK Extracted CSS:
 .Kanji942Character {
@@ -11325,7 +11325,7 @@ const Kanji942Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji942Character);
+styledYak(JapaneseCard)("Kanji942Character");
 const Kanji943Character =
 /*YAK Extracted CSS:
 .Kanji943Character {
@@ -11337,7 +11337,7 @@ const Kanji943Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji943Character);
+styledYak(JapaneseCard)("Kanji943Character");
 const Kanji944Character =
 /*YAK Extracted CSS:
 .Kanji944Character {
@@ -11349,7 +11349,7 @@ const Kanji944Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji944Character);
+styledYak(JapaneseCard)("Kanji944Character");
 const Kanji945Character =
 /*YAK Extracted CSS:
 .Kanji945Character {
@@ -11361,7 +11361,7 @@ const Kanji945Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji945Character);
+styledYak(JapaneseCard)("Kanji945Character");
 const Kanji946Character =
 /*YAK Extracted CSS:
 .Kanji946Character {
@@ -11373,7 +11373,7 @@ const Kanji946Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji946Character);
+styledYak(JapaneseCard)("Kanji946Character");
 const Kanji947Character =
 /*YAK Extracted CSS:
 .Kanji947Character {
@@ -11385,7 +11385,7 @@ const Kanji947Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji947Character);
+styledYak(JapaneseCard)("Kanji947Character");
 const Kanji948Character =
 /*YAK Extracted CSS:
 .Kanji948Character {
@@ -11397,7 +11397,7 @@ const Kanji948Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji948Character);
+styledYak(JapaneseCard)("Kanji948Character");
 const Kanji949Character =
 /*YAK Extracted CSS:
 .Kanji949Character {
@@ -11409,7 +11409,7 @@ const Kanji949Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji949Character);
+styledYak(JapaneseCard)("Kanji949Character");
 const Kanji950Character =
 /*YAK Extracted CSS:
 .Kanji950Character {
@@ -11421,7 +11421,7 @@ const Kanji950Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji950Character);
+styledYak(JapaneseCard)("Kanji950Character");
 const Kanji951Character =
 /*YAK Extracted CSS:
 .Kanji951Character {
@@ -11433,7 +11433,7 @@ const Kanji951Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji951Character);
+styledYak(JapaneseCard)("Kanji951Character");
 const Kanji952Character =
 /*YAK Extracted CSS:
 .Kanji952Character {
@@ -11445,7 +11445,7 @@ const Kanji952Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji952Character);
+styledYak(JapaneseCard)("Kanji952Character");
 const Kanji953Character =
 /*YAK Extracted CSS:
 .Kanji953Character {
@@ -11457,7 +11457,7 @@ const Kanji953Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji953Character);
+styledYak(JapaneseCard)("Kanji953Character");
 const Kanji954Character =
 /*YAK Extracted CSS:
 .Kanji954Character {
@@ -11469,7 +11469,7 @@ const Kanji954Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji954Character);
+styledYak(JapaneseCard)("Kanji954Character");
 const Kanji955Character =
 /*YAK Extracted CSS:
 .Kanji955Character {
@@ -11481,7 +11481,7 @@ const Kanji955Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji955Character);
+styledYak(JapaneseCard)("Kanji955Character");
 const Kanji956Character =
 /*YAK Extracted CSS:
 .Kanji956Character {
@@ -11493,7 +11493,7 @@ const Kanji956Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji956Character);
+styledYak(JapaneseCard)("Kanji956Character");
 const Kanji957Character =
 /*YAK Extracted CSS:
 .Kanji957Character {
@@ -11505,7 +11505,7 @@ const Kanji957Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji957Character);
+styledYak(JapaneseCard)("Kanji957Character");
 const Kanji958Character =
 /*YAK Extracted CSS:
 .Kanji958Character {
@@ -11517,7 +11517,7 @@ const Kanji958Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji958Character);
+styledYak(JapaneseCard)("Kanji958Character");
 const Kanji959Character =
 /*YAK Extracted CSS:
 .Kanji959Character {
@@ -11529,7 +11529,7 @@ const Kanji959Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji959Character);
+styledYak(JapaneseCard)("Kanji959Character");
 const Kanji960Character =
 /*YAK Extracted CSS:
 .Kanji960Character {
@@ -11541,7 +11541,7 @@ const Kanji960Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji960Character);
+styledYak(JapaneseCard)("Kanji960Character");
 const Kanji961Character =
 /*YAK Extracted CSS:
 .Kanji961Character {
@@ -11553,7 +11553,7 @@ const Kanji961Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji961Character);
+styledYak(JapaneseCard)("Kanji961Character");
 const Kanji962Character =
 /*YAK Extracted CSS:
 .Kanji962Character {
@@ -11565,7 +11565,7 @@ const Kanji962Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji962Character);
+styledYak(JapaneseCard)("Kanji962Character");
 const Kanji963Character =
 /*YAK Extracted CSS:
 .Kanji963Character {
@@ -11577,7 +11577,7 @@ const Kanji963Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji963Character);
+styledYak(JapaneseCard)("Kanji963Character");
 const Kanji964Character =
 /*YAK Extracted CSS:
 .Kanji964Character {
@@ -11589,7 +11589,7 @@ const Kanji964Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji964Character);
+styledYak(JapaneseCard)("Kanji964Character");
 const Kanji965Character =
 /*YAK Extracted CSS:
 .Kanji965Character {
@@ -11601,7 +11601,7 @@ const Kanji965Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji965Character);
+styledYak(JapaneseCard)("Kanji965Character");
 const Kanji966Character =
 /*YAK Extracted CSS:
 .Kanji966Character {
@@ -11613,7 +11613,7 @@ const Kanji966Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji966Character);
+styledYak(JapaneseCard)("Kanji966Character");
 const Kanji967Character =
 /*YAK Extracted CSS:
 .Kanji967Character {
@@ -11625,7 +11625,7 @@ const Kanji967Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji967Character);
+styledYak(JapaneseCard)("Kanji967Character");
 const Kanji968Character =
 /*YAK Extracted CSS:
 .Kanji968Character {
@@ -11637,7 +11637,7 @@ const Kanji968Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji968Character);
+styledYak(JapaneseCard)("Kanji968Character");
 const Kanji969Character =
 /*YAK Extracted CSS:
 .Kanji969Character {
@@ -11649,7 +11649,7 @@ const Kanji969Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji969Character);
+styledYak(JapaneseCard)("Kanji969Character");
 const Kanji970Character =
 /*YAK Extracted CSS:
 .Kanji970Character {
@@ -11661,7 +11661,7 @@ const Kanji970Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji970Character);
+styledYak(JapaneseCard)("Kanji970Character");
 const Kanji971Character =
 /*YAK Extracted CSS:
 .Kanji971Character {
@@ -11673,7 +11673,7 @@ const Kanji971Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji971Character);
+styledYak(JapaneseCard)("Kanji971Character");
 const Kanji972Character =
 /*YAK Extracted CSS:
 .Kanji972Character {
@@ -11685,7 +11685,7 @@ const Kanji972Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji972Character);
+styledYak(JapaneseCard)("Kanji972Character");
 const Kanji973Character =
 /*YAK Extracted CSS:
 .Kanji973Character {
@@ -11697,7 +11697,7 @@ const Kanji973Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji973Character);
+styledYak(JapaneseCard)("Kanji973Character");
 const Kanji974Character =
 /*YAK Extracted CSS:
 .Kanji974Character {
@@ -11709,7 +11709,7 @@ const Kanji974Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji974Character);
+styledYak(JapaneseCard)("Kanji974Character");
 const Kanji975Character =
 /*YAK Extracted CSS:
 .Kanji975Character {
@@ -11721,7 +11721,7 @@ const Kanji975Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji975Character);
+styledYak(JapaneseCard)("Kanji975Character");
 const Kanji976Character =
 /*YAK Extracted CSS:
 .Kanji976Character {
@@ -11733,7 +11733,7 @@ const Kanji976Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji976Character);
+styledYak(JapaneseCard)("Kanji976Character");
 const Kanji977Character =
 /*YAK Extracted CSS:
 .Kanji977Character {
@@ -11745,7 +11745,7 @@ const Kanji977Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji977Character);
+styledYak(JapaneseCard)("Kanji977Character");
 const Kanji978Character =
 /*YAK Extracted CSS:
 .Kanji978Character {
@@ -11757,7 +11757,7 @@ const Kanji978Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji978Character);
+styledYak(JapaneseCard)("Kanji978Character");
 const Kanji979Character =
 /*YAK Extracted CSS:
 .Kanji979Character {
@@ -11769,7 +11769,7 @@ const Kanji979Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji979Character);
+styledYak(JapaneseCard)("Kanji979Character");
 const Kanji980Character =
 /*YAK Extracted CSS:
 .Kanji980Character {
@@ -11781,7 +11781,7 @@ const Kanji980Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji980Character);
+styledYak(JapaneseCard)("Kanji980Character");
 const Kanji981Character =
 /*YAK Extracted CSS:
 .Kanji981Character {
@@ -11793,7 +11793,7 @@ const Kanji981Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji981Character);
+styledYak(JapaneseCard)("Kanji981Character");
 const Kanji982Character =
 /*YAK Extracted CSS:
 .Kanji982Character {
@@ -11805,7 +11805,7 @@ const Kanji982Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji982Character);
+styledYak(JapaneseCard)("Kanji982Character");
 const Kanji983Character =
 /*YAK Extracted CSS:
 .Kanji983Character {
@@ -11817,7 +11817,7 @@ const Kanji983Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji983Character);
+styledYak(JapaneseCard)("Kanji983Character");
 const Kanji984Character =
 /*YAK Extracted CSS:
 .Kanji984Character {
@@ -11829,7 +11829,7 @@ const Kanji984Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji984Character);
+styledYak(JapaneseCard)("Kanji984Character");
 const Kanji985Character =
 /*YAK Extracted CSS:
 .Kanji985Character {
@@ -11841,7 +11841,7 @@ const Kanji985Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji985Character);
+styledYak(JapaneseCard)("Kanji985Character");
 const Kanji986Character =
 /*YAK Extracted CSS:
 .Kanji986Character {
@@ -11853,7 +11853,7 @@ const Kanji986Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji986Character);
+styledYak(JapaneseCard)("Kanji986Character");
 const Kanji987Character =
 /*YAK Extracted CSS:
 .Kanji987Character {
@@ -11865,7 +11865,7 @@ const Kanji987Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji987Character);
+styledYak(JapaneseCard)("Kanji987Character");
 const Kanji988Character =
 /*YAK Extracted CSS:
 .Kanji988Character {
@@ -11877,7 +11877,7 @@ const Kanji988Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji988Character);
+styledYak(JapaneseCard)("Kanji988Character");
 const Kanji989Character =
 /*YAK Extracted CSS:
 .Kanji989Character {
@@ -11889,7 +11889,7 @@ const Kanji989Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji989Character);
+styledYak(JapaneseCard)("Kanji989Character");
 const Kanji990Character =
 /*YAK Extracted CSS:
 .Kanji990Character {
@@ -11901,7 +11901,7 @@ const Kanji990Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji990Character);
+styledYak(JapaneseCard)("Kanji990Character");
 const Kanji991Character =
 /*YAK Extracted CSS:
 .Kanji991Character {
@@ -11913,7 +11913,7 @@ const Kanji991Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji991Character);
+styledYak(JapaneseCard)("Kanji991Character");
 const Kanji992Character =
 /*YAK Extracted CSS:
 .Kanji992Character {
@@ -11925,7 +11925,7 @@ const Kanji992Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji992Character);
+styledYak(JapaneseCard)("Kanji992Character");
 const Kanji993Character =
 /*YAK Extracted CSS:
 .Kanji993Character {
@@ -11937,7 +11937,7 @@ const Kanji993Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji993Character);
+styledYak(JapaneseCard)("Kanji993Character");
 const Kanji994Character =
 /*YAK Extracted CSS:
 .Kanji994Character {
@@ -11949,7 +11949,7 @@ const Kanji994Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji994Character);
+styledYak(JapaneseCard)("Kanji994Character");
 const Kanji995Character =
 /*YAK Extracted CSS:
 .Kanji995Character {
@@ -11961,7 +11961,7 @@ const Kanji995Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji995Character);
+styledYak(JapaneseCard)("Kanji995Character");
 const Kanji996Character =
 /*YAK Extracted CSS:
 .Kanji996Character {
@@ -11973,7 +11973,7 @@ const Kanji996Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji996Character);
+styledYak(JapaneseCard)("Kanji996Character");
 const Kanji997Character =
 /*YAK Extracted CSS:
 .Kanji997Character {
@@ -11985,7 +11985,7 @@ const Kanji997Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji997Character);
+styledYak(JapaneseCard)("Kanji997Character");
 const Kanji998Character =
 /*YAK Extracted CSS:
 .Kanji998Character {
@@ -11997,7 +11997,7 @@ const Kanji998Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji998Character);
+styledYak(JapaneseCard)("Kanji998Character");
 const Kanji999Character =
 /*YAK Extracted CSS:
 .Kanji999Character {
@@ -12009,7 +12009,7 @@ const Kanji999Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji999Character);
+styledYak(JapaneseCard)("Kanji999Character");
 const Kanji1000Character =
 /*YAK Extracted CSS:
 .Kanji1000Character {
@@ -12021,7 +12021,7 @@ const Kanji1000Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1000Character);
+styledYak(JapaneseCard)("Kanji1000Character");
 const Kanji1001Character =
 /*YAK Extracted CSS:
 .Kanji1001Character {
@@ -12033,7 +12033,7 @@ const Kanji1001Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1001Character);
+styledYak(JapaneseCard)("Kanji1001Character");
 const Kanji1002Character =
 /*YAK Extracted CSS:
 .Kanji1002Character {
@@ -12045,7 +12045,7 @@ const Kanji1002Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1002Character);
+styledYak(JapaneseCard)("Kanji1002Character");
 const Kanji1003Character =
 /*YAK Extracted CSS:
 .Kanji1003Character {
@@ -12057,7 +12057,7 @@ const Kanji1003Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1003Character);
+styledYak(JapaneseCard)("Kanji1003Character");
 const Kanji1004Character =
 /*YAK Extracted CSS:
 .Kanji1004Character {
@@ -12069,7 +12069,7 @@ const Kanji1004Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1004Character);
+styledYak(JapaneseCard)("Kanji1004Character");
 const Kanji1005Character =
 /*YAK Extracted CSS:
 .Kanji1005Character {
@@ -12081,7 +12081,7 @@ const Kanji1005Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1005Character);
+styledYak(JapaneseCard)("Kanji1005Character");
 const Kanji1006Character =
 /*YAK Extracted CSS:
 .Kanji1006Character {
@@ -12093,7 +12093,7 @@ const Kanji1006Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1006Character);
+styledYak(JapaneseCard)("Kanji1006Character");
 const Kanji1007Character =
 /*YAK Extracted CSS:
 .Kanji1007Character {
@@ -12105,7 +12105,7 @@ const Kanji1007Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1007Character);
+styledYak(JapaneseCard)("Kanji1007Character");
 const Kanji1008Character =
 /*YAK Extracted CSS:
 .Kanji1008Character {
@@ -12117,7 +12117,7 @@ const Kanji1008Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1008Character);
+styledYak(JapaneseCard)("Kanji1008Character");
 const Kanji1009Character =
 /*YAK Extracted CSS:
 .Kanji1009Character {
@@ -12129,7 +12129,7 @@ const Kanji1009Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1009Character);
+styledYak(JapaneseCard)("Kanji1009Character");
 const Kanji1010Character =
 /*YAK Extracted CSS:
 .Kanji1010Character {
@@ -12141,7 +12141,7 @@ const Kanji1010Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1010Character);
+styledYak(JapaneseCard)("Kanji1010Character");
 const Kanji1011Character =
 /*YAK Extracted CSS:
 .Kanji1011Character {
@@ -12153,7 +12153,7 @@ const Kanji1011Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1011Character);
+styledYak(JapaneseCard)("Kanji1011Character");
 const Kanji1012Character =
 /*YAK Extracted CSS:
 .Kanji1012Character {
@@ -12165,7 +12165,7 @@ const Kanji1012Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1012Character);
+styledYak(JapaneseCard)("Kanji1012Character");
 const Kanji1013Character =
 /*YAK Extracted CSS:
 .Kanji1013Character {
@@ -12177,7 +12177,7 @@ const Kanji1013Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1013Character);
+styledYak(JapaneseCard)("Kanji1013Character");
 const Kanji1014Character =
 /*YAK Extracted CSS:
 .Kanji1014Character {
@@ -12189,7 +12189,7 @@ const Kanji1014Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1014Character);
+styledYak(JapaneseCard)("Kanji1014Character");
 const Kanji1015Character =
 /*YAK Extracted CSS:
 .Kanji1015Character {
@@ -12201,7 +12201,7 @@ const Kanji1015Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1015Character);
+styledYak(JapaneseCard)("Kanji1015Character");
 const Kanji1016Character =
 /*YAK Extracted CSS:
 .Kanji1016Character {
@@ -12213,7 +12213,7 @@ const Kanji1016Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1016Character);
+styledYak(JapaneseCard)("Kanji1016Character");
 const Kanji1017Character =
 /*YAK Extracted CSS:
 .Kanji1017Character {
@@ -12225,7 +12225,7 @@ const Kanji1017Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1017Character);
+styledYak(JapaneseCard)("Kanji1017Character");
 const Kanji1018Character =
 /*YAK Extracted CSS:
 .Kanji1018Character {
@@ -12237,7 +12237,7 @@ const Kanji1018Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1018Character);
+styledYak(JapaneseCard)("Kanji1018Character");
 const Kanji1019Character =
 /*YAK Extracted CSS:
 .Kanji1019Character {
@@ -12249,7 +12249,7 @@ const Kanji1019Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1019Character);
+styledYak(JapaneseCard)("Kanji1019Character");
 const Kanji1020Character =
 /*YAK Extracted CSS:
 .Kanji1020Character {
@@ -12261,7 +12261,7 @@ const Kanji1020Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1020Character);
+styledYak(JapaneseCard)("Kanji1020Character");
 const Kanji1021Character =
 /*YAK Extracted CSS:
 .Kanji1021Character {
@@ -12273,7 +12273,7 @@ const Kanji1021Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1021Character);
+styledYak(JapaneseCard)("Kanji1021Character");
 const Kanji1022Character =
 /*YAK Extracted CSS:
 .Kanji1022Character {
@@ -12285,7 +12285,7 @@ const Kanji1022Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1022Character);
+styledYak(JapaneseCard)("Kanji1022Character");
 const Kanji1023Character =
 /*YAK Extracted CSS:
 .Kanji1023Character {
@@ -12297,7 +12297,7 @@ const Kanji1023Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1023Character);
+styledYak(JapaneseCard)("Kanji1023Character");
 const Kanji1024Character =
 /*YAK Extracted CSS:
 .Kanji1024Character {
@@ -12309,7 +12309,7 @@ const Kanji1024Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1024Character);
+styledYak(JapaneseCard)("Kanji1024Character");
 const Kanji1025Character =
 /*YAK Extracted CSS:
 .Kanji1025Character {
@@ -12321,7 +12321,7 @@ const Kanji1025Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1025Character);
+styledYak(JapaneseCard)("Kanji1025Character");
 const Kanji1026Character =
 /*YAK Extracted CSS:
 .Kanji1026Character {
@@ -12333,7 +12333,7 @@ const Kanji1026Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1026Character);
+styledYak(JapaneseCard)("Kanji1026Character");
 const Kanji1027Character =
 /*YAK Extracted CSS:
 .Kanji1027Character {
@@ -12345,7 +12345,7 @@ const Kanji1027Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1027Character);
+styledYak(JapaneseCard)("Kanji1027Character");
 const Kanji1028Character =
 /*YAK Extracted CSS:
 .Kanji1028Character {
@@ -12357,7 +12357,7 @@ const Kanji1028Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1028Character);
+styledYak(JapaneseCard)("Kanji1028Character");
 const Kanji1029Character =
 /*YAK Extracted CSS:
 .Kanji1029Character {
@@ -12369,7 +12369,7 @@ const Kanji1029Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1029Character);
+styledYak(JapaneseCard)("Kanji1029Character");
 const Kanji1030Character =
 /*YAK Extracted CSS:
 .Kanji1030Character {
@@ -12381,7 +12381,7 @@ const Kanji1030Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1030Character);
+styledYak(JapaneseCard)("Kanji1030Character");
 const Kanji1031Character =
 /*YAK Extracted CSS:
 .Kanji1031Character {
@@ -12393,7 +12393,7 @@ const Kanji1031Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1031Character);
+styledYak(JapaneseCard)("Kanji1031Character");
 const Kanji1032Character =
 /*YAK Extracted CSS:
 .Kanji1032Character {
@@ -12405,7 +12405,7 @@ const Kanji1032Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1032Character);
+styledYak(JapaneseCard)("Kanji1032Character");
 const Kanji1033Character =
 /*YAK Extracted CSS:
 .Kanji1033Character {
@@ -12417,7 +12417,7 @@ const Kanji1033Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1033Character);
+styledYak(JapaneseCard)("Kanji1033Character");
 const Kanji1034Character =
 /*YAK Extracted CSS:
 .Kanji1034Character {
@@ -12429,7 +12429,7 @@ const Kanji1034Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1034Character);
+styledYak(JapaneseCard)("Kanji1034Character");
 const Kanji1035Character =
 /*YAK Extracted CSS:
 .Kanji1035Character {
@@ -12441,7 +12441,7 @@ const Kanji1035Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1035Character);
+styledYak(JapaneseCard)("Kanji1035Character");
 const Kanji1036Character =
 /*YAK Extracted CSS:
 .Kanji1036Character {
@@ -12453,7 +12453,7 @@ const Kanji1036Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1036Character);
+styledYak(JapaneseCard)("Kanji1036Character");
 const Kanji1037Character =
 /*YAK Extracted CSS:
 .Kanji1037Character {
@@ -12465,7 +12465,7 @@ const Kanji1037Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1037Character);
+styledYak(JapaneseCard)("Kanji1037Character");
 const Kanji1038Character =
 /*YAK Extracted CSS:
 .Kanji1038Character {
@@ -12477,7 +12477,7 @@ const Kanji1038Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1038Character);
+styledYak(JapaneseCard)("Kanji1038Character");
 const Kanji1039Character =
 /*YAK Extracted CSS:
 .Kanji1039Character {
@@ -12489,7 +12489,7 @@ const Kanji1039Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1039Character);
+styledYak(JapaneseCard)("Kanji1039Character");
 const Kanji1040Character =
 /*YAK Extracted CSS:
 .Kanji1040Character {
@@ -12501,7 +12501,7 @@ const Kanji1040Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1040Character);
+styledYak(JapaneseCard)("Kanji1040Character");
 const Kanji1041Character =
 /*YAK Extracted CSS:
 .Kanji1041Character {
@@ -12513,7 +12513,7 @@ const Kanji1041Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1041Character);
+styledYak(JapaneseCard)("Kanji1041Character");
 const Kanji1042Character =
 /*YAK Extracted CSS:
 .Kanji1042Character {
@@ -12525,7 +12525,7 @@ const Kanji1042Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1042Character);
+styledYak(JapaneseCard)("Kanji1042Character");
 const Kanji1043Character =
 /*YAK Extracted CSS:
 .Kanji1043Character {
@@ -12537,7 +12537,7 @@ const Kanji1043Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1043Character);
+styledYak(JapaneseCard)("Kanji1043Character");
 const Kanji1044Character =
 /*YAK Extracted CSS:
 .Kanji1044Character {
@@ -12549,7 +12549,7 @@ const Kanji1044Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1044Character);
+styledYak(JapaneseCard)("Kanji1044Character");
 const Kanji1045Character =
 /*YAK Extracted CSS:
 .Kanji1045Character {
@@ -12561,7 +12561,7 @@ const Kanji1045Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1045Character);
+styledYak(JapaneseCard)("Kanji1045Character");
 const Kanji1046Character =
 /*YAK Extracted CSS:
 .Kanji1046Character {
@@ -12573,7 +12573,7 @@ const Kanji1046Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1046Character);
+styledYak(JapaneseCard)("Kanji1046Character");
 const Kanji1047Character =
 /*YAK Extracted CSS:
 .Kanji1047Character {
@@ -12585,7 +12585,7 @@ const Kanji1047Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1047Character);
+styledYak(JapaneseCard)("Kanji1047Character");
 const Kanji1048Character =
 /*YAK Extracted CSS:
 .Kanji1048Character {
@@ -12597,7 +12597,7 @@ const Kanji1048Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1048Character);
+styledYak(JapaneseCard)("Kanji1048Character");
 const Kanji1049Character =
 /*YAK Extracted CSS:
 .Kanji1049Character {
@@ -12609,7 +12609,7 @@ const Kanji1049Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1049Character);
+styledYak(JapaneseCard)("Kanji1049Character");
 const Kanji1050Character =
 /*YAK Extracted CSS:
 .Kanji1050Character {
@@ -12621,7 +12621,7 @@ const Kanji1050Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1050Character);
+styledYak(JapaneseCard)("Kanji1050Character");
 const Kanji1051Character =
 /*YAK Extracted CSS:
 .Kanji1051Character {
@@ -12633,7 +12633,7 @@ const Kanji1051Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1051Character);
+styledYak(JapaneseCard)("Kanji1051Character");
 const Kanji1052Character =
 /*YAK Extracted CSS:
 .Kanji1052Character {
@@ -12645,7 +12645,7 @@ const Kanji1052Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1052Character);
+styledYak(JapaneseCard)("Kanji1052Character");
 const Kanji1053Character =
 /*YAK Extracted CSS:
 .Kanji1053Character {
@@ -12657,7 +12657,7 @@ const Kanji1053Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1053Character);
+styledYak(JapaneseCard)("Kanji1053Character");
 const Kanji1054Character =
 /*YAK Extracted CSS:
 .Kanji1054Character {
@@ -12669,7 +12669,7 @@ const Kanji1054Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1054Character);
+styledYak(JapaneseCard)("Kanji1054Character");
 const Kanji1055Character =
 /*YAK Extracted CSS:
 .Kanji1055Character {
@@ -12681,7 +12681,7 @@ const Kanji1055Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1055Character);
+styledYak(JapaneseCard)("Kanji1055Character");
 const Kanji1056Character =
 /*YAK Extracted CSS:
 .Kanji1056Character {
@@ -12693,7 +12693,7 @@ const Kanji1056Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1056Character);
+styledYak(JapaneseCard)("Kanji1056Character");
 const Kanji1057Character =
 /*YAK Extracted CSS:
 .Kanji1057Character {
@@ -12705,7 +12705,7 @@ const Kanji1057Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1057Character);
+styledYak(JapaneseCard)("Kanji1057Character");
 const Kanji1058Character =
 /*YAK Extracted CSS:
 .Kanji1058Character {
@@ -12717,7 +12717,7 @@ const Kanji1058Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1058Character);
+styledYak(JapaneseCard)("Kanji1058Character");
 const Kanji1059Character =
 /*YAK Extracted CSS:
 .Kanji1059Character {
@@ -12729,7 +12729,7 @@ const Kanji1059Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1059Character);
+styledYak(JapaneseCard)("Kanji1059Character");
 const Kanji1060Character =
 /*YAK Extracted CSS:
 .Kanji1060Character {
@@ -12741,7 +12741,7 @@ const Kanji1060Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1060Character);
+styledYak(JapaneseCard)("Kanji1060Character");
 const Kanji1061Character =
 /*YAK Extracted CSS:
 .Kanji1061Character {
@@ -12753,7 +12753,7 @@ const Kanji1061Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1061Character);
+styledYak(JapaneseCard)("Kanji1061Character");
 const Kanji1062Character =
 /*YAK Extracted CSS:
 .Kanji1062Character {
@@ -12765,7 +12765,7 @@ const Kanji1062Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1062Character);
+styledYak(JapaneseCard)("Kanji1062Character");
 const Kanji1063Character =
 /*YAK Extracted CSS:
 .Kanji1063Character {
@@ -12777,7 +12777,7 @@ const Kanji1063Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1063Character);
+styledYak(JapaneseCard)("Kanji1063Character");
 const Kanji1064Character =
 /*YAK Extracted CSS:
 .Kanji1064Character {
@@ -12789,7 +12789,7 @@ const Kanji1064Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1064Character);
+styledYak(JapaneseCard)("Kanji1064Character");
 const Kanji1065Character =
 /*YAK Extracted CSS:
 .Kanji1065Character {
@@ -12801,7 +12801,7 @@ const Kanji1065Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1065Character);
+styledYak(JapaneseCard)("Kanji1065Character");
 const Kanji1066Character =
 /*YAK Extracted CSS:
 .Kanji1066Character {
@@ -12813,7 +12813,7 @@ const Kanji1066Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1066Character);
+styledYak(JapaneseCard)("Kanji1066Character");
 const Kanji1067Character =
 /*YAK Extracted CSS:
 .Kanji1067Character {
@@ -12825,7 +12825,7 @@ const Kanji1067Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1067Character);
+styledYak(JapaneseCard)("Kanji1067Character");
 const Kanji1068Character =
 /*YAK Extracted CSS:
 .Kanji1068Character {
@@ -12837,7 +12837,7 @@ const Kanji1068Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1068Character);
+styledYak(JapaneseCard)("Kanji1068Character");
 const Kanji1069Character =
 /*YAK Extracted CSS:
 .Kanji1069Character {
@@ -12849,7 +12849,7 @@ const Kanji1069Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1069Character);
+styledYak(JapaneseCard)("Kanji1069Character");
 const Kanji1070Character =
 /*YAK Extracted CSS:
 .Kanji1070Character {
@@ -12861,7 +12861,7 @@ const Kanji1070Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1070Character);
+styledYak(JapaneseCard)("Kanji1070Character");
 const Kanji1071Character =
 /*YAK Extracted CSS:
 .Kanji1071Character {
@@ -12873,7 +12873,7 @@ const Kanji1071Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1071Character);
+styledYak(JapaneseCard)("Kanji1071Character");
 const Kanji1072Character =
 /*YAK Extracted CSS:
 .Kanji1072Character {
@@ -12885,7 +12885,7 @@ const Kanji1072Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1072Character);
+styledYak(JapaneseCard)("Kanji1072Character");
 const Kanji1073Character =
 /*YAK Extracted CSS:
 .Kanji1073Character {
@@ -12897,7 +12897,7 @@ const Kanji1073Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1073Character);
+styledYak(JapaneseCard)("Kanji1073Character");
 const Kanji1074Character =
 /*YAK Extracted CSS:
 .Kanji1074Character {
@@ -12909,7 +12909,7 @@ const Kanji1074Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1074Character);
+styledYak(JapaneseCard)("Kanji1074Character");
 const Kanji1075Character =
 /*YAK Extracted CSS:
 .Kanji1075Character {
@@ -12921,7 +12921,7 @@ const Kanji1075Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1075Character);
+styledYak(JapaneseCard)("Kanji1075Character");
 const Kanji1076Character =
 /*YAK Extracted CSS:
 .Kanji1076Character {
@@ -12933,7 +12933,7 @@ const Kanji1076Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1076Character);
+styledYak(JapaneseCard)("Kanji1076Character");
 const Kanji1077Character =
 /*YAK Extracted CSS:
 .Kanji1077Character {
@@ -12945,7 +12945,7 @@ const Kanji1077Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1077Character);
+styledYak(JapaneseCard)("Kanji1077Character");
 const Kanji1078Character =
 /*YAK Extracted CSS:
 .Kanji1078Character {
@@ -12957,7 +12957,7 @@ const Kanji1078Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1078Character);
+styledYak(JapaneseCard)("Kanji1078Character");
 const Kanji1079Character =
 /*YAK Extracted CSS:
 .Kanji1079Character {
@@ -12969,7 +12969,7 @@ const Kanji1079Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1079Character);
+styledYak(JapaneseCard)("Kanji1079Character");
 const Kanji1080Character =
 /*YAK Extracted CSS:
 .Kanji1080Character {
@@ -12981,7 +12981,7 @@ const Kanji1080Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1080Character);
+styledYak(JapaneseCard)("Kanji1080Character");
 const Kanji1081Character =
 /*YAK Extracted CSS:
 .Kanji1081Character {
@@ -12993,7 +12993,7 @@ const Kanji1081Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1081Character);
+styledYak(JapaneseCard)("Kanji1081Character");
 const Kanji1082Character =
 /*YAK Extracted CSS:
 .Kanji1082Character {
@@ -13005,7 +13005,7 @@ const Kanji1082Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1082Character);
+styledYak(JapaneseCard)("Kanji1082Character");
 const Kanji1083Character =
 /*YAK Extracted CSS:
 .Kanji1083Character {
@@ -13017,7 +13017,7 @@ const Kanji1083Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1083Character);
+styledYak(JapaneseCard)("Kanji1083Character");
 const Kanji1084Character =
 /*YAK Extracted CSS:
 .Kanji1084Character {
@@ -13029,7 +13029,7 @@ const Kanji1084Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1084Character);
+styledYak(JapaneseCard)("Kanji1084Character");
 const Kanji1085Character =
 /*YAK Extracted CSS:
 .Kanji1085Character {
@@ -13041,7 +13041,7 @@ const Kanji1085Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1085Character);
+styledYak(JapaneseCard)("Kanji1085Character");
 const Kanji1086Character =
 /*YAK Extracted CSS:
 .Kanji1086Character {
@@ -13053,7 +13053,7 @@ const Kanji1086Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1086Character);
+styledYak(JapaneseCard)("Kanji1086Character");
 const Kanji1087Character =
 /*YAK Extracted CSS:
 .Kanji1087Character {
@@ -13065,7 +13065,7 @@ const Kanji1087Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1087Character);
+styledYak(JapaneseCard)("Kanji1087Character");
 const Kanji1088Character =
 /*YAK Extracted CSS:
 .Kanji1088Character {
@@ -13077,7 +13077,7 @@ const Kanji1088Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1088Character);
+styledYak(JapaneseCard)("Kanji1088Character");
 const Kanji1089Character =
 /*YAK Extracted CSS:
 .Kanji1089Character {
@@ -13089,7 +13089,7 @@ const Kanji1089Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1089Character);
+styledYak(JapaneseCard)("Kanji1089Character");
 const Kanji1090Character =
 /*YAK Extracted CSS:
 .Kanji1090Character {
@@ -13101,7 +13101,7 @@ const Kanji1090Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1090Character);
+styledYak(JapaneseCard)("Kanji1090Character");
 const Kanji1091Character =
 /*YAK Extracted CSS:
 .Kanji1091Character {
@@ -13113,7 +13113,7 @@ const Kanji1091Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1091Character);
+styledYak(JapaneseCard)("Kanji1091Character");
 const Kanji1092Character =
 /*YAK Extracted CSS:
 .Kanji1092Character {
@@ -13125,7 +13125,7 @@ const Kanji1092Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1092Character);
+styledYak(JapaneseCard)("Kanji1092Character");
 const Kanji1093Character =
 /*YAK Extracted CSS:
 .Kanji1093Character {
@@ -13137,7 +13137,7 @@ const Kanji1093Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1093Character);
+styledYak(JapaneseCard)("Kanji1093Character");
 const Kanji1094Character =
 /*YAK Extracted CSS:
 .Kanji1094Character {
@@ -13149,7 +13149,7 @@ const Kanji1094Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1094Character);
+styledYak(JapaneseCard)("Kanji1094Character");
 const Kanji1095Character =
 /*YAK Extracted CSS:
 .Kanji1095Character {
@@ -13161,7 +13161,7 @@ const Kanji1095Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1095Character);
+styledYak(JapaneseCard)("Kanji1095Character");
 const Kanji1096Character =
 /*YAK Extracted CSS:
 .Kanji1096Character {
@@ -13173,7 +13173,7 @@ const Kanji1096Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1096Character);
+styledYak(JapaneseCard)("Kanji1096Character");
 const Kanji1097Character =
 /*YAK Extracted CSS:
 .Kanji1097Character {
@@ -13185,7 +13185,7 @@ const Kanji1097Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1097Character);
+styledYak(JapaneseCard)("Kanji1097Character");
 const Kanji1098Character =
 /*YAK Extracted CSS:
 .Kanji1098Character {
@@ -13197,7 +13197,7 @@ const Kanji1098Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1098Character);
+styledYak(JapaneseCard)("Kanji1098Character");
 const Kanji1099Character =
 /*YAK Extracted CSS:
 .Kanji1099Character {
@@ -13209,7 +13209,7 @@ const Kanji1099Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1099Character);
+styledYak(JapaneseCard)("Kanji1099Character");
 const Kanji1100Character =
 /*YAK Extracted CSS:
 .Kanji1100Character {
@@ -13221,7 +13221,7 @@ const Kanji1100Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1100Character);
+styledYak(JapaneseCard)("Kanji1100Character");
 const Kanji1101Character =
 /*YAK Extracted CSS:
 .Kanji1101Character {
@@ -13233,7 +13233,7 @@ const Kanji1101Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1101Character);
+styledYak(JapaneseCard)("Kanji1101Character");
 const Kanji1102Character =
 /*YAK Extracted CSS:
 .Kanji1102Character {
@@ -13245,7 +13245,7 @@ const Kanji1102Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1102Character);
+styledYak(JapaneseCard)("Kanji1102Character");
 const Kanji1103Character =
 /*YAK Extracted CSS:
 .Kanji1103Character {
@@ -13257,7 +13257,7 @@ const Kanji1103Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1103Character);
+styledYak(JapaneseCard)("Kanji1103Character");
 const Kanji1104Character =
 /*YAK Extracted CSS:
 .Kanji1104Character {
@@ -13269,7 +13269,7 @@ const Kanji1104Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1104Character);
+styledYak(JapaneseCard)("Kanji1104Character");
 const Kanji1105Character =
 /*YAK Extracted CSS:
 .Kanji1105Character {
@@ -13281,7 +13281,7 @@ const Kanji1105Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1105Character);
+styledYak(JapaneseCard)("Kanji1105Character");
 const Kanji1106Character =
 /*YAK Extracted CSS:
 .Kanji1106Character {
@@ -13293,7 +13293,7 @@ const Kanji1106Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1106Character);
+styledYak(JapaneseCard)("Kanji1106Character");
 const Kanji1107Character =
 /*YAK Extracted CSS:
 .Kanji1107Character {
@@ -13305,7 +13305,7 @@ const Kanji1107Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1107Character);
+styledYak(JapaneseCard)("Kanji1107Character");
 const Kanji1108Character =
 /*YAK Extracted CSS:
 .Kanji1108Character {
@@ -13317,7 +13317,7 @@ const Kanji1108Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1108Character);
+styledYak(JapaneseCard)("Kanji1108Character");
 const Kanji1109Character =
 /*YAK Extracted CSS:
 .Kanji1109Character {
@@ -13329,7 +13329,7 @@ const Kanji1109Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1109Character);
+styledYak(JapaneseCard)("Kanji1109Character");
 const Kanji1110Character =
 /*YAK Extracted CSS:
 .Kanji1110Character {
@@ -13341,7 +13341,7 @@ const Kanji1110Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1110Character);
+styledYak(JapaneseCard)("Kanji1110Character");
 const Kanji1111Character =
 /*YAK Extracted CSS:
 .Kanji1111Character {
@@ -13353,7 +13353,7 @@ const Kanji1111Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1111Character);
+styledYak(JapaneseCard)("Kanji1111Character");
 const Kanji1112Character =
 /*YAK Extracted CSS:
 .Kanji1112Character {
@@ -13365,7 +13365,7 @@ const Kanji1112Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1112Character);
+styledYak(JapaneseCard)("Kanji1112Character");
 const Kanji1113Character =
 /*YAK Extracted CSS:
 .Kanji1113Character {
@@ -13377,7 +13377,7 @@ const Kanji1113Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1113Character);
+styledYak(JapaneseCard)("Kanji1113Character");
 const Kanji1114Character =
 /*YAK Extracted CSS:
 .Kanji1114Character {
@@ -13389,7 +13389,7 @@ const Kanji1114Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1114Character);
+styledYak(JapaneseCard)("Kanji1114Character");
 const Kanji1115Character =
 /*YAK Extracted CSS:
 .Kanji1115Character {
@@ -13401,7 +13401,7 @@ const Kanji1115Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1115Character);
+styledYak(JapaneseCard)("Kanji1115Character");
 const Kanji1116Character =
 /*YAK Extracted CSS:
 .Kanji1116Character {
@@ -13413,7 +13413,7 @@ const Kanji1116Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1116Character);
+styledYak(JapaneseCard)("Kanji1116Character");
 const Kanji1117Character =
 /*YAK Extracted CSS:
 .Kanji1117Character {
@@ -13425,7 +13425,7 @@ const Kanji1117Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1117Character);
+styledYak(JapaneseCard)("Kanji1117Character");
 const Kanji1118Character =
 /*YAK Extracted CSS:
 .Kanji1118Character {
@@ -13437,7 +13437,7 @@ const Kanji1118Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1118Character);
+styledYak(JapaneseCard)("Kanji1118Character");
 const Kanji1119Character =
 /*YAK Extracted CSS:
 .Kanji1119Character {
@@ -13449,7 +13449,7 @@ const Kanji1119Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1119Character);
+styledYak(JapaneseCard)("Kanji1119Character");
 const Kanji1120Character =
 /*YAK Extracted CSS:
 .Kanji1120Character {
@@ -13461,7 +13461,7 @@ const Kanji1120Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1120Character);
+styledYak(JapaneseCard)("Kanji1120Character");
 const Kanji1121Character =
 /*YAK Extracted CSS:
 .Kanji1121Character {
@@ -13473,7 +13473,7 @@ const Kanji1121Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1121Character);
+styledYak(JapaneseCard)("Kanji1121Character");
 const Kanji1122Character =
 /*YAK Extracted CSS:
 .Kanji1122Character {
@@ -13485,7 +13485,7 @@ const Kanji1122Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1122Character);
+styledYak(JapaneseCard)("Kanji1122Character");
 const Kanji1123Character =
 /*YAK Extracted CSS:
 .Kanji1123Character {
@@ -13497,7 +13497,7 @@ const Kanji1123Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1123Character);
+styledYak(JapaneseCard)("Kanji1123Character");
 const Kanji1124Character =
 /*YAK Extracted CSS:
 .Kanji1124Character {
@@ -13509,7 +13509,7 @@ const Kanji1124Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1124Character);
+styledYak(JapaneseCard)("Kanji1124Character");
 const Kanji1125Character =
 /*YAK Extracted CSS:
 .Kanji1125Character {
@@ -13521,7 +13521,7 @@ const Kanji1125Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1125Character);
+styledYak(JapaneseCard)("Kanji1125Character");
 const Kanji1126Character =
 /*YAK Extracted CSS:
 .Kanji1126Character {
@@ -13533,7 +13533,7 @@ const Kanji1126Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1126Character);
+styledYak(JapaneseCard)("Kanji1126Character");
 const Kanji1127Character =
 /*YAK Extracted CSS:
 .Kanji1127Character {
@@ -13545,7 +13545,7 @@ const Kanji1127Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1127Character);
+styledYak(JapaneseCard)("Kanji1127Character");
 const Kanji1128Character =
 /*YAK Extracted CSS:
 .Kanji1128Character {
@@ -13557,7 +13557,7 @@ const Kanji1128Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1128Character);
+styledYak(JapaneseCard)("Kanji1128Character");
 const Kanji1129Character =
 /*YAK Extracted CSS:
 .Kanji1129Character {
@@ -13569,7 +13569,7 @@ const Kanji1129Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1129Character);
+styledYak(JapaneseCard)("Kanji1129Character");
 const Kanji1130Character =
 /*YAK Extracted CSS:
 .Kanji1130Character {
@@ -13581,7 +13581,7 @@ const Kanji1130Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1130Character);
+styledYak(JapaneseCard)("Kanji1130Character");
 const Kanji1131Character =
 /*YAK Extracted CSS:
 .Kanji1131Character {
@@ -13593,7 +13593,7 @@ const Kanji1131Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1131Character);
+styledYak(JapaneseCard)("Kanji1131Character");
 const Kanji1132Character =
 /*YAK Extracted CSS:
 .Kanji1132Character {
@@ -13605,7 +13605,7 @@ const Kanji1132Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1132Character);
+styledYak(JapaneseCard)("Kanji1132Character");
 const Kanji1133Character =
 /*YAK Extracted CSS:
 .Kanji1133Character {
@@ -13617,7 +13617,7 @@ const Kanji1133Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1133Character);
+styledYak(JapaneseCard)("Kanji1133Character");
 const Kanji1134Character =
 /*YAK Extracted CSS:
 .Kanji1134Character {
@@ -13629,7 +13629,7 @@ const Kanji1134Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1134Character);
+styledYak(JapaneseCard)("Kanji1134Character");
 const Kanji1135Character =
 /*YAK Extracted CSS:
 .Kanji1135Character {
@@ -13641,7 +13641,7 @@ const Kanji1135Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1135Character);
+styledYak(JapaneseCard)("Kanji1135Character");
 const Kanji1136Character =
 /*YAK Extracted CSS:
 .Kanji1136Character {
@@ -13653,7 +13653,7 @@ const Kanji1136Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1136Character);
+styledYak(JapaneseCard)("Kanji1136Character");
 const Kanji1137Character =
 /*YAK Extracted CSS:
 .Kanji1137Character {
@@ -13665,7 +13665,7 @@ const Kanji1137Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1137Character);
+styledYak(JapaneseCard)("Kanji1137Character");
 const Kanji1138Character =
 /*YAK Extracted CSS:
 .Kanji1138Character {
@@ -13677,7 +13677,7 @@ const Kanji1138Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1138Character);
+styledYak(JapaneseCard)("Kanji1138Character");
 const Kanji1139Character =
 /*YAK Extracted CSS:
 .Kanji1139Character {
@@ -13689,7 +13689,7 @@ const Kanji1139Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1139Character);
+styledYak(JapaneseCard)("Kanji1139Character");
 const Kanji1140Character =
 /*YAK Extracted CSS:
 .Kanji1140Character {
@@ -13701,7 +13701,7 @@ const Kanji1140Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1140Character);
+styledYak(JapaneseCard)("Kanji1140Character");
 const Kanji1141Character =
 /*YAK Extracted CSS:
 .Kanji1141Character {
@@ -13713,7 +13713,7 @@ const Kanji1141Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1141Character);
+styledYak(JapaneseCard)("Kanji1141Character");
 const Kanji1142Character =
 /*YAK Extracted CSS:
 .Kanji1142Character {
@@ -13725,7 +13725,7 @@ const Kanji1142Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1142Character);
+styledYak(JapaneseCard)("Kanji1142Character");
 const Kanji1143Character =
 /*YAK Extracted CSS:
 .Kanji1143Character {
@@ -13737,7 +13737,7 @@ const Kanji1143Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1143Character);
+styledYak(JapaneseCard)("Kanji1143Character");
 const Kanji1144Character =
 /*YAK Extracted CSS:
 .Kanji1144Character {
@@ -13749,7 +13749,7 @@ const Kanji1144Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1144Character);
+styledYak(JapaneseCard)("Kanji1144Character");
 const Kanji1145Character =
 /*YAK Extracted CSS:
 .Kanji1145Character {
@@ -13761,7 +13761,7 @@ const Kanji1145Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1145Character);
+styledYak(JapaneseCard)("Kanji1145Character");
 const Kanji1146Character =
 /*YAK Extracted CSS:
 .Kanji1146Character {
@@ -13773,7 +13773,7 @@ const Kanji1146Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1146Character);
+styledYak(JapaneseCard)("Kanji1146Character");
 const Kanji1147Character =
 /*YAK Extracted CSS:
 .Kanji1147Character {
@@ -13785,7 +13785,7 @@ const Kanji1147Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1147Character);
+styledYak(JapaneseCard)("Kanji1147Character");
 const Kanji1148Character =
 /*YAK Extracted CSS:
 .Kanji1148Character {
@@ -13797,7 +13797,7 @@ const Kanji1148Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1148Character);
+styledYak(JapaneseCard)("Kanji1148Character");
 const Kanji1149Character =
 /*YAK Extracted CSS:
 .Kanji1149Character {
@@ -13809,7 +13809,7 @@ const Kanji1149Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1149Character);
+styledYak(JapaneseCard)("Kanji1149Character");
 const Kanji1150Character =
 /*YAK Extracted CSS:
 .Kanji1150Character {
@@ -13821,7 +13821,7 @@ const Kanji1150Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1150Character);
+styledYak(JapaneseCard)("Kanji1150Character");
 const Kanji1151Character =
 /*YAK Extracted CSS:
 .Kanji1151Character {
@@ -13833,7 +13833,7 @@ const Kanji1151Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1151Character);
+styledYak(JapaneseCard)("Kanji1151Character");
 const Kanji1152Character =
 /*YAK Extracted CSS:
 .Kanji1152Character {
@@ -13845,7 +13845,7 @@ const Kanji1152Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1152Character);
+styledYak(JapaneseCard)("Kanji1152Character");
 const Kanji1153Character =
 /*YAK Extracted CSS:
 .Kanji1153Character {
@@ -13857,7 +13857,7 @@ const Kanji1153Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1153Character);
+styledYak(JapaneseCard)("Kanji1153Character");
 const Kanji1154Character =
 /*YAK Extracted CSS:
 .Kanji1154Character {
@@ -13869,7 +13869,7 @@ const Kanji1154Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1154Character);
+styledYak(JapaneseCard)("Kanji1154Character");
 const Kanji1155Character =
 /*YAK Extracted CSS:
 .Kanji1155Character {
@@ -13881,7 +13881,7 @@ const Kanji1155Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1155Character);
+styledYak(JapaneseCard)("Kanji1155Character");
 const Kanji1156Character =
 /*YAK Extracted CSS:
 .Kanji1156Character {
@@ -13893,7 +13893,7 @@ const Kanji1156Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1156Character);
+styledYak(JapaneseCard)("Kanji1156Character");
 const Kanji1157Character =
 /*YAK Extracted CSS:
 .Kanji1157Character {
@@ -13905,7 +13905,7 @@ const Kanji1157Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1157Character);
+styledYak(JapaneseCard)("Kanji1157Character");
 const Kanji1158Character =
 /*YAK Extracted CSS:
 .Kanji1158Character {
@@ -13917,7 +13917,7 @@ const Kanji1158Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1158Character);
+styledYak(JapaneseCard)("Kanji1158Character");
 const Kanji1159Character =
 /*YAK Extracted CSS:
 .Kanji1159Character {
@@ -13929,7 +13929,7 @@ const Kanji1159Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1159Character);
+styledYak(JapaneseCard)("Kanji1159Character");
 const Kanji1160Character =
 /*YAK Extracted CSS:
 .Kanji1160Character {
@@ -13941,7 +13941,7 @@ const Kanji1160Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1160Character);
+styledYak(JapaneseCard)("Kanji1160Character");
 const Kanji1161Character =
 /*YAK Extracted CSS:
 .Kanji1161Character {
@@ -13953,7 +13953,7 @@ const Kanji1161Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1161Character);
+styledYak(JapaneseCard)("Kanji1161Character");
 const Kanji1162Character =
 /*YAK Extracted CSS:
 .Kanji1162Character {
@@ -13965,7 +13965,7 @@ const Kanji1162Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1162Character);
+styledYak(JapaneseCard)("Kanji1162Character");
 const Kanji1163Character =
 /*YAK Extracted CSS:
 .Kanji1163Character {
@@ -13977,7 +13977,7 @@ const Kanji1163Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1163Character);
+styledYak(JapaneseCard)("Kanji1163Character");
 const Kanji1164Character =
 /*YAK Extracted CSS:
 .Kanji1164Character {
@@ -13989,7 +13989,7 @@ const Kanji1164Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1164Character);
+styledYak(JapaneseCard)("Kanji1164Character");
 const Kanji1165Character =
 /*YAK Extracted CSS:
 .Kanji1165Character {
@@ -14001,7 +14001,7 @@ const Kanji1165Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1165Character);
+styledYak(JapaneseCard)("Kanji1165Character");
 const Kanji1166Character =
 /*YAK Extracted CSS:
 .Kanji1166Character {
@@ -14013,7 +14013,7 @@ const Kanji1166Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1166Character);
+styledYak(JapaneseCard)("Kanji1166Character");
 const Kanji1167Character =
 /*YAK Extracted CSS:
 .Kanji1167Character {
@@ -14025,7 +14025,7 @@ const Kanji1167Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1167Character);
+styledYak(JapaneseCard)("Kanji1167Character");
 const Kanji1168Character =
 /*YAK Extracted CSS:
 .Kanji1168Character {
@@ -14037,7 +14037,7 @@ const Kanji1168Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1168Character);
+styledYak(JapaneseCard)("Kanji1168Character");
 const Kanji1169Character =
 /*YAK Extracted CSS:
 .Kanji1169Character {
@@ -14049,7 +14049,7 @@ const Kanji1169Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1169Character);
+styledYak(JapaneseCard)("Kanji1169Character");
 const Kanji1170Character =
 /*YAK Extracted CSS:
 .Kanji1170Character {
@@ -14061,7 +14061,7 @@ const Kanji1170Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1170Character);
+styledYak(JapaneseCard)("Kanji1170Character");
 const Kanji1171Character =
 /*YAK Extracted CSS:
 .Kanji1171Character {
@@ -14073,7 +14073,7 @@ const Kanji1171Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1171Character);
+styledYak(JapaneseCard)("Kanji1171Character");
 const Kanji1172Character =
 /*YAK Extracted CSS:
 .Kanji1172Character {
@@ -14085,7 +14085,7 @@ const Kanji1172Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1172Character);
+styledYak(JapaneseCard)("Kanji1172Character");
 const Kanji1173Character =
 /*YAK Extracted CSS:
 .Kanji1173Character {
@@ -14097,7 +14097,7 @@ const Kanji1173Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1173Character);
+styledYak(JapaneseCard)("Kanji1173Character");
 const Kanji1174Character =
 /*YAK Extracted CSS:
 .Kanji1174Character {
@@ -14109,7 +14109,7 @@ const Kanji1174Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1174Character);
+styledYak(JapaneseCard)("Kanji1174Character");
 const Kanji1175Character =
 /*YAK Extracted CSS:
 .Kanji1175Character {
@@ -14121,7 +14121,7 @@ const Kanji1175Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1175Character);
+styledYak(JapaneseCard)("Kanji1175Character");
 const Kanji1176Character =
 /*YAK Extracted CSS:
 .Kanji1176Character {
@@ -14133,7 +14133,7 @@ const Kanji1176Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1176Character);
+styledYak(JapaneseCard)("Kanji1176Character");
 const Kanji1177Character =
 /*YAK Extracted CSS:
 .Kanji1177Character {
@@ -14145,7 +14145,7 @@ const Kanji1177Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1177Character);
+styledYak(JapaneseCard)("Kanji1177Character");
 const Kanji1178Character =
 /*YAK Extracted CSS:
 .Kanji1178Character {
@@ -14157,7 +14157,7 @@ const Kanji1178Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1178Character);
+styledYak(JapaneseCard)("Kanji1178Character");
 const Kanji1179Character =
 /*YAK Extracted CSS:
 .Kanji1179Character {
@@ -14169,7 +14169,7 @@ const Kanji1179Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1179Character);
+styledYak(JapaneseCard)("Kanji1179Character");
 const Kanji1180Character =
 /*YAK Extracted CSS:
 .Kanji1180Character {
@@ -14181,7 +14181,7 @@ const Kanji1180Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1180Character);
+styledYak(JapaneseCard)("Kanji1180Character");
 const Kanji1181Character =
 /*YAK Extracted CSS:
 .Kanji1181Character {
@@ -14193,7 +14193,7 @@ const Kanji1181Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1181Character);
+styledYak(JapaneseCard)("Kanji1181Character");
 const Kanji1182Character =
 /*YAK Extracted CSS:
 .Kanji1182Character {
@@ -14205,7 +14205,7 @@ const Kanji1182Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1182Character);
+styledYak(JapaneseCard)("Kanji1182Character");
 const Kanji1183Character =
 /*YAK Extracted CSS:
 .Kanji1183Character {
@@ -14217,7 +14217,7 @@ const Kanji1183Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1183Character);
+styledYak(JapaneseCard)("Kanji1183Character");
 const Kanji1184Character =
 /*YAK Extracted CSS:
 .Kanji1184Character {
@@ -14229,7 +14229,7 @@ const Kanji1184Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1184Character);
+styledYak(JapaneseCard)("Kanji1184Character");
 const Kanji1185Character =
 /*YAK Extracted CSS:
 .Kanji1185Character {
@@ -14241,7 +14241,7 @@ const Kanji1185Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1185Character);
+styledYak(JapaneseCard)("Kanji1185Character");
 const Kanji1186Character =
 /*YAK Extracted CSS:
 .Kanji1186Character {
@@ -14253,7 +14253,7 @@ const Kanji1186Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1186Character);
+styledYak(JapaneseCard)("Kanji1186Character");
 const Kanji1187Character =
 /*YAK Extracted CSS:
 .Kanji1187Character {
@@ -14265,7 +14265,7 @@ const Kanji1187Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1187Character);
+styledYak(JapaneseCard)("Kanji1187Character");
 const Kanji1188Character =
 /*YAK Extracted CSS:
 .Kanji1188Character {
@@ -14277,7 +14277,7 @@ const Kanji1188Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1188Character);
+styledYak(JapaneseCard)("Kanji1188Character");
 const Kanji1189Character =
 /*YAK Extracted CSS:
 .Kanji1189Character {
@@ -14289,7 +14289,7 @@ const Kanji1189Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1189Character);
+styledYak(JapaneseCard)("Kanji1189Character");
 const Kanji1190Character =
 /*YAK Extracted CSS:
 .Kanji1190Character {
@@ -14301,7 +14301,7 @@ const Kanji1190Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1190Character);
+styledYak(JapaneseCard)("Kanji1190Character");
 const Kanji1191Character =
 /*YAK Extracted CSS:
 .Kanji1191Character {
@@ -14313,7 +14313,7 @@ const Kanji1191Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1191Character);
+styledYak(JapaneseCard)("Kanji1191Character");
 const Kanji1192Character =
 /*YAK Extracted CSS:
 .Kanji1192Character {
@@ -14325,7 +14325,7 @@ const Kanji1192Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1192Character);
+styledYak(JapaneseCard)("Kanji1192Character");
 const Kanji1193Character =
 /*YAK Extracted CSS:
 .Kanji1193Character {
@@ -14337,7 +14337,7 @@ const Kanji1193Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1193Character);
+styledYak(JapaneseCard)("Kanji1193Character");
 const Kanji1194Character =
 /*YAK Extracted CSS:
 .Kanji1194Character {
@@ -14349,7 +14349,7 @@ const Kanji1194Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1194Character);
+styledYak(JapaneseCard)("Kanji1194Character");
 const Kanji1195Character =
 /*YAK Extracted CSS:
 .Kanji1195Character {
@@ -14361,7 +14361,7 @@ const Kanji1195Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1195Character);
+styledYak(JapaneseCard)("Kanji1195Character");
 const Kanji1196Character =
 /*YAK Extracted CSS:
 .Kanji1196Character {
@@ -14373,7 +14373,7 @@ const Kanji1196Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1196Character);
+styledYak(JapaneseCard)("Kanji1196Character");
 const Kanji1197Character =
 /*YAK Extracted CSS:
 .Kanji1197Character {
@@ -14385,7 +14385,7 @@ const Kanji1197Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1197Character);
+styledYak(JapaneseCard)("Kanji1197Character");
 const Kanji1198Character =
 /*YAK Extracted CSS:
 .Kanji1198Character {
@@ -14397,7 +14397,7 @@ const Kanji1198Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1198Character);
+styledYak(JapaneseCard)("Kanji1198Character");
 const Kanji1199Character =
 /*YAK Extracted CSS:
 .Kanji1199Character {
@@ -14409,7 +14409,7 @@ const Kanji1199Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1199Character);
+styledYak(JapaneseCard)("Kanji1199Character");
 const Kanji1200Character =
 /*YAK Extracted CSS:
 .Kanji1200Character {
@@ -14421,7 +14421,7 @@ const Kanji1200Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1200Character);
+styledYak(JapaneseCard)("Kanji1200Character");
 const Kanji1201Character =
 /*YAK Extracted CSS:
 .Kanji1201Character {
@@ -14433,7 +14433,7 @@ const Kanji1201Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1201Character);
+styledYak(JapaneseCard)("Kanji1201Character");
 const Kanji1202Character =
 /*YAK Extracted CSS:
 .Kanji1202Character {
@@ -14445,7 +14445,7 @@ const Kanji1202Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1202Character);
+styledYak(JapaneseCard)("Kanji1202Character");
 const Kanji1203Character =
 /*YAK Extracted CSS:
 .Kanji1203Character {
@@ -14457,7 +14457,7 @@ const Kanji1203Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1203Character);
+styledYak(JapaneseCard)("Kanji1203Character");
 const Kanji1204Character =
 /*YAK Extracted CSS:
 .Kanji1204Character {
@@ -14469,7 +14469,7 @@ const Kanji1204Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1204Character);
+styledYak(JapaneseCard)("Kanji1204Character");
 const Kanji1205Character =
 /*YAK Extracted CSS:
 .Kanji1205Character {
@@ -14481,7 +14481,7 @@ const Kanji1205Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1205Character);
+styledYak(JapaneseCard)("Kanji1205Character");
 const Kanji1206Character =
 /*YAK Extracted CSS:
 .Kanji1206Character {
@@ -14493,7 +14493,7 @@ const Kanji1206Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1206Character);
+styledYak(JapaneseCard)("Kanji1206Character");
 const Kanji1207Character =
 /*YAK Extracted CSS:
 .Kanji1207Character {
@@ -14505,7 +14505,7 @@ const Kanji1207Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1207Character);
+styledYak(JapaneseCard)("Kanji1207Character");
 const Kanji1208Character =
 /*YAK Extracted CSS:
 .Kanji1208Character {
@@ -14517,7 +14517,7 @@ const Kanji1208Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1208Character);
+styledYak(JapaneseCard)("Kanji1208Character");
 const Kanji1209Character =
 /*YAK Extracted CSS:
 .Kanji1209Character {
@@ -14529,7 +14529,7 @@ const Kanji1209Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1209Character);
+styledYak(JapaneseCard)("Kanji1209Character");
 const Kanji1210Character =
 /*YAK Extracted CSS:
 .Kanji1210Character {
@@ -14541,7 +14541,7 @@ const Kanji1210Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1210Character);
+styledYak(JapaneseCard)("Kanji1210Character");
 const Kanji1211Character =
 /*YAK Extracted CSS:
 .Kanji1211Character {
@@ -14553,7 +14553,7 @@ const Kanji1211Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1211Character);
+styledYak(JapaneseCard)("Kanji1211Character");
 const Kanji1212Character =
 /*YAK Extracted CSS:
 .Kanji1212Character {
@@ -14565,7 +14565,7 @@ const Kanji1212Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1212Character);
+styledYak(JapaneseCard)("Kanji1212Character");
 const Kanji1213Character =
 /*YAK Extracted CSS:
 .Kanji1213Character {
@@ -14577,7 +14577,7 @@ const Kanji1213Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1213Character);
+styledYak(JapaneseCard)("Kanji1213Character");
 const Kanji1214Character =
 /*YAK Extracted CSS:
 .Kanji1214Character {
@@ -14589,7 +14589,7 @@ const Kanji1214Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1214Character);
+styledYak(JapaneseCard)("Kanji1214Character");
 const Kanji1215Character =
 /*YAK Extracted CSS:
 .Kanji1215Character {
@@ -14601,7 +14601,7 @@ const Kanji1215Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1215Character);
+styledYak(JapaneseCard)("Kanji1215Character");
 const Kanji1216Character =
 /*YAK Extracted CSS:
 .Kanji1216Character {
@@ -14613,7 +14613,7 @@ const Kanji1216Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1216Character);
+styledYak(JapaneseCard)("Kanji1216Character");
 const Kanji1217Character =
 /*YAK Extracted CSS:
 .Kanji1217Character {
@@ -14625,7 +14625,7 @@ const Kanji1217Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1217Character);
+styledYak(JapaneseCard)("Kanji1217Character");
 const Kanji1218Character =
 /*YAK Extracted CSS:
 .Kanji1218Character {
@@ -14637,7 +14637,7 @@ const Kanji1218Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1218Character);
+styledYak(JapaneseCard)("Kanji1218Character");
 const Kanji1219Character =
 /*YAK Extracted CSS:
 .Kanji1219Character {
@@ -14649,7 +14649,7 @@ const Kanji1219Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1219Character);
+styledYak(JapaneseCard)("Kanji1219Character");
 const Kanji1220Character =
 /*YAK Extracted CSS:
 .Kanji1220Character {
@@ -14661,7 +14661,7 @@ const Kanji1220Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1220Character);
+styledYak(JapaneseCard)("Kanji1220Character");
 const Kanji1221Character =
 /*YAK Extracted CSS:
 .Kanji1221Character {
@@ -14673,7 +14673,7 @@ const Kanji1221Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1221Character);
+styledYak(JapaneseCard)("Kanji1221Character");
 const Kanji1222Character =
 /*YAK Extracted CSS:
 .Kanji1222Character {
@@ -14685,7 +14685,7 @@ const Kanji1222Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1222Character);
+styledYak(JapaneseCard)("Kanji1222Character");
 const Kanji1223Character =
 /*YAK Extracted CSS:
 .Kanji1223Character {
@@ -14697,7 +14697,7 @@ const Kanji1223Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1223Character);
+styledYak(JapaneseCard)("Kanji1223Character");
 const Kanji1224Character =
 /*YAK Extracted CSS:
 .Kanji1224Character {
@@ -14709,7 +14709,7 @@ const Kanji1224Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1224Character);
+styledYak(JapaneseCard)("Kanji1224Character");
 const Kanji1225Character =
 /*YAK Extracted CSS:
 .Kanji1225Character {
@@ -14721,7 +14721,7 @@ const Kanji1225Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1225Character);
+styledYak(JapaneseCard)("Kanji1225Character");
 const Kanji1226Character =
 /*YAK Extracted CSS:
 .Kanji1226Character {
@@ -14733,7 +14733,7 @@ const Kanji1226Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1226Character);
+styledYak(JapaneseCard)("Kanji1226Character");
 const Kanji1227Character =
 /*YAK Extracted CSS:
 .Kanji1227Character {
@@ -14745,7 +14745,7 @@ const Kanji1227Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1227Character);
+styledYak(JapaneseCard)("Kanji1227Character");
 const Kanji1228Character =
 /*YAK Extracted CSS:
 .Kanji1228Character {
@@ -14757,7 +14757,7 @@ const Kanji1228Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1228Character);
+styledYak(JapaneseCard)("Kanji1228Character");
 const Kanji1229Character =
 /*YAK Extracted CSS:
 .Kanji1229Character {
@@ -14769,7 +14769,7 @@ const Kanji1229Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1229Character);
+styledYak(JapaneseCard)("Kanji1229Character");
 const Kanji1230Character =
 /*YAK Extracted CSS:
 .Kanji1230Character {
@@ -14781,7 +14781,7 @@ const Kanji1230Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1230Character);
+styledYak(JapaneseCard)("Kanji1230Character");
 const Kanji1231Character =
 /*YAK Extracted CSS:
 .Kanji1231Character {
@@ -14793,7 +14793,7 @@ const Kanji1231Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1231Character);
+styledYak(JapaneseCard)("Kanji1231Character");
 const Kanji1232Character =
 /*YAK Extracted CSS:
 .Kanji1232Character {
@@ -14805,7 +14805,7 @@ const Kanji1232Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1232Character);
+styledYak(JapaneseCard)("Kanji1232Character");
 const Kanji1233Character =
 /*YAK Extracted CSS:
 .Kanji1233Character {
@@ -14817,7 +14817,7 @@ const Kanji1233Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1233Character);
+styledYak(JapaneseCard)("Kanji1233Character");
 const Kanji1234Character =
 /*YAK Extracted CSS:
 .Kanji1234Character {
@@ -14829,7 +14829,7 @@ const Kanji1234Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1234Character);
+styledYak(JapaneseCard)("Kanji1234Character");
 const Kanji1235Character =
 /*YAK Extracted CSS:
 .Kanji1235Character {
@@ -14841,7 +14841,7 @@ const Kanji1235Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1235Character);
+styledYak(JapaneseCard)("Kanji1235Character");
 const Kanji1236Character =
 /*YAK Extracted CSS:
 .Kanji1236Character {
@@ -14853,7 +14853,7 @@ const Kanji1236Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1236Character);
+styledYak(JapaneseCard)("Kanji1236Character");
 const Kanji1237Character =
 /*YAK Extracted CSS:
 .Kanji1237Character {
@@ -14865,7 +14865,7 @@ const Kanji1237Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1237Character);
+styledYak(JapaneseCard)("Kanji1237Character");
 const Kanji1238Character =
 /*YAK Extracted CSS:
 .Kanji1238Character {
@@ -14877,7 +14877,7 @@ const Kanji1238Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1238Character);
+styledYak(JapaneseCard)("Kanji1238Character");
 const Kanji1239Character =
 /*YAK Extracted CSS:
 .Kanji1239Character {
@@ -14889,7 +14889,7 @@ const Kanji1239Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1239Character);
+styledYak(JapaneseCard)("Kanji1239Character");
 const Kanji1240Character =
 /*YAK Extracted CSS:
 .Kanji1240Character {
@@ -14901,7 +14901,7 @@ const Kanji1240Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1240Character);
+styledYak(JapaneseCard)("Kanji1240Character");
 const Kanji1241Character =
 /*YAK Extracted CSS:
 .Kanji1241Character {
@@ -14913,7 +14913,7 @@ const Kanji1241Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1241Character);
+styledYak(JapaneseCard)("Kanji1241Character");
 const Kanji1242Character =
 /*YAK Extracted CSS:
 .Kanji1242Character {
@@ -14925,7 +14925,7 @@ const Kanji1242Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1242Character);
+styledYak(JapaneseCard)("Kanji1242Character");
 const Kanji1243Character =
 /*YAK Extracted CSS:
 .Kanji1243Character {
@@ -14937,7 +14937,7 @@ const Kanji1243Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1243Character);
+styledYak(JapaneseCard)("Kanji1243Character");
 const Kanji1244Character =
 /*YAK Extracted CSS:
 .Kanji1244Character {
@@ -14949,7 +14949,7 @@ const Kanji1244Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1244Character);
+styledYak(JapaneseCard)("Kanji1244Character");
 const Kanji1245Character =
 /*YAK Extracted CSS:
 .Kanji1245Character {
@@ -14961,7 +14961,7 @@ const Kanji1245Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1245Character);
+styledYak(JapaneseCard)("Kanji1245Character");
 const Kanji1246Character =
 /*YAK Extracted CSS:
 .Kanji1246Character {
@@ -14973,7 +14973,7 @@ const Kanji1246Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1246Character);
+styledYak(JapaneseCard)("Kanji1246Character");
 const Kanji1247Character =
 /*YAK Extracted CSS:
 .Kanji1247Character {
@@ -14985,7 +14985,7 @@ const Kanji1247Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1247Character);
+styledYak(JapaneseCard)("Kanji1247Character");
 const Kanji1248Character =
 /*YAK Extracted CSS:
 .Kanji1248Character {
@@ -14997,7 +14997,7 @@ const Kanji1248Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1248Character);
+styledYak(JapaneseCard)("Kanji1248Character");
 const Kanji1249Character =
 /*YAK Extracted CSS:
 .Kanji1249Character {
@@ -15009,7 +15009,7 @@ const Kanji1249Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1249Character);
+styledYak(JapaneseCard)("Kanji1249Character");
 const Kanji1250Character =
 /*YAK Extracted CSS:
 .Kanji1250Character {
@@ -15021,7 +15021,7 @@ const Kanji1250Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1250Character);
+styledYak(JapaneseCard)("Kanji1250Character");
 const Kanji1251Character =
 /*YAK Extracted CSS:
 .Kanji1251Character {
@@ -15033,7 +15033,7 @@ const Kanji1251Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1251Character);
+styledYak(JapaneseCard)("Kanji1251Character");
 const Kanji1252Character =
 /*YAK Extracted CSS:
 .Kanji1252Character {
@@ -15045,7 +15045,7 @@ const Kanji1252Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1252Character);
+styledYak(JapaneseCard)("Kanji1252Character");
 const Kanji1253Character =
 /*YAK Extracted CSS:
 .Kanji1253Character {
@@ -15057,7 +15057,7 @@ const Kanji1253Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1253Character);
+styledYak(JapaneseCard)("Kanji1253Character");
 const Kanji1254Character =
 /*YAK Extracted CSS:
 .Kanji1254Character {
@@ -15069,7 +15069,7 @@ const Kanji1254Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1254Character);
+styledYak(JapaneseCard)("Kanji1254Character");
 const Kanji1255Character =
 /*YAK Extracted CSS:
 .Kanji1255Character {
@@ -15081,7 +15081,7 @@ const Kanji1255Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1255Character);
+styledYak(JapaneseCard)("Kanji1255Character");
 const Kanji1256Character =
 /*YAK Extracted CSS:
 .Kanji1256Character {
@@ -15093,7 +15093,7 @@ const Kanji1256Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1256Character);
+styledYak(JapaneseCard)("Kanji1256Character");
 const Kanji1257Character =
 /*YAK Extracted CSS:
 .Kanji1257Character {
@@ -15105,7 +15105,7 @@ const Kanji1257Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1257Character);
+styledYak(JapaneseCard)("Kanji1257Character");
 const Kanji1258Character =
 /*YAK Extracted CSS:
 .Kanji1258Character {
@@ -15117,7 +15117,7 @@ const Kanji1258Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1258Character);
+styledYak(JapaneseCard)("Kanji1258Character");
 const Kanji1259Character =
 /*YAK Extracted CSS:
 .Kanji1259Character {
@@ -15129,7 +15129,7 @@ const Kanji1259Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1259Character);
+styledYak(JapaneseCard)("Kanji1259Character");
 const Kanji1260Character =
 /*YAK Extracted CSS:
 .Kanji1260Character {
@@ -15141,7 +15141,7 @@ const Kanji1260Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1260Character);
+styledYak(JapaneseCard)("Kanji1260Character");
 const Kanji1261Character =
 /*YAK Extracted CSS:
 .Kanji1261Character {
@@ -15153,7 +15153,7 @@ const Kanji1261Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1261Character);
+styledYak(JapaneseCard)("Kanji1261Character");
 const Kanji1262Character =
 /*YAK Extracted CSS:
 .Kanji1262Character {
@@ -15165,7 +15165,7 @@ const Kanji1262Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1262Character);
+styledYak(JapaneseCard)("Kanji1262Character");
 const Kanji1263Character =
 /*YAK Extracted CSS:
 .Kanji1263Character {
@@ -15177,7 +15177,7 @@ const Kanji1263Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1263Character);
+styledYak(JapaneseCard)("Kanji1263Character");
 const Kanji1264Character =
 /*YAK Extracted CSS:
 .Kanji1264Character {
@@ -15189,7 +15189,7 @@ const Kanji1264Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1264Character);
+styledYak(JapaneseCard)("Kanji1264Character");
 const Kanji1265Character =
 /*YAK Extracted CSS:
 .Kanji1265Character {
@@ -15201,7 +15201,7 @@ const Kanji1265Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1265Character);
+styledYak(JapaneseCard)("Kanji1265Character");
 const Kanji1266Character =
 /*YAK Extracted CSS:
 .Kanji1266Character {
@@ -15213,7 +15213,7 @@ const Kanji1266Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1266Character);
+styledYak(JapaneseCard)("Kanji1266Character");
 const Kanji1267Character =
 /*YAK Extracted CSS:
 .Kanji1267Character {
@@ -15225,7 +15225,7 @@ const Kanji1267Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1267Character);
+styledYak(JapaneseCard)("Kanji1267Character");
 const Kanji1268Character =
 /*YAK Extracted CSS:
 .Kanji1268Character {
@@ -15237,7 +15237,7 @@ const Kanji1268Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1268Character);
+styledYak(JapaneseCard)("Kanji1268Character");
 const Kanji1269Character =
 /*YAK Extracted CSS:
 .Kanji1269Character {
@@ -15249,7 +15249,7 @@ const Kanji1269Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1269Character);
+styledYak(JapaneseCard)("Kanji1269Character");
 const Kanji1270Character =
 /*YAK Extracted CSS:
 .Kanji1270Character {
@@ -15261,7 +15261,7 @@ const Kanji1270Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1270Character);
+styledYak(JapaneseCard)("Kanji1270Character");
 const Kanji1271Character =
 /*YAK Extracted CSS:
 .Kanji1271Character {
@@ -15273,7 +15273,7 @@ const Kanji1271Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1271Character);
+styledYak(JapaneseCard)("Kanji1271Character");
 const Kanji1272Character =
 /*YAK Extracted CSS:
 .Kanji1272Character {
@@ -15285,7 +15285,7 @@ const Kanji1272Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1272Character);
+styledYak(JapaneseCard)("Kanji1272Character");
 const Kanji1273Character =
 /*YAK Extracted CSS:
 .Kanji1273Character {
@@ -15297,7 +15297,7 @@ const Kanji1273Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1273Character);
+styledYak(JapaneseCard)("Kanji1273Character");
 const Kanji1274Character =
 /*YAK Extracted CSS:
 .Kanji1274Character {
@@ -15309,7 +15309,7 @@ const Kanji1274Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1274Character);
+styledYak(JapaneseCard)("Kanji1274Character");
 const Kanji1275Character =
 /*YAK Extracted CSS:
 .Kanji1275Character {
@@ -15321,7 +15321,7 @@ const Kanji1275Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1275Character);
+styledYak(JapaneseCard)("Kanji1275Character");
 const Kanji1276Character =
 /*YAK Extracted CSS:
 .Kanji1276Character {
@@ -15333,7 +15333,7 @@ const Kanji1276Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1276Character);
+styledYak(JapaneseCard)("Kanji1276Character");
 const Kanji1277Character =
 /*YAK Extracted CSS:
 .Kanji1277Character {
@@ -15345,7 +15345,7 @@ const Kanji1277Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1277Character);
+styledYak(JapaneseCard)("Kanji1277Character");
 const Kanji1278Character =
 /*YAK Extracted CSS:
 .Kanji1278Character {
@@ -15357,7 +15357,7 @@ const Kanji1278Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1278Character);
+styledYak(JapaneseCard)("Kanji1278Character");
 const Kanji1279Character =
 /*YAK Extracted CSS:
 .Kanji1279Character {
@@ -15369,7 +15369,7 @@ const Kanji1279Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1279Character);
+styledYak(JapaneseCard)("Kanji1279Character");
 const Kanji1280Character =
 /*YAK Extracted CSS:
 .Kanji1280Character {
@@ -15381,7 +15381,7 @@ const Kanji1280Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1280Character);
+styledYak(JapaneseCard)("Kanji1280Character");
 const Kanji1281Character =
 /*YAK Extracted CSS:
 .Kanji1281Character {
@@ -15393,7 +15393,7 @@ const Kanji1281Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1281Character);
+styledYak(JapaneseCard)("Kanji1281Character");
 const Kanji1282Character =
 /*YAK Extracted CSS:
 .Kanji1282Character {
@@ -15405,7 +15405,7 @@ const Kanji1282Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1282Character);
+styledYak(JapaneseCard)("Kanji1282Character");
 const Kanji1283Character =
 /*YAK Extracted CSS:
 .Kanji1283Character {
@@ -15417,7 +15417,7 @@ const Kanji1283Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1283Character);
+styledYak(JapaneseCard)("Kanji1283Character");
 const Kanji1284Character =
 /*YAK Extracted CSS:
 .Kanji1284Character {
@@ -15429,7 +15429,7 @@ const Kanji1284Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1284Character);
+styledYak(JapaneseCard)("Kanji1284Character");
 const Kanji1285Character =
 /*YAK Extracted CSS:
 .Kanji1285Character {
@@ -15441,7 +15441,7 @@ const Kanji1285Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1285Character);
+styledYak(JapaneseCard)("Kanji1285Character");
 const Kanji1286Character =
 /*YAK Extracted CSS:
 .Kanji1286Character {
@@ -15453,7 +15453,7 @@ const Kanji1286Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1286Character);
+styledYak(JapaneseCard)("Kanji1286Character");
 const Kanji1287Character =
 /*YAK Extracted CSS:
 .Kanji1287Character {
@@ -15465,7 +15465,7 @@ const Kanji1287Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1287Character);
+styledYak(JapaneseCard)("Kanji1287Character");
 const Kanji1288Character =
 /*YAK Extracted CSS:
 .Kanji1288Character {
@@ -15477,7 +15477,7 @@ const Kanji1288Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1288Character);
+styledYak(JapaneseCard)("Kanji1288Character");
 const Kanji1289Character =
 /*YAK Extracted CSS:
 .Kanji1289Character {
@@ -15489,7 +15489,7 @@ const Kanji1289Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1289Character);
+styledYak(JapaneseCard)("Kanji1289Character");
 const Kanji1290Character =
 /*YAK Extracted CSS:
 .Kanji1290Character {
@@ -15501,7 +15501,7 @@ const Kanji1290Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1290Character);
+styledYak(JapaneseCard)("Kanji1290Character");
 const Kanji1291Character =
 /*YAK Extracted CSS:
 .Kanji1291Character {
@@ -15513,7 +15513,7 @@ const Kanji1291Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1291Character);
+styledYak(JapaneseCard)("Kanji1291Character");
 const Kanji1292Character =
 /*YAK Extracted CSS:
 .Kanji1292Character {
@@ -15525,7 +15525,7 @@ const Kanji1292Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1292Character);
+styledYak(JapaneseCard)("Kanji1292Character");
 const Kanji1293Character =
 /*YAK Extracted CSS:
 .Kanji1293Character {
@@ -15537,7 +15537,7 @@ const Kanji1293Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1293Character);
+styledYak(JapaneseCard)("Kanji1293Character");
 const Kanji1294Character =
 /*YAK Extracted CSS:
 .Kanji1294Character {
@@ -15549,7 +15549,7 @@ const Kanji1294Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1294Character);
+styledYak(JapaneseCard)("Kanji1294Character");
 const Kanji1295Character =
 /*YAK Extracted CSS:
 .Kanji1295Character {
@@ -15561,7 +15561,7 @@ const Kanji1295Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1295Character);
+styledYak(JapaneseCard)("Kanji1295Character");
 const Kanji1296Character =
 /*YAK Extracted CSS:
 .Kanji1296Character {
@@ -15573,7 +15573,7 @@ const Kanji1296Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1296Character);
+styledYak(JapaneseCard)("Kanji1296Character");
 const Kanji1297Character =
 /*YAK Extracted CSS:
 .Kanji1297Character {
@@ -15585,7 +15585,7 @@ const Kanji1297Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1297Character);
+styledYak(JapaneseCard)("Kanji1297Character");
 const Kanji1298Character =
 /*YAK Extracted CSS:
 .Kanji1298Character {
@@ -15597,7 +15597,7 @@ const Kanji1298Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1298Character);
+styledYak(JapaneseCard)("Kanji1298Character");
 const Kanji1299Character =
 /*YAK Extracted CSS:
 .Kanji1299Character {
@@ -15609,7 +15609,7 @@ const Kanji1299Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1299Character);
+styledYak(JapaneseCard)("Kanji1299Character");
 const Kanji1300Character =
 /*YAK Extracted CSS:
 .Kanji1300Character {
@@ -15621,7 +15621,7 @@ const Kanji1300Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1300Character);
+styledYak(JapaneseCard)("Kanji1300Character");
 const Kanji1301Character =
 /*YAK Extracted CSS:
 .Kanji1301Character {
@@ -15633,7 +15633,7 @@ const Kanji1301Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1301Character);
+styledYak(JapaneseCard)("Kanji1301Character");
 const Kanji1302Character =
 /*YAK Extracted CSS:
 .Kanji1302Character {
@@ -15645,7 +15645,7 @@ const Kanji1302Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1302Character);
+styledYak(JapaneseCard)("Kanji1302Character");
 const Kanji1303Character =
 /*YAK Extracted CSS:
 .Kanji1303Character {
@@ -15657,7 +15657,7 @@ const Kanji1303Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1303Character);
+styledYak(JapaneseCard)("Kanji1303Character");
 const Kanji1304Character =
 /*YAK Extracted CSS:
 .Kanji1304Character {
@@ -15669,7 +15669,7 @@ const Kanji1304Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1304Character);
+styledYak(JapaneseCard)("Kanji1304Character");
 const Kanji1305Character =
 /*YAK Extracted CSS:
 .Kanji1305Character {
@@ -15681,7 +15681,7 @@ const Kanji1305Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1305Character);
+styledYak(JapaneseCard)("Kanji1305Character");
 const Kanji1306Character =
 /*YAK Extracted CSS:
 .Kanji1306Character {
@@ -15693,7 +15693,7 @@ const Kanji1306Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1306Character);
+styledYak(JapaneseCard)("Kanji1306Character");
 const Kanji1307Character =
 /*YAK Extracted CSS:
 .Kanji1307Character {
@@ -15705,7 +15705,7 @@ const Kanji1307Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1307Character);
+styledYak(JapaneseCard)("Kanji1307Character");
 const Kanji1308Character =
 /*YAK Extracted CSS:
 .Kanji1308Character {
@@ -15717,7 +15717,7 @@ const Kanji1308Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1308Character);
+styledYak(JapaneseCard)("Kanji1308Character");
 const Kanji1309Character =
 /*YAK Extracted CSS:
 .Kanji1309Character {
@@ -15729,7 +15729,7 @@ const Kanji1309Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1309Character);
+styledYak(JapaneseCard)("Kanji1309Character");
 const Kanji1310Character =
 /*YAK Extracted CSS:
 .Kanji1310Character {
@@ -15741,7 +15741,7 @@ const Kanji1310Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1310Character);
+styledYak(JapaneseCard)("Kanji1310Character");
 const Kanji1311Character =
 /*YAK Extracted CSS:
 .Kanji1311Character {
@@ -15753,7 +15753,7 @@ const Kanji1311Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1311Character);
+styledYak(JapaneseCard)("Kanji1311Character");
 const Kanji1312Character =
 /*YAK Extracted CSS:
 .Kanji1312Character {
@@ -15765,7 +15765,7 @@ const Kanji1312Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1312Character);
+styledYak(JapaneseCard)("Kanji1312Character");
 const Kanji1313Character =
 /*YAK Extracted CSS:
 .Kanji1313Character {
@@ -15777,7 +15777,7 @@ const Kanji1313Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1313Character);
+styledYak(JapaneseCard)("Kanji1313Character");
 const Kanji1314Character =
 /*YAK Extracted CSS:
 .Kanji1314Character {
@@ -15789,7 +15789,7 @@ const Kanji1314Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1314Character);
+styledYak(JapaneseCard)("Kanji1314Character");
 const Kanji1315Character =
 /*YAK Extracted CSS:
 .Kanji1315Character {
@@ -15801,7 +15801,7 @@ const Kanji1315Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1315Character);
+styledYak(JapaneseCard)("Kanji1315Character");
 const Kanji1316Character =
 /*YAK Extracted CSS:
 .Kanji1316Character {
@@ -15813,7 +15813,7 @@ const Kanji1316Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1316Character);
+styledYak(JapaneseCard)("Kanji1316Character");
 const Kanji1317Character =
 /*YAK Extracted CSS:
 .Kanji1317Character {
@@ -15825,7 +15825,7 @@ const Kanji1317Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1317Character);
+styledYak(JapaneseCard)("Kanji1317Character");
 const Kanji1318Character =
 /*YAK Extracted CSS:
 .Kanji1318Character {
@@ -15837,7 +15837,7 @@ const Kanji1318Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1318Character);
+styledYak(JapaneseCard)("Kanji1318Character");
 const Kanji1319Character =
 /*YAK Extracted CSS:
 .Kanji1319Character {
@@ -15849,7 +15849,7 @@ const Kanji1319Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1319Character);
+styledYak(JapaneseCard)("Kanji1319Character");
 const Kanji1320Character =
 /*YAK Extracted CSS:
 .Kanji1320Character {
@@ -15861,7 +15861,7 @@ const Kanji1320Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1320Character);
+styledYak(JapaneseCard)("Kanji1320Character");
 const Kanji1321Character =
 /*YAK Extracted CSS:
 .Kanji1321Character {
@@ -15873,7 +15873,7 @@ const Kanji1321Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1321Character);
+styledYak(JapaneseCard)("Kanji1321Character");
 const Kanji1322Character =
 /*YAK Extracted CSS:
 .Kanji1322Character {
@@ -15885,7 +15885,7 @@ const Kanji1322Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1322Character);
+styledYak(JapaneseCard)("Kanji1322Character");
 const Kanji1323Character =
 /*YAK Extracted CSS:
 .Kanji1323Character {
@@ -15897,7 +15897,7 @@ const Kanji1323Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1323Character);
+styledYak(JapaneseCard)("Kanji1323Character");
 const Kanji1324Character =
 /*YAK Extracted CSS:
 .Kanji1324Character {
@@ -15909,7 +15909,7 @@ const Kanji1324Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1324Character);
+styledYak(JapaneseCard)("Kanji1324Character");
 const Kanji1325Character =
 /*YAK Extracted CSS:
 .Kanji1325Character {
@@ -15921,7 +15921,7 @@ const Kanji1325Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1325Character);
+styledYak(JapaneseCard)("Kanji1325Character");
 const Kanji1326Character =
 /*YAK Extracted CSS:
 .Kanji1326Character {
@@ -15933,7 +15933,7 @@ const Kanji1326Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1326Character);
+styledYak(JapaneseCard)("Kanji1326Character");
 const Kanji1327Character =
 /*YAK Extracted CSS:
 .Kanji1327Character {
@@ -15945,7 +15945,7 @@ const Kanji1327Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1327Character);
+styledYak(JapaneseCard)("Kanji1327Character");
 const Kanji1328Character =
 /*YAK Extracted CSS:
 .Kanji1328Character {
@@ -15957,7 +15957,7 @@ const Kanji1328Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1328Character);
+styledYak(JapaneseCard)("Kanji1328Character");
 const Kanji1329Character =
 /*YAK Extracted CSS:
 .Kanji1329Character {
@@ -15969,7 +15969,7 @@ const Kanji1329Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1329Character);
+styledYak(JapaneseCard)("Kanji1329Character");
 const Kanji1330Character =
 /*YAK Extracted CSS:
 .Kanji1330Character {
@@ -15981,7 +15981,7 @@ const Kanji1330Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1330Character);
+styledYak(JapaneseCard)("Kanji1330Character");
 const Kanji1331Character =
 /*YAK Extracted CSS:
 .Kanji1331Character {
@@ -15993,7 +15993,7 @@ const Kanji1331Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1331Character);
+styledYak(JapaneseCard)("Kanji1331Character");
 const Kanji1332Character =
 /*YAK Extracted CSS:
 .Kanji1332Character {
@@ -16005,7 +16005,7 @@ const Kanji1332Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1332Character);
+styledYak(JapaneseCard)("Kanji1332Character");
 const Kanji1333Character =
 /*YAK Extracted CSS:
 .Kanji1333Character {
@@ -16017,7 +16017,7 @@ const Kanji1333Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1333Character);
+styledYak(JapaneseCard)("Kanji1333Character");
 const Kanji1334Character =
 /*YAK Extracted CSS:
 .Kanji1334Character {
@@ -16029,7 +16029,7 @@ const Kanji1334Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1334Character);
+styledYak(JapaneseCard)("Kanji1334Character");
 const Kanji1335Character =
 /*YAK Extracted CSS:
 .Kanji1335Character {
@@ -16041,7 +16041,7 @@ const Kanji1335Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1335Character);
+styledYak(JapaneseCard)("Kanji1335Character");
 const Kanji1336Character =
 /*YAK Extracted CSS:
 .Kanji1336Character {
@@ -16053,7 +16053,7 @@ const Kanji1336Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1336Character);
+styledYak(JapaneseCard)("Kanji1336Character");
 const Kanji1337Character =
 /*YAK Extracted CSS:
 .Kanji1337Character {
@@ -16065,7 +16065,7 @@ const Kanji1337Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1337Character);
+styledYak(JapaneseCard)("Kanji1337Character");
 const Kanji1338Character =
 /*YAK Extracted CSS:
 .Kanji1338Character {
@@ -16077,7 +16077,7 @@ const Kanji1338Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1338Character);
+styledYak(JapaneseCard)("Kanji1338Character");
 const Kanji1339Character =
 /*YAK Extracted CSS:
 .Kanji1339Character {
@@ -16089,7 +16089,7 @@ const Kanji1339Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1339Character);
+styledYak(JapaneseCard)("Kanji1339Character");
 const Kanji1340Character =
 /*YAK Extracted CSS:
 .Kanji1340Character {
@@ -16101,7 +16101,7 @@ const Kanji1340Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1340Character);
+styledYak(JapaneseCard)("Kanji1340Character");
 const Kanji1341Character =
 /*YAK Extracted CSS:
 .Kanji1341Character {
@@ -16113,7 +16113,7 @@ const Kanji1341Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1341Character);
+styledYak(JapaneseCard)("Kanji1341Character");
 const Kanji1342Character =
 /*YAK Extracted CSS:
 .Kanji1342Character {
@@ -16125,7 +16125,7 @@ const Kanji1342Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1342Character);
+styledYak(JapaneseCard)("Kanji1342Character");
 const Kanji1343Character =
 /*YAK Extracted CSS:
 .Kanji1343Character {
@@ -16137,7 +16137,7 @@ const Kanji1343Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1343Character);
+styledYak(JapaneseCard)("Kanji1343Character");
 const Kanji1344Character =
 /*YAK Extracted CSS:
 .Kanji1344Character {
@@ -16149,7 +16149,7 @@ const Kanji1344Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1344Character);
+styledYak(JapaneseCard)("Kanji1344Character");
 const Kanji1345Character =
 /*YAK Extracted CSS:
 .Kanji1345Character {
@@ -16161,7 +16161,7 @@ const Kanji1345Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1345Character);
+styledYak(JapaneseCard)("Kanji1345Character");
 const Kanji1346Character =
 /*YAK Extracted CSS:
 .Kanji1346Character {
@@ -16173,7 +16173,7 @@ const Kanji1346Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1346Character);
+styledYak(JapaneseCard)("Kanji1346Character");
 const Kanji1347Character =
 /*YAK Extracted CSS:
 .Kanji1347Character {
@@ -16185,7 +16185,7 @@ const Kanji1347Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1347Character);
+styledYak(JapaneseCard)("Kanji1347Character");
 const Kanji1348Character =
 /*YAK Extracted CSS:
 .Kanji1348Character {
@@ -16197,7 +16197,7 @@ const Kanji1348Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1348Character);
+styledYak(JapaneseCard)("Kanji1348Character");
 const Kanji1349Character =
 /*YAK Extracted CSS:
 .Kanji1349Character {
@@ -16209,7 +16209,7 @@ const Kanji1349Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1349Character);
+styledYak(JapaneseCard)("Kanji1349Character");
 const Kanji1350Character =
 /*YAK Extracted CSS:
 .Kanji1350Character {
@@ -16221,7 +16221,7 @@ const Kanji1350Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1350Character);
+styledYak(JapaneseCard)("Kanji1350Character");
 const Kanji1351Character =
 /*YAK Extracted CSS:
 .Kanji1351Character {
@@ -16233,7 +16233,7 @@ const Kanji1351Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1351Character);
+styledYak(JapaneseCard)("Kanji1351Character");
 const Kanji1352Character =
 /*YAK Extracted CSS:
 .Kanji1352Character {
@@ -16245,7 +16245,7 @@ const Kanji1352Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1352Character);
+styledYak(JapaneseCard)("Kanji1352Character");
 const Kanji1353Character =
 /*YAK Extracted CSS:
 .Kanji1353Character {
@@ -16257,7 +16257,7 @@ const Kanji1353Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1353Character);
+styledYak(JapaneseCard)("Kanji1353Character");
 const Kanji1354Character =
 /*YAK Extracted CSS:
 .Kanji1354Character {
@@ -16269,7 +16269,7 @@ const Kanji1354Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1354Character);
+styledYak(JapaneseCard)("Kanji1354Character");
 const Kanji1355Character =
 /*YAK Extracted CSS:
 .Kanji1355Character {
@@ -16281,7 +16281,7 @@ const Kanji1355Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1355Character);
+styledYak(JapaneseCard)("Kanji1355Character");
 const Kanji1356Character =
 /*YAK Extracted CSS:
 .Kanji1356Character {
@@ -16293,7 +16293,7 @@ const Kanji1356Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1356Character);
+styledYak(JapaneseCard)("Kanji1356Character");
 const Kanji1357Character =
 /*YAK Extracted CSS:
 .Kanji1357Character {
@@ -16305,7 +16305,7 @@ const Kanji1357Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1357Character);
+styledYak(JapaneseCard)("Kanji1357Character");
 const Kanji1358Character =
 /*YAK Extracted CSS:
 .Kanji1358Character {
@@ -16317,7 +16317,7 @@ const Kanji1358Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1358Character);
+styledYak(JapaneseCard)("Kanji1358Character");
 const Kanji1359Character =
 /*YAK Extracted CSS:
 .Kanji1359Character {
@@ -16329,7 +16329,7 @@ const Kanji1359Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1359Character);
+styledYak(JapaneseCard)("Kanji1359Character");
 const Kanji1360Character =
 /*YAK Extracted CSS:
 .Kanji1360Character {
@@ -16341,7 +16341,7 @@ const Kanji1360Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1360Character);
+styledYak(JapaneseCard)("Kanji1360Character");
 const Kanji1361Character =
 /*YAK Extracted CSS:
 .Kanji1361Character {
@@ -16353,7 +16353,7 @@ const Kanji1361Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1361Character);
+styledYak(JapaneseCard)("Kanji1361Character");
 const Kanji1362Character =
 /*YAK Extracted CSS:
 .Kanji1362Character {
@@ -16365,7 +16365,7 @@ const Kanji1362Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1362Character);
+styledYak(JapaneseCard)("Kanji1362Character");
 const Kanji1363Character =
 /*YAK Extracted CSS:
 .Kanji1363Character {
@@ -16377,7 +16377,7 @@ const Kanji1363Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1363Character);
+styledYak(JapaneseCard)("Kanji1363Character");
 const Kanji1364Character =
 /*YAK Extracted CSS:
 .Kanji1364Character {
@@ -16389,7 +16389,7 @@ const Kanji1364Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1364Character);
+styledYak(JapaneseCard)("Kanji1364Character");
 const Kanji1365Character =
 /*YAK Extracted CSS:
 .Kanji1365Character {
@@ -16401,7 +16401,7 @@ const Kanji1365Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1365Character);
+styledYak(JapaneseCard)("Kanji1365Character");
 const Kanji1366Character =
 /*YAK Extracted CSS:
 .Kanji1366Character {
@@ -16413,7 +16413,7 @@ const Kanji1366Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1366Character);
+styledYak(JapaneseCard)("Kanji1366Character");
 const Kanji1367Character =
 /*YAK Extracted CSS:
 .Kanji1367Character {
@@ -16425,7 +16425,7 @@ const Kanji1367Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1367Character);
+styledYak(JapaneseCard)("Kanji1367Character");
 const Kanji1368Character =
 /*YAK Extracted CSS:
 .Kanji1368Character {
@@ -16437,7 +16437,7 @@ const Kanji1368Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1368Character);
+styledYak(JapaneseCard)("Kanji1368Character");
 const Kanji1369Character =
 /*YAK Extracted CSS:
 .Kanji1369Character {
@@ -16449,7 +16449,7 @@ const Kanji1369Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1369Character);
+styledYak(JapaneseCard)("Kanji1369Character");
 const Kanji1370Character =
 /*YAK Extracted CSS:
 .Kanji1370Character {
@@ -16461,7 +16461,7 @@ const Kanji1370Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1370Character);
+styledYak(JapaneseCard)("Kanji1370Character");
 const Kanji1371Character =
 /*YAK Extracted CSS:
 .Kanji1371Character {
@@ -16473,7 +16473,7 @@ const Kanji1371Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1371Character);
+styledYak(JapaneseCard)("Kanji1371Character");
 const Kanji1372Character =
 /*YAK Extracted CSS:
 .Kanji1372Character {
@@ -16485,7 +16485,7 @@ const Kanji1372Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1372Character);
+styledYak(JapaneseCard)("Kanji1372Character");
 const Kanji1373Character =
 /*YAK Extracted CSS:
 .Kanji1373Character {
@@ -16497,7 +16497,7 @@ const Kanji1373Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1373Character);
+styledYak(JapaneseCard)("Kanji1373Character");
 const Kanji1374Character =
 /*YAK Extracted CSS:
 .Kanji1374Character {
@@ -16509,7 +16509,7 @@ const Kanji1374Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1374Character);
+styledYak(JapaneseCard)("Kanji1374Character");
 const Kanji1375Character =
 /*YAK Extracted CSS:
 .Kanji1375Character {
@@ -16521,7 +16521,7 @@ const Kanji1375Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1375Character);
+styledYak(JapaneseCard)("Kanji1375Character");
 const Kanji1376Character =
 /*YAK Extracted CSS:
 .Kanji1376Character {
@@ -16533,7 +16533,7 @@ const Kanji1376Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1376Character);
+styledYak(JapaneseCard)("Kanji1376Character");
 const Kanji1377Character =
 /*YAK Extracted CSS:
 .Kanji1377Character {
@@ -16545,7 +16545,7 @@ const Kanji1377Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1377Character);
+styledYak(JapaneseCard)("Kanji1377Character");
 const Kanji1378Character =
 /*YAK Extracted CSS:
 .Kanji1378Character {
@@ -16557,7 +16557,7 @@ const Kanji1378Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1378Character);
+styledYak(JapaneseCard)("Kanji1378Character");
 const Kanji1379Character =
 /*YAK Extracted CSS:
 .Kanji1379Character {
@@ -16569,7 +16569,7 @@ const Kanji1379Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1379Character);
+styledYak(JapaneseCard)("Kanji1379Character");
 const Kanji1380Character =
 /*YAK Extracted CSS:
 .Kanji1380Character {
@@ -16581,7 +16581,7 @@ const Kanji1380Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1380Character);
+styledYak(JapaneseCard)("Kanji1380Character");
 const Kanji1381Character =
 /*YAK Extracted CSS:
 .Kanji1381Character {
@@ -16593,7 +16593,7 @@ const Kanji1381Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1381Character);
+styledYak(JapaneseCard)("Kanji1381Character");
 const Kanji1382Character =
 /*YAK Extracted CSS:
 .Kanji1382Character {
@@ -16605,7 +16605,7 @@ const Kanji1382Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1382Character);
+styledYak(JapaneseCard)("Kanji1382Character");
 const Kanji1383Character =
 /*YAK Extracted CSS:
 .Kanji1383Character {
@@ -16617,7 +16617,7 @@ const Kanji1383Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1383Character);
+styledYak(JapaneseCard)("Kanji1383Character");
 const Kanji1384Character =
 /*YAK Extracted CSS:
 .Kanji1384Character {
@@ -16629,7 +16629,7 @@ const Kanji1384Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1384Character);
+styledYak(JapaneseCard)("Kanji1384Character");
 const Kanji1385Character =
 /*YAK Extracted CSS:
 .Kanji1385Character {
@@ -16641,7 +16641,7 @@ const Kanji1385Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1385Character);
+styledYak(JapaneseCard)("Kanji1385Character");
 const Kanji1386Character =
 /*YAK Extracted CSS:
 .Kanji1386Character {
@@ -16653,7 +16653,7 @@ const Kanji1386Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1386Character);
+styledYak(JapaneseCard)("Kanji1386Character");
 const Kanji1387Character =
 /*YAK Extracted CSS:
 .Kanji1387Character {
@@ -16665,7 +16665,7 @@ const Kanji1387Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1387Character);
+styledYak(JapaneseCard)("Kanji1387Character");
 const Kanji1388Character =
 /*YAK Extracted CSS:
 .Kanji1388Character {
@@ -16677,7 +16677,7 @@ const Kanji1388Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1388Character);
+styledYak(JapaneseCard)("Kanji1388Character");
 const Kanji1389Character =
 /*YAK Extracted CSS:
 .Kanji1389Character {
@@ -16689,7 +16689,7 @@ const Kanji1389Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1389Character);
+styledYak(JapaneseCard)("Kanji1389Character");
 const Kanji1390Character =
 /*YAK Extracted CSS:
 .Kanji1390Character {
@@ -16701,7 +16701,7 @@ const Kanji1390Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1390Character);
+styledYak(JapaneseCard)("Kanji1390Character");
 const Kanji1391Character =
 /*YAK Extracted CSS:
 .Kanji1391Character {
@@ -16713,7 +16713,7 @@ const Kanji1391Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1391Character);
+styledYak(JapaneseCard)("Kanji1391Character");
 const Kanji1392Character =
 /*YAK Extracted CSS:
 .Kanji1392Character {
@@ -16725,7 +16725,7 @@ const Kanji1392Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1392Character);
+styledYak(JapaneseCard)("Kanji1392Character");
 const Kanji1393Character =
 /*YAK Extracted CSS:
 .Kanji1393Character {
@@ -16737,7 +16737,7 @@ const Kanji1393Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1393Character);
+styledYak(JapaneseCard)("Kanji1393Character");
 const Kanji1394Character =
 /*YAK Extracted CSS:
 .Kanji1394Character {
@@ -16749,7 +16749,7 @@ const Kanji1394Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1394Character);
+styledYak(JapaneseCard)("Kanji1394Character");
 const Kanji1395Character =
 /*YAK Extracted CSS:
 .Kanji1395Character {
@@ -16761,7 +16761,7 @@ const Kanji1395Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1395Character);
+styledYak(JapaneseCard)("Kanji1395Character");
 const Kanji1396Character =
 /*YAK Extracted CSS:
 .Kanji1396Character {
@@ -16773,7 +16773,7 @@ const Kanji1396Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1396Character);
+styledYak(JapaneseCard)("Kanji1396Character");
 const Kanji1397Character =
 /*YAK Extracted CSS:
 .Kanji1397Character {
@@ -16785,7 +16785,7 @@ const Kanji1397Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1397Character);
+styledYak(JapaneseCard)("Kanji1397Character");
 const Kanji1398Character =
 /*YAK Extracted CSS:
 .Kanji1398Character {
@@ -16797,7 +16797,7 @@ const Kanji1398Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1398Character);
+styledYak(JapaneseCard)("Kanji1398Character");
 const Kanji1399Character =
 /*YAK Extracted CSS:
 .Kanji1399Character {
@@ -16809,7 +16809,7 @@ const Kanji1399Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1399Character);
+styledYak(JapaneseCard)("Kanji1399Character");
 const Kanji1400Character =
 /*YAK Extracted CSS:
 .Kanji1400Character {
@@ -16821,7 +16821,7 @@ const Kanji1400Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1400Character);
+styledYak(JapaneseCard)("Kanji1400Character");
 const Kanji1401Character =
 /*YAK Extracted CSS:
 .Kanji1401Character {
@@ -16833,7 +16833,7 @@ const Kanji1401Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1401Character);
+styledYak(JapaneseCard)("Kanji1401Character");
 const Kanji1402Character =
 /*YAK Extracted CSS:
 .Kanji1402Character {
@@ -16845,7 +16845,7 @@ const Kanji1402Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1402Character);
+styledYak(JapaneseCard)("Kanji1402Character");
 const Kanji1403Character =
 /*YAK Extracted CSS:
 .Kanji1403Character {
@@ -16857,7 +16857,7 @@ const Kanji1403Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1403Character);
+styledYak(JapaneseCard)("Kanji1403Character");
 const Kanji1404Character =
 /*YAK Extracted CSS:
 .Kanji1404Character {
@@ -16869,7 +16869,7 @@ const Kanji1404Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1404Character);
+styledYak(JapaneseCard)("Kanji1404Character");
 const Kanji1405Character =
 /*YAK Extracted CSS:
 .Kanji1405Character {
@@ -16881,7 +16881,7 @@ const Kanji1405Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1405Character);
+styledYak(JapaneseCard)("Kanji1405Character");
 const Kanji1406Character =
 /*YAK Extracted CSS:
 .Kanji1406Character {
@@ -16893,7 +16893,7 @@ const Kanji1406Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1406Character);
+styledYak(JapaneseCard)("Kanji1406Character");
 const Kanji1407Character =
 /*YAK Extracted CSS:
 .Kanji1407Character {
@@ -16905,7 +16905,7 @@ const Kanji1407Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1407Character);
+styledYak(JapaneseCard)("Kanji1407Character");
 const Kanji1408Character =
 /*YAK Extracted CSS:
 .Kanji1408Character {
@@ -16917,7 +16917,7 @@ const Kanji1408Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1408Character);
+styledYak(JapaneseCard)("Kanji1408Character");
 const Kanji1409Character =
 /*YAK Extracted CSS:
 .Kanji1409Character {
@@ -16929,7 +16929,7 @@ const Kanji1409Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1409Character);
+styledYak(JapaneseCard)("Kanji1409Character");
 const Kanji1410Character =
 /*YAK Extracted CSS:
 .Kanji1410Character {
@@ -16941,7 +16941,7 @@ const Kanji1410Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1410Character);
+styledYak(JapaneseCard)("Kanji1410Character");
 const Kanji1411Character =
 /*YAK Extracted CSS:
 .Kanji1411Character {
@@ -16953,7 +16953,7 @@ const Kanji1411Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1411Character);
+styledYak(JapaneseCard)("Kanji1411Character");
 const Kanji1412Character =
 /*YAK Extracted CSS:
 .Kanji1412Character {
@@ -16965,7 +16965,7 @@ const Kanji1412Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1412Character);
+styledYak(JapaneseCard)("Kanji1412Character");
 const Kanji1413Character =
 /*YAK Extracted CSS:
 .Kanji1413Character {
@@ -16977,7 +16977,7 @@ const Kanji1413Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1413Character);
+styledYak(JapaneseCard)("Kanji1413Character");
 const Kanji1414Character =
 /*YAK Extracted CSS:
 .Kanji1414Character {
@@ -16989,7 +16989,7 @@ const Kanji1414Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1414Character);
+styledYak(JapaneseCard)("Kanji1414Character");
 const Kanji1415Character =
 /*YAK Extracted CSS:
 .Kanji1415Character {
@@ -17001,7 +17001,7 @@ const Kanji1415Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1415Character);
+styledYak(JapaneseCard)("Kanji1415Character");
 const Kanji1416Character =
 /*YAK Extracted CSS:
 .Kanji1416Character {
@@ -17013,7 +17013,7 @@ const Kanji1416Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1416Character);
+styledYak(JapaneseCard)("Kanji1416Character");
 const Kanji1417Character =
 /*YAK Extracted CSS:
 .Kanji1417Character {
@@ -17025,7 +17025,7 @@ const Kanji1417Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1417Character);
+styledYak(JapaneseCard)("Kanji1417Character");
 const Kanji1418Character =
 /*YAK Extracted CSS:
 .Kanji1418Character {
@@ -17037,7 +17037,7 @@ const Kanji1418Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1418Character);
+styledYak(JapaneseCard)("Kanji1418Character");
 const Kanji1419Character =
 /*YAK Extracted CSS:
 .Kanji1419Character {
@@ -17049,7 +17049,7 @@ const Kanji1419Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1419Character);
+styledYak(JapaneseCard)("Kanji1419Character");
 const Kanji1420Character =
 /*YAK Extracted CSS:
 .Kanji1420Character {
@@ -17061,7 +17061,7 @@ const Kanji1420Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1420Character);
+styledYak(JapaneseCard)("Kanji1420Character");
 const Kanji1421Character =
 /*YAK Extracted CSS:
 .Kanji1421Character {
@@ -17073,7 +17073,7 @@ const Kanji1421Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1421Character);
+styledYak(JapaneseCard)("Kanji1421Character");
 const Kanji1422Character =
 /*YAK Extracted CSS:
 .Kanji1422Character {
@@ -17085,7 +17085,7 @@ const Kanji1422Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1422Character);
+styledYak(JapaneseCard)("Kanji1422Character");
 const Kanji1423Character =
 /*YAK Extracted CSS:
 .Kanji1423Character {
@@ -17097,7 +17097,7 @@ const Kanji1423Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1423Character);
+styledYak(JapaneseCard)("Kanji1423Character");
 const Kanji1424Character =
 /*YAK Extracted CSS:
 .Kanji1424Character {
@@ -17109,7 +17109,7 @@ const Kanji1424Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1424Character);
+styledYak(JapaneseCard)("Kanji1424Character");
 const Kanji1425Character =
 /*YAK Extracted CSS:
 .Kanji1425Character {
@@ -17121,7 +17121,7 @@ const Kanji1425Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1425Character);
+styledYak(JapaneseCard)("Kanji1425Character");
 const Kanji1426Character =
 /*YAK Extracted CSS:
 .Kanji1426Character {
@@ -17133,7 +17133,7 @@ const Kanji1426Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1426Character);
+styledYak(JapaneseCard)("Kanji1426Character");
 const Kanji1427Character =
 /*YAK Extracted CSS:
 .Kanji1427Character {
@@ -17145,7 +17145,7 @@ const Kanji1427Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1427Character);
+styledYak(JapaneseCard)("Kanji1427Character");
 const Kanji1428Character =
 /*YAK Extracted CSS:
 .Kanji1428Character {
@@ -17157,7 +17157,7 @@ const Kanji1428Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1428Character);
+styledYak(JapaneseCard)("Kanji1428Character");
 const Kanji1429Character =
 /*YAK Extracted CSS:
 .Kanji1429Character {
@@ -17169,7 +17169,7 @@ const Kanji1429Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1429Character);
+styledYak(JapaneseCard)("Kanji1429Character");
 const Kanji1430Character =
 /*YAK Extracted CSS:
 .Kanji1430Character {
@@ -17181,7 +17181,7 @@ const Kanji1430Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1430Character);
+styledYak(JapaneseCard)("Kanji1430Character");
 const Kanji1431Character =
 /*YAK Extracted CSS:
 .Kanji1431Character {
@@ -17193,7 +17193,7 @@ const Kanji1431Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1431Character);
+styledYak(JapaneseCard)("Kanji1431Character");
 const Kanji1432Character =
 /*YAK Extracted CSS:
 .Kanji1432Character {
@@ -17205,7 +17205,7 @@ const Kanji1432Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1432Character);
+styledYak(JapaneseCard)("Kanji1432Character");
 const Kanji1433Character =
 /*YAK Extracted CSS:
 .Kanji1433Character {
@@ -17217,7 +17217,7 @@ const Kanji1433Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1433Character);
+styledYak(JapaneseCard)("Kanji1433Character");
 const Kanji1434Character =
 /*YAK Extracted CSS:
 .Kanji1434Character {
@@ -17229,7 +17229,7 @@ const Kanji1434Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1434Character);
+styledYak(JapaneseCard)("Kanji1434Character");
 const Kanji1435Character =
 /*YAK Extracted CSS:
 .Kanji1435Character {
@@ -17241,7 +17241,7 @@ const Kanji1435Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1435Character);
+styledYak(JapaneseCard)("Kanji1435Character");
 const Kanji1436Character =
 /*YAK Extracted CSS:
 .Kanji1436Character {
@@ -17253,7 +17253,7 @@ const Kanji1436Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1436Character);
+styledYak(JapaneseCard)("Kanji1436Character");
 const Kanji1437Character =
 /*YAK Extracted CSS:
 .Kanji1437Character {
@@ -17265,7 +17265,7 @@ const Kanji1437Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1437Character);
+styledYak(JapaneseCard)("Kanji1437Character");
 const Kanji1438Character =
 /*YAK Extracted CSS:
 .Kanji1438Character {
@@ -17277,7 +17277,7 @@ const Kanji1438Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1438Character);
+styledYak(JapaneseCard)("Kanji1438Character");
 const Kanji1439Character =
 /*YAK Extracted CSS:
 .Kanji1439Character {
@@ -17289,7 +17289,7 @@ const Kanji1439Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1439Character);
+styledYak(JapaneseCard)("Kanji1439Character");
 const Kanji1440Character =
 /*YAK Extracted CSS:
 .Kanji1440Character {
@@ -17301,7 +17301,7 @@ const Kanji1440Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1440Character);
+styledYak(JapaneseCard)("Kanji1440Character");
 const Kanji1441Character =
 /*YAK Extracted CSS:
 .Kanji1441Character {
@@ -17313,7 +17313,7 @@ const Kanji1441Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1441Character);
+styledYak(JapaneseCard)("Kanji1441Character");
 const Kanji1442Character =
 /*YAK Extracted CSS:
 .Kanji1442Character {
@@ -17325,7 +17325,7 @@ const Kanji1442Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1442Character);
+styledYak(JapaneseCard)("Kanji1442Character");
 const Kanji1443Character =
 /*YAK Extracted CSS:
 .Kanji1443Character {
@@ -17337,7 +17337,7 @@ const Kanji1443Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1443Character);
+styledYak(JapaneseCard)("Kanji1443Character");
 const Kanji1444Character =
 /*YAK Extracted CSS:
 .Kanji1444Character {
@@ -17349,7 +17349,7 @@ const Kanji1444Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1444Character);
+styledYak(JapaneseCard)("Kanji1444Character");
 const Kanji1445Character =
 /*YAK Extracted CSS:
 .Kanji1445Character {
@@ -17361,7 +17361,7 @@ const Kanji1445Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1445Character);
+styledYak(JapaneseCard)("Kanji1445Character");
 const Kanji1446Character =
 /*YAK Extracted CSS:
 .Kanji1446Character {
@@ -17373,7 +17373,7 @@ const Kanji1446Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1446Character);
+styledYak(JapaneseCard)("Kanji1446Character");
 const Kanji1447Character =
 /*YAK Extracted CSS:
 .Kanji1447Character {
@@ -17385,7 +17385,7 @@ const Kanji1447Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1447Character);
+styledYak(JapaneseCard)("Kanji1447Character");
 const Kanji1448Character =
 /*YAK Extracted CSS:
 .Kanji1448Character {
@@ -17397,7 +17397,7 @@ const Kanji1448Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1448Character);
+styledYak(JapaneseCard)("Kanji1448Character");
 const Kanji1449Character =
 /*YAK Extracted CSS:
 .Kanji1449Character {
@@ -17409,7 +17409,7 @@ const Kanji1449Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1449Character);
+styledYak(JapaneseCard)("Kanji1449Character");
 const Kanji1450Character =
 /*YAK Extracted CSS:
 .Kanji1450Character {
@@ -17421,7 +17421,7 @@ const Kanji1450Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1450Character);
+styledYak(JapaneseCard)("Kanji1450Character");
 const Kanji1451Character =
 /*YAK Extracted CSS:
 .Kanji1451Character {
@@ -17433,7 +17433,7 @@ const Kanji1451Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1451Character);
+styledYak(JapaneseCard)("Kanji1451Character");
 const Kanji1452Character =
 /*YAK Extracted CSS:
 .Kanji1452Character {
@@ -17445,7 +17445,7 @@ const Kanji1452Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1452Character);
+styledYak(JapaneseCard)("Kanji1452Character");
 const Kanji1453Character =
 /*YAK Extracted CSS:
 .Kanji1453Character {
@@ -17457,7 +17457,7 @@ const Kanji1453Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1453Character);
+styledYak(JapaneseCard)("Kanji1453Character");
 const Kanji1454Character =
 /*YAK Extracted CSS:
 .Kanji1454Character {
@@ -17469,7 +17469,7 @@ const Kanji1454Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1454Character);
+styledYak(JapaneseCard)("Kanji1454Character");
 const Kanji1455Character =
 /*YAK Extracted CSS:
 .Kanji1455Character {
@@ -17481,7 +17481,7 @@ const Kanji1455Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1455Character);
+styledYak(JapaneseCard)("Kanji1455Character");
 const Kanji1456Character =
 /*YAK Extracted CSS:
 .Kanji1456Character {
@@ -17493,7 +17493,7 @@ const Kanji1456Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1456Character);
+styledYak(JapaneseCard)("Kanji1456Character");
 const Kanji1457Character =
 /*YAK Extracted CSS:
 .Kanji1457Character {
@@ -17505,7 +17505,7 @@ const Kanji1457Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1457Character);
+styledYak(JapaneseCard)("Kanji1457Character");
 const Kanji1458Character =
 /*YAK Extracted CSS:
 .Kanji1458Character {
@@ -17517,7 +17517,7 @@ const Kanji1458Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1458Character);
+styledYak(JapaneseCard)("Kanji1458Character");
 const Kanji1459Character =
 /*YAK Extracted CSS:
 .Kanji1459Character {
@@ -17529,7 +17529,7 @@ const Kanji1459Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1459Character);
+styledYak(JapaneseCard)("Kanji1459Character");
 const Kanji1460Character =
 /*YAK Extracted CSS:
 .Kanji1460Character {
@@ -17541,7 +17541,7 @@ const Kanji1460Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1460Character);
+styledYak(JapaneseCard)("Kanji1460Character");
 const Kanji1461Character =
 /*YAK Extracted CSS:
 .Kanji1461Character {
@@ -17553,7 +17553,7 @@ const Kanji1461Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1461Character);
+styledYak(JapaneseCard)("Kanji1461Character");
 const Kanji1462Character =
 /*YAK Extracted CSS:
 .Kanji1462Character {
@@ -17565,7 +17565,7 @@ const Kanji1462Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1462Character);
+styledYak(JapaneseCard)("Kanji1462Character");
 const Kanji1463Character =
 /*YAK Extracted CSS:
 .Kanji1463Character {
@@ -17577,7 +17577,7 @@ const Kanji1463Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1463Character);
+styledYak(JapaneseCard)("Kanji1463Character");
 const Kanji1464Character =
 /*YAK Extracted CSS:
 .Kanji1464Character {
@@ -17589,7 +17589,7 @@ const Kanji1464Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1464Character);
+styledYak(JapaneseCard)("Kanji1464Character");
 const Kanji1465Character =
 /*YAK Extracted CSS:
 .Kanji1465Character {
@@ -17601,7 +17601,7 @@ const Kanji1465Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1465Character);
+styledYak(JapaneseCard)("Kanji1465Character");
 const Kanji1466Character =
 /*YAK Extracted CSS:
 .Kanji1466Character {
@@ -17613,7 +17613,7 @@ const Kanji1466Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1466Character);
+styledYak(JapaneseCard)("Kanji1466Character");
 const Kanji1467Character =
 /*YAK Extracted CSS:
 .Kanji1467Character {
@@ -17625,7 +17625,7 @@ const Kanji1467Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1467Character);
+styledYak(JapaneseCard)("Kanji1467Character");
 const Kanji1468Character =
 /*YAK Extracted CSS:
 .Kanji1468Character {
@@ -17637,7 +17637,7 @@ const Kanji1468Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1468Character);
+styledYak(JapaneseCard)("Kanji1468Character");
 const Kanji1469Character =
 /*YAK Extracted CSS:
 .Kanji1469Character {
@@ -17649,7 +17649,7 @@ const Kanji1469Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1469Character);
+styledYak(JapaneseCard)("Kanji1469Character");
 const Kanji1470Character =
 /*YAK Extracted CSS:
 .Kanji1470Character {
@@ -17661,7 +17661,7 @@ const Kanji1470Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1470Character);
+styledYak(JapaneseCard)("Kanji1470Character");
 const Kanji1471Character =
 /*YAK Extracted CSS:
 .Kanji1471Character {
@@ -17673,7 +17673,7 @@ const Kanji1471Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1471Character);
+styledYak(JapaneseCard)("Kanji1471Character");
 const Kanji1472Character =
 /*YAK Extracted CSS:
 .Kanji1472Character {
@@ -17685,7 +17685,7 @@ const Kanji1472Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1472Character);
+styledYak(JapaneseCard)("Kanji1472Character");
 const Kanji1473Character =
 /*YAK Extracted CSS:
 .Kanji1473Character {
@@ -17697,7 +17697,7 @@ const Kanji1473Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1473Character);
+styledYak(JapaneseCard)("Kanji1473Character");
 const Kanji1474Character =
 /*YAK Extracted CSS:
 .Kanji1474Character {
@@ -17709,7 +17709,7 @@ const Kanji1474Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1474Character);
+styledYak(JapaneseCard)("Kanji1474Character");
 const Kanji1475Character =
 /*YAK Extracted CSS:
 .Kanji1475Character {
@@ -17721,7 +17721,7 @@ const Kanji1475Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1475Character);
+styledYak(JapaneseCard)("Kanji1475Character");
 const Kanji1476Character =
 /*YAK Extracted CSS:
 .Kanji1476Character {
@@ -17733,7 +17733,7 @@ const Kanji1476Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1476Character);
+styledYak(JapaneseCard)("Kanji1476Character");
 const Kanji1477Character =
 /*YAK Extracted CSS:
 .Kanji1477Character {
@@ -17745,7 +17745,7 @@ const Kanji1477Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1477Character);
+styledYak(JapaneseCard)("Kanji1477Character");
 const Kanji1478Character =
 /*YAK Extracted CSS:
 .Kanji1478Character {
@@ -17757,7 +17757,7 @@ const Kanji1478Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1478Character);
+styledYak(JapaneseCard)("Kanji1478Character");
 const Kanji1479Character =
 /*YAK Extracted CSS:
 .Kanji1479Character {
@@ -17769,7 +17769,7 @@ const Kanji1479Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1479Character);
+styledYak(JapaneseCard)("Kanji1479Character");
 const Kanji1480Character =
 /*YAK Extracted CSS:
 .Kanji1480Character {
@@ -17781,7 +17781,7 @@ const Kanji1480Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1480Character);
+styledYak(JapaneseCard)("Kanji1480Character");
 const Kanji1481Character =
 /*YAK Extracted CSS:
 .Kanji1481Character {
@@ -17793,7 +17793,7 @@ const Kanji1481Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1481Character);
+styledYak(JapaneseCard)("Kanji1481Character");
 const Kanji1482Character =
 /*YAK Extracted CSS:
 .Kanji1482Character {
@@ -17805,7 +17805,7 @@ const Kanji1482Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1482Character);
+styledYak(JapaneseCard)("Kanji1482Character");
 const Kanji1483Character =
 /*YAK Extracted CSS:
 .Kanji1483Character {
@@ -17817,7 +17817,7 @@ const Kanji1483Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1483Character);
+styledYak(JapaneseCard)("Kanji1483Character");
 const Kanji1484Character =
 /*YAK Extracted CSS:
 .Kanji1484Character {
@@ -17829,7 +17829,7 @@ const Kanji1484Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1484Character);
+styledYak(JapaneseCard)("Kanji1484Character");
 const Kanji1485Character =
 /*YAK Extracted CSS:
 .Kanji1485Character {
@@ -17841,7 +17841,7 @@ const Kanji1485Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1485Character);
+styledYak(JapaneseCard)("Kanji1485Character");
 const Kanji1486Character =
 /*YAK Extracted CSS:
 .Kanji1486Character {
@@ -17853,7 +17853,7 @@ const Kanji1486Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1486Character);
+styledYak(JapaneseCard)("Kanji1486Character");
 const Kanji1487Character =
 /*YAK Extracted CSS:
 .Kanji1487Character {
@@ -17865,7 +17865,7 @@ const Kanji1487Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1487Character);
+styledYak(JapaneseCard)("Kanji1487Character");
 const Kanji1488Character =
 /*YAK Extracted CSS:
 .Kanji1488Character {
@@ -17877,7 +17877,7 @@ const Kanji1488Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1488Character);
+styledYak(JapaneseCard)("Kanji1488Character");
 const Kanji1489Character =
 /*YAK Extracted CSS:
 .Kanji1489Character {
@@ -17889,7 +17889,7 @@ const Kanji1489Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1489Character);
+styledYak(JapaneseCard)("Kanji1489Character");
 const Kanji1490Character =
 /*YAK Extracted CSS:
 .Kanji1490Character {
@@ -17901,7 +17901,7 @@ const Kanji1490Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1490Character);
+styledYak(JapaneseCard)("Kanji1490Character");
 const Kanji1491Character =
 /*YAK Extracted CSS:
 .Kanji1491Character {
@@ -17913,7 +17913,7 @@ const Kanji1491Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1491Character);
+styledYak(JapaneseCard)("Kanji1491Character");
 const Kanji1492Character =
 /*YAK Extracted CSS:
 .Kanji1492Character {
@@ -17925,7 +17925,7 @@ const Kanji1492Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1492Character);
+styledYak(JapaneseCard)("Kanji1492Character");
 const Kanji1493Character =
 /*YAK Extracted CSS:
 .Kanji1493Character {
@@ -17937,7 +17937,7 @@ const Kanji1493Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1493Character);
+styledYak(JapaneseCard)("Kanji1493Character");
 const Kanji1494Character =
 /*YAK Extracted CSS:
 .Kanji1494Character {
@@ -17949,7 +17949,7 @@ const Kanji1494Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1494Character);
+styledYak(JapaneseCard)("Kanji1494Character");
 const Kanji1495Character =
 /*YAK Extracted CSS:
 .Kanji1495Character {
@@ -17961,7 +17961,7 @@ const Kanji1495Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1495Character);
+styledYak(JapaneseCard)("Kanji1495Character");
 const Kanji1496Character =
 /*YAK Extracted CSS:
 .Kanji1496Character {
@@ -17973,7 +17973,7 @@ const Kanji1496Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1496Character);
+styledYak(JapaneseCard)("Kanji1496Character");
 const Kanji1497Character =
 /*YAK Extracted CSS:
 .Kanji1497Character {
@@ -17985,7 +17985,7 @@ const Kanji1497Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1497Character);
+styledYak(JapaneseCard)("Kanji1497Character");
 const Kanji1498Character =
 /*YAK Extracted CSS:
 .Kanji1498Character {
@@ -17997,7 +17997,7 @@ const Kanji1498Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1498Character);
+styledYak(JapaneseCard)("Kanji1498Character");
 const Kanji1499Character =
 /*YAK Extracted CSS:
 .Kanji1499Character {
@@ -18009,7 +18009,7 @@ const Kanji1499Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1499Character);
+styledYak(JapaneseCard)("Kanji1499Character");
 const Kanji1500Character =
 /*YAK Extracted CSS:
 .Kanji1500Character {
@@ -18021,7 +18021,7 @@ const Kanji1500Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1500Character);
+styledYak(JapaneseCard)("Kanji1500Character");
 const Kanji1501Character =
 /*YAK Extracted CSS:
 .Kanji1501Character {
@@ -18033,7 +18033,7 @@ const Kanji1501Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1501Character);
+styledYak(JapaneseCard)("Kanji1501Character");
 const Kanji1502Character =
 /*YAK Extracted CSS:
 .Kanji1502Character {
@@ -18045,7 +18045,7 @@ const Kanji1502Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1502Character);
+styledYak(JapaneseCard)("Kanji1502Character");
 const Kanji1503Character =
 /*YAK Extracted CSS:
 .Kanji1503Character {
@@ -18057,7 +18057,7 @@ const Kanji1503Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1503Character);
+styledYak(JapaneseCard)("Kanji1503Character");
 const Kanji1504Character =
 /*YAK Extracted CSS:
 .Kanji1504Character {
@@ -18069,7 +18069,7 @@ const Kanji1504Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1504Character);
+styledYak(JapaneseCard)("Kanji1504Character");
 const Kanji1505Character =
 /*YAK Extracted CSS:
 .Kanji1505Character {
@@ -18081,7 +18081,7 @@ const Kanji1505Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1505Character);
+styledYak(JapaneseCard)("Kanji1505Character");
 const Kanji1506Character =
 /*YAK Extracted CSS:
 .Kanji1506Character {
@@ -18093,7 +18093,7 @@ const Kanji1506Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1506Character);
+styledYak(JapaneseCard)("Kanji1506Character");
 const Kanji1507Character =
 /*YAK Extracted CSS:
 .Kanji1507Character {
@@ -18105,7 +18105,7 @@ const Kanji1507Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1507Character);
+styledYak(JapaneseCard)("Kanji1507Character");
 const Kanji1508Character =
 /*YAK Extracted CSS:
 .Kanji1508Character {
@@ -18117,7 +18117,7 @@ const Kanji1508Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1508Character);
+styledYak(JapaneseCard)("Kanji1508Character");
 const Kanji1509Character =
 /*YAK Extracted CSS:
 .Kanji1509Character {
@@ -18129,7 +18129,7 @@ const Kanji1509Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1509Character);
+styledYak(JapaneseCard)("Kanji1509Character");
 const Kanji1510Character =
 /*YAK Extracted CSS:
 .Kanji1510Character {
@@ -18141,7 +18141,7 @@ const Kanji1510Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1510Character);
+styledYak(JapaneseCard)("Kanji1510Character");
 const Kanji1511Character =
 /*YAK Extracted CSS:
 .Kanji1511Character {
@@ -18153,7 +18153,7 @@ const Kanji1511Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1511Character);
+styledYak(JapaneseCard)("Kanji1511Character");
 const Kanji1512Character =
 /*YAK Extracted CSS:
 .Kanji1512Character {
@@ -18165,7 +18165,7 @@ const Kanji1512Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1512Character);
+styledYak(JapaneseCard)("Kanji1512Character");
 const Kanji1513Character =
 /*YAK Extracted CSS:
 .Kanji1513Character {
@@ -18177,7 +18177,7 @@ const Kanji1513Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1513Character);
+styledYak(JapaneseCard)("Kanji1513Character");
 const Kanji1514Character =
 /*YAK Extracted CSS:
 .Kanji1514Character {
@@ -18189,7 +18189,7 @@ const Kanji1514Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1514Character);
+styledYak(JapaneseCard)("Kanji1514Character");
 const Kanji1515Character =
 /*YAK Extracted CSS:
 .Kanji1515Character {
@@ -18201,7 +18201,7 @@ const Kanji1515Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1515Character);
+styledYak(JapaneseCard)("Kanji1515Character");
 const Kanji1516Character =
 /*YAK Extracted CSS:
 .Kanji1516Character {
@@ -18213,7 +18213,7 @@ const Kanji1516Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1516Character);
+styledYak(JapaneseCard)("Kanji1516Character");
 const Kanji1517Character =
 /*YAK Extracted CSS:
 .Kanji1517Character {
@@ -18225,7 +18225,7 @@ const Kanji1517Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1517Character);
+styledYak(JapaneseCard)("Kanji1517Character");
 const Kanji1518Character =
 /*YAK Extracted CSS:
 .Kanji1518Character {
@@ -18237,7 +18237,7 @@ const Kanji1518Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1518Character);
+styledYak(JapaneseCard)("Kanji1518Character");
 const Kanji1519Character =
 /*YAK Extracted CSS:
 .Kanji1519Character {
@@ -18249,7 +18249,7 @@ const Kanji1519Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1519Character);
+styledYak(JapaneseCard)("Kanji1519Character");
 const Kanji1520Character =
 /*YAK Extracted CSS:
 .Kanji1520Character {
@@ -18261,7 +18261,7 @@ const Kanji1520Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1520Character);
+styledYak(JapaneseCard)("Kanji1520Character");
 const Kanji1521Character =
 /*YAK Extracted CSS:
 .Kanji1521Character {
@@ -18273,7 +18273,7 @@ const Kanji1521Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1521Character);
+styledYak(JapaneseCard)("Kanji1521Character");
 const Kanji1522Character =
 /*YAK Extracted CSS:
 .Kanji1522Character {
@@ -18285,7 +18285,7 @@ const Kanji1522Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1522Character);
+styledYak(JapaneseCard)("Kanji1522Character");
 const Kanji1523Character =
 /*YAK Extracted CSS:
 .Kanji1523Character {
@@ -18297,7 +18297,7 @@ const Kanji1523Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1523Character);
+styledYak(JapaneseCard)("Kanji1523Character");
 const Kanji1524Character =
 /*YAK Extracted CSS:
 .Kanji1524Character {
@@ -18309,7 +18309,7 @@ const Kanji1524Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1524Character);
+styledYak(JapaneseCard)("Kanji1524Character");
 const Kanji1525Character =
 /*YAK Extracted CSS:
 .Kanji1525Character {
@@ -18321,7 +18321,7 @@ const Kanji1525Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1525Character);
+styledYak(JapaneseCard)("Kanji1525Character");
 const Kanji1526Character =
 /*YAK Extracted CSS:
 .Kanji1526Character {
@@ -18333,7 +18333,7 @@ const Kanji1526Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1526Character);
+styledYak(JapaneseCard)("Kanji1526Character");
 const Kanji1527Character =
 /*YAK Extracted CSS:
 .Kanji1527Character {
@@ -18345,7 +18345,7 @@ const Kanji1527Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1527Character);
+styledYak(JapaneseCard)("Kanji1527Character");
 const Kanji1528Character =
 /*YAK Extracted CSS:
 .Kanji1528Character {
@@ -18357,7 +18357,7 @@ const Kanji1528Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1528Character);
+styledYak(JapaneseCard)("Kanji1528Character");
 const Kanji1529Character =
 /*YAK Extracted CSS:
 .Kanji1529Character {
@@ -18369,7 +18369,7 @@ const Kanji1529Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1529Character);
+styledYak(JapaneseCard)("Kanji1529Character");
 const Kanji1530Character =
 /*YAK Extracted CSS:
 .Kanji1530Character {
@@ -18381,7 +18381,7 @@ const Kanji1530Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1530Character);
+styledYak(JapaneseCard)("Kanji1530Character");
 const Kanji1531Character =
 /*YAK Extracted CSS:
 .Kanji1531Character {
@@ -18393,7 +18393,7 @@ const Kanji1531Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1531Character);
+styledYak(JapaneseCard)("Kanji1531Character");
 const Kanji1532Character =
 /*YAK Extracted CSS:
 .Kanji1532Character {
@@ -18405,7 +18405,7 @@ const Kanji1532Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1532Character);
+styledYak(JapaneseCard)("Kanji1532Character");
 const Kanji1533Character =
 /*YAK Extracted CSS:
 .Kanji1533Character {
@@ -18417,7 +18417,7 @@ const Kanji1533Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1533Character);
+styledYak(JapaneseCard)("Kanji1533Character");
 const Kanji1534Character =
 /*YAK Extracted CSS:
 .Kanji1534Character {
@@ -18429,7 +18429,7 @@ const Kanji1534Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1534Character);
+styledYak(JapaneseCard)("Kanji1534Character");
 const Kanji1535Character =
 /*YAK Extracted CSS:
 .Kanji1535Character {
@@ -18441,7 +18441,7 @@ const Kanji1535Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1535Character);
+styledYak(JapaneseCard)("Kanji1535Character");
 const Kanji1536Character =
 /*YAK Extracted CSS:
 .Kanji1536Character {
@@ -18453,7 +18453,7 @@ const Kanji1536Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1536Character);
+styledYak(JapaneseCard)("Kanji1536Character");
 const Kanji1537Character =
 /*YAK Extracted CSS:
 .Kanji1537Character {
@@ -18465,7 +18465,7 @@ const Kanji1537Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1537Character);
+styledYak(JapaneseCard)("Kanji1537Character");
 const Kanji1538Character =
 /*YAK Extracted CSS:
 .Kanji1538Character {
@@ -18477,7 +18477,7 @@ const Kanji1538Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1538Character);
+styledYak(JapaneseCard)("Kanji1538Character");
 const Kanji1539Character =
 /*YAK Extracted CSS:
 .Kanji1539Character {
@@ -18489,7 +18489,7 @@ const Kanji1539Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1539Character);
+styledYak(JapaneseCard)("Kanji1539Character");
 const Kanji1540Character =
 /*YAK Extracted CSS:
 .Kanji1540Character {
@@ -18501,7 +18501,7 @@ const Kanji1540Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1540Character);
+styledYak(JapaneseCard)("Kanji1540Character");
 const Kanji1541Character =
 /*YAK Extracted CSS:
 .Kanji1541Character {
@@ -18513,7 +18513,7 @@ const Kanji1541Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1541Character);
+styledYak(JapaneseCard)("Kanji1541Character");
 const Kanji1542Character =
 /*YAK Extracted CSS:
 .Kanji1542Character {
@@ -18525,7 +18525,7 @@ const Kanji1542Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1542Character);
+styledYak(JapaneseCard)("Kanji1542Character");
 const Kanji1543Character =
 /*YAK Extracted CSS:
 .Kanji1543Character {
@@ -18537,7 +18537,7 @@ const Kanji1543Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1543Character);
+styledYak(JapaneseCard)("Kanji1543Character");
 const Kanji1544Character =
 /*YAK Extracted CSS:
 .Kanji1544Character {
@@ -18549,7 +18549,7 @@ const Kanji1544Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1544Character);
+styledYak(JapaneseCard)("Kanji1544Character");
 const Kanji1545Character =
 /*YAK Extracted CSS:
 .Kanji1545Character {
@@ -18561,7 +18561,7 @@ const Kanji1545Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1545Character);
+styledYak(JapaneseCard)("Kanji1545Character");
 const Kanji1546Character =
 /*YAK Extracted CSS:
 .Kanji1546Character {
@@ -18573,7 +18573,7 @@ const Kanji1546Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1546Character);
+styledYak(JapaneseCard)("Kanji1546Character");
 const Kanji1547Character =
 /*YAK Extracted CSS:
 .Kanji1547Character {
@@ -18585,7 +18585,7 @@ const Kanji1547Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1547Character);
+styledYak(JapaneseCard)("Kanji1547Character");
 const Kanji1548Character =
 /*YAK Extracted CSS:
 .Kanji1548Character {
@@ -18597,7 +18597,7 @@ const Kanji1548Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1548Character);
+styledYak(JapaneseCard)("Kanji1548Character");
 const Kanji1549Character =
 /*YAK Extracted CSS:
 .Kanji1549Character {
@@ -18609,7 +18609,7 @@ const Kanji1549Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1549Character);
+styledYak(JapaneseCard)("Kanji1549Character");
 const Kanji1550Character =
 /*YAK Extracted CSS:
 .Kanji1550Character {
@@ -18621,7 +18621,7 @@ const Kanji1550Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1550Character);
+styledYak(JapaneseCard)("Kanji1550Character");
 const Kanji1551Character =
 /*YAK Extracted CSS:
 .Kanji1551Character {
@@ -18633,7 +18633,7 @@ const Kanji1551Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1551Character);
+styledYak(JapaneseCard)("Kanji1551Character");
 const Kanji1552Character =
 /*YAK Extracted CSS:
 .Kanji1552Character {
@@ -18645,7 +18645,7 @@ const Kanji1552Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1552Character);
+styledYak(JapaneseCard)("Kanji1552Character");
 const Kanji1553Character =
 /*YAK Extracted CSS:
 .Kanji1553Character {
@@ -18657,7 +18657,7 @@ const Kanji1553Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1553Character);
+styledYak(JapaneseCard)("Kanji1553Character");
 const Kanji1554Character =
 /*YAK Extracted CSS:
 .Kanji1554Character {
@@ -18669,7 +18669,7 @@ const Kanji1554Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1554Character);
+styledYak(JapaneseCard)("Kanji1554Character");
 const Kanji1555Character =
 /*YAK Extracted CSS:
 .Kanji1555Character {
@@ -18681,7 +18681,7 @@ const Kanji1555Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1555Character);
+styledYak(JapaneseCard)("Kanji1555Character");
 const Kanji1556Character =
 /*YAK Extracted CSS:
 .Kanji1556Character {
@@ -18693,7 +18693,7 @@ const Kanji1556Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1556Character);
+styledYak(JapaneseCard)("Kanji1556Character");
 const Kanji1557Character =
 /*YAK Extracted CSS:
 .Kanji1557Character {
@@ -18705,7 +18705,7 @@ const Kanji1557Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1557Character);
+styledYak(JapaneseCard)("Kanji1557Character");
 const Kanji1558Character =
 /*YAK Extracted CSS:
 .Kanji1558Character {
@@ -18717,7 +18717,7 @@ const Kanji1558Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1558Character);
+styledYak(JapaneseCard)("Kanji1558Character");
 const Kanji1559Character =
 /*YAK Extracted CSS:
 .Kanji1559Character {
@@ -18729,7 +18729,7 @@ const Kanji1559Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1559Character);
+styledYak(JapaneseCard)("Kanji1559Character");
 const Kanji1560Character =
 /*YAK Extracted CSS:
 .Kanji1560Character {
@@ -18741,7 +18741,7 @@ const Kanji1560Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1560Character);
+styledYak(JapaneseCard)("Kanji1560Character");
 const Kanji1561Character =
 /*YAK Extracted CSS:
 .Kanji1561Character {
@@ -18753,7 +18753,7 @@ const Kanji1561Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1561Character);
+styledYak(JapaneseCard)("Kanji1561Character");
 const Kanji1562Character =
 /*YAK Extracted CSS:
 .Kanji1562Character {
@@ -18765,7 +18765,7 @@ const Kanji1562Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1562Character);
+styledYak(JapaneseCard)("Kanji1562Character");
 const Kanji1563Character =
 /*YAK Extracted CSS:
 .Kanji1563Character {
@@ -18777,7 +18777,7 @@ const Kanji1563Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1563Character);
+styledYak(JapaneseCard)("Kanji1563Character");
 const Kanji1564Character =
 /*YAK Extracted CSS:
 .Kanji1564Character {
@@ -18789,7 +18789,7 @@ const Kanji1564Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1564Character);
+styledYak(JapaneseCard)("Kanji1564Character");
 const Kanji1565Character =
 /*YAK Extracted CSS:
 .Kanji1565Character {
@@ -18801,7 +18801,7 @@ const Kanji1565Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1565Character);
+styledYak(JapaneseCard)("Kanji1565Character");
 const Kanji1566Character =
 /*YAK Extracted CSS:
 .Kanji1566Character {
@@ -18813,7 +18813,7 @@ const Kanji1566Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1566Character);
+styledYak(JapaneseCard)("Kanji1566Character");
 const Kanji1567Character =
 /*YAK Extracted CSS:
 .Kanji1567Character {
@@ -18825,7 +18825,7 @@ const Kanji1567Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1567Character);
+styledYak(JapaneseCard)("Kanji1567Character");
 const Kanji1568Character =
 /*YAK Extracted CSS:
 .Kanji1568Character {
@@ -18837,7 +18837,7 @@ const Kanji1568Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1568Character);
+styledYak(JapaneseCard)("Kanji1568Character");
 const Kanji1569Character =
 /*YAK Extracted CSS:
 .Kanji1569Character {
@@ -18849,7 +18849,7 @@ const Kanji1569Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1569Character);
+styledYak(JapaneseCard)("Kanji1569Character");
 const Kanji1570Character =
 /*YAK Extracted CSS:
 .Kanji1570Character {
@@ -18861,7 +18861,7 @@ const Kanji1570Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1570Character);
+styledYak(JapaneseCard)("Kanji1570Character");
 const Kanji1571Character =
 /*YAK Extracted CSS:
 .Kanji1571Character {
@@ -18873,7 +18873,7 @@ const Kanji1571Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1571Character);
+styledYak(JapaneseCard)("Kanji1571Character");
 const Kanji1572Character =
 /*YAK Extracted CSS:
 .Kanji1572Character {
@@ -18885,7 +18885,7 @@ const Kanji1572Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1572Character);
+styledYak(JapaneseCard)("Kanji1572Character");
 const Kanji1573Character =
 /*YAK Extracted CSS:
 .Kanji1573Character {
@@ -18897,7 +18897,7 @@ const Kanji1573Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1573Character);
+styledYak(JapaneseCard)("Kanji1573Character");
 const Kanji1574Character =
 /*YAK Extracted CSS:
 .Kanji1574Character {
@@ -18909,7 +18909,7 @@ const Kanji1574Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1574Character);
+styledYak(JapaneseCard)("Kanji1574Character");
 const Kanji1575Character =
 /*YAK Extracted CSS:
 .Kanji1575Character {
@@ -18921,7 +18921,7 @@ const Kanji1575Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1575Character);
+styledYak(JapaneseCard)("Kanji1575Character");
 const Kanji1576Character =
 /*YAK Extracted CSS:
 .Kanji1576Character {
@@ -18933,7 +18933,7 @@ const Kanji1576Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1576Character);
+styledYak(JapaneseCard)("Kanji1576Character");
 const Kanji1577Character =
 /*YAK Extracted CSS:
 .Kanji1577Character {
@@ -18945,7 +18945,7 @@ const Kanji1577Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1577Character);
+styledYak(JapaneseCard)("Kanji1577Character");
 const Kanji1578Character =
 /*YAK Extracted CSS:
 .Kanji1578Character {
@@ -18957,7 +18957,7 @@ const Kanji1578Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1578Character);
+styledYak(JapaneseCard)("Kanji1578Character");
 const Kanji1579Character =
 /*YAK Extracted CSS:
 .Kanji1579Character {
@@ -18969,7 +18969,7 @@ const Kanji1579Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1579Character);
+styledYak(JapaneseCard)("Kanji1579Character");
 const Kanji1580Character =
 /*YAK Extracted CSS:
 .Kanji1580Character {
@@ -18981,7 +18981,7 @@ const Kanji1580Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1580Character);
+styledYak(JapaneseCard)("Kanji1580Character");
 const Kanji1581Character =
 /*YAK Extracted CSS:
 .Kanji1581Character {
@@ -18993,7 +18993,7 @@ const Kanji1581Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1581Character);
+styledYak(JapaneseCard)("Kanji1581Character");
 const Kanji1582Character =
 /*YAK Extracted CSS:
 .Kanji1582Character {
@@ -19005,7 +19005,7 @@ const Kanji1582Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1582Character);
+styledYak(JapaneseCard)("Kanji1582Character");
 const Kanji1583Character =
 /*YAK Extracted CSS:
 .Kanji1583Character {
@@ -19017,7 +19017,7 @@ const Kanji1583Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1583Character);
+styledYak(JapaneseCard)("Kanji1583Character");
 const Kanji1584Character =
 /*YAK Extracted CSS:
 .Kanji1584Character {
@@ -19029,7 +19029,7 @@ const Kanji1584Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1584Character);
+styledYak(JapaneseCard)("Kanji1584Character");
 const Kanji1585Character =
 /*YAK Extracted CSS:
 .Kanji1585Character {
@@ -19041,7 +19041,7 @@ const Kanji1585Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1585Character);
+styledYak(JapaneseCard)("Kanji1585Character");
 const Kanji1586Character =
 /*YAK Extracted CSS:
 .Kanji1586Character {
@@ -19053,7 +19053,7 @@ const Kanji1586Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1586Character);
+styledYak(JapaneseCard)("Kanji1586Character");
 const Kanji1587Character =
 /*YAK Extracted CSS:
 .Kanji1587Character {
@@ -19065,7 +19065,7 @@ const Kanji1587Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1587Character);
+styledYak(JapaneseCard)("Kanji1587Character");
 const Kanji1588Character =
 /*YAK Extracted CSS:
 .Kanji1588Character {
@@ -19077,7 +19077,7 @@ const Kanji1588Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1588Character);
+styledYak(JapaneseCard)("Kanji1588Character");
 const Kanji1589Character =
 /*YAK Extracted CSS:
 .Kanji1589Character {
@@ -19089,7 +19089,7 @@ const Kanji1589Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1589Character);
+styledYak(JapaneseCard)("Kanji1589Character");
 const Kanji1590Character =
 /*YAK Extracted CSS:
 .Kanji1590Character {
@@ -19101,7 +19101,7 @@ const Kanji1590Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1590Character);
+styledYak(JapaneseCard)("Kanji1590Character");
 const Kanji1591Character =
 /*YAK Extracted CSS:
 .Kanji1591Character {
@@ -19113,7 +19113,7 @@ const Kanji1591Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1591Character);
+styledYak(JapaneseCard)("Kanji1591Character");
 const Kanji1592Character =
 /*YAK Extracted CSS:
 .Kanji1592Character {
@@ -19125,7 +19125,7 @@ const Kanji1592Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1592Character);
+styledYak(JapaneseCard)("Kanji1592Character");
 const Kanji1593Character =
 /*YAK Extracted CSS:
 .Kanji1593Character {
@@ -19137,7 +19137,7 @@ const Kanji1593Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1593Character);
+styledYak(JapaneseCard)("Kanji1593Character");
 const Kanji1594Character =
 /*YAK Extracted CSS:
 .Kanji1594Character {
@@ -19149,7 +19149,7 @@ const Kanji1594Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1594Character);
+styledYak(JapaneseCard)("Kanji1594Character");
 const Kanji1595Character =
 /*YAK Extracted CSS:
 .Kanji1595Character {
@@ -19161,7 +19161,7 @@ const Kanji1595Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1595Character);
+styledYak(JapaneseCard)("Kanji1595Character");
 const Kanji1596Character =
 /*YAK Extracted CSS:
 .Kanji1596Character {
@@ -19173,7 +19173,7 @@ const Kanji1596Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1596Character);
+styledYak(JapaneseCard)("Kanji1596Character");
 const Kanji1597Character =
 /*YAK Extracted CSS:
 .Kanji1597Character {
@@ -19185,7 +19185,7 @@ const Kanji1597Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1597Character);
+styledYak(JapaneseCard)("Kanji1597Character");
 const Kanji1598Character =
 /*YAK Extracted CSS:
 .Kanji1598Character {
@@ -19197,7 +19197,7 @@ const Kanji1598Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1598Character);
+styledYak(JapaneseCard)("Kanji1598Character");
 const Kanji1599Character =
 /*YAK Extracted CSS:
 .Kanji1599Character {
@@ -19209,7 +19209,7 @@ const Kanji1599Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1599Character);
+styledYak(JapaneseCard)("Kanji1599Character");
 const Kanji1600Character =
 /*YAK Extracted CSS:
 .Kanji1600Character {
@@ -19221,7 +19221,7 @@ const Kanji1600Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1600Character);
+styledYak(JapaneseCard)("Kanji1600Character");
 const Kanji1601Character =
 /*YAK Extracted CSS:
 .Kanji1601Character {
@@ -19233,7 +19233,7 @@ const Kanji1601Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1601Character);
+styledYak(JapaneseCard)("Kanji1601Character");
 const Kanji1602Character =
 /*YAK Extracted CSS:
 .Kanji1602Character {
@@ -19245,7 +19245,7 @@ const Kanji1602Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1602Character);
+styledYak(JapaneseCard)("Kanji1602Character");
 const Kanji1603Character =
 /*YAK Extracted CSS:
 .Kanji1603Character {
@@ -19257,7 +19257,7 @@ const Kanji1603Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1603Character);
+styledYak(JapaneseCard)("Kanji1603Character");
 const Kanji1604Character =
 /*YAK Extracted CSS:
 .Kanji1604Character {
@@ -19269,7 +19269,7 @@ const Kanji1604Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1604Character);
+styledYak(JapaneseCard)("Kanji1604Character");
 const Kanji1605Character =
 /*YAK Extracted CSS:
 .Kanji1605Character {
@@ -19281,7 +19281,7 @@ const Kanji1605Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1605Character);
+styledYak(JapaneseCard)("Kanji1605Character");
 const Kanji1606Character =
 /*YAK Extracted CSS:
 .Kanji1606Character {
@@ -19293,7 +19293,7 @@ const Kanji1606Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1606Character);
+styledYak(JapaneseCard)("Kanji1606Character");
 const Kanji1607Character =
 /*YAK Extracted CSS:
 .Kanji1607Character {
@@ -19305,7 +19305,7 @@ const Kanji1607Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1607Character);
+styledYak(JapaneseCard)("Kanji1607Character");
 const Kanji1608Character =
 /*YAK Extracted CSS:
 .Kanji1608Character {
@@ -19317,7 +19317,7 @@ const Kanji1608Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1608Character);
+styledYak(JapaneseCard)("Kanji1608Character");
 const Kanji1609Character =
 /*YAK Extracted CSS:
 .Kanji1609Character {
@@ -19329,7 +19329,7 @@ const Kanji1609Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1609Character);
+styledYak(JapaneseCard)("Kanji1609Character");
 const Kanji1610Character =
 /*YAK Extracted CSS:
 .Kanji1610Character {
@@ -19341,7 +19341,7 @@ const Kanji1610Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1610Character);
+styledYak(JapaneseCard)("Kanji1610Character");
 const Kanji1611Character =
 /*YAK Extracted CSS:
 .Kanji1611Character {
@@ -19353,7 +19353,7 @@ const Kanji1611Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1611Character);
+styledYak(JapaneseCard)("Kanji1611Character");
 const Kanji1612Character =
 /*YAK Extracted CSS:
 .Kanji1612Character {
@@ -19365,7 +19365,7 @@ const Kanji1612Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1612Character);
+styledYak(JapaneseCard)("Kanji1612Character");
 const Kanji1613Character =
 /*YAK Extracted CSS:
 .Kanji1613Character {
@@ -19377,7 +19377,7 @@ const Kanji1613Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1613Character);
+styledYak(JapaneseCard)("Kanji1613Character");
 const Kanji1614Character =
 /*YAK Extracted CSS:
 .Kanji1614Character {
@@ -19389,7 +19389,7 @@ const Kanji1614Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1614Character);
+styledYak(JapaneseCard)("Kanji1614Character");
 const Kanji1615Character =
 /*YAK Extracted CSS:
 .Kanji1615Character {
@@ -19401,7 +19401,7 @@ const Kanji1615Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1615Character);
+styledYak(JapaneseCard)("Kanji1615Character");
 const Kanji1616Character =
 /*YAK Extracted CSS:
 .Kanji1616Character {
@@ -19413,7 +19413,7 @@ const Kanji1616Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1616Character);
+styledYak(JapaneseCard)("Kanji1616Character");
 const Kanji1617Character =
 /*YAK Extracted CSS:
 .Kanji1617Character {
@@ -19425,7 +19425,7 @@ const Kanji1617Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1617Character);
+styledYak(JapaneseCard)("Kanji1617Character");
 const Kanji1618Character =
 /*YAK Extracted CSS:
 .Kanji1618Character {
@@ -19437,7 +19437,7 @@ const Kanji1618Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1618Character);
+styledYak(JapaneseCard)("Kanji1618Character");
 const Kanji1619Character =
 /*YAK Extracted CSS:
 .Kanji1619Character {
@@ -19449,7 +19449,7 @@ const Kanji1619Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1619Character);
+styledYak(JapaneseCard)("Kanji1619Character");
 const Kanji1620Character =
 /*YAK Extracted CSS:
 .Kanji1620Character {
@@ -19461,7 +19461,7 @@ const Kanji1620Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1620Character);
+styledYak(JapaneseCard)("Kanji1620Character");
 const Kanji1621Character =
 /*YAK Extracted CSS:
 .Kanji1621Character {
@@ -19473,7 +19473,7 @@ const Kanji1621Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1621Character);
+styledYak(JapaneseCard)("Kanji1621Character");
 const Kanji1622Character =
 /*YAK Extracted CSS:
 .Kanji1622Character {
@@ -19485,7 +19485,7 @@ const Kanji1622Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1622Character);
+styledYak(JapaneseCard)("Kanji1622Character");
 const Kanji1623Character =
 /*YAK Extracted CSS:
 .Kanji1623Character {
@@ -19497,7 +19497,7 @@ const Kanji1623Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1623Character);
+styledYak(JapaneseCard)("Kanji1623Character");
 const Kanji1624Character =
 /*YAK Extracted CSS:
 .Kanji1624Character {
@@ -19509,7 +19509,7 @@ const Kanji1624Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1624Character);
+styledYak(JapaneseCard)("Kanji1624Character");
 const Kanji1625Character =
 /*YAK Extracted CSS:
 .Kanji1625Character {
@@ -19521,7 +19521,7 @@ const Kanji1625Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1625Character);
+styledYak(JapaneseCard)("Kanji1625Character");
 const Kanji1626Character =
 /*YAK Extracted CSS:
 .Kanji1626Character {
@@ -19533,7 +19533,7 @@ const Kanji1626Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1626Character);
+styledYak(JapaneseCard)("Kanji1626Character");
 const Kanji1627Character =
 /*YAK Extracted CSS:
 .Kanji1627Character {
@@ -19545,7 +19545,7 @@ const Kanji1627Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1627Character);
+styledYak(JapaneseCard)("Kanji1627Character");
 const Kanji1628Character =
 /*YAK Extracted CSS:
 .Kanji1628Character {
@@ -19557,7 +19557,7 @@ const Kanji1628Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1628Character);
+styledYak(JapaneseCard)("Kanji1628Character");
 const Kanji1629Character =
 /*YAK Extracted CSS:
 .Kanji1629Character {
@@ -19569,7 +19569,7 @@ const Kanji1629Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1629Character);
+styledYak(JapaneseCard)("Kanji1629Character");
 const Kanji1630Character =
 /*YAK Extracted CSS:
 .Kanji1630Character {
@@ -19581,7 +19581,7 @@ const Kanji1630Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1630Character);
+styledYak(JapaneseCard)("Kanji1630Character");
 const Kanji1631Character =
 /*YAK Extracted CSS:
 .Kanji1631Character {
@@ -19593,7 +19593,7 @@ const Kanji1631Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1631Character);
+styledYak(JapaneseCard)("Kanji1631Character");
 const Kanji1632Character =
 /*YAK Extracted CSS:
 .Kanji1632Character {
@@ -19605,7 +19605,7 @@ const Kanji1632Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1632Character);
+styledYak(JapaneseCard)("Kanji1632Character");
 const Kanji1633Character =
 /*YAK Extracted CSS:
 .Kanji1633Character {
@@ -19617,7 +19617,7 @@ const Kanji1633Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1633Character);
+styledYak(JapaneseCard)("Kanji1633Character");
 const Kanji1634Character =
 /*YAK Extracted CSS:
 .Kanji1634Character {
@@ -19629,7 +19629,7 @@ const Kanji1634Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1634Character);
+styledYak(JapaneseCard)("Kanji1634Character");
 const Kanji1635Character =
 /*YAK Extracted CSS:
 .Kanji1635Character {
@@ -19641,7 +19641,7 @@ const Kanji1635Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1635Character);
+styledYak(JapaneseCard)("Kanji1635Character");
 const Kanji1636Character =
 /*YAK Extracted CSS:
 .Kanji1636Character {
@@ -19653,7 +19653,7 @@ const Kanji1636Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1636Character);
+styledYak(JapaneseCard)("Kanji1636Character");
 const Kanji1637Character =
 /*YAK Extracted CSS:
 .Kanji1637Character {
@@ -19665,7 +19665,7 @@ const Kanji1637Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1637Character);
+styledYak(JapaneseCard)("Kanji1637Character");
 const Kanji1638Character =
 /*YAK Extracted CSS:
 .Kanji1638Character {
@@ -19677,7 +19677,7 @@ const Kanji1638Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1638Character);
+styledYak(JapaneseCard)("Kanji1638Character");
 const Kanji1639Character =
 /*YAK Extracted CSS:
 .Kanji1639Character {
@@ -19689,7 +19689,7 @@ const Kanji1639Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1639Character);
+styledYak(JapaneseCard)("Kanji1639Character");
 const Kanji1640Character =
 /*YAK Extracted CSS:
 .Kanji1640Character {
@@ -19701,7 +19701,7 @@ const Kanji1640Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1640Character);
+styledYak(JapaneseCard)("Kanji1640Character");
 const Kanji1641Character =
 /*YAK Extracted CSS:
 .Kanji1641Character {
@@ -19713,7 +19713,7 @@ const Kanji1641Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1641Character);
+styledYak(JapaneseCard)("Kanji1641Character");
 const Kanji1642Character =
 /*YAK Extracted CSS:
 .Kanji1642Character {
@@ -19725,7 +19725,7 @@ const Kanji1642Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1642Character);
+styledYak(JapaneseCard)("Kanji1642Character");
 const Kanji1643Character =
 /*YAK Extracted CSS:
 .Kanji1643Character {
@@ -19737,7 +19737,7 @@ const Kanji1643Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1643Character);
+styledYak(JapaneseCard)("Kanji1643Character");
 const Kanji1644Character =
 /*YAK Extracted CSS:
 .Kanji1644Character {
@@ -19749,7 +19749,7 @@ const Kanji1644Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1644Character);
+styledYak(JapaneseCard)("Kanji1644Character");
 const Kanji1645Character =
 /*YAK Extracted CSS:
 .Kanji1645Character {
@@ -19761,7 +19761,7 @@ const Kanji1645Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1645Character);
+styledYak(JapaneseCard)("Kanji1645Character");
 const Kanji1646Character =
 /*YAK Extracted CSS:
 .Kanji1646Character {
@@ -19773,7 +19773,7 @@ const Kanji1646Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1646Character);
+styledYak(JapaneseCard)("Kanji1646Character");
 const Kanji1647Character =
 /*YAK Extracted CSS:
 .Kanji1647Character {
@@ -19785,7 +19785,7 @@ const Kanji1647Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1647Character);
+styledYak(JapaneseCard)("Kanji1647Character");
 const Kanji1648Character =
 /*YAK Extracted CSS:
 .Kanji1648Character {
@@ -19797,7 +19797,7 @@ const Kanji1648Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1648Character);
+styledYak(JapaneseCard)("Kanji1648Character");
 const Kanji1649Character =
 /*YAK Extracted CSS:
 .Kanji1649Character {
@@ -19809,7 +19809,7 @@ const Kanji1649Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1649Character);
+styledYak(JapaneseCard)("Kanji1649Character");
 const Kanji1650Character =
 /*YAK Extracted CSS:
 .Kanji1650Character {
@@ -19821,7 +19821,7 @@ const Kanji1650Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1650Character);
+styledYak(JapaneseCard)("Kanji1650Character");
 const Kanji1651Character =
 /*YAK Extracted CSS:
 .Kanji1651Character {
@@ -19833,7 +19833,7 @@ const Kanji1651Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1651Character);
+styledYak(JapaneseCard)("Kanji1651Character");
 const Kanji1652Character =
 /*YAK Extracted CSS:
 .Kanji1652Character {
@@ -19845,7 +19845,7 @@ const Kanji1652Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1652Character);
+styledYak(JapaneseCard)("Kanji1652Character");
 const Kanji1653Character =
 /*YAK Extracted CSS:
 .Kanji1653Character {
@@ -19857,7 +19857,7 @@ const Kanji1653Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1653Character);
+styledYak(JapaneseCard)("Kanji1653Character");
 const Kanji1654Character =
 /*YAK Extracted CSS:
 .Kanji1654Character {
@@ -19869,7 +19869,7 @@ const Kanji1654Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1654Character);
+styledYak(JapaneseCard)("Kanji1654Character");
 const Kanji1655Character =
 /*YAK Extracted CSS:
 .Kanji1655Character {
@@ -19881,7 +19881,7 @@ const Kanji1655Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1655Character);
+styledYak(JapaneseCard)("Kanji1655Character");
 const Kanji1656Character =
 /*YAK Extracted CSS:
 .Kanji1656Character {
@@ -19893,7 +19893,7 @@ const Kanji1656Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1656Character);
+styledYak(JapaneseCard)("Kanji1656Character");
 const Kanji1657Character =
 /*YAK Extracted CSS:
 .Kanji1657Character {
@@ -19905,7 +19905,7 @@ const Kanji1657Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1657Character);
+styledYak(JapaneseCard)("Kanji1657Character");
 const Kanji1658Character =
 /*YAK Extracted CSS:
 .Kanji1658Character {
@@ -19917,7 +19917,7 @@ const Kanji1658Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1658Character);
+styledYak(JapaneseCard)("Kanji1658Character");
 const Kanji1659Character =
 /*YAK Extracted CSS:
 .Kanji1659Character {
@@ -19929,7 +19929,7 @@ const Kanji1659Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1659Character);
+styledYak(JapaneseCard)("Kanji1659Character");
 const Kanji1660Character =
 /*YAK Extracted CSS:
 .Kanji1660Character {
@@ -19941,7 +19941,7 @@ const Kanji1660Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1660Character);
+styledYak(JapaneseCard)("Kanji1660Character");
 const Kanji1661Character =
 /*YAK Extracted CSS:
 .Kanji1661Character {
@@ -19953,7 +19953,7 @@ const Kanji1661Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1661Character);
+styledYak(JapaneseCard)("Kanji1661Character");
 const Kanji1662Character =
 /*YAK Extracted CSS:
 .Kanji1662Character {
@@ -19965,7 +19965,7 @@ const Kanji1662Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1662Character);
+styledYak(JapaneseCard)("Kanji1662Character");
 const Kanji1663Character =
 /*YAK Extracted CSS:
 .Kanji1663Character {
@@ -19977,7 +19977,7 @@ const Kanji1663Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1663Character);
+styledYak(JapaneseCard)("Kanji1663Character");
 const Kanji1664Character =
 /*YAK Extracted CSS:
 .Kanji1664Character {
@@ -19989,7 +19989,7 @@ const Kanji1664Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1664Character);
+styledYak(JapaneseCard)("Kanji1664Character");
 const Kanji1665Character =
 /*YAK Extracted CSS:
 .Kanji1665Character {
@@ -20001,7 +20001,7 @@ const Kanji1665Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1665Character);
+styledYak(JapaneseCard)("Kanji1665Character");
 const Kanji1666Character =
 /*YAK Extracted CSS:
 .Kanji1666Character {
@@ -20013,7 +20013,7 @@ const Kanji1666Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1666Character);
+styledYak(JapaneseCard)("Kanji1666Character");
 const Kanji1667Character =
 /*YAK Extracted CSS:
 .Kanji1667Character {
@@ -20025,7 +20025,7 @@ const Kanji1667Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1667Character);
+styledYak(JapaneseCard)("Kanji1667Character");
 const Kanji1668Character =
 /*YAK Extracted CSS:
 .Kanji1668Character {
@@ -20037,7 +20037,7 @@ const Kanji1668Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1668Character);
+styledYak(JapaneseCard)("Kanji1668Character");
 const Kanji1669Character =
 /*YAK Extracted CSS:
 .Kanji1669Character {
@@ -20049,7 +20049,7 @@ const Kanji1669Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1669Character);
+styledYak(JapaneseCard)("Kanji1669Character");
 const Kanji1670Character =
 /*YAK Extracted CSS:
 .Kanji1670Character {
@@ -20061,7 +20061,7 @@ const Kanji1670Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1670Character);
+styledYak(JapaneseCard)("Kanji1670Character");
 const Kanji1671Character =
 /*YAK Extracted CSS:
 .Kanji1671Character {
@@ -20073,7 +20073,7 @@ const Kanji1671Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1671Character);
+styledYak(JapaneseCard)("Kanji1671Character");
 const Kanji1672Character =
 /*YAK Extracted CSS:
 .Kanji1672Character {
@@ -20085,7 +20085,7 @@ const Kanji1672Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1672Character);
+styledYak(JapaneseCard)("Kanji1672Character");
 const Kanji1673Character =
 /*YAK Extracted CSS:
 .Kanji1673Character {
@@ -20097,7 +20097,7 @@ const Kanji1673Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1673Character);
+styledYak(JapaneseCard)("Kanji1673Character");
 const Kanji1674Character =
 /*YAK Extracted CSS:
 .Kanji1674Character {
@@ -20109,7 +20109,7 @@ const Kanji1674Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1674Character);
+styledYak(JapaneseCard)("Kanji1674Character");
 const Kanji1675Character =
 /*YAK Extracted CSS:
 .Kanji1675Character {
@@ -20121,7 +20121,7 @@ const Kanji1675Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1675Character);
+styledYak(JapaneseCard)("Kanji1675Character");
 const Kanji1676Character =
 /*YAK Extracted CSS:
 .Kanji1676Character {
@@ -20133,7 +20133,7 @@ const Kanji1676Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1676Character);
+styledYak(JapaneseCard)("Kanji1676Character");
 const Kanji1677Character =
 /*YAK Extracted CSS:
 .Kanji1677Character {
@@ -20145,7 +20145,7 @@ const Kanji1677Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1677Character);
+styledYak(JapaneseCard)("Kanji1677Character");
 const Kanji1678Character =
 /*YAK Extracted CSS:
 .Kanji1678Character {
@@ -20157,7 +20157,7 @@ const Kanji1678Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1678Character);
+styledYak(JapaneseCard)("Kanji1678Character");
 const Kanji1679Character =
 /*YAK Extracted CSS:
 .Kanji1679Character {
@@ -20169,7 +20169,7 @@ const Kanji1679Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1679Character);
+styledYak(JapaneseCard)("Kanji1679Character");
 const Kanji1680Character =
 /*YAK Extracted CSS:
 .Kanji1680Character {
@@ -20181,7 +20181,7 @@ const Kanji1680Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1680Character);
+styledYak(JapaneseCard)("Kanji1680Character");
 const Kanji1681Character =
 /*YAK Extracted CSS:
 .Kanji1681Character {
@@ -20193,7 +20193,7 @@ const Kanji1681Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1681Character);
+styledYak(JapaneseCard)("Kanji1681Character");
 const Kanji1682Character =
 /*YAK Extracted CSS:
 .Kanji1682Character {
@@ -20205,7 +20205,7 @@ const Kanji1682Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1682Character);
+styledYak(JapaneseCard)("Kanji1682Character");
 const Kanji1683Character =
 /*YAK Extracted CSS:
 .Kanji1683Character {
@@ -20217,7 +20217,7 @@ const Kanji1683Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1683Character);
+styledYak(JapaneseCard)("Kanji1683Character");
 const Kanji1684Character =
 /*YAK Extracted CSS:
 .Kanji1684Character {
@@ -20229,7 +20229,7 @@ const Kanji1684Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1684Character);
+styledYak(JapaneseCard)("Kanji1684Character");
 const Kanji1685Character =
 /*YAK Extracted CSS:
 .Kanji1685Character {
@@ -20241,7 +20241,7 @@ const Kanji1685Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1685Character);
+styledYak(JapaneseCard)("Kanji1685Character");
 const Kanji1686Character =
 /*YAK Extracted CSS:
 .Kanji1686Character {
@@ -20253,7 +20253,7 @@ const Kanji1686Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1686Character);
+styledYak(JapaneseCard)("Kanji1686Character");
 const Kanji1687Character =
 /*YAK Extracted CSS:
 .Kanji1687Character {
@@ -20265,7 +20265,7 @@ const Kanji1687Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1687Character);
+styledYak(JapaneseCard)("Kanji1687Character");
 const Kanji1688Character =
 /*YAK Extracted CSS:
 .Kanji1688Character {
@@ -20277,7 +20277,7 @@ const Kanji1688Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1688Character);
+styledYak(JapaneseCard)("Kanji1688Character");
 const Kanji1689Character =
 /*YAK Extracted CSS:
 .Kanji1689Character {
@@ -20289,7 +20289,7 @@ const Kanji1689Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1689Character);
+styledYak(JapaneseCard)("Kanji1689Character");
 const Kanji1690Character =
 /*YAK Extracted CSS:
 .Kanji1690Character {
@@ -20301,7 +20301,7 @@ const Kanji1690Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1690Character);
+styledYak(JapaneseCard)("Kanji1690Character");
 const Kanji1691Character =
 /*YAK Extracted CSS:
 .Kanji1691Character {
@@ -20313,7 +20313,7 @@ const Kanji1691Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1691Character);
+styledYak(JapaneseCard)("Kanji1691Character");
 const Kanji1692Character =
 /*YAK Extracted CSS:
 .Kanji1692Character {
@@ -20325,7 +20325,7 @@ const Kanji1692Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1692Character);
+styledYak(JapaneseCard)("Kanji1692Character");
 const Kanji1693Character =
 /*YAK Extracted CSS:
 .Kanji1693Character {
@@ -20337,7 +20337,7 @@ const Kanji1693Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1693Character);
+styledYak(JapaneseCard)("Kanji1693Character");
 const Kanji1694Character =
 /*YAK Extracted CSS:
 .Kanji1694Character {
@@ -20349,7 +20349,7 @@ const Kanji1694Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1694Character);
+styledYak(JapaneseCard)("Kanji1694Character");
 const Kanji1695Character =
 /*YAK Extracted CSS:
 .Kanji1695Character {
@@ -20361,7 +20361,7 @@ const Kanji1695Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1695Character);
+styledYak(JapaneseCard)("Kanji1695Character");
 const Kanji1696Character =
 /*YAK Extracted CSS:
 .Kanji1696Character {
@@ -20373,7 +20373,7 @@ const Kanji1696Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1696Character);
+styledYak(JapaneseCard)("Kanji1696Character");
 const Kanji1697Character =
 /*YAK Extracted CSS:
 .Kanji1697Character {
@@ -20385,7 +20385,7 @@ const Kanji1697Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1697Character);
+styledYak(JapaneseCard)("Kanji1697Character");
 const Kanji1698Character =
 /*YAK Extracted CSS:
 .Kanji1698Character {
@@ -20397,7 +20397,7 @@ const Kanji1698Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1698Character);
+styledYak(JapaneseCard)("Kanji1698Character");
 const Kanji1699Character =
 /*YAK Extracted CSS:
 .Kanji1699Character {
@@ -20409,7 +20409,7 @@ const Kanji1699Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1699Character);
+styledYak(JapaneseCard)("Kanji1699Character");
 const Kanji1700Character =
 /*YAK Extracted CSS:
 .Kanji1700Character {
@@ -20421,7 +20421,7 @@ const Kanji1700Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1700Character);
+styledYak(JapaneseCard)("Kanji1700Character");
 const Kanji1701Character =
 /*YAK Extracted CSS:
 .Kanji1701Character {
@@ -20433,7 +20433,7 @@ const Kanji1701Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1701Character);
+styledYak(JapaneseCard)("Kanji1701Character");
 const Kanji1702Character =
 /*YAK Extracted CSS:
 .Kanji1702Character {
@@ -20445,7 +20445,7 @@ const Kanji1702Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1702Character);
+styledYak(JapaneseCard)("Kanji1702Character");
 const Kanji1703Character =
 /*YAK Extracted CSS:
 .Kanji1703Character {
@@ -20457,7 +20457,7 @@ const Kanji1703Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1703Character);
+styledYak(JapaneseCard)("Kanji1703Character");
 const Kanji1704Character =
 /*YAK Extracted CSS:
 .Kanji1704Character {
@@ -20469,7 +20469,7 @@ const Kanji1704Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1704Character);
+styledYak(JapaneseCard)("Kanji1704Character");
 const Kanji1705Character =
 /*YAK Extracted CSS:
 .Kanji1705Character {
@@ -20481,7 +20481,7 @@ const Kanji1705Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1705Character);
+styledYak(JapaneseCard)("Kanji1705Character");
 const Kanji1706Character =
 /*YAK Extracted CSS:
 .Kanji1706Character {
@@ -20493,7 +20493,7 @@ const Kanji1706Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1706Character);
+styledYak(JapaneseCard)("Kanji1706Character");
 const Kanji1707Character =
 /*YAK Extracted CSS:
 .Kanji1707Character {
@@ -20505,7 +20505,7 @@ const Kanji1707Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1707Character);
+styledYak(JapaneseCard)("Kanji1707Character");
 const Kanji1708Character =
 /*YAK Extracted CSS:
 .Kanji1708Character {
@@ -20517,7 +20517,7 @@ const Kanji1708Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1708Character);
+styledYak(JapaneseCard)("Kanji1708Character");
 const Kanji1709Character =
 /*YAK Extracted CSS:
 .Kanji1709Character {
@@ -20529,7 +20529,7 @@ const Kanji1709Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1709Character);
+styledYak(JapaneseCard)("Kanji1709Character");
 const Kanji1710Character =
 /*YAK Extracted CSS:
 .Kanji1710Character {
@@ -20541,7 +20541,7 @@ const Kanji1710Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1710Character);
+styledYak(JapaneseCard)("Kanji1710Character");
 const Kanji1711Character =
 /*YAK Extracted CSS:
 .Kanji1711Character {
@@ -20553,7 +20553,7 @@ const Kanji1711Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1711Character);
+styledYak(JapaneseCard)("Kanji1711Character");
 const Kanji1712Character =
 /*YAK Extracted CSS:
 .Kanji1712Character {
@@ -20565,7 +20565,7 @@ const Kanji1712Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1712Character);
+styledYak(JapaneseCard)("Kanji1712Character");
 const Kanji1713Character =
 /*YAK Extracted CSS:
 .Kanji1713Character {
@@ -20577,7 +20577,7 @@ const Kanji1713Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1713Character);
+styledYak(JapaneseCard)("Kanji1713Character");
 const Kanji1714Character =
 /*YAK Extracted CSS:
 .Kanji1714Character {
@@ -20589,7 +20589,7 @@ const Kanji1714Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1714Character);
+styledYak(JapaneseCard)("Kanji1714Character");
 const Kanji1715Character =
 /*YAK Extracted CSS:
 .Kanji1715Character {
@@ -20601,7 +20601,7 @@ const Kanji1715Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1715Character);
+styledYak(JapaneseCard)("Kanji1715Character");
 const Kanji1716Character =
 /*YAK Extracted CSS:
 .Kanji1716Character {
@@ -20613,7 +20613,7 @@ const Kanji1716Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1716Character);
+styledYak(JapaneseCard)("Kanji1716Character");
 const Kanji1717Character =
 /*YAK Extracted CSS:
 .Kanji1717Character {
@@ -20625,7 +20625,7 @@ const Kanji1717Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1717Character);
+styledYak(JapaneseCard)("Kanji1717Character");
 const Kanji1718Character =
 /*YAK Extracted CSS:
 .Kanji1718Character {
@@ -20637,7 +20637,7 @@ const Kanji1718Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1718Character);
+styledYak(JapaneseCard)("Kanji1718Character");
 const Kanji1719Character =
 /*YAK Extracted CSS:
 .Kanji1719Character {
@@ -20649,7 +20649,7 @@ const Kanji1719Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1719Character);
+styledYak(JapaneseCard)("Kanji1719Character");
 const Kanji1720Character =
 /*YAK Extracted CSS:
 .Kanji1720Character {
@@ -20661,7 +20661,7 @@ const Kanji1720Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1720Character);
+styledYak(JapaneseCard)("Kanji1720Character");
 const Kanji1721Character =
 /*YAK Extracted CSS:
 .Kanji1721Character {
@@ -20673,7 +20673,7 @@ const Kanji1721Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1721Character);
+styledYak(JapaneseCard)("Kanji1721Character");
 const Kanji1722Character =
 /*YAK Extracted CSS:
 .Kanji1722Character {
@@ -20685,7 +20685,7 @@ const Kanji1722Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1722Character);
+styledYak(JapaneseCard)("Kanji1722Character");
 const Kanji1723Character =
 /*YAK Extracted CSS:
 .Kanji1723Character {
@@ -20697,7 +20697,7 @@ const Kanji1723Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1723Character);
+styledYak(JapaneseCard)("Kanji1723Character");
 const Kanji1724Character =
 /*YAK Extracted CSS:
 .Kanji1724Character {
@@ -20709,7 +20709,7 @@ const Kanji1724Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1724Character);
+styledYak(JapaneseCard)("Kanji1724Character");
 const Kanji1725Character =
 /*YAK Extracted CSS:
 .Kanji1725Character {
@@ -20721,7 +20721,7 @@ const Kanji1725Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1725Character);
+styledYak(JapaneseCard)("Kanji1725Character");
 const Kanji1726Character =
 /*YAK Extracted CSS:
 .Kanji1726Character {
@@ -20733,7 +20733,7 @@ const Kanji1726Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1726Character);
+styledYak(JapaneseCard)("Kanji1726Character");
 const Kanji1727Character =
 /*YAK Extracted CSS:
 .Kanji1727Character {
@@ -20745,7 +20745,7 @@ const Kanji1727Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1727Character);
+styledYak(JapaneseCard)("Kanji1727Character");
 const Kanji1728Character =
 /*YAK Extracted CSS:
 .Kanji1728Character {
@@ -20757,7 +20757,7 @@ const Kanji1728Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1728Character);
+styledYak(JapaneseCard)("Kanji1728Character");
 const Kanji1729Character =
 /*YAK Extracted CSS:
 .Kanji1729Character {
@@ -20769,7 +20769,7 @@ const Kanji1729Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1729Character);
+styledYak(JapaneseCard)("Kanji1729Character");
 const Kanji1730Character =
 /*YAK Extracted CSS:
 .Kanji1730Character {
@@ -20781,7 +20781,7 @@ const Kanji1730Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1730Character);
+styledYak(JapaneseCard)("Kanji1730Character");
 const Kanji1731Character =
 /*YAK Extracted CSS:
 .Kanji1731Character {
@@ -20793,7 +20793,7 @@ const Kanji1731Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1731Character);
+styledYak(JapaneseCard)("Kanji1731Character");
 const Kanji1732Character =
 /*YAK Extracted CSS:
 .Kanji1732Character {
@@ -20805,7 +20805,7 @@ const Kanji1732Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1732Character);
+styledYak(JapaneseCard)("Kanji1732Character");
 const Kanji1733Character =
 /*YAK Extracted CSS:
 .Kanji1733Character {
@@ -20817,7 +20817,7 @@ const Kanji1733Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1733Character);
+styledYak(JapaneseCard)("Kanji1733Character");
 const Kanji1734Character =
 /*YAK Extracted CSS:
 .Kanji1734Character {
@@ -20829,7 +20829,7 @@ const Kanji1734Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1734Character);
+styledYak(JapaneseCard)("Kanji1734Character");
 const Kanji1735Character =
 /*YAK Extracted CSS:
 .Kanji1735Character {
@@ -20841,7 +20841,7 @@ const Kanji1735Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1735Character);
+styledYak(JapaneseCard)("Kanji1735Character");
 const Kanji1736Character =
 /*YAK Extracted CSS:
 .Kanji1736Character {
@@ -20853,7 +20853,7 @@ const Kanji1736Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1736Character);
+styledYak(JapaneseCard)("Kanji1736Character");
 const Kanji1737Character =
 /*YAK Extracted CSS:
 .Kanji1737Character {
@@ -20865,7 +20865,7 @@ const Kanji1737Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1737Character);
+styledYak(JapaneseCard)("Kanji1737Character");
 const Kanji1738Character =
 /*YAK Extracted CSS:
 .Kanji1738Character {
@@ -20877,7 +20877,7 @@ const Kanji1738Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1738Character);
+styledYak(JapaneseCard)("Kanji1738Character");
 const Kanji1739Character =
 /*YAK Extracted CSS:
 .Kanji1739Character {
@@ -20889,7 +20889,7 @@ const Kanji1739Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1739Character);
+styledYak(JapaneseCard)("Kanji1739Character");
 const Kanji1740Character =
 /*YAK Extracted CSS:
 .Kanji1740Character {
@@ -20901,7 +20901,7 @@ const Kanji1740Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1740Character);
+styledYak(JapaneseCard)("Kanji1740Character");
 const Kanji1741Character =
 /*YAK Extracted CSS:
 .Kanji1741Character {
@@ -20913,7 +20913,7 @@ const Kanji1741Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1741Character);
+styledYak(JapaneseCard)("Kanji1741Character");
 const Kanji1742Character =
 /*YAK Extracted CSS:
 .Kanji1742Character {
@@ -20925,7 +20925,7 @@ const Kanji1742Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1742Character);
+styledYak(JapaneseCard)("Kanji1742Character");
 const Kanji1743Character =
 /*YAK Extracted CSS:
 .Kanji1743Character {
@@ -20937,7 +20937,7 @@ const Kanji1743Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1743Character);
+styledYak(JapaneseCard)("Kanji1743Character");
 const Kanji1744Character =
 /*YAK Extracted CSS:
 .Kanji1744Character {
@@ -20949,7 +20949,7 @@ const Kanji1744Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1744Character);
+styledYak(JapaneseCard)("Kanji1744Character");
 const Kanji1745Character =
 /*YAK Extracted CSS:
 .Kanji1745Character {
@@ -20961,7 +20961,7 @@ const Kanji1745Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1745Character);
+styledYak(JapaneseCard)("Kanji1745Character");
 const Kanji1746Character =
 /*YAK Extracted CSS:
 .Kanji1746Character {
@@ -20973,7 +20973,7 @@ const Kanji1746Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1746Character);
+styledYak(JapaneseCard)("Kanji1746Character");
 const Kanji1747Character =
 /*YAK Extracted CSS:
 .Kanji1747Character {
@@ -20985,7 +20985,7 @@ const Kanji1747Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1747Character);
+styledYak(JapaneseCard)("Kanji1747Character");
 const Kanji1748Character =
 /*YAK Extracted CSS:
 .Kanji1748Character {
@@ -20997,7 +20997,7 @@ const Kanji1748Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1748Character);
+styledYak(JapaneseCard)("Kanji1748Character");
 const Kanji1749Character =
 /*YAK Extracted CSS:
 .Kanji1749Character {
@@ -21009,7 +21009,7 @@ const Kanji1749Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1749Character);
+styledYak(JapaneseCard)("Kanji1749Character");
 const Kanji1750Character =
 /*YAK Extracted CSS:
 .Kanji1750Character {
@@ -21021,7 +21021,7 @@ const Kanji1750Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1750Character);
+styledYak(JapaneseCard)("Kanji1750Character");
 const Kanji1751Character =
 /*YAK Extracted CSS:
 .Kanji1751Character {
@@ -21033,7 +21033,7 @@ const Kanji1751Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1751Character);
+styledYak(JapaneseCard)("Kanji1751Character");
 const Kanji1752Character =
 /*YAK Extracted CSS:
 .Kanji1752Character {
@@ -21045,7 +21045,7 @@ const Kanji1752Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1752Character);
+styledYak(JapaneseCard)("Kanji1752Character");
 const Kanji1753Character =
 /*YAK Extracted CSS:
 .Kanji1753Character {
@@ -21057,7 +21057,7 @@ const Kanji1753Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1753Character);
+styledYak(JapaneseCard)("Kanji1753Character");
 const Kanji1754Character =
 /*YAK Extracted CSS:
 .Kanji1754Character {
@@ -21069,7 +21069,7 @@ const Kanji1754Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1754Character);
+styledYak(JapaneseCard)("Kanji1754Character");
 const Kanji1755Character =
 /*YAK Extracted CSS:
 .Kanji1755Character {
@@ -21081,7 +21081,7 @@ const Kanji1755Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1755Character);
+styledYak(JapaneseCard)("Kanji1755Character");
 const Kanji1756Character =
 /*YAK Extracted CSS:
 .Kanji1756Character {
@@ -21093,7 +21093,7 @@ const Kanji1756Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1756Character);
+styledYak(JapaneseCard)("Kanji1756Character");
 const Kanji1757Character =
 /*YAK Extracted CSS:
 .Kanji1757Character {
@@ -21105,7 +21105,7 @@ const Kanji1757Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1757Character);
+styledYak(JapaneseCard)("Kanji1757Character");
 const Kanji1758Character =
 /*YAK Extracted CSS:
 .Kanji1758Character {
@@ -21117,7 +21117,7 @@ const Kanji1758Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1758Character);
+styledYak(JapaneseCard)("Kanji1758Character");
 const Kanji1759Character =
 /*YAK Extracted CSS:
 .Kanji1759Character {
@@ -21129,7 +21129,7 @@ const Kanji1759Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1759Character);
+styledYak(JapaneseCard)("Kanji1759Character");
 const Kanji1760Character =
 /*YAK Extracted CSS:
 .Kanji1760Character {
@@ -21141,7 +21141,7 @@ const Kanji1760Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1760Character);
+styledYak(JapaneseCard)("Kanji1760Character");
 const Kanji1761Character =
 /*YAK Extracted CSS:
 .Kanji1761Character {
@@ -21153,7 +21153,7 @@ const Kanji1761Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1761Character);
+styledYak(JapaneseCard)("Kanji1761Character");
 const Kanji1762Character =
 /*YAK Extracted CSS:
 .Kanji1762Character {
@@ -21165,7 +21165,7 @@ const Kanji1762Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1762Character);
+styledYak(JapaneseCard)("Kanji1762Character");
 const Kanji1763Character =
 /*YAK Extracted CSS:
 .Kanji1763Character {
@@ -21177,7 +21177,7 @@ const Kanji1763Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1763Character);
+styledYak(JapaneseCard)("Kanji1763Character");
 const Kanji1764Character =
 /*YAK Extracted CSS:
 .Kanji1764Character {
@@ -21189,7 +21189,7 @@ const Kanji1764Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1764Character);
+styledYak(JapaneseCard)("Kanji1764Character");
 const Kanji1765Character =
 /*YAK Extracted CSS:
 .Kanji1765Character {
@@ -21201,7 +21201,7 @@ const Kanji1765Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1765Character);
+styledYak(JapaneseCard)("Kanji1765Character");
 const Kanji1766Character =
 /*YAK Extracted CSS:
 .Kanji1766Character {
@@ -21213,7 +21213,7 @@ const Kanji1766Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1766Character);
+styledYak(JapaneseCard)("Kanji1766Character");
 const Kanji1767Character =
 /*YAK Extracted CSS:
 .Kanji1767Character {
@@ -21225,7 +21225,7 @@ const Kanji1767Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1767Character);
+styledYak(JapaneseCard)("Kanji1767Character");
 const Kanji1768Character =
 /*YAK Extracted CSS:
 .Kanji1768Character {
@@ -21237,7 +21237,7 @@ const Kanji1768Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1768Character);
+styledYak(JapaneseCard)("Kanji1768Character");
 const Kanji1769Character =
 /*YAK Extracted CSS:
 .Kanji1769Character {
@@ -21249,7 +21249,7 @@ const Kanji1769Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1769Character);
+styledYak(JapaneseCard)("Kanji1769Character");
 const Kanji1770Character =
 /*YAK Extracted CSS:
 .Kanji1770Character {
@@ -21261,7 +21261,7 @@ const Kanji1770Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1770Character);
+styledYak(JapaneseCard)("Kanji1770Character");
 const Kanji1771Character =
 /*YAK Extracted CSS:
 .Kanji1771Character {
@@ -21273,7 +21273,7 @@ const Kanji1771Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1771Character);
+styledYak(JapaneseCard)("Kanji1771Character");
 const Kanji1772Character =
 /*YAK Extracted CSS:
 .Kanji1772Character {
@@ -21285,7 +21285,7 @@ const Kanji1772Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1772Character);
+styledYak(JapaneseCard)("Kanji1772Character");
 const Kanji1773Character =
 /*YAK Extracted CSS:
 .Kanji1773Character {
@@ -21297,7 +21297,7 @@ const Kanji1773Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1773Character);
+styledYak(JapaneseCard)("Kanji1773Character");
 const Kanji1774Character =
 /*YAK Extracted CSS:
 .Kanji1774Character {
@@ -21309,7 +21309,7 @@ const Kanji1774Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1774Character);
+styledYak(JapaneseCard)("Kanji1774Character");
 const Kanji1775Character =
 /*YAK Extracted CSS:
 .Kanji1775Character {
@@ -21321,7 +21321,7 @@ const Kanji1775Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1775Character);
+styledYak(JapaneseCard)("Kanji1775Character");
 const Kanji1776Character =
 /*YAK Extracted CSS:
 .Kanji1776Character {
@@ -21333,7 +21333,7 @@ const Kanji1776Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1776Character);
+styledYak(JapaneseCard)("Kanji1776Character");
 const Kanji1777Character =
 /*YAK Extracted CSS:
 .Kanji1777Character {
@@ -21345,7 +21345,7 @@ const Kanji1777Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1777Character);
+styledYak(JapaneseCard)("Kanji1777Character");
 const Kanji1778Character =
 /*YAK Extracted CSS:
 .Kanji1778Character {
@@ -21357,7 +21357,7 @@ const Kanji1778Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1778Character);
+styledYak(JapaneseCard)("Kanji1778Character");
 const Kanji1779Character =
 /*YAK Extracted CSS:
 .Kanji1779Character {
@@ -21369,7 +21369,7 @@ const Kanji1779Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1779Character);
+styledYak(JapaneseCard)("Kanji1779Character");
 const Kanji1780Character =
 /*YAK Extracted CSS:
 .Kanji1780Character {
@@ -21381,7 +21381,7 @@ const Kanji1780Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1780Character);
+styledYak(JapaneseCard)("Kanji1780Character");
 const Kanji1781Character =
 /*YAK Extracted CSS:
 .Kanji1781Character {
@@ -21393,7 +21393,7 @@ const Kanji1781Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1781Character);
+styledYak(JapaneseCard)("Kanji1781Character");
 const Kanji1782Character =
 /*YAK Extracted CSS:
 .Kanji1782Character {
@@ -21405,7 +21405,7 @@ const Kanji1782Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1782Character);
+styledYak(JapaneseCard)("Kanji1782Character");
 const Kanji1783Character =
 /*YAK Extracted CSS:
 .Kanji1783Character {
@@ -21417,7 +21417,7 @@ const Kanji1783Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1783Character);
+styledYak(JapaneseCard)("Kanji1783Character");
 const Kanji1784Character =
 /*YAK Extracted CSS:
 .Kanji1784Character {
@@ -21429,7 +21429,7 @@ const Kanji1784Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1784Character);
+styledYak(JapaneseCard)("Kanji1784Character");
 const Kanji1785Character =
 /*YAK Extracted CSS:
 .Kanji1785Character {
@@ -21441,7 +21441,7 @@ const Kanji1785Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1785Character);
+styledYak(JapaneseCard)("Kanji1785Character");
 const Kanji1786Character =
 /*YAK Extracted CSS:
 .Kanji1786Character {
@@ -21453,7 +21453,7 @@ const Kanji1786Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1786Character);
+styledYak(JapaneseCard)("Kanji1786Character");
 const Kanji1787Character =
 /*YAK Extracted CSS:
 .Kanji1787Character {
@@ -21465,7 +21465,7 @@ const Kanji1787Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1787Character);
+styledYak(JapaneseCard)("Kanji1787Character");
 const Kanji1788Character =
 /*YAK Extracted CSS:
 .Kanji1788Character {
@@ -21477,7 +21477,7 @@ const Kanji1788Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1788Character);
+styledYak(JapaneseCard)("Kanji1788Character");
 const Kanji1789Character =
 /*YAK Extracted CSS:
 .Kanji1789Character {
@@ -21489,7 +21489,7 @@ const Kanji1789Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1789Character);
+styledYak(JapaneseCard)("Kanji1789Character");
 const Kanji1790Character =
 /*YAK Extracted CSS:
 .Kanji1790Character {
@@ -21501,7 +21501,7 @@ const Kanji1790Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1790Character);
+styledYak(JapaneseCard)("Kanji1790Character");
 const Kanji1791Character =
 /*YAK Extracted CSS:
 .Kanji1791Character {
@@ -21513,7 +21513,7 @@ const Kanji1791Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1791Character);
+styledYak(JapaneseCard)("Kanji1791Character");
 const Kanji1792Character =
 /*YAK Extracted CSS:
 .Kanji1792Character {
@@ -21525,7 +21525,7 @@ const Kanji1792Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1792Character);
+styledYak(JapaneseCard)("Kanji1792Character");
 const Kanji1793Character =
 /*YAK Extracted CSS:
 .Kanji1793Character {
@@ -21537,7 +21537,7 @@ const Kanji1793Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1793Character);
+styledYak(JapaneseCard)("Kanji1793Character");
 const Kanji1794Character =
 /*YAK Extracted CSS:
 .Kanji1794Character {
@@ -21549,7 +21549,7 @@ const Kanji1794Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1794Character);
+styledYak(JapaneseCard)("Kanji1794Character");
 const Kanji1795Character =
 /*YAK Extracted CSS:
 .Kanji1795Character {
@@ -21561,7 +21561,7 @@ const Kanji1795Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1795Character);
+styledYak(JapaneseCard)("Kanji1795Character");
 const Kanji1796Character =
 /*YAK Extracted CSS:
 .Kanji1796Character {
@@ -21573,7 +21573,7 @@ const Kanji1796Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1796Character);
+styledYak(JapaneseCard)("Kanji1796Character");
 const Kanji1797Character =
 /*YAK Extracted CSS:
 .Kanji1797Character {
@@ -21585,7 +21585,7 @@ const Kanji1797Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1797Character);
+styledYak(JapaneseCard)("Kanji1797Character");
 const Kanji1798Character =
 /*YAK Extracted CSS:
 .Kanji1798Character {
@@ -21597,7 +21597,7 @@ const Kanji1798Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1798Character);
+styledYak(JapaneseCard)("Kanji1798Character");
 const Kanji1799Character =
 /*YAK Extracted CSS:
 .Kanji1799Character {
@@ -21609,7 +21609,7 @@ const Kanji1799Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1799Character);
+styledYak(JapaneseCard)("Kanji1799Character");
 const Kanji1800Character =
 /*YAK Extracted CSS:
 .Kanji1800Character {
@@ -21621,7 +21621,7 @@ const Kanji1800Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1800Character);
+styledYak(JapaneseCard)("Kanji1800Character");
 const Kanji1801Character =
 /*YAK Extracted CSS:
 .Kanji1801Character {
@@ -21633,7 +21633,7 @@ const Kanji1801Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1801Character);
+styledYak(JapaneseCard)("Kanji1801Character");
 const Kanji1802Character =
 /*YAK Extracted CSS:
 .Kanji1802Character {
@@ -21645,7 +21645,7 @@ const Kanji1802Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1802Character);
+styledYak(JapaneseCard)("Kanji1802Character");
 const Kanji1803Character =
 /*YAK Extracted CSS:
 .Kanji1803Character {
@@ -21657,7 +21657,7 @@ const Kanji1803Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1803Character);
+styledYak(JapaneseCard)("Kanji1803Character");
 const Kanji1804Character =
 /*YAK Extracted CSS:
 .Kanji1804Character {
@@ -21669,7 +21669,7 @@ const Kanji1804Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1804Character);
+styledYak(JapaneseCard)("Kanji1804Character");
 const Kanji1805Character =
 /*YAK Extracted CSS:
 .Kanji1805Character {
@@ -21681,7 +21681,7 @@ const Kanji1805Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1805Character);
+styledYak(JapaneseCard)("Kanji1805Character");
 const Kanji1806Character =
 /*YAK Extracted CSS:
 .Kanji1806Character {
@@ -21693,7 +21693,7 @@ const Kanji1806Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1806Character);
+styledYak(JapaneseCard)("Kanji1806Character");
 const Kanji1807Character =
 /*YAK Extracted CSS:
 .Kanji1807Character {
@@ -21705,7 +21705,7 @@ const Kanji1807Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1807Character);
+styledYak(JapaneseCard)("Kanji1807Character");
 const Kanji1808Character =
 /*YAK Extracted CSS:
 .Kanji1808Character {
@@ -21717,7 +21717,7 @@ const Kanji1808Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1808Character);
+styledYak(JapaneseCard)("Kanji1808Character");
 const Kanji1809Character =
 /*YAK Extracted CSS:
 .Kanji1809Character {
@@ -21729,7 +21729,7 @@ const Kanji1809Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1809Character);
+styledYak(JapaneseCard)("Kanji1809Character");
 const Kanji1810Character =
 /*YAK Extracted CSS:
 .Kanji1810Character {
@@ -21741,7 +21741,7 @@ const Kanji1810Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1810Character);
+styledYak(JapaneseCard)("Kanji1810Character");
 const Kanji1811Character =
 /*YAK Extracted CSS:
 .Kanji1811Character {
@@ -21753,7 +21753,7 @@ const Kanji1811Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1811Character);
+styledYak(JapaneseCard)("Kanji1811Character");
 const Kanji1812Character =
 /*YAK Extracted CSS:
 .Kanji1812Character {
@@ -21765,7 +21765,7 @@ const Kanji1812Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1812Character);
+styledYak(JapaneseCard)("Kanji1812Character");
 const Kanji1813Character =
 /*YAK Extracted CSS:
 .Kanji1813Character {
@@ -21777,7 +21777,7 @@ const Kanji1813Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1813Character);
+styledYak(JapaneseCard)("Kanji1813Character");
 const Kanji1814Character =
 /*YAK Extracted CSS:
 .Kanji1814Character {
@@ -21789,7 +21789,7 @@ const Kanji1814Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1814Character);
+styledYak(JapaneseCard)("Kanji1814Character");
 const Kanji1815Character =
 /*YAK Extracted CSS:
 .Kanji1815Character {
@@ -21801,7 +21801,7 @@ const Kanji1815Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1815Character);
+styledYak(JapaneseCard)("Kanji1815Character");
 const Kanji1816Character =
 /*YAK Extracted CSS:
 .Kanji1816Character {
@@ -21813,7 +21813,7 @@ const Kanji1816Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1816Character);
+styledYak(JapaneseCard)("Kanji1816Character");
 const Kanji1817Character =
 /*YAK Extracted CSS:
 .Kanji1817Character {
@@ -21825,7 +21825,7 @@ const Kanji1817Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1817Character);
+styledYak(JapaneseCard)("Kanji1817Character");
 const Kanji1818Character =
 /*YAK Extracted CSS:
 .Kanji1818Character {
@@ -21837,7 +21837,7 @@ const Kanji1818Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1818Character);
+styledYak(JapaneseCard)("Kanji1818Character");
 const Kanji1819Character =
 /*YAK Extracted CSS:
 .Kanji1819Character {
@@ -21849,7 +21849,7 @@ const Kanji1819Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1819Character);
+styledYak(JapaneseCard)("Kanji1819Character");
 const Kanji1820Character =
 /*YAK Extracted CSS:
 .Kanji1820Character {
@@ -21861,7 +21861,7 @@ const Kanji1820Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1820Character);
+styledYak(JapaneseCard)("Kanji1820Character");
 const Kanji1821Character =
 /*YAK Extracted CSS:
 .Kanji1821Character {
@@ -21873,7 +21873,7 @@ const Kanji1821Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1821Character);
+styledYak(JapaneseCard)("Kanji1821Character");
 const Kanji1822Character =
 /*YAK Extracted CSS:
 .Kanji1822Character {
@@ -21885,7 +21885,7 @@ const Kanji1822Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1822Character);
+styledYak(JapaneseCard)("Kanji1822Character");
 const Kanji1823Character =
 /*YAK Extracted CSS:
 .Kanji1823Character {
@@ -21897,7 +21897,7 @@ const Kanji1823Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1823Character);
+styledYak(JapaneseCard)("Kanji1823Character");
 const Kanji1824Character =
 /*YAK Extracted CSS:
 .Kanji1824Character {
@@ -21909,7 +21909,7 @@ const Kanji1824Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1824Character);
+styledYak(JapaneseCard)("Kanji1824Character");
 const Kanji1825Character =
 /*YAK Extracted CSS:
 .Kanji1825Character {
@@ -21921,7 +21921,7 @@ const Kanji1825Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1825Character);
+styledYak(JapaneseCard)("Kanji1825Character");
 const Kanji1826Character =
 /*YAK Extracted CSS:
 .Kanji1826Character {
@@ -21933,7 +21933,7 @@ const Kanji1826Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1826Character);
+styledYak(JapaneseCard)("Kanji1826Character");
 const Kanji1827Character =
 /*YAK Extracted CSS:
 .Kanji1827Character {
@@ -21945,7 +21945,7 @@ const Kanji1827Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1827Character);
+styledYak(JapaneseCard)("Kanji1827Character");
 const Kanji1828Character =
 /*YAK Extracted CSS:
 .Kanji1828Character {
@@ -21957,7 +21957,7 @@ const Kanji1828Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1828Character);
+styledYak(JapaneseCard)("Kanji1828Character");
 const Kanji1829Character =
 /*YAK Extracted CSS:
 .Kanji1829Character {
@@ -21969,7 +21969,7 @@ const Kanji1829Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1829Character);
+styledYak(JapaneseCard)("Kanji1829Character");
 const Kanji1830Character =
 /*YAK Extracted CSS:
 .Kanji1830Character {
@@ -21981,7 +21981,7 @@ const Kanji1830Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1830Character);
+styledYak(JapaneseCard)("Kanji1830Character");
 const Kanji1831Character =
 /*YAK Extracted CSS:
 .Kanji1831Character {
@@ -21993,7 +21993,7 @@ const Kanji1831Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1831Character);
+styledYak(JapaneseCard)("Kanji1831Character");
 const Kanji1832Character =
 /*YAK Extracted CSS:
 .Kanji1832Character {
@@ -22005,7 +22005,7 @@ const Kanji1832Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1832Character);
+styledYak(JapaneseCard)("Kanji1832Character");
 const Kanji1833Character =
 /*YAK Extracted CSS:
 .Kanji1833Character {
@@ -22017,7 +22017,7 @@ const Kanji1833Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1833Character);
+styledYak(JapaneseCard)("Kanji1833Character");
 const Kanji1834Character =
 /*YAK Extracted CSS:
 .Kanji1834Character {
@@ -22029,7 +22029,7 @@ const Kanji1834Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1834Character);
+styledYak(JapaneseCard)("Kanji1834Character");
 const Kanji1835Character =
 /*YAK Extracted CSS:
 .Kanji1835Character {
@@ -22041,7 +22041,7 @@ const Kanji1835Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1835Character);
+styledYak(JapaneseCard)("Kanji1835Character");
 const Kanji1836Character =
 /*YAK Extracted CSS:
 .Kanji1836Character {
@@ -22053,7 +22053,7 @@ const Kanji1836Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1836Character);
+styledYak(JapaneseCard)("Kanji1836Character");
 const Kanji1837Character =
 /*YAK Extracted CSS:
 .Kanji1837Character {
@@ -22065,7 +22065,7 @@ const Kanji1837Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1837Character);
+styledYak(JapaneseCard)("Kanji1837Character");
 const Kanji1838Character =
 /*YAK Extracted CSS:
 .Kanji1838Character {
@@ -22077,7 +22077,7 @@ const Kanji1838Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1838Character);
+styledYak(JapaneseCard)("Kanji1838Character");
 const Kanji1839Character =
 /*YAK Extracted CSS:
 .Kanji1839Character {
@@ -22089,7 +22089,7 @@ const Kanji1839Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1839Character);
+styledYak(JapaneseCard)("Kanji1839Character");
 const Kanji1840Character =
 /*YAK Extracted CSS:
 .Kanji1840Character {
@@ -22101,7 +22101,7 @@ const Kanji1840Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1840Character);
+styledYak(JapaneseCard)("Kanji1840Character");
 const Kanji1841Character =
 /*YAK Extracted CSS:
 .Kanji1841Character {
@@ -22113,7 +22113,7 @@ const Kanji1841Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1841Character);
+styledYak(JapaneseCard)("Kanji1841Character");
 const Kanji1842Character =
 /*YAK Extracted CSS:
 .Kanji1842Character {
@@ -22125,7 +22125,7 @@ const Kanji1842Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1842Character);
+styledYak(JapaneseCard)("Kanji1842Character");
 const Kanji1843Character =
 /*YAK Extracted CSS:
 .Kanji1843Character {
@@ -22137,7 +22137,7 @@ const Kanji1843Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1843Character);
+styledYak(JapaneseCard)("Kanji1843Character");
 const Kanji1844Character =
 /*YAK Extracted CSS:
 .Kanji1844Character {
@@ -22149,7 +22149,7 @@ const Kanji1844Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1844Character);
+styledYak(JapaneseCard)("Kanji1844Character");
 const Kanji1845Character =
 /*YAK Extracted CSS:
 .Kanji1845Character {
@@ -22161,7 +22161,7 @@ const Kanji1845Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1845Character);
+styledYak(JapaneseCard)("Kanji1845Character");
 const Kanji1846Character =
 /*YAK Extracted CSS:
 .Kanji1846Character {
@@ -22173,7 +22173,7 @@ const Kanji1846Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1846Character);
+styledYak(JapaneseCard)("Kanji1846Character");
 const Kanji1847Character =
 /*YAK Extracted CSS:
 .Kanji1847Character {
@@ -22185,7 +22185,7 @@ const Kanji1847Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1847Character);
+styledYak(JapaneseCard)("Kanji1847Character");
 const Kanji1848Character =
 /*YAK Extracted CSS:
 .Kanji1848Character {
@@ -22197,7 +22197,7 @@ const Kanji1848Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1848Character);
+styledYak(JapaneseCard)("Kanji1848Character");
 const Kanji1849Character =
 /*YAK Extracted CSS:
 .Kanji1849Character {
@@ -22209,7 +22209,7 @@ const Kanji1849Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1849Character);
+styledYak(JapaneseCard)("Kanji1849Character");
 const Kanji1850Character =
 /*YAK Extracted CSS:
 .Kanji1850Character {
@@ -22221,7 +22221,7 @@ const Kanji1850Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1850Character);
+styledYak(JapaneseCard)("Kanji1850Character");
 const Kanji1851Character =
 /*YAK Extracted CSS:
 .Kanji1851Character {
@@ -22233,7 +22233,7 @@ const Kanji1851Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1851Character);
+styledYak(JapaneseCard)("Kanji1851Character");
 const Kanji1852Character =
 /*YAK Extracted CSS:
 .Kanji1852Character {
@@ -22245,7 +22245,7 @@ const Kanji1852Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1852Character);
+styledYak(JapaneseCard)("Kanji1852Character");
 const Kanji1853Character =
 /*YAK Extracted CSS:
 .Kanji1853Character {
@@ -22257,7 +22257,7 @@ const Kanji1853Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1853Character);
+styledYak(JapaneseCard)("Kanji1853Character");
 const Kanji1854Character =
 /*YAK Extracted CSS:
 .Kanji1854Character {
@@ -22269,7 +22269,7 @@ const Kanji1854Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1854Character);
+styledYak(JapaneseCard)("Kanji1854Character");
 const Kanji1855Character =
 /*YAK Extracted CSS:
 .Kanji1855Character {
@@ -22281,7 +22281,7 @@ const Kanji1855Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1855Character);
+styledYak(JapaneseCard)("Kanji1855Character");
 const Kanji1856Character =
 /*YAK Extracted CSS:
 .Kanji1856Character {
@@ -22293,7 +22293,7 @@ const Kanji1856Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1856Character);
+styledYak(JapaneseCard)("Kanji1856Character");
 const Kanji1857Character =
 /*YAK Extracted CSS:
 .Kanji1857Character {
@@ -22305,7 +22305,7 @@ const Kanji1857Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1857Character);
+styledYak(JapaneseCard)("Kanji1857Character");
 const Kanji1858Character =
 /*YAK Extracted CSS:
 .Kanji1858Character {
@@ -22317,7 +22317,7 @@ const Kanji1858Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1858Character);
+styledYak(JapaneseCard)("Kanji1858Character");
 const Kanji1859Character =
 /*YAK Extracted CSS:
 .Kanji1859Character {
@@ -22329,7 +22329,7 @@ const Kanji1859Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1859Character);
+styledYak(JapaneseCard)("Kanji1859Character");
 const Kanji1860Character =
 /*YAK Extracted CSS:
 .Kanji1860Character {
@@ -22341,7 +22341,7 @@ const Kanji1860Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1860Character);
+styledYak(JapaneseCard)("Kanji1860Character");
 const Kanji1861Character =
 /*YAK Extracted CSS:
 .Kanji1861Character {
@@ -22353,7 +22353,7 @@ const Kanji1861Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1861Character);
+styledYak(JapaneseCard)("Kanji1861Character");
 const Kanji1862Character =
 /*YAK Extracted CSS:
 .Kanji1862Character {
@@ -22365,7 +22365,7 @@ const Kanji1862Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1862Character);
+styledYak(JapaneseCard)("Kanji1862Character");
 const Kanji1863Character =
 /*YAK Extracted CSS:
 .Kanji1863Character {
@@ -22377,7 +22377,7 @@ const Kanji1863Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1863Character);
+styledYak(JapaneseCard)("Kanji1863Character");
 const Kanji1864Character =
 /*YAK Extracted CSS:
 .Kanji1864Character {
@@ -22389,7 +22389,7 @@ const Kanji1864Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1864Character);
+styledYak(JapaneseCard)("Kanji1864Character");
 const Kanji1865Character =
 /*YAK Extracted CSS:
 .Kanji1865Character {
@@ -22401,7 +22401,7 @@ const Kanji1865Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1865Character);
+styledYak(JapaneseCard)("Kanji1865Character");
 const Kanji1866Character =
 /*YAK Extracted CSS:
 .Kanji1866Character {
@@ -22413,7 +22413,7 @@ const Kanji1866Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1866Character);
+styledYak(JapaneseCard)("Kanji1866Character");
 const Kanji1867Character =
 /*YAK Extracted CSS:
 .Kanji1867Character {
@@ -22425,7 +22425,7 @@ const Kanji1867Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1867Character);
+styledYak(JapaneseCard)("Kanji1867Character");
 const Kanji1868Character =
 /*YAK Extracted CSS:
 .Kanji1868Character {
@@ -22437,7 +22437,7 @@ const Kanji1868Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1868Character);
+styledYak(JapaneseCard)("Kanji1868Character");
 const Kanji1869Character =
 /*YAK Extracted CSS:
 .Kanji1869Character {
@@ -22449,7 +22449,7 @@ const Kanji1869Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1869Character);
+styledYak(JapaneseCard)("Kanji1869Character");
 const Kanji1870Character =
 /*YAK Extracted CSS:
 .Kanji1870Character {
@@ -22461,7 +22461,7 @@ const Kanji1870Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1870Character);
+styledYak(JapaneseCard)("Kanji1870Character");
 const Kanji1871Character =
 /*YAK Extracted CSS:
 .Kanji1871Character {
@@ -22473,7 +22473,7 @@ const Kanji1871Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1871Character);
+styledYak(JapaneseCard)("Kanji1871Character");
 const Kanji1872Character =
 /*YAK Extracted CSS:
 .Kanji1872Character {
@@ -22485,7 +22485,7 @@ const Kanji1872Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1872Character);
+styledYak(JapaneseCard)("Kanji1872Character");
 const Kanji1873Character =
 /*YAK Extracted CSS:
 .Kanji1873Character {
@@ -22497,7 +22497,7 @@ const Kanji1873Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1873Character);
+styledYak(JapaneseCard)("Kanji1873Character");
 const Kanji1874Character =
 /*YAK Extracted CSS:
 .Kanji1874Character {
@@ -22509,7 +22509,7 @@ const Kanji1874Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1874Character);
+styledYak(JapaneseCard)("Kanji1874Character");
 const Kanji1875Character =
 /*YAK Extracted CSS:
 .Kanji1875Character {
@@ -22521,7 +22521,7 @@ const Kanji1875Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1875Character);
+styledYak(JapaneseCard)("Kanji1875Character");
 const Kanji1876Character =
 /*YAK Extracted CSS:
 .Kanji1876Character {
@@ -22533,7 +22533,7 @@ const Kanji1876Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1876Character);
+styledYak(JapaneseCard)("Kanji1876Character");
 const Kanji1877Character =
 /*YAK Extracted CSS:
 .Kanji1877Character {
@@ -22545,7 +22545,7 @@ const Kanji1877Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1877Character);
+styledYak(JapaneseCard)("Kanji1877Character");
 const Kanji1878Character =
 /*YAK Extracted CSS:
 .Kanji1878Character {
@@ -22557,7 +22557,7 @@ const Kanji1878Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1878Character);
+styledYak(JapaneseCard)("Kanji1878Character");
 const Kanji1879Character =
 /*YAK Extracted CSS:
 .Kanji1879Character {
@@ -22569,7 +22569,7 @@ const Kanji1879Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1879Character);
+styledYak(JapaneseCard)("Kanji1879Character");
 const Kanji1880Character =
 /*YAK Extracted CSS:
 .Kanji1880Character {
@@ -22581,7 +22581,7 @@ const Kanji1880Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1880Character);
+styledYak(JapaneseCard)("Kanji1880Character");
 const Kanji1881Character =
 /*YAK Extracted CSS:
 .Kanji1881Character {
@@ -22593,7 +22593,7 @@ const Kanji1881Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1881Character);
+styledYak(JapaneseCard)("Kanji1881Character");
 const Kanji1882Character =
 /*YAK Extracted CSS:
 .Kanji1882Character {
@@ -22605,7 +22605,7 @@ const Kanji1882Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1882Character);
+styledYak(JapaneseCard)("Kanji1882Character");
 const Kanji1883Character =
 /*YAK Extracted CSS:
 .Kanji1883Character {
@@ -22617,7 +22617,7 @@ const Kanji1883Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1883Character);
+styledYak(JapaneseCard)("Kanji1883Character");
 const Kanji1884Character =
 /*YAK Extracted CSS:
 .Kanji1884Character {
@@ -22629,7 +22629,7 @@ const Kanji1884Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1884Character);
+styledYak(JapaneseCard)("Kanji1884Character");
 const Kanji1885Character =
 /*YAK Extracted CSS:
 .Kanji1885Character {
@@ -22641,7 +22641,7 @@ const Kanji1885Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1885Character);
+styledYak(JapaneseCard)("Kanji1885Character");
 const Kanji1886Character =
 /*YAK Extracted CSS:
 .Kanji1886Character {
@@ -22653,7 +22653,7 @@ const Kanji1886Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1886Character);
+styledYak(JapaneseCard)("Kanji1886Character");
 const Kanji1887Character =
 /*YAK Extracted CSS:
 .Kanji1887Character {
@@ -22665,7 +22665,7 @@ const Kanji1887Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1887Character);
+styledYak(JapaneseCard)("Kanji1887Character");
 const Kanji1888Character =
 /*YAK Extracted CSS:
 .Kanji1888Character {
@@ -22677,7 +22677,7 @@ const Kanji1888Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1888Character);
+styledYak(JapaneseCard)("Kanji1888Character");
 const Kanji1889Character =
 /*YAK Extracted CSS:
 .Kanji1889Character {
@@ -22689,7 +22689,7 @@ const Kanji1889Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1889Character);
+styledYak(JapaneseCard)("Kanji1889Character");
 const Kanji1890Character =
 /*YAK Extracted CSS:
 .Kanji1890Character {
@@ -22701,7 +22701,7 @@ const Kanji1890Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1890Character);
+styledYak(JapaneseCard)("Kanji1890Character");
 const Kanji1891Character =
 /*YAK Extracted CSS:
 .Kanji1891Character {
@@ -22713,7 +22713,7 @@ const Kanji1891Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1891Character);
+styledYak(JapaneseCard)("Kanji1891Character");
 const Kanji1892Character =
 /*YAK Extracted CSS:
 .Kanji1892Character {
@@ -22725,7 +22725,7 @@ const Kanji1892Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1892Character);
+styledYak(JapaneseCard)("Kanji1892Character");
 const Kanji1893Character =
 /*YAK Extracted CSS:
 .Kanji1893Character {
@@ -22737,7 +22737,7 @@ const Kanji1893Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1893Character);
+styledYak(JapaneseCard)("Kanji1893Character");
 const Kanji1894Character =
 /*YAK Extracted CSS:
 .Kanji1894Character {
@@ -22749,7 +22749,7 @@ const Kanji1894Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1894Character);
+styledYak(JapaneseCard)("Kanji1894Character");
 const Kanji1895Character =
 /*YAK Extracted CSS:
 .Kanji1895Character {
@@ -22761,7 +22761,7 @@ const Kanji1895Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1895Character);
+styledYak(JapaneseCard)("Kanji1895Character");
 const Kanji1896Character =
 /*YAK Extracted CSS:
 .Kanji1896Character {
@@ -22773,7 +22773,7 @@ const Kanji1896Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1896Character);
+styledYak(JapaneseCard)("Kanji1896Character");
 const Kanji1897Character =
 /*YAK Extracted CSS:
 .Kanji1897Character {
@@ -22785,7 +22785,7 @@ const Kanji1897Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1897Character);
+styledYak(JapaneseCard)("Kanji1897Character");
 const Kanji1898Character =
 /*YAK Extracted CSS:
 .Kanji1898Character {
@@ -22797,7 +22797,7 @@ const Kanji1898Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1898Character);
+styledYak(JapaneseCard)("Kanji1898Character");
 const Kanji1899Character =
 /*YAK Extracted CSS:
 .Kanji1899Character {
@@ -22809,7 +22809,7 @@ const Kanji1899Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1899Character);
+styledYak(JapaneseCard)("Kanji1899Character");
 const Kanji1900Character =
 /*YAK Extracted CSS:
 .Kanji1900Character {
@@ -22821,7 +22821,7 @@ const Kanji1900Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1900Character);
+styledYak(JapaneseCard)("Kanji1900Character");
 const Kanji1901Character =
 /*YAK Extracted CSS:
 .Kanji1901Character {
@@ -22833,7 +22833,7 @@ const Kanji1901Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1901Character);
+styledYak(JapaneseCard)("Kanji1901Character");
 const Kanji1902Character =
 /*YAK Extracted CSS:
 .Kanji1902Character {
@@ -22845,7 +22845,7 @@ const Kanji1902Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1902Character);
+styledYak(JapaneseCard)("Kanji1902Character");
 const Kanji1903Character =
 /*YAK Extracted CSS:
 .Kanji1903Character {
@@ -22857,7 +22857,7 @@ const Kanji1903Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1903Character);
+styledYak(JapaneseCard)("Kanji1903Character");
 const Kanji1904Character =
 /*YAK Extracted CSS:
 .Kanji1904Character {
@@ -22869,7 +22869,7 @@ const Kanji1904Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1904Character);
+styledYak(JapaneseCard)("Kanji1904Character");
 const Kanji1905Character =
 /*YAK Extracted CSS:
 .Kanji1905Character {
@@ -22881,7 +22881,7 @@ const Kanji1905Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1905Character);
+styledYak(JapaneseCard)("Kanji1905Character");
 const Kanji1906Character =
 /*YAK Extracted CSS:
 .Kanji1906Character {
@@ -22893,7 +22893,7 @@ const Kanji1906Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1906Character);
+styledYak(JapaneseCard)("Kanji1906Character");
 const Kanji1907Character =
 /*YAK Extracted CSS:
 .Kanji1907Character {
@@ -22905,7 +22905,7 @@ const Kanji1907Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1907Character);
+styledYak(JapaneseCard)("Kanji1907Character");
 const Kanji1908Character =
 /*YAK Extracted CSS:
 .Kanji1908Character {
@@ -22917,7 +22917,7 @@ const Kanji1908Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1908Character);
+styledYak(JapaneseCard)("Kanji1908Character");
 const Kanji1909Character =
 /*YAK Extracted CSS:
 .Kanji1909Character {
@@ -22929,7 +22929,7 @@ const Kanji1909Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1909Character);
+styledYak(JapaneseCard)("Kanji1909Character");
 const Kanji1910Character =
 /*YAK Extracted CSS:
 .Kanji1910Character {
@@ -22941,7 +22941,7 @@ const Kanji1910Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1910Character);
+styledYak(JapaneseCard)("Kanji1910Character");
 const Kanji1911Character =
 /*YAK Extracted CSS:
 .Kanji1911Character {
@@ -22953,7 +22953,7 @@ const Kanji1911Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1911Character);
+styledYak(JapaneseCard)("Kanji1911Character");
 const Kanji1912Character =
 /*YAK Extracted CSS:
 .Kanji1912Character {
@@ -22965,7 +22965,7 @@ const Kanji1912Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1912Character);
+styledYak(JapaneseCard)("Kanji1912Character");
 const Kanji1913Character =
 /*YAK Extracted CSS:
 .Kanji1913Character {
@@ -22977,7 +22977,7 @@ const Kanji1913Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1913Character);
+styledYak(JapaneseCard)("Kanji1913Character");
 const Kanji1914Character =
 /*YAK Extracted CSS:
 .Kanji1914Character {
@@ -22989,7 +22989,7 @@ const Kanji1914Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1914Character);
+styledYak(JapaneseCard)("Kanji1914Character");
 const Kanji1915Character =
 /*YAK Extracted CSS:
 .Kanji1915Character {
@@ -23001,7 +23001,7 @@ const Kanji1915Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1915Character);
+styledYak(JapaneseCard)("Kanji1915Character");
 const Kanji1916Character =
 /*YAK Extracted CSS:
 .Kanji1916Character {
@@ -23013,7 +23013,7 @@ const Kanji1916Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1916Character);
+styledYak(JapaneseCard)("Kanji1916Character");
 const Kanji1917Character =
 /*YAK Extracted CSS:
 .Kanji1917Character {
@@ -23025,7 +23025,7 @@ const Kanji1917Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1917Character);
+styledYak(JapaneseCard)("Kanji1917Character");
 const Kanji1918Character =
 /*YAK Extracted CSS:
 .Kanji1918Character {
@@ -23037,7 +23037,7 @@ const Kanji1918Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1918Character);
+styledYak(JapaneseCard)("Kanji1918Character");
 const Kanji1919Character =
 /*YAK Extracted CSS:
 .Kanji1919Character {
@@ -23049,7 +23049,7 @@ const Kanji1919Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1919Character);
+styledYak(JapaneseCard)("Kanji1919Character");
 const Kanji1920Character =
 /*YAK Extracted CSS:
 .Kanji1920Character {
@@ -23061,7 +23061,7 @@ const Kanji1920Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1920Character);
+styledYak(JapaneseCard)("Kanji1920Character");
 const Kanji1921Character =
 /*YAK Extracted CSS:
 .Kanji1921Character {
@@ -23073,7 +23073,7 @@ const Kanji1921Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1921Character);
+styledYak(JapaneseCard)("Kanji1921Character");
 const Kanji1922Character =
 /*YAK Extracted CSS:
 .Kanji1922Character {
@@ -23085,7 +23085,7 @@ const Kanji1922Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1922Character);
+styledYak(JapaneseCard)("Kanji1922Character");
 const Kanji1923Character =
 /*YAK Extracted CSS:
 .Kanji1923Character {
@@ -23097,7 +23097,7 @@ const Kanji1923Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1923Character);
+styledYak(JapaneseCard)("Kanji1923Character");
 const Kanji1924Character =
 /*YAK Extracted CSS:
 .Kanji1924Character {
@@ -23109,7 +23109,7 @@ const Kanji1924Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1924Character);
+styledYak(JapaneseCard)("Kanji1924Character");
 const Kanji1925Character =
 /*YAK Extracted CSS:
 .Kanji1925Character {
@@ -23121,7 +23121,7 @@ const Kanji1925Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1925Character);
+styledYak(JapaneseCard)("Kanji1925Character");
 const Kanji1926Character =
 /*YAK Extracted CSS:
 .Kanji1926Character {
@@ -23133,7 +23133,7 @@ const Kanji1926Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1926Character);
+styledYak(JapaneseCard)("Kanji1926Character");
 const Kanji1927Character =
 /*YAK Extracted CSS:
 .Kanji1927Character {
@@ -23145,7 +23145,7 @@ const Kanji1927Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1927Character);
+styledYak(JapaneseCard)("Kanji1927Character");
 const Kanji1928Character =
 /*YAK Extracted CSS:
 .Kanji1928Character {
@@ -23157,7 +23157,7 @@ const Kanji1928Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1928Character);
+styledYak(JapaneseCard)("Kanji1928Character");
 const Kanji1929Character =
 /*YAK Extracted CSS:
 .Kanji1929Character {
@@ -23169,7 +23169,7 @@ const Kanji1929Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1929Character);
+styledYak(JapaneseCard)("Kanji1929Character");
 const Kanji1930Character =
 /*YAK Extracted CSS:
 .Kanji1930Character {
@@ -23181,7 +23181,7 @@ const Kanji1930Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1930Character);
+styledYak(JapaneseCard)("Kanji1930Character");
 const Kanji1931Character =
 /*YAK Extracted CSS:
 .Kanji1931Character {
@@ -23193,7 +23193,7 @@ const Kanji1931Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1931Character);
+styledYak(JapaneseCard)("Kanji1931Character");
 const Kanji1932Character =
 /*YAK Extracted CSS:
 .Kanji1932Character {
@@ -23205,7 +23205,7 @@ const Kanji1932Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1932Character);
+styledYak(JapaneseCard)("Kanji1932Character");
 const Kanji1933Character =
 /*YAK Extracted CSS:
 .Kanji1933Character {
@@ -23217,7 +23217,7 @@ const Kanji1933Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1933Character);
+styledYak(JapaneseCard)("Kanji1933Character");
 const Kanji1934Character =
 /*YAK Extracted CSS:
 .Kanji1934Character {
@@ -23229,7 +23229,7 @@ const Kanji1934Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1934Character);
+styledYak(JapaneseCard)("Kanji1934Character");
 const Kanji1935Character =
 /*YAK Extracted CSS:
 .Kanji1935Character {
@@ -23241,7 +23241,7 @@ const Kanji1935Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1935Character);
+styledYak(JapaneseCard)("Kanji1935Character");
 const Kanji1936Character =
 /*YAK Extracted CSS:
 .Kanji1936Character {
@@ -23253,7 +23253,7 @@ const Kanji1936Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1936Character);
+styledYak(JapaneseCard)("Kanji1936Character");
 const Kanji1937Character =
 /*YAK Extracted CSS:
 .Kanji1937Character {
@@ -23265,7 +23265,7 @@ const Kanji1937Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1937Character);
+styledYak(JapaneseCard)("Kanji1937Character");
 const Kanji1938Character =
 /*YAK Extracted CSS:
 .Kanji1938Character {
@@ -23277,7 +23277,7 @@ const Kanji1938Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1938Character);
+styledYak(JapaneseCard)("Kanji1938Character");
 const Kanji1939Character =
 /*YAK Extracted CSS:
 .Kanji1939Character {
@@ -23289,7 +23289,7 @@ const Kanji1939Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1939Character);
+styledYak(JapaneseCard)("Kanji1939Character");
 const Kanji1940Character =
 /*YAK Extracted CSS:
 .Kanji1940Character {
@@ -23301,7 +23301,7 @@ const Kanji1940Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1940Character);
+styledYak(JapaneseCard)("Kanji1940Character");
 const Kanji1941Character =
 /*YAK Extracted CSS:
 .Kanji1941Character {
@@ -23313,7 +23313,7 @@ const Kanji1941Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1941Character);
+styledYak(JapaneseCard)("Kanji1941Character");
 const Kanji1942Character =
 /*YAK Extracted CSS:
 .Kanji1942Character {
@@ -23325,7 +23325,7 @@ const Kanji1942Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1942Character);
+styledYak(JapaneseCard)("Kanji1942Character");
 const Kanji1943Character =
 /*YAK Extracted CSS:
 .Kanji1943Character {
@@ -23337,7 +23337,7 @@ const Kanji1943Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1943Character);
+styledYak(JapaneseCard)("Kanji1943Character");
 const Kanji1944Character =
 /*YAK Extracted CSS:
 .Kanji1944Character {
@@ -23349,7 +23349,7 @@ const Kanji1944Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1944Character);
+styledYak(JapaneseCard)("Kanji1944Character");
 const Kanji1945Character =
 /*YAK Extracted CSS:
 .Kanji1945Character {
@@ -23361,7 +23361,7 @@ const Kanji1945Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1945Character);
+styledYak(JapaneseCard)("Kanji1945Character");
 const Kanji1946Character =
 /*YAK Extracted CSS:
 .Kanji1946Character {
@@ -23373,7 +23373,7 @@ const Kanji1946Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1946Character);
+styledYak(JapaneseCard)("Kanji1946Character");
 const Kanji1947Character =
 /*YAK Extracted CSS:
 .Kanji1947Character {
@@ -23385,7 +23385,7 @@ const Kanji1947Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1947Character);
+styledYak(JapaneseCard)("Kanji1947Character");
 const Kanji1948Character =
 /*YAK Extracted CSS:
 .Kanji1948Character {
@@ -23397,7 +23397,7 @@ const Kanji1948Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1948Character);
+styledYak(JapaneseCard)("Kanji1948Character");
 const Kanji1949Character =
 /*YAK Extracted CSS:
 .Kanji1949Character {
@@ -23409,7 +23409,7 @@ const Kanji1949Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1949Character);
+styledYak(JapaneseCard)("Kanji1949Character");
 const Kanji1950Character =
 /*YAK Extracted CSS:
 .Kanji1950Character {
@@ -23421,7 +23421,7 @@ const Kanji1950Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1950Character);
+styledYak(JapaneseCard)("Kanji1950Character");
 const Kanji1951Character =
 /*YAK Extracted CSS:
 .Kanji1951Character {
@@ -23433,7 +23433,7 @@ const Kanji1951Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1951Character);
+styledYak(JapaneseCard)("Kanji1951Character");
 const Kanji1952Character =
 /*YAK Extracted CSS:
 .Kanji1952Character {
@@ -23445,7 +23445,7 @@ const Kanji1952Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1952Character);
+styledYak(JapaneseCard)("Kanji1952Character");
 const Kanji1953Character =
 /*YAK Extracted CSS:
 .Kanji1953Character {
@@ -23457,7 +23457,7 @@ const Kanji1953Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1953Character);
+styledYak(JapaneseCard)("Kanji1953Character");
 const Kanji1954Character =
 /*YAK Extracted CSS:
 .Kanji1954Character {
@@ -23469,7 +23469,7 @@ const Kanji1954Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1954Character);
+styledYak(JapaneseCard)("Kanji1954Character");
 const Kanji1955Character =
 /*YAK Extracted CSS:
 .Kanji1955Character {
@@ -23481,7 +23481,7 @@ const Kanji1955Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1955Character);
+styledYak(JapaneseCard)("Kanji1955Character");
 const Kanji1956Character =
 /*YAK Extracted CSS:
 .Kanji1956Character {
@@ -23493,7 +23493,7 @@ const Kanji1956Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1956Character);
+styledYak(JapaneseCard)("Kanji1956Character");
 const Kanji1957Character =
 /*YAK Extracted CSS:
 .Kanji1957Character {
@@ -23505,7 +23505,7 @@ const Kanji1957Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1957Character);
+styledYak(JapaneseCard)("Kanji1957Character");
 const Kanji1958Character =
 /*YAK Extracted CSS:
 .Kanji1958Character {
@@ -23517,7 +23517,7 @@ const Kanji1958Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1958Character);
+styledYak(JapaneseCard)("Kanji1958Character");
 const Kanji1959Character =
 /*YAK Extracted CSS:
 .Kanji1959Character {
@@ -23529,7 +23529,7 @@ const Kanji1959Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1959Character);
+styledYak(JapaneseCard)("Kanji1959Character");
 const Kanji1960Character =
 /*YAK Extracted CSS:
 .Kanji1960Character {
@@ -23541,7 +23541,7 @@ const Kanji1960Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1960Character);
+styledYak(JapaneseCard)("Kanji1960Character");
 const Kanji1961Character =
 /*YAK Extracted CSS:
 .Kanji1961Character {
@@ -23553,7 +23553,7 @@ const Kanji1961Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1961Character);
+styledYak(JapaneseCard)("Kanji1961Character");
 const Kanji1962Character =
 /*YAK Extracted CSS:
 .Kanji1962Character {
@@ -23565,7 +23565,7 @@ const Kanji1962Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1962Character);
+styledYak(JapaneseCard)("Kanji1962Character");
 const Kanji1963Character =
 /*YAK Extracted CSS:
 .Kanji1963Character {
@@ -23577,7 +23577,7 @@ const Kanji1963Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1963Character);
+styledYak(JapaneseCard)("Kanji1963Character");
 const Kanji1964Character =
 /*YAK Extracted CSS:
 .Kanji1964Character {
@@ -23589,7 +23589,7 @@ const Kanji1964Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1964Character);
+styledYak(JapaneseCard)("Kanji1964Character");
 const Kanji1965Character =
 /*YAK Extracted CSS:
 .Kanji1965Character {
@@ -23601,7 +23601,7 @@ const Kanji1965Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1965Character);
+styledYak(JapaneseCard)("Kanji1965Character");
 const Kanji1966Character =
 /*YAK Extracted CSS:
 .Kanji1966Character {
@@ -23613,7 +23613,7 @@ const Kanji1966Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1966Character);
+styledYak(JapaneseCard)("Kanji1966Character");
 const Kanji1967Character =
 /*YAK Extracted CSS:
 .Kanji1967Character {
@@ -23625,7 +23625,7 @@ const Kanji1967Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1967Character);
+styledYak(JapaneseCard)("Kanji1967Character");
 const Kanji1968Character =
 /*YAK Extracted CSS:
 .Kanji1968Character {
@@ -23637,7 +23637,7 @@ const Kanji1968Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1968Character);
+styledYak(JapaneseCard)("Kanji1968Character");
 const Kanji1969Character =
 /*YAK Extracted CSS:
 .Kanji1969Character {
@@ -23649,7 +23649,7 @@ const Kanji1969Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1969Character);
+styledYak(JapaneseCard)("Kanji1969Character");
 const Kanji1970Character =
 /*YAK Extracted CSS:
 .Kanji1970Character {
@@ -23661,7 +23661,7 @@ const Kanji1970Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1970Character);
+styledYak(JapaneseCard)("Kanji1970Character");
 const Kanji1971Character =
 /*YAK Extracted CSS:
 .Kanji1971Character {
@@ -23673,7 +23673,7 @@ const Kanji1971Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1971Character);
+styledYak(JapaneseCard)("Kanji1971Character");
 const Kanji1972Character =
 /*YAK Extracted CSS:
 .Kanji1972Character {
@@ -23685,7 +23685,7 @@ const Kanji1972Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1972Character);
+styledYak(JapaneseCard)("Kanji1972Character");
 const Kanji1973Character =
 /*YAK Extracted CSS:
 .Kanji1973Character {
@@ -23697,7 +23697,7 @@ const Kanji1973Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1973Character);
+styledYak(JapaneseCard)("Kanji1973Character");
 const Kanji1974Character =
 /*YAK Extracted CSS:
 .Kanji1974Character {
@@ -23709,7 +23709,7 @@ const Kanji1974Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1974Character);
+styledYak(JapaneseCard)("Kanji1974Character");
 const Kanji1975Character =
 /*YAK Extracted CSS:
 .Kanji1975Character {
@@ -23721,7 +23721,7 @@ const Kanji1975Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1975Character);
+styledYak(JapaneseCard)("Kanji1975Character");
 const Kanji1976Character =
 /*YAK Extracted CSS:
 .Kanji1976Character {
@@ -23733,7 +23733,7 @@ const Kanji1976Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1976Character);
+styledYak(JapaneseCard)("Kanji1976Character");
 const Kanji1977Character =
 /*YAK Extracted CSS:
 .Kanji1977Character {
@@ -23745,7 +23745,7 @@ const Kanji1977Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1977Character);
+styledYak(JapaneseCard)("Kanji1977Character");
 const Kanji1978Character =
 /*YAK Extracted CSS:
 .Kanji1978Character {
@@ -23757,7 +23757,7 @@ const Kanji1978Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1978Character);
+styledYak(JapaneseCard)("Kanji1978Character");
 const Kanji1979Character =
 /*YAK Extracted CSS:
 .Kanji1979Character {
@@ -23769,7 +23769,7 @@ const Kanji1979Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1979Character);
+styledYak(JapaneseCard)("Kanji1979Character");
 const Kanji1980Character =
 /*YAK Extracted CSS:
 .Kanji1980Character {
@@ -23781,7 +23781,7 @@ const Kanji1980Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1980Character);
+styledYak(JapaneseCard)("Kanji1980Character");
 const Kanji1981Character =
 /*YAK Extracted CSS:
 .Kanji1981Character {
@@ -23793,7 +23793,7 @@ const Kanji1981Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1981Character);
+styledYak(JapaneseCard)("Kanji1981Character");
 const Kanji1982Character =
 /*YAK Extracted CSS:
 .Kanji1982Character {
@@ -23805,7 +23805,7 @@ const Kanji1982Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1982Character);
+styledYak(JapaneseCard)("Kanji1982Character");
 const Kanji1983Character =
 /*YAK Extracted CSS:
 .Kanji1983Character {
@@ -23817,7 +23817,7 @@ const Kanji1983Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1983Character);
+styledYak(JapaneseCard)("Kanji1983Character");
 const Kanji1984Character =
 /*YAK Extracted CSS:
 .Kanji1984Character {
@@ -23829,7 +23829,7 @@ const Kanji1984Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1984Character);
+styledYak(JapaneseCard)("Kanji1984Character");
 const Kanji1985Character =
 /*YAK Extracted CSS:
 .Kanji1985Character {
@@ -23841,7 +23841,7 @@ const Kanji1985Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1985Character);
+styledYak(JapaneseCard)("Kanji1985Character");
 const Kanji1986Character =
 /*YAK Extracted CSS:
 .Kanji1986Character {
@@ -23853,7 +23853,7 @@ const Kanji1986Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1986Character);
+styledYak(JapaneseCard)("Kanji1986Character");
 const Kanji1987Character =
 /*YAK Extracted CSS:
 .Kanji1987Character {
@@ -23865,7 +23865,7 @@ const Kanji1987Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1987Character);
+styledYak(JapaneseCard)("Kanji1987Character");
 const Kanji1988Character =
 /*YAK Extracted CSS:
 .Kanji1988Character {
@@ -23877,7 +23877,7 @@ const Kanji1988Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1988Character);
+styledYak(JapaneseCard)("Kanji1988Character");
 const Kanji1989Character =
 /*YAK Extracted CSS:
 .Kanji1989Character {
@@ -23889,7 +23889,7 @@ const Kanji1989Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1989Character);
+styledYak(JapaneseCard)("Kanji1989Character");
 const Kanji1990Character =
 /*YAK Extracted CSS:
 .Kanji1990Character {
@@ -23901,7 +23901,7 @@ const Kanji1990Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1990Character);
+styledYak(JapaneseCard)("Kanji1990Character");
 const Kanji1991Character =
 /*YAK Extracted CSS:
 .Kanji1991Character {
@@ -23913,7 +23913,7 @@ const Kanji1991Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1991Character);
+styledYak(JapaneseCard)("Kanji1991Character");
 const Kanji1992Character =
 /*YAK Extracted CSS:
 .Kanji1992Character {
@@ -23925,7 +23925,7 @@ const Kanji1992Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1992Character);
+styledYak(JapaneseCard)("Kanji1992Character");
 const Kanji1993Character =
 /*YAK Extracted CSS:
 .Kanji1993Character {
@@ -23937,7 +23937,7 @@ const Kanji1993Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1993Character);
+styledYak(JapaneseCard)("Kanji1993Character");
 const Kanji1994Character =
 /*YAK Extracted CSS:
 .Kanji1994Character {
@@ -23949,7 +23949,7 @@ const Kanji1994Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1994Character);
+styledYak(JapaneseCard)("Kanji1994Character");
 const Kanji1995Character =
 /*YAK Extracted CSS:
 .Kanji1995Character {
@@ -23961,7 +23961,7 @@ const Kanji1995Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1995Character);
+styledYak(JapaneseCard)("Kanji1995Character");
 const Kanji1996Character =
 /*YAK Extracted CSS:
 .Kanji1996Character {
@@ -23973,7 +23973,7 @@ const Kanji1996Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1996Character);
+styledYak(JapaneseCard)("Kanji1996Character");
 const Kanji1997Character =
 /*YAK Extracted CSS:
 .Kanji1997Character {
@@ -23985,7 +23985,7 @@ const Kanji1997Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1997Character);
+styledYak(JapaneseCard)("Kanji1997Character");
 const Kanji1998Character =
 /*YAK Extracted CSS:
 .Kanji1998Character {
@@ -23997,7 +23997,7 @@ const Kanji1998Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1998Character);
+styledYak(JapaneseCard)("Kanji1998Character");
 const Kanji1999Character =
 /*YAK Extracted CSS:
 .Kanji1999Character {
@@ -24009,7 +24009,7 @@ const Kanji1999Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji1999Character);
+styledYak(JapaneseCard)("Kanji1999Character");
 const Kanji2000Character =
 /*YAK Extracted CSS:
 .Kanji2000Character {
@@ -24021,7 +24021,7 @@ const Kanji2000Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2000Character);
+styledYak(JapaneseCard)("Kanji2000Character");
 const Kanji2001Character =
 /*YAK Extracted CSS:
 .Kanji2001Character {
@@ -24033,7 +24033,7 @@ const Kanji2001Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2001Character);
+styledYak(JapaneseCard)("Kanji2001Character");
 const Kanji2002Character =
 /*YAK Extracted CSS:
 .Kanji2002Character {
@@ -24045,7 +24045,7 @@ const Kanji2002Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2002Character);
+styledYak(JapaneseCard)("Kanji2002Character");
 const Kanji2003Character =
 /*YAK Extracted CSS:
 .Kanji2003Character {
@@ -24057,7 +24057,7 @@ const Kanji2003Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2003Character);
+styledYak(JapaneseCard)("Kanji2003Character");
 const Kanji2004Character =
 /*YAK Extracted CSS:
 .Kanji2004Character {
@@ -24069,7 +24069,7 @@ const Kanji2004Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2004Character);
+styledYak(JapaneseCard)("Kanji2004Character");
 const Kanji2005Character =
 /*YAK Extracted CSS:
 .Kanji2005Character {
@@ -24081,7 +24081,7 @@ const Kanji2005Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2005Character);
+styledYak(JapaneseCard)("Kanji2005Character");
 const Kanji2006Character =
 /*YAK Extracted CSS:
 .Kanji2006Character {
@@ -24093,7 +24093,7 @@ const Kanji2006Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2006Character);
+styledYak(JapaneseCard)("Kanji2006Character");
 const Kanji2007Character =
 /*YAK Extracted CSS:
 .Kanji2007Character {
@@ -24105,7 +24105,7 @@ const Kanji2007Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2007Character);
+styledYak(JapaneseCard)("Kanji2007Character");
 const Kanji2008Character =
 /*YAK Extracted CSS:
 .Kanji2008Character {
@@ -24117,7 +24117,7 @@ const Kanji2008Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2008Character);
+styledYak(JapaneseCard)("Kanji2008Character");
 const Kanji2009Character =
 /*YAK Extracted CSS:
 .Kanji2009Character {
@@ -24129,7 +24129,7 @@ const Kanji2009Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2009Character);
+styledYak(JapaneseCard)("Kanji2009Character");
 const Kanji2010Character =
 /*YAK Extracted CSS:
 .Kanji2010Character {
@@ -24141,7 +24141,7 @@ const Kanji2010Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2010Character);
+styledYak(JapaneseCard)("Kanji2010Character");
 const Kanji2011Character =
 /*YAK Extracted CSS:
 .Kanji2011Character {
@@ -24153,7 +24153,7 @@ const Kanji2011Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2011Character);
+styledYak(JapaneseCard)("Kanji2011Character");
 const Kanji2012Character =
 /*YAK Extracted CSS:
 .Kanji2012Character {
@@ -24165,7 +24165,7 @@ const Kanji2012Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2012Character);
+styledYak(JapaneseCard)("Kanji2012Character");
 const Kanji2013Character =
 /*YAK Extracted CSS:
 .Kanji2013Character {
@@ -24177,7 +24177,7 @@ const Kanji2013Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2013Character);
+styledYak(JapaneseCard)("Kanji2013Character");
 const Kanji2014Character =
 /*YAK Extracted CSS:
 .Kanji2014Character {
@@ -24189,7 +24189,7 @@ const Kanji2014Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2014Character);
+styledYak(JapaneseCard)("Kanji2014Character");
 const Kanji2015Character =
 /*YAK Extracted CSS:
 .Kanji2015Character {
@@ -24201,7 +24201,7 @@ const Kanji2015Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2015Character);
+styledYak(JapaneseCard)("Kanji2015Character");
 const Kanji2016Character =
 /*YAK Extracted CSS:
 .Kanji2016Character {
@@ -24213,7 +24213,7 @@ const Kanji2016Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2016Character);
+styledYak(JapaneseCard)("Kanji2016Character");
 const Kanji2017Character =
 /*YAK Extracted CSS:
 .Kanji2017Character {
@@ -24225,7 +24225,7 @@ const Kanji2017Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2017Character);
+styledYak(JapaneseCard)("Kanji2017Character");
 const Kanji2018Character =
 /*YAK Extracted CSS:
 .Kanji2018Character {
@@ -24237,7 +24237,7 @@ const Kanji2018Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2018Character);
+styledYak(JapaneseCard)("Kanji2018Character");
 const Kanji2019Character =
 /*YAK Extracted CSS:
 .Kanji2019Character {
@@ -24249,7 +24249,7 @@ const Kanji2019Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2019Character);
+styledYak(JapaneseCard)("Kanji2019Character");
 const Kanji2020Character =
 /*YAK Extracted CSS:
 .Kanji2020Character {
@@ -24261,7 +24261,7 @@ const Kanji2020Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2020Character);
+styledYak(JapaneseCard)("Kanji2020Character");
 const Kanji2021Character =
 /*YAK Extracted CSS:
 .Kanji2021Character {
@@ -24273,7 +24273,7 @@ const Kanji2021Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2021Character);
+styledYak(JapaneseCard)("Kanji2021Character");
 const Kanji2022Character =
 /*YAK Extracted CSS:
 .Kanji2022Character {
@@ -24285,7 +24285,7 @@ const Kanji2022Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2022Character);
+styledYak(JapaneseCard)("Kanji2022Character");
 const Kanji2023Character =
 /*YAK Extracted CSS:
 .Kanji2023Character {
@@ -24297,7 +24297,7 @@ const Kanji2023Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2023Character);
+styledYak(JapaneseCard)("Kanji2023Character");
 const Kanji2024Character =
 /*YAK Extracted CSS:
 .Kanji2024Character {
@@ -24309,7 +24309,7 @@ const Kanji2024Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2024Character);
+styledYak(JapaneseCard)("Kanji2024Character");
 const Kanji2025Character =
 /*YAK Extracted CSS:
 .Kanji2025Character {
@@ -24321,7 +24321,7 @@ const Kanji2025Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2025Character);
+styledYak(JapaneseCard)("Kanji2025Character");
 const Kanji2026Character =
 /*YAK Extracted CSS:
 .Kanji2026Character {
@@ -24333,7 +24333,7 @@ const Kanji2026Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2026Character);
+styledYak(JapaneseCard)("Kanji2026Character");
 const Kanji2027Character =
 /*YAK Extracted CSS:
 .Kanji2027Character {
@@ -24345,7 +24345,7 @@ const Kanji2027Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2027Character);
+styledYak(JapaneseCard)("Kanji2027Character");
 const Kanji2028Character =
 /*YAK Extracted CSS:
 .Kanji2028Character {
@@ -24357,7 +24357,7 @@ const Kanji2028Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2028Character);
+styledYak(JapaneseCard)("Kanji2028Character");
 const Kanji2029Character =
 /*YAK Extracted CSS:
 .Kanji2029Character {
@@ -24369,7 +24369,7 @@ const Kanji2029Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2029Character);
+styledYak(JapaneseCard)("Kanji2029Character");
 const Kanji2030Character =
 /*YAK Extracted CSS:
 .Kanji2030Character {
@@ -24381,7 +24381,7 @@ const Kanji2030Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2030Character);
+styledYak(JapaneseCard)("Kanji2030Character");
 const Kanji2031Character =
 /*YAK Extracted CSS:
 .Kanji2031Character {
@@ -24393,7 +24393,7 @@ const Kanji2031Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2031Character);
+styledYak(JapaneseCard)("Kanji2031Character");
 const Kanji2032Character =
 /*YAK Extracted CSS:
 .Kanji2032Character {
@@ -24405,7 +24405,7 @@ const Kanji2032Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2032Character);
+styledYak(JapaneseCard)("Kanji2032Character");
 const Kanji2033Character =
 /*YAK Extracted CSS:
 .Kanji2033Character {
@@ -24417,7 +24417,7 @@ const Kanji2033Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2033Character);
+styledYak(JapaneseCard)("Kanji2033Character");
 const Kanji2034Character =
 /*YAK Extracted CSS:
 .Kanji2034Character {
@@ -24429,7 +24429,7 @@ const Kanji2034Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2034Character);
+styledYak(JapaneseCard)("Kanji2034Character");
 const Kanji2035Character =
 /*YAK Extracted CSS:
 .Kanji2035Character {
@@ -24441,7 +24441,7 @@ const Kanji2035Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2035Character);
+styledYak(JapaneseCard)("Kanji2035Character");
 const Kanji2036Character =
 /*YAK Extracted CSS:
 .Kanji2036Character {
@@ -24453,7 +24453,7 @@ const Kanji2036Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2036Character);
+styledYak(JapaneseCard)("Kanji2036Character");
 const Kanji2037Character =
 /*YAK Extracted CSS:
 .Kanji2037Character {
@@ -24465,7 +24465,7 @@ const Kanji2037Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2037Character);
+styledYak(JapaneseCard)("Kanji2037Character");
 const Kanji2038Character =
 /*YAK Extracted CSS:
 .Kanji2038Character {
@@ -24477,7 +24477,7 @@ const Kanji2038Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2038Character);
+styledYak(JapaneseCard)("Kanji2038Character");
 const Kanji2039Character =
 /*YAK Extracted CSS:
 .Kanji2039Character {
@@ -24489,7 +24489,7 @@ const Kanji2039Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2039Character);
+styledYak(JapaneseCard)("Kanji2039Character");
 const Kanji2040Character =
 /*YAK Extracted CSS:
 .Kanji2040Character {
@@ -24501,7 +24501,7 @@ const Kanji2040Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2040Character);
+styledYak(JapaneseCard)("Kanji2040Character");
 const Kanji2041Character =
 /*YAK Extracted CSS:
 .Kanji2041Character {
@@ -24513,7 +24513,7 @@ const Kanji2041Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2041Character);
+styledYak(JapaneseCard)("Kanji2041Character");
 const Kanji2042Character =
 /*YAK Extracted CSS:
 .Kanji2042Character {
@@ -24525,7 +24525,7 @@ const Kanji2042Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2042Character);
+styledYak(JapaneseCard)("Kanji2042Character");
 const Kanji2043Character =
 /*YAK Extracted CSS:
 .Kanji2043Character {
@@ -24537,7 +24537,7 @@ const Kanji2043Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2043Character);
+styledYak(JapaneseCard)("Kanji2043Character");
 const Kanji2044Character =
 /*YAK Extracted CSS:
 .Kanji2044Character {
@@ -24549,7 +24549,7 @@ const Kanji2044Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2044Character);
+styledYak(JapaneseCard)("Kanji2044Character");
 const Kanji2045Character =
 /*YAK Extracted CSS:
 .Kanji2045Character {
@@ -24561,7 +24561,7 @@ const Kanji2045Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2045Character);
+styledYak(JapaneseCard)("Kanji2045Character");
 const Kanji2046Character =
 /*YAK Extracted CSS:
 .Kanji2046Character {
@@ -24573,7 +24573,7 @@ const Kanji2046Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2046Character);
+styledYak(JapaneseCard)("Kanji2046Character");
 const Kanji2047Character =
 /*YAK Extracted CSS:
 .Kanji2047Character {
@@ -24585,7 +24585,7 @@ const Kanji2047Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2047Character);
+styledYak(JapaneseCard)("Kanji2047Character");
 const Kanji2048Character =
 /*YAK Extracted CSS:
 .Kanji2048Character {
@@ -24597,7 +24597,7 @@ const Kanji2048Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2048Character);
+styledYak(JapaneseCard)("Kanji2048Character");
 const Kanji2049Character =
 /*YAK Extracted CSS:
 .Kanji2049Character {
@@ -24609,7 +24609,7 @@ const Kanji2049Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2049Character);
+styledYak(JapaneseCard)("Kanji2049Character");
 const Kanji2050Character =
 /*YAK Extracted CSS:
 .Kanji2050Character {
@@ -24621,7 +24621,7 @@ const Kanji2050Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2050Character);
+styledYak(JapaneseCard)("Kanji2050Character");
 const Kanji2051Character =
 /*YAK Extracted CSS:
 .Kanji2051Character {
@@ -24633,7 +24633,7 @@ const Kanji2051Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2051Character);
+styledYak(JapaneseCard)("Kanji2051Character");
 const Kanji2052Character =
 /*YAK Extracted CSS:
 .Kanji2052Character {
@@ -24645,7 +24645,7 @@ const Kanji2052Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2052Character);
+styledYak(JapaneseCard)("Kanji2052Character");
 const Kanji2053Character =
 /*YAK Extracted CSS:
 .Kanji2053Character {
@@ -24657,7 +24657,7 @@ const Kanji2053Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2053Character);
+styledYak(JapaneseCard)("Kanji2053Character");
 const Kanji2054Character =
 /*YAK Extracted CSS:
 .Kanji2054Character {
@@ -24669,7 +24669,7 @@ const Kanji2054Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2054Character);
+styledYak(JapaneseCard)("Kanji2054Character");
 const Kanji2055Character =
 /*YAK Extracted CSS:
 .Kanji2055Character {
@@ -24681,7 +24681,7 @@ const Kanji2055Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2055Character);
+styledYak(JapaneseCard)("Kanji2055Character");
 const Kanji2056Character =
 /*YAK Extracted CSS:
 .Kanji2056Character {
@@ -24693,7 +24693,7 @@ const Kanji2056Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2056Character);
+styledYak(JapaneseCard)("Kanji2056Character");
 const Kanji2057Character =
 /*YAK Extracted CSS:
 .Kanji2057Character {
@@ -24705,7 +24705,7 @@ const Kanji2057Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2057Character);
+styledYak(JapaneseCard)("Kanji2057Character");
 const Kanji2058Character =
 /*YAK Extracted CSS:
 .Kanji2058Character {
@@ -24717,7 +24717,7 @@ const Kanji2058Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2058Character);
+styledYak(JapaneseCard)("Kanji2058Character");
 const Kanji2059Character =
 /*YAK Extracted CSS:
 .Kanji2059Character {
@@ -24729,7 +24729,7 @@ const Kanji2059Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2059Character);
+styledYak(JapaneseCard)("Kanji2059Character");
 const Kanji2060Character =
 /*YAK Extracted CSS:
 .Kanji2060Character {
@@ -24741,7 +24741,7 @@ const Kanji2060Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2060Character);
+styledYak(JapaneseCard)("Kanji2060Character");
 const Kanji2061Character =
 /*YAK Extracted CSS:
 .Kanji2061Character {
@@ -24753,7 +24753,7 @@ const Kanji2061Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2061Character);
+styledYak(JapaneseCard)("Kanji2061Character");
 const Kanji2062Character =
 /*YAK Extracted CSS:
 .Kanji2062Character {
@@ -24765,7 +24765,7 @@ const Kanji2062Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2062Character);
+styledYak(JapaneseCard)("Kanji2062Character");
 const Kanji2063Character =
 /*YAK Extracted CSS:
 .Kanji2063Character {
@@ -24777,7 +24777,7 @@ const Kanji2063Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2063Character);
+styledYak(JapaneseCard)("Kanji2063Character");
 const Kanji2064Character =
 /*YAK Extracted CSS:
 .Kanji2064Character {
@@ -24789,7 +24789,7 @@ const Kanji2064Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2064Character);
+styledYak(JapaneseCard)("Kanji2064Character");
 const Kanji2065Character =
 /*YAK Extracted CSS:
 .Kanji2065Character {
@@ -24801,7 +24801,7 @@ const Kanji2065Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2065Character);
+styledYak(JapaneseCard)("Kanji2065Character");
 const Kanji2066Character =
 /*YAK Extracted CSS:
 .Kanji2066Character {
@@ -24813,7 +24813,7 @@ const Kanji2066Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2066Character);
+styledYak(JapaneseCard)("Kanji2066Character");
 const Kanji2067Character =
 /*YAK Extracted CSS:
 .Kanji2067Character {
@@ -24825,7 +24825,7 @@ const Kanji2067Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2067Character);
+styledYak(JapaneseCard)("Kanji2067Character");
 const Kanji2068Character =
 /*YAK Extracted CSS:
 .Kanji2068Character {
@@ -24837,7 +24837,7 @@ const Kanji2068Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2068Character);
+styledYak(JapaneseCard)("Kanji2068Character");
 const Kanji2069Character =
 /*YAK Extracted CSS:
 .Kanji2069Character {
@@ -24849,7 +24849,7 @@ const Kanji2069Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2069Character);
+styledYak(JapaneseCard)("Kanji2069Character");
 const Kanji2070Character =
 /*YAK Extracted CSS:
 .Kanji2070Character {
@@ -24861,7 +24861,7 @@ const Kanji2070Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2070Character);
+styledYak(JapaneseCard)("Kanji2070Character");
 const Kanji2071Character =
 /*YAK Extracted CSS:
 .Kanji2071Character {
@@ -24873,7 +24873,7 @@ const Kanji2071Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2071Character);
+styledYak(JapaneseCard)("Kanji2071Character");
 const Kanji2072Character =
 /*YAK Extracted CSS:
 .Kanji2072Character {
@@ -24885,7 +24885,7 @@ const Kanji2072Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2072Character);
+styledYak(JapaneseCard)("Kanji2072Character");
 const Kanji2073Character =
 /*YAK Extracted CSS:
 .Kanji2073Character {
@@ -24897,7 +24897,7 @@ const Kanji2073Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2073Character);
+styledYak(JapaneseCard)("Kanji2073Character");
 const Kanji2074Character =
 /*YAK Extracted CSS:
 .Kanji2074Character {
@@ -24909,7 +24909,7 @@ const Kanji2074Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2074Character);
+styledYak(JapaneseCard)("Kanji2074Character");
 const Kanji2075Character =
 /*YAK Extracted CSS:
 .Kanji2075Character {
@@ -24921,7 +24921,7 @@ const Kanji2075Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2075Character);
+styledYak(JapaneseCard)("Kanji2075Character");
 const Kanji2076Character =
 /*YAK Extracted CSS:
 .Kanji2076Character {
@@ -24933,7 +24933,7 @@ const Kanji2076Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2076Character);
+styledYak(JapaneseCard)("Kanji2076Character");
 const Kanji2077Character =
 /*YAK Extracted CSS:
 .Kanji2077Character {
@@ -24945,7 +24945,7 @@ const Kanji2077Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2077Character);
+styledYak(JapaneseCard)("Kanji2077Character");
 const Kanji2078Character =
 /*YAK Extracted CSS:
 .Kanji2078Character {
@@ -24957,7 +24957,7 @@ const Kanji2078Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2078Character);
+styledYak(JapaneseCard)("Kanji2078Character");
 const Kanji2079Character =
 /*YAK Extracted CSS:
 .Kanji2079Character {
@@ -24969,7 +24969,7 @@ const Kanji2079Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2079Character);
+styledYak(JapaneseCard)("Kanji2079Character");
 const Kanji2080Character =
 /*YAK Extracted CSS:
 .Kanji2080Character {
@@ -24981,7 +24981,7 @@ const Kanji2080Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2080Character);
+styledYak(JapaneseCard)("Kanji2080Character");
 const Kanji2081Character =
 /*YAK Extracted CSS:
 .Kanji2081Character {
@@ -24993,7 +24993,7 @@ const Kanji2081Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2081Character);
+styledYak(JapaneseCard)("Kanji2081Character");
 const Kanji2082Character =
 /*YAK Extracted CSS:
 .Kanji2082Character {
@@ -25005,7 +25005,7 @@ const Kanji2082Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2082Character);
+styledYak(JapaneseCard)("Kanji2082Character");
 const Kanji2083Character =
 /*YAK Extracted CSS:
 .Kanji2083Character {
@@ -25017,7 +25017,7 @@ const Kanji2083Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2083Character);
+styledYak(JapaneseCard)("Kanji2083Character");
 const Kanji2084Character =
 /*YAK Extracted CSS:
 .Kanji2084Character {
@@ -25029,7 +25029,7 @@ const Kanji2084Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2084Character);
+styledYak(JapaneseCard)("Kanji2084Character");
 const Kanji2085Character =
 /*YAK Extracted CSS:
 .Kanji2085Character {
@@ -25041,7 +25041,7 @@ const Kanji2085Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2085Character);
+styledYak(JapaneseCard)("Kanji2085Character");
 const Kanji2086Character =
 /*YAK Extracted CSS:
 .Kanji2086Character {
@@ -25053,7 +25053,7 @@ const Kanji2086Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2086Character);
+styledYak(JapaneseCard)("Kanji2086Character");
 const Kanji2087Character =
 /*YAK Extracted CSS:
 .Kanji2087Character {
@@ -25065,7 +25065,7 @@ const Kanji2087Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2087Character);
+styledYak(JapaneseCard)("Kanji2087Character");
 const Kanji2088Character =
 /*YAK Extracted CSS:
 .Kanji2088Character {
@@ -25077,7 +25077,7 @@ const Kanji2088Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2088Character);
+styledYak(JapaneseCard)("Kanji2088Character");
 const Kanji2089Character =
 /*YAK Extracted CSS:
 .Kanji2089Character {
@@ -25089,7 +25089,7 @@ const Kanji2089Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2089Character);
+styledYak(JapaneseCard)("Kanji2089Character");
 const Kanji2090Character =
 /*YAK Extracted CSS:
 .Kanji2090Character {
@@ -25101,7 +25101,7 @@ const Kanji2090Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2090Character);
+styledYak(JapaneseCard)("Kanji2090Character");
 const Kanji2091Character =
 /*YAK Extracted CSS:
 .Kanji2091Character {
@@ -25113,7 +25113,7 @@ const Kanji2091Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2091Character);
+styledYak(JapaneseCard)("Kanji2091Character");
 const Kanji2092Character =
 /*YAK Extracted CSS:
 .Kanji2092Character {
@@ -25125,7 +25125,7 @@ const Kanji2092Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2092Character);
+styledYak(JapaneseCard)("Kanji2092Character");
 const Kanji2093Character =
 /*YAK Extracted CSS:
 .Kanji2093Character {
@@ -25137,7 +25137,7 @@ const Kanji2093Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2093Character);
+styledYak(JapaneseCard)("Kanji2093Character");
 const Kanji2094Character =
 /*YAK Extracted CSS:
 .Kanji2094Character {
@@ -25149,7 +25149,7 @@ const Kanji2094Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2094Character);
+styledYak(JapaneseCard)("Kanji2094Character");
 const Kanji2095Character =
 /*YAK Extracted CSS:
 .Kanji2095Character {
@@ -25161,7 +25161,7 @@ const Kanji2095Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2095Character);
+styledYak(JapaneseCard)("Kanji2095Character");
 const Kanji2096Character =
 /*YAK Extracted CSS:
 .Kanji2096Character {
@@ -25173,7 +25173,7 @@ const Kanji2096Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2096Character);
+styledYak(JapaneseCard)("Kanji2096Character");
 const Kanji2097Character =
 /*YAK Extracted CSS:
 .Kanji2097Character {
@@ -25185,7 +25185,7 @@ const Kanji2097Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2097Character);
+styledYak(JapaneseCard)("Kanji2097Character");
 const Kanji2098Character =
 /*YAK Extracted CSS:
 .Kanji2098Character {
@@ -25197,7 +25197,7 @@ const Kanji2098Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2098Character);
+styledYak(JapaneseCard)("Kanji2098Character");
 const Kanji2099Character =
 /*YAK Extracted CSS:
 .Kanji2099Character {
@@ -25209,7 +25209,7 @@ const Kanji2099Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2099Character);
+styledYak(JapaneseCard)("Kanji2099Character");
 const Kanji2100Character =
 /*YAK Extracted CSS:
 .Kanji2100Character {
@@ -25221,7 +25221,7 @@ const Kanji2100Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2100Character);
+styledYak(JapaneseCard)("Kanji2100Character");
 const Kanji2101Character =
 /*YAK Extracted CSS:
 .Kanji2101Character {
@@ -25233,7 +25233,7 @@ const Kanji2101Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2101Character);
+styledYak(JapaneseCard)("Kanji2101Character");
 const Kanji2102Character =
 /*YAK Extracted CSS:
 .Kanji2102Character {
@@ -25245,7 +25245,7 @@ const Kanji2102Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2102Character);
+styledYak(JapaneseCard)("Kanji2102Character");
 const Kanji2103Character =
 /*YAK Extracted CSS:
 .Kanji2103Character {
@@ -25257,7 +25257,7 @@ const Kanji2103Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2103Character);
+styledYak(JapaneseCard)("Kanji2103Character");
 const Kanji2104Character =
 /*YAK Extracted CSS:
 .Kanji2104Character {
@@ -25269,7 +25269,7 @@ const Kanji2104Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2104Character);
+styledYak(JapaneseCard)("Kanji2104Character");
 const Kanji2105Character =
 /*YAK Extracted CSS:
 .Kanji2105Character {
@@ -25281,7 +25281,7 @@ const Kanji2105Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2105Character);
+styledYak(JapaneseCard)("Kanji2105Character");
 const Kanji2106Character =
 /*YAK Extracted CSS:
 .Kanji2106Character {
@@ -25293,7 +25293,7 @@ const Kanji2106Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2106Character);
+styledYak(JapaneseCard)("Kanji2106Character");
 const Kanji2107Character =
 /*YAK Extracted CSS:
 .Kanji2107Character {
@@ -25305,7 +25305,7 @@ const Kanji2107Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2107Character);
+styledYak(JapaneseCard)("Kanji2107Character");
 const Kanji2108Character =
 /*YAK Extracted CSS:
 .Kanji2108Character {
@@ -25317,7 +25317,7 @@ const Kanji2108Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2108Character);
+styledYak(JapaneseCard)("Kanji2108Character");
 const Kanji2109Character =
 /*YAK Extracted CSS:
 .Kanji2109Character {
@@ -25329,7 +25329,7 @@ const Kanji2109Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2109Character);
+styledYak(JapaneseCard)("Kanji2109Character");
 const Kanji2110Character =
 /*YAK Extracted CSS:
 .Kanji2110Character {
@@ -25341,7 +25341,7 @@ const Kanji2110Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2110Character);
+styledYak(JapaneseCard)("Kanji2110Character");
 const Kanji2111Character =
 /*YAK Extracted CSS:
 .Kanji2111Character {
@@ -25353,7 +25353,7 @@ const Kanji2111Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2111Character);
+styledYak(JapaneseCard)("Kanji2111Character");
 const Kanji2112Character =
 /*YAK Extracted CSS:
 .Kanji2112Character {
@@ -25365,7 +25365,7 @@ const Kanji2112Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2112Character);
+styledYak(JapaneseCard)("Kanji2112Character");
 const Kanji2113Character =
 /*YAK Extracted CSS:
 .Kanji2113Character {
@@ -25377,7 +25377,7 @@ const Kanji2113Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2113Character);
+styledYak(JapaneseCard)("Kanji2113Character");
 const Kanji2114Character =
 /*YAK Extracted CSS:
 .Kanji2114Character {
@@ -25389,7 +25389,7 @@ const Kanji2114Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2114Character);
+styledYak(JapaneseCard)("Kanji2114Character");
 const Kanji2115Character =
 /*YAK Extracted CSS:
 .Kanji2115Character {
@@ -25401,7 +25401,7 @@ const Kanji2115Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2115Character);
+styledYak(JapaneseCard)("Kanji2115Character");
 const Kanji2116Character =
 /*YAK Extracted CSS:
 .Kanji2116Character {
@@ -25413,7 +25413,7 @@ const Kanji2116Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2116Character);
+styledYak(JapaneseCard)("Kanji2116Character");
 const Kanji2117Character =
 /*YAK Extracted CSS:
 .Kanji2117Character {
@@ -25425,7 +25425,7 @@ const Kanji2117Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2117Character);
+styledYak(JapaneseCard)("Kanji2117Character");
 const Kanji2118Character =
 /*YAK Extracted CSS:
 .Kanji2118Character {
@@ -25437,7 +25437,7 @@ const Kanji2118Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2118Character);
+styledYak(JapaneseCard)("Kanji2118Character");
 const Kanji2119Character =
 /*YAK Extracted CSS:
 .Kanji2119Character {
@@ -25449,7 +25449,7 @@ const Kanji2119Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2119Character);
+styledYak(JapaneseCard)("Kanji2119Character");
 const Kanji2120Character =
 /*YAK Extracted CSS:
 .Kanji2120Character {
@@ -25461,7 +25461,7 @@ const Kanji2120Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2120Character);
+styledYak(JapaneseCard)("Kanji2120Character");
 const Kanji2121Character =
 /*YAK Extracted CSS:
 .Kanji2121Character {
@@ -25473,7 +25473,7 @@ const Kanji2121Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2121Character);
+styledYak(JapaneseCard)("Kanji2121Character");
 const Kanji2122Character =
 /*YAK Extracted CSS:
 .Kanji2122Character {
@@ -25485,7 +25485,7 @@ const Kanji2122Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2122Character);
+styledYak(JapaneseCard)("Kanji2122Character");
 const Kanji2123Character =
 /*YAK Extracted CSS:
 .Kanji2123Character {
@@ -25497,7 +25497,7 @@ const Kanji2123Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2123Character);
+styledYak(JapaneseCard)("Kanji2123Character");
 const Kanji2124Character =
 /*YAK Extracted CSS:
 .Kanji2124Character {
@@ -25509,7 +25509,7 @@ const Kanji2124Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2124Character);
+styledYak(JapaneseCard)("Kanji2124Character");
 const Kanji2125Character =
 /*YAK Extracted CSS:
 .Kanji2125Character {
@@ -25521,7 +25521,7 @@ const Kanji2125Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2125Character);
+styledYak(JapaneseCard)("Kanji2125Character");
 const Kanji2126Character =
 /*YAK Extracted CSS:
 .Kanji2126Character {
@@ -25533,7 +25533,7 @@ const Kanji2126Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2126Character);
+styledYak(JapaneseCard)("Kanji2126Character");
 const Kanji2127Character =
 /*YAK Extracted CSS:
 .Kanji2127Character {
@@ -25545,7 +25545,7 @@ const Kanji2127Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2127Character);
+styledYak(JapaneseCard)("Kanji2127Character");
 const Kanji2128Character =
 /*YAK Extracted CSS:
 .Kanji2128Character {
@@ -25557,7 +25557,7 @@ const Kanji2128Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2128Character);
+styledYak(JapaneseCard)("Kanji2128Character");
 const Kanji2129Character =
 /*YAK Extracted CSS:
 .Kanji2129Character {
@@ -25569,7 +25569,7 @@ const Kanji2129Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2129Character);
+styledYak(JapaneseCard)("Kanji2129Character");
 const Kanji2130Character =
 /*YAK Extracted CSS:
 .Kanji2130Character {
@@ -25581,7 +25581,7 @@ const Kanji2130Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2130Character);
+styledYak(JapaneseCard)("Kanji2130Character");
 const Kanji2131Character =
 /*YAK Extracted CSS:
 .Kanji2131Character {
@@ -25593,7 +25593,7 @@ const Kanji2131Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2131Character);
+styledYak(JapaneseCard)("Kanji2131Character");
 const Kanji2132Character =
 /*YAK Extracted CSS:
 .Kanji2132Character {
@@ -25605,7 +25605,7 @@ const Kanji2132Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2132Character);
+styledYak(JapaneseCard)("Kanji2132Character");
 const Kanji2133Character =
 /*YAK Extracted CSS:
 .Kanji2133Character {
@@ -25617,7 +25617,7 @@ const Kanji2133Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2133Character);
+styledYak(JapaneseCard)("Kanji2133Character");
 const Kanji2134Character =
 /*YAK Extracted CSS:
 .Kanji2134Character {
@@ -25629,7 +25629,7 @@ const Kanji2134Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2134Character);
+styledYak(JapaneseCard)("Kanji2134Character");
 const Kanji2135Character =
 /*YAK Extracted CSS:
 .Kanji2135Character {
@@ -25641,7 +25641,7 @@ const Kanji2135Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2135Character);
+styledYak(JapaneseCard)("Kanji2135Character");
 const Kanji2136Character =
 /*YAK Extracted CSS:
 .Kanji2136Character {
@@ -25653,7 +25653,7 @@ const Kanji2136Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2136Character);
+styledYak(JapaneseCard)("Kanji2136Character");
 const Kanji2137Character =
 /*YAK Extracted CSS:
 .Kanji2137Character {
@@ -25665,7 +25665,7 @@ const Kanji2137Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2137Character);
+styledYak(JapaneseCard)("Kanji2137Character");
 const Kanji2138Character =
 /*YAK Extracted CSS:
 .Kanji2138Character {
@@ -25677,7 +25677,7 @@ const Kanji2138Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2138Character);
+styledYak(JapaneseCard)("Kanji2138Character");
 const Kanji2139Character =
 /*YAK Extracted CSS:
 .Kanji2139Character {
@@ -25689,7 +25689,7 @@ const Kanji2139Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2139Character);
+styledYak(JapaneseCard)("Kanji2139Character");
 const Kanji2140Character =
 /*YAK Extracted CSS:
 .Kanji2140Character {
@@ -25701,7 +25701,7 @@ const Kanji2140Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2140Character);
+styledYak(JapaneseCard)("Kanji2140Character");
 const Kanji2141Character =
 /*YAK Extracted CSS:
 .Kanji2141Character {
@@ -25713,7 +25713,7 @@ const Kanji2141Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2141Character);
+styledYak(JapaneseCard)("Kanji2141Character");
 const Kanji2142Character =
 /*YAK Extracted CSS:
 .Kanji2142Character {
@@ -25725,7 +25725,7 @@ const Kanji2142Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2142Character);
+styledYak(JapaneseCard)("Kanji2142Character");
 const Kanji2143Character =
 /*YAK Extracted CSS:
 .Kanji2143Character {
@@ -25737,7 +25737,7 @@ const Kanji2143Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2143Character);
+styledYak(JapaneseCard)("Kanji2143Character");
 const Kanji2144Character =
 /*YAK Extracted CSS:
 .Kanji2144Character {
@@ -25749,7 +25749,7 @@ const Kanji2144Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2144Character);
+styledYak(JapaneseCard)("Kanji2144Character");
 const Kanji2145Character =
 /*YAK Extracted CSS:
 .Kanji2145Character {
@@ -25761,7 +25761,7 @@ const Kanji2145Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2145Character);
+styledYak(JapaneseCard)("Kanji2145Character");
 const Kanji2146Character =
 /*YAK Extracted CSS:
 .Kanji2146Character {
@@ -25773,7 +25773,7 @@ const Kanji2146Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2146Character);
+styledYak(JapaneseCard)("Kanji2146Character");
 const Kanji2147Character =
 /*YAK Extracted CSS:
 .Kanji2147Character {
@@ -25785,7 +25785,7 @@ const Kanji2147Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2147Character);
+styledYak(JapaneseCard)("Kanji2147Character");
 const Kanji2148Character =
 /*YAK Extracted CSS:
 .Kanji2148Character {
@@ -25797,7 +25797,7 @@ const Kanji2148Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2148Character);
+styledYak(JapaneseCard)("Kanji2148Character");
 const Kanji2149Character =
 /*YAK Extracted CSS:
 .Kanji2149Character {
@@ -25809,7 +25809,7 @@ const Kanji2149Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2149Character);
+styledYak(JapaneseCard)("Kanji2149Character");
 const Kanji2150Character =
 /*YAK Extracted CSS:
 .Kanji2150Character {
@@ -25821,7 +25821,7 @@ const Kanji2150Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2150Character);
+styledYak(JapaneseCard)("Kanji2150Character");
 const Kanji2151Character =
 /*YAK Extracted CSS:
 .Kanji2151Character {
@@ -25833,7 +25833,7 @@ const Kanji2151Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2151Character);
+styledYak(JapaneseCard)("Kanji2151Character");
 const Kanji2152Character =
 /*YAK Extracted CSS:
 .Kanji2152Character {
@@ -25845,7 +25845,7 @@ const Kanji2152Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2152Character);
+styledYak(JapaneseCard)("Kanji2152Character");
 const Kanji2153Character =
 /*YAK Extracted CSS:
 .Kanji2153Character {
@@ -25857,7 +25857,7 @@ const Kanji2153Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2153Character);
+styledYak(JapaneseCard)("Kanji2153Character");
 const Kanji2154Character =
 /*YAK Extracted CSS:
 .Kanji2154Character {
@@ -25869,7 +25869,7 @@ const Kanji2154Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2154Character);
+styledYak(JapaneseCard)("Kanji2154Character");
 const Kanji2155Character =
 /*YAK Extracted CSS:
 .Kanji2155Character {
@@ -25881,7 +25881,7 @@ const Kanji2155Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2155Character);
+styledYak(JapaneseCard)("Kanji2155Character");
 const Kanji2156Character =
 /*YAK Extracted CSS:
 .Kanji2156Character {
@@ -25893,7 +25893,7 @@ const Kanji2156Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2156Character);
+styledYak(JapaneseCard)("Kanji2156Character");
 const Kanji2157Character =
 /*YAK Extracted CSS:
 .Kanji2157Character {
@@ -25905,7 +25905,7 @@ const Kanji2157Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2157Character);
+styledYak(JapaneseCard)("Kanji2157Character");
 const Kanji2158Character =
 /*YAK Extracted CSS:
 .Kanji2158Character {
@@ -25917,7 +25917,7 @@ const Kanji2158Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2158Character);
+styledYak(JapaneseCard)("Kanji2158Character");
 const Kanji2159Character =
 /*YAK Extracted CSS:
 .Kanji2159Character {
@@ -25929,7 +25929,7 @@ const Kanji2159Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2159Character);
+styledYak(JapaneseCard)("Kanji2159Character");
 const Kanji2160Character =
 /*YAK Extracted CSS:
 .Kanji2160Character {
@@ -25941,7 +25941,7 @@ const Kanji2160Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2160Character);
+styledYak(JapaneseCard)("Kanji2160Character");
 const Kanji2161Character =
 /*YAK Extracted CSS:
 .Kanji2161Character {
@@ -25953,7 +25953,7 @@ const Kanji2161Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2161Character);
+styledYak(JapaneseCard)("Kanji2161Character");
 const Kanji2162Character =
 /*YAK Extracted CSS:
 .Kanji2162Character {
@@ -25965,7 +25965,7 @@ const Kanji2162Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2162Character);
+styledYak(JapaneseCard)("Kanji2162Character");
 const Kanji2163Character =
 /*YAK Extracted CSS:
 .Kanji2163Character {
@@ -25977,7 +25977,7 @@ const Kanji2163Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2163Character);
+styledYak(JapaneseCard)("Kanji2163Character");
 const Kanji2164Character =
 /*YAK Extracted CSS:
 .Kanji2164Character {
@@ -25989,7 +25989,7 @@ const Kanji2164Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2164Character);
+styledYak(JapaneseCard)("Kanji2164Character");
 const Kanji2165Character =
 /*YAK Extracted CSS:
 .Kanji2165Character {
@@ -26001,7 +26001,7 @@ const Kanji2165Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2165Character);
+styledYak(JapaneseCard)("Kanji2165Character");
 const Kanji2166Character =
 /*YAK Extracted CSS:
 .Kanji2166Character {
@@ -26013,7 +26013,7 @@ const Kanji2166Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2166Character);
+styledYak(JapaneseCard)("Kanji2166Character");
 const Kanji2167Character =
 /*YAK Extracted CSS:
 .Kanji2167Character {
@@ -26025,7 +26025,7 @@ const Kanji2167Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2167Character);
+styledYak(JapaneseCard)("Kanji2167Character");
 const Kanji2168Character =
 /*YAK Extracted CSS:
 .Kanji2168Character {
@@ -26037,7 +26037,7 @@ const Kanji2168Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2168Character);
+styledYak(JapaneseCard)("Kanji2168Character");
 const Kanji2169Character =
 /*YAK Extracted CSS:
 .Kanji2169Character {
@@ -26049,7 +26049,7 @@ const Kanji2169Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2169Character);
+styledYak(JapaneseCard)("Kanji2169Character");
 const Kanji2170Character =
 /*YAK Extracted CSS:
 .Kanji2170Character {
@@ -26061,7 +26061,7 @@ const Kanji2170Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2170Character);
+styledYak(JapaneseCard)("Kanji2170Character");
 const Kanji2171Character =
 /*YAK Extracted CSS:
 .Kanji2171Character {
@@ -26073,7 +26073,7 @@ const Kanji2171Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2171Character);
+styledYak(JapaneseCard)("Kanji2171Character");
 const Kanji2172Character =
 /*YAK Extracted CSS:
 .Kanji2172Character {
@@ -26085,7 +26085,7 @@ const Kanji2172Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2172Character);
+styledYak(JapaneseCard)("Kanji2172Character");
 const Kanji2173Character =
 /*YAK Extracted CSS:
 .Kanji2173Character {
@@ -26097,7 +26097,7 @@ const Kanji2173Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2173Character);
+styledYak(JapaneseCard)("Kanji2173Character");
 const Kanji2174Character =
 /*YAK Extracted CSS:
 .Kanji2174Character {
@@ -26109,7 +26109,7 @@ const Kanji2174Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2174Character);
+styledYak(JapaneseCard)("Kanji2174Character");
 const Kanji2175Character =
 /*YAK Extracted CSS:
 .Kanji2175Character {
@@ -26121,7 +26121,7 @@ const Kanji2175Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2175Character);
+styledYak(JapaneseCard)("Kanji2175Character");
 const Kanji2176Character =
 /*YAK Extracted CSS:
 .Kanji2176Character {
@@ -26133,7 +26133,7 @@ const Kanji2176Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2176Character);
+styledYak(JapaneseCard)("Kanji2176Character");
 const Kanji2177Character =
 /*YAK Extracted CSS:
 .Kanji2177Character {
@@ -26145,7 +26145,7 @@ const Kanji2177Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2177Character);
+styledYak(JapaneseCard)("Kanji2177Character");
 const Kanji2178Character =
 /*YAK Extracted CSS:
 .Kanji2178Character {
@@ -26157,7 +26157,7 @@ const Kanji2178Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2178Character);
+styledYak(JapaneseCard)("Kanji2178Character");
 const Kanji2179Character =
 /*YAK Extracted CSS:
 .Kanji2179Character {
@@ -26169,7 +26169,7 @@ const Kanji2179Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2179Character);
+styledYak(JapaneseCard)("Kanji2179Character");
 const Kanji2180Character =
 /*YAK Extracted CSS:
 .Kanji2180Character {
@@ -26181,7 +26181,7 @@ const Kanji2180Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2180Character);
+styledYak(JapaneseCard)("Kanji2180Character");
 const Kanji2181Character =
 /*YAK Extracted CSS:
 .Kanji2181Character {
@@ -26193,7 +26193,7 @@ const Kanji2181Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2181Character);
+styledYak(JapaneseCard)("Kanji2181Character");
 const Kanji2182Character =
 /*YAK Extracted CSS:
 .Kanji2182Character {
@@ -26205,7 +26205,7 @@ const Kanji2182Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2182Character);
+styledYak(JapaneseCard)("Kanji2182Character");
 const Kanji2183Character =
 /*YAK Extracted CSS:
 .Kanji2183Character {
@@ -26217,7 +26217,7 @@ const Kanji2183Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2183Character);
+styledYak(JapaneseCard)("Kanji2183Character");
 const Kanji2184Character =
 /*YAK Extracted CSS:
 .Kanji2184Character {
@@ -26229,7 +26229,7 @@ const Kanji2184Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2184Character);
+styledYak(JapaneseCard)("Kanji2184Character");
 const Kanji2185Character =
 /*YAK Extracted CSS:
 .Kanji2185Character {
@@ -26241,7 +26241,7 @@ const Kanji2185Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2185Character);
+styledYak(JapaneseCard)("Kanji2185Character");
 const Kanji2186Character =
 /*YAK Extracted CSS:
 .Kanji2186Character {
@@ -26253,7 +26253,7 @@ const Kanji2186Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2186Character);
+styledYak(JapaneseCard)("Kanji2186Character");
 const Kanji2187Character =
 /*YAK Extracted CSS:
 .Kanji2187Character {
@@ -26265,7 +26265,7 @@ const Kanji2187Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2187Character);
+styledYak(JapaneseCard)("Kanji2187Character");
 const Kanji2188Character =
 /*YAK Extracted CSS:
 .Kanji2188Character {
@@ -26277,7 +26277,7 @@ const Kanji2188Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2188Character);
+styledYak(JapaneseCard)("Kanji2188Character");
 const Kanji2189Character =
 /*YAK Extracted CSS:
 .Kanji2189Character {
@@ -26289,7 +26289,7 @@ const Kanji2189Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2189Character);
+styledYak(JapaneseCard)("Kanji2189Character");
 const Kanji2190Character =
 /*YAK Extracted CSS:
 .Kanji2190Character {
@@ -26301,7 +26301,7 @@ const Kanji2190Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2190Character);
+styledYak(JapaneseCard)("Kanji2190Character");
 const Kanji2191Character =
 /*YAK Extracted CSS:
 .Kanji2191Character {
@@ -26313,7 +26313,7 @@ const Kanji2191Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2191Character);
+styledYak(JapaneseCard)("Kanji2191Character");
 const Kanji2192Character =
 /*YAK Extracted CSS:
 .Kanji2192Character {
@@ -26325,7 +26325,7 @@ const Kanji2192Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2192Character);
+styledYak(JapaneseCard)("Kanji2192Character");
 const Kanji2193Character =
 /*YAK Extracted CSS:
 .Kanji2193Character {
@@ -26337,7 +26337,7 @@ const Kanji2193Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2193Character);
+styledYak(JapaneseCard)("Kanji2193Character");
 const Kanji2194Character =
 /*YAK Extracted CSS:
 .Kanji2194Character {
@@ -26349,7 +26349,7 @@ const Kanji2194Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2194Character);
+styledYak(JapaneseCard)("Kanji2194Character");
 const Kanji2195Character =
 /*YAK Extracted CSS:
 .Kanji2195Character {
@@ -26361,7 +26361,7 @@ const Kanji2195Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2195Character);
+styledYak(JapaneseCard)("Kanji2195Character");
 const Kanji2196Character =
 /*YAK Extracted CSS:
 .Kanji2196Character {
@@ -26373,7 +26373,7 @@ const Kanji2196Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2196Character);
+styledYak(JapaneseCard)("Kanji2196Character");
 const Kanji2197Character =
 /*YAK Extracted CSS:
 .Kanji2197Character {
@@ -26385,7 +26385,7 @@ const Kanji2197Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2197Character);
+styledYak(JapaneseCard)("Kanji2197Character");
 const Kanji2198Character =
 /*YAK Extracted CSS:
 .Kanji2198Character {
@@ -26397,7 +26397,7 @@ const Kanji2198Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2198Character);
+styledYak(JapaneseCard)("Kanji2198Character");
 const Kanji2199Character =
 /*YAK Extracted CSS:
 .Kanji2199Character {
@@ -26409,7 +26409,7 @@ const Kanji2199Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2199Character);
+styledYak(JapaneseCard)("Kanji2199Character");
 const Kanji2200Character =
 /*YAK Extracted CSS:
 .Kanji2200Character {
@@ -26421,7 +26421,7 @@ const Kanji2200Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2200Character);
+styledYak(JapaneseCard)("Kanji2200Character");
 const Kanji2201Character =
 /*YAK Extracted CSS:
 .Kanji2201Character {
@@ -26433,7 +26433,7 @@ const Kanji2201Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2201Character);
+styledYak(JapaneseCard)("Kanji2201Character");
 const Kanji2202Character =
 /*YAK Extracted CSS:
 .Kanji2202Character {
@@ -26445,7 +26445,7 @@ const Kanji2202Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2202Character);
+styledYak(JapaneseCard)("Kanji2202Character");
 const Kanji2203Character =
 /*YAK Extracted CSS:
 .Kanji2203Character {
@@ -26457,7 +26457,7 @@ const Kanji2203Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2203Character);
+styledYak(JapaneseCard)("Kanji2203Character");
 const Kanji2204Character =
 /*YAK Extracted CSS:
 .Kanji2204Character {
@@ -26469,7 +26469,7 @@ const Kanji2204Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2204Character);
+styledYak(JapaneseCard)("Kanji2204Character");
 const Kanji2205Character =
 /*YAK Extracted CSS:
 .Kanji2205Character {
@@ -26481,7 +26481,7 @@ const Kanji2205Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2205Character);
+styledYak(JapaneseCard)("Kanji2205Character");
 const Kanji2206Character =
 /*YAK Extracted CSS:
 .Kanji2206Character {
@@ -26493,7 +26493,7 @@ const Kanji2206Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2206Character);
+styledYak(JapaneseCard)("Kanji2206Character");
 const Kanji2207Character =
 /*YAK Extracted CSS:
 .Kanji2207Character {
@@ -26505,7 +26505,7 @@ const Kanji2207Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2207Character);
+styledYak(JapaneseCard)("Kanji2207Character");
 const Kanji2208Character =
 /*YAK Extracted CSS:
 .Kanji2208Character {
@@ -26517,7 +26517,7 @@ const Kanji2208Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2208Character);
+styledYak(JapaneseCard)("Kanji2208Character");
 const Kanji2209Character =
 /*YAK Extracted CSS:
 .Kanji2209Character {
@@ -26529,7 +26529,7 @@ const Kanji2209Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2209Character);
+styledYak(JapaneseCard)("Kanji2209Character");
 const Kanji2210Character =
 /*YAK Extracted CSS:
 .Kanji2210Character {
@@ -26541,7 +26541,7 @@ const Kanji2210Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2210Character);
+styledYak(JapaneseCard)("Kanji2210Character");
 const Kanji2211Character =
 /*YAK Extracted CSS:
 .Kanji2211Character {
@@ -26553,7 +26553,7 @@ const Kanji2211Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2211Character);
+styledYak(JapaneseCard)("Kanji2211Character");
 const Kanji2212Character =
 /*YAK Extracted CSS:
 .Kanji2212Character {
@@ -26565,7 +26565,7 @@ const Kanji2212Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2212Character);
+styledYak(JapaneseCard)("Kanji2212Character");
 const Kanji2213Character =
 /*YAK Extracted CSS:
 .Kanji2213Character {
@@ -26577,7 +26577,7 @@ const Kanji2213Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2213Character);
+styledYak(JapaneseCard)("Kanji2213Character");
 const Kanji2214Character =
 /*YAK Extracted CSS:
 .Kanji2214Character {
@@ -26589,7 +26589,7 @@ const Kanji2214Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2214Character);
+styledYak(JapaneseCard)("Kanji2214Character");
 const Kanji2215Character =
 /*YAK Extracted CSS:
 .Kanji2215Character {
@@ -26601,7 +26601,7 @@ const Kanji2215Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2215Character);
+styledYak(JapaneseCard)("Kanji2215Character");
 const Kanji2216Character =
 /*YAK Extracted CSS:
 .Kanji2216Character {
@@ -26613,7 +26613,7 @@ const Kanji2216Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2216Character);
+styledYak(JapaneseCard)("Kanji2216Character");
 const Kanji2217Character =
 /*YAK Extracted CSS:
 .Kanji2217Character {
@@ -26625,7 +26625,7 @@ const Kanji2217Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2217Character);
+styledYak(JapaneseCard)("Kanji2217Character");
 const Kanji2218Character =
 /*YAK Extracted CSS:
 .Kanji2218Character {
@@ -26637,7 +26637,7 @@ const Kanji2218Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2218Character);
+styledYak(JapaneseCard)("Kanji2218Character");
 const Kanji2219Character =
 /*YAK Extracted CSS:
 .Kanji2219Character {
@@ -26649,7 +26649,7 @@ const Kanji2219Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2219Character);
+styledYak(JapaneseCard)("Kanji2219Character");
 const Kanji2220Character =
 /*YAK Extracted CSS:
 .Kanji2220Character {
@@ -26661,7 +26661,7 @@ const Kanji2220Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2220Character);
+styledYak(JapaneseCard)("Kanji2220Character");
 const Kanji2221Character =
 /*YAK Extracted CSS:
 .Kanji2221Character {
@@ -26673,7 +26673,7 @@ const Kanji2221Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2221Character);
+styledYak(JapaneseCard)("Kanji2221Character");
 const Kanji2222Character =
 /*YAK Extracted CSS:
 .Kanji2222Character {
@@ -26685,7 +26685,7 @@ const Kanji2222Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2222Character);
+styledYak(JapaneseCard)("Kanji2222Character");
 const Kanji2223Character =
 /*YAK Extracted CSS:
 .Kanji2223Character {
@@ -26697,7 +26697,7 @@ const Kanji2223Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2223Character);
+styledYak(JapaneseCard)("Kanji2223Character");
 const Kanji2224Character =
 /*YAK Extracted CSS:
 .Kanji2224Character {
@@ -26709,7 +26709,7 @@ const Kanji2224Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2224Character);
+styledYak(JapaneseCard)("Kanji2224Character");
 const Kanji2225Character =
 /*YAK Extracted CSS:
 .Kanji2225Character {
@@ -26721,7 +26721,7 @@ const Kanji2225Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2225Character);
+styledYak(JapaneseCard)("Kanji2225Character");
 const Kanji2226Character =
 /*YAK Extracted CSS:
 .Kanji2226Character {
@@ -26733,7 +26733,7 @@ const Kanji2226Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2226Character);
+styledYak(JapaneseCard)("Kanji2226Character");
 const Kanji2227Character =
 /*YAK Extracted CSS:
 .Kanji2227Character {
@@ -26745,7 +26745,7 @@ const Kanji2227Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2227Character);
+styledYak(JapaneseCard)("Kanji2227Character");
 const Kanji2228Character =
 /*YAK Extracted CSS:
 .Kanji2228Character {
@@ -26757,7 +26757,7 @@ const Kanji2228Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2228Character);
+styledYak(JapaneseCard)("Kanji2228Character");
 const Kanji2229Character =
 /*YAK Extracted CSS:
 .Kanji2229Character {
@@ -26769,7 +26769,7 @@ const Kanji2229Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2229Character);
+styledYak(JapaneseCard)("Kanji2229Character");
 const Kanji2230Character =
 /*YAK Extracted CSS:
 .Kanji2230Character {
@@ -26781,7 +26781,7 @@ const Kanji2230Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2230Character);
+styledYak(JapaneseCard)("Kanji2230Character");
 const Kanji2231Character =
 /*YAK Extracted CSS:
 .Kanji2231Character {
@@ -26793,7 +26793,7 @@ const Kanji2231Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2231Character);
+styledYak(JapaneseCard)("Kanji2231Character");
 const Kanji2232Character =
 /*YAK Extracted CSS:
 .Kanji2232Character {
@@ -26805,7 +26805,7 @@ const Kanji2232Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2232Character);
+styledYak(JapaneseCard)("Kanji2232Character");
 const Kanji2233Character =
 /*YAK Extracted CSS:
 .Kanji2233Character {
@@ -26817,7 +26817,7 @@ const Kanji2233Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2233Character);
+styledYak(JapaneseCard)("Kanji2233Character");
 const Kanji2234Character =
 /*YAK Extracted CSS:
 .Kanji2234Character {
@@ -26829,7 +26829,7 @@ const Kanji2234Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2234Character);
+styledYak(JapaneseCard)("Kanji2234Character");
 const Kanji2235Character =
 /*YAK Extracted CSS:
 .Kanji2235Character {
@@ -26841,7 +26841,7 @@ const Kanji2235Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2235Character);
+styledYak(JapaneseCard)("Kanji2235Character");
 const Kanji2236Character =
 /*YAK Extracted CSS:
 .Kanji2236Character {
@@ -26853,7 +26853,7 @@ const Kanji2236Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2236Character);
+styledYak(JapaneseCard)("Kanji2236Character");
 const Kanji2237Character =
 /*YAK Extracted CSS:
 .Kanji2237Character {
@@ -26865,7 +26865,7 @@ const Kanji2237Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2237Character);
+styledYak(JapaneseCard)("Kanji2237Character");
 const Kanji2238Character =
 /*YAK Extracted CSS:
 .Kanji2238Character {
@@ -26877,7 +26877,7 @@ const Kanji2238Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2238Character);
+styledYak(JapaneseCard)("Kanji2238Character");
 const Kanji2239Character =
 /*YAK Extracted CSS:
 .Kanji2239Character {
@@ -26889,7 +26889,7 @@ const Kanji2239Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2239Character);
+styledYak(JapaneseCard)("Kanji2239Character");
 const Kanji2240Character =
 /*YAK Extracted CSS:
 .Kanji2240Character {
@@ -26901,7 +26901,7 @@ const Kanji2240Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2240Character);
+styledYak(JapaneseCard)("Kanji2240Character");
 const Kanji2241Character =
 /*YAK Extracted CSS:
 .Kanji2241Character {
@@ -26913,7 +26913,7 @@ const Kanji2241Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2241Character);
+styledYak(JapaneseCard)("Kanji2241Character");
 const Kanji2242Character =
 /*YAK Extracted CSS:
 .Kanji2242Character {
@@ -26925,7 +26925,7 @@ const Kanji2242Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2242Character);
+styledYak(JapaneseCard)("Kanji2242Character");
 const Kanji2243Character =
 /*YAK Extracted CSS:
 .Kanji2243Character {
@@ -26937,7 +26937,7 @@ const Kanji2243Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2243Character);
+styledYak(JapaneseCard)("Kanji2243Character");
 const Kanji2244Character =
 /*YAK Extracted CSS:
 .Kanji2244Character {
@@ -26949,7 +26949,7 @@ const Kanji2244Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2244Character);
+styledYak(JapaneseCard)("Kanji2244Character");
 const Kanji2245Character =
 /*YAK Extracted CSS:
 .Kanji2245Character {
@@ -26961,7 +26961,7 @@ const Kanji2245Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2245Character);
+styledYak(JapaneseCard)("Kanji2245Character");
 const Kanji2246Character =
 /*YAK Extracted CSS:
 .Kanji2246Character {
@@ -26973,7 +26973,7 @@ const Kanji2246Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2246Character);
+styledYak(JapaneseCard)("Kanji2246Character");
 const Kanji2247Character =
 /*YAK Extracted CSS:
 .Kanji2247Character {
@@ -26985,7 +26985,7 @@ const Kanji2247Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2247Character);
+styledYak(JapaneseCard)("Kanji2247Character");
 const Kanji2248Character =
 /*YAK Extracted CSS:
 .Kanji2248Character {
@@ -26997,7 +26997,7 @@ const Kanji2248Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2248Character);
+styledYak(JapaneseCard)("Kanji2248Character");
 const Kanji2249Character =
 /*YAK Extracted CSS:
 .Kanji2249Character {
@@ -27009,7 +27009,7 @@ const Kanji2249Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2249Character);
+styledYak(JapaneseCard)("Kanji2249Character");
 const Kanji2250Character =
 /*YAK Extracted CSS:
 .Kanji2250Character {
@@ -27021,7 +27021,7 @@ const Kanji2250Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2250Character);
+styledYak(JapaneseCard)("Kanji2250Character");
 const Kanji2251Character =
 /*YAK Extracted CSS:
 .Kanji2251Character {
@@ -27033,7 +27033,7 @@ const Kanji2251Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2251Character);
+styledYak(JapaneseCard)("Kanji2251Character");
 const Kanji2252Character =
 /*YAK Extracted CSS:
 .Kanji2252Character {
@@ -27045,7 +27045,7 @@ const Kanji2252Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2252Character);
+styledYak(JapaneseCard)("Kanji2252Character");
 const Kanji2253Character =
 /*YAK Extracted CSS:
 .Kanji2253Character {
@@ -27057,7 +27057,7 @@ const Kanji2253Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2253Character);
+styledYak(JapaneseCard)("Kanji2253Character");
 const Kanji2254Character =
 /*YAK Extracted CSS:
 .Kanji2254Character {
@@ -27069,7 +27069,7 @@ const Kanji2254Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2254Character);
+styledYak(JapaneseCard)("Kanji2254Character");
 const Kanji2255Character =
 /*YAK Extracted CSS:
 .Kanji2255Character {
@@ -27081,7 +27081,7 @@ const Kanji2255Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2255Character);
+styledYak(JapaneseCard)("Kanji2255Character");
 const Kanji2256Character =
 /*YAK Extracted CSS:
 .Kanji2256Character {
@@ -27093,7 +27093,7 @@ const Kanji2256Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2256Character);
+styledYak(JapaneseCard)("Kanji2256Character");
 const Kanji2257Character =
 /*YAK Extracted CSS:
 .Kanji2257Character {
@@ -27105,7 +27105,7 @@ const Kanji2257Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2257Character);
+styledYak(JapaneseCard)("Kanji2257Character");
 const Kanji2258Character =
 /*YAK Extracted CSS:
 .Kanji2258Character {
@@ -27117,7 +27117,7 @@ const Kanji2258Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2258Character);
+styledYak(JapaneseCard)("Kanji2258Character");
 const Kanji2259Character =
 /*YAK Extracted CSS:
 .Kanji2259Character {
@@ -27129,7 +27129,7 @@ const Kanji2259Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2259Character);
+styledYak(JapaneseCard)("Kanji2259Character");
 const Kanji2260Character =
 /*YAK Extracted CSS:
 .Kanji2260Character {
@@ -27141,7 +27141,7 @@ const Kanji2260Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2260Character);
+styledYak(JapaneseCard)("Kanji2260Character");
 const Kanji2261Character =
 /*YAK Extracted CSS:
 .Kanji2261Character {
@@ -27153,7 +27153,7 @@ const Kanji2261Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2261Character);
+styledYak(JapaneseCard)("Kanji2261Character");
 const Kanji2262Character =
 /*YAK Extracted CSS:
 .Kanji2262Character {
@@ -27165,7 +27165,7 @@ const Kanji2262Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2262Character);
+styledYak(JapaneseCard)("Kanji2262Character");
 const Kanji2263Character =
 /*YAK Extracted CSS:
 .Kanji2263Character {
@@ -27177,7 +27177,7 @@ const Kanji2263Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2263Character);
+styledYak(JapaneseCard)("Kanji2263Character");
 const Kanji2264Character =
 /*YAK Extracted CSS:
 .Kanji2264Character {
@@ -27189,7 +27189,7 @@ const Kanji2264Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2264Character);
+styledYak(JapaneseCard)("Kanji2264Character");
 const Kanji2265Character =
 /*YAK Extracted CSS:
 .Kanji2265Character {
@@ -27201,7 +27201,7 @@ const Kanji2265Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2265Character);
+styledYak(JapaneseCard)("Kanji2265Character");
 const Kanji2266Character =
 /*YAK Extracted CSS:
 .Kanji2266Character {
@@ -27213,7 +27213,7 @@ const Kanji2266Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2266Character);
+styledYak(JapaneseCard)("Kanji2266Character");
 const Kanji2267Character =
 /*YAK Extracted CSS:
 .Kanji2267Character {
@@ -27225,7 +27225,7 @@ const Kanji2267Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2267Character);
+styledYak(JapaneseCard)("Kanji2267Character");
 const Kanji2268Character =
 /*YAK Extracted CSS:
 .Kanji2268Character {
@@ -27237,7 +27237,7 @@ const Kanji2268Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2268Character);
+styledYak(JapaneseCard)("Kanji2268Character");
 const Kanji2269Character =
 /*YAK Extracted CSS:
 .Kanji2269Character {
@@ -27249,7 +27249,7 @@ const Kanji2269Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2269Character);
+styledYak(JapaneseCard)("Kanji2269Character");
 const Kanji2270Character =
 /*YAK Extracted CSS:
 .Kanji2270Character {
@@ -27261,7 +27261,7 @@ const Kanji2270Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2270Character);
+styledYak(JapaneseCard)("Kanji2270Character");
 const Kanji2271Character =
 /*YAK Extracted CSS:
 .Kanji2271Character {
@@ -27273,7 +27273,7 @@ const Kanji2271Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2271Character);
+styledYak(JapaneseCard)("Kanji2271Character");
 const Kanji2272Character =
 /*YAK Extracted CSS:
 .Kanji2272Character {
@@ -27285,7 +27285,7 @@ const Kanji2272Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2272Character);
+styledYak(JapaneseCard)("Kanji2272Character");
 const Kanji2273Character =
 /*YAK Extracted CSS:
 .Kanji2273Character {
@@ -27297,7 +27297,7 @@ const Kanji2273Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2273Character);
+styledYak(JapaneseCard)("Kanji2273Character");
 const Kanji2274Character =
 /*YAK Extracted CSS:
 .Kanji2274Character {
@@ -27309,7 +27309,7 @@ const Kanji2274Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2274Character);
+styledYak(JapaneseCard)("Kanji2274Character");
 const Kanji2275Character =
 /*YAK Extracted CSS:
 .Kanji2275Character {
@@ -27321,7 +27321,7 @@ const Kanji2275Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2275Character);
+styledYak(JapaneseCard)("Kanji2275Character");
 const Kanji2276Character =
 /*YAK Extracted CSS:
 .Kanji2276Character {
@@ -27333,7 +27333,7 @@ const Kanji2276Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2276Character);
+styledYak(JapaneseCard)("Kanji2276Character");
 const Kanji2277Character =
 /*YAK Extracted CSS:
 .Kanji2277Character {
@@ -27345,7 +27345,7 @@ const Kanji2277Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2277Character);
+styledYak(JapaneseCard)("Kanji2277Character");
 const Kanji2278Character =
 /*YAK Extracted CSS:
 .Kanji2278Character {
@@ -27357,7 +27357,7 @@ const Kanji2278Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2278Character);
+styledYak(JapaneseCard)("Kanji2278Character");
 const Kanji2279Character =
 /*YAK Extracted CSS:
 .Kanji2279Character {
@@ -27369,7 +27369,7 @@ const Kanji2279Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2279Character);
+styledYak(JapaneseCard)("Kanji2279Character");
 const Kanji2280Character =
 /*YAK Extracted CSS:
 .Kanji2280Character {
@@ -27381,7 +27381,7 @@ const Kanji2280Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2280Character);
+styledYak(JapaneseCard)("Kanji2280Character");
 const Kanji2281Character =
 /*YAK Extracted CSS:
 .Kanji2281Character {
@@ -27393,7 +27393,7 @@ const Kanji2281Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2281Character);
+styledYak(JapaneseCard)("Kanji2281Character");
 const Kanji2282Character =
 /*YAK Extracted CSS:
 .Kanji2282Character {
@@ -27405,7 +27405,7 @@ const Kanji2282Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2282Character);
+styledYak(JapaneseCard)("Kanji2282Character");
 const Kanji2283Character =
 /*YAK Extracted CSS:
 .Kanji2283Character {
@@ -27417,7 +27417,7 @@ const Kanji2283Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2283Character);
+styledYak(JapaneseCard)("Kanji2283Character");
 const Kanji2284Character =
 /*YAK Extracted CSS:
 .Kanji2284Character {
@@ -27429,7 +27429,7 @@ const Kanji2284Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2284Character);
+styledYak(JapaneseCard)("Kanji2284Character");
 const Kanji2285Character =
 /*YAK Extracted CSS:
 .Kanji2285Character {
@@ -27441,7 +27441,7 @@ const Kanji2285Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2285Character);
+styledYak(JapaneseCard)("Kanji2285Character");
 const Kanji2286Character =
 /*YAK Extracted CSS:
 .Kanji2286Character {
@@ -27453,7 +27453,7 @@ const Kanji2286Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2286Character);
+styledYak(JapaneseCard)("Kanji2286Character");
 const Kanji2287Character =
 /*YAK Extracted CSS:
 .Kanji2287Character {
@@ -27465,7 +27465,7 @@ const Kanji2287Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2287Character);
+styledYak(JapaneseCard)("Kanji2287Character");
 const Kanji2288Character =
 /*YAK Extracted CSS:
 .Kanji2288Character {
@@ -27477,7 +27477,7 @@ const Kanji2288Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2288Character);
+styledYak(JapaneseCard)("Kanji2288Character");
 const Kanji2289Character =
 /*YAK Extracted CSS:
 .Kanji2289Character {
@@ -27489,7 +27489,7 @@ const Kanji2289Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2289Character);
+styledYak(JapaneseCard)("Kanji2289Character");
 const Kanji2290Character =
 /*YAK Extracted CSS:
 .Kanji2290Character {
@@ -27501,7 +27501,7 @@ const Kanji2290Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2290Character);
+styledYak(JapaneseCard)("Kanji2290Character");
 const Kanji2291Character =
 /*YAK Extracted CSS:
 .Kanji2291Character {
@@ -27513,7 +27513,7 @@ const Kanji2291Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2291Character);
+styledYak(JapaneseCard)("Kanji2291Character");
 const Kanji2292Character =
 /*YAK Extracted CSS:
 .Kanji2292Character {
@@ -27525,7 +27525,7 @@ const Kanji2292Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2292Character);
+styledYak(JapaneseCard)("Kanji2292Character");
 const Kanji2293Character =
 /*YAK Extracted CSS:
 .Kanji2293Character {
@@ -27537,7 +27537,7 @@ const Kanji2293Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2293Character);
+styledYak(JapaneseCard)("Kanji2293Character");
 const Kanji2294Character =
 /*YAK Extracted CSS:
 .Kanji2294Character {
@@ -27549,7 +27549,7 @@ const Kanji2294Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2294Character);
+styledYak(JapaneseCard)("Kanji2294Character");
 const Kanji2295Character =
 /*YAK Extracted CSS:
 .Kanji2295Character {
@@ -27561,7 +27561,7 @@ const Kanji2295Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2295Character);
+styledYak(JapaneseCard)("Kanji2295Character");
 const Kanji2296Character =
 /*YAK Extracted CSS:
 .Kanji2296Character {
@@ -27573,7 +27573,7 @@ const Kanji2296Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2296Character);
+styledYak(JapaneseCard)("Kanji2296Character");
 const Kanji2297Character =
 /*YAK Extracted CSS:
 .Kanji2297Character {
@@ -27585,7 +27585,7 @@ const Kanji2297Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2297Character);
+styledYak(JapaneseCard)("Kanji2297Character");
 const Kanji2298Character =
 /*YAK Extracted CSS:
 .Kanji2298Character {
@@ -27597,7 +27597,7 @@ const Kanji2298Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2298Character);
+styledYak(JapaneseCard)("Kanji2298Character");
 const Kanji2299Character =
 /*YAK Extracted CSS:
 .Kanji2299Character {
@@ -27609,7 +27609,7 @@ const Kanji2299Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2299Character);
+styledYak(JapaneseCard)("Kanji2299Character");
 const Kanji2300Character =
 /*YAK Extracted CSS:
 .Kanji2300Character {
@@ -27621,7 +27621,7 @@ const Kanji2300Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2300Character);
+styledYak(JapaneseCard)("Kanji2300Character");
 const Kanji2301Character =
 /*YAK Extracted CSS:
 .Kanji2301Character {
@@ -27633,7 +27633,7 @@ const Kanji2301Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2301Character);
+styledYak(JapaneseCard)("Kanji2301Character");
 const Kanji2302Character =
 /*YAK Extracted CSS:
 .Kanji2302Character {
@@ -27645,7 +27645,7 @@ const Kanji2302Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2302Character);
+styledYak(JapaneseCard)("Kanji2302Character");
 const Kanji2303Character =
 /*YAK Extracted CSS:
 .Kanji2303Character {
@@ -27657,7 +27657,7 @@ const Kanji2303Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2303Character);
+styledYak(JapaneseCard)("Kanji2303Character");
 const Kanji2304Character =
 /*YAK Extracted CSS:
 .Kanji2304Character {
@@ -27669,7 +27669,7 @@ const Kanji2304Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2304Character);
+styledYak(JapaneseCard)("Kanji2304Character");
 const Kanji2305Character =
 /*YAK Extracted CSS:
 .Kanji2305Character {
@@ -27681,7 +27681,7 @@ const Kanji2305Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2305Character);
+styledYak(JapaneseCard)("Kanji2305Character");
 const Kanji2306Character =
 /*YAK Extracted CSS:
 .Kanji2306Character {
@@ -27693,7 +27693,7 @@ const Kanji2306Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2306Character);
+styledYak(JapaneseCard)("Kanji2306Character");
 const Kanji2307Character =
 /*YAK Extracted CSS:
 .Kanji2307Character {
@@ -27705,7 +27705,7 @@ const Kanji2307Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2307Character);
+styledYak(JapaneseCard)("Kanji2307Character");
 const Kanji2308Character =
 /*YAK Extracted CSS:
 .Kanji2308Character {
@@ -27717,7 +27717,7 @@ const Kanji2308Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2308Character);
+styledYak(JapaneseCard)("Kanji2308Character");
 const Kanji2309Character =
 /*YAK Extracted CSS:
 .Kanji2309Character {
@@ -27729,7 +27729,7 @@ const Kanji2309Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2309Character);
+styledYak(JapaneseCard)("Kanji2309Character");
 const Kanji2310Character =
 /*YAK Extracted CSS:
 .Kanji2310Character {
@@ -27741,7 +27741,7 @@ const Kanji2310Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2310Character);
+styledYak(JapaneseCard)("Kanji2310Character");
 const Kanji2311Character =
 /*YAK Extracted CSS:
 .Kanji2311Character {
@@ -27753,7 +27753,7 @@ const Kanji2311Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2311Character);
+styledYak(JapaneseCard)("Kanji2311Character");
 const Kanji2312Character =
 /*YAK Extracted CSS:
 .Kanji2312Character {
@@ -27765,7 +27765,7 @@ const Kanji2312Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2312Character);
+styledYak(JapaneseCard)("Kanji2312Character");
 const Kanji2313Character =
 /*YAK Extracted CSS:
 .Kanji2313Character {
@@ -27777,7 +27777,7 @@ const Kanji2313Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2313Character);
+styledYak(JapaneseCard)("Kanji2313Character");
 const Kanji2314Character =
 /*YAK Extracted CSS:
 .Kanji2314Character {
@@ -27789,7 +27789,7 @@ const Kanji2314Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2314Character);
+styledYak(JapaneseCard)("Kanji2314Character");
 const Kanji2315Character =
 /*YAK Extracted CSS:
 .Kanji2315Character {
@@ -27801,7 +27801,7 @@ const Kanji2315Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2315Character);
+styledYak(JapaneseCard)("Kanji2315Character");
 const Kanji2316Character =
 /*YAK Extracted CSS:
 .Kanji2316Character {
@@ -27813,7 +27813,7 @@ const Kanji2316Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2316Character);
+styledYak(JapaneseCard)("Kanji2316Character");
 const Kanji2317Character =
 /*YAK Extracted CSS:
 .Kanji2317Character {
@@ -27825,7 +27825,7 @@ const Kanji2317Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2317Character);
+styledYak(JapaneseCard)("Kanji2317Character");
 const Kanji2318Character =
 /*YAK Extracted CSS:
 .Kanji2318Character {
@@ -27837,7 +27837,7 @@ const Kanji2318Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2318Character);
+styledYak(JapaneseCard)("Kanji2318Character");
 const Kanji2319Character =
 /*YAK Extracted CSS:
 .Kanji2319Character {
@@ -27849,7 +27849,7 @@ const Kanji2319Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2319Character);
+styledYak(JapaneseCard)("Kanji2319Character");
 const Kanji2320Character =
 /*YAK Extracted CSS:
 .Kanji2320Character {
@@ -27861,7 +27861,7 @@ const Kanji2320Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2320Character);
+styledYak(JapaneseCard)("Kanji2320Character");
 const Kanji2321Character =
 /*YAK Extracted CSS:
 .Kanji2321Character {
@@ -27873,7 +27873,7 @@ const Kanji2321Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2321Character);
+styledYak(JapaneseCard)("Kanji2321Character");
 const Kanji2322Character =
 /*YAK Extracted CSS:
 .Kanji2322Character {
@@ -27885,7 +27885,7 @@ const Kanji2322Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2322Character);
+styledYak(JapaneseCard)("Kanji2322Character");
 const Kanji2323Character =
 /*YAK Extracted CSS:
 .Kanji2323Character {
@@ -27897,7 +27897,7 @@ const Kanji2323Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2323Character);
+styledYak(JapaneseCard)("Kanji2323Character");
 const Kanji2324Character =
 /*YAK Extracted CSS:
 .Kanji2324Character {
@@ -27909,7 +27909,7 @@ const Kanji2324Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2324Character);
+styledYak(JapaneseCard)("Kanji2324Character");
 const Kanji2325Character =
 /*YAK Extracted CSS:
 .Kanji2325Character {
@@ -27921,7 +27921,7 @@ const Kanji2325Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2325Character);
+styledYak(JapaneseCard)("Kanji2325Character");
 const Kanji2326Character =
 /*YAK Extracted CSS:
 .Kanji2326Character {
@@ -27933,7 +27933,7 @@ const Kanji2326Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2326Character);
+styledYak(JapaneseCard)("Kanji2326Character");
 const Kanji2327Character =
 /*YAK Extracted CSS:
 .Kanji2327Character {
@@ -27945,7 +27945,7 @@ const Kanji2327Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2327Character);
+styledYak(JapaneseCard)("Kanji2327Character");
 const Kanji2328Character =
 /*YAK Extracted CSS:
 .Kanji2328Character {
@@ -27957,7 +27957,7 @@ const Kanji2328Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2328Character);
+styledYak(JapaneseCard)("Kanji2328Character");
 const Kanji2329Character =
 /*YAK Extracted CSS:
 .Kanji2329Character {
@@ -27969,7 +27969,7 @@ const Kanji2329Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2329Character);
+styledYak(JapaneseCard)("Kanji2329Character");
 const Kanji2330Character =
 /*YAK Extracted CSS:
 .Kanji2330Character {
@@ -27981,7 +27981,7 @@ const Kanji2330Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2330Character);
+styledYak(JapaneseCard)("Kanji2330Character");
 const Kanji2331Character =
 /*YAK Extracted CSS:
 .Kanji2331Character {
@@ -27993,7 +27993,7 @@ const Kanji2331Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2331Character);
+styledYak(JapaneseCard)("Kanji2331Character");
 const Kanji2332Character =
 /*YAK Extracted CSS:
 .Kanji2332Character {
@@ -28005,7 +28005,7 @@ const Kanji2332Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2332Character);
+styledYak(JapaneseCard)("Kanji2332Character");
 const Kanji2333Character =
 /*YAK Extracted CSS:
 .Kanji2333Character {
@@ -28017,7 +28017,7 @@ const Kanji2333Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2333Character);
+styledYak(JapaneseCard)("Kanji2333Character");
 const Kanji2334Character =
 /*YAK Extracted CSS:
 .Kanji2334Character {
@@ -28029,7 +28029,7 @@ const Kanji2334Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2334Character);
+styledYak(JapaneseCard)("Kanji2334Character");
 const Kanji2335Character =
 /*YAK Extracted CSS:
 .Kanji2335Character {
@@ -28041,7 +28041,7 @@ const Kanji2335Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2335Character);
+styledYak(JapaneseCard)("Kanji2335Character");
 const Kanji2336Character =
 /*YAK Extracted CSS:
 .Kanji2336Character {
@@ -28053,7 +28053,7 @@ const Kanji2336Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2336Character);
+styledYak(JapaneseCard)("Kanji2336Character");
 const Kanji2337Character =
 /*YAK Extracted CSS:
 .Kanji2337Character {
@@ -28065,7 +28065,7 @@ const Kanji2337Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2337Character);
+styledYak(JapaneseCard)("Kanji2337Character");
 const Kanji2338Character =
 /*YAK Extracted CSS:
 .Kanji2338Character {
@@ -28077,7 +28077,7 @@ const Kanji2338Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2338Character);
+styledYak(JapaneseCard)("Kanji2338Character");
 const Kanji2339Character =
 /*YAK Extracted CSS:
 .Kanji2339Character {
@@ -28089,7 +28089,7 @@ const Kanji2339Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2339Character);
+styledYak(JapaneseCard)("Kanji2339Character");
 const Kanji2340Character =
 /*YAK Extracted CSS:
 .Kanji2340Character {
@@ -28101,7 +28101,7 @@ const Kanji2340Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2340Character);
+styledYak(JapaneseCard)("Kanji2340Character");
 const Kanji2341Character =
 /*YAK Extracted CSS:
 .Kanji2341Character {
@@ -28113,7 +28113,7 @@ const Kanji2341Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2341Character);
+styledYak(JapaneseCard)("Kanji2341Character");
 const Kanji2342Character =
 /*YAK Extracted CSS:
 .Kanji2342Character {
@@ -28125,7 +28125,7 @@ const Kanji2342Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2342Character);
+styledYak(JapaneseCard)("Kanji2342Character");
 const Kanji2343Character =
 /*YAK Extracted CSS:
 .Kanji2343Character {
@@ -28137,7 +28137,7 @@ const Kanji2343Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2343Character);
+styledYak(JapaneseCard)("Kanji2343Character");
 const Kanji2344Character =
 /*YAK Extracted CSS:
 .Kanji2344Character {
@@ -28149,7 +28149,7 @@ const Kanji2344Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2344Character);
+styledYak(JapaneseCard)("Kanji2344Character");
 const Kanji2345Character =
 /*YAK Extracted CSS:
 .Kanji2345Character {
@@ -28161,7 +28161,7 @@ const Kanji2345Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2345Character);
+styledYak(JapaneseCard)("Kanji2345Character");
 const Kanji2346Character =
 /*YAK Extracted CSS:
 .Kanji2346Character {
@@ -28173,7 +28173,7 @@ const Kanji2346Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2346Character);
+styledYak(JapaneseCard)("Kanji2346Character");
 const Kanji2347Character =
 /*YAK Extracted CSS:
 .Kanji2347Character {
@@ -28185,7 +28185,7 @@ const Kanji2347Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2347Character);
+styledYak(JapaneseCard)("Kanji2347Character");
 const Kanji2348Character =
 /*YAK Extracted CSS:
 .Kanji2348Character {
@@ -28197,7 +28197,7 @@ const Kanji2348Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2348Character);
+styledYak(JapaneseCard)("Kanji2348Character");
 const Kanji2349Character =
 /*YAK Extracted CSS:
 .Kanji2349Character {
@@ -28209,7 +28209,7 @@ const Kanji2349Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2349Character);
+styledYak(JapaneseCard)("Kanji2349Character");
 const Kanji2350Character =
 /*YAK Extracted CSS:
 .Kanji2350Character {
@@ -28221,7 +28221,7 @@ const Kanji2350Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2350Character);
+styledYak(JapaneseCard)("Kanji2350Character");
 const Kanji2351Character =
 /*YAK Extracted CSS:
 .Kanji2351Character {
@@ -28233,7 +28233,7 @@ const Kanji2351Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2351Character);
+styledYak(JapaneseCard)("Kanji2351Character");
 const Kanji2352Character =
 /*YAK Extracted CSS:
 .Kanji2352Character {
@@ -28245,7 +28245,7 @@ const Kanji2352Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2352Character);
+styledYak(JapaneseCard)("Kanji2352Character");
 const Kanji2353Character =
 /*YAK Extracted CSS:
 .Kanji2353Character {
@@ -28257,7 +28257,7 @@ const Kanji2353Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2353Character);
+styledYak(JapaneseCard)("Kanji2353Character");
 const Kanji2354Character =
 /*YAK Extracted CSS:
 .Kanji2354Character {
@@ -28269,7 +28269,7 @@ const Kanji2354Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2354Character);
+styledYak(JapaneseCard)("Kanji2354Character");
 const Kanji2355Character =
 /*YAK Extracted CSS:
 .Kanji2355Character {
@@ -28281,7 +28281,7 @@ const Kanji2355Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2355Character);
+styledYak(JapaneseCard)("Kanji2355Character");
 const Kanji2356Character =
 /*YAK Extracted CSS:
 .Kanji2356Character {
@@ -28293,7 +28293,7 @@ const Kanji2356Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2356Character);
+styledYak(JapaneseCard)("Kanji2356Character");
 const Kanji2357Character =
 /*YAK Extracted CSS:
 .Kanji2357Character {
@@ -28305,7 +28305,7 @@ const Kanji2357Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2357Character);
+styledYak(JapaneseCard)("Kanji2357Character");
 const Kanji2358Character =
 /*YAK Extracted CSS:
 .Kanji2358Character {
@@ -28317,7 +28317,7 @@ const Kanji2358Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2358Character);
+styledYak(JapaneseCard)("Kanji2358Character");
 const Kanji2359Character =
 /*YAK Extracted CSS:
 .Kanji2359Character {
@@ -28329,7 +28329,7 @@ const Kanji2359Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2359Character);
+styledYak(JapaneseCard)("Kanji2359Character");
 const Kanji2360Character =
 /*YAK Extracted CSS:
 .Kanji2360Character {
@@ -28341,7 +28341,7 @@ const Kanji2360Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2360Character);
+styledYak(JapaneseCard)("Kanji2360Character");
 const Kanji2361Character =
 /*YAK Extracted CSS:
 .Kanji2361Character {
@@ -28353,7 +28353,7 @@ const Kanji2361Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2361Character);
+styledYak(JapaneseCard)("Kanji2361Character");
 const Kanji2362Character =
 /*YAK Extracted CSS:
 .Kanji2362Character {
@@ -28365,7 +28365,7 @@ const Kanji2362Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2362Character);
+styledYak(JapaneseCard)("Kanji2362Character");
 const Kanji2363Character =
 /*YAK Extracted CSS:
 .Kanji2363Character {
@@ -28377,7 +28377,7 @@ const Kanji2363Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2363Character);
+styledYak(JapaneseCard)("Kanji2363Character");
 const Kanji2364Character =
 /*YAK Extracted CSS:
 .Kanji2364Character {
@@ -28389,7 +28389,7 @@ const Kanji2364Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2364Character);
+styledYak(JapaneseCard)("Kanji2364Character");
 const Kanji2365Character =
 /*YAK Extracted CSS:
 .Kanji2365Character {
@@ -28401,7 +28401,7 @@ const Kanji2365Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2365Character);
+styledYak(JapaneseCard)("Kanji2365Character");
 const Kanji2366Character =
 /*YAK Extracted CSS:
 .Kanji2366Character {
@@ -28413,7 +28413,7 @@ const Kanji2366Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2366Character);
+styledYak(JapaneseCard)("Kanji2366Character");
 const Kanji2367Character =
 /*YAK Extracted CSS:
 .Kanji2367Character {
@@ -28425,7 +28425,7 @@ const Kanji2367Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2367Character);
+styledYak(JapaneseCard)("Kanji2367Character");
 const Kanji2368Character =
 /*YAK Extracted CSS:
 .Kanji2368Character {
@@ -28437,7 +28437,7 @@ const Kanji2368Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2368Character);
+styledYak(JapaneseCard)("Kanji2368Character");
 const Kanji2369Character =
 /*YAK Extracted CSS:
 .Kanji2369Character {
@@ -28449,7 +28449,7 @@ const Kanji2369Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2369Character);
+styledYak(JapaneseCard)("Kanji2369Character");
 const Kanji2370Character =
 /*YAK Extracted CSS:
 .Kanji2370Character {
@@ -28461,7 +28461,7 @@ const Kanji2370Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2370Character);
+styledYak(JapaneseCard)("Kanji2370Character");
 const Kanji2371Character =
 /*YAK Extracted CSS:
 .Kanji2371Character {
@@ -28473,7 +28473,7 @@ const Kanji2371Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2371Character);
+styledYak(JapaneseCard)("Kanji2371Character");
 const Kanji2372Character =
 /*YAK Extracted CSS:
 .Kanji2372Character {
@@ -28485,7 +28485,7 @@ const Kanji2372Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2372Character);
+styledYak(JapaneseCard)("Kanji2372Character");
 const Kanji2373Character =
 /*YAK Extracted CSS:
 .Kanji2373Character {
@@ -28497,7 +28497,7 @@ const Kanji2373Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2373Character);
+styledYak(JapaneseCard)("Kanji2373Character");
 const Kanji2374Character =
 /*YAK Extracted CSS:
 .Kanji2374Character {
@@ -28509,7 +28509,7 @@ const Kanji2374Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2374Character);
+styledYak(JapaneseCard)("Kanji2374Character");
 const Kanji2375Character =
 /*YAK Extracted CSS:
 .Kanji2375Character {
@@ -28521,7 +28521,7 @@ const Kanji2375Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2375Character);
+styledYak(JapaneseCard)("Kanji2375Character");
 const Kanji2376Character =
 /*YAK Extracted CSS:
 .Kanji2376Character {
@@ -28533,7 +28533,7 @@ const Kanji2376Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2376Character);
+styledYak(JapaneseCard)("Kanji2376Character");
 const Kanji2377Character =
 /*YAK Extracted CSS:
 .Kanji2377Character {
@@ -28545,7 +28545,7 @@ const Kanji2377Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2377Character);
+styledYak(JapaneseCard)("Kanji2377Character");
 const Kanji2378Character =
 /*YAK Extracted CSS:
 .Kanji2378Character {
@@ -28557,7 +28557,7 @@ const Kanji2378Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2378Character);
+styledYak(JapaneseCard)("Kanji2378Character");
 const Kanji2379Character =
 /*YAK Extracted CSS:
 .Kanji2379Character {
@@ -28569,7 +28569,7 @@ const Kanji2379Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2379Character);
+styledYak(JapaneseCard)("Kanji2379Character");
 const Kanji2380Character =
 /*YAK Extracted CSS:
 .Kanji2380Character {
@@ -28581,7 +28581,7 @@ const Kanji2380Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2380Character);
+styledYak(JapaneseCard)("Kanji2380Character");
 const Kanji2381Character =
 /*YAK Extracted CSS:
 .Kanji2381Character {
@@ -28593,7 +28593,7 @@ const Kanji2381Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2381Character);
+styledYak(JapaneseCard)("Kanji2381Character");
 const Kanji2382Character =
 /*YAK Extracted CSS:
 .Kanji2382Character {
@@ -28605,7 +28605,7 @@ const Kanji2382Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2382Character);
+styledYak(JapaneseCard)("Kanji2382Character");
 const Kanji2383Character =
 /*YAK Extracted CSS:
 .Kanji2383Character {
@@ -28617,7 +28617,7 @@ const Kanji2383Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2383Character);
+styledYak(JapaneseCard)("Kanji2383Character");
 const Kanji2384Character =
 /*YAK Extracted CSS:
 .Kanji2384Character {
@@ -28629,7 +28629,7 @@ const Kanji2384Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2384Character);
+styledYak(JapaneseCard)("Kanji2384Character");
 const Kanji2385Character =
 /*YAK Extracted CSS:
 .Kanji2385Character {
@@ -28641,7 +28641,7 @@ const Kanji2385Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2385Character);
+styledYak(JapaneseCard)("Kanji2385Character");
 const Kanji2386Character =
 /*YAK Extracted CSS:
 .Kanji2386Character {
@@ -28653,7 +28653,7 @@ const Kanji2386Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2386Character);
+styledYak(JapaneseCard)("Kanji2386Character");
 const Kanji2387Character =
 /*YAK Extracted CSS:
 .Kanji2387Character {
@@ -28665,7 +28665,7 @@ const Kanji2387Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2387Character);
+styledYak(JapaneseCard)("Kanji2387Character");
 const Kanji2388Character =
 /*YAK Extracted CSS:
 .Kanji2388Character {
@@ -28677,7 +28677,7 @@ const Kanji2388Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2388Character);
+styledYak(JapaneseCard)("Kanji2388Character");
 const Kanji2389Character =
 /*YAK Extracted CSS:
 .Kanji2389Character {
@@ -28689,7 +28689,7 @@ const Kanji2389Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2389Character);
+styledYak(JapaneseCard)("Kanji2389Character");
 const Kanji2390Character =
 /*YAK Extracted CSS:
 .Kanji2390Character {
@@ -28701,7 +28701,7 @@ const Kanji2390Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2390Character);
+styledYak(JapaneseCard)("Kanji2390Character");
 const Kanji2391Character =
 /*YAK Extracted CSS:
 .Kanji2391Character {
@@ -28713,7 +28713,7 @@ const Kanji2391Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2391Character);
+styledYak(JapaneseCard)("Kanji2391Character");
 const Kanji2392Character =
 /*YAK Extracted CSS:
 .Kanji2392Character {
@@ -28725,7 +28725,7 @@ const Kanji2392Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2392Character);
+styledYak(JapaneseCard)("Kanji2392Character");
 const Kanji2393Character =
 /*YAK Extracted CSS:
 .Kanji2393Character {
@@ -28737,7 +28737,7 @@ const Kanji2393Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2393Character);
+styledYak(JapaneseCard)("Kanji2393Character");
 const Kanji2394Character =
 /*YAK Extracted CSS:
 .Kanji2394Character {
@@ -28749,7 +28749,7 @@ const Kanji2394Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2394Character);
+styledYak(JapaneseCard)("Kanji2394Character");
 const Kanji2395Character =
 /*YAK Extracted CSS:
 .Kanji2395Character {
@@ -28761,7 +28761,7 @@ const Kanji2395Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2395Character);
+styledYak(JapaneseCard)("Kanji2395Character");
 const Kanji2396Character =
 /*YAK Extracted CSS:
 .Kanji2396Character {
@@ -28773,7 +28773,7 @@ const Kanji2396Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2396Character);
+styledYak(JapaneseCard)("Kanji2396Character");
 const Kanji2397Character =
 /*YAK Extracted CSS:
 .Kanji2397Character {
@@ -28785,7 +28785,7 @@ const Kanji2397Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2397Character);
+styledYak(JapaneseCard)("Kanji2397Character");
 const Kanji2398Character =
 /*YAK Extracted CSS:
 .Kanji2398Character {
@@ -28797,7 +28797,7 @@ const Kanji2398Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2398Character);
+styledYak(JapaneseCard)("Kanji2398Character");
 const Kanji2399Character =
 /*YAK Extracted CSS:
 .Kanji2399Character {
@@ -28809,7 +28809,7 @@ const Kanji2399Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2399Character);
+styledYak(JapaneseCard)("Kanji2399Character");
 const Kanji2400Character =
 /*YAK Extracted CSS:
 .Kanji2400Character {
@@ -28821,7 +28821,7 @@ const Kanji2400Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2400Character);
+styledYak(JapaneseCard)("Kanji2400Character");
 const Kanji2401Character =
 /*YAK Extracted CSS:
 .Kanji2401Character {
@@ -28833,7 +28833,7 @@ const Kanji2401Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2401Character);
+styledYak(JapaneseCard)("Kanji2401Character");
 const Kanji2402Character =
 /*YAK Extracted CSS:
 .Kanji2402Character {
@@ -28845,7 +28845,7 @@ const Kanji2402Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2402Character);
+styledYak(JapaneseCard)("Kanji2402Character");
 const Kanji2403Character =
 /*YAK Extracted CSS:
 .Kanji2403Character {
@@ -28857,7 +28857,7 @@ const Kanji2403Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2403Character);
+styledYak(JapaneseCard)("Kanji2403Character");
 const Kanji2404Character =
 /*YAK Extracted CSS:
 .Kanji2404Character {
@@ -28869,7 +28869,7 @@ const Kanji2404Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2404Character);
+styledYak(JapaneseCard)("Kanji2404Character");
 const Kanji2405Character =
 /*YAK Extracted CSS:
 .Kanji2405Character {
@@ -28881,7 +28881,7 @@ const Kanji2405Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2405Character);
+styledYak(JapaneseCard)("Kanji2405Character");
 const Kanji2406Character =
 /*YAK Extracted CSS:
 .Kanji2406Character {
@@ -28893,7 +28893,7 @@ const Kanji2406Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2406Character);
+styledYak(JapaneseCard)("Kanji2406Character");
 const Kanji2407Character =
 /*YAK Extracted CSS:
 .Kanji2407Character {
@@ -28905,7 +28905,7 @@ const Kanji2407Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2407Character);
+styledYak(JapaneseCard)("Kanji2407Character");
 const Kanji2408Character =
 /*YAK Extracted CSS:
 .Kanji2408Character {
@@ -28917,7 +28917,7 @@ const Kanji2408Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2408Character);
+styledYak(JapaneseCard)("Kanji2408Character");
 const Kanji2409Character =
 /*YAK Extracted CSS:
 .Kanji2409Character {
@@ -28929,7 +28929,7 @@ const Kanji2409Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2409Character);
+styledYak(JapaneseCard)("Kanji2409Character");
 const Kanji2410Character =
 /*YAK Extracted CSS:
 .Kanji2410Character {
@@ -28941,7 +28941,7 @@ const Kanji2410Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2410Character);
+styledYak(JapaneseCard)("Kanji2410Character");
 const Kanji2411Character =
 /*YAK Extracted CSS:
 .Kanji2411Character {
@@ -28953,7 +28953,7 @@ const Kanji2411Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2411Character);
+styledYak(JapaneseCard)("Kanji2411Character");
 const Kanji2412Character =
 /*YAK Extracted CSS:
 .Kanji2412Character {
@@ -28965,7 +28965,7 @@ const Kanji2412Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2412Character);
+styledYak(JapaneseCard)("Kanji2412Character");
 const Kanji2413Character =
 /*YAK Extracted CSS:
 .Kanji2413Character {
@@ -28977,7 +28977,7 @@ const Kanji2413Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2413Character);
+styledYak(JapaneseCard)("Kanji2413Character");
 const Kanji2414Character =
 /*YAK Extracted CSS:
 .Kanji2414Character {
@@ -28989,7 +28989,7 @@ const Kanji2414Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2414Character);
+styledYak(JapaneseCard)("Kanji2414Character");
 const Kanji2415Character =
 /*YAK Extracted CSS:
 .Kanji2415Character {
@@ -29001,7 +29001,7 @@ const Kanji2415Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2415Character);
+styledYak(JapaneseCard)("Kanji2415Character");
 const Kanji2416Character =
 /*YAK Extracted CSS:
 .Kanji2416Character {
@@ -29013,7 +29013,7 @@ const Kanji2416Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2416Character);
+styledYak(JapaneseCard)("Kanji2416Character");
 const Kanji2417Character =
 /*YAK Extracted CSS:
 .Kanji2417Character {
@@ -29025,7 +29025,7 @@ const Kanji2417Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2417Character);
+styledYak(JapaneseCard)("Kanji2417Character");
 const Kanji2418Character =
 /*YAK Extracted CSS:
 .Kanji2418Character {
@@ -29037,7 +29037,7 @@ const Kanji2418Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2418Character);
+styledYak(JapaneseCard)("Kanji2418Character");
 const Kanji2419Character =
 /*YAK Extracted CSS:
 .Kanji2419Character {
@@ -29049,7 +29049,7 @@ const Kanji2419Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2419Character);
+styledYak(JapaneseCard)("Kanji2419Character");
 const Kanji2420Character =
 /*YAK Extracted CSS:
 .Kanji2420Character {
@@ -29061,7 +29061,7 @@ const Kanji2420Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2420Character);
+styledYak(JapaneseCard)("Kanji2420Character");
 const Kanji2421Character =
 /*YAK Extracted CSS:
 .Kanji2421Character {
@@ -29073,7 +29073,7 @@ const Kanji2421Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2421Character);
+styledYak(JapaneseCard)("Kanji2421Character");
 const Kanji2422Character =
 /*YAK Extracted CSS:
 .Kanji2422Character {
@@ -29085,7 +29085,7 @@ const Kanji2422Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2422Character);
+styledYak(JapaneseCard)("Kanji2422Character");
 const Kanji2423Character =
 /*YAK Extracted CSS:
 .Kanji2423Character {
@@ -29097,7 +29097,7 @@ const Kanji2423Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2423Character);
+styledYak(JapaneseCard)("Kanji2423Character");
 const Kanji2424Character =
 /*YAK Extracted CSS:
 .Kanji2424Character {
@@ -29109,7 +29109,7 @@ const Kanji2424Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2424Character);
+styledYak(JapaneseCard)("Kanji2424Character");
 const Kanji2425Character =
 /*YAK Extracted CSS:
 .Kanji2425Character {
@@ -29121,7 +29121,7 @@ const Kanji2425Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2425Character);
+styledYak(JapaneseCard)("Kanji2425Character");
 const Kanji2426Character =
 /*YAK Extracted CSS:
 .Kanji2426Character {
@@ -29133,7 +29133,7 @@ const Kanji2426Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2426Character);
+styledYak(JapaneseCard)("Kanji2426Character");
 const Kanji2427Character =
 /*YAK Extracted CSS:
 .Kanji2427Character {
@@ -29145,7 +29145,7 @@ const Kanji2427Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2427Character);
+styledYak(JapaneseCard)("Kanji2427Character");
 const Kanji2428Character =
 /*YAK Extracted CSS:
 .Kanji2428Character {
@@ -29157,7 +29157,7 @@ const Kanji2428Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2428Character);
+styledYak(JapaneseCard)("Kanji2428Character");
 const Kanji2429Character =
 /*YAK Extracted CSS:
 .Kanji2429Character {
@@ -29169,7 +29169,7 @@ const Kanji2429Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2429Character);
+styledYak(JapaneseCard)("Kanji2429Character");
 const Kanji2430Character =
 /*YAK Extracted CSS:
 .Kanji2430Character {
@@ -29181,7 +29181,7 @@ const Kanji2430Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2430Character);
+styledYak(JapaneseCard)("Kanji2430Character");
 const Kanji2431Character =
 /*YAK Extracted CSS:
 .Kanji2431Character {
@@ -29193,7 +29193,7 @@ const Kanji2431Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2431Character);
+styledYak(JapaneseCard)("Kanji2431Character");
 const Kanji2432Character =
 /*YAK Extracted CSS:
 .Kanji2432Character {
@@ -29205,7 +29205,7 @@ const Kanji2432Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2432Character);
+styledYak(JapaneseCard)("Kanji2432Character");
 const Kanji2433Character =
 /*YAK Extracted CSS:
 .Kanji2433Character {
@@ -29217,7 +29217,7 @@ const Kanji2433Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2433Character);
+styledYak(JapaneseCard)("Kanji2433Character");
 const Kanji2434Character =
 /*YAK Extracted CSS:
 .Kanji2434Character {
@@ -29229,7 +29229,7 @@ const Kanji2434Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2434Character);
+styledYak(JapaneseCard)("Kanji2434Character");
 const Kanji2435Character =
 /*YAK Extracted CSS:
 .Kanji2435Character {
@@ -29241,7 +29241,7 @@ const Kanji2435Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2435Character);
+styledYak(JapaneseCard)("Kanji2435Character");
 const Kanji2436Character =
 /*YAK Extracted CSS:
 .Kanji2436Character {
@@ -29253,7 +29253,7 @@ const Kanji2436Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2436Character);
+styledYak(JapaneseCard)("Kanji2436Character");
 const Kanji2437Character =
 /*YAK Extracted CSS:
 .Kanji2437Character {
@@ -29265,7 +29265,7 @@ const Kanji2437Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2437Character);
+styledYak(JapaneseCard)("Kanji2437Character");
 const Kanji2438Character =
 /*YAK Extracted CSS:
 .Kanji2438Character {
@@ -29277,7 +29277,7 @@ const Kanji2438Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2438Character);
+styledYak(JapaneseCard)("Kanji2438Character");
 const Kanji2439Character =
 /*YAK Extracted CSS:
 .Kanji2439Character {
@@ -29289,7 +29289,7 @@ const Kanji2439Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2439Character);
+styledYak(JapaneseCard)("Kanji2439Character");
 const Kanji2440Character =
 /*YAK Extracted CSS:
 .Kanji2440Character {
@@ -29301,7 +29301,7 @@ const Kanji2440Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2440Character);
+styledYak(JapaneseCard)("Kanji2440Character");
 const Kanji2441Character =
 /*YAK Extracted CSS:
 .Kanji2441Character {
@@ -29313,7 +29313,7 @@ const Kanji2441Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2441Character);
+styledYak(JapaneseCard)("Kanji2441Character");
 const Kanji2442Character =
 /*YAK Extracted CSS:
 .Kanji2442Character {
@@ -29325,7 +29325,7 @@ const Kanji2442Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2442Character);
+styledYak(JapaneseCard)("Kanji2442Character");
 const Kanji2443Character =
 /*YAK Extracted CSS:
 .Kanji2443Character {
@@ -29337,7 +29337,7 @@ const Kanji2443Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2443Character);
+styledYak(JapaneseCard)("Kanji2443Character");
 const Kanji2444Character =
 /*YAK Extracted CSS:
 .Kanji2444Character {
@@ -29349,7 +29349,7 @@ const Kanji2444Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2444Character);
+styledYak(JapaneseCard)("Kanji2444Character");
 const Kanji2445Character =
 /*YAK Extracted CSS:
 .Kanji2445Character {
@@ -29361,7 +29361,7 @@ const Kanji2445Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2445Character);
+styledYak(JapaneseCard)("Kanji2445Character");
 const Kanji2446Character =
 /*YAK Extracted CSS:
 .Kanji2446Character {
@@ -29373,7 +29373,7 @@ const Kanji2446Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2446Character);
+styledYak(JapaneseCard)("Kanji2446Character");
 const Kanji2447Character =
 /*YAK Extracted CSS:
 .Kanji2447Character {
@@ -29385,7 +29385,7 @@ const Kanji2447Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2447Character);
+styledYak(JapaneseCard)("Kanji2447Character");
 const Kanji2448Character =
 /*YAK Extracted CSS:
 .Kanji2448Character {
@@ -29397,7 +29397,7 @@ const Kanji2448Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2448Character);
+styledYak(JapaneseCard)("Kanji2448Character");
 const Kanji2449Character =
 /*YAK Extracted CSS:
 .Kanji2449Character {
@@ -29409,7 +29409,7 @@ const Kanji2449Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2449Character);
+styledYak(JapaneseCard)("Kanji2449Character");
 const Kanji2450Character =
 /*YAK Extracted CSS:
 .Kanji2450Character {
@@ -29421,7 +29421,7 @@ const Kanji2450Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2450Character);
+styledYak(JapaneseCard)("Kanji2450Character");
 const Kanji2451Character =
 /*YAK Extracted CSS:
 .Kanji2451Character {
@@ -29433,7 +29433,7 @@ const Kanji2451Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2451Character);
+styledYak(JapaneseCard)("Kanji2451Character");
 const Kanji2452Character =
 /*YAK Extracted CSS:
 .Kanji2452Character {
@@ -29445,7 +29445,7 @@ const Kanji2452Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2452Character);
+styledYak(JapaneseCard)("Kanji2452Character");
 const Kanji2453Character =
 /*YAK Extracted CSS:
 .Kanji2453Character {
@@ -29457,7 +29457,7 @@ const Kanji2453Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2453Character);
+styledYak(JapaneseCard)("Kanji2453Character");
 const Kanji2454Character =
 /*YAK Extracted CSS:
 .Kanji2454Character {
@@ -29469,7 +29469,7 @@ const Kanji2454Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2454Character);
+styledYak(JapaneseCard)("Kanji2454Character");
 const Kanji2455Character =
 /*YAK Extracted CSS:
 .Kanji2455Character {
@@ -29481,7 +29481,7 @@ const Kanji2455Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2455Character);
+styledYak(JapaneseCard)("Kanji2455Character");
 const Kanji2456Character =
 /*YAK Extracted CSS:
 .Kanji2456Character {
@@ -29493,7 +29493,7 @@ const Kanji2456Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2456Character);
+styledYak(JapaneseCard)("Kanji2456Character");
 const Kanji2457Character =
 /*YAK Extracted CSS:
 .Kanji2457Character {
@@ -29505,7 +29505,7 @@ const Kanji2457Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2457Character);
+styledYak(JapaneseCard)("Kanji2457Character");
 const Kanji2458Character =
 /*YAK Extracted CSS:
 .Kanji2458Character {
@@ -29517,7 +29517,7 @@ const Kanji2458Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2458Character);
+styledYak(JapaneseCard)("Kanji2458Character");
 const Kanji2459Character =
 /*YAK Extracted CSS:
 .Kanji2459Character {
@@ -29529,7 +29529,7 @@ const Kanji2459Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2459Character);
+styledYak(JapaneseCard)("Kanji2459Character");
 const Kanji2460Character =
 /*YAK Extracted CSS:
 .Kanji2460Character {
@@ -29541,7 +29541,7 @@ const Kanji2460Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2460Character);
+styledYak(JapaneseCard)("Kanji2460Character");
 const Kanji2461Character =
 /*YAK Extracted CSS:
 .Kanji2461Character {
@@ -29553,7 +29553,7 @@ const Kanji2461Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2461Character);
+styledYak(JapaneseCard)("Kanji2461Character");
 const Kanji2462Character =
 /*YAK Extracted CSS:
 .Kanji2462Character {
@@ -29565,7 +29565,7 @@ const Kanji2462Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2462Character);
+styledYak(JapaneseCard)("Kanji2462Character");
 const Kanji2463Character =
 /*YAK Extracted CSS:
 .Kanji2463Character {
@@ -29577,7 +29577,7 @@ const Kanji2463Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2463Character);
+styledYak(JapaneseCard)("Kanji2463Character");
 const Kanji2464Character =
 /*YAK Extracted CSS:
 .Kanji2464Character {
@@ -29589,7 +29589,7 @@ const Kanji2464Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2464Character);
+styledYak(JapaneseCard)("Kanji2464Character");
 const Kanji2465Character =
 /*YAK Extracted CSS:
 .Kanji2465Character {
@@ -29601,7 +29601,7 @@ const Kanji2465Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2465Character);
+styledYak(JapaneseCard)("Kanji2465Character");
 const Kanji2466Character =
 /*YAK Extracted CSS:
 .Kanji2466Character {
@@ -29613,7 +29613,7 @@ const Kanji2466Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2466Character);
+styledYak(JapaneseCard)("Kanji2466Character");
 const Kanji2467Character =
 /*YAK Extracted CSS:
 .Kanji2467Character {
@@ -29625,7 +29625,7 @@ const Kanji2467Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2467Character);
+styledYak(JapaneseCard)("Kanji2467Character");
 const Kanji2468Character =
 /*YAK Extracted CSS:
 .Kanji2468Character {
@@ -29637,7 +29637,7 @@ const Kanji2468Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2468Character);
+styledYak(JapaneseCard)("Kanji2468Character");
 const Kanji2469Character =
 /*YAK Extracted CSS:
 .Kanji2469Character {
@@ -29649,7 +29649,7 @@ const Kanji2469Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2469Character);
+styledYak(JapaneseCard)("Kanji2469Character");
 const Kanji2470Character =
 /*YAK Extracted CSS:
 .Kanji2470Character {
@@ -29661,7 +29661,7 @@ const Kanji2470Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2470Character);
+styledYak(JapaneseCard)("Kanji2470Character");
 const Kanji2471Character =
 /*YAK Extracted CSS:
 .Kanji2471Character {
@@ -29673,7 +29673,7 @@ const Kanji2471Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2471Character);
+styledYak(JapaneseCard)("Kanji2471Character");
 const Kanji2472Character =
 /*YAK Extracted CSS:
 .Kanji2472Character {
@@ -29685,7 +29685,7 @@ const Kanji2472Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2472Character);
+styledYak(JapaneseCard)("Kanji2472Character");
 const Kanji2473Character =
 /*YAK Extracted CSS:
 .Kanji2473Character {
@@ -29697,7 +29697,7 @@ const Kanji2473Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2473Character);
+styledYak(JapaneseCard)("Kanji2473Character");
 const Kanji2474Character =
 /*YAK Extracted CSS:
 .Kanji2474Character {
@@ -29709,7 +29709,7 @@ const Kanji2474Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2474Character);
+styledYak(JapaneseCard)("Kanji2474Character");
 const Kanji2475Character =
 /*YAK Extracted CSS:
 .Kanji2475Character {
@@ -29721,7 +29721,7 @@ const Kanji2475Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2475Character);
+styledYak(JapaneseCard)("Kanji2475Character");
 const Kanji2476Character =
 /*YAK Extracted CSS:
 .Kanji2476Character {
@@ -29733,7 +29733,7 @@ const Kanji2476Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2476Character);
+styledYak(JapaneseCard)("Kanji2476Character");
 const Kanji2477Character =
 /*YAK Extracted CSS:
 .Kanji2477Character {
@@ -29745,7 +29745,7 @@ const Kanji2477Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2477Character);
+styledYak(JapaneseCard)("Kanji2477Character");
 const Kanji2478Character =
 /*YAK Extracted CSS:
 .Kanji2478Character {
@@ -29757,7 +29757,7 @@ const Kanji2478Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2478Character);
+styledYak(JapaneseCard)("Kanji2478Character");
 const Kanji2479Character =
 /*YAK Extracted CSS:
 .Kanji2479Character {
@@ -29769,7 +29769,7 @@ const Kanji2479Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2479Character);
+styledYak(JapaneseCard)("Kanji2479Character");
 const Kanji2480Character =
 /*YAK Extracted CSS:
 .Kanji2480Character {
@@ -29781,7 +29781,7 @@ const Kanji2480Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2480Character);
+styledYak(JapaneseCard)("Kanji2480Character");
 const Kanji2481Character =
 /*YAK Extracted CSS:
 .Kanji2481Character {
@@ -29793,7 +29793,7 @@ const Kanji2481Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2481Character);
+styledYak(JapaneseCard)("Kanji2481Character");
 const Kanji2482Character =
 /*YAK Extracted CSS:
 .Kanji2482Character {
@@ -29805,7 +29805,7 @@ const Kanji2482Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2482Character);
+styledYak(JapaneseCard)("Kanji2482Character");
 const Kanji2483Character =
 /*YAK Extracted CSS:
 .Kanji2483Character {
@@ -29817,7 +29817,7 @@ const Kanji2483Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2483Character);
+styledYak(JapaneseCard)("Kanji2483Character");
 const Kanji2484Character =
 /*YAK Extracted CSS:
 .Kanji2484Character {
@@ -29829,7 +29829,7 @@ const Kanji2484Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2484Character);
+styledYak(JapaneseCard)("Kanji2484Character");
 const Kanji2485Character =
 /*YAK Extracted CSS:
 .Kanji2485Character {
@@ -29841,7 +29841,7 @@ const Kanji2485Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2485Character);
+styledYak(JapaneseCard)("Kanji2485Character");
 const Kanji2486Character =
 /*YAK Extracted CSS:
 .Kanji2486Character {
@@ -29853,7 +29853,7 @@ const Kanji2486Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2486Character);
+styledYak(JapaneseCard)("Kanji2486Character");
 const Kanji2487Character =
 /*YAK Extracted CSS:
 .Kanji2487Character {
@@ -29865,7 +29865,7 @@ const Kanji2487Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2487Character);
+styledYak(JapaneseCard)("Kanji2487Character");
 const Kanji2488Character =
 /*YAK Extracted CSS:
 .Kanji2488Character {
@@ -29877,7 +29877,7 @@ const Kanji2488Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2488Character);
+styledYak(JapaneseCard)("Kanji2488Character");
 const Kanji2489Character =
 /*YAK Extracted CSS:
 .Kanji2489Character {
@@ -29889,7 +29889,7 @@ const Kanji2489Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2489Character);
+styledYak(JapaneseCard)("Kanji2489Character");
 const Kanji2490Character =
 /*YAK Extracted CSS:
 .Kanji2490Character {
@@ -29901,7 +29901,7 @@ const Kanji2490Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2490Character);
+styledYak(JapaneseCard)("Kanji2490Character");
 const Kanji2491Character =
 /*YAK Extracted CSS:
 .Kanji2491Character {
@@ -29913,7 +29913,7 @@ const Kanji2491Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2491Character);
+styledYak(JapaneseCard)("Kanji2491Character");
 const Kanji2492Character =
 /*YAK Extracted CSS:
 .Kanji2492Character {
@@ -29925,7 +29925,7 @@ const Kanji2492Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2492Character);
+styledYak(JapaneseCard)("Kanji2492Character");
 const Kanji2493Character =
 /*YAK Extracted CSS:
 .Kanji2493Character {
@@ -29937,7 +29937,7 @@ const Kanji2493Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2493Character);
+styledYak(JapaneseCard)("Kanji2493Character");
 const Kanji2494Character =
 /*YAK Extracted CSS:
 .Kanji2494Character {
@@ -29949,7 +29949,7 @@ const Kanji2494Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2494Character);
+styledYak(JapaneseCard)("Kanji2494Character");
 const Kanji2495Character =
 /*YAK Extracted CSS:
 .Kanji2495Character {
@@ -29961,7 +29961,7 @@ const Kanji2495Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2495Character);
+styledYak(JapaneseCard)("Kanji2495Character");
 const Kanji2496Character =
 /*YAK Extracted CSS:
 .Kanji2496Character {
@@ -29973,7 +29973,7 @@ const Kanji2496Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2496Character);
+styledYak(JapaneseCard)("Kanji2496Character");
 const Kanji2497Character =
 /*YAK Extracted CSS:
 .Kanji2497Character {
@@ -29985,7 +29985,7 @@ const Kanji2497Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2497Character);
+styledYak(JapaneseCard)("Kanji2497Character");
 const Kanji2498Character =
 /*YAK Extracted CSS:
 .Kanji2498Character {
@@ -29997,7 +29997,7 @@ const Kanji2498Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2498Character);
+styledYak(JapaneseCard)("Kanji2498Character");
 const Kanji2499Character =
 /*YAK Extracted CSS:
 .Kanji2499Character {
@@ -30009,7 +30009,7 @@ const Kanji2499Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2499Character);
+styledYak(JapaneseCard)("Kanji2499Character");
 const Kanji2500Character =
 /*YAK Extracted CSS:
 .Kanji2500Character {
@@ -30021,7 +30021,7 @@ const Kanji2500Character =
   }
 }*/
 /*#__PURE__*/
-styledYak(JapaneseCard)(__styleYak.Kanji2500Character);
+styledYak(JapaneseCard)("Kanji2500Character");
 const Wrapper =
 /*YAK Extracted CSS:
 .Wrapper {
@@ -30035,7 +30035,7 @@ const Wrapper =
   padding: 1rem;
 }*/
 /*#__PURE__*/
-styledYak.div(__styleYak.Wrapper);
+styledYak.div("Wrapper");
 const baseButtonStyles =
 /*YAK Extracted CSS:
 .baseButtonStyles {
@@ -30046,7 +30046,7 @@ const baseButtonStyles =
   font-size: 1rem;
 }*/
 /*#__PURE__*/
-css(__styleYak.baseButtonStyles);
+css("baseButtonStyles");
 const BaseButton = /*#__PURE__*/styledYak.button(baseButtonStyles);
 const RerenderButton =
 /*YAK Extracted CSS:
@@ -30068,12 +30068,12 @@ styledYak.button(baseButtonStyles, ({
 }) => {
   switch ($count % 3) {
     case 0:
-      return /*#__PURE__*/css(__styleYak.RerenderButton__RerenderButton);
+      return /*#__PURE__*/css("RerenderButton__RerenderButton");
     case 1:
-      return /*#__PURE__*/css(__styleYak.RerenderButton__RerenderButton_1);
+      return /*#__PURE__*/css("RerenderButton__RerenderButton_1");
     case 2:
     default:
-      return /*#__PURE__*/css(__styleYak.RerenderButton__RerenderButton_2);
+      return /*#__PURE__*/css("RerenderButton__RerenderButton_2");
   }
 });
 const RerenderButtonMedia =
@@ -30102,12 +30102,12 @@ styledYak.button(baseButtonStyles, ({
 }) => {
   switch ($count % 3) {
     case 0:
-      return /*#__PURE__*/css(__styleYak.RerenderButtonMedia__RerenderButtonMedia);
+      return /*#__PURE__*/css("RerenderButtonMedia__RerenderButtonMedia");
     case 1:
-      return /*#__PURE__*/css(__styleYak.RerenderButtonMedia__RerenderButtonMedia_1);
+      return /*#__PURE__*/css("RerenderButtonMedia__RerenderButtonMedia_1");
     case 2:
     default:
-      return /*#__PURE__*/css(__styleYak.RerenderButtonMedia__RerenderButtonMedia_2);
+      return /*#__PURE__*/css("RerenderButtonMedia__RerenderButtonMedia_2");
   }
 });
 const RenderButtonDynamic =
@@ -30116,7 +30116,7 @@ const RenderButtonDynamic =
   transform: rotate(var(--RenderButtonDynamic-transform_18fi82j));
 }*/
 /*#__PURE__*/
-styledYak.button(baseButtonStyles, __styleYak.RenderButtonDynamic, {
+styledYak.button(baseButtonStyles, "RenderButtonDynamic", {
   "style": {
     "--RenderButtonDynamic-transform_18fi82j": ({
       $count
@@ -30131,7 +30131,7 @@ const RenderButtonDynamicMedia =
   }
 }*/
 /*#__PURE__*/
-styledYak.button(baseButtonStyles, __styleYak.RenderButtonDynamicMedia, {
+styledYak.button(baseButtonStyles, "RenderButtonDynamicMedia", {
   "style": {
     "--RenderButtonDynamicMedia-transform_18fi82j": ({
       $count
@@ -30147,7 +30147,7 @@ const LibHeader =
   font-family: 'Arial', sans-serif;
 }*/
 /*#__PURE__*/
-styledYak.h1(__styleYak.LibHeader);
+styledYak.h1("LibHeader");
 const ButtonWrapper =
 /*YAK Extracted CSS:
 .ButtonWrapper {
@@ -30156,7 +30156,7 @@ const ButtonWrapper =
   min-width: 100%;
 }*/
 /*#__PURE__*/
-styledYak.div(__styleYak.ButtonWrapper);
+styledYak.div("ButtonWrapper");
 export const KanjiLetterComponentYak: FunctionComponent = () => {
   const [count0, setCount0] = React.useState(0);
   const [count1, setCount1] = React.useState(0);
