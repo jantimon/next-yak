@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm run build:next && pnpm run build:yak",
+    "build:next": "next build",
+    "build:yak": "pnpm run --dir ../.. build",
     "start": "next start",
     "generate:letters": "npx tsx ./letters/gen.js",
     "lighthouse": "node ./lighthouse/lighthouse.mjs",
