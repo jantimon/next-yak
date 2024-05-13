@@ -214,12 +214,16 @@ export const KanjiLetterComponent${
 };
 `;
 
-    writeFile(`${__dirname}/KanjiLetterComponent.${lib}.tsx`, fileContent, (err) => {
-      if (err) throw err;
-      console.log(
-        `KanjiLetterComponent.${lib}.tsx has been created successfully.`
-      );
-    });
+    writeFile(
+      `${__dirname}/KanjiLetterComponent.${lib}.tsx`,
+      fileContent,
+      (err) => {
+        if (err) throw err;
+        console.log(
+          `KanjiLetterComponent.${lib}.tsx has been created successfully.`,
+        );
+      },
+    );
 
     // Precompile yak similar to how it would be compiled by our loader
     if (lib === "next-yak") {
@@ -251,17 +255,13 @@ export const KanjiLetterComponent${
         },
       };
       let i = 0;
-      const compiled = "// @ts-nocheck\n" + (await tsLoader.call(loaderContext,fileContent))
-      // Remove __styleYak import
-      .replace(
-        /import __styleYak from "[^"]+";/,
-        ""
-      )
-      // Replace __styleYak usage to a string
-      .replace(
-        /`__styleYak.(\S+)`/g,
-        (_, content) => `("$1")`
-      );
+      const compiled =
+        "// @ts-nocheck\n" +
+        (await tsLoader.call(loaderContext, fileContent))
+          // Remove __styleYak import
+          .replace(/import __styleYak from "[^"]+";/, "")
+          // Replace __styleYak usage to a string
+          .replace(/`__styleYak.(\S+)`/g, (_, content) => `("$1")`);
       writeFile(
         `${__dirname}/KanjiLetterComponent.${lib}.compiled.tsx`,
         compiled,
