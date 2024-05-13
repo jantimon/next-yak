@@ -49,13 +49,13 @@ export function LogInp() {
             elementTimings.forEach((timings, element) => {
               console.log(element.tagName, element.title);
               const longetName = Object.keys(timings).reduce((a, b) =>
-                a.length > b.length ? a : b
+                a.length > b.length ? a : b,
               );
               Object.entries(timings).forEach(([name, duration]) => {
                 console.log(
                   `  ${name}: ${" ".repeat(
-                    longetName.length - name.length
-                  )} ${Number(duration).toFixed(0)}ms`
+                    longetName.length - name.length,
+                  )} ${Number(duration).toFixed(0)}ms`,
                 );
               });
             });
