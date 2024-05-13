@@ -5,11 +5,13 @@ on:
     branches: [ "main" ]
     paths:
       - 'packages/next-yak/**'
+      - 'packages/benchmark/**'
       - '.github/workflows/codspeed.yml'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'packages/next-yak/**'
+      - 'packages/benchmark/**'
       - '.github/workflows/codspeed.yml'
   workflow_dispatch:
 

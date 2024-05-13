@@ -1,7 +1,7 @@
 
 "use client";    
 import React, { type FunctionComponent } from 'react';
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 
 const JapaneseCard = styled.div`
     width: 100px;
@@ -22531,9 +22531,139 @@ const Wrapper = styled.div`
     padding: 1rem;
 `;
 
+const baseButtonStyles = css`
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+`;
+
+
+const BaseButton = styled.button`
+  ${baseButtonStyles}
+`;
+
+const RerenderButton = styled.button<{ $count: number }>`
+  ${baseButtonStyles}
+  ${({ $count }) => {
+    switch ($count % 3) {
+      case 0:
+        return css`
+          color: #333;
+          background-color: #fff;
+        `;
+      case 1:
+        return css`
+          color: #fff;
+          background-color: #333;
+        `;
+      case 2:
+      default:
+        return css`
+          color: #333;
+          background-color: #ff0;
+        `;
+      }
+    }
+  }
+`;
+
+const RerenderButtonMedia = styled.button<{ $count: number }>`
+  ${baseButtonStyles}
+  @media (min-width: 1px) {
+    ${({ $count }) => {
+      switch ($count % 3) {
+        case 0:
+          return css`
+            color: #333;
+            background-color: #fff;
+          `;
+        case 1:
+          return css`
+            color: #fff;
+            background-color: #333;
+          `;
+        case 2:
+        default:
+          return css`
+            color: #333;
+            background-color: #ff0;
+          `;
+        }
+      }
+    }
+  }
+`;
+
+const RenderButtonDynamic = styled.button<{ $count: number }>`
+  ${baseButtonStyles}
+  transform: rotate(${({ $count }) => $count}deg);
+`;
+
+const RenderButtonDynamicMedia = styled.button<{ $count: number }>`
+  ${baseButtonStyles}
+  @media (min-width: 1px) {
+    transform: rotate(${({ $count }) => $count}deg);
+  }
+`;
+
+const LibHeader = styled.h1`
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  min-width: 100%;
+`;
+
 export const KanjiLetterComponentStyled: FunctionComponent = () => {
+
+  const [count0, setCount0] = React.useState(0);
+  const [count1, setCount1] = React.useState(0);
+  const [count2, setCount2] = React.useState(0);
+  const [count3, setCount3] = React.useState(0);
+  const [count4, setCount4] = React.useState(0);
+
   return (
-    <Wrapper>
+    <>
+    <LibHeader onClick={() => document.location.href = "/yak"  }>styled-components</LibHeader>
+    <Wrapper style={{ 
+      // @ts-ignore
+      "--count0": count0 
+    }}>
+
+      <ButtonWrapper>
+        <BaseButton title="updates css variable on wrapper" onClick={() => {
+          performance.mark("BaseButtonClick - styled-components");
+          setCount0(count0 + 1)
+        }}>{count0}</BaseButton>
+
+        <RerenderButton title="changes color" onClick={() => {
+          performance.mark("RerenderButtonClick - styled-components");
+          setCount1(count1 + 1)
+        }} $count={count1}>{count1}</RerenderButton>
+
+        <RerenderButtonMedia title="changes color in @media" onClick={() => {
+          performance.mark("RerenderButtonMediaClick - styled-components");
+          setCount2(count2 + 1)
+        }} $count={count2}>{count2}</RerenderButtonMedia>
+
+        <RenderButtonDynamic title="changes dynamic" onClick={() => {
+          performance.mark("RenderButtonDynamicClick - styled-components");
+          setCount3(count3 + 1)
+        }} $count={count3}>{count3}</RenderButtonDynamic>
+
+        <RenderButtonDynamicMedia title="changes dynamic in @media" onClick={() => {
+          performance.mark("RenderButtonDynamicMediaClick - styled-components");
+          setCount4(count4 + 1)
+        }} $count={count4}>{count4}</RenderButtonDynamicMedia>
+      </ButtonWrapper>
+
       <Kanji1Character />
       <Kanji2Character />
       <Kanji3Character />
@@ -25035,5 +25165,8 @@ export const KanjiLetterComponentStyled: FunctionComponent = () => {
       <Kanji2499Character />
       <Kanji2500Character />
     </Wrapper>
+    
+        <a href="https://github.com/jantimon/next-yak/">next-yak</a>
+    </>
   );
 };
