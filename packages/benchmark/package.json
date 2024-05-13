@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run build:next && pnpm run build:yak",
+    "build": "pnpm run build:yak && pnpm run build:next",
     "build:next": "next build",
     "build:yak": "pnpm run --dir ../.. build",
     "start": "next start",
