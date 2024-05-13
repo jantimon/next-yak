@@ -1,4 +1,5 @@
-const fs = require("fs");
+import { writeFile } from "fs";
+import tsLoader from "../../next-yak/loaders/tsloader";
 
 // Function to generate the content of JapaneseLetterComponent.tsx for Kanji characters
 async function generateKanjiComponentFile() {
@@ -213,16 +214,12 @@ export const KanjiLetterComponent${
 };
 `;
 
-    fs.writeFile(
-      `${__dirname}/KanjiLetterComponent.${lib}.tsx`,
-      fileContent,
-      (err) => {
-        if (err) throw err;
-        console.log(
-          `KanjiLetterComponent.${lib}.tsx has been created successfully.`,
-        );
-      },
-    );
+    writeFile(`${__dirname}/KanjiLetterComponent.${lib}.tsx`, fileContent, (err) => {
+      if (err) throw err;
+      console.log(
+        `KanjiLetterComponent.${lib}.tsx has been created successfully.`
+      );
+    });
 
     // Precompile yak similar to how it would be compiled by our loader
     if (lib === "next-yak") {
@@ -253,15 +250,19 @@ export const KanjiLetterComponent${
           return result;
         },
       };
-      const tsLoader = require("../../next-yak/loaders/tsloader").default;
       let i = 0;
-      const compiled =
-        "// @ts-nocheck\n" +
-        (await tsLoader.call(loaderContext, fileContent)).replace(
-          /`__styleYak.(\S+)`/g,
-          (_, content) => `("$1")`,
-        );
-      fs.writeFile(
+      const compiled = "// @ts-nocheck\n" + (await tsLoader.call(loaderContext,fileContent))
+      // Remove __styleYak import
+      .replace(
+        /import __styleYak from "[^"]+";/,
+        ""
+      )
+      // Replace __styleYak usage to a string
+      .replace(
+        /`__styleYak.(\S+)`/g,
+        (_, content) => `("$1")`
+      );
+      writeFile(
         `${__dirname}/KanjiLetterComponent.${lib}.compiled.tsx`,
         compiled,
         (err) => {

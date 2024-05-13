@@ -3,7 +3,7 @@
 
 import React, { type FunctionComponent } from 'react';
 import { styled as styledYak, css } from 'next-yak';
-import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
+
 const JapaneseCard =
 /*YAK Extracted CSS:
 .JapaneseCard {
