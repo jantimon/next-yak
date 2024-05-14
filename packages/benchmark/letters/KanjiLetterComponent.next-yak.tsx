@@ -22533,15 +22533,31 @@ const Wrapper = styledYak.div`
 
 const baseButtonStyles = css`
   padding: 0.5rem 1rem;
-  border: none;
+  border: 1px solid #333;
   border-radius: 0.25rem;
   cursor: pointer;
   font-size: 1rem;
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 200px;
 `;
 
 
 const BaseButton = styledYak.button`
   ${baseButtonStyles}
+`;
+
+const ButtonBadge = styledYak.span`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #f00;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transform: translate(50%, 50%);
 `;
 
 const RerenderButton = styledYak.button<{ $count: number }>`
@@ -22617,8 +22633,12 @@ const LibHeader = styledYak.h1`
 
 const ButtonWrapper = styledYak.div`
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
   min-width: 100%;
+  align-content: center;
+  margin-bottom: 1rem;
 `;
 
 export const KanjiLetterComponentYak: FunctionComponent = () => {
@@ -22628,40 +22648,49 @@ export const KanjiLetterComponentYak: FunctionComponent = () => {
   const [count2, setCount2] = React.useState(0);
   const [count3, setCount3] = React.useState(0);
   const [count4, setCount4] = React.useState(0);
+  const [count5, setCount5] = React.useState(0);
 
   return (
     <>
     <LibHeader onClick={() => document.location.href = "/styled"  }>next-yak</LibHeader>
-    <Wrapper style={{ 
-      // @ts-ignore
-      "--count0": count0 
-    }}>
+    <Wrapper 
+      style={{ 
+        // @ts-ignore
+        "--count0": count0 
+      }}
+      className={`wrapper-${count5}`}
+    >
 
       <ButtonWrapper>
-        <BaseButton title="updates css variable on wrapper" onClick={() => {
-          performance.mark("BaseButtonClick - next-yak");
-          setCount0(count0 + 1)
-        }}>{count0}</BaseButton>
+        <BaseButton title="updates css variable on wrapper (next-yak)" onClick={() => {
+          performance.mark("updates css variable on wrapper (next-yak)");
+          setCount0(count0 + 1);
+        }}>--count<ButtonBadge>{count0}</ButtonBadge></BaseButton>
 
-        <RerenderButton title="changes color" onClick={() => {
-          performance.mark("RerenderButtonClick - next-yak");
-          setCount1(count1 + 1)
-        }} $count={count1}>{count1}</RerenderButton>
+        <RerenderButton title="changes color (next-yak)" onClick={() => {
+          performance.mark("changes color (next-yak)");
+          setCount1(count1 + 1);
+        }} $count={count1}>Color<ButtonBadge>{count1}</ButtonBadge></RerenderButton>
 
-        <RerenderButtonMedia title="changes color in @media" onClick={() => {
-          performance.mark("RerenderButtonMediaClick - next-yak");
-          setCount2(count2 + 1)
-        }} $count={count2}>{count2}</RerenderButtonMedia>
+        <RerenderButtonMedia title="changes color in @media (next-yak)" onClick={() => {
+          performance.mark("changes color in @media (next-yak)");
+          setCount2(count2 + 1);
+        }} $count={count2}>Color (@media)<ButtonBadge>{count2}</ButtonBadge></RerenderButtonMedia>
 
-        <RenderButtonDynamic title="changes dynamic" onClick={() => {
-          performance.mark("RenderButtonDynamicClick - next-yak");
-          setCount3(count3 + 1)
-        }} $count={count3}>{count3}</RenderButtonDynamic>
+        <RenderButtonDynamic title="changes dynamic value (next-yak)" onClick={() => {
+          performance.mark("changes dynamic value (next-yak)");
+          setCount3(count3 + 1);
+        }} $count={count3}>Rotate<ButtonBadge>{count3}</ButtonBadge></RenderButtonDynamic>
 
-        <RenderButtonDynamicMedia title="changes dynamic in @media" onClick={() => {
-          performance.mark("RenderButtonDynamicMediaClick - next-yak");
-          setCount4(count4 + 1)
-        }} $count={count4}>{count4}</RenderButtonDynamicMedia>
+        <RenderButtonDynamicMedia title="changes dynamic value in @media (next-yak)" onClick={() => {
+          performance.mark("changes dynamic value in @media (next-yak)");
+          setCount4(count4 + 1);
+        }} $count={count4}>Rotate (@media)<ButtonBadge>{count3}</ButtonBadge></RenderButtonDynamicMedia>
+
+        <BaseButton title="Wrapper className (next-yak)" onClick={() => {
+          performance.mark("Wrapper className (next-yak)");
+          setCount5(count5 + 1);
+        }}>Wrapper className<ButtonBadge>{count5}</ButtonBadge></BaseButton>
       </ButtonWrapper>
 
       <Kanji1Character />

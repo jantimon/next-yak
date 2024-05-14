@@ -22533,15 +22533,31 @@ const Wrapper = styled.div`
 
 const baseButtonStyles = css`
   padding: 0.5rem 1rem;
-  border: none;
+  border: 1px solid #333;
   border-radius: 0.25rem;
   cursor: pointer;
   font-size: 1rem;
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 200px;
 `;
 
 
 const BaseButton = styled.button`
   ${baseButtonStyles}
+`;
+
+const ButtonBadge = styled.span`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #f00;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transform: translate(50%, 50%);
 `;
 
 const RerenderButton = styled.button<{ $count: number }>`
@@ -22617,8 +22633,12 @@ const LibHeader = styled.h1`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
   min-width: 100%;
+  align-content: center;
+  margin-bottom: 1rem;
 `;
 
 export const KanjiLetterComponentStyled: FunctionComponent = () => {
@@ -22634,42 +22654,43 @@ export const KanjiLetterComponentStyled: FunctionComponent = () => {
     <>
     <LibHeader onClick={() => document.location.href = "/yak"  }>styled-components</LibHeader>
     <Wrapper 
-      className={`count5-${count5}`}
       style={{ 
-      // @ts-ignore
-      "--count0": count0 
-    }}>
+        // @ts-ignore
+        "--count0": count0 
+      }}
+      className={`wrapper-${count5}`}
+    >
 
       <ButtonWrapper>
-        <BaseButton title="updates css variable on wrapper" onClick={() => {
-          performance.mark("BaseButtonClick - styled-components");
-          setCount0(count0 + 1)
-        }}>{count0}</BaseButton>
+        <BaseButton title="updates css variable on wrapper (styled-components)" onClick={() => {
+          performance.mark("updates css variable on wrapper (styled-components)");
+          setCount0(count0 + 1);
+        }}>--count<ButtonBadge>{count0}</ButtonBadge></BaseButton>
 
-        <RerenderButton title="changes color" onClick={() => {
-          performance.mark("RerenderButtonClick - styled-components");
-          setCount1(count1 + 1)
-        }} $count={count1}>{count1}</RerenderButton>
+        <RerenderButton title="changes color (styled-components)" onClick={() => {
+          performance.mark("changes color (styled-components)");
+          setCount1(count1 + 1);
+        }} $count={count1}>Color<ButtonBadge>{count1}</ButtonBadge></RerenderButton>
 
-        <RerenderButtonMedia title="changes color in @media" onClick={() => {
-          performance.mark("RerenderButtonMediaClick - styled-components");
-          setCount2(count2 + 1)
-        }} $count={count2}>{count2}</RerenderButtonMedia>
+        <RerenderButtonMedia title="changes color in @media (styled-components)" onClick={() => {
+          performance.mark("changes color in @media (styled-components)");
+          setCount2(count2 + 1);
+        }} $count={count2}>Color (@media)<ButtonBadge>{count2}</ButtonBadge></RerenderButtonMedia>
 
-        <RenderButtonDynamic title="changes dynamic" onClick={() => {
-          performance.mark("RenderButtonDynamicClick - styled-components");
-          setCount3(count3 + 1)
-        }} $count={count3}>{count3}</RenderButtonDynamic>
+        <RenderButtonDynamic title="changes dynamic value (styled-components)" onClick={() => {
+          performance.mark("changes dynamic value (styled-components)");
+          setCount3(count3 + 1);
+        }} $count={count3}>Rotate<ButtonBadge>{count3}</ButtonBadge></RenderButtonDynamic>
 
-        <RenderButtonDynamicMedia title="changes dynamic in @media" onClick={() => {
-          performance.mark("RenderButtonDynamicMediaClick - styled-components");
-          setCount4(count4 + 1)
-        }} $count={count4}>{count4}</RenderButtonDynamicMedia>
+        <RenderButtonDynamicMedia title="changes dynamic value in @media (styled-components)" onClick={() => {
+          performance.mark("changes dynamic value in @media (styled-components)");
+          setCount4(count4 + 1);
+        }} $count={count4}>Rotate (@media)<ButtonBadge>{count3}</ButtonBadge></RenderButtonDynamicMedia>
 
-        <BaseButton title="add className to wrapper" onClick={() => {
-          performance.mark("BaseButtonAddClassClick - styled-components");
-          setCount5(count5 + 1)
-        }}>{count5}</BaseButton>
+        <BaseButton title="Wrapper className (styled-components)" onClick={() => {
+          performance.mark("Wrapper className (styled-components)");
+          setCount5(count5 + 1);
+        }}>Wrapper className<ButtonBadge>{count5}</ButtonBadge></BaseButton>
       </ButtonWrapper>
 
       <Kanji1Character />
