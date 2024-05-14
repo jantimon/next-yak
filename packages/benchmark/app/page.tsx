@@ -57,21 +57,24 @@ export default function Home() {
         </PerformanceTestStartLink>
         <PerformanceTestStartLink href="/yak">yak</PerformanceTestStartLink>
         <Explanation>
-        <p>
-          This benchmark renders 2500 Kanji characters with different components. 
-          The code is the same except for the import statement.
-        </p>
-        <p>
-          In addition there are buttons which allow triggering different rendering scenarios:
-        </p>
-        <List>
-          <li>Change the css variable on the wrapper</li>
-          <li>Change the color to 1 of 3 predefined values</li>
-          <li>Change the color to 1 of 3 predefined values inside a @media query</li>
-          <li>Change the rotation to a custom value</li>
-          <li>Change the rotation to a custom value inside a @media query</li>
-          <li>Change the class name on the wrapper</li>
-        </List>
+          <p>
+            This benchmark renders 2500 Kanji characters with different
+            components. The code is the same except for the import statement.
+          </p>
+          <p>
+            In addition there are buttons which allow triggering different
+            rendering scenarios:
+          </p>
+          <List>
+            <li>Change the css variable on the wrapper</li>
+            <li>Change the color to 1 of 3 predefined values</li>
+            <li>
+              Change the color to 1 of 3 predefined values inside a @media query
+            </li>
+            <li>Change the rotation to a custom value</li>
+            <li>Change the rotation to a custom value inside a @media query</li>
+            <li>Change the class name on the wrapper</li>
+          </List>
         </Explanation>
       </div>
     </Centered>
