@@ -1591,4 +1591,32 @@ describe("css prop", () => {
       css(__styleYak.Elem))({})} />;"
     `);
   });
+  it("should not convert any interpolated css", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => {
+        const x = Math.random() > 0.5;
+        return (<div css={x => css\`
+          padding: 20px;
+          \`} />);
+      }`,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => {
+        const x = Math.random() > 0.5;
+        return <div {...css(x =>
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 20px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem))({})} />;
+      };"
+    `);
+  });
 });

@@ -1,4 +1,4 @@
-export { css } from "./cssLiteral.js";
+export { css, type StaticCSSProp } from "./cssLiteral.js";
 export { styled } from "./styled.js";
 export { atoms } from "./atoms.js";
 export { keyframes } from "./keyframes.js";

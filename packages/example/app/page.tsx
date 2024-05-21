@@ -1,4 +1,4 @@
-import { YakThemeProvider, css, styled } from "next-yak";
+import { YakThemeProvider, css, styled, StaticCSSProp } from "next-yak";
 import styles from "./page.module.css";
 import { queries, colors } from "@/theme/constants.yak";
 import { Clock } from "./Clock";
@@ -30,8 +30,8 @@ const headline = css<{ $primary?: boolean }>`
   ${queries.sm} {
     font-size: 1.5rem;
     ${({ $primary }) =>
-      $primary &&
-      css`
+    $primary &&
+    css`
         font-size: 1.7rem;
       `}
   }
@@ -112,6 +112,13 @@ const StyledLink = styled.a`
   }
 `;
 
+declare module 'react' {
+  // only add the css prop to html elements
+  interface HTMLAttributes<T> {
+    css?: StaticCSSProp;
+  }
+}
+
 export default function Home() {
   return (
     <YakThemeProvider>
@@ -127,8 +134,9 @@ export default function Home() {
         <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
         </StyledLink>
+        <p css={css`color: green;`}>CSS Prop works if this is green</p>
         <Inputs />
       </main>
-    </YakThemeProvider>
+    </YakThemeProvider >
   );
 }

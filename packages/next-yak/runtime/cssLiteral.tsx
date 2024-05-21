@@ -7,6 +7,13 @@ type ComponentStyles<TProps = {}> = (props: TProps) => {
   };
 };
 
+export type StaticCSSProp = {
+  className: string;
+  style?: {
+    [key: string]: string;
+  };
+};
+
 export type CSSInterpolation<TProps = {}> =
   | string
   | number
@@ -14,6 +21,7 @@ export type CSSInterpolation<TProps = {}> =
   | null
   | false
   | ComponentStyles<TProps>
+  | StaticCSSProp
   | {
       // type only identifier to allow targeting components
       // e.g. styled.svg`${Button}:hover & { fill: red; }`
@@ -162,4 +170,11 @@ const recursivePropExecution = (
   return result;
 };
 
-export const css = internalCssFactory as any as CSSFunction;
+export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
+export function css<TProps = {}>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
+): ComponentStyles<TProps>;
+export function css(styles: any, ...values: any) {
+  return internalCssFactory(styles, ...values) as any;
+}
