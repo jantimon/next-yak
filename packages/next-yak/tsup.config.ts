@@ -105,4 +105,16 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/loaders",
   },
+  // jsx-runtime
+  {
+    entryPoints: ["runtime/jsx-runtime.ts"],
+    format: ["cjs", "esm"],
+    minify: true,
+    sourcemap: true,
+    clean: true,
+    dts: true,
+    external: ["react"],
+    target: "es2022",
+    outDir: "dist",
+  },
 ]);

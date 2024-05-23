@@ -1,3 +1,4 @@
+/** @jsxImportSource next-yak */
 import { YakThemeProvider, css, styled, StaticCSSProp } from "next-yak";
 import styles from "./page.module.css";
 import { queries, colors } from "@/theme/constants.yak";
@@ -112,12 +113,6 @@ const StyledLink = styled.a`
   }
 `;
 
-declare module "react" {
-  // only add the css prop to html elements
-  interface HTMLAttributes<T> {
-    css?: StaticCSSProp;
-  }
-}
 
 export default function Home() {
   return (
