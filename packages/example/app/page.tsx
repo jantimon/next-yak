@@ -113,7 +113,6 @@ const StyledLink = styled.a`
   }
 `;
 
-
 export default function Home() {
   return (
     <YakThemeProvider>
