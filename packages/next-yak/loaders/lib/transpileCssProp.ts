@@ -1,12 +1,12 @@
 import type { NodePath, types as babelTypes } from "@babel/core";
-import type { JSXElement } from "@babel/types";
+import type { JSXAttribute, JSXElement } from "@babel/types";
 
 export const transpileCssProp = (
   t: typeof babelTypes,
   path: NodePath<JSXElement>,
+  runtimeInternalHelpers: Set<string>,
 ) => {
   const openingElement = path.node.openingElement;
-  const closingElement = path.node.closingElement;
   const cssPropIndex = openingElement.attributes.findIndex(
     (prop) =>
       t.isJSXAttribute(prop) &&
@@ -18,18 +18,12 @@ export const transpileCssProp = (
     return;
   }
 
-  const cssProp =
-    /** @type {import("@babel/types").JSXAttribute} */ openingElement
-      .attributes[cssPropIndex];
-
-  //todo: check
-  if (t.isJSXSpreadAttribute(cssProp)) {
-    return;
-  }
+  // can only be a JSXAttribute, as we checked above
+  const cssPropValue = (openingElement.attributes[cssPropIndex] as JSXAttribute).value
 
   // if the css prop is not an expression, we don't need to do anything
   // e.g. <div css="..." /> instead of <div css={css`...`} />
-  if (!t.isJSXExpressionContainer(cssProp.value)) {
+  if (!t.isJSXExpressionContainer(cssPropValue)) {
     return;
   }
 
@@ -39,14 +33,15 @@ export const transpileCssProp = (
     throw new Error("Namespaced JSX not supported");
   }
 
-  const cssValue = cssProp.value.expression;
+  const cssExpression = cssPropValue.expression;
 
-  // remove the css prop
-  // openingElement.attributes.splice(cssPropIndex, 1);
-
-  if (t.isJSXEmptyExpression(cssValue)) {
+  if (t.isJSXEmptyExpression(cssExpression)) {
     return;
   }
+
+  // add import to the custom merge function to the top of the file
+  // import { __yak_mergeCssProp } from "next-yak/runtime-internals";
+  runtimeInternalHelpers.add("__yak_mergeCssProp");
 
   // simple case where we don't have any other relevant props
   if (
@@ -57,14 +52,16 @@ export const transpileCssProp = (
         prop.name.name === "style",
     )
   ) {
+    // remove the css prop
     openingElement.attributes.splice(cssPropIndex, 1);
 
+    // adding a spread attribute with the css prop, in order to be able to use `className` and `style` props that are
+    // returned from the css prop
     openingElement.attributes.push(
       t.jsxSpreadAttribute(
-        t.callExpression(t.callExpression(t.identifier("css"), [cssValue]), [
-          // todo: check if we need access to the other props and maybe theme? Or throw an error?
+        t.callExpression(t.identifier("__yak_mergeCssProp"), [t.callExpression(cssExpression, [
           t.objectExpression([]),
-        ]),
+        ])])
       ),
     );
     return;
@@ -72,8 +69,7 @@ export const transpileCssProp = (
 
   // add the className, styleProp and spreadProps onto the opening element but keep the same ordering
   // e.g. <div className="x" css={css`...`} style={{y:true}} {...p} />
-  // get converted to <div {yakMerge({className: "x"}, {css: css`...`}, {style: {y:true}, {...p})} />
-
+  // get converted to <div {...mergeCssProp({className: "x"}, {css: css`...`}, {style: {y:true}, {...p})} />
   const relevantProps = openingElement.attributes.filter(
     (prop) =>
       t.isJSXSpreadAttribute(prop) ||
@@ -95,7 +91,9 @@ export const transpileCssProp = (
           return null;
         }
         if (prop.name.name === "css") {
-          return t.callExpression(t.identifier("css"), [cssValue]);
+          return t.callExpression(cssExpression, [
+          t.objectExpression([]),
+        ])
         }
 
         if (t.isJSXExpressionContainer(prop.value)) {
@@ -117,8 +115,6 @@ export const transpileCssProp = (
     })
     .filter(Boolean) as babelTypes.ObjectExpression[];
 
-  // console.log(relevantProps, mapped);
-
   // delete the relevant props
   relevantProps.forEach((prop) => {
     const index = openingElement.attributes.indexOf(prop);
@@ -128,7 +124,7 @@ export const transpileCssProp = (
   // add the spread attribute
   openingElement.attributes.push(
     t.jsxSpreadAttribute(
-      t.callExpression(t.identifier("_yak_css_prop"), mapped),
+      t.callExpression(t.identifier("__yak_mergeCssProp"), mapped),
     ),
   );
 };

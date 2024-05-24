@@ -1591,32 +1591,278 @@ describe("css prop", () => {
       css(__styleYak.Elem))({})} />;"
     `);
   });
-  it("should not convert any interpolated css", async () => {
+  describe("merge properties", () => {
+  it("when className is set", async () => {
     expect(
       await tsloader.call(
         loaderContext,
         `
       import { css, styled } from "next-yak";
-      const Elem = () => {
-        const x = Math.random() > 0.5;
-        return (<div css={x => css\`
-          padding: 20px;
-          \`} />);
-      }`,
-      ),
+      const Elem = () => <div className="foo" css={css\`
+        padding: 10px;
+        \`} />;
+      `),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => {
-        const x = Math.random() > 0.5;
-        return <div {...css(x =>
-        /*YAK Extracted CSS:
-        .Elem {
-          padding: 20px;
-        }*/
-        /*#__PURE__*/
-        css(__styleYak.Elem))({})} />;
-      };"
+      const Elem = () => <div {..._yak_css_prop({
+        className: \\"foo\\"
+      }, css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}))} />;"
     `);
   });
+it("when style is set", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div style={{padding: "5px"}} css={css\`
+        padding: 10px;
+        \`} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop({
+        style: {
+          padding: \\"5px\\"
+        }
+      }, css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}))} />;"
+    `);
+  });
+it("when spreaded property is set", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div {...{className: "foo"}} css={css\`
+        padding: 10px;
+        \`} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop({
+        ...{
+          className: \\"foo\\"
+        }
+      }, css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}))} />;"
+    `);
+  });
+it("when className is set after", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div  css={css\`
+        padding: 10px;
+        \`} className="foo" />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop(css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}), {
+        className: \\"foo\\"
+      })} />;"
+    `);
+  });
+it("when style is set after", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div css={css\`
+        padding: 10px;
+        \`} style={{padding: "5px"}}/>;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop(css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}), {
+        style: {
+          padding: \\"5px\\"
+        }
+      })} />;"
+    `);
+  });
+it("when spreaded property is set after", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div {...{className: "foo"}} css={css\`
+        padding: 10px;
+        \`} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop({
+        ...{
+          className: \\"foo\\"
+        }
+      }, css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}))} />;"
+    `);
+  });
+it("when class name and style is set", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div className="foo" style={{padding: "5px"}} css={css\`
+        padding: 10px;
+        \`} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop({
+        className: \\"foo\\"
+      }, {
+        style: {
+          padding: \\"5px\\"
+        }
+      }, css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}))} />;"
+    `);
+  });
+it("when class name and style is set after", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div css={css\`
+        padding: 10px;
+        \`} className="foo" style={{padding: "5px"}} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop(css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}), {
+        className: \\"foo\\"
+      }, {
+        style: {
+          padding: \\"5px\\"
+        }
+      })} />;"
+    `);
+  });
+it("when class name, style and spreaded property is set", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div className="foo" style={{padding: "5px"}} {...{className: "foo2"}} css={css\`
+        padding: 10px;
+        \`} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop({
+        className: \\"foo\\"
+      }, {
+        style: {
+          padding: \\"5px\\"
+        }
+      }, {
+        ...{
+          className: \\"foo2\\"
+        }
+      }, css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}))} />;"
+    `);
+  });
+it("when class name, style and spreaded property is set after", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+      import { css, styled } from "next-yak";
+      const Elem = () => <div css={css\`
+        padding: 10px;
+        \`} className="foo" style={{padding: "5px"}} {...{className: "foo2"}} />;
+      `),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const Elem = () => <div {..._yak_css_prop(css(
+      /*YAK Extracted CSS:
+      .Elem {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.Elem))({}), {
+        className: \\"foo\\"
+      }, {
+        style: {
+          padding: \\"5px\\"
+        }
+      }, {
+        ...{
+          className: \\"foo2\\"
+        }
+      })} />;"
+    `);
+  });
+});
 });
