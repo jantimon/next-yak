@@ -40,9 +40,7 @@ export const transpileCssProp = (
     return;
   }
 
-  // add import to the custom merge function to the top of the file
-  // import { __yak_mergeCssProp } from "next-yak/runtime-internals";
-  runtimeInternalHelpers.add("__yak_mergeCssProp");
+
 
   // simple case where we don't have any other relevant props
   if (
@@ -59,11 +57,7 @@ export const transpileCssProp = (
     // adding a spread attribute with the css prop, in order to be able to use `className` and `style` props that are
     // returned from the css prop
     openingElement.attributes.push(
-      t.jsxSpreadAttribute(
-        t.callExpression(t.identifier("__yak_mergeCssProp"), [
-          t.callExpression(cssExpression, [t.objectExpression([])]),
-        ]),
-      ),
+      t.jsxSpreadAttribute(t.callExpression(cssExpression, [t.objectExpression([])])),
     );
     return;
   }
@@ -126,4 +120,8 @@ export const transpileCssProp = (
       t.callExpression(t.identifier("__yak_mergeCssProp"), mapped),
     ),
   );
+
+  // add import to the custom merge function to the top of the file
+  // import { __yak_mergeCssProp } from "next-yak/runtime-internals";
+  runtimeInternalHelpers.add("__yak_mergeCssProp");
 };
