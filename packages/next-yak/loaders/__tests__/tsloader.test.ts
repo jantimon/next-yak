@@ -1344,14 +1344,15 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const elem = <div {...css(
+      const elem = <div {...__yak_mergeCssProp(
       /*YAK Extracted CSS:
       .elem {
         padding: 10px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.elem))({})} />;"
+      css(__styleYak.elem)({}))} />;"
     `);
   });
   it("should work with a css property that is not in the root jsx element", async () => {
@@ -1367,14 +1368,15 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const MyComp = () => <div><p><div {...css(
+      const MyComp = () => <div><p><div {...__yak_mergeCssProp(
           /*YAK Extracted CSS:
           .MyComp {
             padding: 10px;
           }*/
           /*#__PURE__*/
-          css(__styleYak.MyComp))({})}>anything</div></p></div>;"
+          css(__styleYak.MyComp)({}))}>anything</div></p></div>;"
     `);
   });
 
@@ -1392,15 +1394,16 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp = p => <div {...p}>anything</div>;
-      const MyComp2 = () => <MyComp {...css(
+      const MyComp2 = () => <MyComp {...__yak_mergeCssProp(
       /*YAK Extracted CSS:
       .MyComp2 {
         padding: 10px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.MyComp2))({})} />;"
+      css(__styleYak.MyComp2)({}))} />;"
     `);
   });
 
@@ -1420,17 +1423,18 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const TestObj = {
         TestMem: p => <div {...p}>anything</div>
       };
-      const MyComp2 = () => <TestObj.TestMem {...css(
+      const MyComp2 = () => <TestObj.TestMem {...__yak_mergeCssProp(
       /*YAK Extracted CSS:
       .MyComp2 {
         padding: 10px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.MyComp2))({})} />;"
+      css(__styleYak.MyComp2)({}))} />;"
     `);
   });
 
@@ -1452,19 +1456,20 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const test = {
         nested: {
           TestMem: p => <div {...p}>anything</div>
         }
       };
-      const MyComp2 = () => <test.nested.TestMem {...css(
+      const MyComp2 = () => <test.nested.TestMem {...__yak_mergeCssProp(
       /*YAK Extracted CSS:
       .MyComp2 {
         padding: 10px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.MyComp2))({})} />;"
+      css(__styleYak.MyComp2)({}))} />;"
     `);
   });
 
@@ -1481,14 +1486,15 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const MyComp2 = () => <custom-element {...css(
+      const MyComp2 = () => <custom-element {...__yak_mergeCssProp(
       /*YAK Extracted CSS:
       .MyComp2 {
         padding: 10px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.MyComp2))({})} />;"
+      css(__styleYak.MyComp2)({}))} />;"
     `);
   });
 
@@ -1521,6 +1527,7 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const padding =
       /*YAK Extracted CSS:
@@ -1529,7 +1536,7 @@ describe("css prop", () => {
       }*/
       /*#__PURE__*/
       css(__styleYak.padding);
-      const Elem = () => <div {...css(padding)({})} />;"
+      const Elem = () => <div {...__yak_mergeCssProp(padding({}))} />;"
     `);
   });
 
@@ -1546,14 +1553,15 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const MyComp = () => <div {...css(true &&
+      const MyComp = () => <div {...__yak_mergeCssProp((true &&
       /*YAK Extracted CSS:
       .MyComp {
         padding: 10px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.MyComp))({})}>anything</div>;"
+      css(__styleYak.MyComp))({}))}>anything</div>;"
     `);
   });
 
@@ -1574,6 +1582,7 @@ describe("css prop", () => {
       ),
     ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
+      import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const padding =
       /*YAK Extracted CSS:
@@ -1582,13 +1591,13 @@ describe("css prop", () => {
       }*/
       /*#__PURE__*/
       css(__styleYak.padding);
-      const Elem = () => <div {...css(true ? padding :
+      const Elem = () => <div {...__yak_mergeCssProp((true ? padding :
       /*YAK Extracted CSS:
       .Elem {
         padding: 20px;
       }*/
       /*#__PURE__*/
-      css(__styleYak.Elem))({})} />;"
+      css(__styleYak.Elem))({}))} />;"
     `);
   });
   describe("merge properties", () => {
@@ -1604,18 +1613,19 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop({
-        className: \\"foo\\"
-      }, css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}))} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp({
+          className: \\"foo\\"
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
     });
     it("when style is set", async () => {
       expect(
@@ -1629,20 +1639,21 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop({
-        style: {
-          padding: \\"5px\\"
-        }
-      }, css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}))} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp({
+          style: {
+            padding: \\"5px\\"
+          }
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
     });
     it("when spreaded property is set", async () => {
       expect(
@@ -1656,20 +1667,21 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop({
-        ...{
-          className: \\"foo\\"
-        }
-      }, css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}))} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp({
+          ...{
+            className: \\"foo\\"
+          }
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
     });
     it("when className is set after", async () => {
       expect(
@@ -1683,18 +1695,19 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop(css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}), {
-        className: \\"foo\\"
-      })} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp(
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}), {
+          className: \\"foo\\"
+        })} />;"
+      `);
     });
     it("when style is set after", async () => {
       expect(
@@ -1708,20 +1721,21 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop(css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}), {
-        style: {
-          padding: \\"5px\\"
-        }
-      })} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp(
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}), {
+          style: {
+            padding: \\"5px\\"
+          }
+        })} />;"
+      `);
     });
     it("when spreaded property is set after", async () => {
       expect(
@@ -1735,20 +1749,21 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop({
-        ...{
-          className: \\"foo\\"
-        }
-      }, css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}))} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp({
+          ...{
+            className: \\"foo\\"
+          }
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
     });
     it("when class name and style is set", async () => {
       expect(
@@ -1762,22 +1777,23 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop({
-        className: \\"foo\\"
-      }, {
-        style: {
-          padding: \\"5px\\"
-        }
-      }, css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}))} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp({
+          className: \\"foo\\"
+        }, {
+          style: {
+            padding: \\"5px\\"
+          }
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
     });
     it("when class name and style is set after", async () => {
       expect(
@@ -1791,22 +1807,23 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop(css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}), {
-        className: \\"foo\\"
-      }, {
-        style: {
-          padding: \\"5px\\"
-        }
-      })} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp(
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}), {
+          className: \\"foo\\"
+        }, {
+          style: {
+            padding: \\"5px\\"
+          }
+        })} />;"
+      `);
     });
     it("when class name, style and spreaded property is set", async () => {
       expect(
@@ -1820,26 +1837,27 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop({
-        className: \\"foo\\"
-      }, {
-        style: {
-          padding: \\"5px\\"
-        }
-      }, {
-        ...{
-          className: \\"foo2\\"
-        }
-      }, css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}))} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp({
+          className: \\"foo\\"
+        }, {
+          style: {
+            padding: \\"5px\\"
+          }
+        }, {
+          ...{
+            className: \\"foo2\\"
+          }
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
     });
     it("when class name, style and spreaded property is set after", async () => {
       expect(
@@ -1853,26 +1871,27 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const Elem = () => <div {..._yak_css_prop(css(
-      /*YAK Extracted CSS:
-      .Elem {
-        padding: 10px;
-      }*/
-      /*#__PURE__*/
-      css(__styleYak.Elem))({}), {
-        className: \\"foo\\"
-      }, {
-        style: {
-          padding: \\"5px\\"
-        }
-      }, {
-        ...{
-          className: \\"foo2\\"
-        }
-      })} />;"
-    `);
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = () => <div {...__yak_mergeCssProp(
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}), {
+          className: \\"foo\\"
+        }, {
+          style: {
+            padding: \\"5px\\"
+          }
+        }, {
+          ...{
+            className: \\"foo2\\"
+          }
+        })} />;"
+      `);
     });
   });
 });
