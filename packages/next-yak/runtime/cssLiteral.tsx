@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import type { YakTheme } from "./index.d.ts";
 
 type ComponentStyles<TProps = {}> = (props: TProps) => {
@@ -9,9 +10,7 @@ type ComponentStyles<TProps = {}> = (props: TProps) => {
 
 export type StaticCSSProp = {
   className: string;
-  style?: {
-    [key: string]: string;
-  };
+  style?: CSSProperties;
 };
 
 export type CSSInterpolation<TProps = {}> =

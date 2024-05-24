@@ -1,16 +1,11 @@
-import { css, StaticCSSProp } from "next-yak";
-import React from "react";
+/** @jsxImportSource next-yak */
+
+import { css } from "next-yak";
+import { CSSProperties } from "react";
 
 declare module "next-yak" {
   export interface YakTheme {
     primaryColor: "red" | "blue";
-  }
-}
-
-declare module "react" {
-  // only add the css prop to html elements
-  interface HTMLAttributes<T> {
-    css?: StaticCSSProp;
   }
 }
 
@@ -32,9 +27,9 @@ const NestedComponentWithCssProp = () => (
   </div>
 );
 
-const ComponentThatTakesCssProp = (p: { css: StaticCSSProp }) => (
-  <div {...p}>anything</div>
-);
+const ComponentThatTakesCssProp = (p: {
+  css: { className: string; style?: CSSProperties };
+}) => <div {...p}>anything</div>;
 
 const ComponentWithCssPropAsProp = () => {
   return <ComponentThatTakesCssProp css={css``} />;
