@@ -117,4 +117,15 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist",
   },
+  // jsx-runtime-dev
+  {
+    entryPoints: ["runtime/jsx-dev-runtime.ts"],
+    format: ["cjs", "esm"],
+    minify: true,
+    sourcemap: true,
+    clean: true,
+    external: ["react"],
+    target: "es2022",
+    outDir: "dist",
+  },
 ]);

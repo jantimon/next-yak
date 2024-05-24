@@ -1,3 +1,5 @@
+/** @jsxImportSource next-yak */
+
 import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries, colors } from "@/theme/constants.yak";
@@ -128,11 +130,11 @@ export default function Home() {
           view code
         </StyledLink>
         <p
-          className="test"
+          // className="test"
           css={css`
             color: green;
           `}
-          style={{ padding: "10px" }}
+          // style={{ padding: "10px" }}
           {...{ className: "test2", style: { padding: "30px" } }}
         >
           CSS Prop works if this is green

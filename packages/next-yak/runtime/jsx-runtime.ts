@@ -1,5 +1,12 @@
-import * as React from "react";
-import type { StaticCSSProp } from "./index.js";
+import ReactJSXRuntime from "react/jsx-runtime";
+import type { StaticCSSProp } from "./cssLiteral.js";
+
+// @ts-ignore
+const Fragment = ReactJSXRuntime.Fragment;
+// @ts-ignore
+const jsx = ReactJSXRuntime.jsx;
+// @ts-ignore
+const jsxs = ReactJSXRuntime.jsxs;
 
 export declare namespace YakJSX {
   export type Element = React.JSX.Element;
@@ -19,4 +26,4 @@ export declare namespace YakJSX {
   };
 }
 
-export { YakJSX as JSX };
+export { type YakJSX as JSX, Fragment, jsx, jsxs };
