@@ -19,7 +19,8 @@ export const transpileCssProp = (
   }
 
   // can only be a JSXAttribute, as we checked above
-  const cssPropValue = (openingElement.attributes[cssPropIndex] as JSXAttribute).value
+  const cssPropValue = (openingElement.attributes[cssPropIndex] as JSXAttribute)
+    .value;
 
   // if the css prop is not an expression, we don't need to do anything
   // e.g. <div css="..." /> instead of <div css={css`...`} />
@@ -59,9 +60,9 @@ export const transpileCssProp = (
     // returned from the css prop
     openingElement.attributes.push(
       t.jsxSpreadAttribute(
-        t.callExpression(t.identifier("__yak_mergeCssProp"), [t.callExpression(cssExpression, [
-          t.objectExpression([]),
-        ])])
+        t.callExpression(t.identifier("__yak_mergeCssProp"), [
+          t.callExpression(cssExpression, [t.objectExpression([])]),
+        ]),
       ),
     );
     return;
@@ -91,9 +92,7 @@ export const transpileCssProp = (
           return null;
         }
         if (prop.name.name === "css") {
-          return t.callExpression(cssExpression, [
-          t.objectExpression([]),
-        ])
+          return t.callExpression(cssExpression, [t.objectExpression([])]);
         }
 
         if (t.isJSXExpressionContainer(prop.value)) {

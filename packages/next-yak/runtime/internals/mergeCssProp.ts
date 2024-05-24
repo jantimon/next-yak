@@ -10,6 +10,6 @@ export const mergeCssProp = (
         style: { ...acc.style, ...style },
       };
     },
-    { className: "", style: {} }
+    { className: "", style: {} },
   );
 };
