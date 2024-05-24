@@ -130,12 +130,10 @@ export default function Home() {
           view code
         </StyledLink>
         <p
-          // className="test"
           css={css`
             color: green;
           `}
-          // style={{ padding: "10px" }}
-          {...{ className: "test2", style: { padding: "30px" } }}
+          {...{ className: "css-merge-test", style: { padding: "30px" } }}
         >
           CSS Prop works if this is green
         </p>
