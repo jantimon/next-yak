@@ -1,5 +1,9 @@
 import type { BabelFile, NodePath, types as babelTypes } from "@babel/core";
-import { objectExpression, type JSXAttribute, type JSXElement } from "@babel/types";
+import {
+  objectExpression,
+  type JSXAttribute,
+  type JSXElement,
+} from "@babel/types";
 import { InvalidPositionError } from "../babel-yak-plugin.js";
 
 export const transpileCssProp = (
@@ -27,15 +31,17 @@ export const transpileCssProp = (
   // if the css prop is not an expression, we don't need to do anything
   // e.g. <div css="..." /> instead of <div css={css`...`} />
   if (!t.isJSXExpressionContainer(cssPropValue)) {
-    if(cssPropValue){
-    throw new InvalidPositionError(
-            `CSS prop must be an expression.`,
-            cssPropValue,
-            file,
-            "Use the css prop like this: <div css={css`...`} />",
-          );
+    if (cssPropValue) {
+      throw new InvalidPositionError(
+        `CSS prop must be an expression.`,
+        cssPropValue,
+        file,
+        "Use the css prop like this: <div css={css`...`} />",
+      );
     } else {
-      throw new Error(`css prop must be an expression but found ${cssPropValue}. Please use the css prop like this: <div css={css\`...\`} />`);
+      throw new Error(
+        `css prop must be an expression but found ${cssPropValue}. Please use the css prop like this: <div css={css\`...\`} />`,
+      );
     }
   }
 
@@ -58,8 +64,7 @@ export const transpileCssProp = (
       t.isJSXSpreadAttribute(prop) ||
       (t.isJSXAttribute(prop) &&
         t.isJSXIdentifier(prop.name) &&
-        (prop.name.name === "className" ||
-          prop.name.name === "style")),
+        (prop.name.name === "className" || prop.name.name === "style")),
   );
 
   // simple case where we don't have any other relevant props
@@ -78,7 +83,7 @@ export const transpileCssProp = (
     return;
   }
 
-  // map the relevant props to an object 
+  // map the relevant props to an object
   // e.g. <div className="x" css={css`...`} style={{y:true}} {...p} /> gets converted to
   // { className: "x", style: {y:true}, ...p }
   const mapped = relevantProps
@@ -98,16 +103,18 @@ export const transpileCssProp = (
           if (t.isJSXEmptyExpression(prop.value.expression)) {
             return null;
           }
-          return  t.objectProperty(
-              t.identifier(prop.name.name),
-              prop.value.expression,
-            );
+          return t.objectProperty(
+            t.identifier(prop.name.name),
+            prop.value.expression,
+          );
         }
         return t.objectProperty(t.identifier(prop.name.name), prop.value);
       }
       return t.spreadElement(prop.argument);
     })
-    .filter(Boolean) as Array<babelTypes.ObjectProperty | babelTypes.SpreadElement>;
+    .filter(Boolean) as Array<
+    babelTypes.ObjectProperty | babelTypes.SpreadElement
+  >;
 
   // remove all properties that are in the relevant props
   openingElement.attributes = openingElement.attributes.filter(
@@ -117,7 +124,10 @@ export const transpileCssProp = (
   // add the spread attribute
   openingElement.attributes.push(
     t.jsxSpreadAttribute(
-      t.callExpression(t.identifier("__yak_mergeCssProp"), [t.objectExpression(mapped), t.callExpression(cssExpression, [t.objectExpression([])])]),
+      t.callExpression(t.identifier("__yak_mergeCssProp"), [
+        t.objectExpression(mapped),
+        t.callExpression(cssExpression, [t.objectExpression([])]),
+      ]),
     ),
   );
 

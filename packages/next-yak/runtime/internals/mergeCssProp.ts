@@ -14,9 +14,9 @@
 export const mergeCssProp = (
   relevantProps: Record<string, unknown>,
   cssProp: {
-  className: string;
-  style?: Record<string, unknown>;
-},
+    className: string;
+    style?: Record<string, unknown>;
+  },
 ) => {
   return {
     className: relevantProps.className

@@ -61,13 +61,11 @@ export function css<TProps = {}>(
   styles: TemplateStringsArray,
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ): ComponentStyles<TProps>;
-export function css(
-  ...args: Array<any>
-):StaticCSSProp | ComponentStyles {
+export function css(...args: Array<any>): StaticCSSProp | ComponentStyles {
   const classNames: string[] = [];
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
-  for (const arg of (args as Array<string | CSSFunction | CSSStyles<any>>)) {
+  for (const arg of args as Array<string | CSSFunction | CSSStyles<any>>) {
     // A CSS-module class name which got auto generated during build from static css
     // e.g. css`color: red;`
     // compiled -> css("yak31e4")
@@ -122,7 +120,7 @@ export function css(
       style: allStyles,
     };
   };
-};
+}
 
 // Dynamic CSS with runtime logic
 const unwrapProps = (
