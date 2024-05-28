@@ -56,13 +56,18 @@ type PropsToClassNameFn = (props: unknown) =>
  * Therefore this is only an internal function only and it must be cast to any
  * before exported to the user.
  */
-const internalCssFactory = (
-  ...args: Array<string | CSSFunction | CSSStyles<any>>
-) => {
+export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
+export function css<TProps = {}>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
+): ComponentStyles<TProps>;
+export function css(
+  ...args: Array<any>
+):StaticCSSProp | ComponentStyles {
   const classNames: string[] = [];
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
-  for (const arg of args) {
+  for (const arg of (args as Array<string | CSSFunction | CSSStyles<any>>)) {
     // A CSS-module class name which got auto generated during build from static css
     // e.g. css`color: red;`
     // compiled -> css("yak31e4")
@@ -168,12 +173,3 @@ const recursivePropExecution = (
   }
   return result;
 };
-
-export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
-export function css<TProps = {}>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-): ComponentStyles<TProps>;
-export function css(styles: any, ...values: any) {
-  return internalCssFactory(styles, ...values) as any;
-}

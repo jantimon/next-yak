@@ -1,4 +1,5 @@
 /** @jsxImportSource next-yak */
+// this is only a type check file and should not be executed
 
 import { css } from "next-yak";
 import { CSSProperties } from "react";

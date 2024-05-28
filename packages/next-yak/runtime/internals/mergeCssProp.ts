@@ -1,15 +1,27 @@
-import { CSSProperties } from "react";
-
+/**
+ * This is an internal helper function to merge relevant props of a native element with a css prop.
+ * It's automatically added when using the `css` prop in a JSX element.
+ * e.g.:
+ * ```tsx
+ * <p
+ *  className="foo"
+ *  css={css`
+ *   color: green;
+ * `}
+ * {...{ style: { padding: "30px" }}}
+ * />
+ */
 export const mergeCssProp = (
-  ...args: { className?: string; style?: CSSProperties }[]
+  relevantProps: Record<string, unknown>,
+  cssProp: {
+  className: string;
+  style?: Record<string, unknown>;
+},
 ) => {
-  return args.reduce(
-    (acc, { className, style }) => {
-      return {
-        className: className ? acc.className + " " + className : acc.className,
-        style: { ...acc.style, ...style },
-      };
-    },
-    { className: "", style: {} },
-  );
+  return {
+    className: relevantProps.className
+      ? relevantProps.className + " " + cssProp.className
+      : cssProp.className,
+    style: { ...(relevantProps.style ?? {}), ...cssProp.style },
+  };
 };

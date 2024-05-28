@@ -223,7 +223,7 @@ export default function (
         if (!this.isImportedInCurrentFile || !this.yakImportPath) {
           return;
         }
-        transpileCssProp(t, path, this.runtimeInternalHelpers);
+        transpileCssProp(t, path, this.runtimeInternalHelpers, this.file);
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:

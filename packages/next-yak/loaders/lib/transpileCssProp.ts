@@ -1,10 +1,12 @@
-import type { NodePath, types as babelTypes } from "@babel/core";
-import type { JSXAttribute, JSXElement } from "@babel/types";
+import type { BabelFile, NodePath, types as babelTypes } from "@babel/core";
+import { objectExpression, type JSXAttribute, type JSXElement } from "@babel/types";
+import { InvalidPositionError } from "../babel-yak-plugin.js";
 
 export const transpileCssProp = (
   t: typeof babelTypes,
   path: NodePath<JSXElement>,
   runtimeInternalHelpers: Set<string>,
+  file: BabelFile,
 ) => {
   const openingElement = path.node.openingElement;
   const cssPropIndex = openingElement.attributes.findIndex(
@@ -25,7 +27,16 @@ export const transpileCssProp = (
   // if the css prop is not an expression, we don't need to do anything
   // e.g. <div css="..." /> instead of <div css={css`...`} />
   if (!t.isJSXExpressionContainer(cssPropValue)) {
-    return;
+    if(cssPropValue){
+    throw new InvalidPositionError(
+            `CSS prop must be an expression.`,
+            cssPropValue,
+            file,
+            "Use the css prop like this: <div css={css`...`} />",
+          );
+    } else {
+      throw new Error(`css prop must be an expression but found ${cssPropValue}. Please use the css prop like this: <div css={css\`...\`} />`);
+    }
   }
 
   // namespaced JSX is not supported (even by React itself)
@@ -40,15 +51,20 @@ export const transpileCssProp = (
     return;
   }
 
+  // relevant props are the ones that we need to merge with the css prop
+  // like className, style, and other spread props
+  const relevantProps = openingElement.attributes.filter(
+    (prop) =>
+      t.isJSXSpreadAttribute(prop) ||
+      (t.isJSXAttribute(prop) &&
+        t.isJSXIdentifier(prop.name) &&
+        (prop.name.name === "className" ||
+          prop.name.name === "style")),
+  );
+
   // simple case where we don't have any other relevant props
-  if (
-    !openingElement.attributes.some(
-      (prop) =>
-        t.isJSXSpreadAttribute(prop) ||
-        prop.name.name === "className" ||
-        prop.name.name === "style",
-    )
-  ) {
+  // e.g. <div css={css`color: red;`} />
+  if (relevantProps.length === 0) {
     // remove the css prop
     openingElement.attributes.splice(cssPropIndex, 1);
 
@@ -62,20 +78,9 @@ export const transpileCssProp = (
     return;
   }
 
-  // add the className, styleProp and spreadProps onto the opening element but keep the same ordering
-  // e.g. <div className="x" css={css`...`} style={{y:true}} {...p} />
-  // get converted to <div {...mergeCssProp({className: "x"}, {css: css`...`}, {style: {y:true}, {...p})} />
-  const relevantProps = openingElement.attributes.filter(
-    (prop) =>
-      t.isJSXSpreadAttribute(prop) ||
-      (t.isJSXAttribute(prop) &&
-        t.isJSXIdentifier(prop.name) &&
-        (prop.name.name === "className" ||
-          prop.name.name === "style" ||
-          prop.name.name === "css")),
-  );
-
-  //map the props to an object
+  // map the relevant props to an object 
+  // e.g. <div className="x" css={css`...`} style={{y:true}} {...p} /> gets converted to
+  // { className: "x", style: {y:true}, ...p }
   const mapped = relevantProps
     .map((prop) => {
       if (t.isJSXAttribute(prop)) {
@@ -85,39 +90,34 @@ export const transpileCssProp = (
         if (!prop.value) {
           return null;
         }
-        if (prop.name.name === "css") {
-          return t.callExpression(cssExpression, [t.objectExpression([])]);
-        }
+        // if (prop.name.name === "css") {
+        //   return t.callExpression(cssExpression, [t.objectExpression([])]);
+        // }
 
         if (t.isJSXExpressionContainer(prop.value)) {
           if (t.isJSXEmptyExpression(prop.value.expression)) {
             return null;
           }
-          return t.objectExpression([
-            t.objectProperty(
+          return  t.objectProperty(
               t.identifier(prop.name.name),
               prop.value.expression,
-            ),
-          ]);
+            );
         }
-        return t.objectExpression([
-          t.objectProperty(t.identifier(prop.name.name), prop.value),
-        ]);
+        return t.objectProperty(t.identifier(prop.name.name), prop.value);
       }
-      return t.objectExpression([t.spreadElement(prop.argument)]);
+      return t.spreadElement(prop.argument);
     })
-    .filter(Boolean) as babelTypes.ObjectExpression[];
+    .filter(Boolean) as Array<babelTypes.ObjectProperty | babelTypes.SpreadElement>;
 
-  // delete the relevant props
-  relevantProps.forEach((prop) => {
-    const index = openingElement.attributes.indexOf(prop);
-    openingElement.attributes.splice(index, 1);
-  });
+  // remove all properties that are in the relevant props
+  openingElement.attributes = openingElement.attributes.filter(
+    (prop, index) => !relevantProps.includes(prop) && index !== cssPropIndex,
+  );
 
   // add the spread attribute
   openingElement.attributes.push(
     t.jsxSpreadAttribute(
-      t.callExpression(t.identifier("__yak_mergeCssProp"), mapped),
+      t.callExpression(t.identifier("__yak_mergeCssProp"), [t.objectExpression(mapped), t.callExpression(cssExpression, [t.objectExpression([])])]),
     ),
   );
 

@@ -1674,88 +1674,6 @@ describe("css prop", () => {
         css(__styleYak.Elem)({}))} />;"
       `);
     });
-    it("when className is set after", async () => {
-      expect(
-        await tsloader.call(
-          loaderContext,
-          `
-      import { css, styled } from "next-yak";
-      const Elem = () => <div  css={css\`
-        padding: 10px;
-        \`} className="foo" />;
-      `,
-        ),
-      ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-        const Elem = () => <div {...__yak_mergeCssProp(
-        /*YAK Extracted CSS:
-        .Elem {
-          padding: 10px;
-        }*/
-        /*#__PURE__*/
-        css(__styleYak.Elem)({}), {
-          className: \\"foo\\"
-        })} />;"
-      `);
-    });
-    it("when style is set after", async () => {
-      expect(
-        await tsloader.call(
-          loaderContext,
-          `
-      import { css, styled } from "next-yak";
-      const Elem = () => <div css={css\`
-        padding: 10px;
-        \`} style={{padding: "5px"}}/>;
-      `,
-        ),
-      ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-        const Elem = () => <div {...__yak_mergeCssProp(
-        /*YAK Extracted CSS:
-        .Elem {
-          padding: 10px;
-        }*/
-        /*#__PURE__*/
-        css(__styleYak.Elem)({}), {
-          style: {
-            padding: \\"5px\\"
-          }
-        })} />;"
-      `);
-    });
-    it("when spreaded property is set after", async () => {
-      expect(
-        await tsloader.call(
-          loaderContext,
-          `
-      import { css, styled } from "next-yak";
-      const Elem = () => <div {...{className: "foo"}} css={css\`
-        padding: 10px;
-        \`} />;
-      `,
-        ),
-      ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-        const Elem = () => <div {...__yak_mergeCssProp({
-          ...{
-            className: \\"foo\\"
-          }
-        },
-        /*YAK Extracted CSS:
-        .Elem {
-          padding: 10px;
-        }*/
-        /*#__PURE__*/
-        css(__styleYak.Elem)({}))} />;"
-      `);
-    });
     it("when class name and style is set", async () => {
       expect(
         await tsloader.call(
@@ -1772,8 +1690,7 @@ describe("css prop", () => {
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
-          className: \\"foo\\"
-        }, {
+          className: \\"foo\\",
           style: {
             padding: \\"5px\\"
           }
@@ -1784,36 +1701,6 @@ describe("css prop", () => {
         }*/
         /*#__PURE__*/
         css(__styleYak.Elem)({}))} />;"
-      `);
-    });
-    it("when class name and style is set after", async () => {
-      expect(
-        await tsloader.call(
-          loaderContext,
-          `
-      import { css, styled } from "next-yak";
-      const Elem = () => <div css={css\`
-        padding: 10px;
-        \`} className="foo" style={{padding: "5px"}} />;
-      `,
-        ),
-      ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-        const Elem = () => <div {...__yak_mergeCssProp(
-        /*YAK Extracted CSS:
-        .Elem {
-          padding: 10px;
-        }*/
-        /*#__PURE__*/
-        css(__styleYak.Elem)({}), {
-          className: \\"foo\\"
-        }, {
-          style: {
-            padding: \\"5px\\"
-          }
-        })} />;"
       `);
     });
     it("when class name, style and spreaded property is set", async () => {
@@ -1832,12 +1719,10 @@ describe("css prop", () => {
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
-          className: \\"foo\\"
-        }, {
+          className: \\"foo\\",
           style: {
             padding: \\"5px\\"
-          }
-        }, {
+          },
           ...{
             className: \\"foo2\\"
           }
@@ -1848,40 +1733,6 @@ describe("css prop", () => {
         }*/
         /*#__PURE__*/
         css(__styleYak.Elem)({}))} />;"
-      `);
-    });
-    it("when class name, style and spreaded property is set after", async () => {
-      expect(
-        await tsloader.call(
-          loaderContext,
-          `
-      import { css, styled } from "next-yak";
-      const Elem = () => <div css={css\`
-        padding: 10px;
-        \`} className="foo" style={{padding: "5px"}} {...{className: "foo2"}} />;
-      `,
-        ),
-      ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-        const Elem = () => <div {...__yak_mergeCssProp(
-        /*YAK Extracted CSS:
-        .Elem {
-          padding: 10px;
-        }*/
-        /*#__PURE__*/
-        css(__styleYak.Elem)({}), {
-          className: \\"foo\\"
-        }, {
-          style: {
-            padding: \\"5px\\"
-          }
-        }, {
-          ...{
-            className: \\"foo2\\"
-          }
-        })} />;"
       `);
     });
   });
