@@ -10,7 +10,10 @@ const currentDir =
     ? __dirname
     : dirname(fileURLToPath(import.meta.url));
 
-export type YakConfigOptions = { contextPath?: string };
+export type YakConfigOptions = {
+  extensions?: string[];
+  contextPath?: string;
+};
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
@@ -18,8 +21,13 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     if (previousConfig) {
       webpackConfig = previousConfig(webpackConfig, options);
     }
+
+    const compiledExtensions = yakOptions.extensions || ["ts", "tsx"];
+    const extensionFilterRegex = new RegExp(
+      `\\.(${compiledExtensions.join("|")})$`,
+    );
     webpackConfig.module.rules.push({
-      test: /\.tsx?$/,
+      test: extensionFilterRegex,
       loader: path.join(currentDir, "../loaders/tsloader.cjs"),
       options: yakOptions,
       issuerLayer: {
