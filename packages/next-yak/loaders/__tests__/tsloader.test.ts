@@ -1783,23 +1783,34 @@ describe("css prop", () => {
     });
     it("throws an error when dynamic properties are used", async () => {
       expect(
-        tsloader.call(
+        await tsloader.call(
           loaderContext,
           `
       import { css, styled } from "next-yak";
       const Elem = (props) => <div css={css\`
-        padding: \${props.dynamicPadding}px;
-        \${props.active && css\`color: orange\`}
+        padding: \${() => props.dynamicPadding ? '10px' : "0"}px;
+        \${() => props.active && css\`color: orange\`}
         \`} {...props} />;
       `,
         ),
-      ).rejects.toMatchInlineSnapshot(`
-        [Error: /some/special/path/page.tsx: line 4: Possible constant used as runtime value for a css variable
-        found: \${props.dynamicPadding}
-        Please move the constant to a .yak import or use an arrow function
-        e.g.:
-        |   import { primaryColor } from './foo.yak'
-        |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`]
+      ).toMatchInlineSnapshot(`
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = props => <div {...__yak_mergeCssProp(props,
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: var(--Elem-padding_18fi82j);
+        }
+        .Elem__propsActive {
+          color: orange;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem, () => props.active && /*#__PURE__*/css(__styleYak.Elem__propsActive), {
+          \\"style\\": {
+            \\"--Elem-padding_18fi82j\\": () => (props.dynamicPadding ? '10px' : \\"0\\") + \\"px\\"
+          }
+        })({}))} />;"
       `);
     });
   });
