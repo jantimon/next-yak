@@ -1662,9 +1662,7 @@ describe("css prop", () => {
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
-          ...{
-            className: \\"foo\\"
-          }
+          className: \\"foo\\"
         },
         /*YAK Extracted CSS:
         .Elem {
@@ -1750,9 +1748,7 @@ describe("css prop", () => {
         "import { css, styled } from \\"next-yak\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-        const Elem = props => <div {...__yak_mergeCssProp({
-          ...props
-        },
+        const Elem = props => <div {...__yak_mergeCssProp(props,
         /*YAK Extracted CSS:
         .Elem {
           padding: 10px;

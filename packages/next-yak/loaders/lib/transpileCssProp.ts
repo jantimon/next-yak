@@ -121,7 +121,12 @@ export const transpileCssProp = (
   openingElement.attributes.push(
     t.jsxSpreadAttribute(
       t.callExpression(t.identifier("__yak_mergeCssProp"), [
-        t.objectExpression(mapped),
+        // shortcircuit if there is only one spread element to avoid creating an unnecessary object
+        // e.g. <div {...p} css={css`...`} /> gets converted to
+        // __yak_mergeCssProp(p, css`...`) instead of __yak_mergeCssProp({ ...p }, css`...`)
+        mapped.length === 1 && t.isSpreadElement(mapped[0])
+          ? mapped[0].argument
+          : t.objectExpression(mapped),
         t.callExpression(cssExpression, [t.objectExpression([])]),
       ]),
     ),
