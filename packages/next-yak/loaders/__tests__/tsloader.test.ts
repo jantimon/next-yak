@@ -1735,5 +1735,31 @@ describe("css prop", () => {
         css(__styleYak.Elem)({}))} />;"
       `);
     });
+    it("when props are spreaded", async () => {
+      expect(
+        await tsloader.call(
+          loaderContext,
+          `
+      import { css, styled } from "next-yak";
+      const Elem = (props) => <div css={css\`
+        padding: 10px;
+        \`} {...props} />;
+      `,
+        ),
+      ).toMatchInlineSnapshot(`
+        "import { css, styled } from \\"next-yak\\";
+        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
+        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        const Elem = props => <div {...__yak_mergeCssProp({
+          ...props
+        },
+        /*YAK Extracted CSS:
+        .Elem {
+          padding: 10px;
+        }*/
+        /*#__PURE__*/
+        css(__styleYak.Elem)({}))} />;"
+      `);
+    });
   });
 });

@@ -95,10 +95,6 @@ export const transpileCssProp = (
         if (!prop.value) {
           return null;
         }
-        // if (prop.name.name === "css") {
-        //   return t.callExpression(cssExpression, [t.objectExpression([])]);
-        // }
-
         if (t.isJSXExpressionContainer(prop.value)) {
           if (t.isJSXEmptyExpression(prop.value.expression)) {
             return null;
