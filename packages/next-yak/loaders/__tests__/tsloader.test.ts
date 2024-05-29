@@ -1557,7 +1557,7 @@ describe("css prop", () => {
     `);
   });
 
-it("should work when css property is conditionally not applied", async () => {
+  it("should work when css property is conditionally not applied", async () => {
     expect(
       await tsloader.call(
         loaderContext,
