@@ -1,11 +1,11 @@
 import ReactJSXRuntime from "react/jsx-runtime";
 import type { StaticCSSProp } from "./cssLiteral.js";
 
-// @ts-ignore
+// @ts-expect-error as the types are not exported
 const Fragment = ReactJSXRuntime.Fragment;
-// @ts-ignore
+// @ts-expect-error as the types are not exported
 const jsx = ReactJSXRuntime.jsx;
-// @ts-ignore
+// @ts-expect-error as the types are not exported
 const jsxs = ReactJSXRuntime.jsxs;
 
 export declare namespace YakJSX {

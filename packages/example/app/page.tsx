@@ -133,7 +133,6 @@ export default function Home() {
           css={css`
             color: green;
           `}
-          {...{ className: "css-merge-test", style: { padding: "30px" } }}
         >
           CSS Prop works if this is green
         </p>

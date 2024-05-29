@@ -1557,6 +1557,30 @@ describe("css prop", () => {
     `);
   });
 
+it("should work when css property is conditionally not applied", async () => {
+    expect(
+      await tsloader.call(
+        loaderContext,
+        `
+     import { css, styled } from "next-yak";
+     const MyComp = () => <div css={false && css\`
+        padding: 10px;
+      \`}>anything</div>
+      `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      const MyComp = () => <div {...(false &&
+      /*YAK Extracted CSS:
+      .MyComp {
+        padding: 10px;
+      }*/
+      /*#__PURE__*/
+      css(__styleYak.MyComp))({})}>anything</div>;"
+    `);
+  });
+
   it("should allow conditional css properties", async () => {
     expect(
       await tsloader.call(
@@ -1755,6 +1779,27 @@ describe("css prop", () => {
         }*/
         /*#__PURE__*/
         css(__styleYak.Elem)({}))} />;"
+      `);
+    });
+    it("throws an error when dynamic properties are used", async () => {
+      expect(
+        tsloader.call(
+          loaderContext,
+          `
+      import { css, styled } from "next-yak";
+      const Elem = (props) => <div css={css\`
+        padding: \${props.dynamicPadding}px;
+        \${props.active && css\`color: orange\`}
+        \`} {...props} />;
+      `,
+        ),
+      ).rejects.toMatchInlineSnapshot(`
+        [Error: /some/special/path/page.tsx: line 4: Possible constant used as runtime value for a css variable
+        found: \${props.dynamicPadding}
+        Please move the constant to a .yak import or use an arrow function
+        e.g.:
+        |   import { primaryColor } from './foo.yak'
+        |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`]
       `);
     });
   });
