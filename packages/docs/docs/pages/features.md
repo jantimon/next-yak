@@ -1,6 +1,17 @@
 # Features
 next-yak is a featured packed static CSS-in-JS framework with a minimal runtime aspect.
 
+## Table of contents
+1. [Static CSS](#static-css)
+2. [Dynamic styles](#dynamic-styles)
+3. [Compatible with utility-first CSS frameworks (e.g. Tailwind)](#compatible-with-utility-first-css-frameworks-eg-tailwind)
+4. [Animations](#animations)
+5. [Mixins](#mixins)
+6. [Automatic CSS variables](#automatic-css-variables)
+7. [Theming](#theming)
+8. [CSS Prop](#css-prop)
+
+
 ## Static CSS
 
 At the heart of next-yak lies the extraction of static CSS. 
@@ -496,4 +507,46 @@ const Button = styled.button`
           color: #009688;
         `}
 `;
+```
+
+:::
+
+## CSS Prop
+
+We support out of the box the `css` prop which is a shorthand for adding styles to an element. Similiar to inline-styles
+it allows you to write local styles for certain elements on your page. Differently than inline-styles, it allows you to use
+selectors that target wrapped elements.
+
+```jsx
+import { css } from 'next-yak';
+
+const Component = () => {
+  return <div css={{ color: 'red' }}>Hello there!</div>
+}
+```
+
+It's meant for simple styling requirements, where you don't have to think about a name for a specialized component. 
+
+### TypeScript
+
+To use it with the correct types just add the following line to the top of the file
+
+```tsx
+/** @jsxImportSource next-yak */ // [!code focus] // [!code hl]
+
+import { css } from 'next-yak';
+
+const Component = () => {
+  return <div css={{ color: 'red' }}>Hello there!</div>
+}
+```
+
+Or just add this to your `tsconfig.json` and all your css props will have the correct types.
+
+```json
+{
+  "compilerOptions": {
+    "jsxImportSource": "next-yak"
+  }
+}
 ```

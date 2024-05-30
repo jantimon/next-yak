@@ -88,10 +88,56 @@ const Button = styled.button<{ $primary: boolean }>`
 `;
 ```
 
-:::
+::: 
 
 Next-yak transforms `css` code into a class name that is referenced. So you can think of it as
 an additional css class that gets added/subtracted as needed.
+
+#### css prop
+
+Also the css prop works similar to styled-components. The main difference is that you can't use
+dynamic values in the css prop and that you have to use the `css` tag to define the css.
+
+:::code-group
+
+```jsx [styled-components]
+<div
+  css={`
+    background: papayawhip;
+    color: ${props => props.theme.colors.text};
+  `}
+/>
+<Button
+  css="padding: 0.5em 1em;"
+/>
+```
+
+```tsx [next-yak]
+import { css } from 'next-yak';
+
+<div
+  css={css`
+    background: papayawhip;
+    color: 'red';
+  `}
+/>
+<Button
+  css={css`padding: 0.5em 1em;`}
+/>
+```
+
+:::
+
+If you use TypeScript, you can just add the following to your `tsconfig.json` to get type checking for the css prop.
+
+```json
+{
+	"compilerOptions": {
+      "jsxImportSource": "next-yak"
+	}
+}
+```
+
 
 ### keyframes
 
