@@ -9,20 +9,33 @@ import type { NodePath, types as babelTypes } from "@babel/core";
 const getStyledComponentName = (
   taggedTemplateExpressionPath: NodePath<babelTypes.TaggedTemplateExpression>,
 ) => {
-  const variableDeclaratorPath = taggedTemplateExpressionPath.findParent(
-    (path) => path.isVariableDeclarator(),
-  );
+  const variableOrFunctionDeclaratorPath =
+    taggedTemplateExpressionPath.findParent(
+      (path) => path.isVariableDeclarator() || path.isFunctionDeclaration(),
+    );
+
   if (
-    !variableDeclaratorPath ||
-    !("id" in variableDeclaratorPath.node) ||
-    variableDeclaratorPath.node.id?.type !== "Identifier"
+    variableOrFunctionDeclaratorPath?.isFunctionDeclaration() &&
+    "id" in variableOrFunctionDeclaratorPath.node &&
+    variableOrFunctionDeclaratorPath.node.id === null
+  ) {
+    const parent = variableOrFunctionDeclaratorPath.parentPath;
+    if (parent.isExportDefaultDeclaration()) {
+      return "defaultExp";
+    }
+  }
+
+  if (
+    !variableOrFunctionDeclaratorPath ||
+    !("id" in variableOrFunctionDeclaratorPath.node) ||
+    variableOrFunctionDeclaratorPath.node.id?.type !== "Identifier"
   ) {
     throw new Error(
       "Could not find variable declaration for styled component at " +
-        taggedTemplateExpressionPath.node.loc,
+        JSON.stringify(taggedTemplateExpressionPath.node.loc),
     );
   }
-  return variableDeclaratorPath.node.id.name;
+  return variableOrFunctionDeclaratorPath.node.id.name;
 };
 
 export default getStyledComponentName;

@@ -41,6 +41,14 @@
     "./cssloader": {
       "require": "./dist/loaders/cssloader.cjs",
       "import": "./dist/loaders/cssloader.js"
+    },
+    "./jsx-runtime": {
+      "require": "./dist/jsx-runtime.cjs",
+      "import": "./dist/jsx-runtime.js"
+    },
+    "./jsx-dev-runtime": {
+      "require": "./dist/jsx-dev-runtime.cjs",
+      "import": "./dist/jsx-dev-runtime.js"
     }
   },
   "scripts": {

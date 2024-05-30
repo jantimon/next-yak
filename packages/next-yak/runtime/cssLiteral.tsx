@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import type { YakTheme } from "./index.d.ts";
 
 type ComponentStyles<TProps = {}> = (props: TProps) => {
@@ -7,6 +8,11 @@ type ComponentStyles<TProps = {}> = (props: TProps) => {
   };
 };
 
+export type StaticCSSProp = {
+  className: string;
+  style?: CSSProperties;
+};
+
 export type CSSInterpolation<TProps = {}> =
   | string
   | number
@@ -14,6 +20,7 @@ export type CSSInterpolation<TProps = {}> =
   | null
   | false
   | ComponentStyles<TProps>
+  | StaticCSSProp
   | {
       // type only identifier to allow targeting components
       // e.g. styled.svg`${Button}:hover & { fill: red; }`
@@ -49,13 +56,16 @@ type PropsToClassNameFn = (props: unknown) =>
  * Therefore this is only an internal function only and it must be cast to any
  * before exported to the user.
  */
-const internalCssFactory = (
-  ...args: Array<string | CSSFunction | CSSStyles<any>>
-) => {
+export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
+export function css<TProps = {}>(
+  styles: TemplateStringsArray,
+  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
+): ComponentStyles<TProps>;
+export function css(...args: Array<any>): StaticCSSProp | ComponentStyles {
   const classNames: string[] = [];
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
-  for (const arg of args) {
+  for (const arg of args as Array<string | CSSFunction | CSSStyles<any>>) {
     // A CSS-module class name which got auto generated during build from static css
     // e.g. css`color: red;`
     // compiled -> css("yak31e4")
@@ -110,7 +120,7 @@ const internalCssFactory = (
       style: allStyles,
     };
   };
-};
+}
 
 // Dynamic CSS with runtime logic
 const unwrapProps = (
@@ -161,5 +171,3 @@ const recursivePropExecution = (
   }
   return result;
 };
-
-export const css = internalCssFactory as any as CSSFunction;

@@ -1,3 +1,5 @@
+/** @jsxImportSource next-yak */
+
 import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries, colors } from "@/theme/constants.yak";
@@ -127,6 +129,13 @@ export default function Home() {
         <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
         </StyledLink>
+        <p
+          css={css`
+            color: green;
+          `}
+        >
+          CSS Prop works if this is green
+        </p>
         <Inputs />
       </main>
     </YakThemeProvider>

@@ -10,6 +10,7 @@ import getCssName from "./lib/getCssName.js";
 import { Declaration, ParserState, parseCss } from "./lib/parseCss.js";
 import { toCss } from "./lib/toCss.js";
 import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue.js";
+import { transpileCssProp } from "./lib/transpileCssProp.js";
 
 type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
@@ -66,6 +67,7 @@ export default function (
       YakTemplateLiteral
     >;
     yakTemplateExpressionsByName: Map<string, YakTemplateLiteral>;
+    runtimeInternalHelpers: Set<string>;
   }
 > {
   const { replaces } = options;
@@ -156,6 +158,7 @@ export default function (
       this.topLevelConstBindings = new Map();
       this.yakTemplateExpressionsByPath = new Map();
       this.yakTemplateExpressionsByName = new Map();
+      this.runtimeInternalHelpers = new Set();
     },
     visitor: {
       Program: {
@@ -167,7 +170,6 @@ export default function (
             return;
           }
           const devMode = options.devMode || false;
-          const runtimeInternalHelpers = new Set<string>();
           // Util to create a unique identifiers per file name
           const existingNames = new Set<string>();
           const createUniqueName = (name: string, hash?: boolean) => {
@@ -197,7 +199,7 @@ export default function (
                 cssParserState,
                 visitChildren,
                 createUniqueName,
-                runtimeInternalHelpers,
+                this.runtimeInternalHelpers,
                 getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
                 state.file,
@@ -206,9 +208,9 @@ export default function (
           );
 
           // Add used runtime helpers to the import
-          if (runtimeInternalHelpers.size && this.yakImportPath) {
+          if (this.runtimeInternalHelpers.size && this.yakImportPath) {
             const newImport = t.importDeclaration(
-              [...runtimeInternalHelpers].map((helper) =>
+              [...this.runtimeInternalHelpers].map((helper) =>
                 t.importSpecifier(t.identifier(helper), t.identifier(helper)),
               ),
               t.stringLiteral("next-yak/runtime-internals"),
@@ -216,6 +218,12 @@ export default function (
             this.yakImportPath.insertAfter(newImport);
           }
         },
+      },
+      JSXElement(path, state) {
+        if (!this.isImportedInCurrentFile || !this.yakImportPath) {
+          return;
+        }
+        transpileCssProp(t, path, this.runtimeInternalHelpers, this.file);
       },
       /**
        * Store the name of the imported 'css' and 'styled' variables e.g.:
