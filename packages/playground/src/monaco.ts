@@ -1,5 +1,4 @@
 import * as monaco from "monaco-editor";
-// import { languages, editor } from 'monaco-editor';
 import { getHighlighterCore } from "shiki/core";
 import getWasm from "shiki/wasm";
 import { shikiToMonaco } from "@shikijs/monaco";
