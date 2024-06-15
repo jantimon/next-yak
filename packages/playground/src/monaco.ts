@@ -91,6 +91,8 @@ export const setupMonaco = async () => {
 
   monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
     jsx: monaco.languages.typescript.JsxEmit.Preserve,
+    jsxImportSource: 'next-yak',
+    esModuleInterop: true,
     paths: {
       react: ["/node_modules/@types/react"],
     },
