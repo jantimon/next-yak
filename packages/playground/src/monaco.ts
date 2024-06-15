@@ -1,4 +1,5 @@
 import * as monaco from "monaco-editor";
+// import { languages, editor } from 'monaco-editor';
 import { getHighlighterCore } from "shiki/core";
 import getWasm from "shiki/wasm";
 import { shikiToMonaco } from "@shikijs/monaco";
@@ -90,8 +91,7 @@ export const setupMonaco = async () => {
   });
 
   monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-    jsx: monaco.languages.typescript.JsxEmit.ReactJSX,
-    esModuleInterop: true,
+    jsx: monaco.languages.typescript.JsxEmit.Preserve,
     paths: {
       react: ["/node_modules/@types/react"],
     },
