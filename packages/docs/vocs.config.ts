@@ -45,6 +45,10 @@ export default defineConfig({
       link: '/getting-started',
     },
     {
+      text: 'Playground',
+      link: '/playground',
+    },
+    {
       text: 'GitHub',
       link: 'https://github.com/jantimon/next-yak',
     },
