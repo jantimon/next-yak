@@ -6,12 +6,13 @@ import type { BabelFileResult } from "@babel/core";
 import babelPlugin from "@babel/plugin-syntax-typescript";
 import getYakImports from "./lib/getYakImports.js";
 import YakBabelPlugin, { InvalidPositionError } from "./babel-yak-plugin.js";
+import type { LoaderContext } from "webpack";
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
  */
 export default async function tsloader(
-  this: any,
+  this: LoaderContext<{}>,
   source: string,
 ): Promise<string | void> {
   // ignore files if they don't use yak
@@ -22,7 +23,7 @@ export default async function tsloader(
   const { rootContext, resourcePath } = this;
 
   /** .yak files are constant definition files */
-  const isYakFile = /\.yak\.(j|t)sx?$/.test(resourcePath.matches);
+  const isYakFile = /\.yak\.(j|t)sx?$/.test(resourcePath);
   // The user may import constants from a .yak file
   // e.g. import { primary } from './colors.yak'
   //
@@ -72,5 +73,5 @@ export default async function tsloader(
   if (!result?.code) {
     return callback(new Error("babel transform failed"));
   }
-  return callback(null, result.code, result.map);
+  return callback(null, result.code, result.map ?? undefined);
 }

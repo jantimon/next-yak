@@ -1,7 +1,7 @@
 import { styled, keyframes } from "next-yak";
 import styles from "../page.module.css";
 import { Clock } from "../Clock";
-import { ClockHands } from "../Test";
+import { ClockHand } from "../ClockHands";
 
 const rotate = keyframes`
   from {
@@ -14,12 +14,21 @@ const rotate = keyframes`
 
 const Headline = styled.h1`
   animation: ${() => rotate} 3s linear infinite;
-  display: whatever;
+`;
+
+const colorRotation = keyframes`
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
 `;
 
 const MyWrapper = styled.div`
-  ${ClockHands} {
-    background: pink !important;
+  ${ClockHand} {
+    background: #ffb134;
+    animation: ${colorRotation} 3s linear infinite;
   }
 `;
 

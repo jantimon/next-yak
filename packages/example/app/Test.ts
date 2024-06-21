@@ -1,1 +1,0 @@
-export {ClockHand as ClockHands} from "./ClockHands";
