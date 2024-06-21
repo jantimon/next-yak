@@ -43,10 +43,6 @@ function extractCss(code: string): string {
     const codeUntilEnd = codeParts[i].split("*/")[0];
     result += codeUntilEnd;
   }
-  // TODO: REMOVE!!
-  if (result.includes("display: whatever;")) {
-    result += "\n.foo:module-selector-import(ClockHands from '../Test') { color: red; }"
-    }
   return result;
 }
 
