@@ -5,4 +5,8 @@ const nextConfig = {
 
 }
 
-module.exports = withYak(nextConfig)
+module.exports = withYak({
+    experiments: {
+        crossFileSelectors: true
+    }
+}, nextConfig)

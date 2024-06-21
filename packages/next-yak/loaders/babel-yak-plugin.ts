@@ -16,6 +16,7 @@ type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
   rootContext?: string;
   devMode?: boolean;
+  crossFile: boolean;
 };
 
 type YakLocalIdentifierNames = {
@@ -203,6 +204,7 @@ export default function (
                 getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
                 state.file,
+                options.crossFile
               );
             },
           );
@@ -515,6 +517,7 @@ function transformYakExpressions(
   componentTypeMapping: Record<string, YakTemplateLiteral["type"]>,
   constantValues: ReturnType<typeof getConstantValues>,
   file: BabelFile,
+  crossFileSelectors: boolean,
 ) {
   // Get className / keyframes name
   const identifier = createUniqueName(
@@ -581,6 +584,14 @@ function transformYakExpressions(
           );
         }
         else if (constantValue.type === "module") {
+          if (!crossFileSelectors) {
+            throw new InvalidPositionError(
+              `Module constants are not allowed in this context`,
+              quasiExpression,
+              file,
+              `Use the 'experiments.crossFileSelectors' option to enable cross file selectors`,
+            );
+          }
           if (constantValue.source === null) {
             throw new InvalidPositionError(
               `Module constant could not be resolved`,

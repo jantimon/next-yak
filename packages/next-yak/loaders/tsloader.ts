@@ -7,12 +7,13 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import getYakImports from "./lib/getYakImports.js";
 import YakBabelPlugin, { InvalidPositionError } from "./babel-yak-plugin.js";
 import type { LoaderContext } from "webpack";
+import { YakConfigOptions } from "../withYak/index.js";
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
  */
 export default async function tsloader(
-  this: LoaderContext<{}>,
+  this: LoaderContext<YakConfigOptions>,
   source: string,
 ): Promise<string | void> {
   // ignore files if they don't use yak
@@ -58,6 +59,7 @@ export default async function tsloader(
             replaces,
             rootContext,
             devMode: this.mode === "development",
+            crossFile: this.getOptions().experiments?.crossFileSelectors ?? false,
           },
         ],
       ],
