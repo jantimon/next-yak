@@ -94,17 +94,26 @@ export default defineConfig([
   },
   // loaders
   {
-    entryPoints: ["loaders/cssloader.ts", "loaders/tsloader.ts"],
+    entryPoints: ["loaders/tsloader.ts", "loaders/cssloader.ts"],
     format: ["esm", "cjs"],
     minify: false,
     sourcemap: true,
     clean: false,
+    external: [
+      // css-loader imports tsloader
+      "./tsloader.js",
+      // all non relative imports must be load from node_modules
+      /^(?!\.)/,
+    ],
+    noExternal: [
+    ],
     dts: true,
     platform: "node",
     splitting: false,
     target: "es2022",
     outDir: "dist/loaders",
   },
+
   // jsx-runtime
   {
     entryPoints: ["runtime/jsx-runtime.ts"],

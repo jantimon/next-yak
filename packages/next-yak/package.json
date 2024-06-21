@@ -63,8 +63,7 @@
   },
   "dependencies": {
     "@babel/core": "7.23.2",
-    "@babel/plugin-syntax-typescript": "7.22.5",
-    "postcss-nested": "^6.0.1"
+    "@babel/plugin-syntax-typescript": "7.22.5"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.14",
