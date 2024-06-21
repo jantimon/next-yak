@@ -581,6 +581,13 @@ function transformYakExpressions(
           );
         }
         else if (constantValue.type === "module") {
+          if (constantValue.source === null) {
+            throw new InvalidPositionError(
+              `Module constant could not be resolved`,
+              quasiExpression,
+              file,
+            );
+          }
           replaceValue = `:module-selector-import(${constantValue.name} from '${constantValue.source}')`
         } else {
           replaceValue = String(constantValue?.value);

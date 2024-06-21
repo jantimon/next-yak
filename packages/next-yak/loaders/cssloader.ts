@@ -66,7 +66,6 @@ async function resolveExternalImports(loader: any, css: string): Promise<string>
     
     const resolved = await resolveIdentifier(loader, loader.context, importPath, namedExport);
     // should be the internal namedExport identifier not the exported one
-    console.log("resolved", resolved, { namedExport, importPath })
     const selector = `:global(.${getCssModuleLocalIdent({
       rootContext: loader.rootContext,
       resourcePath: resolved.from,
@@ -94,7 +93,6 @@ async function resolveIdentifier(loader: any, context: string, sourcePath: strin
   const fileContents = await fs.readFile(resolved, "utf-8");
   const exports = getAllExports(fileContents, resolved.endsWith(".tsx"));
   const exportForIdentifier = exports[identifier];
-  console.log("exports", exports, { context, identifier,  sourcePath, resolved });
   if (!exportForIdentifier) {
     throw new Error(`Could not find export ${identifier} in ${resolved}`);
   }

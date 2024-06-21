@@ -15,16 +15,13 @@ const rotate = keyframes`
 const Headline = styled.h1`
   animation: ${() => rotate} 3s linear infinite;
   display: whatever;
-  
 `;
 
 const MyWrapper = styled.div`
-
   ${ClockHands} {
     background: pink !important;
   }
-`
-  
+`;
 
 export default function Home() {
   return (
