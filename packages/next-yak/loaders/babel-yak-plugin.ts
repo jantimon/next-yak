@@ -573,22 +573,18 @@ function transformYakExpressions(
             file,
           );
         }
-        if (constantValue.type === "module") {
-          throw new InvalidPositionError(
-            `Imported values cannot be used as constants`,
-            quasiExpression,
-            file,
-            "Move the constant into the current file or into a .yak file",
-          );
-        }
-        if (constantValue.type === "function") {
+        else if (constantValue.type === "function") {
           throw new InvalidPositionError(
             `Function constants are not supported yet`,
             quasiExpression,
             file,
           );
         }
-        replaceValue = String(constantValue?.value);
+        else if (constantValue.type === "module") {
+          replaceValue = `:module-selector-import(${constantValue.name} from '${constantValue.source}')`
+        } else {
+          replaceValue = String(constantValue?.value);
+        }
       }
       // Identifier without program scope definition
       // e.g.

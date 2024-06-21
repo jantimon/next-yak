@@ -51,15 +51,27 @@ export function getConstantValues(
       }
     | {
         value: null;
-        type: "module" | "function";
+        type: "function";
+      }
+    | {
+        value: null;
+        name: string;
+        source: string;
+        type: "module";
       }
   >();
   const bindings = Object.entries(path.scope.bindings);
   for (const [name, binding] of bindings) {
     if (binding.kind === "module") {
+      console.log({
+        bNode: binding.path.node?.local?.name,
+        bKind: binding.path.parent?.source?.value
+      })
       topLevelConstBindings.set(name, {
         value: null,
         type: "module",
+        name,
+        source: ""
       });
       continue;
     }

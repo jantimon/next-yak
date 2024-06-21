@@ -15,6 +15,9 @@
     "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak",
     "prettier": "pnpm run --recursive --if-present prettier"
   },
+  "dependencies": {
+    "next": "14.0.0"
+  },
   "engines": {
     "node": ">=20",
     "pnpm": "8"
