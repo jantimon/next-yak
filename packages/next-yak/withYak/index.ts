@@ -28,7 +28,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     );
     webpackConfig.module.rules.push({
       test: extensionFilterRegex,
-      loader: path.join(currentDir, "../loaders/tsloader.cjs"),
+      loader: path.join(currentDir, "../loaders/tsloader.js"),
       options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
@@ -38,7 +38,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     });
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: path.join(currentDir, "../loaders/cssloader.cjs"),
+      loader: path.join(currentDir, "../loaders/cssloader.js"),
       options: yakOptions,
     });
 
