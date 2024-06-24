@@ -20,7 +20,6 @@ export async function resolveCrossFileSelectors(
     return css;
   }
   let result = "";
-  // Reverse itereate to replace from the end
   for (let i = matches.length - 1; i >= 0; i--) {
     const match = matches[i];
     const index = match.index;
@@ -36,8 +35,13 @@ export async function resolveCrossFileSelectors(
       importPath,
       namedExport
     );
-    // should be the internal namedExport identifier not the exported one
-    const selector = `:global(.${getCssModuleLocalIdent(
+    if (resolved.type === "unsupported") {
+      throw new Error(
+        `yak could not import ${namedExport} from ${importPath} - only styled-components, strings and numbers are supported`
+      );
+    }
+    
+    const replacement = resolved.type === "styled-component" ? `:global(.${getCssModuleLocalIdent(
       {
         rootContext: loader.rootContext,
         resourcePath: resolved.from,
@@ -45,21 +49,36 @@ export async function resolveCrossFileSelectors(
       null,
       resolved.name,
       {}
-    )})`;
-    result = selector + css.slice(index + match[0].length) + result;
+    )})` : resolved.value;
+
+    // should be the internal namedExport identifier not the exported one
+    result = String(replacement) + css.slice(index + match[0].length, matches[i + 1]?.index) + result;
   }
   result = css.slice(0, firstMatchPosition) + result;
   return result;
 }
 
+/**
+ * Recursively follows the import chain to resolve the identifiers
+ * type, name and value.
+ * 
+ * Currently only supports named exports
+ */
 async function resolveIdentifier(
   loader: LoaderContext<{}>,
   context: string,
   sourcePath: string,
   identifier: string
 ): Promise<{
-  name: string;
+  type: "styled-component";
   from: string;
+  name: string;
+} | {
+  type: "unsupported";
+  name: string; 
+}| {
+  type: "constant";
+  value: string | number;
 }> {
   const resolved = await new Promise<string>((resolve, reject) => {
     loader.resolve(context, sourcePath, (err, result) => {
@@ -80,21 +99,41 @@ async function resolveIdentifier(
   );
   const exportForIdentifier = exports[identifier];
   if (!exportForIdentifier) {
-    throw new Error(`Could not find export ${identifier} in ${resolved}`);
+    throw new Error(`Could not find export ${identifier} in ${resolved}
+Currently only named exports are supported.
+Available exports: ${Object.keys(exports).join(", ")}`);
   }
-  if (typeof exportForIdentifier === "string") {
+  if (exportForIdentifier.type === "styled-component") {
     return {
-      name: exportForIdentifier,
+      type: "styled-component",
       from: resolved,
+      name: exportForIdentifier.name,
     };
   }
-  const result = resolveIdentifier(
+  return (exportForIdentifier.type !== "named-export") ?
+     exportForIdentifier : resolveIdentifier(
     loader,
     path.dirname(resolved),
     exportForIdentifier.from,
     exportForIdentifier.name
   );
-  return result;
+}
+
+type ResolvedExport = 
+{
+  type: "unsupported";
+  name: string
+} |
+{
+  type: "styled-component";
+  name : string
+} | {
+  type: "constant";
+  value: string | number
+}
+| { 
+  type: "named-export";
+  name: string; from: string 
 }
 
 /**
@@ -102,7 +141,7 @@ async function resolveIdentifier(
  */
 const exportsCache = new WeakMap<
   Compilation,
-  Map<string, Record<string, string | { name: string; from: string }>>
+  Map<string, Record<string, ResolvedExport>>
 >();
 
 /**
@@ -112,7 +151,7 @@ async function getAllExports(
   loader: LoaderContext<{}>,
   source: string,
   isTSX: boolean
-): Promise<{ [key: string]: string | { name: string; from: string } }> {
+): Promise<{ [key: string]: ResolvedExport }> {
   const compilationCache =
     loader._compilation && exportsCache.get(loader._compilation)?.get(source);
   if (compilationCache) {
@@ -128,7 +167,7 @@ async function getAllExports(
     })
   );
 
-  let result: { [key: string]: string | { name: string; from: string } } = {};
+  let result: { [key: string]: ResolvedExport } = {};
   babel.transformSync(sourceContents, {
     configFile: false,
     plugins: [
@@ -150,6 +189,7 @@ async function getAllExports(
                     exportSource
                   ) {
                     result[specifier.exported.name] = {
+                      type: "named-export",
                       name: specifier.local.name,
                       from: exportSource,
                     };
@@ -160,10 +200,29 @@ async function getAllExports(
                 node.declaration.declarations.forEach((declaration) => {
                   if (
                     declaration.id.type === "Identifier" &&
-                    declaration.id.name
+                    declaration.id.name &&
+                    declaration.init
                   ) {
                     // TODO: check if this is a styled component, or constant, or sth unsupported
-                    result[declaration.id.name] = declaration.id.name;
+                    if (declaration.init.type === "CallExpression" || declaration.init.type === "TaggedTemplateExpression") {
+                      result[declaration.id.name] = {
+                        type: "styled-component",
+                        name: declaration.id.name
+                      }
+                    } else if (declaration.init.type === "StringLiteral"
+                      || declaration.init.type === "NumericLiteral"
+
+                    ) {
+                      result[declaration.id.name] = {
+                        type: "constant",
+                        value: declaration.init.value
+                      }
+                    } else {
+                      result[declaration.id.name] = {
+                        type: "unsupported",
+                        name: declaration.id.name
+                      }
+                    }
                   }
                 });
               }
