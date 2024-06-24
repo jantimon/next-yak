@@ -23,7 +23,7 @@ export default async function cssloader(
           );
         }
         const css = extractCss(String(code));
-        resolveCrossFileSelectors(this, css).then(
+        return resolveCrossFileSelectors(this, css).then(
           (result) => callback(null, result),
           callback
         );

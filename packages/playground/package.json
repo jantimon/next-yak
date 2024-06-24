@@ -43,7 +43,7 @@
     "patch-package": "^8.0.0",
     "shiki": "^1.1.1",
     "terser": "^5.28.1",
-    "typescript": "^5.2.2",
+    "typescript": "5.5.2",
     "vite": "^5.1.0",
     "vite-plugin-node-polyfills": "^0.21.0"
   }
