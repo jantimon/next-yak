@@ -190,11 +190,15 @@ const CompositionOverridingAndMergingTest = () => {
       ${Child} {
         color: blue;
       }
-      color: ${({ $colorMe }) => ($colorMe ? `blue` : `red`)};
+      color: ${
+        // @ts-expect-error - should not allow props which have not been defined (like styled-components)
+        ({ $colorMe }) => ($colorMe ? `blue` : `red`)
+      };
     `;
 
     // Overriding with Child and Mixin should work
     const _ = (
+      // @ts-expect-error - should not allow props which have not been defined (like styled-components)
       <Parent $colorMe>
         <Child $child />
       </Parent>
