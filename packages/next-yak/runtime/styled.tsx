@@ -162,9 +162,16 @@ const yakStyled = <
  * Type for the proxy object returned by `styled` that allows to
  * access all html tags as properties.
  */
-type StyledLiteral<T> = <TCSSProps = {}>(
+type StyledLiteral<T> = <TCSSProps>(
   styles: TemplateStringsArray,
-  ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
+  ...values: Array<
+    CSSInterpolation<
+      T &
+        // don't allow inference from types in the tagged template literal
+        // additional benefit is that destruction is now typed and provides hints
+        NoInfer<TCSSProps> & { theme: YakTheme }
+    >
+  >
 ) => FunctionComponent<TCSSProps & T> & {
   // type only identifier to allow targeting components
   // e.g. styled.svg`${Button}:hover & { fill: red; }`
