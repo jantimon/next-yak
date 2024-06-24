@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import type { YakTheme } from "./index.d.ts";
 
-type ComponentStyles<TProps = {}> = (props: TProps) => {
+type ComponentStyles<TProps> = (props: TProps) => {
   className: string;
   style?: {
     [key: string]: string;
@@ -13,7 +13,7 @@ export type StaticCSSProp = {
   style?: CSSProperties;
 };
 
-export type CSSInterpolation<TProps = {}> =
+export type CSSInterpolation<TProps> =
   | string
   | number
   | undefined
@@ -61,7 +61,9 @@ export function css<TProps = {}>(
   styles: TemplateStringsArray,
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ): ComponentStyles<TProps>;
-export function css(...args: Array<any>): StaticCSSProp | ComponentStyles {
+export function css<TProps>(
+  ...args: Array<any>
+): StaticCSSProp | ComponentStyles<TProps> {
   const classNames: string[] = [];
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
