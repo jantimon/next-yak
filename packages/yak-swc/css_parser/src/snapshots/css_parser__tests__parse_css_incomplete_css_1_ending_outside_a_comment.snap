@@ -1,0 +1,54 @@
+---
+source: src/lib.rs
+expression: "(state, declarations)"
+---
+(
+    ParserState {
+        is_inside_string: None,
+        is_inside_comment: false,
+        is_inside_property_value: true,
+        is_inside_at_rule: false,
+        current_scopes: [
+            CssScope {
+                name: ".foo",
+                scope_type: "selector",
+            },
+            CssScope {
+                name: ".fancy section",
+                scope_type: "selector",
+            },
+        ],
+        current_declaration: Declaration {
+            property: "color",
+            value: "blue\n",
+            scope: [
+                CssScope {
+                    name: ".foo",
+                    scope_type: "selector",
+                },
+                CssScope {
+                    name: ".fancy section",
+                    scope_type: "selector",
+                },
+            ],
+            closed: false,
+        },
+    },
+    [
+        Declaration {
+            property: "color",
+            value: "blue\n",
+            scope: [
+                CssScope {
+                    name: ".foo",
+                    scope_type: "selector",
+                },
+                CssScope {
+                    name: ".fancy section",
+                    scope_type: "selector",
+                },
+            ],
+            closed: false,
+        },
+    ],
+)
