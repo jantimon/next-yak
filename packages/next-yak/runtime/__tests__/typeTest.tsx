@@ -166,14 +166,36 @@ const CompositionOverridingAndMergingTest = () => {
         color: blue;
       }
 
-      ${Mixin} {
-        color: blue;
-      }
+      ${Mixin};
     `;
 
     // Overriding with Child and Mixin should work
     const _ = (
       <Parent $mixin>
+        <Child $child />
+      </Parent>
+    );
+  };
+
+  const case3 = () => {
+    const Child = styled.div<{ $child: boolean }>`
+      ${({ $child }) =>
+        $child &&
+        css`
+          color: red;
+        `}
+    `;
+
+    const Parent = styled.div`
+      ${Child} {
+        color: blue;
+      }
+      color: ${({ $colorMe }) => $colorMe ? `blue` : `red`};
+    `;
+
+    // Overriding with Child and Mixin should work
+    const _ = (
+      <Parent $colorMe>
         <Child $child />
       </Parent>
     );
