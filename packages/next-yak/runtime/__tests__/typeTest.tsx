@@ -190,7 +190,7 @@ const CompositionOverridingAndMergingTest = () => {
       ${Child} {
         color: blue;
       }
-      color: ${({ $colorMe }) => $colorMe ? `blue` : `red`};
+      color: ${({ $colorMe }) => ($colorMe ? `blue` : `red`)};
     `;
 
     // Overriding with Child and Mixin should work
