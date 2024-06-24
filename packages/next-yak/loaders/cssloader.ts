@@ -9,7 +9,7 @@ import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
  */
 export default async function cssloader(
   this: LoaderContext<{}>,
-  source: string
+  source: string,
 ): Promise<string | void> {
   const callback = this.async();
 
@@ -19,17 +19,17 @@ export default async function cssloader(
       async: () => (err, code) => {
         if (err || !code) {
           return callback(
-            err && err instanceof Error ? err : new Error("No code returned")
+            err && err instanceof Error ? err : new Error("No code returned"),
           );
         }
         const css = extractCss(String(code));
         return resolveCrossFileSelectors(this, css).then(
           (result) => callback(null, result),
-          callback
+          callback,
         );
       },
     },
-    source
+    source,
   );
 }
 

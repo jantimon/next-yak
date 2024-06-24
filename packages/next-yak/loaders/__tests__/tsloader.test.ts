@@ -1820,13 +1820,14 @@ describe("cross file", () => {
   it("compiles selectors", async () => {
     expect(
       await tsloader.call(
-        {...loaderContext,
-          getOptions: () => ({ 
-              configPath: "/some/special/path/config",
-            experiments: { crossFileSelectors: true } 
-          })
+        {
+          ...loaderContext,
+          getOptions: () => ({
+            configPath: "/some/special/path/config",
+            experiments: { crossFileSelectors: true },
+          }),
         },
-    `
+        `
       import { css, styled } from "next-yak";
       import { Icon } from "./icon";
       const Button = styled.button\`
@@ -1834,7 +1835,8 @@ describe("cross file", () => {
         \${Icon} { margin: 0 10px; }
         \`; 
     `,
-    )).toMatchInlineSnapshot(`
+      ),
+    ).toMatchInlineSnapshot(`
       "import { css, styled } from \\"next-yak\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { Icon } from \\"./icon\\";
@@ -1847,7 +1849,6 @@ describe("cross file", () => {
       }*/
       /*#__PURE__*/
       styled.button(__styleYak.Button);"
-    `)
-    ;
+    `);
   });
 });

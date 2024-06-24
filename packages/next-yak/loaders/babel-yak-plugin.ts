@@ -204,7 +204,7 @@ export default function (
                 getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
                 state.file,
-                options.crossFile
+                options.crossFile,
               );
             },
           );
@@ -575,15 +575,13 @@ function transformYakExpressions(
             quasiExpression,
             file,
           );
-        }
-        else if (constantValue.type === "function") {
+        } else if (constantValue.type === "function") {
           throw new InvalidPositionError(
             `Function constants are not supported yet`,
             quasiExpression,
             file,
           );
-        }
-        else if (constantValue.type === "module") {
+        } else if (constantValue.type === "module") {
           if (!crossFileSelectors) {
             throw new InvalidPositionError(
               `Module constants are not allowed in this context`,
@@ -599,7 +597,7 @@ function transformYakExpressions(
               file,
             );
           }
-          replaceValue = `:module-selector-import(${constantValue.name} from '${constantValue.source}')`
+          replaceValue = `:module-selector-import(${constantValue.name} from '${constantValue.source}')`;
         } else {
           replaceValue = String(constantValue?.value);
         }

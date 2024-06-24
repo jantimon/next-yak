@@ -15,7 +15,7 @@ export type YakConfigOptions = {
   contextPath?: string;
   experiments?: {
     crossFileSelectors?: boolean;
-  }
+  };
 };
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {

@@ -59,7 +59,8 @@ export default async function tsloader(
             replaces,
             rootContext,
             devMode: this.mode === "development",
-            crossFile: this.getOptions().experiments?.crossFileSelectors ?? false,
+            crossFile:
+              this.getOptions().experiments?.crossFileSelectors ?? false,
           },
         ],
       ],

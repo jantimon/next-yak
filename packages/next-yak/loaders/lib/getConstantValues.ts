@@ -63,22 +63,25 @@ export function getConstantValues(
   const bindings = Object.entries(path.scope.bindings);
   for (const [name, binding] of bindings) {
     if (binding.kind === "module") {
-
       const node = binding.path.node;
       const parent = binding.path.parent;
-      if (node.type === "ImportSpecifier" && parent?.type === "ImportDeclaration" && node.imported.type === "Identifier") {
+      if (
+        node.type === "ImportSpecifier" &&
+        parent?.type === "ImportDeclaration" &&
+        node.imported.type === "Identifier"
+      ) {
         topLevelConstBindings.set(name, {
           value: null,
           type: "module",
           name: node.imported.name,
-          source: parent.source.value
+          source: parent.source.value,
         });
       } else {
         topLevelConstBindings.set(name, {
           value: null,
           type: "module",
           name,
-          source: null
+          source: null,
         });
       }
       continue;
