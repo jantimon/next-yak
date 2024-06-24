@@ -71,7 +71,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       vocs:
         specifier: latest
-        version: 1.0.0-alpha.25(@types/react@18.2.78)(react-dom@18.2.0)(react@18.2.0)(rollup@4.14.2)(typescript@5.4.5)
+        version: 1.0.0-alpha.25(@types/react@18.2.78)(react-dom@18.2.0)(react@18.2.0)(rollup@4.14.2)(typescript@5.5.2)
 
   packages/example:
     dependencies:
@@ -160,10 +160,10 @@ importers:
         version: 18.2.0(react@18.2.0)
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(typescript@5.4.5)
+        version: 7.2.0(typescript@5.5.2)
       typescript:
-        specifier: 5.4.5
-        version: 5.4.5
+        specifier: 5.5.2
+        version: 5.5.2
       vite:
         specifier: ^4.4.9
         version: 4.4.9(@types/node@20.4.5)
@@ -9018,11 +9018,11 @@ packages:
       shikiji: 0.10.0-beta.9
     dev: false
 
-  /shikiji-twoslash@0.10.0-beta.9(typescript@5.4.5):
+  /shikiji-twoslash@0.10.0-beta.9(typescript@5.5.2):
     resolution: {integrity: sha512-VZNysft2sky0I5p4xCwoJ4BN1VxtRrY+aBu20hYGbX5IetUZl0jDFtdpNC32GUUhOddx/gy0X/fSCoomv0FE2Q==}
     dependencies:
       shikiji-core: 0.10.0-beta.9
-      twoslash: 0.0.11(typescript@5.4.5)
+      twoslash: 0.0.11(typescript@5.5.2)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -9572,7 +9572,7 @@ packages:
       - ts-node
     dev: true
 
-  /tsup@7.2.0(typescript@5.4.5):
+  /tsup@7.2.0(typescript@5.5.2):
     resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
     engines: {node: '>=16.14'}
     hasBin: true
@@ -9602,7 +9602,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.34.0
       tree-kill: 1.2.2
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -9612,24 +9612,24 @@ packages:
     resolution: {integrity: sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==}
     dev: true
 
-  /twoslash@0.0.11(typescript@5.4.5):
+  /twoslash@0.0.11(typescript@5.5.2):
     resolution: {integrity: sha512-XCxpr8Of+swV66Ox5aTqkozax6tFjJrfP0UZrGNaKlqHDyvY1gUNZE2lUqj9phyF4cKoo/LxzOhkQw7zBmRyVw==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@typescript/vfs': 1.5.0
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /twoslash@0.0.12(typescript@5.4.5):
+  /twoslash@0.0.12(typescript@5.5.2):
     resolution: {integrity: sha512-WUNpv9NUt1cUMokCAy79Y5nozyJ2F8mPM9utsxrkwgVcHtqLpxFaCLJG9lAL18EMOjAlfMBrswTW26w5KZvMSQ==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@typescript/vfs': 1.5.0
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -9668,8 +9668,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.5:
-    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+  /typescript@5.5.2:
+    resolution: {integrity: sha512-NcRtPEOsPFFWjobJEtfihkLCZCXZt/os3zf8nTxjVH3RvTSxjrCamJpbExGvYOF+tFHc3pA65qpdwPbzjohhew==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -10158,7 +10158,7 @@ packages:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
     dev: true
 
-  /vocs@1.0.0-alpha.25(@types/react@18.2.78)(react-dom@18.2.0)(react@18.2.0)(rollup@4.14.2)(typescript@5.4.5):
+  /vocs@1.0.0-alpha.25(@types/react@18.2.78)(react-dom@18.2.0)(react@18.2.0)(rollup@4.14.2)(typescript@5.5.2):
     resolution: {integrity: sha512-oqJh2XCjq1WI6g809YLPEAzeYBabLAvOxVZCvJwTmZpSxDlaD4XdDOUWefXNscg72/L98jp9DFwUB3G7p6IbFg==}
     hasBin: true
     peerDependencies:
@@ -10218,10 +10218,10 @@ packages:
       serve-static: 1.15.0
       shikiji: 0.10.0-beta.9
       shikiji-transformers: 0.10.0-beta.9
-      shikiji-twoslash: 0.10.0-beta.9(typescript@5.4.5)
+      shikiji-twoslash: 0.10.0-beta.9(typescript@5.5.2)
       tailwindcss: 3.4.1
       toml: 3.0.0
-      twoslash: 0.0.12(typescript@5.4.5)
+      twoslash: 0.0.12(typescript@5.5.2)
       ua-parser-js: 1.0.37
       unified: 11.0.4
       unist-util-visit: 5.0.0

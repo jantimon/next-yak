@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "type": "module",
   "types": "./dist/",
   "exports": {
@@ -78,7 +78,7 @@
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "typescript": "5.4.5",
+    "typescript": "5.5.2",
     "vite": "^4.4.9",
     "vitest": "0.34.5",
     "tsup": "7.2.0"
