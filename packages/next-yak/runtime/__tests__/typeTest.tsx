@@ -123,3 +123,85 @@ const MergeTestErrors = () => {
       return null;
   }
 };
+
+const CompositionOverridingAndMergingTest = () => {
+  const case1 = () => {
+    const Child = styled.div<{ $child: boolean }>`
+      ${({ $child }) =>
+        $child &&
+        css`
+          color: red;
+        `}
+    `;
+
+    const Parent = styled.div`
+      ${Child} {
+        color: blue;
+      }
+    `;
+
+    // should not inherit component props of Child
+    const _ = (
+      <Parent>
+        <Child $child />
+      </Parent>
+    );
+  };
+
+  const case2 = () => {
+    const Child = styled.div<{ $child: boolean }>`
+      ${({ $child }) =>
+        $child &&
+        css`
+          color: red;
+        `}
+    `;
+
+    const Mixin = css<{ $mixin: boolean }>`
+      color: ${({ $mixin }) => ($mixin ? `blue` : `red`)};
+    `;
+
+    const Parent = styled.div<{ $mixin: boolean }>`
+      ${Child} {
+        color: blue;
+      }
+
+      ${Mixin};
+    `;
+
+    // Overriding with Child and Mixin should work
+    const _ = (
+      <Parent $mixin>
+        <Child $child />
+      </Parent>
+    );
+  };
+
+  const case3 = () => {
+    const Child = styled.div<{ $child: boolean }>`
+      ${({ $child }) =>
+        $child &&
+        css`
+          color: red;
+        `}
+    `;
+
+    const Parent = styled.div`
+      ${Child} {
+        color: blue;
+      }
+      color: ${
+        // @ts-expect-error - should not allow props which have not been defined (like styled-components)
+        ({ $colorMe }) => ($colorMe ? `blue` : `red`)
+      };
+    `;
+
+    // Overriding with Child and Mixin should work
+    const _ = (
+      // @ts-expect-error - should not allow props which have not been defined (like styled-components)
+      <Parent $colorMe>
+        <Child $child />
+      </Parent>
+    );
+  };
+};
