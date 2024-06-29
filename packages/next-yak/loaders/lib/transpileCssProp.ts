@@ -1,8 +1,7 @@
 import type { BabelFile, NodePath, types as babelTypes } from "@babel/core";
 import {
-  objectExpression,
   type JSXAttribute,
-  type JSXElement,
+  type JSXElement
 } from "@babel/types";
 import { InvalidPositionError } from "../babel-yak-plugin.js";
 
