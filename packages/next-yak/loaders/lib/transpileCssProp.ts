@@ -1,8 +1,5 @@
 import type { BabelFile, NodePath, types as babelTypes } from "@babel/core";
-import {
-  type JSXAttribute,
-  type JSXElement
-} from "@babel/types";
+import { type JSXAttribute, type JSXElement } from "@babel/types";
 import { InvalidPositionError } from "../babel-yak-plugin.js";
 
 export const transpileCssProp = (
