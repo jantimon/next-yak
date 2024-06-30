@@ -1,7 +1,6 @@
 import path from "path";
 import babel from "@babel/core";
-// This let's vite bundle this dependency correctly (used for the playground)
-// @ts-expect-error - this should be a dynamic import
+// @ts-expect-error - this is used by babel directly so we ignore that it is not typed
 import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
