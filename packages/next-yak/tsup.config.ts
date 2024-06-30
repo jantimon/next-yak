@@ -100,8 +100,6 @@ export default defineConfig([
     sourcemap: true,
     clean: false,
     external: [
-      // css-loader imports tsloader
-      "./tsloader.js",
       // all non relative imports must be load from node_modules
       /^(?!\.)/,
     ],
