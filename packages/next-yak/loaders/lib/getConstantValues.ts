@@ -51,16 +51,39 @@ export function getConstantValues(
       }
     | {
         value: null;
-        type: "module" | "function";
+        type: "function";
+      }
+    | {
+        value: null;
+        name: string;
+        source: string | null;
+        type: "module";
       }
   >();
   const bindings = Object.entries(path.scope.bindings);
   for (const [name, binding] of bindings) {
     if (binding.kind === "module") {
-      topLevelConstBindings.set(name, {
-        value: null,
-        type: "module",
-      });
+      const node = binding.path.node;
+      const parent = binding.path.parent;
+      if (
+        node.type === "ImportSpecifier" &&
+        parent?.type === "ImportDeclaration" &&
+        node.imported.type === "Identifier"
+      ) {
+        topLevelConstBindings.set(name, {
+          value: null,
+          type: "module",
+          name: node.imported.name,
+          source: parent.source.value,
+        });
+      } else {
+        topLevelConstBindings.set(name, {
+          value: null,
+          type: "module",
+          name,
+          source: null,
+        });
+      }
       continue;
     }
     if (

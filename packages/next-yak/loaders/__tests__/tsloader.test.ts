@@ -742,9 +742,9 @@ const Icon = styled.div\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 6: Imported values cannot be used as constants
+      "/some/special/path/page.tsx: line 6: Module constants are not allowed in this context
       found: \${test}
-      Move the constant into the current file or into a .yak file"
+      Use the 'experiments.crossFileSelectors' option to enable cross file selectors"
     `);
   });
 
@@ -893,9 +893,9 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 9: Imported values cannot be used as constants
+      "/some/special/path/page.tsx: line 9: Module constants are not allowed in this context
       found: \${$red}
-      Move the constant into the current file or into a .yak file"
+      Use the 'experiments.crossFileSelectors' option to enable cross file selectors"
     `);
   });
 
@@ -1015,9 +1015,9 @@ const Icon = styled.div\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 6: Imported values cannot be used as constants
+      "/some/special/path/page.tsx: line 6: Module constants are not allowed in this context
       found: \${test}
-      Move the constant into the current file or into a .yak file"
+      Use the 'experiments.crossFileSelectors' option to enable cross file selectors"
     `);
   });
 
@@ -1813,5 +1813,42 @@ describe("css prop", () => {
         })({}))} />;"
       `);
     });
+  });
+});
+
+describe("cross file", () => {
+  it("compiles selectors", async () => {
+    expect(
+      await tsloader.call(
+        {
+          ...loaderContext,
+          getOptions: () => ({
+            configPath: "/some/special/path/config",
+            experiments: { crossFileSelectors: true },
+          }),
+        },
+        `
+      import { css, styled } from "next-yak";
+      import { Icon } from "./icon";
+      const Button = styled.button\`
+        /* Add some margin to the icon */
+        \${Icon} { margin: 0 10px; }
+        \`; 
+    `,
+      ),
+    ).toMatchInlineSnapshot(`
+      "import { css, styled } from \\"next-yak\\";
+      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      import { Icon } from \\"./icon\\";
+      const Button =
+      /*YAK Extracted CSS:
+      .Button {
+        :module-selector-import(Icon from './icon') {
+          margin: 0 10px;
+        }
+      }*/
+      /*#__PURE__*/
+      styled.button(__styleYak.Button);"
+    `);
   });
 });
