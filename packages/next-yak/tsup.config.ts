@@ -95,7 +95,7 @@ export default defineConfig([
   // loaders
   {
     entryPoints: ["loaders/tsloader.ts", "loaders/cssloader.ts"],
-    format: ["esm", "cjs"],
+    format: ["cjs"],
     minify: false,
     sourcemap: true,
     clean: false,
@@ -111,7 +111,6 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist/loaders",
   },
-
   // jsx-runtime
   {
     entryPoints: ["runtime/jsx-runtime.ts"],
