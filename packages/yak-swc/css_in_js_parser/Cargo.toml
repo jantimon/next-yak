@@ -1,0 +1,17 @@
+[package]
+name = "css_in_js_parser"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jan Nicklas <j.nicklas@me.com>"]
+description = "A CSS-in-JS parser that maintains parsing state for dynamic CSS processing"
+repository = "https://github.com/jantimon/next-yak"
+license = "MIT"
+keywords = ["css", "parser", "css-in-js"]
+categories = ["parser-implementations", "web-programming"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[dev-dependencies]
+insta = { version = "1.39.0", features = ["yaml"] }

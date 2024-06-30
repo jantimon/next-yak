@@ -1,3 +1,5 @@
+//! This module provides functionality for parsing incomplete CSS strings.
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -34,6 +36,16 @@ fn new_declaration() -> Declaration {
     }
 }
 
+/// Parses a CSS string and returns the final parser state along with parsed declarations.
+///
+/// # Arguments
+///
+/// * `css_string` - A string slice containing the CSS to parse
+/// * `initial_state` - An optional initial parser state from a previous parsing
+///
+/// # Returns
+///
+/// A tuple containing the final `ParserState` and a vector of `Declaration`s
 pub fn parse_css(css_string: &str, initial_state: Option<ParserState>) -> (ParserState, Vec<Declaration>) {
     let mut state = initial_state.unwrap_or(ParserState {
         is_inside_string: None,

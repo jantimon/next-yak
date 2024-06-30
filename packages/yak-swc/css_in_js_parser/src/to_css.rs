@@ -1,3 +1,4 @@
+//! Converts a list of CSS declarations to a CSS string
 use crate::{CssScope, Declaration};
 
 pub fn to_css(declarations: &[Declaration]) -> String {
@@ -17,7 +18,7 @@ pub fn to_css(declarations: &[Declaration]) -> String {
             }
         }
 
-        // Open scopes that are not in the previous declaration
+        // Find the open scopes (those which are not in the previous declaration)
         for i in 0..scopes.len() {
             if i >= previous_scopes.len() || scopes[i] != previous_scopes[i] {
                 for j in i..scopes.len() {
@@ -32,7 +33,7 @@ pub fn to_css(declarations: &[Declaration]) -> String {
         previous_scopes = scopes.to_vec();
     }
 
-    // Close all scopes
+    // Close all scopes with proper indentation
     for i in (0..previous_scopes.len()).rev() {
         css.push_str(&format!("\n{}}}", "  ".repeat(i)));
     }
