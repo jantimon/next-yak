@@ -1,6 +1,6 @@
-import tsloader from "./tsloader.js";
 import type { LoaderContext } from "webpack";
 import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
+import { getTsLoaderResultFromCache } from "./lib/loaderCompilationCache.js";
 
 /**
  * Transform typescript to css
@@ -9,27 +9,13 @@ import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
  */
 export default async function cssloader(
   this: LoaderContext<{}>,
-  source: string,
 ): Promise<string | void> {
   const callback = this.async();
-
-  return tsloader.call(
-    {
-      ...this,
-      async: () => (err, code) => {
-        if (err || !code) {
-          return callback(
-            err && err instanceof Error ? err : new Error("No code returned"),
-          );
-        }
-        const css = extractCss(String(code));
-        return resolveCrossFileSelectors(this, css).then(
-          (result) => callback(null, result),
-          callback,
-        );
-      },
-    },
-    source,
+  const typescriptCode = getTsLoaderResultFromCache(this);
+  const css = extractCss(typescriptCode);
+  return resolveCrossFileSelectors(this, css).then(
+    (result) => callback(null, result),
+    callback
   );
 }
 

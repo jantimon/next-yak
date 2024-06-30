@@ -1,49 +1,55 @@
 import { describe, it, expect } from "vitest";
-import cssloader from "../cssloader.js";
+import cssloader from "../cssloader";
+import tsloader from "../tsloader";
 
-const loaderContext = {
-  resourcePath: "/some/special/path/page.tsx",
-  rootContext: "/some",
-  mode: "development",
-  importModule: () => {
-    return {
-      queries: {
-        sm: "@media (min-width: 640px)",
-        md: "@media (min-width: 768px)",
-        lg: "@media (min-width: 1024px)",
-        xl: "@media (min-width: 1280px)",
-        xxl: "@media (min-width: 1536px)",
-      },
-      spacing: {
-        0.5: "4px",
-        1: "8px",
-        2: "16px",
-        4: "32px",
-      },
-      typography: {
-        "letter spacing": "0.05em",
-        primary: {
-          "font weight": 800,
+const runTsLoaderAndCssLoader = function (code) {
+  const loaderContext = {
+    _compilation: {},
+    resourcePath: "/some/special/path/page.tsx",
+    rootContext: "/some",
+    mode: "development",
+    importModule: () => {
+      return {
+        queries: {
+          sm: "@media (min-width: 640px)",
+          md: "@media (min-width: 768px)",
+          lg: "@media (min-width: 1024px)",
+          xl: "@media (min-width: 1280px)",
+          xxl: "@media (min-width: 1536px)",
         },
-      },
-    };
-  },
-  getOptions: () => ({
-    configPath: "/some/special/path/config",
-  }),
-  async: () => (err, result) => {
-    if (err) {
-      throw err;
-    }
-    return result;
-  },
+        spacing: {
+          0.5: "4px",
+          1: "8px",
+          2: "16px",
+          4: "32px",
+        },
+        typography: {
+          "letter spacing": "0.05em",
+          primary: {
+            "font weight": 800,
+          },
+        },
+      };
+    },
+    getOptions: () => ({
+      configPath: "/some/special/path/config",
+    }),
+    async: () => (err, result) => {
+      if (err) {
+        throw err;
+      }
+      return result;
+    },
+  };
+  return tsloader
+    .call(loaderContext, code)
+    .then(() => cssloader.call(loaderContext, code));
 };
 
 describe("cssloader", () => {
   it("should return the correct value", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -56,8 +62,8 @@ const headline = css\`
     color: red;
   }
       \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         font-size: 2rem;
@@ -72,8 +78,7 @@ const headline = css\`
 
   it("should support nested css code", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -93,8 +98,8 @@ const headline = css\`
     color: \${() => x ? "red" : "blue"\};
   }
 \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         font-size: 2rem;
@@ -117,8 +122,7 @@ const headline = css\`
 
   it("should ignores empty chunks if they include only a comment", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -130,8 +134,8 @@ const headline = css\`
     color: blue;
   \`}
 \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline__headline {
         color: blue;
@@ -141,8 +145,7 @@ const headline = css\`
 
   it("should support css variables", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -152,8 +155,8 @@ const headline = css\`
     color: \${() => x ? "red" : "blue"\};
   }
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         &:hover {
@@ -165,8 +168,7 @@ const headline = css\`
 
   it("should support attrs on intrinsic elements", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled } from "next-yak";
 
@@ -175,8 +177,8 @@ const headline = styled.input.attrs({
 })\`
   color: red;
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         color: red;
@@ -186,8 +188,7 @@ const headline = styled.input.attrs({
 
   it("should support attrs on wrapped elements", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled } from "next-yak";
 
@@ -200,8 +201,8 @@ const newHeadline = styled(headline).attrs({
 })\`
   color: black;
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         color: red;
@@ -213,8 +214,7 @@ const newHeadline = styled(headline).attrs({
 
   it("should support css variables with spaces", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -224,8 +224,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
@@ -239,8 +239,7 @@ const headline = css\`
 
   it("should replace breakpoint references with actual media queries", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from "@/theme.yak";
@@ -254,8 +253,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         color: blue;
@@ -273,8 +272,7 @@ const headline = css\`
 
   it("should replace breakpoint references with actual media queries from single quote imports", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from '@/theme.yak';
@@ -288,8 +286,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         color: blue;
@@ -307,8 +305,7 @@ const headline = css\`
 
   it("should replace breakpoint references with actual media queries when using square brackets", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from '@/theme.yak';
@@ -322,8 +319,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         color: blue;
@@ -343,8 +340,7 @@ const headline = css\`
     // in styled-components \\ is replaced with \
     // this test verifies that yak provides the same behavior
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from "@/theme";
@@ -358,8 +354,8 @@ const headline = css\`
   }
   content: "\\\\\\\\"
 \`
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         :before {
@@ -376,8 +372,7 @@ const headline = css\`
 
   it("should convert keyframes", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { styled, keyframes } from "next-yak";
@@ -394,8 +389,8 @@ const fadeIn = keyframes\`
 const FadeInButton = styled.button\`
   animation: 1s \${fadeIn} ease-out;
 \`
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       "@keyframes fadeIn {
         0% {
@@ -412,8 +407,7 @@ const FadeInButton = styled.button\`
 
   it("should allow to target components", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes } from "next-yak";
 
@@ -438,8 +432,8 @@ const Wrapper = styled.div\`
     padding: 10px;
   }
 \`
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".Link {
         color: palevioletred;
@@ -463,8 +457,7 @@ const Wrapper = styled.div\`
 
   it("should allow to target components even if they don't have styles", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes } from "next-yak";
 
@@ -480,8 +473,8 @@ const Wrapper = styled.div\`
   }
 \`
 
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".Icon {}
       .Wrapper {
@@ -494,8 +487,7 @@ const Wrapper = styled.div\`
 
   it("should support nested expressions", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes, css } from "next-yak";
 
@@ -524,8 +516,8 @@ const Component2 = styled.div\`
     color: hotpink;
 \`;
 
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".Component {
         background-color: red;
@@ -562,8 +554,7 @@ const Component2 = styled.div\`
 
   it("should inline constants", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, css } from "next-yak";
 
@@ -573,8 +564,8 @@ const headline = css\`
   color: \${red};
   z-index: \${zIndex};
 \`
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         color: #E50914;
@@ -585,8 +576,7 @@ const headline = css\`
 
   it("should support conditional nested expressions", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes, css } from "next-yak";
 
@@ -609,8 +599,8 @@ const Component = styled.div\`
         transition: color \${() => duration} \${() => easing};
     \`}
 \`;
-`,
-      ),
+`
+      )
     ).toMatchInlineSnapshot(`
       ".Component {
         background-color: red;
@@ -636,8 +626,7 @@ const Component = styled.div\`
 
   it("should replace all array like constants", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries, spacing, typography } from "@/theme.yak";
@@ -649,8 +638,8 @@ const headline = css\`
   margin: -\${spacing[2]};
   font-weight: \${typography.primary["font weight"]};
   letter-spacing: \${typography["letter spacing"]};
-\``,
-      ),
+\``
+      )
     ).toMatchInlineSnapshot(`
       ".headline {
         @media (min-width: 1280px) {
@@ -665,8 +654,7 @@ const headline = css\`
 
   it("should detect expressions with units automatically in arrow function expressions", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
      import styles from "./page.module.css";
      import { css } from "next-yak";
@@ -678,8 +666,8 @@ const headline = css\`
       transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
        translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
     \`
-     `,
-      ),
+     `
+      )
     ).toMatchInlineSnapshot(`
       ".case3 {
         padding: var(--case3-padding_18fi82j);
@@ -691,8 +679,7 @@ const headline = css\`
 
   it("should detect expressions with units automatically in edge cases", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
      import styles from "./page.module.css";
      import { css } from "next-yak";
@@ -704,8 +691,8 @@ const headline = css\`
         left: \${() => spacing()}px;
         right: \${value}px;
     \`
-     `,
-      ),
+     `
+      )
     ).toMatchInlineSnapshot(`
       ".case3 {
         margin: var(--case3-margin_18fi82j);
@@ -720,8 +707,7 @@ const headline = css\`
 
 it("should allow allow using an inline nested css literal", async () => {
   expect(
-    await cssloader.call(
-      loaderContext,
+    await runTsLoaderAndCssLoader(
       `
    import styles from "./page.module.css";
    import { styled, css } from "next-yak";
@@ -734,8 +720,8 @@ it("should allow allow using an inline nested css literal", async () => {
      }
    \`;
    
-   `,
-    ),
+   `
+    )
   ).toMatchInlineSnapshot(`
     ".Icon {}
     .Button__primary {
@@ -749,16 +735,15 @@ it("should allow allow using an inline nested css literal", async () => {
 it("should support linebreaks in content", async () => {
   expect(
     (
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
    import { styled, css } from "next-yak";
    const Button = styled.button\`
      :before {
       content: '🦄\\nHello World';
      }
-   \`;`,
+   \`;`
       )
-    ).split("content")[1],
+    ).split("content")[1]
   ).includes("\\nHello World");
 });
