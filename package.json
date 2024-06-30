@@ -10,7 +10,7 @@
     "build": "pnpm run --filter=next-yak build",
     "watch": "pnpm run --filter=next-yak watch",
     "example": "pnpm --filter=next-yak-example run dev",
-    "test": "pnpm --filter=next-yak run \"/test($|:types)/\"",
+    "test": "pnpm --filter=next-yak --filter=webpack-tests run \"/test($|:types)/\"",
     "test:watch": "pnpm --filter=next-yak run test:watch",
     "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak",
     "prettier": "pnpm run --recursive --if-present prettier"

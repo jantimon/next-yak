@@ -1,0 +1,18 @@
+{
+  "name": "webpack-tests",
+  "version": "1.0.0",
+  "description": "next-yak e2e webpack tests",
+  "scripts": {
+    "test": "vitest --no-watch",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vite": "^4.4.9",
+    "vitest": "0.34.5",
+    "webpack": "5.92.1",
+    "swc-loader": "0.2.6",
+    "next-yak": "workspace:*",
+    "memfs": "4.9.3",
+    "unionfs": "4.5.4"
+  }
+}
