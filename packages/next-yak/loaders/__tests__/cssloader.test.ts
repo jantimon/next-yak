@@ -1,49 +1,55 @@
 import { describe, it, expect } from "vitest";
-import cssloader from "../cssloader.js";
+import cssloader from "../cssloader";
+import tsloader from "../tsloader";
 
-const loaderContext = {
-  resourcePath: "/some/special/path/page.tsx",
-  rootContext: "/some",
-  mode: "development",
-  importModule: () => {
-    return {
-      queries: {
-        sm: "@media (min-width: 640px)",
-        md: "@media (min-width: 768px)",
-        lg: "@media (min-width: 1024px)",
-        xl: "@media (min-width: 1280px)",
-        xxl: "@media (min-width: 1536px)",
-      },
-      spacing: {
-        0.5: "4px",
-        1: "8px",
-        2: "16px",
-        4: "32px",
-      },
-      typography: {
-        "letter spacing": "0.05em",
-        primary: {
-          "font weight": 800,
+const runTsLoaderAndCssLoader = function (code) {
+  const loaderContext = {
+    _compilation: {},
+    resourcePath: "/some/special/path/page.tsx",
+    rootContext: "/some",
+    mode: "development",
+    importModule: () => {
+      return {
+        queries: {
+          sm: "@media (min-width: 640px)",
+          md: "@media (min-width: 768px)",
+          lg: "@media (min-width: 1024px)",
+          xl: "@media (min-width: 1280px)",
+          xxl: "@media (min-width: 1536px)",
         },
-      },
-    };
-  },
-  getOptions: () => ({
-    configPath: "/some/special/path/config",
-  }),
-  async: () => (err, result) => {
-    if (err) {
-      throw err;
-    }
-    return result;
-  },
+        spacing: {
+          0.5: "4px",
+          1: "8px",
+          2: "16px",
+          4: "32px",
+        },
+        typography: {
+          "letter spacing": "0.05em",
+          primary: {
+            "font weight": 800,
+          },
+        },
+      };
+    },
+    getOptions: () => ({
+      configPath: "/some/special/path/config",
+    }),
+    async: () => (err, result) => {
+      if (err) {
+        throw err;
+      }
+      return result;
+    },
+  };
+  return tsloader
+    .call(loaderContext, code)
+    .then(() => cssloader.call(loaderContext, code));
 };
 
 describe("cssloader", () => {
   it("should return the correct value", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -72,8 +78,7 @@ const headline = css\`
 
   it("should support nested css code", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -117,8 +122,7 @@ const headline = css\`
 
   it("should ignores empty chunks if they include only a comment", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -141,8 +145,7 @@ const headline = css\`
 
   it("should support css variables", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -165,8 +168,7 @@ const headline = css\`
 
   it("should support attrs on intrinsic elements", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled } from "next-yak";
 
@@ -186,8 +188,7 @@ const headline = styled.input.attrs({
 
   it("should support attrs on wrapped elements", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled } from "next-yak";
 
@@ -213,8 +214,7 @@ const newHeadline = styled(headline).attrs({
 
   it("should support css variables with spaces", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { css } from "next-yak";
@@ -239,8 +239,7 @@ const headline = css\`
 
   it("should replace breakpoint references with actual media queries", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from "@/theme.yak";
@@ -273,8 +272,7 @@ const headline = css\`
 
   it("should replace breakpoint references with actual media queries from single quote imports", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from '@/theme.yak';
@@ -307,8 +305,7 @@ const headline = css\`
 
   it("should replace breakpoint references with actual media queries when using square brackets", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from '@/theme.yak';
@@ -343,8 +340,7 @@ const headline = css\`
     // in styled-components \\ is replaced with \
     // this test verifies that yak provides the same behavior
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries } from "@/theme";
@@ -376,8 +372,7 @@ const headline = css\`
 
   it("should convert keyframes", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import styles from "./page.module.css";
 import { styled, keyframes } from "next-yak";
@@ -412,8 +407,7 @@ const FadeInButton = styled.button\`
 
   it("should allow to target components", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes } from "next-yak";
 
@@ -463,8 +457,7 @@ const Wrapper = styled.div\`
 
   it("should allow to target components even if they don't have styles", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes } from "next-yak";
 
@@ -494,8 +487,7 @@ const Wrapper = styled.div\`
 
   it("should support nested expressions", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes, css } from "next-yak";
 
@@ -562,8 +554,7 @@ const Component2 = styled.div\`
 
   it("should inline constants", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, css } from "next-yak";
 
@@ -585,8 +576,7 @@ const headline = css\`
 
   it("should support conditional nested expressions", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { styled, keyframes, css } from "next-yak";
 
@@ -636,8 +626,7 @@ const Component = styled.div\`
 
   it("should replace all array like constants", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
 import { css } from "next-yak";
 import { queries, spacing, typography } from "@/theme.yak";
@@ -665,8 +654,7 @@ const headline = css\`
 
   it("should detect expressions with units automatically in arrow function expressions", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
      import styles from "./page.module.css";
      import { css } from "next-yak";
@@ -691,8 +679,7 @@ const headline = css\`
 
   it("should detect expressions with units automatically in edge cases", async () => {
     expect(
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
      import styles from "./page.module.css";
      import { css } from "next-yak";
@@ -720,8 +707,7 @@ const headline = css\`
 
 it("should allow allow using an inline nested css literal", async () => {
   expect(
-    await cssloader.call(
-      loaderContext,
+    await runTsLoaderAndCssLoader(
       `
    import styles from "./page.module.css";
    import { styled, css } from "next-yak";
@@ -749,8 +735,7 @@ it("should allow allow using an inline nested css literal", async () => {
 it("should support linebreaks in content", async () => {
   expect(
     (
-      await cssloader.call(
-        loaderContext,
+      await runTsLoaderAndCssLoader(
         `
    import { styled, css } from "next-yak";
    const Button = styled.button\`
