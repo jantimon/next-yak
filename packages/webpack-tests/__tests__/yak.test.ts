@@ -19,3 +19,27 @@ describe("Yak Webpack e2e tests", () => {
     expect(JSON.stringify(compiledCode)).toContain("height: 10px;");
   });
 });
+
+
+describe("Yak Webpack e2e tests for experimental features", () => {
+  test("should compile constants from other files", async () => {
+    const compiledCode = await compile({
+      "./src/index.tsx": `
+      import { styled } from "next-yak";
+      import { siteMaxWidth } from "./constants";
+      export const Button = styled.button\`
+        color: red;
+        height: \${siteMaxWidth}px;
+      \`;
+    `,
+      "./src/constants.ts": `
+      export const siteMaxWidth = 10;
+    `,
+    }, {
+      experiments: {
+        crossFileSelectors: true,
+      }
+    });
+    expect(JSON.stringify(compiledCode)).toContain("height: 10px;");
+  });
+});

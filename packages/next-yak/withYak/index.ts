@@ -13,6 +13,9 @@ const currentDir =
 export type YakConfigOptions = {
   extensions?: string[];
   contextPath?: string;
+  experiments?: {
+    crossFileSelectors?: boolean;
+  };
 };
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {

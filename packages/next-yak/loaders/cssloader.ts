@@ -1,4 +1,6 @@
 import tsloader from "./tsloader.js";
+import type { LoaderContext } from "webpack";
+import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
 
 /**
  * Transform typescript to css
@@ -6,18 +8,25 @@ import tsloader from "./tsloader.js";
  * This loader reuses the yak tsloader and extracts the css from the generated comments
  */
 export default async function cssloader(
-  this: any,
+  this: LoaderContext<{}>,
   source: string,
 ): Promise<string | void> {
   const callback = this.async();
+
   return tsloader.call(
     {
       ...this,
-      async: () => (err: unknown | null, code?: string) => {
+      async: () => (err, code) => {
         if (err || !code) {
-          return callback(err || new Error("No code returned"));
+          return callback(
+            err && err instanceof Error ? err : new Error("No code returned"),
+          );
         }
-        return callback(null, extractCss(code));
+        const css = extractCss(String(code));
+        return resolveCrossFileSelectors(this, css).then(
+          (result) => callback(null, result),
+          callback,
+        );
       },
     },
     source,

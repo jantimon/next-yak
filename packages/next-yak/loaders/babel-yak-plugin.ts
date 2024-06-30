@@ -16,6 +16,7 @@ type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
   rootContext?: string;
   devMode?: boolean;
+  crossFile: boolean;
 };
 
 type YakLocalIdentifierNames = {
@@ -203,6 +204,7 @@ export default function (
                 getComponentTypes(this.yakTemplateExpressionsByPath),
                 this.topLevelConstBindings,
                 state.file,
+                options.crossFile,
               );
             },
           );
@@ -515,6 +517,7 @@ function transformYakExpressions(
   componentTypeMapping: Record<string, YakTemplateLiteral["type"]>,
   constantValues: ReturnType<typeof getConstantValues>,
   file: BabelFile,
+  crossFileSelectors: boolean,
 ) {
   // Get className / keyframes name
   const identifier = createUniqueName(
@@ -572,23 +575,32 @@ function transformYakExpressions(
             quasiExpression,
             file,
           );
-        }
-        if (constantValue.type === "module") {
-          throw new InvalidPositionError(
-            `Imported values cannot be used as constants`,
-            quasiExpression,
-            file,
-            "Move the constant into the current file or into a .yak file",
-          );
-        }
-        if (constantValue.type === "function") {
+        } else if (constantValue.type === "function") {
           throw new InvalidPositionError(
             `Function constants are not supported yet`,
             quasiExpression,
             file,
           );
+        } else if (constantValue.type === "module") {
+          if (!crossFileSelectors) {
+            throw new InvalidPositionError(
+              `Module constants are not allowed in this context`,
+              quasiExpression,
+              file,
+              `Use the 'experiments.crossFileSelectors' option to enable cross file selectors`,
+            );
+          }
+          if (constantValue.source === null) {
+            throw new InvalidPositionError(
+              `Module constant could not be resolved`,
+              quasiExpression,
+              file,
+            );
+          }
+          replaceValue = `:module-selector-import(${constantValue.name} from '${constantValue.source}')`;
+        } else {
+          replaceValue = String(constantValue?.value);
         }
-        replaceValue = String(constantValue?.value);
       }
       // Identifier without program scope definition
       // e.g.

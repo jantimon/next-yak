@@ -37,7 +37,7 @@ const useCurrentTime = () => {
   }, [time]);
 };
 
-const ClockHand = styled.div<{ $angle: number }>`
+export const ClockHand = styled.div<{ $angle: number }>`
   position: absolute;
   left: 50%;
   top: 50%;
