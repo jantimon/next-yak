@@ -15,7 +15,7 @@ export default async function cssloader(
   const css = extractCss(typescriptCode);
   return resolveCrossFileSelectors(this, css).then(
     (result) => callback(null, result),
-    callback
+    callback,
   );
 }
 

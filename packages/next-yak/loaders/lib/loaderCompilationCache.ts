@@ -1,6 +1,6 @@
 /*
  * A dangerous way to cache the result of the ts-loader
- * 
+ *
  * This is dangerous because we rely on the webpack internals and loader execution
  * to cache the result of the ts-loader but it is the only way to avoid compiling the typescript
  * code twice
@@ -21,7 +21,7 @@ type LoaderContextWithCompilation = LoaderContext<unknown> & {
  */
 export const writeTsLoaderResultToCache = (
   loaderContext: LoaderContext<unknown>,
-  code: string
+  code: string,
 ) => {
   const cacheMap = ((
     loaderContext as LoaderContextWithCompilation
@@ -37,14 +37,14 @@ export const writeTsLoaderResultToCache = (
  * avoid running the tsloader twice
  */
 export const getTsLoaderResultFromCache = (
-  loaderContext: LoaderContext<unknown>
+  loaderContext: LoaderContext<unknown>,
 ) => {
   const preCompiled = (
     loaderContext as LoaderContextWithCompilation
   )._compilation[cacheKey]?.get(loaderContext.resourcePath);
   if (!preCompiled) {
     throw new Error(
-      "The file was processed by the css-loader before the ts-loader which should never happen"
+      "The file was processed by the css-loader before the ts-loader which should never happen",
     );
   }
   return preCompiled;

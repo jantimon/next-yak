@@ -62,8 +62,8 @@ const headline = css\`
     color: red;
   }
       \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         font-size: 2rem;
@@ -98,8 +98,8 @@ const headline = css\`
     color: \${() => x ? "red" : "blue"\};
   }
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         font-size: 2rem;
@@ -134,8 +134,8 @@ const headline = css\`
     color: blue;
   \`}
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline__headline {
         color: blue;
@@ -155,8 +155,8 @@ const headline = css\`
     color: \${() => x ? "red" : "blue"\};
   }
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         &:hover {
@@ -177,8 +177,8 @@ const headline = styled.input.attrs({
 })\`
   color: red;
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         color: red;
@@ -201,8 +201,8 @@ const newHeadline = styled(headline).attrs({
 })\`
   color: black;
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         color: red;
@@ -224,8 +224,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
@@ -253,8 +253,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         color: blue;
@@ -286,8 +286,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         color: blue;
@@ -319,8 +319,8 @@ const headline = css\`
   display: block;
   \${css\`color: orange\`}
   \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         color: blue;
@@ -354,8 +354,8 @@ const headline = css\`
   }
   content: "\\\\\\\\"
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         :before {
@@ -389,8 +389,8 @@ const fadeIn = keyframes\`
 const FadeInButton = styled.button\`
   animation: 1s \${fadeIn} ease-out;
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       "@keyframes fadeIn {
         0% {
@@ -432,8 +432,8 @@ const Wrapper = styled.div\`
     padding: 10px;
   }
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".Link {
         color: palevioletred;
@@ -473,8 +473,8 @@ const Wrapper = styled.div\`
   }
 \`
 
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".Icon {}
       .Wrapper {
@@ -516,8 +516,8 @@ const Component2 = styled.div\`
     color: hotpink;
 \`;
 
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".Component {
         background-color: red;
@@ -564,8 +564,8 @@ const headline = css\`
   color: \${red};
   z-index: \${zIndex};
 \`
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         color: #E50914;
@@ -599,8 +599,8 @@ const Component = styled.div\`
         transition: color \${() => duration} \${() => easing};
     \`}
 \`;
-`
-      )
+`,
+      ),
     ).toMatchInlineSnapshot(`
       ".Component {
         background-color: red;
@@ -638,8 +638,8 @@ const headline = css\`
   margin: -\${spacing[2]};
   font-weight: \${typography.primary["font weight"]};
   letter-spacing: \${typography["letter spacing"]};
-\``
-      )
+\``,
+      ),
     ).toMatchInlineSnapshot(`
       ".headline {
         @media (min-width: 1280px) {
@@ -666,8 +666,8 @@ const headline = css\`
       transform: translate(-50%, -50%) rotate(\${({ index }) => index * 30}deg)
        translate(0, -88px) rotate(\${({ index }) => -index * 30}deg);
     \`
-     `
-      )
+     `,
+      ),
     ).toMatchInlineSnapshot(`
       ".case3 {
         padding: var(--case3-padding_18fi82j);
@@ -691,8 +691,8 @@ const headline = css\`
         left: \${() => spacing()}px;
         right: \${value}px;
     \`
-     `
-      )
+     `,
+      ),
     ).toMatchInlineSnapshot(`
       ".case3 {
         margin: var(--case3-margin_18fi82j);
@@ -720,8 +720,8 @@ it("should allow allow using an inline nested css literal", async () => {
      }
    \`;
    
-   `
-    )
+   `,
+    ),
   ).toMatchInlineSnapshot(`
     ".Icon {}
     .Button__primary {
@@ -742,8 +742,8 @@ it("should support linebreaks in content", async () => {
      :before {
       content: '🦄\\nHello World';
      }
-   \`;`
+   \`;`,
       )
-    ).split("content")[1]
+    ).split("content")[1],
   ).includes("\\nHello World");
 });
