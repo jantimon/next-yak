@@ -27,7 +27,7 @@ pub struct TransformVisitor {
 }
 
 impl TransformVisitor {
-    fn new(comments: Option<PluginCommentsProxy>) -> Self {
+    pub fn new(comments: Option<PluginCommentsProxy>) -> Self {
         Self {
             next_yak_imports: HashMap::new(),
             current_css_state: None,
