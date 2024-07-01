@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "css_parser"
+name = "css_in_js_parser"
 version = "0.1.0"
 dependencies = [
  "insta",

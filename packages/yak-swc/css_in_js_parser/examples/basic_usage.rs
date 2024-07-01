@@ -1,7 +1,7 @@
 use css_in_js_parser::{parse_css, to_css};
 
 fn main() {
-    let css = r#"
+  let css = r#"
         .button {
             color: blue;
             &:hover {
@@ -10,9 +10,9 @@ fn main() {
         }
     "#;
 
-    let (_, declarations) = parse_css(css, None);
-    println!("Parsed declarations: {:?}", declarations);
+  let (_, declarations) = parse_css(css, None);
+  println!("Parsed declarations: {:?}", declarations);
 
-    let regenerated_css = to_css(&declarations);
-    println!("Regenerated CSS:\n{}", regenerated_css);
+  let regenerated_css = to_css(&declarations);
+  println!("Regenerated CSS:\n{}", regenerated_css);
 }
