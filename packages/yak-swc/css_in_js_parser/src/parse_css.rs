@@ -8,8 +8,21 @@ pub struct ParserState {
   is_inside_comment: bool,
   is_inside_property_value: bool,
   is_inside_at_rule: bool,
-  current_scopes: Vec<CssScope>,
+  pub current_scopes: Vec<CssScope>,
   current_declaration: Declaration,
+}
+
+impl ParserState {
+  pub fn new(base_scopes: Option<Vec<CssScope>>) -> Self {
+    Self {
+      is_inside_string: None,
+      is_inside_comment: false,
+      is_inside_property_value: false,
+      is_inside_at_rule: false,
+      current_scopes: base_scopes.unwrap_or(Vec::new()),
+      current_declaration: new_declaration(),
+    }
+  }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -50,14 +63,7 @@ pub fn parse_css(
   css_string: &str,
   initial_state: Option<ParserState>,
 ) -> (ParserState, Vec<Declaration>) {
-  let mut state = initial_state.unwrap_or(ParserState {
-    is_inside_string: None,
-    is_inside_comment: false,
-    is_inside_property_value: false,
-    is_inside_at_rule: false,
-    current_scopes: Vec::new(),
-    current_declaration: new_declaration(),
-  });
+  let mut state = initial_state.unwrap_or(ParserState::new(None));
 
   let mut current_code = String::new();
   let mut back_slashes = 0;

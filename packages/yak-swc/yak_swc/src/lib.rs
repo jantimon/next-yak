@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, to_css};
+use css_in_js_parser::{parse_css, to_css, CssScope};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -15,8 +15,14 @@ use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata
 
 pub struct TransformVisitor {
     next_yak_imports: HashMap<String, String>,
+    // Last css parser state to contiue parsing the next css code from a quasi
+    // in the same scope
     current_css_state: Option<ParserState>,
+    // All css declarations of the current root css expression
     current_declaration: Vec<Declaration>,
+    // e.g Button in const Button = styled.button`color: red;`
+    current_variable_name: Option<String>,
+    // SWC comments proxy to add extracted css as comments
     comments: Option<PluginCommentsProxy>,
 }
 
@@ -26,8 +32,19 @@ impl TransformVisitor {
             next_yak_imports: HashMap::new(),
             current_css_state: None,
             current_declaration: vec![],
+            current_variable_name: None,
             comments,
         }
+    }
+
+    // Check if the current AST has imports to the next-yak library
+    fn is_using_next_yak(&self) -> bool {
+        return !self.next_yak_imports.is_empty();
+    }
+
+    // Check if we are inside a next-yak css expression
+    fn is_inside_css_expression(&self) -> bool {
+        return self.current_css_state.is_some();
     }
 }
 
@@ -51,19 +68,38 @@ impl VisitMut for TransformVisitor {
         }
     }
 
-    fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-        if self.next_yak_imports.is_empty() {
+    // Visit variable declarations
+    // To store the current name which can be used for class names
+    // e.g. Button for const Button = styled.button`color: red;`
+    fn visit_mut_var_decl(&mut self, n: &mut VarDecl) {
+        if !self.is_using_next_yak() {
             return;
         }
+        for decl in &mut n.decls {
+            if let Pat::Ident(BindingIdent { id, .. }) = &decl.name {
+                let previous_variable_name = self.current_variable_name.clone();
+                self.current_variable_name = Some(id.to_string());
+                decl.init.visit_mut_with(self);
+                self.current_variable_name = previous_variable_name;
+            }
+        }
+    }
 
+    // Visit tagged template literals
+    // This is where the css-in-js expressions are
+    fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
+        if !self.is_using_next_yak() {
+            return;
+        }
         // styled.button`color: red;`
         // keyframes`from { color: red; }`
         // css`color: red;`
-        let template_literal_name: Option<String> = match &*n.tag {
-            Expr::Ident(Ident { sym, .. }) => Some(sym.to_string()),
+        // styled.button.attrs({})`color: red;`
+        let yak_library_function_name = match &*n.tag {
+            Expr::Ident(Ident { sym, .. }) => self.next_yak_imports.get(&sym.to_string()).cloned(),
             Expr::Member(MemberExpr { obj, .. }) => {
                 if let Expr::Ident(Ident { sym, .. }) = &**obj {
-                    Some(sym.to_string())
+                    self.next_yak_imports.get(&sym.to_string()).cloned()
                 } else {
                     None
                 }
@@ -72,11 +108,7 @@ impl VisitMut for TransformVisitor {
         };
 
         // Only continue if the template literal is our own styled, css or keyframes
-        if template_literal_name.is_none()
-            || !self
-                .next_yak_imports
-                .contains_key(&template_literal_name.unwrap())
-        {
+        if yak_library_function_name.is_none() {
             return;
         }
 
@@ -86,11 +118,50 @@ impl VisitMut for TransformVisitor {
         // Current css parser state to parse an incomplete css code from a quasi
         let mut css_state = self.current_css_state.clone();
 
+        let current_variable_name = self
+            .current_variable_name
+            .clone()
+            .unwrap_or("default".to_string())
+            // SWC variables end with #0
+            .replace("#0", "")
+            .replace("#", "_");
+
         // Every top-level css-in-js gathers its own css declarations
-        if is_top_level {
+        if !self.is_inside_css_expression() {
             self.current_declaration = vec![];
+            css_state = Some(ParserState::new(Some(Vec::from([
+                match yak_library_function_name.as_deref() {
+                    Some("styled") => CssScope {
+                        name: format!(".{}", current_variable_name),
+                        //TODO: should be an enum
+                        scope_type: "selector".to_string(),
+                    },
+                    Some("css") => CssScope {
+                        name: format!(".{}", current_variable_name),
+                        //TODO: should be an enum
+                        scope_type: "selector".to_string(),
+                    },
+                    Some("keyframes") => CssScope {
+                        name: format!("@keyframes {}", current_variable_name),
+                        //TODO: should be an enum
+                        scope_type: "at_rule".to_string(),
+                    },
+                    _ => panic!("Unknown next-yak function"),
+                },
+            ]))));
         } else {
-            // TODO add a custom css class name for nested css expressions to self.current_css_state
+            // Change the first CssScope
+            if yak_library_function_name.as_deref() == Some("css") {
+                let mut css_state_with_css_scope = css_state.clone().unwrap();
+                css_state_with_css_scope.current_scopes[0] = CssScope {
+                    // TODO: instead of _css we should use the current conditions and ensure that it is unique
+                    name: format!(".{}_css", current_variable_name),
+                    scope_type: "selector".to_string(),
+                };
+                css_state = Some(css_state_with_css_scope);
+            } else {
+                panic!("Unsupported nested yak expression");
+            }
         }
 
         // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
@@ -118,12 +189,11 @@ impl VisitMut for TransformVisitor {
         // revert to the css state before the current expression or literal
         self.current_css_state = css_state_before;
 
-        dbg!(is_top_level);
-        dbg!(to_css(&self.current_declaration));
-
         // Add the extracted CSS as a comment
         if is_top_level {
             {
+                println!("{}", to_css(&self.current_declaration));
+
                 if let Some(comments) = &self.comments {
                     comments.add_leading(
                         n.tpl.span.lo,
@@ -165,7 +235,7 @@ test_inline!(
     |_| as_folder(TransformVisitor::new(None)),
     import_and_use,
     r#"
-    import { styled, css } from "next-yak";
+    import { styled, css, keyframes } from "next-yak";
     const Button = styled.button`
         font-size: 1rem;
         .icon { 
@@ -173,10 +243,15 @@ test_inline!(
             padding: 1rem;
         }
     `;
+    const Animation = keyframes`
+        from { color: red; }
+        to { color: blue; }
+    `;
     "#,
     r#"
-    import { styled, css } from "next-yak";
+    import { styled, css, keyframes } from "next-yak";
     const Button = styled.button`EXTRACTED`;
+    const Animation = keyframes`EXTRACTED`;
     "#
 );
 
