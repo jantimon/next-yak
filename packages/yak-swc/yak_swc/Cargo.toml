@@ -6,12 +6,9 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib"]
 
-[profile.release]
-lto = true
-
 [dependencies]
-serde = "1"
-swc_core = { version = "0.95.*", features = ["ecma_plugin_transform"] }
+serde = "1.0.203"
+swc_core = { version = "0.96.0", features = ["ecma_plugin_transform"] }
 swc_common = "0.34.3"
 css_in_js_parser = { path = "../css_in_js_parser" }
 itertools = "0.13.0"

@@ -10,9 +10,9 @@ keywords = ["css", "parser", "css-in-js"]
 categories = ["parser-implementations", "web-programming"]
 
 [dependencies]
-serde = { version = "1.0", features = ["derive"] }
+serde = { version = "1.0.203", features = ["derive"] }
+serde_json = "1.0.119"
 serde_repr = "0.1"
-serde_json = "1.0"
 
 [dev-dependencies]
 insta = { version = "1.39.0", features = ["yaml"] }
