@@ -15,14 +15,14 @@ use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata
 
 pub struct TransformVisitor {
     next_yak_imports: HashMap<String, String>,
-    // Last css parser state to contiue parsing the next css code from a quasi
-    // in the same scope
+    /// Last css parser state to contiue parsing the next css code from a quasi
+    /// in the same scope
     current_css_state: Option<ParserState>,
-    // All css declarations of the current root css expression
+    /// All css declarations of the current root css expression
     current_declaration: Vec<Declaration>,
-    // e.g Button in const Button = styled.button`color: red;`
+    /// e.g Button in const Button = styled.button`color: red;`
     current_variable_name: Option<String>,
-    // SWC comments proxy to add extracted css as comments
+    /// SWC comments proxy to add extracted css as comments
     comments: Option<PluginCommentsProxy>,
 }
 
@@ -49,9 +49,9 @@ impl TransformVisitor {
 }
 
 impl VisitMut for TransformVisitor {
-    // Visit the import declaration and store the imported names
-    // That way we know if `styled`, `css` is imported from "next-yak"
-    // and we can transpile their usages
+    /// Visit the import declaration and store the imported names
+    /// That way we know if `styled`, `css` is imported from "next-yak"
+    /// and we can transpile their usages
     fn visit_mut_import_decl(&mut self, n: &mut ImportDecl) {
         if n.src.value == "next-yak" {
             for specifier in &n.specifiers {
@@ -68,9 +68,9 @@ impl VisitMut for TransformVisitor {
         }
     }
 
-    // Visit variable declarations
-    // To store the current name which can be used for class names
-    // e.g. Button for const Button = styled.button`color: red;`
+    /// Visit variable declarations
+    /// To store the current name which can be used for class names
+    /// e.g. Button for const Button = styled.button`color: red;`
     fn visit_mut_var_decl(&mut self, n: &mut VarDecl) {
         if !self.is_using_next_yak() {
             return;
@@ -85,8 +85,8 @@ impl VisitMut for TransformVisitor {
         }
     }
 
-    // Visit tagged template literals
-    // This is where the css-in-js expressions are
+    /// Visit tagged template literals
+    /// This is where the css-in-js expressions are
     fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
         if !self.is_using_next_yak() {
             return;
@@ -189,6 +189,7 @@ impl VisitMut for TransformVisitor {
         // Add the extracted CSS as a comment
         if is_top_level {
             {
+                // TODO: Remove debug output:
                 println!("{}", to_css(&self.current_declaration));
 
                 if let Some(comments) = &self.comments {
