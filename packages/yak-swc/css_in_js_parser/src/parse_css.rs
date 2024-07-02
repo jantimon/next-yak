@@ -20,7 +20,7 @@ impl ParserState {
       is_inside_comment: false,
       is_inside_property_value: false,
       is_inside_at_rule: false,
-      current_scopes: base_scopes.unwrap_or(Vec::new()),
+      current_scopes: base_scopes.unwrap_or_default(),
       current_declaration: new_declaration(),
     }
   }
@@ -128,7 +128,10 @@ pub fn parse_css(
       state.current_scopes.pop();
       current_code.clear();
       state.is_inside_property_value = false;
-      state.current_declaration.scope = state.current_scopes.clone();
+      state
+        .current_declaration
+        .scope
+        .clone_from(&state.current_scopes);
       if !state.current_declaration.property.is_empty() {
         state.current_declaration.closed = true;
         declarations.push(state.current_declaration.clone());
@@ -154,7 +157,10 @@ pub fn parse_css(
       state.is_inside_at_rule = false;
       if !state.current_declaration.property.is_empty() {
         state.current_declaration.closed = true;
-        state.current_declaration.scope = state.current_scopes.clone();
+        state
+          .current_declaration
+          .scope
+          .clone_from(&state.current_scopes);
         declarations.push(state.current_declaration.clone());
         state.current_declaration = new_declaration();
       }
@@ -195,7 +201,10 @@ pub fn parse_css(
 
   // Only add the last declaration if it's not empty and not already closed
   if !state.current_declaration.property.is_empty() && !state.current_declaration.closed {
-    state.current_declaration.scope = state.current_scopes.clone();
+    state
+      .current_declaration
+      .scope
+      .clone_from(&state.current_scopes);
     declarations.push(state.current_declaration.clone());
   }
 
@@ -281,13 +290,13 @@ mod tests {
                 .foo {
                                 .fancy {
                                                 background: url('https://example.com');
-                                
-                
+
+
 
                 @media (max-width: 600px) {
                                 .baz {
                                                 color: red;
-                                
+
         "#,
       None,
     );
@@ -301,7 +310,7 @@ mod tests {
     .foo {
       .fancy {
         background: url("https://example.com");
-    
+
         @media (max-width: 600px) {
           .baz {
             color: red;
@@ -312,7 +321,7 @@ mod tests {
       body {
         padding: 0;
       }
-    }    
+    }
   "#,
       None,
     );

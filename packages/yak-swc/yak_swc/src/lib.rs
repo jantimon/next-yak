@@ -42,12 +42,12 @@ impl TransformVisitor {
 
   // Check if the current AST has imports to the next-yak library
   fn is_using_next_yak(&self) -> bool {
-    return !self.next_yak_imports.is_empty();
+    !self.next_yak_imports.is_empty()
   }
 
   // Check if we are inside a next-yak css expression
   fn is_inside_css_expression(&self) -> bool {
-    return self.current_css_state.is_some();
+    self.current_css_state.is_some()
   }
 }
 
@@ -172,7 +172,7 @@ impl VisitMut for TransformVisitor {
       .unwrap_or("default".to_string())
       // SWC variables end with #0
       .replace("#0", "")
-      .replace("#", "_");
+      .replace('#', "_");
 
     // In css-in-js the outer css scope is missing e.g.:
     // styled.button`color: red;` => .button { color: red; }
@@ -226,7 +226,7 @@ impl VisitMut for TransformVisitor {
       // Add the extracted css declarations to the current css state
       self.current_declaration.extend(new_declarations);
       // store the current css state so we can use it in nested css expressions
-      self.current_css_state = css_state.clone();
+      self.current_css_state.clone_from(&css_state);
 
       // Expressions
       if let Some(expr) = pair.right() {
@@ -279,7 +279,7 @@ impl VisitMut for TransformVisitor {
 fn condition_to_string(expr: &Expr, negate: bool) -> String {
   let prefix = if negate { "not_" } else { "" };
   match expr {
-    Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym).replace("#", ""),
+    Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym).replace('#', ""),
     Expr::Lit(Lit::Bool(Bool { value, .. })) => format!("{}{}", prefix, value),
     _ => "".to_string(),
   }
@@ -301,13 +301,13 @@ test_inline!(
     import { styled, css, keyframes } from "next-yak";
     const Button = styled.button`
         font-size: 1rem;
-        .icon { 
-            ${({$active}) => $active && css`color: red`} 
+        .icon {
+            ${({$active}) => $active && css`color: red`}
             padding: 1rem;
 
             ${({$active}) => $active ? null : css`
                 ${({$hover}) => $hover && css`color: blue`}
-            `} 
+            `}
         }
     `;
     const Animation = keyframes`

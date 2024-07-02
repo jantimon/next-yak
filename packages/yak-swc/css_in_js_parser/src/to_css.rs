@@ -21,8 +21,8 @@ pub fn to_css(declarations: &[Declaration]) -> String {
     // Find the open scopes (those which are not in the previous declaration)
     for i in 0..scopes.len() {
       if i >= previous_scopes.len() || scopes[i] != previous_scopes[i] {
-        for j in i..scopes.len() {
-          css.push_str(&format!("\n{}{} {{", "  ".repeat(j), scopes[j].name));
+        for (j, scope) in scopes.iter().enumerate().skip(i) {
+          css.push_str(&format!("\n{}{} {{", "  ".repeat(j), scope.name));
         }
         break;
       }
@@ -87,10 +87,7 @@ mod tests {
       "#,
       None,
     );
-    let combined_declarations: Vec<_> = declarations1
-      .into_iter()
-      .chain(declarations2.into_iter())
-      .collect();
+    let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
     assert_snapshot!(to_css(&combined_declarations));
   }
 
@@ -113,10 +110,7 @@ mod tests {
     "#,
       Some(state1),
     );
-    let combined_declarations: Vec<_> = declarations1
-      .into_iter()
-      .chain(declarations2.into_iter())
-      .collect();
+    let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
     assert_snapshot!(to_css(&combined_declarations));
   }
 
@@ -146,10 +140,7 @@ mod tests {
         scope_type: ScopeType::Selector,
       },
     );
-    let combined_declarations: Vec<_> = declarations1
-      .into_iter()
-      .chain(declarations2.into_iter())
-      .collect();
+    let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
     assert_snapshot!(to_css(&combined_declarations));
   }
 

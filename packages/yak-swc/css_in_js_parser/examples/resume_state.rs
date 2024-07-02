@@ -38,8 +38,8 @@ fn main() {
 
   let combined_declarations: Vec<_> = declarations1
     .into_iter()
-    .chain(declarations2.into_iter())
-    .chain(declarations3.into_iter())
+    .chain(declarations2)
+    .chain(declarations3)
     .collect();
 
   // Do something with the combined declarations
