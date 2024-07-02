@@ -1,6 +1,7 @@
 //! This module provides functionality for parsing incomplete CSS strings.
 
 use serde::{Deserialize, Serialize};
+use serde_repr::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ParserState {
@@ -29,7 +30,14 @@ impl ParserState {
 pub struct CssScope {
   pub name: String,
   #[serde(rename = "type")]
-  pub scope_type: String,
+  pub scope_type: ScopeType,
+}
+
+#[derive(Serialize_repr, Deserialize_repr, PartialEq, Debug, Clone)]
+#[repr(u8)]
+pub enum ScopeType {
+  Selector = 0,
+  AtRule = 1,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -130,9 +138,9 @@ pub fn parse_css(
       state.current_scopes.push(CssScope {
         name: current_code.trim().to_string(),
         scope_type: if state.is_inside_at_rule {
-          "at-rule".to_string()
+          ScopeType::AtRule
         } else {
-          "selector".to_string()
+          ScopeType::Selector
         },
       });
       current_code.clear();

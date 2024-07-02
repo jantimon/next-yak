@@ -11,19 +11,19 @@ expression: "(state, declarations)"
         current_scopes: [
             CssScope {
                 name: ".foo",
-                scope_type: "selector",
+                scope_type: Selector,
             },
             CssScope {
                 name: ".fancy",
-                scope_type: "selector",
+                scope_type: Selector,
             },
             CssScope {
                 name: "@media (max-width: 600px)",
-                scope_type: "at-rule",
+                scope_type: AtRule,
             },
             CssScope {
                 name: ".baz",
-                scope_type: "selector",
+                scope_type: Selector,
             },
         ],
         current_declaration: Declaration {
@@ -40,11 +40,11 @@ expression: "(state, declarations)"
             scope: [
                 CssScope {
                     name: ".foo",
-                    scope_type: "selector",
+                    scope_type: Selector,
                 },
                 CssScope {
                     name: ".fancy",
-                    scope_type: "selector",
+                    scope_type: Selector,
                 },
             ],
             closed: true,
@@ -55,19 +55,19 @@ expression: "(state, declarations)"
             scope: [
                 CssScope {
                     name: ".foo",
-                    scope_type: "selector",
+                    scope_type: Selector,
                 },
                 CssScope {
                     name: ".fancy",
-                    scope_type: "selector",
+                    scope_type: Selector,
                 },
                 CssScope {
                     name: "@media (max-width: 600px)",
-                    scope_type: "at-rule",
+                    scope_type: AtRule,
                 },
                 CssScope {
                     name: ".baz",
-                    scope_type: "selector",
+                    scope_type: Selector,
                 },
             ],
             closed: true,

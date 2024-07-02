@@ -11,11 +11,11 @@ expression: "(state, declarations)"
         current_scopes: [
             CssScope {
                 name: ".foo",
-                scope_type: "selector",
+                scope_type: Selector,
             },
             CssScope {
                 name: ".fancy",
-                scope_type: "selector",
+                scope_type: Selector,
             },
         ],
         current_declaration: Declaration {

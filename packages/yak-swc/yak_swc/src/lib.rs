@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, to_css, CssScope};
+use css_in_js_parser::{parse_css, to_css, CssScope, ScopeType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -133,18 +133,15 @@ impl VisitMut for TransformVisitor {
                 match yak_library_function_name.as_deref() {
                     Some("styled") => CssScope {
                         name: format!(".{}", current_variable_name),
-                        //TODO: should be an enum
-                        scope_type: "selector".to_string(),
+                        scope_type: ScopeType::Selector,
                     },
                     Some("css") => CssScope {
                         name: format!(".{}", current_variable_name),
-                        //TODO: should be an enum
-                        scope_type: "selector".to_string(),
+                        scope_type: ScopeType::Selector,
                     },
                     Some("keyframes") => CssScope {
                         name: format!("@keyframes {}", current_variable_name),
-                        //TODO: should be an enum
-                        scope_type: "at_rule".to_string(),
+                        scope_type: ScopeType::AtRule,
                     },
                     _ => panic!("Unknown next-yak function"),
                 },
@@ -156,7 +153,7 @@ impl VisitMut for TransformVisitor {
                 css_state_with_css_scope.current_scopes[0] = CssScope {
                     // TODO: instead of _css we should use the current conditions and ensure that it is unique
                     name: format!(".{}_css", current_variable_name),
-                    scope_type: "selector".to_string(),
+                    scope_type: ScopeType::Selector,
                 };
                 css_state = Some(css_state_with_css_scope);
             } else {

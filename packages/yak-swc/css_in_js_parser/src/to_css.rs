@@ -50,6 +50,7 @@ pub fn to_css(declarations: &[Declaration]) -> String {
 mod tests {
   use super::*;
   use crate::parse_css;
+  use crate::ScopeType;
   use insta::assert_snapshot;
 
   #[test]
@@ -142,7 +143,7 @@ mod tests {
       0,
       CssScope {
         name: ".isActive".to_string(),
-        scope_type: "selector".to_string(),
+        scope_type: ScopeType::Selector,
       },
     );
     let combined_declarations: Vec<_> = declarations1
