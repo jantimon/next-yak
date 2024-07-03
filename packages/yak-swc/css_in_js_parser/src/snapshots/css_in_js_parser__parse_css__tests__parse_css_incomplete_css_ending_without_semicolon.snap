@@ -5,16 +5,12 @@ expression: "(state, declarations)"
 (
     ParserState {
         is_inside_string: None,
-        is_inside_comment: true,
+        is_inside_comment: false,
         is_inside_property_value: false,
         is_inside_at_rule: false,
         current_scopes: [
             CssScope {
                 name: ".foo",
-                scope_type: Selector,
-            },
-            CssScope {
-                name: ".fancy",
                 scope_type: Selector,
             },
         ],
@@ -24,7 +20,7 @@ expression: "(state, declarations)"
             scope: [],
             closed: false,
         },
-        pending_css_segment: "",
+        pending_css_segment: "color: orange\n",
     },
     [],
 )

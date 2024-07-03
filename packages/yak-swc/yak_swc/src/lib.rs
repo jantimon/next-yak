@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, to_css, CssScope, ScopeType};
+use css_in_js_parser::{parse_css, to_css, to_css_with_state, CssScope, ScopeType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -13,6 +13,9 @@ use swc_core::ecma::{
 use swc_core::plugin::proxies::PluginCommentsProxy;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 
+mod variable_visitor;
+use variable_visitor::VariableVisitor;
+
 pub struct TransformVisitor {
   next_yak_imports: HashMap<String, String>,
   /// Last css parser state to contiue parsing the next css code from a quasi
@@ -26,6 +29,9 @@ pub struct TransformVisitor {
   current_condition: Vec<String>,
   /// SWC comments proxy to add extracted css as comments
   comments: Option<PluginCommentsProxy>,
+  /// Extracted variables from the AST
+  /// Used to access constants in css expressions
+  variables: VariableVisitor,
 }
 
 impl TransformVisitor {
@@ -36,6 +42,7 @@ impl TransformVisitor {
       current_declaration: vec![],
       current_variable_name: None,
       current_condition: vec![],
+      variables: VariableVisitor::new(),
       comments,
     }
   }
@@ -52,6 +59,14 @@ impl TransformVisitor {
 }
 
 impl VisitMut for TransformVisitor {
+  fn visit_mut_program(&mut self, n: &mut Program) {
+    // Use VariableVisitor to visit the AST and extract all variable names
+    let mut variable_visitor = VariableVisitor::new();
+    n.visit_mut_children_with(&mut variable_visitor);
+    self.variables = variable_visitor;
+    n.visit_mut_children_with(self);
+  }
+
   /// Visit the import declaration and store the imported names
   /// That way we know if `styled`, `css` is imported from "next-yak"
   /// and we can transpile their usages
@@ -161,8 +176,6 @@ impl VisitMut for TransformVisitor {
     }
 
     let is_top_level = self.current_css_state.is_none();
-    // Used for resetting the css state after processing all expressions
-    let css_state_before = self.current_css_state.clone();
     // Current css parser state to parse an incomplete css code from a quasi
     let mut css_state = self.current_css_state.clone();
 
@@ -219,28 +232,62 @@ impl VisitMut for TransformVisitor {
 
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
-    for pair in n.tpl.quasis.iter().zip_longest(n.tpl.exprs.iter_mut()) {
+    for (i, pair) in n
+      .tpl
+      .quasis
+      .iter()
+      .zip_longest(n.tpl.exprs.iter_mut())
+      .enumerate()
+    {
+      let is_last_pair = i == n.tpl.quasis.len() - 1;
       let quasi = pair.as_ref().left().unwrap();
-      let (new_state, new_declarations) = parse_css(&quasi.raw, css_state);
+      let css_code = if is_last_pair {
+        // allow a css literal to skip the last semicolon
+        // therefore we trim the last quasi element and add a semicolon
+        format!("{};", quasi.raw.trim()).to_string()
+      } else {
+        quasi.raw.to_string()
+      };
+      let (new_state, new_declarations) = parse_css(&css_code, css_state);
       css_state = Some(new_state);
       // Add the extracted css declarations to the current css state
       self.current_declaration.extend(new_declarations);
-      // store the current css state so we can use it in nested css expressions
-      self.current_css_state.clone_from(&css_state);
 
       // Expressions
       if let Some(expr) = pair.right() {
-        // TODO: Handle constants
         // TODO: Handle selectors
 
+        // Handle constants in css expressions
+        // e.g. styled.button`color: ${primary};`
+        if let Expr::Ident(Ident { sym, .. }) = &**expr {
+          if let Some(value) = self.variables.get_imported_variable(sym) {
+            // In rust we cant access the bundler resolver
+            // therefore we add a reference to the imported variable
+            // :module-selector-import(FOO from 'bar')
+            // later in the bundler we can replace this with the actual value
+            let selector = format!("::module-selector-import({} '{}')", sym, value);
+            let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
+            css_state = Some(new_state);
+            self.current_declaration.extend(new_declarations);
+          } else if let Some(value) = self.variables.get_variable(sym) {
+            let (new_state, new_declarations) = parse_css(&value, css_state);
+            css_state = Some(new_state);
+            self.current_declaration.extend(new_declarations);
+          }
+        }
         // Visit nested css expressions
         // e.g. styled.button`.foo { ${({$x}) => $x && css`color: red`}; }`
-        expr.visit_mut_children_with(self);
+        else {
+          // Used for resetting the css state after processing all expressions
+          let css_state_before = self.current_css_state.clone();
+          // store the current css state so we can use it in nested css expressions
+          self.current_css_state.clone_from(&css_state);
+          expr.visit_mut_children_with(self);
+          // revert to the css state before the current expression or literal
+          self.current_css_state = css_state_before;
+        }
       }
     }
-
-    // revert to the css state before the current expression or literal
-    self.current_css_state = css_state_before;
 
     // Add the extracted CSS as a comment
     if is_top_level {
@@ -254,7 +301,7 @@ impl VisitMut for TransformVisitor {
             Comment {
               kind: swc_core::common::comments::CommentKind::Block,
               span: DUMMY_SP,
-              text: to_css(&self.current_declaration).into(),
+              text: to_css_with_state(&self.current_declaration, css_state).into(),
             },
           );
           self.current_declaration = vec![];
@@ -299,13 +346,16 @@ test_inline!(
   import_and_use,
   r#"
     import { styled, css, keyframes } from "next-yak";
+    import { Icon } from "./Icon";
+    const primary = "green";
     const Button = styled.button`
         font-size: 1rem;
-        .icon {
+        color: ${primary};
+        ${Icon} {
             ${({$active}) => $active && css`color: red`}
             padding: 1rem;
 
-            ${({$active}) => $active ? null : css`
+            ${({$active}) => $active ? null2 : css`
                 ${({$hover}) => $hover && css`color: blue`}
             `}
         }
@@ -317,6 +367,8 @@ test_inline!(
     "#,
   r#"
     import { styled, css, keyframes } from "next-yak";
+    import { Icon } from "./Icon";
+    const primary = "green";
     const Button = styled.button`EXTRACTED`;
     const Animation = keyframes`EXTRACTED`;
     "#

@@ -1,16 +1,16 @@
 //! This module provides functionality for parsing incomplete CSS strings.
-
 use serde::{Deserialize, Serialize};
 use serde_repr::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ParserState {
-  is_inside_string: Option<char>,
-  is_inside_comment: bool,
-  is_inside_property_value: bool,
-  is_inside_at_rule: bool,
+  pub is_inside_string: Option<char>,
+  pub is_inside_comment: bool,
+  pub is_inside_property_value: bool,
+  pub is_inside_at_rule: bool,
   pub current_scopes: Vec<CssScope>,
   current_declaration: Declaration,
+  pub pending_css_segment: String,
 }
 
 impl ParserState {
@@ -22,6 +22,7 @@ impl ParserState {
       is_inside_at_rule: false,
       current_scopes: base_scopes.unwrap_or_default(),
       current_declaration: new_declaration(),
+      pending_css_segment: String::new(),
     }
   }
 }
@@ -56,7 +57,6 @@ fn new_declaration() -> Declaration {
     closed: false,
   }
 }
-
 /// Parses a CSS string and returns the final parser state along with parsed declarations.
 ///
 /// # Arguments
@@ -73,23 +73,40 @@ pub fn parse_css(
 ) -> (ParserState, Vec<Declaration>) {
   let mut state = initial_state.unwrap_or(ParserState::new(None));
 
+  // Prepend any pending CSS segment from the previous state
+  let css_to_parse = if !state.pending_css_segment.is_empty() {
+    state.pending_css_segment.clone() + css_string
+  } else {
+    css_string.to_string()
+  };
+
   let mut current_code = String::new();
   let mut back_slashes = 0;
   let mut declarations = Vec::new();
 
-  let chars: Vec<char> = css_string.chars().collect();
-  let mut index = 0;
+  let chars: Vec<char> = css_to_parse.chars().collect();
+  let mut char_position = 0;
 
-  while index < chars.len() {
+  while char_position < chars.len() {
     let previous_back_slashes = back_slashes;
-    let current_character = chars[index];
+    let current_character = chars[char_position];
 
+    // Count backslashes to detect escaped characters
+    // e.g.:
+    // .foo { content: "Hello, \"World!\\\""; }
     if current_character == '\\' {
       back_slashes += 1;
     } else {
       back_slashes = 0;
     }
 
+    // Detect unescaped strings
+    // e.g.:
+    // url("Hello, World!")
+    //     ^
+    // or
+    // url('Hello, World!')
+    //     ^
     if previous_back_slashes % 2 == 0 && (current_character == '"' || current_character == '\'') {
       if state.is_inside_string == Some(current_character) {
         state.is_inside_string = None;
@@ -98,33 +115,62 @@ pub fn parse_css(
       }
     }
 
+    // Inside a string, just add the character to the current code no matter what
+    // e.g. content: "{ ; } @ !"
     if state.is_inside_string.is_some() {
       current_code.push(current_character);
       state.current_declaration.value.push(current_character);
-    } else if current_character == '/' && index + 1 < chars.len() && chars[index + 1] == '*' {
+    }
+    // Detect multi-line comments
+    // e.g.
+    // .foo { color: red; } /* This is a comment */
+    //                      ^
+    else if current_character == '/'
+      && char_position + 1 < chars.len()
+      && chars[char_position + 1] == '*'
+    {
       state.is_inside_comment = true;
-      index += 2;
-      while index < chars.len() {
-        if chars[index] == '*' && index + 1 < chars.len() && chars[index + 1] == '/' {
+      char_position += 2;
+      while char_position < chars.len() {
+        if chars[char_position] == '*'
+          && char_position + 1 < chars.len()
+          && chars[char_position + 1] == '/'
+        {
           state.is_inside_comment = false;
-          index += 2;
+          char_position += 2;
           break;
         }
-        index += 1;
+        char_position += 1;
       }
       continue;
-    } else if current_character == '/' && index + 1 < chars.len() && chars[index + 1] == '/' {
+    }
+    // Detect single line comments
+    // e.g.
+    // .foo { color: red; } // This is a comment
+    //                       ^
+    else if current_character == '/'
+      && char_position + 1 < chars.len()
+      && chars[char_position + 1] == '/'
+    {
       state.is_inside_comment = true;
-      index += 2;
-      while index < chars.len() {
-        if chars[index] == '\n' {
+      char_position += 2;
+      while char_position < chars.len() {
+        if chars[char_position] == '\n' {
           state.is_inside_comment = false;
           break;
         }
-        index += 1;
+        char_position += 1;
       }
       continue;
-    } else if current_character == '}' {
+    }
+    // Detect scope closing
+    // e.g.
+    // .foo { color: black; }
+    //                      ^
+    // or
+    // .foo { color: black }
+    //                     ^
+    else if current_character == '}' {
       state.current_scopes.pop();
       current_code.clear();
       state.is_inside_property_value = false;
@@ -132,12 +178,22 @@ pub fn parse_css(
         .current_declaration
         .scope
         .clone_from(&state.current_scopes);
+      // a closing brace acts similar to a semicolon as it
+      // closes the current declaration
       if !state.current_declaration.property.is_empty() {
         state.current_declaration.closed = true;
         declarations.push(state.current_declaration.clone());
         state.current_declaration = new_declaration();
       }
-    } else if current_character == '{' {
+    }
+    // Detect scope opening
+    // e.g.
+    // .foo {
+    //      ^
+    // or
+    // @media (max-width: 600px) {
+    //                           ^
+    else if current_character == '{' {
       state.current_scopes.push(CssScope {
         name: current_code.trim().to_string(),
         scope_type: if state.is_inside_at_rule {
@@ -151,10 +207,16 @@ pub fn parse_css(
       state.is_inside_at_rule = false;
       state.current_declaration.property.clear();
       state.current_declaration.value.clear();
-    } else if current_character == ';' {
+    }
+    // Detect declaration closing
+    // e.g.
+    // color: red;
+    //           ^
+    else if current_character == ';' {
       current_code.clear();
       state.is_inside_property_value = false;
       state.is_inside_at_rule = false;
+      // a semicolon closes the current declaration
       if !state.current_declaration.property.is_empty() {
         state.current_declaration.closed = true;
         state
@@ -164,23 +226,39 @@ pub fn parse_css(
         declarations.push(state.current_declaration.clone());
         state.current_declaration = new_declaration();
       }
-    } else if !state.is_inside_property_value
+    }
+    // Detect property value separator
+    // e.g.
+    // color: red;
+    //      ^
+    else if !state.is_inside_property_value
       && !state.is_inside_at_rule
       && current_character == ':'
     {
       state.is_inside_property_value = true;
       current_code.push(current_character);
-    } else if !state.is_inside_property_value && current_character == '@' {
+    }
+    // Detect at-rules
+    // e.g.
+    // @media (max-width: 600px) {
+    // ^
+    else if !state.is_inside_property_value && current_character == '@' {
       state.is_inside_at_rule = true;
       current_code.push(current_character);
-    } else {
-      let previous_character = if index == 0 {
+    }
+    // Detect other characters
+    // e.g.
+    // color: red;
+    // ^
+    // Trim any leading whitespace in front of the value
+    else {
+      let previous_character = if char_position == 0 {
         state.current_declaration.value.chars().last()
       } else {
-        Some(chars[index - 1])
+        Some(chars[char_position - 1])
       };
 
-      let is_previous_character_empty = (index > 0 && current_code.is_empty())
+      let is_previous_character_empty = (char_position > 0 && current_code.is_empty())
         || previous_character.map_or(true, |c| c.is_whitespace());
       let is_current_character_empty = current_character.is_whitespace();
 
@@ -196,16 +274,21 @@ pub fn parse_css(
       }
     }
 
-    index += 1;
+    char_position += 1;
   }
 
-  // Only add the last declaration if it's not empty and not already closed
-  if !state.current_declaration.property.is_empty() && !state.current_declaration.closed {
-    state
-      .current_declaration
-      .scope
-      .clone_from(&state.current_scopes);
-    declarations.push(state.current_declaration.clone());
+  // Store any uncategorized CSS code for later parsing
+  // The reason behind that is the following example where it is unclear from the syntax wether
+  // the ending is a property declaration or a selector:
+  // .foo { section:has(bar)
+  // .foo { background:url(bar)
+  if !current_code.is_empty() {
+    state.pending_css_segment = current_code;
+    state.current_declaration = new_declaration();
+    state.is_inside_property_value = false;
+    state.is_inside_at_rule = false;
+  } else {
+    state.pending_css_segment.clear();
   }
 
   (state, declarations)
@@ -326,5 +409,39 @@ mod tests {
       None,
     );
     assert_debug_snapshot!((state, declarations));
+  }
+
+  #[test]
+  fn test_parse_css_incomplete_css_ending_without_semicolon() {
+    let (state, declarations) = parse_css(
+      r#"
+        .foo {
+          color: orange
+    "#,
+      None,
+    );
+    assert_debug_snapshot!((state, declarations));
+  }
+
+  #[test]
+  fn test_parse_css_resume_incomplete_css_ending_without_semicolon() {
+    let (state1, declarations) = parse_css(
+      r#"
+        .foo {
+          color: orange
+    "#,
+      None,
+    );
+    let (state2, declarations2) = parse_css(
+      r#"
+        ;
+    "#,
+      Some(state1.clone()),
+    );
+    let all_declarations = declarations
+      .into_iter()
+      .chain(declarations2.into_iter())
+      .collect::<Vec<_>>();
+    assert_debug_snapshot!((state1, state2, all_declarations));
   }
 }

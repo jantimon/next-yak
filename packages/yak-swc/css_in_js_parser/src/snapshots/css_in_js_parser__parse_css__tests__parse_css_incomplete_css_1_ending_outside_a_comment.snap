@@ -1,12 +1,12 @@
 ---
-source: src/parse_css.rs
+source: css_in_js_parser/src/parse_css.rs
 expression: "(state, declarations)"
 ---
 (
     ParserState {
         is_inside_string: None,
         is_inside_comment: false,
-        is_inside_property_value: true,
+        is_inside_property_value: false,
         is_inside_at_rule: false,
         current_scopes: [
             CssScope {
@@ -19,36 +19,12 @@ expression: "(state, declarations)"
             },
         ],
         current_declaration: Declaration {
-            property: "color",
-            value: "blue\n",
-            scope: [
-                CssScope {
-                    name: ".foo",
-                    scope_type: Selector,
-                },
-                CssScope {
-                    name: ".fancy section",
-                    scope_type: Selector,
-                },
-            ],
+            property: "",
+            value: "",
+            scope: [],
             closed: false,
         },
+        pending_css_segment: "color: blue\n",
     },
-    [
-        Declaration {
-            property: "color",
-            value: "blue\n",
-            scope: [
-                CssScope {
-                    name: ".foo",
-                    scope_type: Selector,
-                },
-                CssScope {
-                    name: ".fancy section",
-                    scope_type: Selector,
-                },
-            ],
-            closed: false,
-        },
-    ],
+    [],
 )

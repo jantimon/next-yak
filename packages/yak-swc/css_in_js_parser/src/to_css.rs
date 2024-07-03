@@ -1,5 +1,5 @@
 //! Converts a list of CSS declarations to a CSS string
-use crate::{CssScope, Declaration};
+use crate::{parse_css, CssScope, Declaration, ParserState};
 
 pub fn to_css(declarations: &[Declaration]) -> String {
   let mut css = String::new();
@@ -44,6 +44,32 @@ pub fn to_css(declarations: &[Declaration]) -> String {
   }
 
   css
+}
+
+pub fn to_css_with_state(
+  declarations: &[Declaration],
+  parser_state: Option<ParserState>,
+) -> String {
+  // In CSS it is allowed to leave the last semicolon out
+  // However the parser can't handle this as a simicolon or a closing brace is required
+  // to determine the end of a declaration
+  //
+  // The reason behind that is the following example where it is unclear from the syntax wether
+  // the ending is a property declaration or a selector:
+  // .foo { section:has(bar)
+  // .foo { background:url(bar)
+  if let Some(parser_state) = parser_state {
+    if !parser_state.pending_css_segment.is_empty() {
+      let (_, final_declarations) = parse_css(";", Some(parser_state));
+      let combined_declarations: Vec<_> = final_declarations
+        .into_iter()
+        .chain(declarations.iter().cloned())
+        .collect();
+
+      return to_css(&combined_declarations);
+    }
+  }
+  return to_css(declarations);
 }
 
 #[cfg(test)]
@@ -111,7 +137,69 @@ mod tests {
       Some(state1),
     );
     let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
-    assert_snapshot!(to_css(&combined_declarations));
+    assert_eq!(
+      to_css(&combined_declarations),
+      r#"
+.foo {
+  .fancy {
+    color: blue;
+  }
+  &:hover {
+    color: orange;
+  }
+}"#
+    );
+  }
+
+  #[test]
+  fn test_parse_css_merge_two_css_chunks2() {
+    let (state1, declarations1) = parse_css(
+      r#"
+      .foo
+    "#,
+      None,
+    );
+    let (_, declarations2) = parse_css(
+      r#"
+        {
+          color: orange;
+    "#,
+      Some(state1),
+    );
+    let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
+    assert_eq!(
+      to_css(&combined_declarations),
+      r#"
+.foo {
+  color: orange;
+}"#
+    );
+  }
+
+  #[test]
+  fn test_parse_css_merge_without_final_semicolon() {
+    let (state1, declarations1) = parse_css(
+      r#"
+      .foo
+    "#,
+      None,
+    );
+    let (state2, declarations2) = parse_css(
+      r#"
+        {
+          color: orange
+    "#,
+      Some(state1),
+    );
+    let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
+    assert_eq!(
+      to_css_with_state(&combined_declarations, Some(state2)),
+      r#"
+.foo {
+  color: orange
+;
+}"#
+    );
   }
 
   #[test]

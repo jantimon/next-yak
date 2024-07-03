@@ -1,5 +1,5 @@
 ---
-source: src/parse_css.rs
+source: css_in_js_parser/src/parse_css.rs
 expression: "(state, declarations)"
 ---
 (
@@ -15,6 +15,7 @@ expression: "(state, declarations)"
             scope: [],
             closed: false,
         },
+        pending_css_segment: "",
     },
     [
         Declaration {

@@ -1,5 +1,5 @@
 ---
-source: src/parse_css.rs
+source: css_in_js_parser/src/parse_css.rs
 expression: "(state, declarations)"
 ---
 (
@@ -8,7 +8,7 @@ expression: "(state, declarations)"
             '\'',
         ),
         is_inside_comment: false,
-        is_inside_property_value: true,
+        is_inside_property_value: false,
         is_inside_at_rule: false,
         current_scopes: [
             CssScope {
@@ -21,36 +21,12 @@ expression: "(state, declarations)"
             },
         ],
         current_declaration: Declaration {
-            property: "background",
-            value: "url('https://example.com\n    ",
-            scope: [
-                CssScope {
-                    name: ".foo",
-                    scope_type: Selector,
-                },
-                CssScope {
-                    name: ".fancy",
-                    scope_type: Selector,
-                },
-            ],
+            property: "",
+            value: "",
+            scope: [],
             closed: false,
         },
+        pending_css_segment: "background: url('https://example.com\n    ",
     },
-    [
-        Declaration {
-            property: "background",
-            value: "url('https://example.com\n    ",
-            scope: [
-                CssScope {
-                    name: ".foo",
-                    scope_type: Selector,
-                },
-                CssScope {
-                    name: ".fancy",
-                    scope_type: Selector,
-                },
-            ],
-            closed: false,
-        },
-    ],
+    [],
 )
