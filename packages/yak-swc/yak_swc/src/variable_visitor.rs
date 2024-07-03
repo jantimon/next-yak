@@ -65,29 +65,32 @@ impl VisitMut for VariableVisitor {
   }
 }
 
-// Tests
-use swc_core::ecma::transforms::testing::test_transform;
-use swc_core::ecma::visit::as_folder;
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use swc_core::ecma::transforms::testing::test_transform;
+  use swc_core::ecma::visit::as_folder;
 
-#[test]
-fn test_import_visitor() {
-  let mut visitor = VariableVisitor::new();
-  let code = r#"
+  #[test]
+  fn test_import_visitor() {
+    let mut visitor = VariableVisitor::new();
+    let code = r#"
     import { primary } from "./theme";
     const duration = 34;
     export function run() {
       console.log(primary, duration);
     }
     "#;
-  test_transform(
-    Default::default(),
-    |_| as_folder(&mut visitor),
-    code,
-    code,
-    true,
-  );
-  let primary = &visitor.get_imported_variable("primary");
-  let duration = &visitor.get_variable("duration");
-  assert_eq!(*primary, Some("./theme".to_string()));
-  assert_eq!(*duration, Some("34".to_string()));
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      code,
+      code,
+      true,
+    );
+    let primary = &visitor.get_imported_variable("primary");
+    let duration = &visitor.get_variable("duration");
+    assert_eq!(*primary, Some("./theme".to_string()));
+    assert_eq!(*duration, Some("34".to_string()));
+  }
 }

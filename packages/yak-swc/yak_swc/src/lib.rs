@@ -337,14 +337,16 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
   program.fold_with(&mut as_folder(TransformVisitor::new(metadata.comments)))
 }
 
-// Tests
-use swc_core::ecma::transforms::testing::test_inline;
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use swc_core::ecma::transforms::testing::test_inline;
 
-test_inline!(
-  Default::default(),
-  |_| as_folder(TransformVisitor::new(None)),
-  import_and_use,
-  r#"
+  test_inline!(
+    Default::default(),
+    |_| as_folder(TransformVisitor::new(None)),
+    import_and_use,
+    r#"
     import { styled, css, keyframes } from "next-yak";
     import { Icon } from "./Icon";
     const primary = "green";
@@ -365,39 +367,40 @@ test_inline!(
         to { color: blue; }
     `;
     "#,
-  r#"
+    r#"
     import { styled, css, keyframes } from "next-yak";
     import { Icon } from "./Icon";
     const primary = "green";
     const Button = styled.button`EXTRACTED`;
     const Animation = keyframes`EXTRACTED`;
     "#
-);
+  );
 
-test_inline!(
-  Default::default(),
-  |_| as_folder(TransformVisitor::new(None)),
-  import_named_and_use,
-  r#"
+  test_inline!(
+    Default::default(),
+    |_| as_folder(TransformVisitor::new(None)),
+    import_named_and_use,
+    r#"
     import { styled as styledNamed } from "next-yak";
     const Button = styledNamed.button`color: red`;
     "#,
-  r#"
+    r#"
     import { styled as styledNamed } from "next-yak";
     const Button = styledNamed.button`EXTRACTED`;
     "#
-);
+  );
 
-test_inline!(
-  Default::default(),
-  |_| as_folder(TransformVisitor::new(None)),
-  ignore_another_lib,
-  r#"
+  test_inline!(
+    Default::default(),
+    |_| as_folder(TransformVisitor::new(None)),
+    ignore_another_lib,
+    r#"
     import styled from "anotherlib";
     const Button = styled.button`color: red`;
     "#,
-  r#"
+    r#"
     import styled from "anotherlib";
     const Button = styled.button`color: red`;
     "#
-);
+  );
+}
