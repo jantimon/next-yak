@@ -66,7 +66,7 @@ impl VisitMut for VariableVisitor {
 }
 
 // Tests
-use swc_core::ecma::transforms::testing::{test_exec, test_transform};
+use swc_core::ecma::transforms::testing::test_transform;
 use swc_core::ecma::visit::as_folder;
 
 #[test]

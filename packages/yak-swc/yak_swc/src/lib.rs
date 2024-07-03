@@ -355,7 +355,7 @@ test_inline!(
             ${({$active}) => $active && css`color: red`}
             padding: 1rem;
 
-            ${({$active}) => $active ? null2 : css`
+            ${({$active}) => $active ? null : css`
                 ${({$hover}) => $hover && css`color: blue`}
             `}
         }
