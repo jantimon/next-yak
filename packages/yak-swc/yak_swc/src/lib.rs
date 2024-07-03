@@ -16,6 +16,9 @@ use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
 
+mod naming_convention;
+use naming_convention::NamingConvention;
+
 pub struct TransformVisitor {
   next_yak_imports: HashMap<String, String>,
   /// Last css parser state to contiue parsing the next css code from a quasi
@@ -32,6 +35,8 @@ pub struct TransformVisitor {
   /// Extracted variables from the AST
   /// Used to access constants in css expressions
   variables: VariableVisitor,
+  /// Naming convention to generate unique css identifiers
+  naming_convention: NamingConvention,
 }
 
 impl TransformVisitor {
@@ -43,6 +48,7 @@ impl TransformVisitor {
       current_variable_name: None,
       current_condition: vec![],
       variables: VariableVisitor::new(),
+      naming_convention: NamingConvention::new(),
       comments,
     }
   }
@@ -197,15 +203,30 @@ impl VisitMut for TransformVisitor {
       css_state = Some(ParserState::new(Some(Vec::from([
         match yak_library_function_name.as_deref() {
           Some("styled") => CssScope {
-            name: format!(".{}", current_variable_name),
+            name: format!(
+              ".{}",
+              self
+                .naming_convention
+                .generate_unique_name(&current_variable_name)
+            ),
             scope_type: ScopeType::Selector,
           },
           Some("css") => CssScope {
-            name: format!(".{}", current_variable_name),
+            name: format!(
+              ".{}",
+              self
+                .naming_convention
+                .generate_unique_name(&current_variable_name)
+            ),
             scope_type: ScopeType::Selector,
           },
           Some("keyframes") => CssScope {
-            name: format!("@keyframes {}", current_variable_name),
+            name: format!(
+              "@keyframes {}",
+              self
+                .naming_convention
+                .generate_unique_name(&current_variable_name)
+            ),
             scope_type: ScopeType::AtRule,
           },
           _ => panic!("Unknown next-yak function"),
@@ -218,10 +239,11 @@ impl VisitMut for TransformVisitor {
       // e.g. const Button styled.button`${({$x}) => $x && css`color: red`}` -> .Button_and_x { color: red; }
       if yak_library_function_name.as_deref() == Some("css") {
         let mut css_state_with_css_scope = css_state.clone().unwrap();
-        let condition = self.current_condition.join("_and_");
+        let condition = self.current_condition.join("-and-");
         css_state_with_css_scope.current_scopes[0] = CssScope {
-          // TODO: that the name is unique
-          name: format!(".{}--{}", current_variable_name, condition),
+          name: self
+            .naming_convention
+            .generate_unique_name(&format!("{}--{}", current_variable_name, condition)),
           scope_type: ScopeType::Selector,
         };
         css_state = Some(css_state_with_css_scope);
@@ -340,41 +362,47 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc_core::ecma::transforms::testing::test_inline;
+  use swc_core::ecma::transforms::testing::{test_inline, test_transform};
 
-  test_inline!(
-    Default::default(),
-    |_| as_folder(TransformVisitor::new(None)),
-    import_and_use,
-    r#"
-    import { styled, css, keyframes } from "next-yak";
-    import { Icon } from "./Icon";
-    const primary = "green";
-    const Button = styled.button`
-        font-size: 1rem;
-        color: ${primary};
-        ${Icon} {
-            ${({$active}) => $active && css`color: red`}
-            padding: 1rem;
-
-            ${({$active}) => $active ? null : css`
-                ${({$hover}) => $hover && css`color: blue`}
-            `}
-        }
-    `;
-    const Animation = keyframes`
-        from { color: red; }
-        to { color: blue; }
-    `;
-    "#,
-    r#"
-    import { styled, css, keyframes } from "next-yak";
-    import { Icon } from "./Icon";
-    const primary = "green";
-    const Button = styled.button`EXTRACTED`;
-    const Animation = keyframes`EXTRACTED`;
-    "#
-  );
+  #[test]
+  fn extract_css() {
+    let mut visitor = TransformVisitor::new(Some(PluginCommentsProxy {}));
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      r#"
+      import { styled, css, keyframes } from "next-yak";
+      import { Icon } from "./Icon";
+      const primary = "green";
+      const Button = styled.button`
+          font-size: 1rem;
+          color: ${primary};
+          ${Icon} {
+              ${({$active}) => $active && css`color: red`}
+              padding: 1rem;
+  
+              ${({$active}) => $active ? null : css`
+                  ${({$hover}) => $hover && css`color: blue`}
+              `}
+          }
+  
+          ${({$active}) => $active && css`border: 1px solid red`}
+      `;
+      const Animation = keyframes`
+          from { color: red; }
+          to { color: blue; }
+      `;
+      "#,
+      r#"
+      import { styled, css, keyframes } from "next-yak";
+      import { Icon } from "./Icon";
+      const primary = "green";
+      const Button = styled.button`EXTRACTED`;
+      const Animation = keyframes`EXTRACTED`;
+      "#,
+      true,
+    );
+  }
 
   test_inline!(
     Default::default(),

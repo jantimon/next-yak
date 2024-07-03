@@ -34,8 +34,6 @@ let (state, declarations) = parse_css(
     .foo {
         .fancy {
             color: blue;
-        }
-    }
     "#,
     None,
 );
@@ -43,13 +41,17 @@ let (state, declarations) = parse_css(
 
 ### Converting Declarations to CSS
 
+To convert the parsed declarations to prettified CSS, use the `to_css` function:
+
 ```rust
 use css_in_js_parser::to_css;
 
 let css_string = to_css(&declarations);
 ```
 
-### Merging CSS Chunks
+### Resuming Parsing
+
+To resume parsing from a previous state, pass the previous state to the `parse_css` function:
 
 ```rust
 let (state1, declarations1) = parse_css(chunk1, None);
