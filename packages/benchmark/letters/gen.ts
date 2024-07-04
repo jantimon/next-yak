@@ -274,7 +274,10 @@ export const KanjiLetterComponent${
       </ButtonWrapper>
 
       ${kanjiCharacters
-        .map((_, index) => `<FakeDataLoader><Kanji${index + 1}Character /></FakeDataLoader>`)
+        .map(
+          (_, index) =>
+            `<FakeDataLoader><Kanji${index + 1}Character /></FakeDataLoader>`,
+        )
         .join("\n      ")}
     </Wrapper>
     
