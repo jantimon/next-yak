@@ -35,9 +35,9 @@ impl NamingConvention {
 
 fn escape_css_identifier(input: &str) -> String {
   let mut result = String::new();
-  let mut chars = input.chars().peekable();
+  let chars = input.chars();
 
-  while let Some(c) = chars.next() {
+  for c in chars {
     match c {
       'a'..='z' | 'A'..='Z' | '-' | '_' | '$' | '\\' => result.push(c),
       // Whitespace

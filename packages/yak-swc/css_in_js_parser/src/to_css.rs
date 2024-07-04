@@ -69,7 +69,7 @@ pub fn to_css_with_state(
       return to_css(&combined_declarations);
     }
   }
-  return to_css(declarations);
+  to_css(declarations)
 }
 
 #[cfg(test)]

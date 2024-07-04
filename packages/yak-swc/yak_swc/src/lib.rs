@@ -207,7 +207,7 @@ impl VisitMut for TransformVisitor {
     let unique_identifier = if !self.is_inside_css_expression() {
       let css_identifier = self
         .naming_convention
-        .generate_unique_name(&current_variable_name);
+        .generate_unique_name(current_variable_name);
       self.current_declaration = vec![];
       css_state = Some(ParserState::new(Some(Vec::from([
         match yak_library_function_name.as_deref() {

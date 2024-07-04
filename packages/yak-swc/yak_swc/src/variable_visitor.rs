@@ -35,7 +35,7 @@ impl VariableVisitor {
         }
       }
     }
-    return None;
+    None
   }
 
   // Returns the source of an imported variable if it exists
@@ -45,7 +45,7 @@ impl VariableVisitor {
     if let Some(src) = self.imports.get(name) {
       return Some(src.to_string());
     }
-    return None;
+    None
   }
 
   /// Returns wether a variable is top level or not
