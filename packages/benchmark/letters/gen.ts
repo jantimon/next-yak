@@ -25,9 +25,32 @@ import ${
       lib === "next-yak" ? `{ styled as ${styled}, css }` : `{ ${styled}, css }`
     } from '${lib}';
 
+
+const oneTimeDelay = new Promise((resolve) => setTimeout(resolve, 1));
+
+// Simulate a component which accesses apollo or relay data access
+// starting with a loading state and then switching to the actual content
+const FakeDataLoader = ({children}: { children?: React.ReactNode }) => {
+    const [show, setShow] = React.useState(false);
+    const showDeferred = React.useDeferredValue(show);
+    React.useEffect(() => {
+        let isMounted = true;
+        oneTimeDelay.then(() => {
+            if (isMounted) {
+                setShow(true);
+            }
+        });
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+    if (!showDeferred) return null;
+    return <>{children}</>;
+}
+
 const JapaneseCard = ${styled}.div\`
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,9 +67,13 @@ ${kanjiCharacters
   .map(
     (kanji, index) => `
 const Kanji${index + 1}Character = ${styled}(JapaneseCard)\`
+  font-size: 1em;
+  @media (max-width: 640px) {
+    font-size: 0.9em;
+  }
+  display: grid;
   &:before {
     display: block;
-    font-size: 2em;
     color: #333;
     content: '${kanji}';
   }
@@ -168,12 +195,21 @@ const LibHeader = ${styled}.h1\`
 
 const ButtonWrapper = ${styled}.div\`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
   min-width: 100%;
   align-content: center;
   margin-bottom: 1rem;
+  justify-content: center;
+\`;
+
+const RoundSpan = ${styled}.span\`
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #333;
 \`;
 
 export const KanjiLetterComponent${
@@ -189,6 +225,11 @@ export const KanjiLetterComponent${
 
   return (
     <>
+    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", opacity: 0 }}>
+      {Array.from({ length: 10001 }, (_, index) => index).map((_, index) => (
+        <RoundSpan key={index}>{index + 1}</RoundSpan>
+      ))}
+    </div>
     <LibHeader onClick={() => document.location.href = "${
       lib === "next-yak" ? "/styled" : "/yak"
     }"  }>${lib}</LibHeader>
@@ -233,7 +274,7 @@ export const KanjiLetterComponent${
       </ButtonWrapper>
 
       ${kanjiCharacters
-        .map((_, index) => `<Kanji${index + 1}Character />`)
+        .map((_, index) => `<FakeDataLoader><Kanji${index + 1}Character /></FakeDataLoader>`)
         .join("\n      ")}
     </Wrapper>
     
