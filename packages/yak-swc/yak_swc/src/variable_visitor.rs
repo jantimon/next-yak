@@ -1,10 +1,13 @@
 use std::collections::HashMap;
+use std::collections::HashSet;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
 
 pub struct VariableVisitor {
+  top_level: HashSet<String>,
   variables: HashMap<String, Box<Expr>>,
   imports: HashMap<String, String>,
+  is_top_level: bool,
 }
 
 /// Visitor implementation to gather all variable declarations
@@ -12,12 +15,16 @@ pub struct VariableVisitor {
 impl VariableVisitor {
   pub fn new() -> Self {
     Self {
+      top_level: HashSet::new(),
       variables: HashMap::new(),
       imports: HashMap::new(),
+      is_top_level: true,
     }
   }
 
   /// Returns the value of a variable if it exists
+  /// Use id.to_string() (including the #0 suffix) to get the variable name
+  /// Using sym.to_string() will always return None
   pub fn get_variable(&mut self, name: &str) -> Option<String> {
     if let Some(expr) = self.variables.get_mut(name) {
       if let Expr::Lit(lit) = &mut **expr {
@@ -32,11 +39,20 @@ impl VariableVisitor {
   }
 
   // Returns the source of an imported variable if it exists
+  /// Use id.to_string() (including the #0 suffix) to get the variable name
+  /// Using sym.to_string() will always return None
   pub fn get_imported_variable(&mut self, name: &str) -> Option<String> {
     if let Some(src) = self.imports.get(name) {
       return Some(src.to_string());
     }
     return None;
+  }
+
+  /// Returns wether a variable is top level or not
+  /// Use id.to_string() (including the #0 suffix) to get the variable name
+  /// Using sym.to_string() will always return false
+  pub fn is_top_level(&self, name: &str) -> bool {
+    self.top_level.contains(name)
   }
 }
 
@@ -46,10 +62,14 @@ impl VisitMut for VariableVisitor {
     var.decls.iter_mut().for_each(|decl| {
       if let Pat::Ident(ident) = &decl.name {
         if let Some(init) = &decl.init {
-          self.variables.insert(ident.sym.to_string(), init.clone());
+          self.variables.insert(ident.to_string(), init.clone());
+          if self.is_top_level {
+            self.top_level.insert(ident.to_string());
+          }
         }
       }
     });
+    self.is_top_level = false;
     var.visit_mut_children_with(self);
   }
   /// Scans the AST for import declarations and extracts the imported names
@@ -58,10 +78,19 @@ impl VisitMut for VariableVisitor {
       if let ImportSpecifier::Named(named) = specifier {
         self
           .imports
-          .insert(named.local.sym.to_string(), import.src.value.to_string());
+          .insert(named.local.to_string(), import.src.value.to_string());
+        self.top_level.insert(named.local.to_string());
       }
     });
     import.visit_mut_children_with(self);
+  }
+
+  /// Mark any nested variable declarations as not top level
+  fn visit_mut_block_stmt(&mut self, block: &mut BlockStmt) {
+    let is_top_level = self.is_top_level;
+    self.is_top_level = false;
+    block.visit_mut_children_with(self);
+    self.is_top_level = is_top_level;
   }
 }
 
@@ -77,7 +106,7 @@ mod tests {
     let code = r#"
     import { primary } from "./theme";
     const duration = 34;
-    export function run() {
+    export function run(primary = "red") {
       console.log(primary, duration);
     }
     "#;
@@ -88,9 +117,15 @@ mod tests {
       code,
       true,
     );
-    let primary = &visitor.get_imported_variable("primary");
-    let duration = &visitor.get_variable("duration");
+    let primary = &visitor.get_imported_variable("primary#0");
+    let duration = &visitor.get_variable("duration#0");
     assert_eq!(*primary, Some("./theme".to_string()));
     assert_eq!(*duration, Some("34".to_string()));
+
+    let is_top_level = visitor.is_top_level("primary#0");
+    assert_eq!(is_top_level, true);
+
+    let is_top_level = visitor.is_top_level("primary#1");
+    assert_eq!(is_top_level, false);
   }
 }

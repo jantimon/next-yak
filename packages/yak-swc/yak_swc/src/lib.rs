@@ -35,6 +35,11 @@ pub struct TransformVisitor {
   /// Extracted variables from the AST
   /// Used to access constants in css expressions
   variables: VariableVisitor,
+  /// Variable Name to Unique CSS Identifier Mapping\
+  /// e.g. const Rotation = keyframes`...` -> Rotation\
+  /// e.g. const Button = styled.button`...` -> Button\
+  /// Used to replace expressions with the actual class name or keyframes name
+  variable_name_mapping: HashMap<String, String>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
 }
@@ -49,6 +54,7 @@ impl TransformVisitor {
       current_condition: vec![],
       variables: VariableVisitor::new(),
       naming_convention: NamingConvention::new(),
+      variable_name_mapping: HashMap::new(),
       comments,
     }
   }
@@ -185,53 +191,66 @@ impl VisitMut for TransformVisitor {
     // Current css parser state to parse an incomplete css code from a quasi
     let mut css_state = self.current_css_state.clone();
 
-    let current_variable_name = self
+    let current_variable_id = self
       .current_variable_name
       .clone()
-      .unwrap_or("default".to_string())
-      // SWC variables end with #0
-      .replace("#0", "")
-      .replace('#', "_");
+      .unwrap_or("yak".to_string());
+    // SWC variables end with #{number}
+    // Remove this postfix to generate a more readable css class name
+    let current_variable_name = current_variable_id.split('#').next().unwrap();
 
     // In css-in-js the outer css scope is missing e.g.:
     // styled.button`color: red;` => .button { color: red; }
     //
     // Depending on the library function used (styled, keyframes, css, ...)
     // a surrounding scope is added
-    if !self.is_inside_css_expression() {
+    let unique_identifier = if !self.is_inside_css_expression() {
+      let css_identifier = self
+        .naming_convention
+        .generate_unique_name(&current_variable_name);
       self.current_declaration = vec![];
       css_state = Some(ParserState::new(Some(Vec::from([
         match yak_library_function_name.as_deref() {
-          Some("styled") => CssScope {
-            name: format!(
-              ".{}",
+          Some("styled") => {
+            let styled_component_selector = format!(".{}", css_identifier);
+            // Allow to be used as selector in expressions
+            // e.g.
+            // const Button = styled.button`color: red;`
+            // const Wrapper = styled.div`${Button} { color: blue; }`
+            if let Some(variable_name) = self.current_variable_name.clone() {
               self
-                .naming_convention
-                .generate_unique_name(&current_variable_name)
-            ),
-            scope_type: ScopeType::Selector,
-          },
+                .variable_name_mapping
+                .insert(variable_name, styled_component_selector.clone());
+            }
+            // Use the styled component selector as surrounding scope
+            // for all quasi and expressions of the current styled component
+            CssScope {
+              name: styled_component_selector,
+              scope_type: ScopeType::Selector,
+            }
+          }
+          Some("keyframes") => {
+            // Allow to be used as selector in expressions
+            if let Some(variable_name) = self.current_variable_name.clone() {
+              self
+                .variable_name_mapping
+                .insert(variable_name, css_identifier.clone());
+            }
+            // Wrap with @keyframes
+            CssScope {
+              name: format!("@keyframes {}", css_identifier),
+              scope_type: ScopeType::AtRule,
+            }
+          }
           Some("css") => CssScope {
-            name: format!(
-              ".{}",
-              self
-                .naming_convention
-                .generate_unique_name(&current_variable_name)
-            ),
+            name: format!(".{}", css_identifier),
             scope_type: ScopeType::Selector,
-          },
-          Some("keyframes") => CssScope {
-            name: format!(
-              "@keyframes {}",
-              self
-                .naming_convention
-                .generate_unique_name(&current_variable_name)
-            ),
-            scope_type: ScopeType::AtRule,
           },
           _ => panic!("Unknown next-yak function"),
         },
       ]))));
+
+      css_identifier
     } else {
       // Nested css expressions can't use the variable name of the outer scope
       // but need their own name
@@ -240,17 +259,19 @@ impl VisitMut for TransformVisitor {
       if yak_library_function_name.as_deref() == Some("css") {
         let mut css_state_with_css_scope = css_state.clone().unwrap();
         let condition = self.current_condition.join("-and-");
+        let css_identifier = self
+          .naming_convention
+          .generate_unique_name(&format!("{}--{}", current_variable_name, condition));
         css_state_with_css_scope.current_scopes[0] = CssScope {
-          name: self
-            .naming_convention
-            .generate_unique_name(&format!("{}--{}", current_variable_name, condition)),
+          name: format!(".{}", css_identifier),
           scope_type: ScopeType::Selector,
         };
         css_state = Some(css_state_with_css_scope);
+        css_identifier
       } else {
         panic!("Unsupported nested yak expression");
       }
-    }
+    };
 
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
@@ -265,36 +286,59 @@ impl VisitMut for TransformVisitor {
       let quasi = pair.as_ref().left().unwrap();
       let css_code = if is_last_pair {
         // allow a css literal to skip the last semicolon
-        // therefore we trim the last quasi element and add a semicolon
-        format!("{};", quasi.raw.trim()).to_string()
+        let final_quasi = quasi.raw.trim_end();
+        if final_quasi.ends_with(';') || final_quasi.ends_with('}') {
+          quasi.raw.to_string()
+        } else {
+          format!("{};", final_quasi).to_string()
+        }
       } else {
         quasi.raw.to_string()
       };
       let (new_state, new_declarations) = parse_css(&css_code, css_state);
       css_state = Some(new_state);
-      // Add the extracted css declarations to the current css state
+      // Add the extracted CSS to the the root styled component
       self.current_declaration.extend(new_declarations);
 
       // Expressions
+      // e.g. const Button = styled.button`color: ${primary};`
+      //                                            ^^^^^^^
+      // e.g. const Button = styled.button`color: ${() => /* ... */};`
+      //                                            ^^^^^^^^^^^^^^^^
       if let Some(expr) = pair.right() {
-        // TODO: Handle selectors
-
         // Handle constants in css expressions
         // e.g. styled.button`color: ${primary};`
-        if let Expr::Ident(Ident { sym, .. }) = &**expr {
-          if let Some(value) = self.variables.get_imported_variable(sym) {
+        if let Expr::Ident(id) = &**expr {
+          let scoped_name = id.to_string();
+          if let Some(value) = self.variable_name_mapping.get(&scoped_name) {
+            // Reference StyledComponents or Animations in the same file
+            let (new_state, new_declarations) = parse_css(value.as_str(), css_state);
+            css_state = Some(new_state);
+            self.current_declaration.extend(new_declarations);
+          } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
             // In rust we cant access the bundler resolver
             // therefore we add a reference to the imported variable
             // :module-selector-import(FOO from 'bar')
             // later in the bundler we can replace this with the actual value
-            let selector = format!("::module-selector-import({} '{}')", sym, value);
+            let selector = format!("::module-selector-import({} '{}')", id.sym, value);
             let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
             css_state = Some(new_state);
             self.current_declaration.extend(new_declarations);
-          } else if let Some(value) = self.variables.get_variable(sym) {
-            let (new_state, new_declarations) = parse_css(&value, css_state);
+          } else if let Some(value) = self.variables.get_variable(&scoped_name) {
+            let (new_state, _) = parse_css(&value, css_state);
             css_state = Some(new_state);
-            self.current_declaration.extend(new_declarations);
+          } else if self.variables.is_top_level(&scoped_name) {
+            // If the variable is top but not a constant we can't access it
+            // chances are high that it is a calculated value
+            panic!("Variable {} is not a constant", scoped_name);
+          } else if css_state.is_some() && css_state.as_ref().unwrap().is_inside_property_value {
+            // Convert the variable to a css variable
+            // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
+            let (new_state, _) = parse_css("var(--TODO)", css_state);
+            css_state = Some(new_state);
+          } else {
+            // If the variable is not found we can't access it
+            panic!("You cant use '{}' outside of a css value", id.sym);
           }
         }
         // Visit nested css expressions
@@ -336,7 +380,7 @@ impl VisitMut for TransformVisitor {
         exprs: vec![],
         quasis: vec![TplElement {
           span: DUMMY_SP,
-          raw: "EXTRACTED".into(),
+          raw: unique_identifier.to_string().into(),
           cooked: None,
           tail: true,
         }],
@@ -348,7 +392,7 @@ impl VisitMut for TransformVisitor {
 fn condition_to_string(expr: &Expr, negate: bool) -> String {
   let prefix = if negate { "not_" } else { "" };
   match expr {
-    Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym).replace('#', ""),
+    Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym),
     Expr::Lit(Lit::Bool(Bool { value, .. })) => format!("{}{}", prefix, value),
     _ => "".to_string(),
   }
@@ -375,30 +419,36 @@ mod tests {
       import { Icon } from "./Icon";
       const primary = "green";
       const Button = styled.button`
-          font-size: 1rem;
-          color: ${primary};
-          ${Icon} {
-              ${({$active}) => $active && css`color: red`}
-              padding: 1rem;
-  
-              ${({$active}) => $active ? null : css`
-                  ${({$hover}) => $hover && css`color: blue`}
-              `}
-          }
-  
-          ${({$active}) => $active && css`border: 1px solid red`}
+        font-size: 1rem;
+        color: ${primary};
+        ${Icon} {
+            ${({$active}) => $active && css`color: red`}
+            padding: 1rem;
+
+            ${({$active}) => $active ? null : css`
+                ${({$hover}) => $hover && css`color: blue`}
+            `}
+        }
+        ${({$active, $size}) => $active && css`border: ${size} solid red`}
       `;
       const Animation = keyframes`
-          from { color: red; }
-          to { color: blue; }
+        from { color: red; }
+        to { color: blue; }
+      `;
+      const Wrapper = styled.div`
+        animation: ${Animation} 1s linear infinite;
+        &:hover ${Button} {
+          opacity: 0.5;
+        }
       `;
       "#,
       r#"
       import { styled, css, keyframes } from "next-yak";
       import { Icon } from "./Icon";
       const primary = "green";
-      const Button = styled.button`EXTRACTED`;
-      const Animation = keyframes`EXTRACTED`;
+      const Button = styled.button`Button`;
+      const Animation = keyframes`Animation`;
+      const Wrapper = styled.div`Wrapper`;
       "#,
       true,
     );
@@ -414,7 +464,7 @@ mod tests {
     "#,
     r#"
     import { styled as styledNamed } from "next-yak";
-    const Button = styledNamed.button`EXTRACTED`;
+    const Button = styledNamed.button`Button`;
     "#
   );
 

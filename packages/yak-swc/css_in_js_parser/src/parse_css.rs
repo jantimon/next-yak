@@ -75,6 +75,12 @@ pub fn parse_css(
 
   // Prepend any pending CSS segment from the previous state
   let css_to_parse = if !state.pending_css_segment.is_empty() {
+    // Reset the state to properly parse the pending CSS segment
+    state.is_inside_string = None;
+    state.is_inside_comment = false;
+    state.is_inside_property_value = false;
+    state.is_inside_at_rule = false;
+    state.current_declaration = new_declaration();
     state.pending_css_segment.clone() + css_string
   } else {
     css_string.to_string()
@@ -285,8 +291,6 @@ pub fn parse_css(
   if !current_code.is_empty() {
     state.pending_css_segment = current_code;
     state.current_declaration = new_declaration();
-    state.is_inside_property_value = false;
-    state.is_inside_at_rule = false;
   } else {
     state.pending_css_segment.clear();
   }

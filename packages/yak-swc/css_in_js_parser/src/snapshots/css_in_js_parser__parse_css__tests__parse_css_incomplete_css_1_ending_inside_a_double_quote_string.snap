@@ -8,7 +8,7 @@ expression: "(state, declarations)"
             '"',
         ),
         is_inside_comment: false,
-        is_inside_property_value: false,
+        is_inside_property_value: true,
         is_inside_at_rule: false,
         current_scopes: [
             CssScope {
