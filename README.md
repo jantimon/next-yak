@@ -291,7 +291,7 @@ Thanks for merging our prs fixes in next.js and postcss ❤️
 
   - https://next-yak-benchmark.vercel.app/
   - https://yacijs.vercel.app/
-</detials>
+</details>
 
 ## Acknowledgments
 
