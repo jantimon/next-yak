@@ -226,13 +226,13 @@ export const KanjiLetterComponent${
   return (
     <>
     <div style={{ position: "fixed", inset: 0, pointerEvents: "none", opacity: 0 }}>
-      {Array.from({ length: 10001 }, (_, index) => index).map((_, index) => (
+      {Array(10000).fill(0).map((_, index) => (
         <RoundSpan key={index}>{index + 1}</RoundSpan>
       ))}
     </div>
     <LibHeader onClick={() => document.location.href = "${
       lib === "next-yak" ? "/styled" : "/yak"
-    }"  }>${lib}</LibHeader>
+    }"}>${lib}</LibHeader>
     <Wrapper 
       style={{ 
         // @ts-ignore

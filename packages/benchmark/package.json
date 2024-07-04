@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "next": "canary",
-    "react": "beta",
-    "react-dom": "beta",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "next-yak": "workspace:*",
     "styled-components": "6.1.1"
   },
