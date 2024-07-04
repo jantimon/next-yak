@@ -329,7 +329,7 @@ export const KanjiLetterComponent${
         "// @ts-nocheck\n" +
         (await tsLoader.call(loaderContext, fileContent))
           // Remove __styleYak import
-          .replace(/import __styleYak from "[^"]+";/, "")
+          .replace(/import[^;\n]+yak.module.css";/, "")
           // Replace __styleYak usage to a string
           .replace(/__styleYak.(\w+)/g, `"$1"`);
       writeFile(

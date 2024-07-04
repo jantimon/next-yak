@@ -285,6 +285,14 @@ Thanks for merging our prs fixes in next.js and postcss ❤️
   
 </details>
 
+<details>
+  <summary>Experiments</summary>
+  Small work in progress experiments to test the features and performance of next-yak:
+
+  - https://next-yak-benchmark.vercel.app/
+  - https://yacijs.vercel.app/
+</detials>
+
 ## Acknowledgments
 
 Special thanks to the contributors and the inspiring projects that influenced next-yak:

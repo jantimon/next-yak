@@ -1,5 +1,5 @@
 // @ts-nocheck
-"use client";import React,{type FunctionComponent}from'react';import{styled as styledYak,css}from'next-yak';import "from""./page.yak.module.css!=!./page?./page.yak.module.css";const oneTimeDelay=new Promise(resolve=>setTimeout(resolve,1));// Simulate a component which accesses apollo or relay data access
+"use client";import React,{type FunctionComponent}from'react';import{styled as styledYak,css}from'next-yak';const oneTimeDelay=new Promise(resolve=>setTimeout(resolve,1));// Simulate a component which accesses apollo or relay data access
 // starting with a loading state and then switching to the actual content
 const FakeDataLoader=({children}:{children?:React.ReactNode;})=>{const[show,setShow]=React.useState(false);const showDeferred=React.useDeferredValue(show);React.useEffect(()=>{let isMounted=true;oneTimeDelay.then(()=>{if(isMounted){setShow(true);}});return()=>{isMounted=false;};},[]);if(!showDeferred)return null;return<>{children}</>;};const JapaneseCard=/*YAK Extracted CSS:
 .JapaneseCard {
