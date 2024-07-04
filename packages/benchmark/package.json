@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "pnpm run build:yak && pnpm run build:next",
+    "dev": "pnpm run generate:letters && next dev",
+    "build": "pnpm run build:yak && pnpm run generate:letters && pnpm run build:next",
     "build:next": "next build",
     "build:yak": "pnpm run --dir ../.. build",
     "start": "next start",
