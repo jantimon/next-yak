@@ -386,7 +386,7 @@ where
 
       // Replace the quasi with "EXTRACTED"
       n.tpl = Box::new(Tpl {
-        span: DUMMY_SP,
+        span: n.tpl.span,
         exprs: vec![],
         quasis: vec![TplElement {
           span: DUMMY_SP,
