@@ -9,12 +9,13 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 serde = "1.0.203"
 swc_core = { version = "0.96.0", features = ["ecma_plugin_transform"] }
-swc_common = "0.34.3"
 css_in_js_parser = { path = "../css_in_js_parser" }
 itertools = "0.13.0"
 
 [dev-dependencies]
 swc = "0.279.0"
+swc_ecma_transforms_testing = "0.143.1"
+testing = "0.36.0"
 
 # .cargo/config defines few alias to build plugin.
 # cargo build-wasi generates wasm-wasi32 binary

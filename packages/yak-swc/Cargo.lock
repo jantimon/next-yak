@@ -3118,8 +3118,9 @@ dependencies = [
  "itertools",
  "serde",
  "swc",
- "swc_common",
  "swc_core",
+ "swc_ecma_transforms_testing",
+ "testing",
 ]
 
 [[package]]

@@ -19,7 +19,13 @@ use variable_visitor::VariableVisitor;
 mod naming_convention;
 use naming_convention::NamingConvention;
 
-pub struct TransformVisitor {
+pub struct TransformVisitor<GenericComments>
+where
+  // SWC provides different comment types for production and testing
+  // We need to abstract over this to make the plugin testable
+  // @see https://stackoverflow.com/questions/78709909/injecting-comments-with-a-swc-rust-plugin
+  GenericComments: Comments,
+{
   next_yak_imports: HashMap<String, String>,
   /// Last css parser state to contiue parsing the next css code from a quasi
   /// in the same scope
@@ -31,7 +37,7 @@ pub struct TransformVisitor {
   /// Current condition to name nested css expressions
   current_condition: Vec<String>,
   /// SWC comments proxy to add extracted css as comments
-  comments: Option<PluginCommentsProxy>,
+  comments: Option<GenericComments>,
   /// Extracted variables from the AST
   /// Used to access constants in css expressions
   variables: VariableVisitor,
@@ -44,8 +50,11 @@ pub struct TransformVisitor {
   naming_convention: NamingConvention,
 }
 
-impl TransformVisitor {
-  pub fn new(comments: Option<PluginCommentsProxy>) -> Self {
+impl<GenericComments> TransformVisitor<GenericComments>
+where
+  GenericComments: Comments,
+{
+  pub fn new(comments: Option<GenericComments>) -> Self {
     Self {
       next_yak_imports: HashMap::new(),
       current_css_state: None,
@@ -70,7 +79,10 @@ impl TransformVisitor {
   }
 }
 
-impl VisitMut for TransformVisitor {
+impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
+where
+  GenericComments: Comments,
+{
   fn visit_mut_program(&mut self, n: &mut Program) {
     // Use VariableVisitor to visit the AST and extract all variable names
     let mut variable_visitor = VariableVisitor::new();
@@ -361,17 +373,15 @@ impl VisitMut for TransformVisitor {
         // TODO: Remove debug output:
         println!("{}", to_css(&self.current_declaration));
 
-        if let Some(comments) = &self.comments {
-          comments.add_leading(
-            n.tpl.span.lo,
-            Comment {
-              kind: swc_core::common::comments::CommentKind::Block,
-              span: DUMMY_SP,
-              text: to_css_with_state(&self.current_declaration, css_state).into(),
-            },
-          );
-          self.current_declaration = vec![];
-        }
+        self.comments.add_leading(
+          n.tpl.span.lo,
+          Comment {
+            kind: swc_core::common::comments::CommentKind::Block,
+            span: DUMMY_SP,
+            text: "EXTRACTED".to_string().into(),
+          },
+        );
+        self.current_declaration = vec![];
       }
 
       // Replace the quasi with "EXTRACTED"
@@ -406,79 +416,18 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc_core::ecma::transforms::testing::{test_inline, test_transform};
+  use std::path::PathBuf;
+  use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
+  use swc_ecma_transforms_testing::FixtureTestConfig;
 
-  #[test]
-  fn extract_css() {
-    let mut visitor = TransformVisitor::new(Some(PluginCommentsProxy {}));
-    test_transform(
+  #[testing::fixture("tests/fixture/**/input.tsx")]
+  fn fixture(input: PathBuf) {
+    test_fixture(
       Default::default(),
-      |_| as_folder(&mut visitor),
-      r#"
-      import { styled, css, keyframes } from "next-yak";
-      import { Icon } from "./Icon";
-      const primary = "green";
-      const Button = styled.button`
-        font-size: 1rem;
-        color: ${primary};
-        ${Icon} {
-            ${({$active}) => $active && css`color: red`}
-            padding: 1rem;
-
-            ${({$active}) => $active ? null : css`
-                ${({$hover}) => $hover && css`color: blue`}
-            `}
-        }
-        ${({$active, $size}) => $active && css`border: ${size} solid red`}
-      `;
-      const Animation = keyframes`
-        from { color: red; }
-        to { color: blue; }
-      `;
-      const Wrapper = styled.div`
-        animation: ${Animation} 1s linear infinite;
-        &:hover ${Button} {
-          opacity: 0.5;
-        }
-      `;
-      "#,
-      r#"
-      import { styled, css, keyframes } from "next-yak";
-      import { Icon } from "./Icon";
-      const primary = "green";
-      const Button = styled.button`Button`;
-      const Animation = keyframes`Animation`;
-      const Wrapper = styled.div`Wrapper`;
-      "#,
-      true,
+      &|tester| as_folder(TransformVisitor::new(Some(tester.comments.clone()))),
+      &input,
+      &input.with_file_name("output.tsx"),
+      FixtureTestConfig::default(),
     );
   }
-
-  test_inline!(
-    Default::default(),
-    |_| as_folder(TransformVisitor::new(None)),
-    import_named_and_use,
-    r#"
-    import { styled as styledNamed } from "next-yak";
-    const Button = styledNamed.button`color: red`;
-    "#,
-    r#"
-    import { styled as styledNamed } from "next-yak";
-    const Button = styledNamed.button`Button`;
-    "#
-  );
-
-  test_inline!(
-    Default::default(),
-    |_| as_folder(TransformVisitor::new(None)),
-    ignore_another_lib,
-    r#"
-    import styled from "anotherlib";
-    const Button = styled.button`color: red`;
-    "#,
-    r#"
-    import styled from "anotherlib";
-    const Button = styled.button`color: red`;
-    "#
-  );
 }
