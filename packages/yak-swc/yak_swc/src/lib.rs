@@ -339,15 +339,20 @@ where
           } else if let Some(value) = self.variables.get_variable(&scoped_name) {
             let (new_state, _) = parse_css(&value, css_state);
             css_state = Some(new_state);
-          } else if self.variables.is_top_level(&scoped_name) {
-            // If the variable is top but not a constant we can't access it
-            // chances are high that it is a calculated value
-            panic!("Variable {} is not a constant", scoped_name);
-          } else if css_state.is_some() && css_state.as_ref().unwrap().is_inside_property_value {
-            // Convert the variable to a css variable
-            // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
-            let (new_state, _) = parse_css("var(--TODO)", css_state);
-            css_state = Some(new_state);
+          }
+          // A property with a dynamic value
+          // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
+          else if css_state.is_some() && css_state.as_ref().unwrap().is_inside_property_value {
+            if !self.variables.is_top_level(&scoped_name) {
+              // Convert the variable to a css variable
+              // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
+              let (new_state, _) = parse_css("var(--TODO)", css_state);
+              css_state = Some(new_state);
+            } else {
+              // If the variable is top but not a constant we can't access it
+              // e.g. styled.button`color: ${color};`
+              panic!("Variable {} is not a constant", scoped_name);
+            }
           } else {
             // If the variable is not found we can't access it
             panic!("You cant use '{}' outside of a css value", id.sym);
@@ -369,20 +374,15 @@ where
 
     // Add the extracted CSS as a comment
     if is_top_level {
-      {
-        // TODO: Remove debug output:
-        println!("{}", to_css(&self.current_declaration));
-
-        self.comments.add_leading(
-          n.tpl.span.lo,
-          Comment {
-            kind: swc_core::common::comments::CommentKind::Block,
-            span: DUMMY_SP,
-            text: "EXTRACTED".to_string().into(),
-          },
-        );
-        self.current_declaration = vec![];
-      }
+      self.comments.add_leading(
+        n.tpl.span.lo,
+        Comment {
+          kind: swc_core::common::comments::CommentKind::Block,
+          span: DUMMY_SP,
+          text: to_css(&self.current_declaration).into(),
+        },
+      );
+      self.current_declaration = vec![];
 
       // Replace the quasi with "EXTRACTED"
       n.tpl = Box::new(Tpl {
