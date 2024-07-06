@@ -3,6 +3,9 @@ use std::collections::HashSet;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
 
+#[derive(Debug)]
+/// Visitor implementation to gather all variable declarations
+/// and their values from the AST
 pub struct VariableVisitor {
   top_level: HashSet<String>,
   variables: HashMap<String, Box<Expr>>,
@@ -10,8 +13,6 @@ pub struct VariableVisitor {
   is_top_level: bool,
 }
 
-/// Visitor implementation to gather all variable declarations
-/// and their values from the AST
 impl VariableVisitor {
   pub fn new() -> Self {
     Self {

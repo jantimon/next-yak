@@ -1,0 +1,21 @@
+{
+    "name": "yak-swc",
+    "version": "0.1.0",
+    "description": "SWC plugin for next-yak",
+    "author": "Jan Nicklas",
+    "license": "MIT",
+    "keywords": ["swc-plugin"],
+    "main": "target/wasm32-wasi/release/yak_swc.wasm",
+    "scripts": {
+        "build": "cargo build-wasi --release",
+        "prepublishOnly": "cargo build-wasi --release"
+    },
+    "files": [],
+    "preferUnplugged": true,
+    "dependencies": {
+        "@swc/counter": "0.1.3"
+    },
+    "devDependencies": {
+        "next-yak": "workspace:*"
+    }
+}

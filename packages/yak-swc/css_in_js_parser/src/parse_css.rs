@@ -14,13 +14,13 @@ pub struct ParserState {
 }
 
 impl ParserState {
-  pub fn new(base_scopes: Option<Vec<CssScope>>) -> Self {
+  pub fn new() -> Self {
     Self {
       is_inside_string: None,
       is_inside_comment: false,
       is_inside_property_value: false,
       is_inside_at_rule: false,
-      current_scopes: base_scopes.unwrap_or_default(),
+      current_scopes: Vec::new(),
       current_declaration: new_declaration(),
       pending_css_segment: String::new(),
     }
@@ -71,7 +71,7 @@ pub fn parse_css(
   css_string: &str,
   initial_state: Option<ParserState>,
 ) -> (ParserState, Vec<Declaration>) {
-  let mut state = initial_state.unwrap_or(ParserState::new(None));
+  let mut state = initial_state.unwrap_or(ParserState::new());
 
   // Prepend any pending CSS segment from the previous state
   let css_to_parse = if !state.pending_css_segment.is_empty() {

@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, to_css, to_css_with_state, CssScope, ScopeType};
+use css_in_js_parser::parse_css;
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -10,7 +10,6 @@ use swc_core::ecma::{
   ast::*,
   visit::{as_folder, FoldWith, VisitMut},
 };
-use swc_core::plugin::proxies::PluginCommentsProxy;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 
 mod variable_visitor;
@@ -18,6 +17,11 @@ use variable_visitor::VariableVisitor;
 
 mod naming_convention;
 use naming_convention::NamingConvention;
+
+mod yak_transforms;
+use yak_transforms::{
+  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakTransform,
+};
 
 pub struct TransformVisitor<GenericComments>
 where
@@ -68,14 +72,37 @@ where
     }
   }
 
-  // Check if the current AST has imports to the next-yak library
+  /// Check if the current AST has imports to the next-yak library
   fn is_using_next_yak(&self) -> bool {
     !self.next_yak_imports.is_empty()
   }
 
-  // Check if we are inside a next-yak css expression
+  /// Check if we are inside a next-yak css expression
   fn is_inside_css_expression(&self) -> bool {
     self.current_css_state.is_some()
+  }
+
+  /// Get the name of the used next-yak library function
+  /// e.g. styled.button`color: red;` -> styled
+  fn get_yak_library_function_name(&self, n: &TaggedTpl) -> Option<String> {
+    if !self.is_using_next_yak() {
+      return None;
+    }
+    // styled.button`color: red;`
+    // keyframes`from { color: red; }`
+    // css`color: red;`
+    // styled.button.attrs({})`color: red;`
+    return match &*n.tag {
+      Expr::Ident(Ident { sym, .. }) => self.next_yak_imports.get(&sym.to_string()).cloned(),
+      Expr::Member(MemberExpr { obj, .. }) => {
+        if let Expr::Ident(Ident { sym, .. }) = &**obj {
+          self.next_yak_imports.get(&sym.to_string()).cloned()
+        } else {
+          None
+        }
+      }
+      _ => None,
+    };
   }
 }
 
@@ -130,6 +157,10 @@ where
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
+    if !self.is_inside_css_expression() {
+      n.visit_mut_children_with(self);
+      return;
+    }
     match n {
       Expr::Cond(cond) => {
         cond.test.visit_mut_with(self);
@@ -175,33 +206,28 @@ where
   /// Visit tagged template literals
   /// This is where the css-in-js expressions are
   fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-    if !self.is_using_next_yak() {
-      return;
-    }
-    // styled.button`color: red;`
-    // keyframes`from { color: red; }`
-    // css`color: red;`
-    // styled.button.attrs({})`color: red;`
-    let yak_library_function_name = match &*n.tag {
-      Expr::Ident(Ident { sym, .. }) => self.next_yak_imports.get(&sym.to_string()).cloned(),
-      Expr::Member(MemberExpr { obj, .. }) => {
-        if let Expr::Ident(Ident { sym, .. }) = &**obj {
-          self.next_yak_imports.get(&sym.to_string()).cloned()
-        } else {
-          None
-        }
-      }
-      _ => None,
-    };
-
-    // Only continue if the template literal is our own styled, css or keyframes
+    let yak_library_function_name = self.get_yak_library_function_name(n);
     if yak_library_function_name.is_none() {
+      n.visit_mut_children_with(self);
       return;
     }
 
-    let is_top_level = self.current_css_state.is_none();
-    // Current css parser state to parse an incomplete css code from a quasi
-    let mut css_state = self.current_css_state.clone();
+    let is_top_level = !self.is_inside_css_expression();
+
+    let mut transform: Box<dyn YakTransform> = match yak_library_function_name.as_deref() {
+      // Styled Components transform works only on top level
+      Some("styled") if is_top_level => Box::new(TransformStyled::new()),
+      // Keyframes transform works only on top level
+      Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new()),
+      // CSS Mixin e.g. const highlight = css`color: red;`
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new()),
+      // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
+      Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
+      _ => panic!(
+        "Invalid context for next-yak function {:?}",
+        yak_library_function_name
+      ),
+    };
 
     let current_variable_id = self
       .current_variable_name
@@ -211,79 +237,17 @@ where
     // Remove this postfix to generate a more readable css class name
     let current_variable_name = current_variable_id.split('#').next().unwrap();
 
+    // Current css parser state to parse an incomplete css code from a quasi
     // In css-in-js the outer css scope is missing e.g.:
     // styled.button`color: red;` => .button { color: red; }
     //
     // Depending on the library function used (styled, keyframes, css, ...)
     // a surrounding scope is added
-    let unique_identifier = if !self.is_inside_css_expression() {
-      let css_identifier = self
-        .naming_convention
-        .generate_unique_name(current_variable_name);
-      self.current_declaration = vec![];
-      css_state = Some(ParserState::new(Some(Vec::from([
-        match yak_library_function_name.as_deref() {
-          Some("styled") => {
-            let styled_component_selector = format!(".{}", css_identifier);
-            // Allow to be used as selector in expressions
-            // e.g.
-            // const Button = styled.button`color: red;`
-            // const Wrapper = styled.div`${Button} { color: blue; }`
-            if let Some(variable_name) = self.current_variable_name.clone() {
-              self
-                .variable_name_mapping
-                .insert(variable_name, styled_component_selector.clone());
-            }
-            // Use the styled component selector as surrounding scope
-            // for all quasi and expressions of the current styled component
-            CssScope {
-              name: styled_component_selector,
-              scope_type: ScopeType::Selector,
-            }
-          }
-          Some("keyframes") => {
-            // Allow to be used as selector in expressions
-            if let Some(variable_name) = self.current_variable_name.clone() {
-              self
-                .variable_name_mapping
-                .insert(variable_name, css_identifier.clone());
-            }
-            // Wrap with @keyframes
-            CssScope {
-              name: format!("@keyframes {}", css_identifier),
-              scope_type: ScopeType::AtRule,
-            }
-          }
-          Some("css") => CssScope {
-            name: format!(".{}", css_identifier),
-            scope_type: ScopeType::Selector,
-          },
-          _ => panic!("Unknown next-yak function"),
-        },
-      ]))));
-
-      css_identifier
-    } else {
-      // Nested css expressions can't use the variable name of the outer scope
-      // but need their own name
-      // To help developers during debugging we try to use the conditions of the current expression
-      // e.g. const Button styled.button`${({$x}) => $x && css`color: red`}` -> .Button_and_x { color: red; }
-      if yak_library_function_name.as_deref() == Some("css") {
-        let mut css_state_with_css_scope = css_state.clone().unwrap();
-        let condition = self.current_condition.join("-and-");
-        let css_identifier = self
-          .naming_convention
-          .generate_unique_name(&format!("{}--{}", current_variable_name, condition));
-        css_state_with_css_scope.current_scopes[0] = CssScope {
-          name: format!(".{}", css_identifier),
-          scope_type: ScopeType::Selector,
-        };
-        css_state = Some(css_state_with_css_scope);
-        css_identifier
-      } else {
-        panic!("Unsupported nested yak expression");
-      }
-    };
+    let mut css_state = Some(transform.create_css_state(
+      &mut self.naming_convention,
+      current_variable_name,
+      self.current_css_state.clone(),
+    ));
 
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
@@ -372,30 +336,36 @@ where
       }
     }
 
-    // Add the extracted CSS as a comment
+    let transform_result = transform.transform_expression(n, &self.current_declaration);
+    if let Some(css_identifier) = transform_result.css_identifier.clone() {
+      self
+        .variable_name_mapping
+        .insert(current_variable_id, css_identifier);
+    }
+    // Top level consumes the current declaration
     if is_top_level {
+      self.current_declaration = vec![];
+    }
+    let css_code = transform_result.css.trim();
+    n.tpl = Box::new(transform_result.expression);
+    if !css_code.is_empty() {
       self.comments.add_leading(
         n.tpl.span.lo,
         Comment {
           kind: swc_core::common::comments::CommentKind::Block,
           span: DUMMY_SP,
-          text: to_css(&self.current_declaration).into(),
+          text: format!("YAK Extracted CSS:\n{}\n", css_code).into(),
         },
       );
-      self.current_declaration = vec![];
-
-      // Replace the quasi with "EXTRACTED"
-      n.tpl = Box::new(Tpl {
-        span: n.tpl.span,
-        exprs: vec![],
-        quasis: vec![TplElement {
-          span: DUMMY_SP,
-          raw: unique_identifier.to_string().into(),
-          cooked: None,
-          tail: true,
-        }],
-      });
     }
+    self.comments.add_leading(
+      n.tpl.span.lo,
+      Comment {
+        kind: swc_core::common::comments::CommentKind::Block,
+        span: DUMMY_SP,
+        text: "#__PURE__".to_string().into(),
+      },
+    );
   }
 }
 
@@ -417,7 +387,7 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
 mod tests {
   use super::*;
   use std::path::PathBuf;
-  use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
+  use swc_core::ecma::transforms::testing::test_fixture;
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
   #[testing::fixture("tests/fixture/**/input.tsx")]
