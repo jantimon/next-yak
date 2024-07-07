@@ -52,6 +52,8 @@ where
   variable_name_mapping: HashMap<String, String>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
+  /// Expression replacement to replace a yak library call with the transformed one
+  expression_replacement: Option<Box<Expr>>,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -68,6 +70,7 @@ where
       variables: VariableVisitor::new(),
       naming_convention: NamingConvention::new(),
       variable_name_mapping: HashMap::new(),
+      expression_replacement: None,
       comments,
     }
   }
@@ -166,49 +169,61 @@ where
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
-    if !self.is_inside_css_expression() {
-      n.visit_mut_children_with(self);
-      return;
+    // Transform tagged template literals
+    // e.g. styled.button`color: red;`
+    if let Expr::TaggedTpl(tpl) = n {
+      let replacement_before = self.expression_replacement.clone();
+      self.visit_mut_tagged_tpl(tpl);
+      if let Some(replacement) = self.expression_replacement.clone() {
+        *n = *replacement;
+      }
+      self.expression_replacement = replacement_before;
     }
-    match n {
-      Expr::Cond(cond) => {
-        cond.test.visit_mut_with(self);
+    // Store the current conditions so they can be used to name nested css expressions
+    // e.g. const Button = styled.button`${({$active}) => $active && css`...`}` -> Button__active
+    else if self.is_inside_css_expression() {
+      match n {
+        Expr::Cond(cond) => {
+          cond.test.visit_mut_with(self);
 
-        // Push condition for the consequent
-        self
-          .current_condition
-          .push(condition_to_string(&cond.test, false));
-        cond.cons.visit_mut_with(self);
-        self.current_condition.pop();
+          // Push condition for the consequent
+          self
+            .current_condition
+            .push(condition_to_string(&cond.test, false));
+          cond.cons.visit_mut_with(self);
+          self.current_condition.pop();
 
-        // Push negated condition for the alternate
-        self
-          .current_condition
-          .push(condition_to_string(&cond.test, true));
-        cond.alt.visit_mut_with(self);
-        self.current_condition.pop();
+          // Push negated condition for the alternate
+          self
+            .current_condition
+            .push(condition_to_string(&cond.test, true));
+          cond.alt.visit_mut_with(self);
+          self.current_condition.pop();
+        }
+        Expr::Bin(bin) if bin.op == BinaryOp::LogicalAnd => {
+          bin.left.visit_mut_with(self);
+
+          // Push condition for right side
+          self
+            .current_condition
+            .push(condition_to_string(&bin.left, false));
+          bin.right.visit_mut_with(self);
+          self.current_condition.pop();
+        }
+        Expr::Bin(bin) if bin.op == BinaryOp::LogicalOr => {
+          bin.left.visit_mut_with(self);
+
+          // Push negated condition for right side
+          self
+            .current_condition
+            .push(condition_to_string(&bin.left, true));
+          bin.right.visit_mut_with(self);
+          self.current_condition.pop();
+        }
+        _ => n.visit_mut_children_with(self),
       }
-      Expr::Bin(bin) if bin.op == BinaryOp::LogicalAnd => {
-        bin.left.visit_mut_with(self);
-
-        // Push condition for right side
-        self
-          .current_condition
-          .push(condition_to_string(&bin.left, false));
-        bin.right.visit_mut_with(self);
-        self.current_condition.pop();
-      }
-      Expr::Bin(bin) if bin.op == BinaryOp::LogicalOr => {
-        bin.left.visit_mut_with(self);
-
-        // Push negated condition for right side
-        self
-          .current_condition
-          .push(condition_to_string(&bin.left, true));
-        bin.right.visit_mut_with(self);
-        self.current_condition.pop();
-      }
-      _ => n.visit_mut_children_with(self),
+    } else {
+      n.visit_mut_children_with(self);
     }
   }
 
@@ -352,25 +367,22 @@ where
       self.current_declaration = vec![];
     }
     let css_code = transform_result.css.trim();
-    n.tpl = Box::new(transform_result.expression);
-    if !css_code.is_empty() {
-      self.comments.add_leading(
-        n.tpl.span.lo,
-        Comment {
-          kind: swc_core::common::comments::CommentKind::Block,
-          span: DUMMY_SP,
-          text: format!("YAK Extracted CSS:\n{}\n", css_code).into(),
-        },
-      );
+    // TODO: this works only for call expressions
+    // can we make this more generic?
+    if let Expr::Call(call) = &*transform_result.expression {
+      if !css_code.is_empty() {
+        self.comments.add_leading(
+          call.span.lo,
+          Comment {
+            kind: swc_core::common::comments::CommentKind::Block,
+            span: DUMMY_SP,
+            text: format!("YAK Extracted CSS:\n{}\n", css_code).into(),
+          },
+        );
+      }
+      self.comments.add_leading(call.span.lo, pure_annotation());
     }
-    self.comments.add_leading(
-      n.tpl.span.lo,
-      Comment {
-        kind: swc_core::common::comments::CommentKind::Block,
-        span: DUMMY_SP,
-        text: "#__PURE__".to_string().into(),
-      },
-    );
+    self.expression_replacement = Some(transform_result.expression);
   }
 }
 
@@ -380,6 +392,16 @@ fn condition_to_string(expr: &Expr, negate: bool) -> String {
     Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym),
     Expr::Lit(Lit::Bool(Bool { value, .. })) => format!("{}{}", prefix, value),
     _ => "".to_string(),
+  }
+}
+
+/// Adds the `#__PURE__` comment for minifiers
+/// to remove the function call if it's not used
+fn pure_annotation() -> Comment {
+  Comment {
+    kind: swc_core::common::comments::CommentKind::Block,
+    span: DUMMY_SP,
+    text: "#__PURE__".to_string().into(),
   }
 }
 

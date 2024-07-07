@@ -1,13 +1,14 @@
 use css_in_js_parser::{to_css, CssScope, Declaration, ParserState, ScopeType};
 use swc_core::{
+  atoms::Atom,
   common::DUMMY_SP,
-  ecma::ast::{TaggedTpl, Tpl, TplElement},
+  ecma::ast::{CallExpr, Callee, Expr, Ident, TaggedTpl},
 };
 
 use crate::naming_convention::NamingConvention;
 
 pub struct YakTransformResult {
-  pub expression: Tpl,
+  pub expression: Box<Expr>,
   pub css: String,
   pub css_identifier: Option<String>,
 }
@@ -78,16 +79,12 @@ impl YakTransform for TransformNestedCss {
     YakTransformResult {
       css_identifier: None,
       css: to_css(&declarations),
-      expression: Tpl {
+      expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
-        exprs: vec![],
-        quasis: vec![TplElement {
-          span: DUMMY_SP,
-          raw: self.class_name.as_ref().unwrap().to_string().into(),
-          cooked: None,
-          tail: true,
-        }],
-      },
+        callee: Callee::Expr(expression.tag.clone()),
+        args: vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()],
+        type_args: None,
+      })),
     }
   }
 }
@@ -130,16 +127,13 @@ impl YakTransform for TransformCssMixin {
     YakTransformResult {
       css_identifier: Some(format!(".{}", self.class_name.as_ref().unwrap())),
       css: "".to_string(),
-      expression: Tpl {
+      expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
-        exprs: vec![],
-        quasis: vec![TplElement {
-          span: DUMMY_SP,
-          raw: self.class_name.as_ref().unwrap().to_string().into(),
-          cooked: None,
-          tail: true,
-        }],
-      },
+
+        callee: Callee::Expr(expression.tag.clone()),
+        args: vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()],
+        type_args: None,
+      })),
     }
   }
 }
@@ -182,16 +176,12 @@ impl YakTransform for TransformStyled {
     YakTransformResult {
       css_identifier: Some(format!(".{}", self.class_name.as_ref().unwrap())),
       css: to_css(&declarations),
-      expression: Tpl {
+      expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
-        exprs: vec![],
-        quasis: vec![TplElement {
-          span: DUMMY_SP,
-          raw: self.class_name.as_ref().unwrap().to_string().into(),
-          cooked: None,
-          tail: true,
-        }],
-      },
+        callee: Callee::Expr(expression.tag.clone()),
+        args: vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()],
+        type_args: None,
+      })),
     }
   }
 }
@@ -236,16 +226,12 @@ impl YakTransform for TransformKeyframes {
     YakTransformResult {
       css_identifier: Some(self.animation_name.as_ref().unwrap().to_string()),
       css: to_css(&declarations),
-      expression: Tpl {
+      expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
-        exprs: vec![],
-        quasis: vec![TplElement {
-          span: DUMMY_SP,
-          raw: self.animation_name.as_ref().unwrap().to_string().into(),
-          cooked: None,
-          tail: true,
-        }],
-      },
+        callee: Callee::Expr(expression.tag.clone()),
+        args: vec![Expr::Lit(self.animation_name.as_ref().unwrap().clone().into()).into()],
+        type_args: None,
+      })),
     }
   }
 }

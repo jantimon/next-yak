@@ -7,7 +7,7 @@ const BaseButton = /*YAK Extracted CSS:
   font-size: 16px;
   cursor: pointer;
 }
-*/ /*#__PURE__*/ styled.button`BaseButton`;
+*/ /*#__PURE__*/ styled.button("BaseButton");
 export const PrimaryButton = styled(BaseButton)`
   background-color: #007bff;
   color: #fff;

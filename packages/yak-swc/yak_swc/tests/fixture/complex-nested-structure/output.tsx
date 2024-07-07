@@ -51,4 +51,4 @@ export const ArticleCard = /*YAK Extracted CSS:
     }
   }
 }
-*/ /*#__PURE__*/ styled.article`ArticleCard`;
+*/ /*#__PURE__*/ styled.article("ArticleCard");
