@@ -104,6 +104,15 @@ where
       _ => None,
     };
   }
+
+  /// Try to get the component id of the current styled component mixin or animation
+  /// e.g. const Button = styled.button`color: red;` -> Button#1
+  fn get_current_component_id(&self) -> String {
+    return self
+      .current_variable_name
+      .clone()
+      .unwrap_or("yak".to_string());
+  }
 }
 
 impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
@@ -229,12 +238,8 @@ where
       ),
     };
 
-    let current_variable_id = self
-      .current_variable_name
-      .clone()
-      .unwrap_or("yak".to_string());
-    // SWC variables end with #{number}
-    // Remove this postfix to generate a more readable css class name
+    let current_variable_id = self.get_current_component_id();
+    // Remove the scope postfix to make the variable name easier to read
     let current_variable_name = current_variable_id.split('#').next().unwrap();
 
     // Current css parser state to parse an incomplete css code from a quasi
