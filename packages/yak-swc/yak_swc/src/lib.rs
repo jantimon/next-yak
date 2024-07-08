@@ -279,6 +279,7 @@ where
     // Literal expressions which can't be replaced by constant values
     // and must be kept for the final output (so they run at runtime)
     let mut runtime_expressions: Vec<Expr> = vec![];
+    let mut runtime_css_variables: HashMap<String, Expr> = HashMap::new();
 
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
@@ -332,12 +333,7 @@ where
             // const highlight = css`color: red;`
             // styled.button`${highlight};`
             else if referenced_yak_css.kind == YakType::Mixin {
-              // Add "foo" as argument
-              runtime_expressions.push(Expr::Lit(Lit::Str(Str {
-                span: DUMMY_SP,
-                value: referenced_yak_css.name.clone().into(),
-                raw: None,
-              })));
+              runtime_expressions.push(*expr.clone());
             }
           } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
             // In rust we cant access the bundler resolver
@@ -378,23 +374,59 @@ where
           let css_state_before = self.current_css_state.clone();
           // store the current css state so we can use it in nested css expressions
           self.current_css_state.clone_from(&css_state);
+
+          let is_inside_property_value = css_state.as_ref().unwrap().is_inside_property_value;
+
+          // If the expression is inside a css property value
+          // it has to be replaced with a css variable
+          if is_inside_property_value {
+            dbg!(&css_state.as_ref().unwrap());
+            let css_variable_name = self.naming_convention.get_css_variable_name(
+              &css_state
+                .as_ref()
+                .unwrap()
+                .current_declaration
+                .property
+                .as_str(),
+              // TODO: get the current file name
+              "todo.tsx",
+              // TODO: get the current dev mode
+              true,
+            );
+            runtime_css_variables.insert(css_variable_name.clone(), *expr.clone());
+            let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
+            css_state = Some(new_state);
+          }
+
           expr.visit_mut_children_with(self);
-          runtime_expressions.push(*expr.clone());
+
+          // If the expression is outside a css property value
+          // it is probably a nested css expression
+          if !is_inside_property_value {
+            runtime_expressions.push(*expr.clone());
+          }
+
           // revert to the css state before the current expression or literal
           self.current_css_state = css_state_before;
         }
       }
     }
 
-    let transform_result =
-      transform.transform_expression(n, runtime_expressions, &self.current_declaration);
+    let transform_result = transform.transform_expression(
+      n,
+      runtime_expressions,
+      &self.current_declaration,
+      runtime_css_variables,
+    );
 
-    self.current_declaration = vec![];
+    if is_top_level {
+      self.current_declaration = vec![];
+    }
     let css_code = transform_result.css.code.trim();
     // TODO: this works only for call expressions
     // can we make this more generic?
     if let Expr::Call(call) = &*transform_result.expression {
-      if !css_code.is_empty() {
+      if !css_code.is_empty() && is_top_level {
         self.comments.add_leading(
           call.span.lo,
           Comment {

@@ -1,5 +1,9 @@
+use std::collections::HashMap;
+
 use css_in_js_parser::{to_css, CssScope, Declaration, ParserState, ScopeType};
-use swc_core::ecma::ast::{CallExpr, Callee, Expr, ExprOrSpread, TaggedTpl};
+use swc_core::ecma::ast::{
+  CallExpr, Callee, Expr, ExprOrSpread, KeyValueProp, ObjectLit, PropName, PropOrSpread, TaggedTpl,
+};
 
 use crate::naming_convention::NamingConvention;
 
@@ -47,6 +51,7 @@ pub trait YakTransform {
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
+    runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult;
 }
 
@@ -94,6 +99,7 @@ impl YakTransform for TransformNestedCss {
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
+    runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if declarations.len() > 0 {
@@ -104,6 +110,9 @@ impl YakTransform for TransformNestedCss {
         .into_iter()
         .map(|expr| ExprOrSpread::from(expr)),
     );
+    if runtime_css_variables.len() > 0 {
+      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+    }
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
@@ -118,6 +127,26 @@ impl YakTransform for TransformNestedCss {
       })),
     }
   }
+}
+
+fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
+  let properties = values
+    .into_iter()
+    .map(|(key, value)| {
+      PropOrSpread::Prop(Box::new(
+        KeyValueProp {
+          key: PropName::Str(key.into()),
+          value: Box::new(value),
+        }
+        .into(),
+      ))
+    })
+    .collect::<Vec<_>>();
+
+  Expr::Object(ObjectLit {
+    span: Default::default(),
+    props: properties,
+  })
 }
 
 /// Transform for CSS Mixins
@@ -155,6 +184,7 @@ impl YakTransform for TransformCssMixin {
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
+    runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if declarations.len() > 0 {
@@ -165,6 +195,9 @@ impl YakTransform for TransformCssMixin {
         .into_iter()
         .map(|expr| ExprOrSpread::from(expr)),
     );
+    if runtime_css_variables.len() > 0 {
+      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+    }
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
@@ -216,6 +249,7 @@ impl YakTransform for TransformStyled {
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
+    runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if declarations.len() > 0 {
@@ -226,6 +260,9 @@ impl YakTransform for TransformStyled {
         .into_iter()
         .map(|expr| ExprOrSpread::from(expr)),
     );
+    if runtime_css_variables.len() > 0 {
+      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+    }
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
@@ -279,7 +316,15 @@ impl YakTransform for TransformKeyframes {
     expression: &mut TaggedTpl,
     _runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
+    runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
+    let mut arguments: Vec<ExprOrSpread> = vec![];
+    if declarations.len() > 0 {
+      arguments.push(Expr::Lit(self.animation_name.as_ref().unwrap().clone().into()).into());
+    }
+    if runtime_css_variables.len() > 0 {
+      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+    }
     YakTransformResult {
       css: YakCss {
         name: self.animation_name.as_ref().unwrap().to_string(),
@@ -289,7 +334,7 @@ impl YakTransform for TransformKeyframes {
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
-        args: vec![Expr::Lit(self.animation_name.as_ref().unwrap().clone().into()).into()],
+        args: arguments,
         type_args: None,
       })),
     }

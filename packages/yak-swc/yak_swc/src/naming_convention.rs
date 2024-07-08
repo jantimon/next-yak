@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use std::hash::{DefaultHasher, Hasher};
 
 pub struct NamingConvention {
   used_variables: HashSet<String>,
@@ -30,6 +31,31 @@ impl NamingConvention {
     };
     self.used_variables.insert(name.clone());
     name
+  }
+
+  pub fn get_css_variable_name(
+    &mut self,
+    base_name: &str,
+    file_name: &str,
+    dev_mode: bool,
+  ) -> String {
+    let name: &str = if dev_mode {
+      if base_name.len() == 0 {
+        "yak"
+      } else {
+        base_name
+      }
+    } else {
+      "y"
+    };
+    let hash = {
+      let mut hasher = DefaultHasher::new();
+      hasher.write(file_name.as_bytes());
+      hasher.finish()
+    };
+    let hash_str = format!("{:x}", hash);
+    let css_variable_name = format!("{}-{}", name, &hash_str[..5]);
+    return self.generate_unique_name(&css_variable_name);
   }
 }
 
@@ -97,5 +123,22 @@ mod tests {
     assert_eq!(convention.generate_unique_name("foo"), "foo");
     assert_eq!(convention.generate_unique_name("foo"), "foo-01");
     assert_eq!(convention.generate_unique_name("foo"), "foo-02");
+  }
+
+  #[test]
+  fn css_variable_name() {
+    let mut convention = NamingConvention::new();
+    assert_eq!(
+      convention.get_css_variable_name("foo", "file.css", false),
+      "y-1fc5c"
+    );
+    assert_eq!(
+      convention.get_css_variable_name("foo", "file.css", true),
+      "foo-1fc5c"
+    );
+    assert_eq!(
+      convention.get_css_variable_name("", "file.css", true),
+      "yak-1fc5c"
+    );
   }
 }

@@ -1,6 +1,26 @@
 import { styled, css } from "next-yak/internal";
-export const ThemedButton = /*#__PURE__*/ styled.button(({ $active })=>$active && /*YAK Extracted CSS:
-.ThemedButton--$active {
-  background-color: #f0f0f0;
+const buttonStyles = /*YAK Extracted CSS:
+.buttonStyles {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-*/ /*#__PURE__*/ css("ThemedButton--$active"));
+.buttonStyles--$active {
+  background-color: #f0f0f0;
+  max-width: var(--max-width-d617d)px;
+}
+.buttonStyles {
+  width: var(--width-d617d)px;
+}
+*/ /*#__PURE__*/ css("buttonStyles", ({ $active })=>$active && /*#__PURE__*/ css("buttonStyles--$active", {
+        "max-width-d617d": ({ $letters })=>$letters * 15
+    }), {
+    "width-d617d": ({ $letters })=>$letters * 10
+});
+export const ThemedButton = /*#__PURE__*/ styled.button(buttonStyles);
+export const CustomThemedButton = /*YAK Extracted CSS:
+.CustomThemedButton {
+  color: red;
+}
+*/ /*#__PURE__*/ styled.button("CustomThemedButton", buttonStyles);

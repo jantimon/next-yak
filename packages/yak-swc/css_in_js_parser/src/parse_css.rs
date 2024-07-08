@@ -9,7 +9,7 @@ pub struct ParserState {
   pub is_inside_property_value: bool,
   pub is_inside_at_rule: bool,
   pub current_scopes: Vec<CssScope>,
-  current_declaration: Declaration,
+  pub current_declaration: Declaration,
   pub pending_css_segment: String,
 }
 
@@ -290,7 +290,6 @@ pub fn parse_css(
   // .foo { background:url(bar)
   if !current_code.is_empty() {
     state.pending_css_segment = current_code;
-    state.current_declaration = new_declaration();
   } else {
     state.pending_css_segment.clear();
   }

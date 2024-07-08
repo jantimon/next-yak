@@ -2,10 +2,14 @@ import { styled } from "next-yak/internal";
 export const FlexContainer = /*YAK Extracted CSS:
 .FlexContainer {
   display: flex;
-  flex-direction: ;
-  justify-content: ;
-  align-items: ;
+  flex-direction: var(--flex-direction-d617d);
+  justify-content: var(--justify-content-d617d);
+  align-items: var(--align-items-d617d);
   padding: 20px;
   background-color: #f0f0f0;
 }
-*/ /*#__PURE__*/ styled.div("FlexContainer", ({ $direction })=>$direction || 'row', ({ $justify })=>$justify || 'flex-start', ({ $align })=>$align || 'stretch');
+*/ /*#__PURE__*/ styled.div("FlexContainer", {
+    "align-items-d617d": ({ $align })=>$align || 'stretch',
+    "flex-direction-d617d": ({ $direction })=>$direction || 'row',
+    "justify-content-d617d": ({ $justify })=>$justify || 'flex-start'
+});

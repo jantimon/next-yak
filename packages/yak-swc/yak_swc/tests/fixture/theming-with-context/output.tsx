@@ -2,9 +2,12 @@ import React from 'react';
 import { styled } from "next-yak/internal";
 const ThemedComponent = /*YAK Extracted CSS:
 .ThemedComponent {
-  background-color: ;
-  color: ;
+  background-color: var(--background-color-d617d);
+  color: var(--color-d617d);
   padding: 20px;
   border-radius: 8px;
 }
-*/ /*#__PURE__*/ styled.div("ThemedComponent", (props)=>props.theme.background, (props)=>props.theme.text);
+*/ /*#__PURE__*/ styled.div("ThemedComponent", {
+    "background-color-d617d": (props)=>props.theme.background,
+    "color-d617d": (props)=>props.theme.text
+});
