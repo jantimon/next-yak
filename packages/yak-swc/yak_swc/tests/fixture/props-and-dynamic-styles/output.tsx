@@ -8,4 +8,4 @@ export const FlexContainer = /*YAK Extracted CSS:
   padding: 20px;
   background-color: #f0f0f0;
 }
-*/ /*#__PURE__*/ styled.div("FlexContainer");
+*/ /*#__PURE__*/ styled.div("FlexContainer", ({ $direction })=>$direction || 'row', ({ $justify })=>$justify || 'flex-start', ({ $align })=>$align || 'stretch');

@@ -269,6 +269,10 @@ where
       self.current_css_state.clone(),
     ));
 
+    // Literal expressions which can't be replaced by constant values
+    // and must be kept for the final output (so they run at runtime)
+    let mut runtime_expressions: Vec<Expr> = vec![];
+
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
     for (i, pair) in n
@@ -344,19 +348,22 @@ where
         }
         // Visit nested css expressions
         // e.g. styled.button`.foo { ${({$x}) => $x && css`color: red`}; }`
+        // e.g. styled.button`left: ${({$x}) => $x};`
         else {
           // Used for resetting the css state after processing all expressions
           let css_state_before = self.current_css_state.clone();
           // store the current css state so we can use it in nested css expressions
           self.current_css_state.clone_from(&css_state);
           expr.visit_mut_children_with(self);
+          runtime_expressions.push(*expr.clone());
           // revert to the css state before the current expression or literal
           self.current_css_state = css_state_before;
         }
       }
     }
 
-    let transform_result = transform.transform_expression(n, &self.current_declaration);
+    let transform_result =
+      transform.transform_expression(n, runtime_expressions, &self.current_declaration);
     if let Some(css_identifier) = transform_result.css_identifier.clone() {
       self
         .variable_name_mapping

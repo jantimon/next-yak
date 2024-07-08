@@ -2,7 +2,7 @@ use css_in_js_parser::{to_css, CssScope, Declaration, ParserState, ScopeType};
 use swc_core::{
   atoms::Atom,
   common::DUMMY_SP,
-  ecma::ast::{CallExpr, Callee, Expr, Ident, TaggedTpl},
+  ecma::ast::{CallExpr, Callee, Expr, ExprOrSpread, Ident, TaggedTpl},
 };
 
 use crate::naming_convention::NamingConvention;
@@ -28,6 +28,7 @@ pub trait YakTransform {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult;
 }
@@ -74,6 +75,7 @@ impl YakTransform for TransformNestedCss {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
     YakTransformResult {
@@ -122,16 +124,23 @@ impl YakTransform for TransformCssMixin {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    runtime_expressions: Vec<Expr>,
     _declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
+    let mut arguments: Vec<ExprOrSpread> =
+      vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()];
+    arguments.extend(
+      runtime_expressions
+        .into_iter()
+        .map(|expr| ExprOrSpread::from(expr)),
+    );
     YakTransformResult {
       css_identifier: Some(format!(".{}", self.class_name.as_ref().unwrap())),
       css: "".to_string(),
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
-
         callee: Callee::Expr(expression.tag.clone()),
-        args: vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()],
+        args: arguments,
         type_args: None,
       })),
     }
@@ -171,15 +180,23 @@ impl YakTransform for TransformStyled {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
+    let mut arguments: Vec<ExprOrSpread> =
+      vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()];
+    arguments.extend(
+      runtime_expressions
+        .into_iter()
+        .map(|expr| ExprOrSpread::from(expr)),
+    );
     YakTransformResult {
       css_identifier: Some(format!(".{}", self.class_name.as_ref().unwrap())),
       css: to_css(&declarations),
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
-        args: vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()],
+        args: arguments,
         type_args: None,
       })),
     }
@@ -221,6 +238,7 @@ impl YakTransform for TransformKeyframes {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    _runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
     YakTransformResult {

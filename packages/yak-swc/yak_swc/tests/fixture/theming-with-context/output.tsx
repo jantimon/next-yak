@@ -7,4 +7,4 @@ const ThemedComponent = /*YAK Extracted CSS:
   padding: 20px;
   border-radius: 8px;
 }
-*/ /*#__PURE__*/ styled.div("ThemedComponent");
+*/ /*#__PURE__*/ styled.div("ThemedComponent", (props)=>props.theme.background, (props)=>props.theme.text);
