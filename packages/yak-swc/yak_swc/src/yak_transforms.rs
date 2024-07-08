@@ -3,10 +3,31 @@ use swc_core::ecma::ast::{CallExpr, Callee, Expr, ExprOrSpread, TaggedTpl};
 
 use crate::naming_convention::NamingConvention;
 
+#[derive(PartialEq)]
+pub enum YakType {
+  Mixin,
+  Keyframes,
+  StyledComponent,
+}
+
+/// Represents a CSS result after the transformation
+pub struct YakCss {
+  /// The name is used to reference the css from another expression
+  ///
+  /// E.g.:
+  /// ```ts
+  /// const Icon = styled.div`..`
+  /// const Button = styled.button`${Icon} { ... }`
+  /// ```
+  pub name: String,
+  pub kind: YakType,
+  /// The generated CSS code
+  pub code: String,
+}
+
 pub struct YakTransformResult {
   pub expression: Box<Expr>,
-  pub css: String,
-  pub css_identifier: Option<String>,
+  pub css: YakCss,
 }
 
 pub trait YakTransform {
@@ -74,16 +95,21 @@ impl YakTransform for TransformNestedCss {
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
-    let mut arguments: Vec<ExprOrSpread> =
-      vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()];
+    let mut arguments: Vec<ExprOrSpread> = vec![];
+    if declarations.len() > 0 {
+      arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
+    }
     arguments.extend(
       runtime_expressions
         .into_iter()
         .map(|expr| ExprOrSpread::from(expr)),
     );
     YakTransformResult {
-      css_identifier: None,
-      css: to_css(&declarations),
+      css: YakCss {
+        name: self.class_name.as_ref().unwrap().to_string(),
+        kind: YakType::Mixin,
+        code: to_css(&declarations),
+      },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
@@ -128,18 +154,23 @@ impl YakTransform for TransformCssMixin {
     &mut self,
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
-    _declarations: &Vec<Declaration>,
+    declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
-    let mut arguments: Vec<ExprOrSpread> =
-      vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()];
+    let mut arguments: Vec<ExprOrSpread> = vec![];
+    if declarations.len() > 0 {
+      arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
+    }
     arguments.extend(
       runtime_expressions
         .into_iter()
         .map(|expr| ExprOrSpread::from(expr)),
     );
     YakTransformResult {
-      css_identifier: Some(format!(".{}", self.class_name.as_ref().unwrap())),
-      css: "".to_string(),
+      css: YakCss {
+        name: self.class_name.as_ref().unwrap().to_string(),
+        kind: YakType::Mixin,
+        code: to_css(&declarations),
+      },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
@@ -186,16 +217,21 @@ impl YakTransform for TransformStyled {
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
-    let mut arguments: Vec<ExprOrSpread> =
-      vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()];
+    let mut arguments: Vec<ExprOrSpread> = vec![];
+    if declarations.len() > 0 {
+      arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
+    }
     arguments.extend(
       runtime_expressions
         .into_iter()
         .map(|expr| ExprOrSpread::from(expr)),
     );
     YakTransformResult {
-      css_identifier: Some(format!(".{}", self.class_name.as_ref().unwrap())),
-      css: to_css(&declarations),
+      css: YakCss {
+        name: self.class_name.as_ref().unwrap().to_string(),
+        kind: YakType::StyledComponent,
+        code: to_css(&declarations),
+      },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
@@ -245,8 +281,11 @@ impl YakTransform for TransformKeyframes {
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
     YakTransformResult {
-      css_identifier: Some(self.animation_name.as_ref().unwrap().to_string()),
-      css: to_css(&declarations),
+      css: YakCss {
+        name: self.animation_name.as_ref().unwrap().to_string(),
+        kind: YakType::Keyframes,
+        code: to_css(&declarations),
+      },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),

@@ -1,4 +1,4 @@
-import { styled } from "next-yak";
+import { styled } from "next-yak/internal";
 const BaseButton = /*YAK Extracted CSS:
 .BaseButton {
   padding: 10px 20px;

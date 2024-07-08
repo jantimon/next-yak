@@ -20,7 +20,8 @@ use naming_convention::NamingConvention;
 
 mod yak_transforms;
 use yak_transforms::{
-  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakTransform,
+  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakCss, YakTransform,
+  YakType,
 };
 
 pub struct TransformVisitor<GenericComments>
@@ -49,7 +50,7 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_mapping: HashMap<String, String>,
+  variable_name_mapping: HashMap<String, YakCss>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -139,6 +140,7 @@ where
       // Therefore the types are split between the user usage
       // and how the library is called internally
       import_decl.src.value = "next-yak/internal".into();
+      import_decl.src.raw = None;
       // Store the local name of the imported function
       for specifier in &import_decl.specifiers {
         if let ImportSpecifier::Named(named) = specifier {
@@ -315,11 +317,28 @@ where
         // e.g. styled.button`color: ${primary};`
         if let Expr::Ident(id) = &**expr {
           let scoped_name = id.to_string();
-          if let Some(value) = self.variable_name_mapping.get(&scoped_name) {
+          if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
             // Reference StyledComponents or Animations in the same file
-            let (new_state, new_declarations) = parse_css(value.as_str(), css_state);
-            css_state = Some(new_state);
-            self.current_declaration.extend(new_declarations);
+            // Mixins can't be used inside css code and is an empty string
+            if referenced_yak_css.kind == YakType::StyledComponent
+              || referenced_yak_css.kind == YakType::Keyframes
+            {
+              let (new_state, new_declarations) =
+                parse_css(&referenced_yak_css.name.as_str(), css_state);
+              css_state = Some(new_state);
+              self.current_declaration.extend(new_declarations);
+            }
+            // Mixins e.g.
+            // const highlight = css`color: red;`
+            // styled.button`${highlight};`
+            else if referenced_yak_css.kind == YakType::Mixin {
+              // Add "foo" as argument
+              runtime_expressions.push(Expr::Lit(Lit::Str(Str {
+                span: DUMMY_SP,
+                value: referenced_yak_css.name.clone().into(),
+                raw: None,
+              })));
+            }
           } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
             // In rust we cant access the bundler resolver
             // therefore we add a reference to the imported variable
@@ -369,16 +388,9 @@ where
 
     let transform_result =
       transform.transform_expression(n, runtime_expressions, &self.current_declaration);
-    if let Some(css_identifier) = transform_result.css_identifier.clone() {
-      self
-        .variable_name_mapping
-        .insert(current_variable_id, css_identifier);
-    }
-    // Top level consumes the current declaration
-    if is_top_level {
-      self.current_declaration = vec![];
-    }
-    let css_code = transform_result.css.trim();
+
+    self.current_declaration = vec![];
+    let css_code = transform_result.css.code.trim();
     // TODO: this works only for call expressions
     // can we make this more generic?
     if let Expr::Call(call) = &*transform_result.expression {
@@ -395,6 +407,9 @@ where
       self.comments.add_leading(call.span.lo, pure_annotation());
     }
     self.expression_replacement = Some(transform_result.expression);
+    self
+      .variable_name_mapping
+      .insert(current_variable_id, transform_result.css);
   }
 }
 

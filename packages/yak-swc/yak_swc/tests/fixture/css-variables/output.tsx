@@ -1,4 +1,4 @@
-import { styled } from "next-yak";
+import { styled } from "next-yak/internal";
 export const ThemedButton = /*YAK Extracted CSS:
 .ThemedButton {
   background-color: var(--primary-color);

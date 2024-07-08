@@ -1,4 +1,4 @@
-import { styled } from "next-yak";
+import { styled } from "next-yak/internal";
 export const GridLayout = /*YAK Extracted CSS:
 .GridLayout {
   display: grid;

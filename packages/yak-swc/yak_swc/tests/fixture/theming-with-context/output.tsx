@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from "next-yak";
+import { styled } from "next-yak/internal";
 const ThemedComponent = /*YAK Extracted CSS:
 .ThemedComponent {
   background-color: ;
