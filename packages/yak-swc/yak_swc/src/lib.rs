@@ -122,20 +122,25 @@ impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
 where
   GenericComments: Comments,
 {
-  fn visit_mut_program(&mut self, n: &mut Program) {
+  fn visit_mut_program(&mut self, program: &mut Program) {
     // Use VariableVisitor to visit the AST and extract all variable names
     let mut variable_visitor = VariableVisitor::new();
-    n.visit_mut_children_with(&mut variable_visitor);
+    program.visit_mut_children_with(&mut variable_visitor);
     self.variables = variable_visitor;
-    n.visit_mut_children_with(self);
+    program.visit_mut_children_with(self);
   }
 
   /// Visit the import declaration and store the imported names
   /// That way we know if `styled`, `css` is imported from "next-yak"
   /// and we can transpile their usages
-  fn visit_mut_import_decl(&mut self, n: &mut ImportDecl) {
-    if n.src.value == "next-yak" {
-      for specifier in &n.specifiers {
+  fn visit_mut_import_decl(&mut self, import_decl: &mut ImportDecl) {
+    if import_decl.src.value == "next-yak" {
+      // Compiling will change the way the utils are called
+      // Therefore the types are split between the user usage
+      // and how the library is called internally
+      import_decl.src.value = "next-yak/internal".into();
+      // Store the local name of the imported function
+      for specifier in &import_decl.specifiers {
         if let ImportSpecifier::Named(named) = specifier {
           let imported = match &named.imported {
             Some(ModuleExportName::Ident(i)) => i.sym.to_string(),

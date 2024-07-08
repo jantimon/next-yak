@@ -1,4 +1,4 @@
-import { styled, css, keyframes } from "next-yak";
+import { styled } from "next-yak";
 // @ts-ignore
 import { Icon } from "./Icon";
 const primary = "green";

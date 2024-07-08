@@ -1,9 +1,5 @@
 use css_in_js_parser::{to_css, CssScope, Declaration, ParserState, ScopeType};
-use swc_core::{
-  atoms::Atom,
-  common::DUMMY_SP,
-  ecma::ast::{CallExpr, Callee, Expr, ExprOrSpread, Ident, TaggedTpl},
-};
+use swc_core::ecma::ast::{CallExpr, Callee, Expr, ExprOrSpread, TaggedTpl};
 
 use crate::naming_convention::NamingConvention;
 
@@ -78,13 +74,20 @@ impl YakTransform for TransformNestedCss {
     runtime_expressions: Vec<Expr>,
     declarations: &Vec<Declaration>,
   ) -> YakTransformResult {
+    let mut arguments: Vec<ExprOrSpread> =
+      vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()];
+    arguments.extend(
+      runtime_expressions
+        .into_iter()
+        .map(|expr| ExprOrSpread::from(expr)),
+    );
     YakTransformResult {
       css_identifier: None,
       css: to_css(&declarations),
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
-        args: vec![Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into()],
+        args: arguments,
         type_args: None,
       })),
     }
