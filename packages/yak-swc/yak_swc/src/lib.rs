@@ -445,11 +445,27 @@ where
   }
 }
 
+/// Converts an expression to a string
 fn condition_to_string(expr: &Expr, negate: bool) -> String {
   let prefix = if negate { "not_" } else { "" };
   match expr {
     Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym),
     Expr::Lit(Lit::Bool(Bool { value, .. })) => format!("{}{}", prefix, value),
+    Expr::Member(MemberExpr {
+      obj,
+      prop,
+      ..
+    }) => {
+      let obj = condition_to_string(obj, false);
+      let prop = match &*prop {
+        MemberProp::Ident(Ident { sym, .. }) => sym.to_string(),
+        _ => "".to_string(),
+      };
+      if prop.is_empty() || obj.is_empty() {
+        return "".to_string();
+      }
+      format!("{}.{}", obj, prop)
+    }
     _ => "".to_string(),
   }
 }
@@ -473,7 +489,7 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
 mod tests {
   use super::*;
   use std::path::PathBuf;
-  use swc_core::ecma::transforms::testing::test_fixture;
+  use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
   #[testing::fixture("tests/fixture/**/input.tsx")]
@@ -486,4 +502,43 @@ mod tests {
       FixtureTestConfig::default(),
     );
   }
+
+  #[test]
+  fn test_condition_to_string() {
+
+    struct TestVisitor {
+    }
+    impl TestVisitor {
+      fn new() -> Self {
+        Self {}
+      }
+    }
+    impl VisitMut for TestVisitor {
+      fn visit_mut_expr(&mut self, n: &mut Expr) {
+        *n = Expr::Lit(Lit::Str(Str {
+          span: DUMMY_SP,
+          value: condition_to_string(&n.clone(), false).into(),
+          raw: None
+        }));
+      }
+    }
+
+    test_transform(
+      Default::default(),
+      |_| as_folder(TestVisitor::new()),
+      "member.example.test",
+      "\"member.example.test\"",
+      false,
+    );
+
+    test_transform(
+      Default::default(),
+      |_| as_folder(TestVisitor::new()),
+      "fooBar",
+      "\"fooBar\"",
+      false,
+    );
+
+  }
+  
 }

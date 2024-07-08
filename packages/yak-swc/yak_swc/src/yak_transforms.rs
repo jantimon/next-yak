@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use css_in_js_parser::{to_css, CssScope, Declaration, ParserState, ScopeType};
+use itertools::Itertools;
 use swc_core::ecma::ast::{
   CallExpr, Callee, Expr, ExprOrSpread, KeyValueProp, ObjectLit, PropName, PropOrSpread, TaggedTpl,
 };
@@ -132,6 +133,7 @@ impl YakTransform for TransformNestedCss {
 fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
   let properties = values
     .into_iter()
+    .sorted_by_key(|(key, _)| key.clone())
     .map(|(key, value)| {
       PropOrSpread::Prop(Box::new(
         KeyValueProp {

@@ -17,6 +17,9 @@ impl NamingConvention {
 
   pub fn generate_unique_name(&mut self, base_name: &str) -> String {
     let escaped_name = escape_css_identifier(base_name);
+    if escaped_name.len() == 0 {
+      return self.generate_unique_name("yak");
+    }
     let mut count = 0;
     let name = loop {
       let candidate = if count == 0 {
@@ -67,11 +70,11 @@ fn escape_css_identifier(input: &str) -> String {
     match c {
       'a'..='z' | 'A'..='Z' | '-' | '_' | '$' | '\\' => result.push(c),
       // Whitespace
-      c if c == ' ' || c == '\t' => {
+      ' ' | '\t' => {
         result.push('_');
       }
       // Remove control characters
-      '\0'..='\x1F' | '\x7F' => continue,
+      '\0'..='\x1F' | '\x7F' | '.' => continue,
       // Escape Unicode characters
       c if c > '\u{00FF}' => {
         result.push('\\');
