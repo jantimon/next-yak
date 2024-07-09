@@ -42,13 +42,17 @@ export default defineConfig({
   resolve: {
     alias: {
       // @babel/core can only be bundled from the typescript files
-      "next-yak/cssloader": path.resolve(
+      "next-yak/css-loader": path.resolve(
         __dirname,
-        "../next-yak/loaders/cssloader.ts"
+        "../next-yak/loaders/css-loader.ts"
       ),
-      "next-yak/tsloader": path.resolve(
+      "next-yak/ts-loader": path.resolve(
         __dirname,
-        "../next-yak/loaders/tsloader.ts"
+        "../next-yak/loaders/ts-loader.ts"
+      ),
+      "next-yak/ts-post-loader": path.resolve(
+        __dirname,
+        "../next-yak/loaders/ts-post-loader.ts"
       ),
       // use the dev version of useYakCompiler
       "next-yak-playground/useYakCompiler": path.resolve(

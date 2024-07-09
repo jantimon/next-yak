@@ -8,7 +8,6 @@ import getYakImports from "./lib/getYakImports.js";
 import YakBabelPlugin, { InvalidPositionError } from "./babel-yak-plugin.js";
 import type { LoaderContext } from "webpack";
 import { YakConfigOptions } from "../withYak/index.js";
-import { writeTsLoaderResultToCache } from "./lib/loaderCompilationCache.js";
 
 /**
  * Loader for typescript files that use yak, it replaces the css template literal with a call to the 'styled' function
@@ -44,7 +43,6 @@ export default async function tsloader(
     }),
   );
 
-  writeTsLoaderResultToCache(this, "");
   let result: BabelFileResult | null = null;
   try {
     // Compile the typescript file with babel - this will:
@@ -79,6 +77,5 @@ export default async function tsloader(
     return callback(new Error("babel transform failed"));
   }
 
-  writeTsLoaderResultToCache(this, result.code);
   return callback(null, result.code, result.map ?? undefined);
 }

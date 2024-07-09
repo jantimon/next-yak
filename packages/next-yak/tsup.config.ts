@@ -94,7 +94,11 @@ export default defineConfig([
   },
   // loaders
   {
-    entryPoints: ["loaders/tsloader.ts", "loaders/cssloader.ts"],
+    entryPoints: [
+      "loaders/ts-loader.ts",
+      "loaders/ts-post-loader.ts",
+      "loaders/css-loader.ts",
+    ],
     format: ["esm", "cjs"],
     minify: false,
     sourcemap: true,
@@ -103,8 +107,7 @@ export default defineConfig([
       // all non relative imports must be load from node_modules
       /^(?!\.)/,
     ],
-    noExternal: [
-    ],
+    noExternal: [],
     dts: true,
     platform: "node",
     splitting: false,

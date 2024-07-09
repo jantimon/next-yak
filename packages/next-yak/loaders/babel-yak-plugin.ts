@@ -166,7 +166,7 @@ export default function (
         enter(path) {
           this.topLevelConstBindings = getConstantValues(path, t);
         },
-        exit(path, state) {
+        exit(_path, state) {
           if (!this.isImportedInCurrentFile) {
             return;
           }
@@ -221,7 +221,7 @@ export default function (
           }
         },
       },
-      JSXElement(path, state) {
+      JSXElement(path) {
         if (!this.isImportedInCurrentFile || !this.yakImportPath) {
           return;
         }
@@ -288,7 +288,7 @@ export default function (
        * - styled.div.attrs({})`...`
        * - keyframes`...`
        */
-      TaggedTemplateExpression(path, state) {
+      TaggedTemplateExpression(path) {
         if (!this.isImportedInCurrentFile) {
           return;
         }

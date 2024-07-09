@@ -1,7 +1,10 @@
-import cssLoader from "next-yak/cssloader";
+import cssLoader from "next-yak/css-loader";
+import tsLoader from "next-yak/ts-loader";
+import tsPostLoader from "next-yak/ts-post-loader";
 
-export const compileCSS = async (css: string): Promise<string> => {
+export const compileCSS = async (code: string): Promise<string> => {
   const loaderContext = {
+    _compilation: {},
     resourcePath: "/some/path/to/file.tsx",
     rootContext: "/some",
     importModule: () => {
@@ -21,6 +24,9 @@ export const compileCSS = async (css: string): Promise<string> => {
       }
       return result;
     },
-  };
-  return (await cssLoader.call(loaderContext, css))!;
+  } as any;
+  // TsPostLoader will add a cache to _compilation
+  await tsPostLoader.call(loaderContext, await tsLoader.call(loaderContext, code) || "", undefined);
+  // CssLoader will read the cache from _compilation and return the css
+  return (await cssLoader.call(loaderContext))!;
 };

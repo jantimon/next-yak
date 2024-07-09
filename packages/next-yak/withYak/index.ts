@@ -29,19 +29,25 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     const extensionFilterRegex = new RegExp(
       `\\.(${compiledExtensions.join("|")})$`,
     );
+
     webpackConfig.module.rules.push({
       test: extensionFilterRegex,
-      loader: path.join(currentDir, "../loaders/tsloader.js"),
-      options: yakOptions,
       issuerLayer: {
         // prevent recursions when calling this.importModule
         // in the tsloader
         not: ["yak-importModule"],
       },
+      use : [{
+        loader: path.join(currentDir, "../loaders/ts-post-loader.js"),
+      },{
+        loader: path.join(currentDir, "../loaders/ts-loader.js"),
+        options: yakOptions,
+      }],
     });
+
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
-      loader: path.join(currentDir, "../loaders/cssloader.js"),
+      loader: path.join(currentDir, "../loaders/css-loader.js"),
       options: yakOptions,
     });
 

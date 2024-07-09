@@ -1,7 +1,8 @@
-import tsLoader from "next-yak/tsloader";
+import tsLoader from "next-yak/ts-loader";
 
 export const compileTS = async (code: string): Promise<string> => {
   const loaderContext = {
+    _compilation: {},
     resourcePath: "/some/path/to/file.tsx",
     rootContext: "/some",
     importModule: () => {
@@ -22,5 +23,5 @@ export const compileTS = async (code: string): Promise<string> => {
       return result;
     },
   };
-  return (await tsLoader.call(loaderContext, code))!;
+  return (await tsLoader.call(loaderContext as any, code))!;
 };
