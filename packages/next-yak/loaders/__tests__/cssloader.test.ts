@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import cssloader from "../cssloader";
-import tsloader from "../tsloader";
+import cssLoader from "../css-loader";
+import tsPostLoader from "../ts-post-loader";
+import tsLoader from "../ts-loader";
 
 const runTsLoaderAndCssLoader = function (code) {
   const loaderContext = {
@@ -41,9 +42,10 @@ const runTsLoaderAndCssLoader = function (code) {
       return result;
     },
   };
-  return tsloader
+  return tsLoader
     .call(loaderContext, code)
-    .then(() => cssloader.call(loaderContext, code));
+    .then((code) => tsPostLoader.call(loaderContext, code, undefined))
+    .then(() => cssLoader.call(loaderContext));
 };
 
 describe("cssloader", () => {

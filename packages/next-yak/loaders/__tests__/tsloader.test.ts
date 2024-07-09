@@ -1,4 +1,4 @@
-import tsloader from "../tsloader.js";
+import tsloader from "../ts-loader.js";
 import { describe, it, expect } from "vitest";
 
 const loaderContext = {
