@@ -37,12 +37,15 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
         // in the tsloader
         not: ["yak-importModule"],
       },
-      use : [{
-        loader: path.join(currentDir, "../loaders/ts-post-loader.js"),
-      },{
-        loader: path.join(currentDir, "../loaders/ts-loader.js"),
-        options: yakOptions,
-      }],
+      use: [
+        {
+          loader: path.join(currentDir, "../loaders/ts-post-loader.js"),
+        },
+        {
+          loader: path.join(currentDir, "../loaders/ts-loader.js"),
+          options: yakOptions,
+        },
+      ],
     });
 
     webpackConfig.module.rules.push({

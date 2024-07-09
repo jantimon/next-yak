@@ -9,5 +9,5 @@ import { getTsLoaderResultFromCache } from "./lib/loaderCompilationCache.js";
 export default async function cssloader(
   this: LoaderContext<{}>,
 ): Promise<string | void> {
-  return getTsLoaderResultFromCache(this)
+  return getTsLoaderResultFromCache(this);
 }
