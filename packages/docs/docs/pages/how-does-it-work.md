@@ -1,7 +1,7 @@
 # How does it work?
 
 This is for the curious minds who want to know how `next-yak` works under the hood and it's not necessary 
-to understand it in order to use it.
+to understand it in order to use it. A live playground to see the code transformation can be found [here](/playground).
 
 ## The basics
 
@@ -16,11 +16,11 @@ the runtime part. The runtime part is responsible for merging styles and props.
 
 ## The compile time part
 
-`next-yak` uses two webpack loaders to transform your code. The first loader is responsible for transforming the
+`next-yak` uses three webpack loaders to transform your code. The first loader is responsible for transforming the
 usages of the tagged template literals (like `styled` and `css`) and the second loader is responsible for transforming 
-the styles into real CSS.
+the styles into real CSS. The third loader is only needed to not compile the code twice in the same webpack run.
 
-### The first loader [(tsloader.cjs)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/tsloader.cjs)
+### The first loader [(tsloader.cjs)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-loader.cjs)
 
 The first loader takes in the source code and transforms the tagged template literals into `next-yak` runtime function 
 calls with the imported styles (from the second loader) as arguments. It also transforms the dynamic parts of the 
@@ -114,10 +114,10 @@ const Button = styled.button(
 :::
 
 
-### The second loader [(cssloader.cjs)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/cssloader.cjs)
+### The second loader [(cssloader.cjs)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-post-loader.cjs)
 
 The second loader runs after the first loader changed the import, takes in the styles and transforms it into real 
-CSS inside CSS-Modules. It also generates a class name for each static and dynamic style in order to reference it in the first loader. It translates dynamic property values into CSS variables and adds it to the class selector.
+CSS inside CSS-Modules. It also generates a class name for each static and dynamic style in order to reference it in the first loader. It translates dynamic property values into CSS variables and adds it to the class selector. Once done, it stores the generated CSS in memory which will be picked up by the third loader.
 
 #### Remove imports
 
