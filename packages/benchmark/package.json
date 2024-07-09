@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "pnpm run build:yak && pnpm run build:next",
+    "dev": "pnpm run generate:letters && next dev",
+    "build": "pnpm run build:yak && pnpm run generate:letters && pnpm run build:next",
     "build:next": "next build",
     "build:yak": "pnpm run --dir ../.. build",
     "start": "next start",
     "generate:letters": "npx tsx ./letters/gen.js",
     "lighthouse": "node ./lighthouse/lighthouse.mjs",
-    "codspeed": "pnpm run codspeed:build && pnpm run codspeed:run",
+    "codspeed": "pnpm run generate:letters && pnpm run codspeed:build && pnpm run codspeed:run",
     "codspeed:build": "tsup ./codspeed/index.bench.tsx --sourcemap inline --format esm --target node20 --clean --outDir ./codspeed/dist --external benchmark --external react --external next-yak --external styled-components --external react-dom --external @codspeed/benchmark.js-plugin",
     "codspeed:run": "NODE_ENV=production node ./codspeed/dist/index.bench.mjs"
   },

@@ -10,10 +10,20 @@ import { KanjiLetterComponentStyled } from "../letters/KanjiLetterComponent.styl
 
   suite
     .add("render KanjiLetterComponentStyled", () => {
-      renderToString(<KanjiLetterComponentStyled />).length;
+      try {
+        renderToString(<KanjiLetterComponentStyled />).length;
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     })
     .add("render KanjiLetterComponentYak", () => {
-      renderToString(<KanjiLetterComponentYak />).length;
+      try {
+        renderToString(<KanjiLetterComponentYak />).length;
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     })
     .on("cycle", function (event: Benchmark.Event) {
       console.log(String(event.target));
