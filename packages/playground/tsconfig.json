@@ -18,11 +18,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
     "paths": {
       "next-yak/ts-loader": ["../next-yak/loaders/ts-loader.ts"],
       "next-yak/ts-post-loader": ["../next-yak/loaders/ts-post-loader.ts"],
-      "next-yak/css-loader": ["../next-yak/loaders/css-loader.ts"]
+      "next-yak/css-loader": ["../next-yak/loaders/css-loader.ts"],
+      "react": ["./node_modules/@types/react"]
     }
   },
   "include": ["src"],

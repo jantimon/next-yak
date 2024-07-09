@@ -59,6 +59,11 @@ export default defineConfig({
         __dirname,
         "./src/useYakCompiler/useYakCompiler.ts"
       ),
+      // patch getCssModuleLocalIdent to not use unaccessible globals
+      "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js": path.resolve(
+        __dirname,
+        "./src/fixes/getCssModuleLocalIdent.ts"
+      ),
     },
   },
 });

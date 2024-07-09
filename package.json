@@ -16,8 +16,7 @@
     "prettier": "pnpm run --recursive --if-present prettier"
   },
   "engines": {
-    "node": ">=20",
-    "pnpm": "8"
+    "node": ">=20"
   },
   "packageManager": "pnpm@8.6.1",
   "author": "Jan Nicklas",
