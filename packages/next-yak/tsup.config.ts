@@ -96,7 +96,6 @@ export default defineConfig([
   {
     entryPoints: [
       "loaders/ts-loader.ts",
-      "loaders/ts-post-loader.ts",
       "loaders/css-loader.ts",
     ],
     format: ["esm", "cjs"],

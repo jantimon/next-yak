@@ -1,14 +1,13 @@
 import { describe, it, expect } from "vitest";
 import cssLoader from "../css-loader";
-import tsPostLoader from "../ts-post-loader";
 import tsLoader from "../ts-loader";
 
 const runTsLoaderAndCssLoader = function (code) {
   const loaderContext = {
-    _compilation: {},
     resourcePath: "/some/special/path/page.tsx",
     rootContext: "/some",
     mode: "development",
+    loadModule: (_, cb) => tsLoader.call(loaderContext, code).then((code) => cb(null, code)),
     importModule: () => {
       return {
         queries: {
@@ -42,10 +41,7 @@ const runTsLoaderAndCssLoader = function (code) {
       return result;
     },
   };
-  return tsLoader
-    .call(loaderContext, code)
-    .then((code) => tsPostLoader.call(loaderContext, code, undefined))
-    .then(() => cssLoader.call(loaderContext));
+  return cssLoader.call(loaderContext);
 };
 
 describe("cssloader", () => {

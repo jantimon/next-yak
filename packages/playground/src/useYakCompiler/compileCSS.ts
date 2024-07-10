@@ -1,11 +1,10 @@
 import cssLoader from "next-yak/css-loader";
 import tsLoader from "next-yak/ts-loader";
-import tsPostLoader from "next-yak/ts-post-loader";
-import type { Compilation, LoaderContext } from "webpack";
+import type { LoaderContext } from "webpack";
 
 export const compileCSS = async (code: string): Promise<string> => {
   const loaderContext = {
-    _compilation: {} as any as Compilation,
+    loadModule: (_, cb) => tsLoader.call(loaderContext, code).then((code) => cb(null, code || "", undefined, {} as any)),
     resourcePath: "/some/path/to/file.tsx",
     rootContext: "/some",
     importModule: () => {
@@ -27,9 +26,6 @@ export const compileCSS = async (code: string): Promise<string> => {
     },
     getOptions: () => ({}),
   } as Partial<LoaderContext<{}>> as LoaderContext<{}>;
-  // TsPostLoader will add a cache to _compilation
-  await tsPostLoader.call(loaderContext, await tsLoader.call(loaderContext, code) || "", undefined);
-
-  // CssLoader will read the cache from _compilation and return the css
-  return (await cssLoader.call(loaderContext))!;
+  const cssCode = await cssLoader.call(loaderContext, code, undefined);
+  return cssCode || "";
 };

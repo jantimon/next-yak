@@ -39,9 +39,6 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
       },
       use: [
         {
-          loader: path.join(currentDir, "../loaders/ts-post-loader.js"),
-        },
-        {
           loader: path.join(currentDir, "../loaders/ts-loader.js"),
           options: yakOptions,
         },

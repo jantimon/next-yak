@@ -16,8 +16,8 @@ the runtime part. The runtime part is responsible for merging styles and props.
 
 ## The compile time part
 
-`next-yak` uses three webpack loaders to transform your code. The first loader is responsible for transforming the
-usages of the tagged template literals (like `styled` and `css`), the second loader reads the results from the first loader, resolves cross module dependencies and writes the finished css in the context. The third and last loader just gets the cached css from the context and writes it in a css module file.
+`next-yak` uses two webpack loaders to transform your code. The first loader is responsible for transforming the
+usages of the tagged template literals (like `styled` and `css`), the second loader reads the results from the first loader, resolves cross module dependencies and writes the finished css in a css module file.
 
 ### The first loader [(ts-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-loader.ts)
 
@@ -113,18 +113,14 @@ const Button = styled.button(
 :::
 
 
-### The second loader [(ts-post-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-post-loader.ts)
+### The second loader [(css-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-post-loader.ts)
 
 The second loader takes the output of the first loader and resolves the cross module dependencies. The result is valid CSS that will be written to the context.
 
 #### Resolve cross module dependencies
 
 To resolve cross module dependencies, the first loader generates a unique string to signal the second loader that this is a dependency with a specific name. The second loader then reads the generated CSS from the first loader and resolves the dependencies.
-
-### The third loader [(css-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/css-loader.ts)
-
-The third loader runs after the other loaders and reads the cached CSS from the context and writes it to a CSS module file.
-
+Once the final css is generated the loader hands it over as a CSS module file so it can be processed by Next.js like a normal CSS module file.
 
 ## The runtime part
 

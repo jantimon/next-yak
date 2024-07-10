@@ -1,9 +1,8 @@
 import tsLoader from "next-yak/ts-loader";
-import type { Compilation, LoaderContext } from "webpack";
+import type { LoaderContext } from "webpack";
 
 export const compileTS = async (code: string): Promise<string> => {
   const loaderContext = {
-    _compilation: {} as any as Compilation,
     resourcePath: "/some/path/to/file.tsx",
     rootContext: "/some",
     importModule: () => {
