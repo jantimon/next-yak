@@ -34,12 +34,6 @@
         "require": "./dist/context/index.cjs"
       }
     },
-    "./tsloader.js": {
-      "require": "./dist/loaders/tsloader.cjs"
-    },
-    "./cssloader.js": {
-      "require": "./dist/loaders/cssloader.cjs"
-    },
     "./jsx-runtime": {
       "require": "./dist/jsx-runtime.cjs",
       "import": "./dist/jsx-runtime.js"
