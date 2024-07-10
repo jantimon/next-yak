@@ -20,7 +20,10 @@ export default async function cssExtractLoader(
       return callback(err);
     }
     const css = extractCss(source);
-    return resolveCrossFileSelectors(this, css).then((result) =>  callback(null, result, sourceMap), callback);
+    return resolveCrossFileSelectors(this, css).then(
+      (result) => callback(null, result, sourceMap),
+      callback,
+    );
   });
 }
 

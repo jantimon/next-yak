@@ -7,7 +7,8 @@ const runTsLoaderAndCssLoader = function (code) {
     resourcePath: "/some/special/path/page.tsx",
     rootContext: "/some",
     mode: "development",
-    loadModule: (_, cb) => tsLoader.call(loaderContext, code).then((code) => cb(null, code)),
+    loadModule: (_, cb) =>
+      tsLoader.call(loaderContext, code).then((code) => cb(null, code)),
     importModule: () => {
       return {
         queries: {
