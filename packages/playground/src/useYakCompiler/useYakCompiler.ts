@@ -13,8 +13,8 @@ export const useYakCompiler = (typescriptCode: string) => {
   });
   useEffect(() => {
     let mounted = true;
-    Promise.all([compileTS(typescriptCode), compileCSS(typescriptCode)]).then(
-      ([tsOutput, cssOutput]) => {
+    compile(typescriptCode).then(
+      ({tsOutput, cssOutput}) => {
         if (!mounted) return;
         setResult({
           tsOutput,
@@ -28,3 +28,10 @@ export const useYakCompiler = (typescriptCode: string) => {
   }, [typescriptCode]);
   return result;
 };
+
+
+const compile = async (typescriptCode: string) => {
+    const tsOutput = await compileTS(typescriptCode);
+    const cssOutput = await compileCSS(tsOutput);
+    return { tsOutput, cssOutput };
+}

@@ -76,5 +76,6 @@ export default async function tsloader(
   if (!result?.code) {
     return callback(new Error("babel transform failed"));
   }
+
   return callback(null, result.code, result.map ?? undefined);
 }

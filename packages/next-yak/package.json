@@ -1,8 +1,25 @@
 {
   "name": "next-yak",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "type": "module",
   "types": "./dist/",
+  "license": "MIT",
+  "description": "next-yak is a CSS-in-JS solution tailored for Next.js that seamlessly combines the expressive power of styled-components syntax with efficient build-time extraction of CSS using Next.js's built-in CSS configuration",
+  "homepage": "https://yak.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jantimon/next-yak.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jantimon/next-yak/issues"
+  },
+  "keywords": [
+    "next.js",
+    "css-in-js",
+    "styled-components",
+    "react",
+    "typescript"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -33,14 +50,6 @@
         "import": "./dist/context/index.js",
         "require": "./dist/context/index.cjs"
       }
-    },
-    "./tsloader": {
-      "require": "./dist/loaders/tsloader.cjs",
-      "import": "./dist/loaders/tsloader.js"
-    },
-    "./cssloader": {
-      "require": "./dist/loaders/cssloader.cjs",
-      "import": "./dist/loaders/cssloader.js"
     },
     "./jsx-runtime": {
       "require": "./dist/jsx-runtime.cjs",
@@ -77,7 +86,7 @@
     "@types/react-dom": "18.2.13",
     "@types/react-test-renderer": "^18.0.3",
     "jsdom": "^22.1.0",
-    "next": "14.0.0",
+    "next": "14.2.4",
     "react": "^18.2.0",
     "react-test-renderer": "^18.2.0",
     "typescript": "5.5.2",
@@ -89,6 +98,15 @@
     "dist",
     "loaders",
     "runtime",
-    "withYak"
-  ]
+    "withYak",
+    "LICENSE"
+  ],
+  "maintainers": [
+    {
+      "name": "Luca Schneider"
+    }
+  ],
+  "author": {
+    "name": "Jan Nicklas"
+  }
 }

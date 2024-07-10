@@ -33,7 +33,7 @@ yarn add next-yak
 
 ## Getting Started
 
-Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
+See a live [stackblitz demo](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx) or try our **[stackblitz starter kit](https://stackblitz.com/fork/next-yak-starter?file=app%2Fpage.tsx)**
 
 ### Locally
 
@@ -277,6 +277,7 @@ Thanks for merging our prs fixes in next.js and postcss ❤️
   - https://github.com/vercel/next.js/pull/51115
   - https://github.com/vercel/next.js/pull/53796
   - https://github.com/css-modules/postcss-modules-local-by-default/pull/64
+  - https://github.com/css-modules/postcss-modules-local-by-default/pull/72
   - https://github.com/vercel/next.js/pull/62644
   - https://github.com/vercel/next.js/pull/62639
   - https://github.com/webpack-contrib/mini-css-extract-plugin/pull/1084

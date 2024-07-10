@@ -1,5 +1,5 @@
 import { writeFile } from "fs";
-import tsLoader from "../../next-yak/loaders/tsloader";
+import tsLoader from "../../next-yak/loaders/ts-loader";
 
 // Function to generate the content of JapaneseLetterComponent.tsx for Kanji characters
 async function generateKanjiComponentFile() {
