@@ -12,9 +12,11 @@ const buttonStyles = css`
   width: ${({ $letters }) => $letters * 10}px;
 `;
 
-export const Wrapper = styled.button`
-   button {
-      ${buttonStyles}
-   }
+export const ThemedButton = styled.button`
+   ${buttonStyles}
 `;
 
+export const CustomThemedButton = styled.button`
+  color: red;
+   ${buttonStyles}
+`; 

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use css_in_js_parser::{to_css, CssScope, Declaration, ParserState, ScopeType};
+use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use itertools::Itertools;
 use swc_core::ecma::ast::{
   CallExpr, Callee, Expr, ExprOrSpread, KeyValueProp, ObjectLit, PropName, PropOrSpread, TaggedTpl,
@@ -27,7 +27,7 @@ pub struct YakCss {
   pub name: String,
   pub kind: YakType,
   /// The generated CSS code
-  pub code: String,
+  pub declarations: Vec<Declaration>,
 }
 
 pub struct YakTransformResult {
@@ -114,7 +114,7 @@ impl YakTransform for TransformNestedCss {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::Mixin,
-        code: to_css(declarations),
+        declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
@@ -196,7 +196,7 @@ impl YakTransform for TransformCssMixin {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::Mixin,
-        code: to_css(declarations),
+        declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
@@ -257,7 +257,7 @@ impl YakTransform for TransformStyled {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::StyledComponent,
-        code: to_css(declarations),
+        declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
@@ -319,7 +319,7 @@ impl YakTransform for TransformKeyframes {
       css: YakCss {
         name: self.animation_name.as_ref().unwrap().to_string(),
         kind: YakType::Keyframes,
-        code: to_css(declarations),
+        declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,

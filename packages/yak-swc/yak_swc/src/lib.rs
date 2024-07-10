@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, CommentStateType};
+use css_in_js_parser::{parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -129,6 +129,7 @@ where
     program.visit_mut_children_with(&mut variable_visitor);
     self.variables = variable_visitor;
     program.visit_mut_children_with(self);
+    // TODO: delete all unused mixins and animations
   }
 
   /// Visit the import declaration and store the imported names
@@ -308,7 +309,8 @@ where
       // Add the extracted CSS to the the root styled component
       self.current_declaration.extend(new_declarations);
 
-      if css_state.clone().unwrap().current_comment_state == CommentStateType::None {
+      let current_css_state = css_state.clone().unwrap();
+      if current_css_state.current_comment_state == CommentStateType::None {
         // Expressions
         // e.g. const Button = styled.button`color: ${primary};`
         //                                            ^^^^^^^
@@ -334,7 +336,36 @@ where
               // const highlight = css`color: red;`
               // styled.button`${highlight};`
               else if referenced_yak_css.kind == YakType::Mixin {
+                // Add the mixin to the react component
                 runtime_expressions.push(*expr.clone());
+
+                if current_css_state.current_scopes.len() > 1 {
+                  // If the mixin is used as scoped inline mixin
+                  // e.g. styled.button`&:hover { ${highlight}; }`
+                  // in this case the css code has to be merged into the
+                  // current scope to keep the scope hierarchy
+
+                  // Get Declarations with the current scope
+                  let mixin_declarations = referenced_yak_css
+                    .declarations
+                    .iter()
+                    .map(|declaration| {
+                      let mut declaration = declaration.clone();
+                      let mut mixin_scope = declaration.scope.clone();
+                      mixin_scope[0].name = format!("&{}", mixin_scope[0].name);
+                      // Prepend the current scope to the mixin scope
+                      declaration.scope = current_css_state
+                        .current_scopes
+                        .clone()
+                        .into_iter()
+                        .chain(mixin_scope.into_iter())
+                        .collect();
+                      declaration
+                    })
+                    .collect::<Vec<Declaration>>();
+
+                  self.current_declaration.extend(mixin_declarations);
+                }
               }
             } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
               // In rust we cant access the bundler resolver
@@ -351,7 +382,7 @@ where
             }
             // A property with a dynamic value
             // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
-            else if css_state.is_some() && css_state.as_ref().unwrap().is_inside_property_value {
+            else if current_css_state.is_inside_property_value {
               if !self.variables.is_top_level(&scoped_name) {
                 // Convert the variable to a css variable
                 // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
@@ -381,7 +412,6 @@ where
             // If the expression is inside a css property value
             // it has to be replaced with a css variable
             if is_inside_property_value {
-              dbg!(&css_state.as_ref().unwrap());
               let css_variable_name = self.naming_convention.get_css_variable_name(
                 css_state
                   .as_ref()
@@ -424,7 +454,7 @@ where
     if is_top_level {
       self.current_declaration = vec![];
     }
-    let css_code = transform_result.css.code.trim();
+    let css_code = to_css(&transform_result.css.declarations);
     // TODO: this works only for call expressions
     // can we make this more generic?
     if let Expr::Call(call) = &*transform_result.expression {
@@ -434,7 +464,7 @@ where
           Comment {
             kind: swc_core::common::comments::CommentKind::Block,
             span: DUMMY_SP,
-            text: format!("YAK Extracted CSS:\n{}\n", css_code).into(),
+            text: format!("YAK Extracted CSS:\n{}\n", css_code.trim()).into(),
           },
         );
       }
