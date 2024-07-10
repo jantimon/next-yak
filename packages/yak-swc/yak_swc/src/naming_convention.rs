@@ -17,7 +17,7 @@ impl NamingConvention {
 
   pub fn generate_unique_name(&mut self, base_name: &str) -> String {
     let escaped_name = escape_css_identifier(base_name);
-    if escaped_name.len() == 0 {
+    if escaped_name.is_empty() {
       return self.generate_unique_name("yak");
     }
     let mut count = 0;
@@ -43,7 +43,7 @@ impl NamingConvention {
     dev_mode: bool,
   ) -> String {
     let name: &str = if dev_mode {
-      if base_name.len() == 0 {
+      if base_name.is_empty() {
         "yak"
       } else {
         base_name
@@ -58,7 +58,7 @@ impl NamingConvention {
     };
     let hash_str = format!("{:x}", hash);
     let css_variable_name = format!("{}-{}", name, &hash_str[..5]);
-    return self.generate_unique_name(&css_variable_name);
+    self.generate_unique_name(&css_variable_name)
   }
 }
 

@@ -112,10 +112,10 @@ where
   /// Try to get the component id of the current styled component mixin or animation
   /// e.g. const Button = styled.button`color: red;` -> Button#1
   fn get_current_component_id(&self) -> String {
-    return self
+    self
       .current_variable_name
       .clone()
-      .unwrap_or("yak".to_string());
+      .unwrap_or("yak".to_string())
   }
 }
 
@@ -326,7 +326,7 @@ where
                 || referenced_yak_css.kind == YakType::Keyframes
               {
                 let (new_state, new_declarations) =
-                  parse_css(&referenced_yak_css.name.as_str(), css_state);
+                  parse_css(referenced_yak_css.name.as_str(), css_state);
                 css_state = Some(new_state);
                 self.current_declaration.extend(new_declarations);
               }
@@ -383,7 +383,7 @@ where
             if is_inside_property_value {
               dbg!(&css_state.as_ref().unwrap());
               let css_variable_name = self.naming_convention.get_css_variable_name(
-                &css_state
+                css_state
                   .as_ref()
                   .unwrap()
                   .current_declaration
@@ -455,7 +455,7 @@ fn condition_to_string(expr: &Expr, negate: bool) -> String {
     Expr::Lit(Lit::Bool(Bool { value, .. })) => format!("{}{}", prefix, value),
     Expr::Member(MemberExpr { obj, prop, .. }) => {
       let obj = condition_to_string(obj, false);
-      let prop = match &*prop {
+      let prop = match prop {
         MemberProp::Ident(Ident { sym, .. }) => sym.to_string(),
         _ => "".to_string(),
       };

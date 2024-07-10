@@ -51,7 +51,7 @@ pub trait YakTransform {
     &mut self,
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
-    declarations: &Vec<Declaration>,
+    declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult;
 }
@@ -68,7 +68,7 @@ pub struct TransformNestedCss {
 impl TransformNestedCss {
   pub fn new(condition: Vec<String>) -> TransformNestedCss {
     TransformNestedCss {
-      condition: condition,
+      condition,
       class_name: None,
     }
   }
@@ -92,33 +92,29 @@ impl YakTransform for TransformNestedCss {
       name: format!(".{}", css_identifier),
       scope_type: ScopeType::Selector,
     };
-    return parser_state;
+    parser_state
   }
 
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
-    declarations: &Vec<Declaration>,
+    declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
-    if declarations.len() > 0 {
+    if !declarations.is_empty() {
       arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
     }
-    arguments.extend(
-      runtime_expressions
-        .into_iter()
-        .map(|expr| ExprOrSpread::from(expr)),
-    );
-    if runtime_css_variables.len() > 0 {
+    arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
+    if !runtime_css_variables.is_empty() {
       arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
     }
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::Mixin,
-        code: to_css(&declarations),
+        code: to_css(declarations),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
@@ -178,33 +174,29 @@ impl YakTransform for TransformCssMixin {
       name: format!(".{}", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
-    return parser_state;
+    parser_state
   }
 
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
-    declarations: &Vec<Declaration>,
+    declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
-    if declarations.len() > 0 {
+    if !declarations.is_empty() {
       arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
     }
-    arguments.extend(
-      runtime_expressions
-        .into_iter()
-        .map(|expr| ExprOrSpread::from(expr)),
-    );
-    if runtime_css_variables.len() > 0 {
+    arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
+    if !runtime_css_variables.is_empty() {
       arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
     }
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::Mixin,
-        code: to_css(&declarations),
+        code: to_css(declarations),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
@@ -243,33 +235,29 @@ impl YakTransform for TransformStyled {
       name: format!(".{}", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
-    return parser_state;
+    parser_state
   }
 
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
     runtime_expressions: Vec<Expr>,
-    declarations: &Vec<Declaration>,
+    declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
-    if declarations.len() > 0 {
+    if !declarations.is_empty() {
       arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
     }
-    arguments.extend(
-      runtime_expressions
-        .into_iter()
-        .map(|expr| ExprOrSpread::from(expr)),
-    );
-    if runtime_css_variables.len() > 0 {
+    arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
+    if !runtime_css_variables.is_empty() {
       arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
     }
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::StyledComponent,
-        code: to_css(&declarations),
+        code: to_css(declarations),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,
@@ -310,28 +298,28 @@ impl YakTransform for TransformKeyframes {
       name: format!("@keyframes {}", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
-    return parser_state;
+    parser_state
   }
 
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
     _runtime_expressions: Vec<Expr>,
-    declarations: &Vec<Declaration>,
+    declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
-    if declarations.len() > 0 {
+    if !declarations.is_empty() {
       arguments.push(Expr::Lit(self.animation_name.as_ref().unwrap().clone().into()).into());
     }
-    if runtime_css_variables.len() > 0 {
+    if !runtime_css_variables.is_empty() {
       arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
     }
     YakTransformResult {
       css: YakCss {
         name: self.animation_name.as_ref().unwrap().to_string(),
         kind: YakType::Keyframes,
-        code: to_css(&declarations),
+        code: to_css(declarations),
       },
       expression: Box::new(Expr::Call(CallExpr {
         span: expression.span,

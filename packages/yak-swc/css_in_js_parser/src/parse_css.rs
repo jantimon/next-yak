@@ -27,6 +27,12 @@ impl ParserState {
   }
 }
 
+impl Default for ParserState {
+  fn default() -> Self {
+    Self::new()
+  }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct CssScope {
   pub name: String,
@@ -79,7 +85,7 @@ pub fn parse_css(
   css_string: &str,
   initial_state: Option<ParserState>,
 ) -> (ParserState, Vec<Declaration>) {
-  let mut state = initial_state.unwrap_or(ParserState::new());
+  let mut state = initial_state.unwrap_or_default();
 
   // Prepend any pending CSS segment from the previous state
   let css_to_parse = if !state.pending_css_segment.is_empty() {
