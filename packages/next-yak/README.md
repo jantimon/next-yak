@@ -39,17 +39,17 @@ Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?fi
 
 1. Install **next-yak** in your Next.js project.
 
-2. Add next-yak to your `next.config.js`:
+2. Add next-yak to your `next.config.mjs`:
 
 ```js
 // next.config.js
-const { withYak } = require("next-yak/withYak");
+import { withYak } from "next-yak/withYak";
 
 const nextConfig = {
   // your next.js config
 };
 
-module.exports = withYak(nextConfig);
+export default withYak(nextConfig);
 ```
 
 3. Ready to go:
@@ -266,29 +266,32 @@ const Container = styled.div`
 
 [Build time constants (video)](https://github.com/jantimon/next-yak/assets/4113649/2c83246c-a03b-4c57-8814-32a7248983ac)
 
-## Todos:
+## Yak shaving
 
-next-yak is currently in the development phase, with several todos that must be completed before it is ready for production:
-
- - [ ] improve js parsing - right now it not reusing babel..
- - [ ] better sourcemaps
- - [ ] improve runtime code size and typings
- - [ ] maybe remove proxy by compiling `styled.button -> styled("button")`
- - [ ] better error messages
- - [x] replace the current config apporach with a solution similar to vanilla-extracts `.styles.ts` files
- - [x] add theme provider (which works for Server Components)
- - [x] add support for forwardRef
- - [x] add support for attrs
- - [x] config hot module reloading
- 
+While trying to get next-yak to work properly we stumbled accross several bugs.  
+Thanks for merging our prs fixes in next.js and postcss ❤️
 
 <details>
-  <summary>prs</summary>
+  <summary>PRS</summary>
 
   - https://github.com/vercel/next.js/pull/51115
   - https://github.com/vercel/next.js/pull/53796
   - https://github.com/css-modules/postcss-modules-local-by-default/pull/64
+  - https://github.com/css-modules/postcss-modules-local-by-default/pull/72
+  - https://github.com/vercel/next.js/pull/62644
+  - https://github.com/vercel/next.js/pull/62639
+  - https://github.com/webpack-contrib/mini-css-extract-plugin/pull/1084
+  - https://github.com/vercel/next.js/pull/62733
+  - https://github.com/vercel/next.js/pull/64551
   
+</details>
+
+<details>
+  <summary>Experiments</summary>
+  Incomplete work in progress experiments to test the features and performance of next-yak:
+
+  - https://next-yak-benchmark.vercel.app/
+  - https://yacijs.vercel.app/
 </details>
 
 ## Acknowledgments
