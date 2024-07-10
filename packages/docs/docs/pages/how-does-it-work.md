@@ -17,13 +17,12 @@ the runtime part. The runtime part is responsible for merging styles and props.
 ## The compile time part
 
 `next-yak` uses three webpack loaders to transform your code. The first loader is responsible for transforming the
-usages of the tagged template literals (like `styled` and `css`) and the second loader is responsible for transforming 
-the styles into real CSS. The third loader is only needed to not compile the code twice in the same webpack run.
+usages of the tagged template literals (like `styled` and `css`), the second loader reads the results from the first loader, resolves cross module dependencies and writes the finished css in the context. The third and last loader just gets the cached css from the context and writes it in a css module file.
 
-### The first loader [(tsloader.cjs)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-loader.cjs)
+### The first loader [(ts-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-loader.ts)
 
 The first loader takes in the source code and transforms the tagged template literals into `next-yak` runtime function 
-calls with the imported styles (from the second loader) as arguments. It also transforms the dynamic parts of the 
+calls with the imported styles (from the final css module output) as arguments. It also transforms the dynamic parts of the 
 tagged template literals into function calls with the properties as argument and adds it as css value to the style object.
 
 #### Add style import
@@ -114,87 +113,18 @@ const Button = styled.button(
 :::
 
 
-### The second loader [(cssloader.cjs)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-post-loader.cjs)
+### The second loader [(ts-post-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/ts-post-loader.ts)
 
-The second loader runs after the first loader changed the import, takes in the styles and transforms it into real 
-CSS inside CSS-Modules. It also generates a class name for each static and dynamic style in order to reference it in the first loader. It translates dynamic property values into CSS variables and adds it to the class selector. Once done, it stores the generated CSS in memory which will be picked up by the third loader.
+The second loader takes the output of the first loader and resolves the cross module dependencies. The result is valid CSS that will be written to the context.
 
-#### Remove imports
+#### Resolve cross module dependencies
 
-The first step of the transformation is to remove all import statements as the input is the normal JS file and we need to output a CSS file.
+To resolve cross module dependencies, the first loader generates a unique string to signal the second loader that this is a dependency with a specific name. The second loader then reads the generated CSS from the first loader and resolves the dependencies.
 
-#### Transform static styles
+### The third loader [(css-loader.ts)](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/loaders/css-loader.ts)
 
-The static styles are transformed into CSS classes. The class names are generated based on the component name and referenced
-in the first loader.
+The third loader runs after the other loaders and reads the cached CSS from the context and writes it to a CSS module file.
 
-:::code-group
-
-```tsx [input]
-import { styled } from "next-yak";
-
-const Button = styled.button`
-  font-size: 2rem;
-  font-weight: bold;
-  color: blue;
-  &:hover {
-    color: red;
-  }
-`;
-```
-
-```css [output]
-.Button {
-  font-size: 2rem;
-  font-weight: bold;
-  color: blue;
-  &:hover {
-    color: red;
-  }
-}
-```
-
-:::
-
-#### Transform dynamic styles
-
-The dynamic property styles are transformed into nested `:where` selectors that don't alter the specificity of the selector. The class names are generated based on the condition of the properties and used in the first loader. For dynamic property
-values, the value is transformed into a CSS variable.
-
-:::code-group
-
-```tsx [input]
-import { styled, css } from "next-yak";
-
-const Button = styled.button`
-	font-size: 2rem;
-	font-weight: bold;
-	color: ${props => props.$primary ? "white" : "blue"}; // [!code focus]
-	${props => props.$primary ? css`background: black;` : css`background: white;`} // [!code focus]
-    &:hover {
-		color: ${props => props.$primary ? "red" : "blue"}; // [!code focus]
-	}
-`;
-```
-
-```css [output]
-.Button {
-	font-size: 2rem;
-	font-weight: bold;
-	color: var(--🦬18fi82j0); /* [!code focus] */
-	&:where(.propsprimary_0) { /* [!code focus] */
-		background: black; /* [!code focus] */
-	} /* [!code focus] */
-	&:where(.not_propsprimary_1) { /* [!code focus] */
-		background: white; /* [!code focus] */
-	} /* [!code focus] */
-	&:hover { /* [!code focus] */
-		color: var(--🦬18fi82j1); /* [!code focus] */
-	} /* [!code focus] */
-}
-```
-
-:::
 
 ## The runtime part
 
