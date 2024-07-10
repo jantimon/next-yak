@@ -33,7 +33,7 @@ yarn add next-yak
 
 ## Getting Started
 
-Try it on [stackblitz](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx)
+See a live [stackblitz demo](https://stackblitz.com/edit/stackblitz-starters-dfykqy?file=app%2Fpage.tsx) or try our **[stackblitz starter kit](https://stackblitz.com/fork/next-yak-starter?file=app%2Fpage.tsx)**
 
 ### Locally
 

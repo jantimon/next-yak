@@ -3,6 +3,23 @@
   "version": "0.2.4",
   "type": "module",
   "types": "./dist/",
+  "license": "MIT",
+  "description": "next-yak is a CSS-in-JS solution tailored for Next.js that seamlessly combines the expressive power of styled-components syntax with efficient build-time extraction of CSS using Next.js's built-in CSS configuration",
+  "homepage": "https://yak.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jantimon/next-yak.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jantimon/next-yak/issues"
+  },
+  "keywords": [
+    "next.js",
+    "css-in-js",
+    "styled-components",
+    "react",
+    "typescript"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -33,12 +50,6 @@
         "import": "./dist/context/index.js",
         "require": "./dist/context/index.cjs"
       }
-    },
-    "./tsloader.js": {
-      "require": "./dist/loaders/tsloader.cjs"
-    },
-    "./cssloader.js": {
-      "require": "./dist/loaders/cssloader.cjs"
     },
     "./jsx-runtime": {
       "require": "./dist/jsx-runtime.cjs",
@@ -87,6 +98,15 @@
     "dist",
     "loaders",
     "runtime",
-    "withYak"
-  ]
+    "withYak",
+    "LICENSE"
+  ],
+  "maintainers": [
+    {
+      "name": "Luca Schneider"
+    }
+  ],
+  "author": {
+    "name": "Jan Nicklas"
+  }
 }
