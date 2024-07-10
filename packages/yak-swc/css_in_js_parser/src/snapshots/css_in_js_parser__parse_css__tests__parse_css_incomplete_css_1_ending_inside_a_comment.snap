@@ -5,7 +5,7 @@ expression: "(state, declarations)"
 (
     ParserState {
         is_inside_string: None,
-        is_inside_comment: true,
+        current_comment_state: MultiLine,
         is_inside_property_value: false,
         is_inside_at_rule: false,
         current_scopes: [

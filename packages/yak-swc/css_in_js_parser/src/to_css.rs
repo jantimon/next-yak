@@ -244,4 +244,30 @@ mod tests {
     );
     assert_snapshot!(to_css(&declarations));
   }
+
+  #[test]
+  fn test_parse_css_merge_two_css_with_comments() {
+    let (state1, declarations1) = parse_css(
+      r#"
+        .foo {
+        /* comment
+      "#,
+      None,
+    );
+    let (_, declarations2) = parse_css(
+      r#"
+          bar {*/
+            color: orange;
+      "#,
+      Some(state1),
+    );
+    let combined_declarations: Vec<_> = declarations1.into_iter().chain(declarations2).collect();
+    assert_eq!(
+      to_css(&combined_declarations),
+      r#"
+.foo {
+  color: orange;
+}"#
+    );
+  }
 }

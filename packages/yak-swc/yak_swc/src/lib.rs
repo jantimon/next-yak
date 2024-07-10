@@ -1,4 +1,4 @@
-use css_in_js_parser::parse_css;
+use css_in_js_parser::{parse_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -308,106 +308,108 @@ where
       // Add the extracted CSS to the the root styled component
       self.current_declaration.extend(new_declarations);
 
-      // Expressions
-      // e.g. const Button = styled.button`color: ${primary};`
-      //                                            ^^^^^^^
-      // e.g. const Button = styled.button`color: ${() => /* ... */};`
-      //                                            ^^^^^^^^^^^^^^^^
-      if let Some(expr) = pair.right() {
-        // Handle constants in css expressions
-        // e.g. styled.button`color: ${primary};`
-        if let Expr::Ident(id) = &**expr {
-          let scoped_name = id.to_string();
-          if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
-            // Reference StyledComponents or Animations in the same file
-            // Mixins can't be used inside css code and is an empty string
-            if referenced_yak_css.kind == YakType::StyledComponent
-              || referenced_yak_css.kind == YakType::Keyframes
-            {
-              let (new_state, new_declarations) =
-                parse_css(&referenced_yak_css.name.as_str(), css_state);
+      if css_state.clone().unwrap().current_comment_state == CommentStateType::None {
+        // Expressions
+        // e.g. const Button = styled.button`color: ${primary};`
+        //                                            ^^^^^^^
+        // e.g. const Button = styled.button`color: ${() => /* ... */};`
+        //                                            ^^^^^^^^^^^^^^^^
+        if let Some(expr) = pair.right() {
+          // Handle constants in css expressions
+          // e.g. styled.button`color: ${primary};`
+          if let Expr::Ident(id) = &**expr {
+            let scoped_name = id.to_string();
+            if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
+              // Reference StyledComponents or Animations in the same file
+              // Mixins can't be used inside css code and is an empty string
+              if referenced_yak_css.kind == YakType::StyledComponent
+                || referenced_yak_css.kind == YakType::Keyframes
+              {
+                let (new_state, new_declarations) =
+                  parse_css(&referenced_yak_css.name.as_str(), css_state);
+                css_state = Some(new_state);
+                self.current_declaration.extend(new_declarations);
+              }
+              // Mixins e.g.
+              // const highlight = css`color: red;`
+              // styled.button`${highlight};`
+              else if referenced_yak_css.kind == YakType::Mixin {
+                runtime_expressions.push(*expr.clone());
+              }
+            } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
+              // In rust we cant access the bundler resolver
+              // therefore we add a reference to the imported variable
+              // :module-selector-import(FOO from 'bar')
+              // later in the bundler we can replace this with the actual value
+              let selector = format!("::module-selector-import({} '{}')", id.sym, value);
+              let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
               css_state = Some(new_state);
               self.current_declaration.extend(new_declarations);
+            } else if let Some(value) = self.variables.get_variable(&scoped_name) {
+              let (new_state, _) = parse_css(&value, css_state);
+              css_state = Some(new_state);
             }
-            // Mixins e.g.
-            // const highlight = css`color: red;`
-            // styled.button`${highlight};`
-            else if referenced_yak_css.kind == YakType::Mixin {
+            // A property with a dynamic value
+            // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
+            else if css_state.is_some() && css_state.as_ref().unwrap().is_inside_property_value {
+              if !self.variables.is_top_level(&scoped_name) {
+                // Convert the variable to a css variable
+                // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
+                let (new_state, _) = parse_css("var(--TODO)", css_state);
+                css_state = Some(new_state);
+              } else {
+                // If the variable is top but not a constant we can't access it
+                // e.g. styled.button`color: ${color};`
+                panic!("Variable {} is not a constant", scoped_name);
+              }
+            } else {
+              // If the variable is not found we can't access it
+              panic!("You cant use '{}' outside of a css value", id.sym);
+            }
+          }
+          // Visit nested css expressions
+          // e.g. styled.button`.foo { ${({$x}) => $x && css`color: red`}; }`
+          // e.g. styled.button`left: ${({$x}) => $x};`
+          else {
+            // Used for resetting the css state after processing all expressions
+            let css_state_before = self.current_css_state.clone();
+            // store the current css state so we can use it in nested css expressions
+            self.current_css_state.clone_from(&css_state);
+
+            let is_inside_property_value = css_state.as_ref().unwrap().is_inside_property_value;
+
+            // If the expression is inside a css property value
+            // it has to be replaced with a css variable
+            if is_inside_property_value {
+              dbg!(&css_state.as_ref().unwrap());
+              let css_variable_name = self.naming_convention.get_css_variable_name(
+                &css_state
+                  .as_ref()
+                  .unwrap()
+                  .current_declaration
+                  .property
+                  .as_str(),
+                // TODO: get the current file name
+                "todo.tsx",
+                // TODO: get the current dev mode
+                true,
+              );
+              runtime_css_variables.insert(css_variable_name.clone(), *expr.clone());
+              let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
+              css_state = Some(new_state);
+            }
+
+            expr.visit_mut_children_with(self);
+
+            // If the expression is outside a css property value
+            // it is probably a nested css expression
+            if !is_inside_property_value {
               runtime_expressions.push(*expr.clone());
             }
-          } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
-            // In rust we cant access the bundler resolver
-            // therefore we add a reference to the imported variable
-            // :module-selector-import(FOO from 'bar')
-            // later in the bundler we can replace this with the actual value
-            let selector = format!("::module-selector-import({} '{}')", id.sym, value);
-            let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
-            css_state = Some(new_state);
-            self.current_declaration.extend(new_declarations);
-          } else if let Some(value) = self.variables.get_variable(&scoped_name) {
-            let (new_state, _) = parse_css(&value, css_state);
-            css_state = Some(new_state);
+
+            // revert to the css state before the current expression or literal
+            self.current_css_state = css_state_before;
           }
-          // A property with a dynamic value
-          // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
-          else if css_state.is_some() && css_state.as_ref().unwrap().is_inside_property_value {
-            if !self.variables.is_top_level(&scoped_name) {
-              // Convert the variable to a css variable
-              // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
-              let (new_state, _) = parse_css("var(--TODO)", css_state);
-              css_state = Some(new_state);
-            } else {
-              // If the variable is top but not a constant we can't access it
-              // e.g. styled.button`color: ${color};`
-              panic!("Variable {} is not a constant", scoped_name);
-            }
-          } else {
-            // If the variable is not found we can't access it
-            panic!("You cant use '{}' outside of a css value", id.sym);
-          }
-        }
-        // Visit nested css expressions
-        // e.g. styled.button`.foo { ${({$x}) => $x && css`color: red`}; }`
-        // e.g. styled.button`left: ${({$x}) => $x};`
-        else {
-          // Used for resetting the css state after processing all expressions
-          let css_state_before = self.current_css_state.clone();
-          // store the current css state so we can use it in nested css expressions
-          self.current_css_state.clone_from(&css_state);
-
-          let is_inside_property_value = css_state.as_ref().unwrap().is_inside_property_value;
-
-          // If the expression is inside a css property value
-          // it has to be replaced with a css variable
-          if is_inside_property_value {
-            dbg!(&css_state.as_ref().unwrap());
-            let css_variable_name = self.naming_convention.get_css_variable_name(
-              &css_state
-                .as_ref()
-                .unwrap()
-                .current_declaration
-                .property
-                .as_str(),
-              // TODO: get the current file name
-              "todo.tsx",
-              // TODO: get the current dev mode
-              true,
-            );
-            runtime_css_variables.insert(css_variable_name.clone(), *expr.clone());
-            let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
-            css_state = Some(new_state);
-          }
-
-          expr.visit_mut_children_with(self);
-
-          // If the expression is outside a css property value
-          // it is probably a nested css expression
-          if !is_inside_property_value {
-            runtime_expressions.push(*expr.clone());
-          }
-
-          // revert to the css state before the current expression or literal
-          self.current_css_state = css_state_before;
         }
       }
     }
@@ -451,11 +453,7 @@ fn condition_to_string(expr: &Expr, negate: bool) -> String {
   match expr {
     Expr::Ident(Ident { sym, .. }) => format!("{}{}", prefix, sym),
     Expr::Lit(Lit::Bool(Bool { value, .. })) => format!("{}{}", prefix, value),
-    Expr::Member(MemberExpr {
-      obj,
-      prop,
-      ..
-    }) => {
+    Expr::Member(MemberExpr { obj, prop, .. }) => {
       let obj = condition_to_string(obj, false);
       let prop = match &*prop {
         MemberProp::Ident(Ident { sym, .. }) => sym.to_string(),
@@ -505,9 +503,7 @@ mod tests {
 
   #[test]
   fn test_condition_to_string() {
-
-    struct TestVisitor {
-    }
+    struct TestVisitor {}
     impl TestVisitor {
       fn new() -> Self {
         Self {}
@@ -518,7 +514,7 @@ mod tests {
         *n = Expr::Lit(Lit::Str(Str {
           span: DUMMY_SP,
           value: condition_to_string(&n.clone(), false).into(),
-          raw: None
+          raw: None,
         }));
       }
     }
@@ -538,7 +534,5 @@ mod tests {
       "\"fooBar\"",
       false,
     );
-
   }
-  
 }

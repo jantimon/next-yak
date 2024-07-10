@@ -5,7 +5,7 @@ use serde_repr::*;
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ParserState {
   pub is_inside_string: Option<char>,
-  pub is_inside_comment: bool,
+  pub current_comment_state: CommentStateType,
   pub is_inside_property_value: bool,
   pub is_inside_at_rule: bool,
   pub current_scopes: Vec<CssScope>,
@@ -17,7 +17,7 @@ impl ParserState {
   pub fn new() -> Self {
     Self {
       is_inside_string: None,
-      is_inside_comment: false,
+      current_comment_state: CommentStateType::None,
       is_inside_property_value: false,
       is_inside_at_rule: false,
       current_scopes: Vec::new(),
@@ -39,6 +39,14 @@ pub struct CssScope {
 pub enum ScopeType {
   Selector = 0,
   AtRule = 1,
+}
+
+#[derive(Serialize_repr, Deserialize_repr, PartialEq, Debug, Clone)]
+#[repr(u8)]
+pub enum CommentStateType {
+  None = 0,
+  SingleLine = 1,
+  MultiLine = 2,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -77,7 +85,7 @@ pub fn parse_css(
   let css_to_parse = if !state.pending_css_segment.is_empty() {
     // Reset the state to properly parse the pending CSS segment
     state.is_inside_string = None;
-    state.is_inside_comment = false;
+    state.current_comment_state = CommentStateType::None;
     state.is_inside_property_value = false;
     state.is_inside_at_rule = false;
     state.current_declaration = new_declaration();
@@ -106,6 +114,38 @@ pub fn parse_css(
       back_slashes = 0;
     }
 
+    match state.current_comment_state {
+      // Parse until the end of the current multi line comment is reached
+      CommentStateType::MultiLine => {
+        while char_position < chars.len() {
+          if chars[char_position] == '*'
+            && char_position + 1 < chars.len()
+            && chars[char_position + 1] == '/'
+          {
+            state.current_comment_state = CommentStateType::None;
+            char_position += 2;
+            break;
+          }
+          char_position += 1;
+        }
+        continue;
+      }
+      // Parse until the end of the current multi line comment is reached
+      CommentStateType::SingleLine => {
+        while char_position < chars.len() {
+          if chars[char_position] == '\n' {
+            state.current_comment_state = CommentStateType::None;
+            break;
+          }
+          char_position += 1;
+        }
+        continue;
+      }
+      CommentStateType::None => {
+        // Proceed with the normal parsing
+      }
+    }
+
     // Detect unescaped strings
     // e.g.:
     // url("Hello, World!")
@@ -126,6 +166,8 @@ pub fn parse_css(
     if state.is_inside_string.is_some() {
       current_code.push(current_character);
       state.current_declaration.value.push(current_character);
+      char_position += 1;
+      continue;
     }
     // Detect multi-line comments
     // e.g.
@@ -135,19 +177,8 @@ pub fn parse_css(
       && char_position + 1 < chars.len()
       && chars[char_position + 1] == '*'
     {
-      state.is_inside_comment = true;
+      state.current_comment_state = CommentStateType::MultiLine;
       char_position += 2;
-      while char_position < chars.len() {
-        if chars[char_position] == '*'
-          && char_position + 1 < chars.len()
-          && chars[char_position + 1] == '/'
-        {
-          state.is_inside_comment = false;
-          char_position += 2;
-          break;
-        }
-        char_position += 1;
-      }
       continue;
     }
     // Detect single line comments
@@ -158,15 +189,8 @@ pub fn parse_css(
       && char_position + 1 < chars.len()
       && chars[char_position + 1] == '/'
     {
-      state.is_inside_comment = true;
+      state.current_comment_state = CommentStateType::SingleLine;
       char_position += 2;
-      while char_position < chars.len() {
-        if chars[char_position] == '\n' {
-          state.is_inside_comment = false;
-          break;
-        }
-        char_position += 1;
-      }
       continue;
     }
     // Detect scope closing

@@ -5,7 +5,7 @@ expression: "(state, declarations)"
 (
     ParserState {
         is_inside_string: None,
-        is_inside_comment: false,
+        current_comment_state: None,
         is_inside_property_value: true,
         is_inside_at_rule: false,
         current_scopes: [
@@ -15,8 +15,8 @@ expression: "(state, declarations)"
             },
         ],
         current_declaration: Declaration {
-            property: "",
-            value: "",
+            property: "color",
+            value: "orange\n",
             scope: [],
             closed: false,
         },
