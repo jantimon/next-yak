@@ -4,6 +4,6 @@ const primary = "green";
 export const Button = /*YAK Extracted CSS:
 .Button {
   color: green;
-  backgroun: red;
+  background: red;
 }
 */ /*#__PURE__*/ styled.button(__styleYak["Button"]);

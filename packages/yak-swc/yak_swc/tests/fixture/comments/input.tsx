@@ -6,6 +6,6 @@ export const Button = styled.button`
   // font-size: ${size}rem;
   color: ${primary};
   /* Undefined Icon in comment: ${Icon} { */
-    backgroun: red;
+    background: red;
   /* css curly in comment: { */
 `;
