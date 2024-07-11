@@ -9,6 +9,8 @@ const ThemedComponent = /*YAK Extracted CSS:
   border-radius: 8px;
 }
 */ /*#__PURE__*/ styled.div(__styleYak["ThemedComponent"], {
-    "background-color-d617d": (props)=>props.theme.background,
-    "color-d617d": (props)=>props.theme.text
+    "style": {
+        "--background-color-d617d": (props)=>props.theme.background,
+        "--color-d617d": (props)=>props.theme.text
+    }
 });

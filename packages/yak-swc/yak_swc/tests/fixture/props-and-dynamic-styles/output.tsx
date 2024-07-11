@@ -10,7 +10,9 @@ export const FlexContainer = /*YAK Extracted CSS:
   background-color: #f0f0f0;
 }
 */ /*#__PURE__*/ styled.div(__styleYak["FlexContainer"], {
-    "align-items-d617d": ({ $align })=>$align || 'stretch',
-    "flex-direction-d617d": ({ $direction })=>$direction || 'row',
-    "justify-content-d617d": ({ $justify })=>$justify || 'flex-start'
+    "style": {
+        "--align-items-d617d": ({ $align })=>$align || 'stretch',
+        "--flex-direction-d617d": ({ $direction })=>$direction || 'row',
+        "--justify-content-d617d": ({ $justify })=>$justify || 'flex-start'
+    }
 });

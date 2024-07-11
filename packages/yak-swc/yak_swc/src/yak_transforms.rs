@@ -123,7 +123,13 @@ impl YakTransform for TransformNestedCss {
     }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
-      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+      arguments.push(
+        expr_hash_map_to_object(HashMap::from([(
+          "style".to_string(),
+          expr_hash_map_to_object(runtime_css_variables).into(),
+        )]))
+        .into(),
+      );
     }
     YakTransformResult {
       css: YakCss {
@@ -220,7 +226,13 @@ impl YakTransform for TransformCssMixin {
     }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
-      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+      arguments.push(
+        expr_hash_map_to_object(HashMap::from([(
+          "style".to_string(),
+          expr_hash_map_to_object(runtime_css_variables).into(),
+        )]))
+        .into(),
+      );
     }
     YakTransformResult {
       css: YakCss {
@@ -296,7 +308,13 @@ impl YakTransform for TransformStyled {
     }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
-      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+      arguments.push(
+        expr_hash_map_to_object(HashMap::from([(
+          "style".to_string(),
+          expr_hash_map_to_object(runtime_css_variables).into(),
+        )]))
+        .into(),
+      );
     }
     YakTransformResult {
       css: YakCss {
@@ -373,7 +391,13 @@ impl YakTransform for TransformKeyframes {
       );
     }
     if !runtime_css_variables.is_empty() {
-      arguments.push(expr_hash_map_to_object(runtime_css_variables).into());
+      arguments.push(
+        expr_hash_map_to_object(HashMap::from([(
+          "style".to_string(),
+          expr_hash_map_to_object(runtime_css_variables).into(),
+        )]))
+        .into(),
+      );
     }
     YakTransformResult {
       css: YakCss {

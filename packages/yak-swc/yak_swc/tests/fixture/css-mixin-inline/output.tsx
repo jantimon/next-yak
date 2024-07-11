@@ -15,9 +15,13 @@ const buttonStyles = /*YAK Extracted CSS:
   width: var(--width-d617d)px;
 }
 */ /*#__PURE__*/ css(__styleYak["buttonStyles"], ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
-        "max-width-d617d": ({ $letters })=>$letters * 15
+        "style": {
+            "--max-width-d617d": ({ $letters })=>$letters * 15
+        }
     }), {
-    "width-d617d": ({ $letters })=>$letters * 10
+    "style": {
+        "--width-d617d": ({ $letters })=>$letters * 10
+    }
 });
 export const Wrapper = /*YAK Extracted CSS:
 .Wrapper {

@@ -444,7 +444,8 @@ where
                 // TODO: get the current dev mode
                 true,
               );
-              runtime_css_variables.insert(css_variable_name.clone(), *expr.clone());
+              runtime_css_variables
+                .insert(format!("--{}", css_variable_name.clone()), *expr.clone());
               let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
               css_state = Some(new_state);
             }
