@@ -21,17 +21,11 @@ impl NamingConvention {
       return self.generate_unique_name("yak");
     }
     let mut count = 0;
-    let name = loop {
-      let candidate = if count == 0 {
-        escaped_name.clone()
-      } else {
-        format!("{}-{:02}", escaped_name, count)
-      };
-      if !self.used_variables.contains(&candidate) {
-        break candidate;
-      }
+    let mut name = escaped_name.clone();
+    while self.used_variables.contains(&name) {
       count += 1;
-    };
+      name = format!("{}-{:02}", escaped_name, count);
+    }
     self.used_variables.insert(name.clone());
     name
   }

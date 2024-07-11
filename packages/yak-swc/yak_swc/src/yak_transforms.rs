@@ -85,7 +85,7 @@ impl YakTransform for TransformNestedCss {
     let css_identifier =
       naming_convention.generate_unique_name(&format!("{}--{}", declaration_name, condition));
     self.class_name = Some(css_identifier.clone());
-    // It is save to unwrap here because the previous_parser_state is alwayy set for a nested css
+    // It is safe to unwrap here because the previous_parser_state is always set for a nested css
     let mut parser_state = previous_parser_state.clone().unwrap();
     // The first scope is the class name which gets attached to the element
     parser_state.current_scopes[0] = CssScope {
@@ -107,7 +107,7 @@ impl YakTransform for TransformNestedCss {
     if !declarations.is_empty() {
       arguments.push(
         Expr::Member(MemberExpr {
-          span: DUMMY_SP, // You might want to use a more appropriate span
+          span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
           prop: MemberProp::Computed(ComputedPropName {
             span: DUMMY_SP,
@@ -204,7 +204,7 @@ impl YakTransform for TransformCssMixin {
     if !declarations.is_empty() {
       arguments.push(
         Expr::Member(MemberExpr {
-          span: DUMMY_SP, // You might want to use a more appropriate span
+          span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
           prop: MemberProp::Computed(ComputedPropName {
             span: DUMMY_SP,
@@ -280,7 +280,7 @@ impl YakTransform for TransformStyled {
     if !declarations.is_empty() {
       arguments.push(
         Expr::Member(MemberExpr {
-          span: DUMMY_SP, // You might want to use a more appropriate span
+          span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
           prop: MemberProp::Computed(ComputedPropName {
             span: DUMMY_SP,
@@ -358,7 +358,7 @@ impl YakTransform for TransformKeyframes {
     if !declarations.is_empty() {
       arguments.push(
         Expr::Member(MemberExpr {
-          span: DUMMY_SP, // You might want to use a more appropriate span
+          span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
           prop: MemberProp::Computed(ComputedPropName {
             span: DUMMY_SP,

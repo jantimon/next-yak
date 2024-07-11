@@ -143,31 +143,36 @@ where
     let basename = self.get_file_name_without_extension();
     let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP);
     self.css_module_identifier = Some(css_module_identifier.clone());
-    module.body.insert(
-      0,
-      ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
-        phase: Default::default(),
-        span: DUMMY_SP,
-        specifiers: vec![ImportDefaultSpecifier {
-          span: DUMMY_SP,
-          local: css_module_identifier,
-        }
-        .into()],
-        src: Box::new(Str {
-          span: DUMMY_SP,
-          value: format!(
-            "./{}.yak.module.css!=!./{}?./{}.yak.module.css",
-            basename, basename, basename
-          )
-          .into(),
-          raw: None,
-        }),
-        type_only: false,
-        with: None,
-      })),
-    );
 
     module.visit_mut_children_with(self);
+
+    // Add the css module import to the top of the file
+    // if any css-in-js expressions has been used
+    if !self.variable_name_mapping.is_empty() {
+      module.body.insert(
+        0,
+        ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+          phase: Default::default(),
+          span: DUMMY_SP,
+          specifiers: vec![ImportDefaultSpecifier {
+            span: DUMMY_SP,
+            local: css_module_identifier,
+          }
+          .into()],
+          src: Box::new(Str {
+            span: DUMMY_SP,
+            value: format!(
+              "./{}.yak.module.css!=!./{}?./{}.yak.module.css",
+              basename, basename, basename
+            )
+            .into(),
+            raw: None,
+          }),
+          type_only: false,
+          with: None,
+        })),
+      );
+    }
 
     // TODO: delete all unused mixins and animations
   }
