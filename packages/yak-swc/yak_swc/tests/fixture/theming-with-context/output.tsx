@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import React from 'react';
 import { styled } from "next-yak/internal";
 const ThemedComponent = /*YAK Extracted CSS:
@@ -7,7 +8,7 @@ const ThemedComponent = /*YAK Extracted CSS:
   padding: 20px;
   border-radius: 8px;
 }
-*/ /*#__PURE__*/ styled.div("ThemedComponent", {
+*/ /*#__PURE__*/ styled.div(__styleYak["ThemedComponent"], {
     "background-color-d617d": (props)=>props.theme.background,
     "color-d617d": (props)=>props.theme.text
 });

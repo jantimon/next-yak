@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled, css } from "next-yak/internal";
 const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
@@ -13,7 +14,7 @@ const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
   width: var(--width-d617d)px;
 }
-*/ /*#__PURE__*/ css("buttonStyles", ({ $active })=>$active && /*#__PURE__*/ css("buttonStyles--$active", {
+*/ /*#__PURE__*/ css(__styleYak["buttonStyles"], ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
         "max-width-d617d": ({ $letters })=>$letters * 15
     }), {
     "width-d617d": ({ $letters })=>$letters * 10
@@ -23,4 +24,4 @@ export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton {
   color: red;
 }
-*/ /*#__PURE__*/ styled.button("CustomThemedButton", buttonStyles);
+*/ /*#__PURE__*/ styled.button(__styleYak["CustomThemedButton"], buttonStyles);

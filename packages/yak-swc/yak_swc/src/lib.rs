@@ -2,6 +2,7 @@ use css_in_js_parser::{parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
 use std::collections::HashMap;
+use std::path::Path;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::DUMMY_SP;
@@ -10,6 +11,7 @@ use swc_core::ecma::{
   ast::*,
   visit::{as_folder, FoldWith, VisitMut},
 };
+use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 
 mod variable_visitor;
@@ -60,13 +62,17 @@ where
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
   expression_replacement: Option<Box<Expr>>,
+  /// The current file name e.g. "App.tsx"
+  filename: String,
+  /// The imported css module from the virtual yak.module.css
+  css_module_identifier: Option<Ident>,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
 where
   GenericComments: Comments,
 {
-  pub fn new(comments: Option<GenericComments>) -> Self {
+  pub fn new(comments: Option<GenericComments>, filename: String) -> Self {
     Self {
       current_css_state: None,
       current_declaration: vec![],
@@ -77,6 +83,8 @@ where
       naming_convention: NamingConvention::new(),
       variable_name_mapping: HashMap::new(),
       expression_replacement: None,
+      css_module_identifier: None,
+      filename,
       comments,
     }
   }
@@ -93,6 +101,15 @@ where
       .current_variable_name
       .clone()
       .unwrap_or("yak".to_string())
+  }
+
+  /// Get the current filename without extension or path e.g. "App" from "/path/to/App.tsx
+  fn get_file_name_without_extension(&self) -> String {
+    Path::new(&self.filename)
+      .file_stem()
+      .and_then(|os_str| os_str.to_str())
+      .map(|s| s.to_string())
+      .unwrap()
   }
 }
 
@@ -115,6 +132,43 @@ where
     program.visit_mut_children_with(&mut variable_visitor);
     self.variables = variable_visitor;
     program.visit_mut_children_with(self);
+  }
+
+  /// Inject the css module import to the current file so webpack can process
+  /// the css separately add HMR and extract it as a static asset
+  /// e.g. import __styleYak from "./App.yak.module.css!=!./App?App.yak.module.css"
+  /// !=! is a webpack-specific syntax that tells webpack to override the default loaders for this import
+  /// ? is a fix for Next.js loaders which ignore the !=! statement
+  fn visit_mut_module(&mut self, module: &mut Module) {
+    let basename = self.get_file_name_without_extension();
+    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP);
+    self.css_module_identifier = Some(css_module_identifier.clone());
+    module.body.insert(
+      0,
+      ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+        phase: Default::default(),
+        span: DUMMY_SP,
+        specifiers: vec![ImportDefaultSpecifier {
+          span: DUMMY_SP,
+          local: css_module_identifier,
+        }
+        .into()],
+        src: Box::new(Str {
+          span: DUMMY_SP,
+          value: format!(
+            "./{}.yak.module.css!=!./{}?./{}.yak.module.css",
+            basename, basename, basename
+          )
+          .into(),
+          raw: None,
+        }),
+        type_only: false,
+        with: None,
+      })),
+    );
+
+    module.visit_mut_children_with(self);
+
     // TODO: delete all unused mixins and animations
   }
 
@@ -407,6 +461,7 @@ where
 
     let transform_result = transform.transform_expression(
       n,
+      self.css_module_identifier.clone().unwrap(),
       runtime_expressions,
       &self.current_declaration,
       runtime_css_variables,
@@ -471,7 +526,13 @@ fn pure_annotation() -> Comment {
 
 #[plugin_transform]
 pub fn process_transform(program: Program, metadata: TransformPluginProgramMetadata) -> Program {
-  program.fold_with(&mut as_folder(TransformVisitor::new(metadata.comments)))
+  let filename = metadata
+    .get_context(&TransformPluginMetadataContextKind::Filename)
+    .unwrap_or("unkown_file_name.tsx".to_string());
+  program.fold_with(&mut as_folder(TransformVisitor::new(
+    metadata.comments,
+    filename,
+  )))
 }
 
 #[cfg(test)]
@@ -485,7 +546,12 @@ mod tests {
   fn fixture(input: PathBuf) {
     test_fixture(
       Default::default(),
-      &|tester| as_folder(TransformVisitor::new(Some(tester.comments.clone()))),
+      &|tester| {
+        as_folder(TransformVisitor::new(
+          Some(tester.comments.clone()),
+          "/some/path/input.tsx".to_string(),
+        ))
+      },
       &input,
       &input.with_file_name("output.tsx"),
       FixtureTestConfig::default(),

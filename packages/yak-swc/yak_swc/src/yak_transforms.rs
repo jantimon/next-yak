@@ -2,9 +2,8 @@ use std::collections::HashMap;
 
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use itertools::Itertools;
-use swc_core::ecma::ast::{
-  CallExpr, Callee, Expr, ExprOrSpread, KeyValueProp, ObjectLit, PropName, PropOrSpread, TaggedTpl,
-};
+use swc_core::common::DUMMY_SP;
+use swc_core::ecma::ast::*;
 
 use crate::naming_convention::NamingConvention;
 
@@ -50,6 +49,7 @@ pub trait YakTransform {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
@@ -98,13 +98,28 @@ impl YakTransform for TransformNestedCss {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
-      arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
+      arguments.push(
+        Expr::Member(MemberExpr {
+          span: DUMMY_SP, // You might want to use a more appropriate span
+          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
+          prop: MemberProp::Computed(ComputedPropName {
+            span: DUMMY_SP,
+            expr: Box::new(Expr::Lit(Lit::Str(Str {
+              span: DUMMY_SP,
+              value: self.class_name.clone().unwrap().to_string().into(),
+              raw: None,
+            }))),
+          }),
+        })
+        .into(),
+      );
     }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
@@ -180,13 +195,28 @@ impl YakTransform for TransformCssMixin {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
-      arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
+      arguments.push(
+        Expr::Member(MemberExpr {
+          span: DUMMY_SP, // You might want to use a more appropriate span
+          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
+          prop: MemberProp::Computed(ComputedPropName {
+            span: DUMMY_SP,
+            expr: Box::new(Expr::Lit(Lit::Str(Str {
+              span: DUMMY_SP,
+              value: self.class_name.clone().unwrap().to_string().into(),
+              raw: None,
+            }))),
+          }),
+        })
+        .into(),
+      );
     }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
@@ -241,13 +271,28 @@ impl YakTransform for TransformStyled {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
-      arguments.push(Expr::Lit(self.class_name.as_ref().unwrap().clone().into()).into());
+      arguments.push(
+        Expr::Member(MemberExpr {
+          span: DUMMY_SP, // You might want to use a more appropriate span
+          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
+          prop: MemberProp::Computed(ComputedPropName {
+            span: DUMMY_SP,
+            expr: Box::new(Expr::Lit(Lit::Str(Str {
+              span: DUMMY_SP,
+              value: self.class_name.clone().unwrap().to_string().into(),
+              raw: None,
+            }))),
+          }),
+        })
+        .into(),
+      );
     }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
@@ -304,13 +349,28 @@ impl YakTransform for TransformKeyframes {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
+    css_module_identifier: Ident,
     _runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: HashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
-      arguments.push(Expr::Lit(self.animation_name.as_ref().unwrap().clone().into()).into());
+      arguments.push(
+        Expr::Member(MemberExpr {
+          span: DUMMY_SP, // You might want to use a more appropriate span
+          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
+          prop: MemberProp::Computed(ComputedPropName {
+            span: DUMMY_SP,
+            expr: Box::new(Expr::Lit(Lit::Str(Str {
+              span: DUMMY_SP,
+              value: self.animation_name.clone().unwrap().to_string().into(),
+              raw: None,
+            }))),
+          }),
+        })
+        .into(),
+      );
     }
     if !runtime_css_variables.is_empty() {
       arguments.push(expr_hash_map_to_object(runtime_css_variables).into());

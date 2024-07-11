@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled, keyframes } from "next-yak/internal";
 const fadeIn = /*YAK Extracted CSS:
 @keyframes fadeIn {
@@ -8,11 +9,11 @@ const fadeIn = /*YAK Extracted CSS:
     opacity: 1;
   }
 }
-*/ /*#__PURE__*/ keyframes("fadeIn");
+*/ /*#__PURE__*/ keyframes(__styleYak["fadeIn"]);
 export const FadeInText = /*YAK Extracted CSS:
 .FadeInText {
   animation: fadeIn 1s ease-in;
   font-size: 18px;
   color: #333;
 }
-*/ /*#__PURE__*/ styled.p("FadeInText");
+*/ /*#__PURE__*/ styled.p(__styleYak["FadeInText"]);

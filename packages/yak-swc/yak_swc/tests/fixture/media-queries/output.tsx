@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled } from "next-yak/internal";
 export const ResponsiveGrid = /*YAK Extracted CSS:
 .ResponsiveGrid {
@@ -12,4 +13,4 @@ export const ResponsiveGrid = /*YAK Extracted CSS:
     grid-template-columns: repeat(3, 1fr);
   }
 }
-*/ /*#__PURE__*/ styled.div("ResponsiveGrid");
+*/ /*#__PURE__*/ styled.div(__styleYak["ResponsiveGrid"]);

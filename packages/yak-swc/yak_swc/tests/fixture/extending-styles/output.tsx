@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled } from "next-yak/internal";
 const BaseButton = /*YAK Extracted CSS:
 .BaseButton {
@@ -7,7 +8,7 @@ const BaseButton = /*YAK Extracted CSS:
   font-size: 16px;
   cursor: pointer;
 }
-*/ /*#__PURE__*/ styled.button("BaseButton");
+*/ /*#__PURE__*/ styled.button(__styleYak["BaseButton"]);
 export const PrimaryButton = styled(BaseButton)`
   background-color: #007bff;
   color: #fff;

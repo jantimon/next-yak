@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled } from "next-yak/internal";
 // @ts-ignore
 import { Icon } from "./Icon";
@@ -10,4 +11,4 @@ export const Button = /*YAK Extracted CSS:
     color: red;
   }
 }
-*/ /*#__PURE__*/ styled.button("Button");
+*/ /*#__PURE__*/ styled.button(__styleYak["Button"]);

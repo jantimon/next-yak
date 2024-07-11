@@ -1,3 +1,4 @@
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled } from "next-yak/internal";
 export const Card = /*YAK Extracted CSS:
 .Card {
@@ -28,4 +29,4 @@ export const Card = /*YAK Extracted CSS:
     }
   }
 }
-*/ /*#__PURE__*/ styled.div("Card");
+*/ /*#__PURE__*/ styled.div(__styleYak["Card"]);
