@@ -392,7 +392,7 @@ where
               // therefore we add a reference to the imported variable
               // :module-selector-import(FOO from 'bar')
               // later in the bundler we can replace this with the actual value
-              let selector = format!("::module-selector-import({} '{}')", id.sym, value);
+              let selector = format!(":module-selector-import({} from '{}')", id.sym, value);
               let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
               css_state = Some(new_state);
               self.current_declaration.extend(new_declarations);
