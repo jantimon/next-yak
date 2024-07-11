@@ -14,6 +14,8 @@ use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata
 
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
+mod yak_imports;
+use yak_imports::YakImportVisitor;
 
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -31,7 +33,6 @@ where
   // @see https://stackoverflow.com/questions/78709909/injecting-comments-with-a-swc-rust-plugin
   GenericComments: Comments,
 {
-  next_yak_imports: HashMap<String, String>,
   /// Last css parser state to contiue parsing the next css code from a quasi
   /// in the same scope
   current_css_state: Option<ParserState>,
@@ -46,6 +47,10 @@ where
   /// Extracted variables from the AST
   /// Used to access constants in css expressions
   variables: VariableVisitor,
+  /// Visitor to gather all imports from the current program
+  /// Used to check if the current program is using next-yak
+  /// to idenftify css-in-js expressions
+  yak_library_imports: YakImportVisitor,
   /// Variable Name to Unique CSS Identifier Mapping\
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
@@ -63,12 +68,12 @@ where
 {
   pub fn new(comments: Option<GenericComments>) -> Self {
     Self {
-      next_yak_imports: HashMap::new(),
       current_css_state: None,
       current_declaration: vec![],
       current_variable_name: None,
       current_condition: vec![],
       variables: VariableVisitor::new(),
+      yak_library_imports: YakImportVisitor::new(),
       naming_convention: NamingConvention::new(),
       variable_name_mapping: HashMap::new(),
       expression_replacement: None,
@@ -76,37 +81,9 @@ where
     }
   }
 
-  /// Check if the current AST has imports to the next-yak library
-  fn is_using_next_yak(&self) -> bool {
-    !self.next_yak_imports.is_empty()
-  }
-
   /// Check if we are inside a next-yak css expression
   fn is_inside_css_expression(&self) -> bool {
     self.current_css_state.is_some()
-  }
-
-  /// Get the name of the used next-yak library function
-  /// e.g. styled.button`color: red;` -> styled
-  fn get_yak_library_function_name(&self, n: &TaggedTpl) -> Option<String> {
-    if !self.is_using_next_yak() {
-      return None;
-    }
-    // styled.button`color: red;`
-    // keyframes`from { color: red; }`
-    // css`color: red;`
-    // styled.button.attrs({})`color: red;`
-    return match &*n.tag {
-      Expr::Ident(Ident { sym, .. }) => self.next_yak_imports.get(&sym.to_string()).cloned(),
-      Expr::Member(MemberExpr { obj, .. }) => {
-        if let Expr::Ident(Ident { sym, .. }) = &**obj {
-          self.next_yak_imports.get(&sym.to_string()).cloned()
-        } else {
-          None
-        }
-      }
-      _ => None,
-    };
   }
 
   /// Try to get the component id of the current styled component mixin or animation
@@ -124,6 +101,15 @@ where
   GenericComments: Comments,
 {
   fn visit_mut_program(&mut self, program: &mut Program) {
+    let mut yak_import_visitor = YakImportVisitor::new();
+    program.visit_mut_children_with(&mut yak_import_visitor);
+    self.yak_library_imports = yak_import_visitor;
+
+    // Skip this program only if yak is not used at all
+    if !self.yak_library_imports.is_using_next_yak() {
+      return;
+    }
+
     // Use VariableVisitor to visit the AST and extract all variable names
     let mut variable_visitor = VariableVisitor::new();
     program.visit_mut_children_with(&mut variable_visitor);
@@ -132,36 +118,11 @@ where
     // TODO: delete all unused mixins and animations
   }
 
-  /// Visit the import declaration and store the imported names
-  /// That way we know if `styled`, `css` is imported from "next-yak"
-  /// and we can transpile their usages
-  fn visit_mut_import_decl(&mut self, import_decl: &mut ImportDecl) {
-    if import_decl.src.value == "next-yak" {
-      // Compiling will change the way the utils are called
-      // Therefore the types are split between the user usage
-      // and how the library is called internally
-      import_decl.src.value = "next-yak/internal".into();
-      import_decl.src.raw = None;
-      // Store the local name of the imported function
-      for specifier in &import_decl.specifiers {
-        if let ImportSpecifier::Named(named) = specifier {
-          let imported = match &named.imported {
-            Some(ModuleExportName::Ident(i)) => i.sym.to_string(),
-            None => named.local.sym.to_string(),
-            _ => continue,
-          };
-          let local = named.local.sym.to_string();
-          self.next_yak_imports.insert(local, imported);
-        }
-      }
-    }
-  }
-
   /// Visit variable declarations
   /// To store the current name which can be used for class names
   /// e.g. Button for const Button = styled.button`color: red;`
   fn visit_mut_var_decl(&mut self, n: &mut VarDecl) {
-    if !self.is_using_next_yak() {
+    if !self.yak_library_imports.is_using_next_yak() {
       return;
     }
     for decl in &mut n.decls {
@@ -238,7 +199,7 @@ where
   /// Visit tagged template literals
   /// This is where the css-in-js expressions are
   fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-    let yak_library_function_name = self.get_yak_library_function_name(n);
+    let yak_library_function_name = self.yak_library_imports.get_yak_library_function_name(n);
     if yak_library_function_name.is_none() {
       n.visit_mut_children_with(self);
       return;
