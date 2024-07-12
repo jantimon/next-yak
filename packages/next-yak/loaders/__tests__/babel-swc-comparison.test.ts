@@ -47,7 +47,7 @@ describe("should work", () => {
             return result;
           },
         },
-        input,
+        input
       );
 
       const outputFile = path.join(path.dirname(inputFile), "output.tsx");
@@ -58,23 +58,21 @@ describe("should work", () => {
 });
 
 /** Helper to format SWC and Babel compile outputs the same way */
-const prettify = async (code: string) => {
-  const prettified = await prettier.format(code, {
-    parser: "typescript",
-  });
-
-  return (
-    prettified
+const prettify = async (code: string) =>
+  await prettier.format(
+    code
       // replace the newlines and spaces before comments
       .replace(/\s*\/\*/g, "/*")
       // replace the newlines and spaces after comments
       .replace(/\s*\*\//g, "*/")
       // replace the newlines after comments
-      .replace(/\*\/\s+/g, "*/\n")
+      .replace(/\*\/\s*/g, "*/\n")
       // replace empty lines
       .replace(/\n\n+/g, "\n")
       // remove ts ignore comments
       .replace(/\/\/\s*@ts-ignore/g, "")
-      .trim()
+      .trim(),
+    {
+      parser: "typescript",
+    }
   );
-};
