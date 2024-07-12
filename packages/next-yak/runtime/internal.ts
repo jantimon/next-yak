@@ -1,24 +1,24 @@
 /**
  * IMPORTANT: This file contains the internal implementation of next-yak's core APIs.
- * 
+ *
  * Purpose:
  * - Provides the actual runtime implementations for styled, css, keyframes, etc.
  * - Referenced only by the compiled code "next-yak/internal"
- * 
+ *
  * Usage:
  * - DO NOT import from this file directly in your application code.
  * - Always use `import { ... } from "next-yak"` in your source files.
  * - The Babel plugin will automatically transform those imports to use this internal module.
- * 
+ *
  * Why this exists:
  * 1. Allows for cleaner separation between the public API and internal implementation
  * 2. Enables better typing for both pre-compilation (user code) and post-compilation scenarios
  * 3. Easier testing and snapshot comparisons without hashes (in index.ts)
- * 4. Makes next-yak work out-of-the-box with testing frameworks like Jest and Vitest 
- * 
+ * 4. Makes next-yak work out-of-the-box with testing frameworks like Jest and Vitest
+ *
  * Note for maintainers:
  * - Ensure that types from this file are not published to avoid exposing internal APIs.
- * 
+ *
  * @internal This module is not intended for direct usage and may change without notice.
  */
 
