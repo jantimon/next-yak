@@ -10,7 +10,6 @@
  * @return Base 36 encoded hash result
  */
 export default function murmurhash2_32_gc(str: string) {
-  
   let l = str.length;
   let h = l;
   let i = 0;
@@ -56,6 +55,6 @@ export default function murmurhash2_32_gc(str: string) {
   h ^= h >>> 15;
 
   const result = (h >>> 0).toString(36);
-  console.log({input: str, output: result});
+  console.log({ input: str, output: result });
   return result;
 }
