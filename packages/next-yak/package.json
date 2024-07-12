@@ -33,6 +33,10 @@
       "import": "./dist/runtime-internals/index.js",
       "require": "./dist/runtime-internals/index.cjs"
     },
+    "./internal": {
+      "import": "./dist/internal.js",
+      "require": "./dist/internal.cjs"
+    },
     "./withYak": {
       "import": "./dist/withYak/index.js",
       "require": "./dist/withYak/index.cjs"

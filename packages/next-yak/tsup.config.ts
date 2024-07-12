@@ -23,6 +23,17 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist",
   },
+   // internal
+   {
+    entryPoints: ["runtime/internal.ts"],
+    format: ["cjs", "esm"],
+    minify: true,
+    sourcemap: true,
+    dts: false,
+    external: ["react", "next-yak/context"],
+    target: "es2022",
+    outDir: "dist",
+  },
   // runtime internals (helpers which get injected by the compiler)
   {
     entryPoints: ["runtime/internals/index.ts"],
