@@ -47,7 +47,7 @@ describe("should work", () => {
             return result;
           },
         },
-        input
+        input,
       );
 
       const outputFile = path.join(path.dirname(inputFile), "output.tsx");
@@ -74,5 +74,5 @@ const prettify = async (code: string) =>
       .trim(),
     {
       parser: "typescript",
-    }
+    },
   );
