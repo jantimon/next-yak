@@ -30,6 +30,7 @@ impl NamingConvention {
     name
   }
 
+  /// Generate a unique CSS variable name based on the file name and a base name
   pub fn get_css_variable_name(
     &mut self,
     base_name: &str,
@@ -51,7 +52,7 @@ impl NamingConvention {
       hasher.finish()
     };
     let hash_str = format!("{:x}", hash);
-    let css_variable_name = format!("{}-{}", name, &hash_str[..5]);
+    let css_variable_name = format!("{}_{}", name, &hash_str[..5]);
     self.generate_unique_name(&css_variable_name)
   }
 }
@@ -127,15 +128,15 @@ mod tests {
     let mut convention = NamingConvention::new();
     assert_eq!(
       convention.get_css_variable_name("foo", "file.css", false),
-      "y-1fc5c"
+      "y_1fc5c"
     );
     assert_eq!(
       convention.get_css_variable_name("foo", "file.css", true),
-      "foo-1fc5c"
+      "foo_1fc5c"
     );
     assert_eq!(
       convention.get_css_variable_name("", "file.css", true),
-      "yak-1fc5c"
+      "yak_1fc5c"
     );
   }
 }

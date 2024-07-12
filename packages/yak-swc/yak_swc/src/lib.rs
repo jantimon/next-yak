@@ -442,13 +442,20 @@ where
             // If the expression is inside a css property value
             // it has to be replaced with a css variable
             if is_inside_property_value {
+              let mut readable_name = self
+                .current_variable_name
+                .clone()
+                .unwrap_or("yak".to_string());
+              if !readable_name.is_empty() {
+                readable_name = format!("{}-", readable_name);
+              }
+              readable_name = format!(
+                "{}{}",
+                readable_name,
+                css_state.as_ref().unwrap().current_declaration.property
+              );
               let css_variable_name = self.naming_convention.get_css_variable_name(
-                css_state
-                  .as_ref()
-                  .unwrap()
-                  .current_declaration
-                  .property
-                  .as_str(),
+                readable_name.as_str(),
                 // TODO: get the current file name
                 "todo.tsx",
                 // TODO: get the current dev mode

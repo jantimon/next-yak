@@ -3,16 +3,16 @@ import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css"
 export const FlexContainer = /*YAK Extracted CSS:
 .FlexContainer {
   display: flex;
-  flex-direction: var(--flex-direction-d617d);
-  justify-content: var(--justify-content-d617d);
-  align-items: var(--align-items-d617d);
+  flex-direction: var(--FlexContainer\#0-flex-direction_d617d);
+  justify-content: var(--FlexContainer\#0-justify-content_d617d);
+  align-items: var(--FlexContainer\#0-align-items_d617d);
   padding: 20px;
   background-color: #f0f0f0;
 }
 */ /*#__PURE__*/ styled.div(__styleYak["FlexContainer"], {
     "style": {
-        "--align-items-d617d": ({ $align })=>$align || 'stretch',
-        "--flex-direction-d617d": ({ $direction })=>$direction || 'row',
-        "--justify-content-d617d": ({ $justify })=>$justify || 'flex-start'
+        "--FlexContainer\\#0-align-items_d617d": ({ $align })=>$align || 'stretch',
+        "--FlexContainer\\#0-flex-direction_d617d": ({ $direction })=>$direction || 'row',
+        "--FlexContainer\\#0-justify-content_d617d": ({ $justify })=>$justify || 'flex-start'
     }
 });
