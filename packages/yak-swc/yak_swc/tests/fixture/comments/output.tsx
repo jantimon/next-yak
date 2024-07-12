@@ -6,4 +6,4 @@ export const Button = /*YAK Extracted CSS:
   color: green;
   background: red;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak["Button"]);
+*/ /*#__PURE__*/ styled.button(__styleYak.Button);

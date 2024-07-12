@@ -9,11 +9,11 @@ const fadeIn = /*YAK Extracted CSS:
     opacity: 1;
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak["fadeIn"]);
+*/ /*#__PURE__*/ keyframes(__styleYak.fadeIn);
 export const FadeInText = /*YAK Extracted CSS:
 .FadeInText {
   animation: fadeIn 1s ease-in;
   font-size: 18px;
   color: #333;
 }
-*/ /*#__PURE__*/ styled.p(__styleYak["FadeInText"]);
+*/ /*#__PURE__*/ styled.p(__styleYak.FadeInText);

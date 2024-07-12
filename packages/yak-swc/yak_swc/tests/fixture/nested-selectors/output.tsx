@@ -29,4 +29,4 @@ export const Card = /*YAK Extracted CSS:
     }
   }
 }
-*/ /*#__PURE__*/ styled.div(__styleYak["Card"]);
+*/ /*#__PURE__*/ styled.div(__styleYak.Card);

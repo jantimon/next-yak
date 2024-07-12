@@ -19,6 +19,7 @@ use variable_visitor::VariableVisitor;
 mod yak_imports;
 use yak_imports::YakImportVisitor;
 
+mod ast_helper;
 mod naming_convention;
 use naming_convention::NamingConvention;
 

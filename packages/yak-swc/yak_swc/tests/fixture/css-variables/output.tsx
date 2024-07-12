@@ -13,11 +13,11 @@ export const ThemedButton = /*YAK Extracted CSS:
     background-color: var(--secondary-color);
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak["ThemedButton"]);
+*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton);
 export const ThemeProvider = /*YAK Extracted CSS:
 .ThemeProvider {
   --primary-color: #007bff;
   --secondary-color: #6c757d;
   --font-size-base: 16px;
 }
-*/ /*#__PURE__*/ styled.div(__styleYak["ThemeProvider"]);
+*/ /*#__PURE__*/ styled.div(__styleYak.ThemeProvider);

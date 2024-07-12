@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
+use crate::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
-use itertools::Itertools;
 use swc_core::common::DUMMY_SP;
 use swc_core::ecma::ast::*;
 
@@ -109,14 +109,7 @@ impl YakTransform for TransformNestedCss {
         Expr::Member(MemberExpr {
           span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-          prop: MemberProp::Computed(ComputedPropName {
-            span: DUMMY_SP,
-            expr: Box::new(Expr::Lit(Lit::Str(Str {
-              span: DUMMY_SP,
-              value: self.class_name.clone().unwrap().to_string().into(),
-              raw: None,
-            }))),
-          }),
+          prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
         })
         .into(),
       );
@@ -145,27 +138,6 @@ impl YakTransform for TransformNestedCss {
       })),
     }
   }
-}
-
-fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
-  let properties = values
-    .into_iter()
-    .sorted_by_key(|(key, _)| key.clone())
-    .map(|(key, value)| {
-      PropOrSpread::Prop(Box::new(
-        KeyValueProp {
-          key: PropName::Str(key.into()),
-          value: Box::new(value),
-        }
-        .into(),
-      ))
-    })
-    .collect::<Vec<_>>();
-
-  Expr::Object(ObjectLit {
-    span: Default::default(),
-    props: properties,
-  })
 }
 
 /// Transform for CSS Mixins
@@ -212,14 +184,7 @@ impl YakTransform for TransformCssMixin {
         Expr::Member(MemberExpr {
           span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-          prop: MemberProp::Computed(ComputedPropName {
-            span: DUMMY_SP,
-            expr: Box::new(Expr::Lit(Lit::Str(Str {
-              span: DUMMY_SP,
-              value: self.class_name.clone().unwrap().to_string().into(),
-              raw: None,
-            }))),
-          }),
+          prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
         })
         .into(),
       );
@@ -294,14 +259,7 @@ impl YakTransform for TransformStyled {
         Expr::Member(MemberExpr {
           span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-          prop: MemberProp::Computed(ComputedPropName {
-            span: DUMMY_SP,
-            expr: Box::new(Expr::Lit(Lit::Str(Str {
-              span: DUMMY_SP,
-              value: self.class_name.clone().unwrap().to_string().into(),
-              raw: None,
-            }))),
-          }),
+          prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
         })
         .into(),
       );
@@ -378,14 +336,7 @@ impl YakTransform for TransformKeyframes {
         Expr::Member(MemberExpr {
           span: DUMMY_SP,
           obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-          prop: MemberProp::Computed(ComputedPropName {
-            span: DUMMY_SP,
-            expr: Box::new(Expr::Lit(Lit::Str(Str {
-              span: DUMMY_SP,
-              value: self.animation_name.clone().unwrap().to_string().into(),
-              raw: None,
-            }))),
-          }),
+          prop: create_member_prop_from_string(self.animation_name.clone().unwrap()),
         })
         .into(),
       );

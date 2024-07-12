@@ -14,7 +14,7 @@ const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
   width: var(--buttonStyles\#0-width_d617d)px;
 }
-*/ /*#__PURE__*/ css(__styleYak["buttonStyles"], ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
+*/ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
         "style": {
             "--buttonStyles\\#0-max-width_d617d": ({ $letters })=>$letters * 15
         }
@@ -41,4 +41,4 @@ export const Wrapper = /*YAK Extracted CSS:
     }
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak["Wrapper"], buttonStyles);
+*/ /*#__PURE__*/ styled.button(__styleYak.Wrapper, buttonStyles);

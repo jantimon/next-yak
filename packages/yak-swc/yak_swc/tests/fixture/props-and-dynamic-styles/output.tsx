@@ -9,7 +9,7 @@ export const FlexContainer = /*YAK Extracted CSS:
   padding: 20px;
   background-color: #f0f0f0;
 }
-*/ /*#__PURE__*/ styled.div(__styleYak["FlexContainer"], {
+*/ /*#__PURE__*/ styled.div(__styleYak.FlexContainer, {
     "style": {
         "--FlexContainer\\#0-align-items_d617d": ({ $align })=>$align || 'stretch',
         "--FlexContainer\\#0-flex-direction_d617d": ({ $direction })=>$direction || 'row',

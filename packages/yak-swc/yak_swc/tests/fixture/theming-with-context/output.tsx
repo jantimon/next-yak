@@ -8,7 +8,7 @@ const ThemedComponent = /*YAK Extracted CSS:
   padding: 20px;
   border-radius: 8px;
 }
-*/ /*#__PURE__*/ styled.div(__styleYak["ThemedComponent"], {
+*/ /*#__PURE__*/ styled.div(__styleYak.ThemedComponent, {
     "style": {
         "--ThemedComponent\\#0-background-color_d617d": (props)=>props.theme.background,
         "--ThemedComponent\\#0-color_d617d": (props)=>props.theme.text

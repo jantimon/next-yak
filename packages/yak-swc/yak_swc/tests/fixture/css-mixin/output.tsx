@@ -14,7 +14,7 @@ const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
   width: var(--buttonStyles\#0-width_d617d)px;
 }
-*/ /*#__PURE__*/ css(__styleYak["buttonStyles"], ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
+*/ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
         "style": {
             "--buttonStyles\\#0-max-width_d617d": ({ $letters })=>$letters * 15
         }
@@ -28,4 +28,4 @@ export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton {
   color: red;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak["CustomThemedButton"], buttonStyles);
+*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton, buttonStyles);
