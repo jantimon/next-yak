@@ -1,7 +1,7 @@
 // @ts-ignore
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import styled from "styled-components";
 import { styled as styledYak, css } from "next-yak/internal";
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
   padding: 10px 20px;

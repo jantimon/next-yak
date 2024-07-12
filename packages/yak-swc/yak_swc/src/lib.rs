@@ -149,8 +149,18 @@ where
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
     if !self.variable_name_mapping.is_empty() {
+      // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
+      let mut yak_import_index = 0;
+      for (i, item) in module.body.iter().enumerate() {
+        if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl { src, .. })) = item {
+          if src.value == "next-yak/internal" {
+            yak_import_index = i + 1;
+            break;
+          }
+        }
+      }
       module.body.insert(
-        0,
+        yak_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
           phase: Default::default(),
           span: DUMMY_SP,

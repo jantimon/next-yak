@@ -1,6 +1,6 @@
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import React from 'react';
 import { styled } from "next-yak/internal";
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const ThemedComponent = /*YAK Extracted CSS:
 .ThemedComponent {
   background-color: var(--background-color-d617d);

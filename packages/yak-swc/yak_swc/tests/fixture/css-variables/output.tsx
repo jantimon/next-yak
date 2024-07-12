@@ -1,5 +1,5 @@
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { styled } from "next-yak/internal";
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const ThemedButton = /*YAK Extracted CSS:
 .ThemedButton {
   background-color: var(--primary-color);
