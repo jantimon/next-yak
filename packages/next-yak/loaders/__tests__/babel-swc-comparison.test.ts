@@ -18,7 +18,7 @@ describe("should work", () => {
       const output = await tsloader.call(
         {
           _compilation: {},
-          resourcePath: "/some/special/path/page.tsx",
+          resourcePath: inputFile,
           rootContext: "/some",
           mode: "development",
           importModule: () => {
