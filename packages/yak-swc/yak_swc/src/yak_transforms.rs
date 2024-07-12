@@ -83,7 +83,7 @@ impl YakTransform for TransformNestedCss {
   ) -> ParserState {
     let condition = self.condition.join("-and-");
     let css_identifier =
-      naming_convention.generate_unique_name(&format!("{}--{}", declaration_name, condition));
+      naming_convention.generate_unique_name(&format!("{}__{}", declaration_name, condition));
     self.class_name = Some(css_identifier.clone());
     // It is safe to unwrap here because the previous_parser_state is always set for a nested css
     let mut parser_state = previous_parser_state.clone().unwrap();
