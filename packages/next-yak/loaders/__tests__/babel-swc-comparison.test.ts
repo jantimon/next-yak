@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { glob } from "glob";
 import tsloader from "../ts-loader";
+import * as prettier from "prettier";
 
 describe("should work", () => {
   const inputFiles = glob.sync("../yak-swc/**/input.tsx", {
@@ -46,16 +47,28 @@ describe("should work", () => {
             return result;
           },
         },
-        input,
+        input
       );
 
       const outputFile = path.join(path.dirname(inputFile), "output.tsx");
-
-      // read the expected output from the output file
       const expectedOutput = fs.readFileSync(outputFile, "utf8");
-
-      // compare the actual output to the expected output
-      expect(output).toEqual(expectedOutput);
+      expect(await prettify(output)).toEqual(await prettify(expectedOutput));
     });
   });
 });
+
+const prettify = async (code: string) => {
+  const prettified = await prettier.format(code, {
+    parser: "typescript",
+  });
+
+  return (
+    prettified
+      // replace the newlines and spaces before the extracted css comment
+      .replace(/\s*\/\*YAK Extracted CSS:/g, "/*YAK Extracted CSS:")
+      // replace the newlines and spaces after the extracted css comment
+      .replace(/}\s*\*\//g, "}*/")
+      // replace the newlines and spaces before the pure comment
+      .replace(/\s*\/\*#__PURE__\*\/\s*/g, "/*#__PURE__*/")
+  );
+};
