@@ -54,7 +54,5 @@ export default function murmurhash2_32_gc(str: string) {
   h = (h & 0xffff) * 0x5bd1e995 + ((((h >>> 16) * 0x5bd1e995) & 0xffff) << 16);
   h ^= h >>> 15;
 
-  const result = (h >>> 0).toString(36);
-  console.log({ input: str, output: result });
-  return result;
+  return (h >>> 0).toString(36);
 }
