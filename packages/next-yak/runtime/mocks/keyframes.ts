@@ -21,11 +21,10 @@
  * ```
  */
 export const keyframes = (
-    styles: TemplateStringsArray,
-    ...dynamic: never[]
-  ): string => {
-    // the keyframes function is a no-op in the mock
-    // as it has no dynamic runtime behavior but only css
-    return "";
-  };
-  
+  styles: TemplateStringsArray,
+  ...dynamic: never[]
+): string => {
+  // the keyframes function is a no-op in the mock
+  // as it has no dynamic runtime behavior but only css
+  return "";
+};
