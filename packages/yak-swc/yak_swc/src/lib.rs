@@ -448,7 +448,10 @@ where
                 .clone()
                 .unwrap_or("yak".to_string());
               if !readable_name.is_empty() {
-                readable_name = format!("{}-", readable_name);
+                // remove #0
+                readable_name = format!("{}__", readable_name)
+                  .replace("#0", "")
+                  .replace("#", "");
               }
               readable_name = format!(
                 "{}{}",

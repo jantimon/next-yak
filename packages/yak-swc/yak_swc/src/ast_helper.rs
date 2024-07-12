@@ -29,7 +29,9 @@ pub fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
 pub fn create_member_prop_from_string(s: String) -> MemberProp {
   // if the string contains characters that are not allowed in an identifier
   // use a string literal instead
-  if s.contains(|c: char| !c.is_alphanumeric() && c != '_' && c != '$') || s.starts_with(|c: char| c.is_ascii_digit()) {
+  if s.contains(|c: char| !c.is_alphanumeric() && c != '_' && c != '$')
+    || s.starts_with(|c: char| c.is_ascii_digit())
+  {
     return MemberProp::Computed(ComputedPropName {
       span: DUMMY_SP,
       expr: Box::new(Expr::Lit(Lit::Str(Str {

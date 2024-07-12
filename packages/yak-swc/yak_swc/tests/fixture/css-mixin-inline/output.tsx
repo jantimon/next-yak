@@ -9,18 +9,18 @@ const buttonStyles = /*YAK Extracted CSS:
 }
 .buttonStyles--$active {
   background-color: #f0f0f0;
-  max-width: var(--buttonStyles\#0-max-width_d617d)px;
+  max-width: var(--buttonStyles__max-width_d617d)px;
 }
 .buttonStyles {
-  width: var(--buttonStyles\#0-width_d617d)px;
+  width: var(--buttonStyles__width_d617d)px;
 }
 */ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
         "style": {
-            "--buttonStyles\\#0-max-width_d617d": ({ $letters })=>$letters * 15
+            "--buttonStyles__max-width_d617d": ({ $letters })=>$letters * 15
         }
     }), {
     "style": {
-        "--buttonStyles\\#0-width_d617d": ({ $letters })=>$letters * 10
+        "--buttonStyles__width_d617d": ({ $letters })=>$letters * 10
     }
 });
 export const Wrapper = /*YAK Extracted CSS:
@@ -34,10 +34,10 @@ export const Wrapper = /*YAK Extracted CSS:
     }
     &.buttonStyles--$active {
       background-color: #f0f0f0;
-      max-width: var(--buttonStyles\#0-max-width_d617d)px;
+      max-width: var(--buttonStyles__max-width_d617d)px;
     }
     &.buttonStyles {
-      width: var(--buttonStyles\#0-width_d617d)px;
+      width: var(--buttonStyles__width_d617d)px;
     }
   }
 }
