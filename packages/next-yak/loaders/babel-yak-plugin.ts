@@ -240,6 +240,7 @@ export default function (
         if (node.source.value !== "next-yak") {
           return;
         }
+        node.source.value = "next-yak/internal";
         const filePath = state.file.opts.filename;
         if (!filePath) {
           throw new Error("filePath is undefined");
