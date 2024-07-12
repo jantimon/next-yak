@@ -91,7 +91,7 @@ export function css<TProps>(
   }) as ComponentStyles<TProps>;
 }
 
-function executeDynamiceExpressionRecursively(
+function executeDynamicExpressionRecursively(
   props: unknown,
   expression: PropsToClassNameFn,
 ) {
@@ -100,4 +100,5 @@ function executeDynamiceExpressionRecursively(
     result = result(props);
   }
   return result;
+}
 }
