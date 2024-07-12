@@ -59,7 +59,7 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
       "\\"use client\\";
 
       import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       type x = number;
       const headline =
@@ -101,7 +101,7 @@ const headline = css\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline =
@@ -151,7 +151,7 @@ const FancyButton = styled(Button)\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button =
@@ -208,7 +208,7 @@ const FancyButton = styled(Button)\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak\\";
+      "import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
       /*YAK Extracted CSS:
@@ -279,7 +279,7 @@ const FancyButton = styled(Button)\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const Button =
@@ -326,7 +326,7 @@ const headline = styled.input.attrs({
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled } from \\"next-yak\\";
+      "import { styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const headline =
       /*YAK Extracted CSS:
@@ -359,7 +359,7 @@ const newHeadline = styled(headline).attrs({
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled } from \\"next-yak\\";
+      "import { styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const headline =
       /*YAK Extracted CSS:
@@ -399,7 +399,7 @@ const headline = css\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { easing } from \\"styleguide\\";
       const headline =
@@ -452,7 +452,7 @@ const FadeInButton = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, keyframes } from \\"next-yak\\";
+      import { styled, keyframes } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const fadeIn =
       /*YAK Extracted CSS:
@@ -508,7 +508,7 @@ const Wrapper = styled.div\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, keyframes } from \\"next-yak\\";
+      "import { styled, keyframes } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Link =
       /*YAK Extracted CSS:
@@ -571,7 +571,7 @@ const Wrapper = styled.div\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, keyframes } from \\"next-yak\\";
+      "import { styled, keyframes } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Link =
       /*YAK Extracted CSS:
@@ -619,7 +619,7 @@ const Wrapper = styled.div\`
   \``,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak\\";
+      "import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { queries } from \\"@/theme/constants.yak\\";
       const headline =
@@ -765,7 +765,7 @@ const headline = css\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak\\";
+      "import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const red = \\"#E50914\\";
       const zIndex = 14;
@@ -945,7 +945,7 @@ const Button = styled.button\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak\\";
+      "import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
       /*YAK Extracted CSS:
@@ -987,7 +987,7 @@ const headline = css\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const x = Math.random();
       const headline =
@@ -1041,7 +1041,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Icon =
       /*YAK Extracted CSS:
@@ -1091,7 +1091,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak\\";
+      import { styled, css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
       /*YAK Extracted CSS:
@@ -1149,7 +1149,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled } from \\"next-yak\\";
+      import { styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
       /*YAK Extracted CSS:
@@ -1188,7 +1188,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled } from \\"next-yak\\";
+      import { styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber =
       /*YAK Extracted CSS:
@@ -1230,7 +1230,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak\\";
+      import { css } from \\"next-yak/internal\\";
       import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const case1 =
@@ -1274,7 +1274,7 @@ const Button = styled.button\`
      `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak\\";
+      "import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const mixin1 =
       /*YAK Extracted CSS:
@@ -1344,7 +1344,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak\\";
+      "import { css } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const elem = <div {...
       /*YAK Extracted CSS:
@@ -1367,7 +1367,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp = () => <div><p><div {...
           /*YAK Extracted CSS:
@@ -1392,7 +1392,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp = p => <div {...p}>anything</div>;
       const MyComp2 = () => <MyComp {...
@@ -1420,7 +1420,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const TestObj = {
         TestMem: p => <div {...p}>anything</div>
@@ -1452,7 +1452,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const test = {
         nested: {
@@ -1481,7 +1481,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp2 = () => <custom-element {...
       /*YAK Extracted CSS:
@@ -1521,7 +1521,7 @@ describe("css prop", () => {
         `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const padding =
       /*YAK Extracted CSS:
@@ -1546,7 +1546,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp = () => <div {...(true &&
       /*YAK Extracted CSS:
@@ -1570,7 +1570,7 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const MyComp = () => <div {...(false &&
       /*YAK Extracted CSS:
@@ -1598,7 +1598,7 @@ describe("css prop", () => {
         `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const padding =
       /*YAK Extracted CSS:
@@ -1629,7 +1629,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
@@ -1655,7 +1655,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
@@ -1683,7 +1683,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
@@ -1709,7 +1709,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
@@ -1738,7 +1738,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = () => <div {...__yak_mergeCssProp({
@@ -1770,7 +1770,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = props => <div {...__yak_mergeCssProp(props,
@@ -1795,7 +1795,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak\\";
+        "import { css, styled } from \\"next-yak/internal\\";
         import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = props => <div {...__yak_mergeCssProp(props,
@@ -1838,7 +1838,7 @@ describe("cross file", () => {
     `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak\\";
+      "import { css, styled } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       import { Icon } from \\"./icon\\";
       const Button =
