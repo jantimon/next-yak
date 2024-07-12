@@ -85,7 +85,7 @@ export function css<TProps>(
       // run the dynamic expressions and ignore the return value
       // the execution is important to ensure that the user code is executed
       // the same way as in the real runtime
-      executeDynamiceExpressionRecursively(props, dynamicCssFunctions[i]);
+      executeDynamicExpressionRecursively(props, dynamicCssFunctions[i]);
     }
     return {};
   }) as ComponentStyles<TProps>;
@@ -100,5 +100,4 @@ function executeDynamicExpressionRecursively(
     result = result(props);
   }
   return result;
-}
 }
