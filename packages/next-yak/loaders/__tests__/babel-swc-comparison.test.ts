@@ -47,7 +47,7 @@ describe("should work", () => {
             return result;
           },
         },
-        input,
+        input
       );
 
       const outputFile = path.join(path.dirname(inputFile), "output.tsx");
@@ -64,11 +64,11 @@ const prettify = async (code: string) => {
 
   return (
     prettified
-      // replace the newlines and spaces before the extracted css comment
-      .replace(/\s*\/\*YAK Extracted CSS:/g, "/*YAK Extracted CSS:")
-      // replace the newlines and spaces after the extracted css comment
-      .replace(/}\s*\*\//g, "}*/")
-      // replace the newlines and spaces before the pure comment
-      .replace(/\s*\/\*#__PURE__\*\/\s*/g, "/*#__PURE__*/")
+      // replace the newlines and spaces before comments
+      .replace(/\s*\/\*/g, "/*")
+      // replace the newlines and spaces after comments
+      .replace(/\s*\*\//g, "*/")
+      // replace empty lines
+      .replace(/(^|\n)\n+/g, "$1")
   );
 };
