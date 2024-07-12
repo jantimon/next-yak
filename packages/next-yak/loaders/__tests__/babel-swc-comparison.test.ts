@@ -57,6 +57,7 @@ describe("should work", () => {
   });
 });
 
+/** Helper to format SWC and Babel compile outputs the same way */
 const prettify = async (code: string) => {
   const prettified = await prettier.format(code, {
     parser: "typescript",
@@ -68,6 +69,8 @@ const prettify = async (code: string) => {
       .replace(/\s*\/\*/g, "/*")
       // replace the newlines and spaces after comments
       .replace(/\s*\*\//g, "*/")
+      // replace the newlines after comments
+      .replace(/\*\/\s+/g, "*/\n")
       // replace empty lines
       .replace(/\n\n+/g, "\n")
       // remove ts ignore comments
