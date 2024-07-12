@@ -9,18 +9,18 @@ const buttonStyles = /*YAK Extracted CSS:
 }
 .buttonStyles--$active {
   background-color: #f0f0f0;
-  max-width: var(--buttonStyles__max-width_d617d)px;
+  max-width: var(--buttonStyles__max-width_o1wkyu)px;
 }
 .buttonStyles {
-  width: var(--buttonStyles__width_d617d)px;
+  width: var(--buttonStyles__width_o1wkyu)px;
 }
 */ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak["buttonStyles--$active"], {
         "style": {
-            "--buttonStyles__max-width_d617d": ({ $letters })=>$letters * 15
+            "--buttonStyles__max-width_o1wkyu": ({ $letters })=>$letters * 15
         }
     }), {
     "style": {
-        "--buttonStyles__width_d617d": ({ $letters })=>$letters * 10
+        "--buttonStyles__width_o1wkyu": ({ $letters })=>$letters * 10
     }
 });
 export const ThemedButton = /*#__PURE__*/ styled.button(buttonStyles);

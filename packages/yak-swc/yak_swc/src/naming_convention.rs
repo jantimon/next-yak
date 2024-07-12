@@ -1,5 +1,5 @@
+use crate::utils::murmur_hash::murmurhash2_32_gc;
 use std::collections::HashSet;
-use std::hash::{DefaultHasher, Hasher};
 
 pub struct NamingConvention {
   used_variables: HashSet<String>,
@@ -46,13 +46,8 @@ impl NamingConvention {
     } else {
       "y"
     };
-    let hash = {
-      let mut hasher = DefaultHasher::new();
-      hasher.write(file_name.as_bytes());
-      hasher.finish()
-    };
-    let hash_str = format!("{:x}", hash);
-    let css_variable_name = format!("{}_{}", name, &hash_str[..5]);
+    // TODO - don't hash the same file name every over and over again
+    let css_variable_name = format!("{}_{}", name, murmurhash2_32_gc(file_name));
     self.generate_unique_name(&css_variable_name)
   }
 }
@@ -128,15 +123,15 @@ mod tests {
     let mut convention = NamingConvention::new();
     assert_eq!(
       convention.get_css_variable_name("foo", "file.css", false),
-      "y_1fc5c"
+      "y_17k2ec6"
     );
     assert_eq!(
       convention.get_css_variable_name("foo", "file.css", true),
-      "foo_1fc5c"
+      "foo_17k2ec6"
     );
     assert_eq!(
       convention.get_css_variable_name("", "file.css", true),
-      "yak_1fc5c"
+      "yak_17k2ec6"
     );
   }
 }

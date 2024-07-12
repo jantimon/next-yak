@@ -1,6 +1,7 @@
 use css_in_js_parser::{parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
+use serde::Deserialize;
 use std::collections::HashMap;
 use std::path::Path;
 use swc_core::common::comments::Comment;
@@ -19,7 +20,11 @@ use variable_visitor::VariableVisitor;
 mod yak_imports;
 use yak_imports::YakImportVisitor;
 
-mod ast_helper;
+mod utils {
+  pub mod ast_helper;
+  pub mod file_paths;
+  pub mod murmur_hash;
+}
 mod naming_convention;
 use naming_convention::NamingConvention;
 
@@ -28,6 +33,21 @@ use yak_transforms::{
   TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakCss, YakTransform,
   YakType,
 };
+
+/// Static plugin configuration.
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
+pub struct Config {
+  /// Use Readable CSS Variable Names
+  #[serde(default = "bool::default")]
+  pub dev_mode: bool,
+  /// The hash for a css-variable depends on the file name including createVar().
+  /// To ensure that the hash is consistent accross multiple systems the relative path
+  /// from the base dir to the source file is used.
+  #[serde()]
+  pub base_path: String,
+}
 
 pub struct TransformVisitor<GenericComments>
 where
@@ -67,13 +87,15 @@ where
   filename: String,
   /// The imported css module from the virtual yak.module.css
   css_module_identifier: Option<Ident>,
+  /// Dev mode to use readable css variable names
+  dev_mode: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
 where
   GenericComments: Comments,
 {
-  pub fn new(comments: Option<GenericComments>, filename: String) -> Self {
+  pub fn new(comments: Option<GenericComments>, filename: String, dev_mode: bool) -> Self {
     Self {
       current_css_state: None,
       current_declaration: vec![],
@@ -85,6 +107,7 @@ where
       variable_name_mapping: HashMap::new(),
       expression_replacement: None,
       css_module_identifier: None,
+      dev_mode,
       filename,
       comments,
     }
@@ -460,10 +483,8 @@ where
               );
               let css_variable_name = self.naming_convention.get_css_variable_name(
                 readable_name.as_str(),
-                // TODO: get the current file name
-                "todo.tsx",
-                // TODO: get the current dev mode
-                true,
+                self.filename.as_str(),
+                self.dev_mode,
               );
               runtime_css_variables
                 .insert(format!("--{}", css_variable_name.clone()), *expr.clone());
@@ -553,12 +574,23 @@ fn pure_annotation() -> Comment {
 
 #[plugin_transform]
 pub fn process_transform(program: Program, metadata: TransformPluginProgramMetadata) -> Program {
+  let config: Config = serde_json::from_str(
+    &metadata
+      .get_transform_plugin_config()
+      .expect("failed to get plugin config for swc-yak"),
+  )
+  .expect("failed to parse plugin swc-yak config");
+
   let filename = metadata
     .get_context(&TransformPluginMetadataContextKind::Filename)
-    .unwrap_or("unkown_file_name.tsx".to_string());
+    .expect("failed to get filename");
+  // Get a relative posix path to generate always the same hash
+  // on different machines or operating systems
+  let deterministic_path = utils::file_paths::relative_posix_path(&config.base_path, &filename);
   program.fold_with(&mut as_folder(TransformVisitor::new(
     metadata.comments,
-    filename,
+    deterministic_path,
+    config.dev_mode,
   )))
 }
 
@@ -576,7 +608,8 @@ mod tests {
       &|tester| {
         as_folder(TransformVisitor::new(
           Some(tester.comments.clone()),
-          "/some/path/input.tsx".to_string(),
+          "path/input.tsx".to_string(),
+          true,
         ))
       },
       &input,

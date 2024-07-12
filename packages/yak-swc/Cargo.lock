@@ -3116,7 +3116,11 @@ version = "0.1.0"
 dependencies = [
  "css_in_js_parser",
  "itertools",
+ "lazy_static",
+ "pathdiff",
+ "regex",
  "serde",
+ "serde_json",
  "swc",
  "swc_core",
  "swc_ecma_transforms_testing",
