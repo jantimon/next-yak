@@ -69,6 +69,8 @@ const prettify = async (code: string) => {
       // replace the newlines and spaces after comments
       .replace(/\s*\*\//g, "*/")
       // replace empty lines
-      .replace(/(^|\n)\n+/g, "$1")
-  );
+      .replace(/\n\n+/g, "\n")
+      // remove ts ignore comments
+      .replace(/\/\/\s*@ts-ignore/g, "")
+  ).trim();
 };
