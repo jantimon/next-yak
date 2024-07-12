@@ -46,12 +46,12 @@ type PropsToClassNameFn = (props: unknown) =>
 
 /**
  * Allows to use CSS styles in a styled or css block
- * 
+ *
  * e.g.
- * 
+ *
  * ```tsx
  * const Component = styled.div`
- *  color: black; 
+ *  color: black;
  *  ${({$active}) => $active && css`color: red;`}
  * `;
  * ```
@@ -62,7 +62,7 @@ export function css<TProps = {}>(
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ): ComponentStyles<TProps>;
 export function css<TProps>(
-    styles: TemplateStringsArray,
+  styles: TemplateStringsArray,
   ...args: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ): StaticCSSProp | ComponentStyles<TProps> {
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
@@ -77,7 +77,7 @@ export function css<TProps>(
   if (dynamicCssFunctions.length === 0) {
     return {
       className: "css-mixin",
-      style: undefined
+      style: undefined,
     };
   }
   return (<T>(props: T) => {
@@ -93,7 +93,7 @@ export function css<TProps>(
 
 function executeDynamiceExpressionRecursively(
   props: unknown,
-  expression: PropsToClassNameFn
+  expression: PropsToClassNameFn,
 ) {
   let result = expression(props);
   while (typeof result === "function") {
