@@ -72,5 +72,6 @@ const prettify = async (code: string) => {
       .replace(/\n\n+/g, "\n")
       // remove ts ignore comments
       .replace(/\/\/\s*@ts-ignore/g, "")
-  ).trim();
+      .trim()
+  );
 };
