@@ -1,5 +1,8 @@
 use std::collections::HashMap;
-use swc_core::ecma::{ast::*, visit::VisitMut};
+use swc_core::{
+  common::DUMMY_SP,
+  ecma::{ast::*, visit::VisitMut},
+};
 
 #[derive(Debug)]
 /// Visitor implementation to gather all names imported from "next-yak"
@@ -7,12 +10,17 @@ use swc_core::ecma::{ast::*, visit::VisitMut};
 pub struct YakImportVisitor {
   /// Imports from "next-yak"
   yak_library_imports: HashMap<String, String>,
+  /// Utilities used from "next-yak/internal"
+  yak_utilities: HashMap<String, Ident>,
 }
+
+const UTILITIES: &[&str] = &["unitPostFix"];
 
 impl YakImportVisitor {
   pub fn new() -> Self {
     Self {
       yak_library_imports: HashMap::new(),
+      yak_utilities: HashMap::new(),
     }
   }
 
@@ -42,6 +50,39 @@ impl YakImportVisitor {
       }
       _ => None,
     };
+  }
+
+  /// Returns the utility function identifier
+  pub fn get_yak_utility_ident(&mut self, name: String) -> Ident {
+    if !UTILITIES.contains(&name.as_str()) {
+      panic!("Utility function not found: {}", name);
+    }
+    if let Some(ident) = self.yak_utilities.get(&name) {
+      return ident.clone();
+    } else {
+      let ident = Ident::new(format!("__yak_{}", name).into(), DUMMY_SP);
+      self.yak_utilities.insert(name, ident.clone());
+      return ident;
+    }
+  }
+
+  /// Get the import declaration specifiers for all used utility functions
+  pub fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
+    self
+      .yak_utilities
+      .iter()
+      .map(|(local, imported)| {
+        ImportSpecifier::Named(ImportNamedSpecifier {
+          span: DUMMY_SP,
+          local: imported.clone(),
+          imported: Some(ModuleExportName::Ident(Ident::new(
+            local.clone().into(),
+            DUMMY_SP,
+          ))),
+          is_type_only: false,
+        })
+      })
+      .collect()
   }
 }
 

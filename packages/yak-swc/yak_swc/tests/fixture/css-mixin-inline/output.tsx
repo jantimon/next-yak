@@ -1,4 +1,4 @@
-import { styled, css } from "next-yak/internal";
+import { styled, css, unitPostFix as __yak_unitPostFix } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
@@ -16,11 +16,11 @@ const buttonStyles = /*YAK Extracted CSS:
 }
 */ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.buttonStyles__$active, {
         "style": {
-            "--buttonStyles__max-width_o1wkyu": ({ $letters })=>$letters * 15
+            "--buttonStyles__max-width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }
     }), {
     "style": {
-        "--buttonStyles__width_o1wkyu": ({ $letters })=>$letters * 10
+        "--buttonStyles__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
     }
 });
 export const Wrapper = /*YAK Extracted CSS:

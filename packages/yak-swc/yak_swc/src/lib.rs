@@ -1,6 +1,5 @@
 use css_in_js_parser::{parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
-use itertools::Itertools;
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::path::Path;
@@ -14,6 +13,8 @@ use swc_core::ecma::{
 };
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
+use utils::ast_helper::TemplateIterator;
+use utils::wrap_return_value::add_suffix_to_expr;
 
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
@@ -24,6 +25,7 @@ mod utils {
   pub mod ast_helper;
   pub mod file_paths;
   pub mod murmur_hash;
+  pub mod wrap_return_value;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -175,10 +177,17 @@ where
     if !self.variable_name_mapping.is_empty() {
       // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
       let mut yak_import_index = 0;
-      for (i, item) in module.body.iter().enumerate() {
-        if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl { src, .. })) = item {
-          if src.value == "next-yak/internal" {
+      for (i, item) in module.body.iter_mut().enumerate() {
+        if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
+          if import_declaration.src.value == "next-yak/internal" {
             yak_import_index = i + 1;
+            // Add utility functions
+            import_declaration.specifiers.extend(
+              self
+                .yak_library_imports
+                .get_yak_utility_import_declaration()
+                .into_iter(),
+            );
             break;
           }
         }
@@ -336,17 +345,13 @@ where
     let mut runtime_expressions: Vec<Expr> = vec![];
     let mut runtime_css_variables: HashMap<String, Expr> = HashMap::new();
 
+    let mut template_iter = TemplateIterator::new(&mut n.tpl);
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
-    for (i, pair) in n
-      .tpl
-      .quasis
-      .iter()
-      .zip_longest(n.tpl.exprs.iter_mut())
-      .enumerate()
-    {
-      let is_last_pair = i == n.tpl.quasis.len() - 1;
-      let quasi = pair.as_ref().left().unwrap();
+    while let Some(pair) = template_iter.next() {
+      let is_last_pair = pair.is_last;
+      let quasi = pair.quasi;
+
       let css_code = if is_last_pair {
         // allow a css literal to skip the last semicolon
         let final_quasi = quasi.raw.trim_end();
@@ -370,7 +375,7 @@ where
         //                                            ^^^^^^^
         // e.g. const Button = styled.button`color: ${() => /* ... */};`
         //                                            ^^^^^^^^^^^^^^^^
-        if let Some(expr) = pair.right() {
+        if let Some(expr) = pair.expr {
           // Handle constants in css expressions
           // e.g. styled.button`color: ${primary};`
           if let Expr::Ident(id) = &**expr {
@@ -437,16 +442,9 @@ where
             // A property with a dynamic value
             // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
             else if current_css_state.is_inside_property_value {
-              if !self.variables.is_top_level(&scoped_name) {
-                // Convert the variable to a css variable
-                // e.g. styled.button`${({$size, $active}) => $active && css`width: ${size}px`};`
-                let (new_state, _) = parse_css("var(--TODO)", css_state);
-                css_state = Some(new_state);
-              } else {
-                // If the variable is top but not a constant we can't access it
-                // e.g. styled.button`color: ${color};`
-                panic!("Variable {} is not a constant", scoped_name);
-              }
+              // If the variable is top but not a constant we can't access it
+              // e.g. styled.button`color: ${color};`
+              panic!("Variable {} is not a constant", scoped_name);
             } else {
               // If the variable is not found we can't access it
               panic!("You cant use '{}' outside of a css value", id.sym);
@@ -466,6 +464,14 @@ where
             // If the expression is inside a css property value
             // it has to be replaced with a css variable
             if is_inside_property_value {
+              // Check if the next quasi starts with a unit
+              // e.g. styled.button`left: ${({$x}) => $x}px;`
+              let unit = if let Some(next_quasi) = pair.next_quasi {
+                extract_leading_css_unit(next_quasi.raw.as_str())
+              } else {
+                None
+              };
+
               let mut readable_name = self
                 .current_variable_name
                 .clone()
@@ -486,8 +492,22 @@ where
                 self.filename.as_str(),
                 self.dev_mode,
               );
-              runtime_css_variables
-                .insert(format!("--{}", css_variable_name.clone()), *expr.clone());
+              let css_variable_runtime_expr = if let Some(unit) = unit {
+                add_suffix_to_expr(
+                  *expr.clone(),
+                  self
+                    .yak_library_imports
+                    .get_yak_utility_ident("unitPostFix".to_string()),
+                  unit.to_string(),
+                )
+              } else {
+                *expr.clone()
+              };
+
+              runtime_css_variables.insert(
+                format!("--{}", css_variable_name.clone()),
+                css_variable_runtime_expr,
+              );
               let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
               css_state = Some(new_state);
             }
@@ -572,6 +592,17 @@ fn pure_annotation() -> Comment {
   }
 }
 
+/// Extracts the leading css unit from a css code
+/// Use a heuristic to determine if the unit is a valid css unit by checking the length
+fn extract_leading_css_unit(css: &str) -> Option<&str> {
+  let end = css.find(|c: char| !c.is_alphabetic()).unwrap_or(css.len());
+  if end > 0 && end <= 4 {
+    let unit = &css[..end];
+    return Some(unit);
+  }
+  None
+}
+
 #[plugin_transform]
 pub fn process_transform(program: Program, metadata: TransformPluginProgramMetadata) -> Program {
   let config: Config = serde_json::from_str(
@@ -651,5 +682,16 @@ mod tests {
       "\"fooBar\"",
       false,
     );
+  }
+
+  #[test]
+  fn test_extract_leading_css_unit() {
+    assert_eq!(extract_leading_css_unit("px "), Some("px"));
+    assert_eq!(extract_leading_css_unit("px;"), Some("px"));
+    assert_eq!(extract_leading_css_unit("px}"), Some("px"));
+    assert_eq!(extract_leading_css_unit("px"), Some("px"));
+    assert_eq!(extract_leading_css_unit(" px"), None);
+    assert_eq!(extract_leading_css_unit("1px"), None);
+    assert_eq!(extract_leading_css_unit("color"), None);
   }
 }
