@@ -1,5 +1,7 @@
 use pathdiff::diff_paths;
 use regex::Regex;
+#[macro_use]
+extern crate lazy_static;
 
 /// Returns a relative POSIX path from the `base_path` to the filename.
 ///
@@ -27,8 +29,11 @@ pub fn relative_posix_path(base_path: &str, filename: &str) -> String {
 /// - "C:\foo\bar" -> "c/foo/bar"
 /// - "/foo/bar" -> "/foo/bar"
 fn convert_path_to_posix(path: &str) -> String {
-  let path_replacement_regex = Regex::new(r":\\|\\").unwrap();
-  path_replacement_regex.replace_all(path, "/").to_string()
+  lazy_static! {
+    static ref PATH_REPLACEMENT_REGEX: Regex = Regex::new(r":\\|\\").unwrap();
+  }
+
+  PATH_REPLACEMENT_REGEX.replace_all(path, "/").to_string()
 }
 
 #[cfg(test)]

@@ -8,12 +8,11 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 lazy_static = "1.4.0"
-pathdiff = "0.2.1"
-regex = "1.10.3"
 serde = "1.0.203"
 serde_json = "1.0.120"
 swc_core = { version = "0.96.0", features = ["ecma_plugin_transform"] }
 css_in_js_parser = { path = "../css_in_js_parser" }
+relative_posix_path = { path = "../relative_posix_path" }
 itertools = "0.13.0"
 
 [dev-dependencies]

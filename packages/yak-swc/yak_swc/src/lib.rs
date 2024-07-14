@@ -13,8 +13,8 @@ use swc_core::ecma::{
 };
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
-use utils::ast_helper::TemplateIterator;
 use utils::add_suffix_to_expr::add_suffix_to_expr;
+use utils::ast_helper::TemplateIterator;
 
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
@@ -22,10 +22,9 @@ mod yak_imports;
 use yak_imports::YakImportVisitor;
 
 mod utils {
-  pub mod ast_helper;
-  pub mod file_paths;
-  pub mod murmur_hash;
   pub mod add_suffix_to_expr;
+  pub mod ast_helper;
+  pub mod murmur_hash;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -622,7 +621,7 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     .expect("failed to get filename");
   // Get a relative posix path to generate always the same hash
   // on different machines or operating systems
-  let deterministic_path = utils::file_paths::relative_posix_path(&config.base_path, &filename);
+  let deterministic_path = relative_posix_path::relative_posix_path(&config.base_path, &filename);
   program.fold_with(&mut as_folder(TransformVisitor::new(
     metadata.comments,
     deterministic_path,
