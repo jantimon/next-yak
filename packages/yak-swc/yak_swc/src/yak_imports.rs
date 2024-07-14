@@ -14,7 +14,7 @@ pub struct YakImportVisitor {
   yak_utilities: HashMap<String, Ident>,
 }
 
-const UTILITIES: &[&str] = &["unitPostFix"];
+const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
 
 impl YakImportVisitor {
   pub fn new() -> Self {
@@ -60,8 +60,9 @@ impl YakImportVisitor {
     if let Some(ident) = self.yak_utilities.get(&name) {
       return ident.clone();
     } else {
-      let ident = Ident::new(format!("__yak_{}", name).into(), DUMMY_SP);
-      self.yak_utilities.insert(name, ident.clone());
+      let prefixed_name = format!("__yak_{}", name);
+      let ident = Ident::new(prefixed_name.clone().into(), DUMMY_SP);
+      self.yak_utilities.insert(prefixed_name, ident.clone());
       return ident;
     }
   }
@@ -71,14 +72,11 @@ impl YakImportVisitor {
     self
       .yak_utilities
       .iter()
-      .map(|(local, imported)| {
+      .map(|(_, imported)| {
         ImportSpecifier::Named(ImportNamedSpecifier {
           span: DUMMY_SP,
           local: imported.clone(),
-          imported: Some(ModuleExportName::Ident(Ident::new(
-            local.clone().into(),
-            DUMMY_SP,
-          ))),
+          imported: None,
           is_type_only: false,
         })
       })
