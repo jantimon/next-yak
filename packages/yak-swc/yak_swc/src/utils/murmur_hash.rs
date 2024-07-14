@@ -69,7 +69,7 @@ fn to_base36(mut num: u32) -> String {
   }
 
   result.reverse();
-  String::from_utf8(result).unwrap_or_default()
+  String::from_utf8(result).unwrap_or_else(|_| "000000".to_string())
 }
 
 #[cfg(test)]
