@@ -9,10 +9,10 @@ const buttonStyles = /*YAK Extracted CSS:
 }
 .buttonStyles__$active {
   background-color: #f0f0f0;
-  max-width: var(--buttonStyles__max-width_o1wkyu)px;
+  max-width: var(--buttonStyles__max-width_o1wkyu);
 }
 .buttonStyles {
-  width: var(--buttonStyles__width_o1wkyu)px;
+  width: var(--buttonStyles__width_o1wkyu);
 }
 */ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.buttonStyles__$active, {
         "style": {
@@ -34,10 +34,10 @@ export const Wrapper = /*YAK Extracted CSS:
     }
     &.buttonStyles__$active {
       background-color: #f0f0f0;
-      max-width: var(--buttonStyles__max-width_o1wkyu)px;
+      max-width: var(--buttonStyles__max-width_o1wkyu);
     }
     &.buttonStyles {
-      width: var(--buttonStyles__width_o1wkyu)px;
+      width: var(--buttonStyles__width_o1wkyu);
     }
   }
 }

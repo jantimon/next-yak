@@ -51,11 +51,10 @@ fn merge_suffix_into_expr(suffix: String, expr: Expr) -> Option<Expr> {
     }
     // merge binary expressions for calculations  e.g. 4 * 3 -> 4 * 3 + "-suffix"
     Expr::Bin(bin_expr)
-      if (bin_expr.op == BinaryOp::Add
-        || bin_expr.op == BinaryOp::Sub
-        || bin_expr.op == BinaryOp::Mul
-        || bin_expr.op == BinaryOp::Div
-        || bin_expr.op == BinaryOp::Mod) =>
+      if matches!(
+        bin_expr.op,
+        BinaryOp::Add | BinaryOp::Sub | BinaryOp::Mul | BinaryOp::Div | BinaryOp::Mod
+      ) =>
     {
       return Some(
         Expr::Bin(BinExpr {

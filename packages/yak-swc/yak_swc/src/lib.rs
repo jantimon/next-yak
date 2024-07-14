@@ -14,7 +14,7 @@ use swc_core::ecma::{
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::ast_helper::TemplateIterator;
-use utils::wrap_return_value::add_suffix_to_expr;
+use utils::add_suffix_to_expr::add_suffix_to_expr;
 
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
@@ -25,7 +25,7 @@ mod utils {
   pub mod ast_helper;
   pub mod file_paths;
   pub mod murmur_hash;
-  pub mod wrap_return_value;
+  pub mod add_suffix_to_expr;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -344,6 +344,9 @@ where
     // and must be kept for the final output (so they run at runtime)
     let mut runtime_expressions: Vec<Expr> = vec![];
     let mut runtime_css_variables: HashMap<String, Expr> = HashMap::new();
+    // When moving units into css variables it has to be removed from the next css code
+    // e.g. styled.button`left: ${({$x}) => $x}px;` -> `left: var(--left);`
+    let mut css_code_offset: usize = 0;
 
     let mut template_iter = TemplateIterator::new(&mut n.tpl);
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
@@ -363,7 +366,7 @@ where
       } else {
         quasi.raw.to_string()
       };
-      let (new_state, new_declarations) = parse_css(&css_code, css_state);
+      let (new_state, new_declarations) = parse_css(&css_code[css_code_offset..], css_state);
       css_state = Some(new_state);
       // Add the extracted CSS to the the root styled component
       self.current_declaration.extend(new_declarations);
@@ -471,6 +474,8 @@ where
               } else {
                 None
               };
+              // The css code offset is used to remove the unit from the next css code
+              css_code_offset = unit.map_or(0, |unit_str| unit_str.len());
 
               let mut readable_name = self
                 .current_variable_name
