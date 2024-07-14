@@ -684,7 +684,7 @@ e.g.:
         }
 
         const cssVarName = createUniqueName(
-          `${identifier}-${parsedCss.state.currentDeclaration.property}`,
+          `${identifier}__${parsedCss.state.currentDeclaration.property}`,
           true,
         );
         cssVariables[`--${cssVarName}`] = quasiExpression;
