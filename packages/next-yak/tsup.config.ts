@@ -34,17 +34,6 @@ export default defineConfig([
     target: "es2022",
     outDir: "dist",
   },
-  // runtime internals (helpers which get injected by the compiler)
-  {
-    entryPoints: ["runtime/internals/index.ts"],
-    format: ["cjs", "esm"],
-    minify: true,
-    sourcemap: true,
-    clean: true,
-    external: ["react"],
-    target: "es2022",
-    outDir: "dist/runtime-internals",
-  },
   // static
   {
     entryPoints: ["static/index.ts"],
