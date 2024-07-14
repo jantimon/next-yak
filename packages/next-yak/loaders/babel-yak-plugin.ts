@@ -209,15 +209,14 @@ export default function (
             },
           );
 
-          // Add used runtime helpers to the import
-          if (this.runtimeInternalHelpers.size && this.yakImportPath) {
-            const newImport = t.importDeclaration(
-              [...this.runtimeInternalHelpers].map((helper) =>
+          // Add all runtime helpers to the yak import path
+          const yakImportPath = this.yakImportPath;
+          if (this.runtimeInternalHelpers.size && yakImportPath) {
+            this.runtimeInternalHelpers.forEach((helper) => {
+              yakImportPath.node.specifiers.push(
                 t.importSpecifier(t.identifier(helper), t.identifier(helper)),
-              ),
-              t.stringLiteral("next-yak/runtime-internals"),
-            );
-            this.yakImportPath.insertAfter(newImport);
+              );
+            });
           }
         },
       },
@@ -685,7 +684,7 @@ e.g.:
         }
 
         const cssVarName = createUniqueName(
-          `${identifier}-${parsedCss.state.currentDeclaration.property}`,
+          `${identifier}__${parsedCss.state.currentDeclaration.property}`,
           true,
         );
         cssVariables[`--${cssVarName}`] = quasiExpression;

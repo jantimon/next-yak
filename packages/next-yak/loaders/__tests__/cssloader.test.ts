@@ -113,7 +113,7 @@ const headline = css\`
       }
       .headline {
         &:hover {
-          color: var(--headline-color_18fi82j);
+          color: var(--headline__color_18fi82j);
         }
       }"
     `);
@@ -159,7 +159,7 @@ const headline = css\`
     ).toMatchInlineSnapshot(`
       ".headline {
         &:hover {
-          color: var(--headline-color_18fi82j);
+          color: var(--headline__color_18fi82j);
         }
       }"
     `);
@@ -227,7 +227,7 @@ const headline = css\`
       ),
     ).toMatchInlineSnapshot(`
       ".headline {
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
+        transition: color var(--headline__transition_18fi82j) var(--headline__transition_18fi82j_1);
         display: block;
       }
       .headline__headline {
@@ -260,7 +260,7 @@ const headline = css\`
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
+        transition: color var(--headline__transition_18fi82j) var(--headline__transition_18fi82j_1);
         display: block;
       }
       .headline__headline {
@@ -293,7 +293,7 @@ const headline = css\`
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
+        transition: color var(--headline__transition_18fi82j) var(--headline__transition_18fi82j_1);
         display: block;
       }
       .headline__headline {
@@ -326,7 +326,7 @@ const headline = css\`
         @media (min-width: 640px) {
           color: red;
         }
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
+        transition: color var(--headline__transition_18fi82j) var(--headline__transition_18fi82j_1);
         display: block;
       }
       .headline__headline {
@@ -609,7 +609,7 @@ const Component = styled.div\`
         background-color: blue;
       }
       .Component__not_active {
-        background-color: var(--Component__not_active-background-color_18fi82j);
+        background-color: var(--Component__not_active__background-color_18fi82j);
       }
       .Component {
         border: 1px solid black;
@@ -618,7 +618,7 @@ const Component = styled.div\`
         color: orange;
       }
       .Component__not_active_1 {
-        transition: color var(--Component__not_active_1-transition_18fi82j) var(--Component__not_active_1-transition_18fi82j_1);
+        transition: color var(--Component__not_active_1__transition_18fi82j) var(--Component__not_active_1__transition_18fi82j_1);
       }"
     `);
   });
@@ -669,9 +669,9 @@ const headline = css\`
       ),
     ).toMatchInlineSnapshot(`
       ".case3 {
-        padding: var(--case3-padding_18fi82j);
-        transform: translate(-50%, -50%) rotate(var(--case3-transform_18fi82j))
-      translate(0, -88px) rotate(var(--case3-transform_18fi82j_1));
+        padding: var(--case3__padding_18fi82j);
+        transform: translate(-50%, -50%) rotate(var(--case3__transform_18fi82j))
+      translate(0, -88px) rotate(var(--case3__transform_18fi82j_1));
       }"
     `);
   });
@@ -694,10 +694,10 @@ const headline = css\`
       ),
     ).toMatchInlineSnapshot(`
       ".case3 {
-        margin: var(--case3-margin_18fi82j);
-        top: var(--case3-top_18fi82j);
-        bottom: var(--case3-bottom_18fi82j);
-        left: var(--case3-left_18fi82j);
+        margin: var(--case3__margin_18fi82j);
+        top: var(--case3__top_18fi82j);
+        bottom: var(--case3__bottom_18fi82j);
+        left: var(--case3__left_18fi82j);
         right: 10px;
       }"
     `);
@@ -723,7 +723,7 @@ it("should allow allow using an inline nested css literal", async () => {
     ),
   ).toMatchInlineSnapshot(`
     ".Icon {}
-    .Button__primary {
+    .Button__$primary {
       &:has(.Icon) {
         color: red;
       }
