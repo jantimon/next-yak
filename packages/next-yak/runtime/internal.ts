@@ -32,7 +32,6 @@ export { keyframes } from "./keyframes.js";
 // to another file for classic react components
 export { useTheme, YakThemeProvider } from "next-yak/context";
 
-
 // runtime internals (helpers which get injected by the compiler)
 export { unitPostFix as __yak_unitPostFix } from "./internals/unitPostFix.js";
 export { mergeCssProp as __yak_mergeCssProp } from "./internals/mergeCssProp.js";
