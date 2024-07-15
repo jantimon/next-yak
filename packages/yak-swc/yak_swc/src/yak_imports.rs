@@ -51,6 +51,16 @@ impl YakImportVisitor {
           None
         }
       }
+      Expr::Call(CallExpr { callee, .. }) => match callee {
+        Callee::Expr(expr) => {
+          if let Expr::Ident(Ident { sym, .. }) = &**expr {
+            self.yak_library_imports.get(&sym.to_string()).cloned()
+          } else {
+            None
+          }
+        }
+        _ => None,
+      },
       _ => None,
     };
   }

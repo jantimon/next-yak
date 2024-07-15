@@ -9,17 +9,21 @@ const BaseButton = /*YAK Extracted CSS:
   cursor: pointer;
 }
 */ /*#__PURE__*/ styled.button(__styleYak.BaseButton);
-export const PrimaryButton = styled(BaseButton)`
+export const PrimaryButton = /*YAK Extracted CSS:
+.PrimaryButton {
   background-color: #007bff;
   color: #fff;
   &:hover {
     background-color: #0056b3;
   }
-`;
-export const SecondaryButton = styled(BaseButton)`
+}
+*/ /*#__PURE__*/ styled(BaseButton)(__styleYak.PrimaryButton);
+export const SecondaryButton = /*YAK Extracted CSS:
+.SecondaryButton {
   background-color: #6c757d;
   color: #fff;
   &:hover {
     background-color: #545b62;
   }
-`;
+}
+*/ /*#__PURE__*/ styled(BaseButton)(__styleYak.SecondaryButton);
