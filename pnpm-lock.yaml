@@ -121,6 +121,9 @@ importers:
       '@babel/plugin-syntax-typescript':
         specifier: 7.22.5
         version: 7.22.5(@babel/core@7.23.2)
+      yak-swc:
+        specifier: workspace:*
+        version: link:../yak-swc
     devDependencies:
       '@babel/types':
         specifier: 7.23.0

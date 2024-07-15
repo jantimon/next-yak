@@ -4,14 +4,16 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import { dirname } from "node:path";
+import { createRequire } from 'module';
 
 const currentDir =
   typeof __dirname !== "undefined"
     ? __dirname
     : dirname(fileURLToPath(import.meta.url));
 
+const { resolve } = createRequire(__dirname + "/index.js");
+
 export type YakConfigOptions = {
-  extensions?: string[];
   contextPath?: string;
   experiments?: {
     crossFileSelectors?: boolean;
@@ -20,30 +22,18 @@ export type YakConfigOptions = {
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
+
+  nextConfig.experimental ||= {};
+  nextConfig.experimental.swcPlugins ||= [];
+  nextConfig.experimental.swcPlugins.push([
+    resolve("yak-swc"), 
+    { dev_mode: process.env.NODE_ENV !== "production", basePath: __dirname }
+  ]);
+
   nextConfig.webpack = (webpackConfig, options) => {
     if (previousConfig) {
       webpackConfig = previousConfig(webpackConfig, options);
     }
-
-    const compiledExtensions = yakOptions.extensions || ["ts", "tsx"];
-    const extensionFilterRegex = new RegExp(
-      `\\.(${compiledExtensions.join("|")})$`,
-    );
-
-    webpackConfig.module.rules.push({
-      test: extensionFilterRegex,
-      issuerLayer: {
-        // prevent recursions when calling this.importModule
-        // in the tsloader
-        not: ["yak-importModule"],
-      },
-      use: [
-        {
-          loader: path.join(currentDir, "../loaders/ts-loader.cjs"),
-          options: yakOptions,
-        },
-      ],
-    });
 
     webpackConfig.module.rules.push({
       test: /\.yak\.module\.css$/,
