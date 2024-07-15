@@ -24,6 +24,7 @@ use yak_imports::YakImportVisitor;
 
 mod utils {
   pub mod add_suffix_to_expr;
+  pub mod assert_css_expr;
   pub mod ast_helper;
   pub mod murmur_hash;
 }
@@ -367,6 +368,7 @@ where
         quasi.raw.to_string()
       };
       let (new_state, new_declarations) = parse_css(&css_code[css_code_offset..], css_state);
+      css_code_offset = 0;
       css_state = Some(new_state);
       // Add the extracted CSS to the the root styled component
       self.current_declaration.extend(new_declarations);
@@ -407,16 +409,7 @@ where
               if current_css_state.current_scopes.len() > 1 {
                 // If the mixin is used as scoped inline mixin
                 // e.g. styled.button`&:hover { ${highlight}; }`
-
                 HANDLER.with(|handler| {
-                  // You can access the handler for the current file using HANDLER.with.
-
-                  // We now report an error
-
-                  // `struct_span_err` creates a builder for a diagnostic.
-                  // The span passed to `struct_span_err` will used to point the problematic code.
-                  //
-                  // You may provide additional information, like a previous declaration of parameter.
                   handler
                     .struct_span_err(
                       id.span,
@@ -512,6 +505,12 @@ where
             );
             let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
             css_state = Some(new_state);
+          } else {
+            // Check if an invalid expression is used inside nested selectors
+            if current_css_state.current_scopes.len() > 1 {
+              utils::assert_css_expr::assert_css_expr(expr, "Inside nested selectors you can only use css literals, constants or dynamic values".to_string(), 
+              self.yak_library_imports.yak_css_idents.clone());
+            }
           }
 
           expr.visit_mut_children_with(self);

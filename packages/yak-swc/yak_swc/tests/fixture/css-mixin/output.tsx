@@ -14,11 +14,16 @@ const buttonStyles = /*YAK Extracted CSS:
 .buttonStyles {
   width: var(--buttonStyles__width_o1wkyu);
 }
+.buttonStyles__ {
+  color: red;
+}
 */ /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.buttonStyles__$active, {
         "style": {
             "--buttonStyles__max-width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }
-    }), {
+    }), function({ $letters }) {
+    return $letters > 5 && /*#__PURE__*/ css(__styleYak.buttonStyles__);
+}, {
     "style": {
         "--buttonStyles__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
     }

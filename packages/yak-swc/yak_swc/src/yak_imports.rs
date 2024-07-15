@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use swc_core::{
   common::DUMMY_SP,
   ecma::{ast::*, visit::VisitMut},
@@ -12,6 +12,8 @@ pub struct YakImportVisitor {
   yak_library_imports: HashMap<String, String>,
   /// Utilities used from "next-yak/internal"
   yak_utilities: HashMap<String, Ident>,
+  /// Identifiers used in the css function
+  pub yak_css_idents: HashSet<String>,
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
@@ -21,6 +23,7 @@ impl YakImportVisitor {
     Self {
       yak_library_imports: HashMap::new(),
       yak_utilities: HashMap::new(),
+      yak_css_idents: HashSet::new(),
     }
   }
 
@@ -104,7 +107,10 @@ impl VisitMut for YakImportVisitor {
             _ => continue,
           };
           let local = named.local.sym.to_string();
-          self.yak_library_imports.insert(local, imported);
+          self.yak_library_imports.insert(local, imported.clone());
+          if imported == "css" {
+            self.yak_css_idents.insert(named.local.to_string());
+          }
         }
       }
     }

@@ -10,6 +10,11 @@ const buttonStyles = css`
     max-width: ${({ $letters }) => $letters * 15}px;
   `}
   width: ${({ $letters }) => $letters * 10}px;
+  ${function ({ $letters }) {
+    return $letters > 5 && css`
+      color: red;
+    `;
+  }}
 `;
 
 export const Wrapper = styled.button`
