@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import { dirname } from "node:path";
-import { createRequire } from 'module';
+import { createRequire } from "module";
 
 const currentDir =
   typeof __dirname !== "undefined"
@@ -26,8 +26,8 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   nextConfig.experimental ||= {};
   nextConfig.experimental.swcPlugins ||= [];
   nextConfig.experimental.swcPlugins.push([
-    resolve("yak-swc"), 
-    { dev_mode: process.env.NODE_ENV !== "production", basePath: __dirname }
+    resolve("yak-swc"),
+    { dev_mode: process.env.NODE_ENV !== "production", basePath: __dirname },
   ]);
 
   nextConfig.webpack = (webpackConfig, options) => {
