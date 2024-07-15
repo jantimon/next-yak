@@ -27,7 +27,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   nextConfig.experimental.swcPlugins ||= [];
   nextConfig.experimental.swcPlugins.push([
     resolve("yak-swc"),
-    { dev_mode: process.env.NODE_ENV !== "production", basePath: __dirname },
+    { devMode: process.env.NODE_ENV !== "production", basePath: __dirname },
   ]);
 
   nextConfig.webpack = (webpackConfig, options) => {
