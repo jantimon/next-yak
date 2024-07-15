@@ -23,22 +23,4 @@ const buttonStyles = /*YAK Extracted CSS:
         "--buttonStyles__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
     }
 });
-export const Wrapper = /*YAK Extracted CSS:
-.Wrapper {
-  button {
-    &.buttonStyles {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    &.buttonStyles__$active {
-      background-color: #f0f0f0;
-      max-width: var(--buttonStyles__max-width_o1wkyu);
-    }
-    &.buttonStyles {
-      width: var(--buttonStyles__width_o1wkyu);
-    }
-  }
-}
-*/ /*#__PURE__*/ styled.button(__styleYak.Wrapper, buttonStyles);
+export const Wrapper = /*#__PURE__*/ styled.button(buttonStyles);
