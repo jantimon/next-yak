@@ -9,24 +9,9 @@ const appendCssUnitToExpressionValue = (
   runtimeInternalHelpers: Set<string>,
   t: typeof babelTypes,
 ) => {
-  if (expression.type === "ArrowFunctionExpression") {
-    if (expression.body.type !== "BlockStatement") {
-      const newBody = t.binaryExpression(
-        "+",
-        t.parenthesizedExpression(expression.body),
-        t.stringLiteral(cssUnit),
-      );
-
-      const newArrowFunction = t.arrowFunctionExpression(
-        expression.params,
-        newBody,
-      );
-      return newArrowFunction;
-    }
-  } else if (
+  if (
     expression.type === "NumericLiteral" ||
-    expression.type === "BinaryExpression" ||
-    expression.type === "Identifier"
+    expression.type === "StringLiteral"
   ) {
     const cssUnitLiteral = t.stringLiteral(cssUnit);
     const binaryExpression = t.binaryExpression(
@@ -36,7 +21,6 @@ const appendCssUnitToExpressionValue = (
     );
     return binaryExpression;
   }
-
   const callExpression = t.callExpression(t.identifier("__yak_unitPostFix"), [
     expression,
     t.stringLiteral(cssUnit),
