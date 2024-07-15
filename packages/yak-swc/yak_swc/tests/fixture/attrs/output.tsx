@@ -1,7 +1,7 @@
 import { styled } from "next-yak/internal";
-export const Button = styled.button.attrs({
-    type: "button"
-})`
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+export const Button = /*YAK Extracted CSS:
+.Button {
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
@@ -13,4 +13,7 @@ export const Button = styled.button.attrs({
   &:hover {
     background-color: #0056b3;
   }
-`;
+}
+*/ /*#__PURE__*/ styled.button.attrs({
+    type: "button"
+})(__styleYak.Button);

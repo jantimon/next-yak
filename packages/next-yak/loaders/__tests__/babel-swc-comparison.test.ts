@@ -78,10 +78,10 @@ const prettify = async (code: string) =>
       .replace(/\s*\*\//g, "*/")
       // replace the newlines after comments
       .replace(/\*\/\s*/g, "*/\n")
-      // replace empty lines
-      .replace(/\n\n+/g, "\n")
       // remove ts ignore comments
       .replace(/\/\/\s*@ts-ignore/g, "")
+      // replace empty lines
+      .replace(/\n\n+/g, "\n")
       .trim(),
     {
       parser: "typescript",

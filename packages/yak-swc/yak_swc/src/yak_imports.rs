@@ -38,31 +38,27 @@ impl YakImportVisitor {
     if !self.is_using_next_yak() {
       return None;
     }
-    // styled.button`color: red;`
-    // keyframes`from { color: red; }`
-    // css`color: red;`
-    // styled.button.attrs({})`color: red;`
-    return match &*n.tag {
-      Expr::Ident(Ident { sym, .. }) => self.yak_library_imports.get(&sym.to_string()).cloned(),
-      Expr::Member(MemberExpr { obj, .. }) => {
-        if let Expr::Ident(Ident { sym, .. }) = &**obj {
-          self.yak_library_imports.get(&sym.to_string()).cloned()
-        } else {
-          None
-        }
-      }
-      Expr::Call(CallExpr { callee, .. }) => match callee {
-        Callee::Expr(expr) => {
-          if let Expr::Ident(Ident { sym, .. }) = &**expr {
-            self.yak_library_imports.get(&sym.to_string()).cloned()
-          } else {
-            None
-          }
-        }
+
+    fn get_root_ident(expr: &Expr) -> Option<&Ident> {
+      match expr {
+        Expr::Ident(ident) => Some(ident),
+        Expr::Member(MemberExpr { obj, .. }) => get_root_ident(obj),
+        Expr::Call(CallExpr { callee, .. }) => match callee {
+          Callee::Expr(expr) => get_root_ident(expr),
+          _ => None,
+        },
         _ => None,
-      },
-      _ => None,
-    };
+      }
+    }
+
+    if let Some(ident) = get_root_ident(&n.tag) {
+      self
+        .yak_library_imports
+        .get(&ident.sym.to_string())
+        .cloned()
+    } else {
+      None
+    }
   }
 
   /// Returns the utility function identifier
