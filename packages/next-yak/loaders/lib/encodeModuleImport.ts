@@ -26,5 +26,5 @@ export function encodeModuleImport(
     .map((part) => encodeURIComponent(part))
     .join(":");
 
-  return `:yak-css-import(${modulePath}:${kind}:${encodedChain})`;
+  return `--yak-css-import: url("${modulePath}:${kind}:${encodedChain}")`;
 }

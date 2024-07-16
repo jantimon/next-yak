@@ -59,7 +59,7 @@ impl ExprVisitor {
     if let Some(ident) = tagged_tpl.tag.as_ref().clone().ident() {
       return self.valid_idents.contains(ident.to_string().as_str());
     }
-    return false;
+    false
   }
 }
 

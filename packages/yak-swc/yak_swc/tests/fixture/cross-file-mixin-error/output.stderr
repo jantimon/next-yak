@@ -1,0 +1,9 @@
+
+  x Mixins are not allowed inside nested selectors
+  | Use an inline css literal instead or move the selector into the mixin
+   ,-[input.js:6:1]
+ 6 |   &:hover {
+ 7 |     ${fonts.h1}
+   :       ^^^^^^^^
+ 8 |   }
+   `----

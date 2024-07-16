@@ -8,6 +8,7 @@ import { HighContrastToggle } from "./HighContrastToggle";
 import { typography } from "./mixins/constants.yak";
 
 const headline = css<{ $primary?: boolean }>`
+  ${typography.h1};
   filter: drop-shadow(0px 0px 1px #fff);
   ${({ theme }) =>
     theme.highContrast

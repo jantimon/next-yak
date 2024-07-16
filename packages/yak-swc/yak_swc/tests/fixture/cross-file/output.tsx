@@ -7,8 +7,11 @@ export const Button = /*YAK Extracted CSS:
 .Button {
   font-size: 1rem;
   color: green;
-  :yak-css-import(./Icon:any:Icon) {
+  --yak-css-import: url("./Icon:selector:Icon") {
     color: red;
+  }
+  --yak-css-import: url("./Icon:selector:Icon") --yak-css-import: url("./Icon:selector:Icon") {
+    color: blue;
   }
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button);

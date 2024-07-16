@@ -9,4 +9,8 @@ export const Button = styled.button`
   ${Icon} {
     color: red;
   }
+
+  ${Icon} ${Icon} {
+    color: blue;
+  }
 `;

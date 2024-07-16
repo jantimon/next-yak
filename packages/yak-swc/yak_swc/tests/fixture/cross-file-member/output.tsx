@@ -6,8 +6,8 @@ import { colors } from "./colors";
 import { fonts } from "./fonts";
 export const Button = /*YAK Extracted CSS:
 .Button {
-  font-size: :yak-css-import(./fonts:any:fonts:sm);
-  color: :yak-css-import(./colors:any:colors:colors:dark:primary);
-  background-color: :yak-css-import(./colors:any:colors:colors:light:full%20opacity);
+  font-size: --yak-css-import: url("./fonts:selector:fonts");
+  color: --yak-css-import: url("./colors:selector:colors");
+  background-color: --yak-css-import: url("./colors:selector:colors");
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button);

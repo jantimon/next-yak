@@ -1,3 +1,4 @@
+use css_in_js_parser::{parse_css, ParserState};
 use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 
 /// This function generates a special CSS selector that represents an import from another module,
@@ -16,7 +17,7 @@ use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 /// # Examples
 ///
 /// Lets say we want to create a module import for ${breakpoints["<xs"].min} from "./styles/media"
-/// it gets converted to :yak-css-import(./styles/media:module:breakpoints:%3Cxs:min)
+/// it gets converted to --yak-css-import: url("./styles/media:module:breakpoints:%3Cxs:min")
 ///
 ///
 /// # Notes
@@ -31,9 +32,29 @@ pub fn encode_module_import(module_path: &str, kind: &str, import_chain: Vec<Str
     .collect::<Vec<String>>()
     .join(":");
   format!(
-    ":yak-css-import({}:{}:{})",
+    "--yak-css-import: url(\"{}:{}:{}\")",
     module_path, kind, encoded_chain
   )
+}
+
+pub fn is_mixin_expression(
+  css_state: Option<ParserState>,
+  css_code: String,
+  next_css_code: Option<String>,
+) -> bool {
+  let next_css = next_css_code.unwrap_or("".to_string());
+  let next_css = if next_css.is_empty() {
+    ";".to_string()
+  } else {
+    next_css
+  };
+  let (_, next_declaration) = parse_css(
+    format!("{}{}", css_code.to_string(), next_css).as_str(),
+    css_state,
+  );
+  // If the next declaration is a import declaration, it is a mixin expression as the css parser expected a
+  // css property value pair
+  next_declaration.len() > 0 && next_declaration.first().unwrap().property == "--yak-css-import"
 }
 
 #[cfg(test)]
@@ -53,14 +74,17 @@ mod tests {
     );
     assert_eq!(
       selector,
-      ":yak-css-import(./styles/media:any:breakpoints:%3Cxs:min)"
+      "--yak-css-import: url(\"./styles/media:any:breakpoints:%3Cxs:min\")"
     );
   }
 
   #[test]
   fn test_encode_module_import_single_item_chain() {
     let selector = encode_module_import("./styles/media", "any", vec!["breakpoints".to_string()]);
-    assert_eq!(selector, ":yak-css-import(./styles/media:any:breakpoints)");
+    assert_eq!(
+      selector,
+      "--yak-css-import: url(\"./styles/media:any:breakpoints\")"
+    );
   }
 
   #[test]
@@ -72,7 +96,7 @@ mod tests {
     );
     assert_eq!(
       selector,
-      ":yak-css-import(./styles/media:any:breakpoints:xs)"
+      "--yak-css-import: url(\"./styles/media:any:breakpoints:xs\")"
     );
   }
 
@@ -85,7 +109,7 @@ mod tests {
     );
     assert_eq!(
       selector,
-      ":yak-css-import(./styles/media:inline:breakpoints:%3C%3A%22%3E)"
+      "--yak-css-import: url(\"./styles/media:inline:breakpoints:%3C%3A%22%3E\")"
     );
   }
 }

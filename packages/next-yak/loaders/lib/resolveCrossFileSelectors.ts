@@ -5,7 +5,7 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const moduleSelectorRegex = /:yak-css-import\(([^)]+)\)/g;
+const moduleSelectorRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
 export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
   css: string,
@@ -283,6 +283,11 @@ async function getAllExports(
                         type: "constant",
                         value: declaration.init.value,
                       };
+                    } else if (declaration.init.type === "TemplateLiteral" && declaration.init.quasis.length === 1) {
+                      result[declaration.id.name] = {
+                        type: "constant",
+                        value: declaration.init.quasis[0].value.raw,
+                      };
                     } else if (declaration.init.type === "ObjectExpression") {
                       result[declaration.id.name] = {
                         type: "record",
@@ -332,6 +337,8 @@ function parseObjectExpression(
         property.value.type === "NumericLiteral"
       ) {
         result[key] = property.value.value;
+      } else if (property.value.type === "TemplateLiteral" && property.value.quasis.length === 1) {
+        result[key] = property.value.quasis[0].value.raw;
       } else if (property.value.type === "ObjectExpression") {
         result[key] = parseObjectExpression(property.value);
       }

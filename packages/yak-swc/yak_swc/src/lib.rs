@@ -5,7 +5,7 @@ use std::collections::HashMap;
 use std::path::Path;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
-use swc_core::common::DUMMY_SP;
+use swc_core::common::{Spanned, DUMMY_SP};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -16,7 +16,7 @@ use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
 use utils::ast_helper::{member_expr_to_strings, TemplateIterator};
-use utils::encode_module_import::encode_module_import;
+use utils::encode_module_import::{encode_module_import, is_mixin_expression};
 
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
@@ -386,9 +386,35 @@ where
       // e.g. const Button = styled.button`color: ${() => /* ... */};`
       //                                            ^^^^^^^^^^^^^^^^
       if let Some(expr) = pair.expr {
+
+        let member_expr = if let Expr::Member(member) = &**expr {
+          member_expr_to_strings(member).or_else(|| {
+            HANDLER.with(|handler| {
+              handler
+                .struct_span_err(
+                  member.span,
+                  "Could not parse member expression",
+                )
+                .emit();
+            });
+            None
+          })
+        } else {
+          None
+        };
+
+        let ident = if let Expr::Ident(ident) = &**expr {
+          Some(ident.clone())
+        } else if let Some(member) = member_expr {
+          Some(member.0)
+        } else {
+          None
+        };
+
         // Handle constants in css expressions
         // e.g. styled.button`color: ${primary};`
-        if let Expr::Ident(id) = &**expr {
+        // e.g. styled.button`color: ${colors.primary};`
+        if let Some(id) = ident {
           let scoped_name = id.to_string();
           if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
             // Reference StyledComponents or Animations in the same file
@@ -421,20 +447,36 @@ where
                 });
               }
             }
-          } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
-            let allowed_imports = if current_css_state.current_scopes.len() > 1 {
-              "inline"
-            } else {
-              "any"
-            };
-            // In rust we cant access the bundler resolver
-            // therefore we add a reference to the imported variable
-            // :module-selector-import(FOO from 'bar')
-            // later in the bundler we can replace this with the actual value
-            let selector = encode_module_import(&value, allowed_imports, vec![id.sym.to_string()]);
-            let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
-            css_state = Some(new_state);
-            self.current_declaration.extend(new_declarations);
+          } else if let Some(module_path) = self.variables.get_imported_variable(&scoped_name) {
+            let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
+            if is_mixin_expression(css_state.clone(), encode_module_import(
+              module_path.as_str(),
+              "selector",
+              vec![id.sym.to_string()],
+            ), next_css_code) {
+              if current_css_state.current_scopes.len() == 1 {
+                  runtime_expressions.push(*expr.clone());
+              } else {
+                HANDLER.with(|handler| {
+                  handler
+                    .struct_span_err(
+                      expr.span(),
+                      "Mixins are not allowed inside nested selectors\nUse an inline css literal instead or move the selector into the mixin",
+                    )
+                    .emit();
+                });
+              }
+            } 
+            // An imported constant
+            else {
+              let css_code = encode_module_import(
+                module_path.as_str(),
+                "selector",
+                vec![id.sym.to_string()],
+              );
+              let (new_state, _) = parse_css(&css_code, css_state);
+              css_state = Some(new_state);
+            }
           } else if let Some(value) = self.variables.get_variable(&scoped_name) {
             let (new_state, _) = parse_css(&value, css_state);
             css_state = Some(new_state);
@@ -448,31 +490,6 @@ where
           } else {
             // If the variable is not found we can't access it
             panic!("You cant use '{}' outside of a css value", id.sym);
-          }
-        }
-        // Handle member expressions
-        // e.g. styled.button`color: ${colors.primary};`
-        else if let Expr::Member(member) = &**expr {
-          if let Some(member) = member_expr_to_strings(member) {
-            let (root, props) = member;
-            if let Some(module_path) = self.variables.get_imported_variable(&root.to_string()) {
-              let allowed_imports = if current_css_state.current_scopes.len() > 1 {
-                "inline"
-              } else {
-                "any"
-              };
-              let css_code = encode_module_import(module_path.as_str(), allowed_imports, props);
-              let (new_state, _) = parse_css(&css_code, css_state);
-              css_state = Some(new_state);
-            }
-            // TODO add support for local variables e.g.:
-            // const colors = { primary: 'red' };
-            // styled.button`color: ${colors.primary};`
-            else {
-              panic!("Variable {} is not imported", root);
-            }
-          } else {
-            panic!("Could not parse member expression");
           }
         }
         // Visit nested css expressions
@@ -507,7 +524,7 @@ where
               // remove #0
               readable_name = format!("{}__", readable_name)
                 .replace("#0", "")
-                .replace("#", "");
+                .replace('#', "");
             }
             readable_name = format!(
               "{}{}",
