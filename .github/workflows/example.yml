@@ -1,10 +1,11 @@
 name: Build and Deploy packages/example
+env:
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches-ignore:
+      - main
 
 jobs:
   build-and-deploy:
@@ -22,7 +23,7 @@ jobs:
 
     - name: Add wasm32-wasi target
       run: rustup target add wasm32-wasi
-      
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
@@ -47,10 +48,10 @@ jobs:
       run: vercel link --yes --token ${{ secrets.VERCEL_TOKEN }}
 
     - name: Pull Vercel environment information
-      run: vercel pull --yes --token ${{ secrets.VERCEL_TOKEN }}
+      run: vercel pull --yes --environment=preview --token ${{ secrets.VERCEL_TOKEN }}
 
     - name: Build project artifacts
-      run: vercel build --token ${{ secrets.VERCEL_TOKEN }}
+      run: vercel build --token --yes ${{ secrets.VERCEL_TOKEN }}
 
     - name: Deploy to Vercel
       run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
