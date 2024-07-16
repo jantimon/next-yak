@@ -18,13 +18,13 @@
  * - The kind gives a hint how the import can be used - to provide an error message if the import is not supported
  */
 export function encodeModuleImport(
-    modulePath: string, 
-    kind: "any" | "inline", 
-    importChain: string[]
-  ): string {
-    const encodedChain = importChain
-      .map(part => encodeURIComponent(part))
-      .join(":");
-  
-    return `:yak-css-import(${modulePath}:${kind}:${encodedChain})`;
-  }
+  modulePath: string,
+  kind: "any" | "inline",
+  importChain: string[],
+): string {
+  const encodedChain = importChain
+    .map((part) => encodeURIComponent(part))
+    .join(":");
+
+  return `:yak-css-import(${modulePath}:${kind}:${encodedChain})`;
+}

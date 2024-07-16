@@ -10,14 +10,11 @@ export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
   css: string,
 ): Promise<string> {
-
-  const matches = [...css.matchAll(moduleSelectorRegex)].map(match => {
+  const matches = [...css.matchAll(moduleSelectorRegex)].map((match) => {
     const [fullMatch, encodedArguments] = match;
-    const [
-      moduleSpecifier,
-      importKind,
-      ...specifier
-    ] = encodedArguments.split(":").map((entry) => decodeURIComponent(entry));
+    const [moduleSpecifier, importKind, ...specifier] = encodedArguments
+      .split(":")
+      .map((entry) => decodeURIComponent(entry));
     const position = match.index!;
     if (specifier.length === 0) {
       throw new Error(
@@ -37,20 +34,15 @@ export async function resolveCrossFileSelectors(
       size: fullMatch.length,
     };
   });
-  
+
   const firstMatchPosition = matches[0]?.position;
   if (firstMatchPosition === undefined) {
     return css;
   }
   let result = "";
   for (let i = matches.length - 1; i >= 0; i--) {
-    const {
-      moduleSpecifier,
-      importKind,
-      specifier,
-      position,
-      size
-    } = matches[i];
+    const { moduleSpecifier, importKind, specifier, position, size } =
+      matches[i];
 
     const resolved = await resolveIdentifier(
       loader,
@@ -60,7 +52,9 @@ export async function resolveCrossFileSelectors(
     );
     if (resolved.type === "unsupported") {
       throw new Error(
-        `yak could not import ${specifier.join(".")} from ${moduleSpecifier} - only styled-components, strings and numbers are supported`,
+        `yak could not import ${specifier.join(
+          ".",
+        )} from ${moduleSpecifier} - only styled-components, strings and numbers are supported`,
       );
     }
 
@@ -87,19 +81,26 @@ export async function resolveCrossFileSelectors(
   return result;
 }
 
-const getConstantFromResolvedValue = (record: RecursiveRecord| string | number, specifier: string[]): string | number => {
+const getConstantFromResolvedValue = (
+  record: RecursiveRecord | string | number,
+  specifier: string[],
+): string | number => {
   let current: string | number | RecursiveRecord = record;
   for (const key of specifier) {
     if (typeof current === "string" || typeof current === "number") {
-      throw new Error(`Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`);
+      throw new Error(
+        `Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`,
+      );
     }
     current = current[key];
   }
   if (typeof current === "string" || typeof current === "number") {
     return current;
   }
-  throw new Error(`Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`);
-}
+  throw new Error(
+    `Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`,
+  );
+};
 
 /**
  * Recursively follows the import chain to resolve the identifiers
@@ -111,7 +112,7 @@ async function resolveIdentifier(
   loader: LoaderContext<{}>,
   context: string,
   sourcePath: string,
-  identifier: string
+  identifier: string,
 ): Promise<
   | {
       type: "styled-component";
@@ -124,8 +125,8 @@ async function resolveIdentifier(
     }
   | {
       type: "record";
-      value: RecursiveRecord
-  }
+      value: RecursiveRecord;
+    }
   | {
       type: "constant";
       value: string | number;
@@ -171,10 +172,9 @@ Available exports: ${Object.keys(exports).join(", ")}`);
       );
 }
 
-
 type RecursiveRecord = {
-  [key: string]: RecursiveRecord | number | string
-}
+  [key: string]: RecursiveRecord | number | string;
+};
 
 type ResolvedExport =
   | {
@@ -187,12 +187,12 @@ type ResolvedExport =
     }
   | {
       type: "constant";
-      value: string | number
+      value: string | number;
     }
   | {
-    type: "record"
-    value: RecursiveRecord
-  }
+      type: "record";
+      value: RecursiveRecord;
+    }
   | {
       type: "named-export";
       name: string;
@@ -286,8 +286,8 @@ async function getAllExports(
                     } else if (declaration.init.type === "ObjectExpression") {
                       result[declaration.id.name] = {
                         type: "record",
-                        value: parseObjectExpression(declaration.init)
-                      }
+                        value: parseObjectExpression(declaration.init),
+                      };
                     } else {
                       result[declaration.id.name] = {
                         type: "unsupported",
@@ -317,12 +317,20 @@ async function getAllExports(
   return result;
 }
 
-function parseObjectExpression(node: babel.types.ObjectExpression): RecursiveRecord {
+function parseObjectExpression(
+  node: babel.types.ObjectExpression,
+): RecursiveRecord {
   let result: RecursiveRecord = {};
   for (const property of node.properties) {
-    if (property.type === "ObjectProperty" && property.key.type === "Identifier") {
+    if (
+      property.type === "ObjectProperty" &&
+      property.key.type === "Identifier"
+    ) {
       const key = property.key.name;
-      if (property.value.type === "StringLiteral" || property.value.type === "NumericLiteral") {
+      if (
+        property.value.type === "StringLiteral" ||
+        property.value.type === "NumericLiteral"
+      ) {
         result[key] = property.value.value;
       } else if (property.value.type === "ObjectExpression") {
         result[key] = parseObjectExpression(property.value);

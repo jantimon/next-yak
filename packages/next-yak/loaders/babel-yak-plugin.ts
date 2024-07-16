@@ -598,8 +598,13 @@ function transformYakExpressions(
               file,
             );
           }
-          const allowed_import = currentCssParserState.currentScopes.length > 0 ? "inline": "any";
-          replaceValue = encodeModuleImport(constantValue.source, allowed_import, [constantValue.name]);
+          const allowed_import =
+            currentCssParserState.currentScopes.length > 0 ? "inline" : "any";
+          replaceValue = encodeModuleImport(
+            constantValue.source,
+            allowed_import,
+            [constantValue.name],
+          );
         } else {
           replaceValue = String(constantValue?.value);
         }
