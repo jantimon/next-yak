@@ -149,7 +149,7 @@ async function resolveIdentifier(
     resolved,
     resolved.endsWith(".tsx"),
   );
-  const exportForIdentifier = exports[identifier[0]];
+  const exportForIdentifier = exports[identifier];
   if (!exportForIdentifier) {
     throw new Error(`Could not find export ${identifier} in ${resolved}
 Currently only named exports are supported.
