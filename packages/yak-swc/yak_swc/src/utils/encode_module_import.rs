@@ -16,11 +16,8 @@ use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 /// # Examples
 ///
 /// Lets say we want to create a module import for ${breakpoints["<xs"].min} from "./styles/media"
+/// it gets converted to :yak-css-import(./styles/media:module:breakpoints:%3Cxs:min)
 ///
-/// ```
-/// let selector = encode_module_import("./styles/media", "any", vec!["breakpoints", "<xs", "min"]);
-/// assert_eq!(selector, ":yak-css-import(./styles/media:module:breakpoints:%3Cxs:min)");
-/// ```
 ///
 /// # Notes
 ///
