@@ -8,7 +8,6 @@ import { HighContrastToggle } from "./HighContrastToggle";
 import { typography } from "./mixins/constants.yak";
 
 const headline = css<{ $primary?: boolean }>`
-
   filter: drop-shadow(0px 0px 1px #fff);
   ${({ theme }) =>
     theme.highContrast
@@ -127,10 +126,7 @@ export default function Home() {
         <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
         </StyledLink>
-        <p
-        >
-          CSS Prop works if this is green
-        </p>
+        <p>CSS Prop works if this is green</p>
         <Inputs />
       </main>
     </YakThemeProvider>
