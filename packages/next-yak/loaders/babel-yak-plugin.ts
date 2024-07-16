@@ -11,6 +11,7 @@ import { Declaration, ParserState, parseCss } from "./lib/parseCss.js";
 import { toCss } from "./lib/toCss.js";
 import appendCssUnitToExpressionValue from "./lib/appendCssUnitToExpressionValue.js";
 import { transpileCssProp } from "./lib/transpileCssProp.js";
+import { encodeModuleImport } from "./lib/encodeModuleImport.js";
 
 type YakBabelPluginOptions = {
   replaces: Record<string, unknown>;
@@ -597,7 +598,8 @@ function transformYakExpressions(
               file,
             );
           }
-          replaceValue = `:module-selector-import(${constantValue.name} from '${constantValue.source}')`;
+          const allowed_import = currentCssParserState.currentScopes.length > 0 ? "inline": "any";
+          replaceValue = encodeModuleImport(constantValue.source, allowed_import, [constantValue.name]);
         } else {
           replaceValue = String(constantValue?.value);
         }
