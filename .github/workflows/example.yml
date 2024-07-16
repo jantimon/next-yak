@@ -50,7 +50,7 @@ jobs:
 
     - name: Build project artifacts
       working-directory: packages/example
-      run: vercel build --token --yes ${{ secrets.VERCEL_TOKEN }}
+      run: vercel build --yes --token${{ secrets.VERCEL_TOKEN }}
 
     - name: Deploy to Vercel
       working-directory: packages/example
