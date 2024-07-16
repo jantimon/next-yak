@@ -1,5 +1,4 @@
 /** @jsxImportSource next-yak */
-
 import { YakThemeProvider, css, styled } from "next-yak";
 import styles from "./page.module.css";
 import { queries, colors } from "@/theme/constants.yak";
@@ -9,7 +8,6 @@ import { HighContrastToggle } from "./HighContrastToggle";
 import { typography } from "./mixins/constants.yak";
 
 const headline = css<{ $primary?: boolean }>`
-  ${typography.h1}
 
   filter: drop-shadow(0px 0px 1px #fff);
   ${({ theme }) =>
@@ -130,9 +128,6 @@ export default function Home() {
           view code
         </StyledLink>
         <p
-          css={css`
-            color: green;
-          `}
         >
           CSS Prop works if this is green
         </p>

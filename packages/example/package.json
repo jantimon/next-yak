@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run build:yak && pnpm run build:next",
+    "build": "pnpm run build:yak && pnpm run build:swc && pnpm run build:next",
     "build:next": "next build",
     "build:yak": "pnpm run --filter next-yak build",
+    "build:swc": "pnpm run --filter yak-swc build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",

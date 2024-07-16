@@ -7,7 +7,7 @@ export const Button = /*YAK Extracted CSS:
 .Button {
   font-size: 1rem;
   color: green;
-  :module-selector-import(Icon from './Icon') {
+  :yak-css-import(./Icon:any:Icon) {
     color: red;
   }
 }

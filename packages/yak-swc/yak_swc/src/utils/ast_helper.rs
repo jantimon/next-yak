@@ -25,6 +25,38 @@ pub fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
   })
 }
 
+/// Convert a member expression to a root identifier and a string vector of properties
+/// e.g. `foo.bar.baz` will return `(foo#0, ["foo", "bar", "baz"])`
+pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<String>)> {
+  let mut props = vec![];
+  if let Some(ident) = member_expr.clone().prop.ident() {
+    props.push(ident.sym.to_string());
+  } else if let Some(computed) = member_expr.clone().prop.computed() {
+    if let Expr::Lit(Lit::Str(str)) = *computed.expr.clone() {
+      props.push(str.value.to_string());
+    } else {
+      return None;
+    }
+  } else {
+    return None;
+  }
+  match *member_expr.obj.clone() {
+    Expr::Ident(ident) => {
+      let root_ident = ident;
+      props.insert(0, root_ident.sym.to_string());
+      Some((root_ident.clone(), props))
+    }
+    Expr::Member(member) => {
+      let result = member_expr_to_strings(&member)?;
+      let (root_ident, mut nested_props) = result;
+      nested_props.extend(props);
+      nested_props.insert(0, root_ident.sym.to_string());
+      Some((root_ident, nested_props))
+    }
+    _ => None,
+  }
+}
+
 /// String to MemberProp
 pub fn create_member_prop_from_string(s: String) -> MemberProp {
   // if the string contains characters that are not allowed in an identifier

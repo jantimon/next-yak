@@ -3126,6 +3126,7 @@ dependencies = [
  "css_in_js_parser",
  "itertools",
  "lazy_static",
+ "percent-encoding",
  "relative_posix_path",
  "serde",
  "serde_json",

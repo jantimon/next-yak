@@ -15,7 +15,8 @@ use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
-use utils::ast_helper::TemplateIterator;
+use utils::ast_helper::{member_expr_to_strings, TemplateIterator};
+use utils::encode_module_import::encode_module_import;
 
 mod variable_visitor;
 use variable_visitor::VariableVisitor;
@@ -26,6 +27,7 @@ mod utils {
   pub mod add_suffix_to_expr;
   pub mod assert_css_expr;
   pub mod ast_helper;
+  pub mod encode_module_import;
   pub mod murmur_hash;
 }
 mod naming_convention;
@@ -420,11 +422,16 @@ where
               }
             }
           } else if let Some(value) = self.variables.get_imported_variable(&scoped_name) {
+            let allowed_imports = if current_css_state.current_scopes.len() > 1 {
+              "inline"
+            } else {
+              "any"
+            };
             // In rust we cant access the bundler resolver
             // therefore we add a reference to the imported variable
             // :module-selector-import(FOO from 'bar')
             // later in the bundler we can replace this with the actual value
-            let selector = format!(":module-selector-import({} from '{}')", id.sym, value);
+            let selector = encode_module_import(&value, allowed_imports, vec![id.sym.to_string()]);
             let (new_state, new_declarations) = parse_css(selector.as_str(), css_state);
             css_state = Some(new_state);
             self.current_declaration.extend(new_declarations);
@@ -441,6 +448,31 @@ where
           } else {
             // If the variable is not found we can't access it
             panic!("You cant use '{}' outside of a css value", id.sym);
+          }
+        }
+        // Handle member expressions
+        // e.g. styled.button`color: ${colors.primary};`
+        else if let Expr::Member(member) = &**expr {
+          if let Some(member) = member_expr_to_strings(member) {
+            let (root, props) = member;
+            if let Some(module_path) = self.variables.get_imported_variable(&root.to_string()) {
+              let allowed_imports = if current_css_state.current_scopes.len() > 1 {
+                "inline"
+              } else {
+                "any"
+              };
+              let css_code = encode_module_import(module_path.as_str(), allowed_imports, props);
+              let (new_state, _) = parse_css(&css_code, css_state);
+              css_state = Some(new_state);
+            }
+            // TODO add support for local variables e.g.:
+            // const colors = { primary: 'red' };
+            // styled.button`color: ${colors.primary};`
+            else {
+              panic!("Variable {} is not imported", root);
+            }
+          } else {
+            panic!("Could not parse member expression");
           }
         }
         // Visit nested css expressions

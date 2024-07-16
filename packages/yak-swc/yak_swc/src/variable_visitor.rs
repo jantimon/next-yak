@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::collections::HashSet;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
 
@@ -7,19 +6,15 @@ use swc_core::ecma::{ast::*, visit::VisitMut};
 /// Visitor implementation to gather all variable declarations
 /// and their values from the AST
 pub struct VariableVisitor {
-  top_level: HashSet<String>,
   variables: HashMap<String, Box<Expr>>,
   imports: HashMap<String, String>,
-  is_top_level: bool,
 }
 
 impl VariableVisitor {
   pub fn new() -> Self {
     Self {
-      top_level: HashSet::new(),
       variables: HashMap::new(),
       imports: HashMap::new(),
-      is_top_level: true,
     }
   }
 
@@ -48,13 +43,6 @@ impl VariableVisitor {
     }
     None
   }
-
-  /// Returns wether a variable is top level or not
-  /// Use id.to_string() (including the #0 suffix) to get the variable name
-  /// Using sym.to_string() will always return false
-  pub fn is_top_level(&self, name: &str) -> bool {
-    self.top_level.contains(name)
-  }
 }
 
 impl VisitMut for VariableVisitor {
@@ -64,13 +52,9 @@ impl VisitMut for VariableVisitor {
       if let Pat::Ident(ident) = &decl.name {
         if let Some(init) = &decl.init {
           self.variables.insert(ident.to_string(), init.clone());
-          if self.is_top_level {
-            self.top_level.insert(ident.to_string());
-          }
         }
       }
     });
-    self.is_top_level = false;
     var.visit_mut_children_with(self);
   }
   /// Scans the AST for import declarations and extracts the imported names
@@ -80,18 +64,9 @@ impl VisitMut for VariableVisitor {
         self
           .imports
           .insert(named.local.to_string(), import.src.value.to_string());
-        self.top_level.insert(named.local.to_string());
       }
     });
     import.visit_mut_children_with(self);
-  }
-
-  /// Mark any nested variable declarations as not top level
-  fn visit_mut_block_stmt(&mut self, block: &mut BlockStmt) {
-    let is_top_level = self.is_top_level;
-    self.is_top_level = false;
-    block.visit_mut_children_with(self);
-    self.is_top_level = is_top_level;
   }
 }
 
@@ -122,11 +97,5 @@ mod tests {
     let duration = &visitor.get_variable("duration#0");
     assert_eq!(*primary, Some("./theme".to_string()));
     assert_eq!(*duration, Some("34".to_string()));
-
-    let is_top_level = visitor.is_top_level("primary#0");
-    assert_eq!(is_top_level, true);
-
-    let is_top_level = visitor.is_top_level("primary#1");
-    assert_eq!(is_top_level, false);
   }
 }
