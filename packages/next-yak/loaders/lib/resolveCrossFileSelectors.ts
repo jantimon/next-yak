@@ -283,7 +283,10 @@ async function getAllExports(
                         type: "constant",
                         value: declaration.init.value,
                       };
-                    } else if (declaration.init.type === "TemplateLiteral" && declaration.init.quasis.length === 1) {
+                    } else if (
+                      declaration.init.type === "TemplateLiteral" &&
+                      declaration.init.quasis.length === 1
+                    ) {
                       result[declaration.id.name] = {
                         type: "constant",
                         value: declaration.init.quasis[0].value.raw,
@@ -337,7 +340,10 @@ function parseObjectExpression(
         property.value.type === "NumericLiteral"
       ) {
         result[key] = property.value.value;
-      } else if (property.value.type === "TemplateLiteral" && property.value.quasis.length === 1) {
+      } else if (
+        property.value.type === "TemplateLiteral" &&
+        property.value.quasis.length === 1
+      ) {
         result[key] = property.value.quasis[0].value.raw;
       } else if (property.value.type === "ObjectExpression") {
         result[key] = parseObjectExpression(property.value);
