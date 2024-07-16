@@ -57,8 +57,6 @@ impl ExprVisitor {
   /// Verifies that the expression is a template literal with a valid identifier as tag
   pub fn is_valid_expr(&self, tagged_tpl: &TaggedTpl) -> bool {
     if let Some(ident) = tagged_tpl.tag.as_ref().clone().ident() {
-      dbg!(ident.to_string());
-      dbg!(self.valid_idents.contains(ident.to_string().as_str()));
       return self.valid_idents.contains(ident.to_string().as_str());
     }
     return false;
