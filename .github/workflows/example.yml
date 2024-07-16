@@ -22,19 +22,23 @@ jobs:
 
     - name: Add wasm32-wasi target
       run: rustup target add wasm32-wasi
-
+      
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: 20
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
       with:
-        version: 7
+        version: 8.6.1
+        run_install: false
 
     - name: Install Vercel CLI
       run: npm install -g vercel
+
+    - name: Install NodeModules
+      run: pnpm install
 
     - name: Build with SWC
       run: pnpm run build:swc
