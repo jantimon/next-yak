@@ -15,10 +15,6 @@ on:
       - ".github/workflows/codspeed.yml"
   workflow_dispatch:
 
-# enable step debug logging
-env:
-  ACTIONS_STEP_DEBUG: true
-
 jobs:
   benchmarks:
     runs-on: ubuntu-latest
