@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "type": "module",
   "types": "./dist/",
   "license": "MIT",
