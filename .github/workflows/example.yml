@@ -20,6 +20,9 @@ jobs:
         profile: minimal
         override: true
 
+    - name: Add wasm32-wasi target
+      run: rustup target add wasm32-wasi
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
