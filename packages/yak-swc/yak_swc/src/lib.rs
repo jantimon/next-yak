@@ -386,15 +386,11 @@ where
       // e.g. const Button = styled.button`color: ${() => /* ... */};`
       //                                            ^^^^^^^^^^^^^^^^
       if let Some(expr) = pair.expr {
-
         let member_expr = if let Expr::Member(member) = &**expr {
           member_expr_to_strings(member).or_else(|| {
             HANDLER.with(|handler| {
               handler
-                .struct_span_err(
-                  member.span,
-                  "Could not parse member expression",
-                )
+                .struct_span_err(member.span, "Could not parse member expression")
                 .emit();
             });
             None
@@ -449,13 +445,13 @@ where
             }
           } else if let Some(module_path) = self.variables.get_imported_variable(&scoped_name) {
             let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
-            if is_mixin_expression(css_state.clone(), encode_module_import(
-              module_path.as_str(),
-              "selector",
-              vec![id.sym.to_string()],
-            ), next_css_code) {
+            if is_mixin_expression(
+              css_state.clone(),
+              encode_module_import(module_path.as_str(), "selector", vec![id.sym.to_string()]),
+              next_css_code,
+            ) {
               if current_css_state.current_scopes.len() == 1 {
-                  runtime_expressions.push(*expr.clone());
+                runtime_expressions.push(*expr.clone());
               } else {
                 HANDLER.with(|handler| {
                   handler
@@ -466,14 +462,11 @@ where
                     .emit();
                 });
               }
-            } 
+            }
             // An imported constant
             else {
-              let css_code = encode_module_import(
-                module_path.as_str(),
-                "selector",
-                vec![id.sym.to_string()],
-              );
+              let css_code =
+                encode_module_import(module_path.as_str(), "selector", vec![id.sym.to_string()]);
               let (new_state, _) = parse_css(&css_code, css_state);
               css_state = Some(new_state);
             }

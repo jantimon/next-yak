@@ -43,10 +43,10 @@ impl YakImportVisitor {
       match expr {
         Expr::Ident(ident) => Some(ident),
         Expr::Member(MemberExpr { obj, .. }) => get_root_ident(obj),
-        Expr::Call(CallExpr { callee, .. }) => match callee {
-          Callee::Expr(expr) => get_root_ident(expr),
-          _ => None,
-        },
+        Expr::Call(CallExpr {
+          callee: Callee::Expr(expr),
+          ..
+        }) => get_root_ident(expr),
         _ => None,
       }
     }
