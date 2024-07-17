@@ -35,8 +35,7 @@ export async function resolveCrossFileSelectors(
   }
   let result = "";
   for (let i = matches.length - 1; i >= 0; i--) {
-    const { moduleSpecifier, specifier, position, size } =
-      matches[i];
+    const { moduleSpecifier, specifier, position, size } = matches[i];
 
     const resolved = await resolveIdentifier(
       loader,
