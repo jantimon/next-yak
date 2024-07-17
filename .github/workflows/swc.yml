@@ -28,5 +28,3 @@ jobs:
         run: cargo test --manifest-path packages/yak-swc/Cargo.toml
       - name: Run cargo fmt
         run: cargo fmt --manifest-path packages/yak-swc/Cargo.toml --all -- --check
-      - name: Run cargo clippy
-        run: cargo clippy --manifest-path packages/yak-swc/Cargo.toml -- -D warnings

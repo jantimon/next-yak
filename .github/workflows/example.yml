@@ -42,6 +42,11 @@ jobs:
     - name: Build with SWC
       run: pnpm run build:swc
 
+    - name: Enable caching
+      uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: packages/yak-swc
+
     - name: Link Vercel project
       run: vercel link --yes --token ${{ secrets.VERCEL_TOKEN }}
 

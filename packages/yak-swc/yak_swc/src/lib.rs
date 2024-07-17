@@ -447,7 +447,7 @@ where
             let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
             if is_mixin_expression(
               css_state.clone(),
-              encode_module_import(module_path.as_str(), "selector", vec![id.sym.to_string()]),
+              encode_module_import(module_path.as_str(), "inline", vec![id.sym.to_string()]),
               next_css_code,
             ) {
               if current_css_state.current_scopes.len() == 1 {
@@ -466,7 +466,7 @@ where
             // An imported constant
             else {
               let css_code =
-                encode_module_import(module_path.as_str(), "selector", vec![id.sym.to_string()]);
+                encode_module_import(module_path.as_str(), "inline", vec![id.sym.to_string()]);
               let (new_state, _) = parse_css(&css_code, css_state);
               css_state = Some(new_state);
             }
