@@ -64,4 +64,4 @@ jobs:
 
     - name: Deploy to Vercel
       working-directory: packages/example
-      run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
+      run: vercel deploy --token ${{ secrets.VERCEL_TOKEN }}
