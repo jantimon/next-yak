@@ -31,21 +31,18 @@ jobs:
       name: Install pnpm
       with:
         version: 8.6.1
-        run_install: false
+        run_install: true
 
     - name: Install Vercel CLI
       run: npm install -g vercel
-
-    - name: Install NodeModules
-      run: pnpm install
-
-    - name: Build with SWC
-      run: pnpm run build:swc
 
     - name: Enable caching
       uses: Swatinem/rust-cache@v2
       with:
         workspaces: packages/yak-swc
+
+    - name: Build with SWC
+      run: pnpm run build:swc
 
     - name: Link Vercel project
       run: vercel link --yes --token ${{ secrets.VERCEL_TOKEN }}
