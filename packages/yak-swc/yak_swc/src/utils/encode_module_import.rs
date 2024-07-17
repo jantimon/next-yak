@@ -7,7 +7,6 @@ use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 /// # Arguments
 ///
 /// * `module_path` - The path to the module being imported
-/// * `kind` - The type of import, e.g. `module`, `inline`, `any`
 /// * `import_chain` - The member expression or variable name of the imported property
 ///
 /// # Returns
@@ -25,15 +24,15 @@ use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 /// - The function uses URL encoding for the import chain to handle special characters
 /// - The resulting string is meant to be processed and resolved by the yak css loader
 /// - The kind gives a hint how the import can be used - to provide an error message if the import is not supported
-pub fn encode_module_import(module_path: &str, kind: &str, import_chain: Vec<String>) -> String {
+pub fn encode_module_import(module_path: &str, import_chain: Vec<String>) -> String {
   let encoded_chain = import_chain
     .into_iter()
     .map(|part| utf8_percent_encode(&part, NON_ALPHANUMERIC).to_string())
     .collect::<Vec<String>>()
     .join(":");
   format!(
-    "--yak-css-import: url(\"{}:{}:{}\")",
-    module_path, kind, encoded_chain
+    "--yak-css-import: url(\"{}:{}\")",
+    module_path, encoded_chain
   )
 }
 
@@ -65,7 +64,6 @@ mod tests {
   fn test_encode_module_import() {
     let selector = encode_module_import(
       "./styles/media",
-      "any",
       vec![
         "breakpoints".to_string(),
         "<xs".to_string(),
@@ -74,16 +72,16 @@ mod tests {
     );
     assert_eq!(
       selector,
-      "--yak-css-import: url(\"./styles/media:any:breakpoints:%3Cxs:min\")"
+      "--yak-css-import: url(\"./styles/media:breakpoints:%3Cxs:min\")"
     );
   }
 
   #[test]
   fn test_encode_module_import_single_item_chain() {
-    let selector = encode_module_import("./styles/media", "any", vec!["breakpoints".to_string()]);
+    let selector = encode_module_import("./styles/media", vec!["breakpoints".to_string()]);
     assert_eq!(
       selector,
-      "--yak-css-import: url(\"./styles/media:any:breakpoints\")"
+      "--yak-css-import: url(\"./styles/media:breakpoints\")"
     );
   }
 
@@ -91,12 +89,11 @@ mod tests {
   fn test_encode_module_import_special_characters() {
     let selector = encode_module_import(
       "./styles/media",
-      "any",
       vec!["breakpoints".to_string(), "xs".to_string()],
     );
     assert_eq!(
       selector,
-      "--yak-css-import: url(\"./styles/media:any:breakpoints:xs\")"
+      "--yak-css-import: url(\"./styles/media:breakpoints:xs\")"
     );
   }
 
@@ -104,12 +101,11 @@ mod tests {
   fn test_encode_module_import_special_characters_encoded() {
     let selector = encode_module_import(
       "./styles/media",
-      "inline",
       vec!["breakpoints".to_string(), "<:\">".to_string()],
     );
     assert_eq!(
       selector,
-      "--yak-css-import: url(\"./styles/media:inline:breakpoints:%3C%3A%22%3E\")"
+      "--yak-css-import: url(\"./styles/media:breakpoints:%3C%3A%22%3E\")"
     );
   }
 }
