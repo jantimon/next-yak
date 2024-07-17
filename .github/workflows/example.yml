@@ -1,4 +1,7 @@
 name: Build and Deploy packages/example
+env:
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
 on:
   push:
@@ -38,7 +41,7 @@ jobs:
       run: pnpm install
 
     - name: Install Vercel CLI
-      run: npm install -g vercel@34.3.0
+      run: npm install -g vercel@35
 
     - name: Enable caching
       uses: Swatinem/rust-cache@v2
@@ -64,4 +67,4 @@ jobs:
 
     - name: Deploy to Vercel
       working-directory: packages/example
-      run: vercel deploy --token ${{ secrets.VERCEL_TOKEN }}
+      run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
