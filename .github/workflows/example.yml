@@ -57,9 +57,6 @@ jobs:
     - name: Pull Vercel environment information
       run: vercel pull --yes --environment=preview --token ${{ secrets.VERCEL_TOKEN }}
 
-    - name: Pull Vercel environment information
-      run: vercel pull --yes --environment=preview --token ${{ secrets.VERCEL_TOKEN }}
-
     - name: Build project artifacts
       run: vercel build --yes --token ${{ secrets.VERCEL_TOKEN }}
 
