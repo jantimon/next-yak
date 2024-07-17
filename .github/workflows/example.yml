@@ -58,13 +58,10 @@ jobs:
       run: vercel pull --yes --environment=preview --token ${{ secrets.VERCEL_TOKEN }}
 
     - name: Pull Vercel environment information
-      working-directory: packages/example
       run: vercel pull --yes --environment=preview --token ${{ secrets.VERCEL_TOKEN }}
 
     - name: Build project artifacts
-      working-directory: packages/example
       run: vercel build --yes --token ${{ secrets.VERCEL_TOKEN }}
 
     - name: Deploy to Vercel
-      working-directory: packages/example
       run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
