@@ -22,17 +22,22 @@ jobs:
     - name: Add wasm32-wasi target
       run: rustup target add wasm32-wasi
 
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
+      with:
+        version: 8.6.1
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 20
 
-    - uses: pnpm/action-setup@v4
-      name: Install pnpm
-      with:
-        version: 8.6.1
-        run_install: true
-        dest: .pnpm
+    - name: PNPM Cache Dir
+      run: pnpm config set store-dir "${PWD}/.pnpm-store"
+
+    - name: Install node_modules
+      run: pnpm install
 
     - name: Install Vercel CLI
       run: npm install -g vercel
