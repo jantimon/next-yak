@@ -6,7 +6,7 @@ import { fonts } from "./fonts";
 import { fancy } from "./fancy";
 export const Button = /*YAK Extracted CSS:
 .Button {
-  --yak-css-import: url("./fonts:selector:fonts");
+  --yak-css-import: url("./fonts:fonts:h1");
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button);
 export const Button2 = /*#__PURE__*/ styled.button(fonts.h1);
@@ -17,7 +17,7 @@ export const Button3 = /*YAK Extracted CSS:
 */ /*#__PURE__*/ styled.button(__styleYak.Button3, fonts.h1);
 export const Button4 = /*YAK Extracted CSS:
 .Button4 {
-  --yak-css-import: url("./fonts:selector:fonts")
+  --yak-css-import: url("./fonts:fonts:h1")
 ;
   color: green;
 }

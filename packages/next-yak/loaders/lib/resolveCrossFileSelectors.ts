@@ -12,7 +12,7 @@ export async function resolveCrossFileSelectors(
 ): Promise<string> {
   const matches = [...css.matchAll(moduleSelectorRegex)].map((match) => {
     const [fullMatch, encodedArguments] = match;
-    const [moduleSpecifier, importKind, ...specifier] = encodedArguments
+    const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
     const position = match.index!;
@@ -21,14 +21,8 @@ export async function resolveCrossFileSelectors(
         `Invalid module import selector ${fullMatch} - no specifier provided`,
       );
     }
-    if (importKind !== "any" && importKind !== "inline") {
-      throw new Error(
-        `Invalid module import selector ${fullMatch} - invalid import kind ${importKind}`,
-      );
-    }
     return {
       moduleSpecifier,
-      importKind,
       specifier,
       position,
       size: fullMatch.length,
@@ -41,8 +35,7 @@ export async function resolveCrossFileSelectors(
   }
   let result = "";
   for (let i = matches.length - 1; i >= 0; i--) {
-    const { moduleSpecifier, importKind, specifier, position, size } =
-      matches[i];
+    const { moduleSpecifier, specifier, position, size } = matches[i];
 
     const resolved = await resolveIdentifier(
       loader,
