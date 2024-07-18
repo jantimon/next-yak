@@ -15,19 +15,21 @@ export type YakConfigOptions = {
   contextPath?: string;
   experiments?: {
     crossFileSelectors?: boolean;
+    debug?: boolean | { filter?: (path: string) => boolean, type: "all" | "ts" | "css" | "css resolved" };
   };
 };
 
-const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
+export type ResolvedYakConfigOptions = Required<YakConfigOptions>;
+
+const addYak = (yakOptions: ResolvedYakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
     if (previousConfig) {
       webpackConfig = previousConfig(webpackConfig, options);
     }
 
-    const compiledExtensions = yakOptions.extensions || ["ts", "tsx"];
     const extensionFilterRegex = new RegExp(
-      `\\.(${compiledExtensions.join("|")})$`,
+      `\\.(${yakOptions.extensions.join("|")})$`,
     );
 
     webpackConfig.module.rules.push({
@@ -69,10 +71,8 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
 /**
  * Try to resolve yak
  */
-function resolveYakContext(contextPath: string | undefined, cwd: string) {
-  const yakContext = contextPath
-    ? path.resolve(cwd, contextPath)
-    : path.resolve(cwd, "yak.context");
+function resolveYakContext(contextPath: string, cwd: string) {
+  const yakContext = path.resolve(cwd, contextPath);
   const extensions = ["", ".ts", ".tsx", ".js", ".jsx"];
   for (const extension in extensions) {
     const fileName = yakContext + extensions[extension];
@@ -83,6 +83,29 @@ function resolveYakContext(contextPath: string | undefined, cwd: string) {
   if (contextPath) {
     throw new Error(`Could not find yak context file at ${yakContext}`);
   }
+}
+
+/**
+ * Yak Default Options
+ */
+function addDefaultOptions(options: YakConfigOptions): ResolvedYakConfigOptions {
+  const withDefaults = {
+    extensions: ["ts", "tsx"],
+    contextPath: "yak.context",
+    experiments: {
+      crossFileSelectors: false,
+      debug: false,
+      ...options.experiments,
+    },
+    ...options,
+  };
+  if (withDefaults.experiments.debug === true) {
+    withDefaults.experiments.debug = {
+      filter: () => true,
+      type: "ts",
+    }; 
+  }
+  return withDefaults;
 }
 
 // Wrapper to allow sync, async, and function configuration of Next.js
@@ -139,7 +162,7 @@ export const withYak: {
     return withYak({}, maybeYakOptions);
   }
   // If the second parameter is present the first parameter must be a YakConfigOptions
-  const yakOptions = maybeYakOptions as YakConfigOptions;
+  const yakOptions = addDefaultOptions(maybeYakOptions as YakConfigOptions);
   if (typeof nextConfig === "function") {
     /**
      * A NextConfig can be a sync or async function
