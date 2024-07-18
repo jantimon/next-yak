@@ -5,14 +5,14 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const moduleSelectorRegex = /:yak-css-import\(([^)]+)\)/g;
+const moduleSelectorRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
 export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
   css: string,
 ): Promise<string> {
   const matches = [...css.matchAll(moduleSelectorRegex)].map((match) => {
     const [fullMatch, encodedArguments] = match;
-    const [moduleSpecifier, importKind, ...specifier] = encodedArguments
+    const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
     const position = match.index!;
@@ -21,14 +21,8 @@ export async function resolveCrossFileSelectors(
         `Invalid module import selector ${fullMatch} - no specifier provided`,
       );
     }
-    if (importKind !== "any" && importKind !== "inline") {
-      throw new Error(
-        `Invalid module import selector ${fullMatch} - invalid import kind ${importKind}`,
-      );
-    }
     return {
       moduleSpecifier,
-      importKind,
       specifier,
       position,
       size: fullMatch.length,
@@ -41,8 +35,7 @@ export async function resolveCrossFileSelectors(
   }
   let result = "";
   for (let i = matches.length - 1; i >= 0; i--) {
-    const { moduleSpecifier, importKind, specifier, position, size } =
-      matches[i];
+    const { moduleSpecifier, specifier, position, size } = matches[i];
 
     const resolved = await resolveIdentifier(
       loader,
@@ -283,6 +276,14 @@ async function getAllExports(
                         type: "constant",
                         value: declaration.init.value,
                       };
+                    } else if (
+                      declaration.init.type === "TemplateLiteral" &&
+                      declaration.init.quasis.length === 1
+                    ) {
+                      result[declaration.id.name] = {
+                        type: "constant",
+                        value: declaration.init.quasis[0].value.raw,
+                      };
                     } else if (declaration.init.type === "ObjectExpression") {
                       result[declaration.id.name] = {
                         type: "record",
@@ -332,6 +333,11 @@ function parseObjectExpression(
         property.value.type === "NumericLiteral"
       ) {
         result[key] = property.value.value;
+      } else if (
+        property.value.type === "TemplateLiteral" &&
+        property.value.quasis.length === 1
+      ) {
+        result[key] = property.value.quasis[0].value.raw;
       } else if (property.value.type === "ObjectExpression") {
         result[key] = parseObjectExpression(property.value);
       }
