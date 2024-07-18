@@ -23,10 +23,7 @@ export default async function cssExtractLoader(
       return callback(err);
     }
     const { experiments } = this.getOptions();
-    const debugLog = createDebugLogger(
-      this,
-      experiments?.debug
-    );
+    const debugLog = createDebugLogger(this, experiments?.debug);
 
     debugLog("ts", source);
     const css = extractCss(source);
@@ -53,7 +50,12 @@ function createDebugLogger(
   loaderContext: LoaderContext<YakConfigOptions>,
   debugOptions: Required<YakConfigOptions>["experiments"]["debug"],
 ) {
-  if (!debugOptions || (debugOptions !== true && debugOptions.filter && !debugOptions.filter(loaderContext.resourcePath))) {
+  if (
+    !debugOptions ||
+    (debugOptions !== true &&
+      debugOptions.filter &&
+      !debugOptions.filter(loaderContext.resourcePath))
+  ) {
     return () => {};
   }
   const debugType = debugOptions === true ? "ts" : debugOptions.type;
