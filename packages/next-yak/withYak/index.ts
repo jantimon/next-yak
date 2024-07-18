@@ -24,20 +24,16 @@ export type YakConfigOptions = {
   };
 };
 
-export type ResolvedYakConfigOptions = Required<YakConfigOptions>;
-
-const addYak = (
-  yakOptions: ResolvedYakConfigOptions,
-  nextConfig: NextConfig,
-) => {
+const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
     if (previousConfig) {
       webpackConfig = previousConfig(webpackConfig, options);
     }
 
+    const compiledExtensions = yakOptions.extensions || ["ts", "tsx"];
     const extensionFilterRegex = new RegExp(
-      `\\.(${yakOptions.extensions.join("|")})$`,
+      `\\.(${compiledExtensions.join("|")})$`,
     );
 
     webpackConfig.module.rules.push({
@@ -79,8 +75,10 @@ const addYak = (
 /**
  * Try to resolve yak
  */
-function resolveYakContext(contextPath: string, cwd: string) {
-  const yakContext = path.resolve(cwd, contextPath);
+function resolveYakContext(contextPath: string | undefined, cwd: string) {
+  const yakContext = contextPath
+    ? path.resolve(cwd, contextPath)
+    : path.resolve(cwd, "yak.context");
   const extensions = ["", ".ts", ".tsx", ".js", ".jsx"];
   for (const extension in extensions) {
     const fileName = yakContext + extensions[extension];
@@ -91,31 +89,6 @@ function resolveYakContext(contextPath: string, cwd: string) {
   if (contextPath) {
     throw new Error(`Could not find yak context file at ${yakContext}`);
   }
-}
-
-/**
- * Yak Default Options
- */
-function addDefaultOptions(
-  options: YakConfigOptions,
-): ResolvedYakConfigOptions {
-  const withDefaults = {
-    extensions: ["ts", "tsx"],
-    contextPath: "yak.context",
-    experiments: {
-      crossFileSelectors: false,
-      debug: false,
-      ...options.experiments,
-    },
-    ...options,
-  };
-  if (withDefaults.experiments.debug === true) {
-    withDefaults.experiments.debug = {
-      filter: () => true,
-      type: "ts",
-    };
-  }
-  return withDefaults;
 }
 
 // Wrapper to allow sync, async, and function configuration of Next.js
@@ -172,7 +145,7 @@ export const withYak: {
     return withYak({}, maybeYakOptions);
   }
   // If the second parameter is present the first parameter must be a YakConfigOptions
-  const yakOptions = addDefaultOptions(maybeYakOptions as YakConfigOptions);
+  const yakOptions = maybeYakOptions as YakConfigOptions;
   if (typeof nextConfig === "function") {
     /**
      * A NextConfig can be a sync or async function
