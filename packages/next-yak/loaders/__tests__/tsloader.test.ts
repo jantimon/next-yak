@@ -1836,7 +1836,7 @@ describe("cross file", () => {
       const Button =
       /*YAK Extracted CSS:
       .Button {
-        :yak-css-import(./icon:any:Icon) {
+        --yak-css-import: url(\\"./icon:Icon\\") {
           margin: 0 10px;
         }
       }*/

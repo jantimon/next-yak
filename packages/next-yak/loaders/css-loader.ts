@@ -1,5 +1,8 @@
 import type { LoaderContext } from "webpack";
 import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
+import { relative } from "path";
+import type { YakConfigOptions } from "../withYak/index.js";
+
 /**
  * Transform typescript to css
  *
@@ -7,7 +10,7 @@ import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
  * and extracts the css from the generated comments
  */
 export default async function cssExtractLoader(
-  this: LoaderContext<{}>,
+  this: LoaderContext<YakConfigOptions>,
   // Instead of the source code, we receive the extracted css
   // from the ts-loader transformation
   _code: string,
@@ -19,11 +22,17 @@ export default async function cssExtractLoader(
     if (err) {
       return callback(err);
     }
+    const { experiments } = this.getOptions();
+    const debugLog = createDebugLogger(this, experiments?.debug);
+
+    debugLog("ts", source);
     const css = extractCss(source);
-    return resolveCrossFileSelectors(this, css).then(
-      (result) => callback(null, result, sourceMap),
-      callback,
-    );
+    debugLog("css", css);
+
+    return resolveCrossFileSelectors(this, css).then((result) => {
+      debugLog("css resolved", css);
+      return callback(null, result, sourceMap);
+    }, callback);
   });
 }
 
@@ -35,4 +44,36 @@ function extractCss(code: string): string {
     result += codeUntilEnd;
   }
   return result;
+}
+
+function createDebugLogger(
+  loaderContext: LoaderContext<YakConfigOptions>,
+  debugOptions: Required<YakConfigOptions>["experiments"]["debug"],
+) {
+  if (
+    !debugOptions ||
+    (debugOptions !== true &&
+      debugOptions.filter &&
+      !debugOptions.filter(loaderContext.resourcePath))
+  ) {
+    return () => {};
+  }
+  const debugType = debugOptions === true ? "ts" : debugOptions.type;
+  return (messageType: "ts" | "css" | "css resolved", message: string) => {
+    if (messageType === debugType || debugType === "all") {
+      console.log(
+        "🐮 Yak",
+        messageType,
+        "\n",
+        loaderContext._compiler
+          ? relative(
+              loaderContext._compiler.context,
+              loaderContext.resourcePath,
+            )
+          : loaderContext.resourcePath,
+        "\n\n",
+        message,
+      );
+    }
+  };
 }
