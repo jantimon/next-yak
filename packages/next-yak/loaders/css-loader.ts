@@ -23,19 +23,22 @@ export default async function cssExtractLoader(
       return callback(err);
     }
     const options = this.getOptions();
-    const debugLog = createLogger(this, (typeof options.experiments.debug === "object" && (!options.experiments.debug.filter || options.experiments.debug.filter(this.resourcePath))) && options.experiments.debug.type);
+    const debugLog = createLogger(
+      this,
+      typeof options.experiments.debug === "object" &&
+        (!options.experiments.debug.filter ||
+          options.experiments.debug.filter(this.resourcePath)) &&
+        options.experiments.debug.type,
+    );
 
     debugLog("ts", source);
     const css = extractCss(source);
     debugLog("css", css);
 
-    return resolveCrossFileSelectors(this, css).then(
-      (result) => {
-        debugLog("css resolved", css);
-        return callback(null, result, sourceMap);
-      },
-      callback,
-    );
+    return resolveCrossFileSelectors(this, css).then((result) => {
+      debugLog("css resolved", css);
+      return callback(null, result, sourceMap);
+    }, callback);
   });
 }
 
@@ -49,11 +52,25 @@ function extractCss(code: string): string {
   return result;
 }
 
-function createLogger(loaderContext: LoaderContext<ResolvedYakConfigOptions>, debugType: string | undefined | false) {
+function createLogger(
+  loaderContext: LoaderContext<ResolvedYakConfigOptions>,
+  debugType: string | undefined | false,
+) {
   return (messageType: "ts" | "css" | "css resolved", message: string) => {
     if (messageType === debugType || debugType === "all") {
-      console.log("🐮 Yak", messageType, "\n", loaderContext._compiler ? relative(loaderContext._compiler.context, loaderContext.resourcePath) : loaderContext.resourcePath, "\n\n", message);
+      console.log(
+        "🐮 Yak",
+        messageType,
+        "\n",
+        loaderContext._compiler
+          ? relative(
+              loaderContext._compiler.context,
+              loaderContext.resourcePath,
+            )
+          : loaderContext.resourcePath,
+        "\n\n",
+        message,
+      );
     }
-  }
+  };
 }
-

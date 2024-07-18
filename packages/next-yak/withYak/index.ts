@@ -15,13 +15,21 @@ export type YakConfigOptions = {
   contextPath?: string;
   experiments?: {
     crossFileSelectors?: boolean;
-    debug?: boolean | { filter?: (path: string) => boolean, type: "all" | "ts" | "css" | "css resolved" };
+    debug?:
+      | boolean
+      | {
+          filter?: (path: string) => boolean;
+          type: "all" | "ts" | "css" | "css resolved";
+        };
   };
 };
 
 export type ResolvedYakConfigOptions = Required<YakConfigOptions>;
 
-const addYak = (yakOptions: ResolvedYakConfigOptions, nextConfig: NextConfig) => {
+const addYak = (
+  yakOptions: ResolvedYakConfigOptions,
+  nextConfig: NextConfig,
+) => {
   const previousConfig = nextConfig.webpack;
   nextConfig.webpack = (webpackConfig, options) => {
     if (previousConfig) {
@@ -88,7 +96,9 @@ function resolveYakContext(contextPath: string, cwd: string) {
 /**
  * Yak Default Options
  */
-function addDefaultOptions(options: YakConfigOptions): ResolvedYakConfigOptions {
+function addDefaultOptions(
+  options: YakConfigOptions,
+): ResolvedYakConfigOptions {
   const withDefaults = {
     extensions: ["ts", "tsx"],
     contextPath: "yak.context",
@@ -103,7 +113,7 @@ function addDefaultOptions(options: YakConfigOptions): ResolvedYakConfigOptions 
     withDefaults.experiments.debug = {
       filter: () => true,
       type: "ts",
-    }; 
+    };
   }
   return withDefaults;
 }
