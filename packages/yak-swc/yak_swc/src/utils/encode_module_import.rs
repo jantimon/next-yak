@@ -47,10 +47,7 @@ pub fn is_mixin_expression(
   } else {
     next_css
   };
-  let (_, next_declaration) = parse_css(
-    format!("{}{}", css_code.to_string(), next_css).as_str(),
-    css_state,
-  );
+  let (_, next_declaration) = parse_css(format!("{}{}", css_code, next_css).as_str(), css_state);
   // If the next declaration is a import declaration, it is a mixin expression as the css parser expected a
   // css property value pair
   next_declaration.len() > 0 && next_declaration.first().unwrap().property == "--yak-css-import"

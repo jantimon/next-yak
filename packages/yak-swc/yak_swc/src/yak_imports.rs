@@ -67,12 +67,12 @@ impl YakImportVisitor {
       panic!("Utility function not found: {}", name);
     }
     if let Some(ident) = self.yak_utilities.get(&name) {
-      return ident.clone();
+      ident.clone()
     } else {
       let prefixed_name = format!("__yak_{}", name);
       let ident = Ident::new(prefixed_name.clone().into(), DUMMY_SP);
       self.yak_utilities.insert(prefixed_name, ident.clone());
-      return ident;
+      ident
     }
   }
 

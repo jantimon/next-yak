@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use itertools::Itertools;
-use swc_core::{common::DUMMY_SP, ecma::ast::*};
+use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
 
 /// Convert a HashMap to an Object expression
 pub fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
@@ -60,20 +60,44 @@ pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<St
 /// String to MemberProp
 pub fn create_member_prop_from_string(s: String) -> MemberProp {
   // if the string contains characters that are not allowed in an identifier
-  // use a string literal instead
+  // "with space" -> foo["with space"]
   if s.contains(|c: char| !c.is_alphanumeric() && c != '_' && c != '$')
     || s.starts_with(|c: char| c.is_ascii_digit())
   {
-    return MemberProp::Computed(ComputedPropName {
+    MemberProp::Computed(ComputedPropName {
       span: DUMMY_SP,
       expr: Box::new(Expr::Lit(Lit::Str(Str {
         span: DUMMY_SP,
         value: s.into(),
         raw: None,
       }))),
-    });
+    })
   }
-  return MemberProp::Ident(Ident::new(s.into(), DUMMY_SP));
+  // otherwise "bar" -> foo.bar
+  else {
+    MemberProp::Ident(Ident::new(s.into(), DUMMY_SP))
+  }
+}
+
+/// Extracts the identifier and member expression parts from an expression
+/// There are two use cases:
+/// 1. Member expressions (e.g., `colors.primary`) -> Some((colors#0, ["colors", "primary"]))
+/// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
+pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<String>)> {
+  match &expr {
+    Expr::Member(member) => member_expr_to_strings(&member)
+      .map(|(ident, parts)| (ident, parts))
+      .or_else(|| {
+        HANDLER.with(|handler| {
+          handler
+            .struct_span_err(member.span, "Could not parse member expression")
+            .emit();
+        });
+        None
+      }),
+    Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.to_string()])),
+    _ => None,
+  }
 }
 
 pub struct TemplateIterator<'a> {

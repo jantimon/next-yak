@@ -16,7 +16,7 @@ use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
-use utils::ast_helper::{member_expr_to_strings, TemplateIterator};
+use utils::ast_helper::{extract_ident_and_parts, TemplateIterator};
 use utils::encode_module_import::{encode_module_import, is_mixin_expression};
 
 mod variable_visitor;
@@ -25,11 +25,11 @@ mod yak_imports;
 use yak_imports::YakImportVisitor;
 
 mod utils {
-  pub mod add_suffix_to_expr;
-  pub mod assert_css_expr;
-  pub mod ast_helper;
-  pub mod encode_module_import;
-  pub mod murmur_hash;
+  pub(crate) mod add_suffix_to_expr;
+  pub(crate) mod assert_css_expr;
+  pub(crate) mod ast_helper;
+  pub(crate) mod encode_module_import;
+  pub(crate) mod murmur_hash;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -387,34 +387,15 @@ where
       // e.g. const Button = styled.button`color: ${() => /* ... */};`
       //                                            ^^^^^^^^^^^^^^^^
       if let Some(expr) = pair.expr {
-        // Get the ident for ${primary} or ${colors.primary}
-        let (ident, member_expr_parts): (Option<Ident>, Vec<String>) =
-          if let Expr::Member(member) = &**expr {
-            member_expr_to_strings(member).map_or_else(
-              || {
-                HANDLER.with(|handler| {
-                  handler
-                    .struct_span_err(member.span, "Could not parse member expression")
-                    .emit();
-                });
-                (None, vec![])
-              },
-              |(ident, member_expr_parts)| (Some(ident), member_expr_parts),
-            )
-          } else if let Expr::Ident(ident) = &**expr {
-            (Some(ident.clone()), vec![ident.sym.to_string()])
-          } else {
-            (None, vec![])
-          };
-
         // Handle constants in css expressions
-        // e.g. styled.button`color: ${primary};`
-        // e.g. styled.button`color: ${colors.primary};`
-        if let Some(id) = ident {
+        // e.g. styled.button`color: ${primary};` (Ident)
+        // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
+        if let Some((id, member_expr_parts)) = extract_ident_and_parts(&expr) {
           let scoped_name = id.to_string();
+          // Known StyledComponents, Mixin or Animations in the same file
           if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
-            // Reference StyledComponents or Animations in the same file
-            // Mixins can't be used inside css code and is an empty string
+            // Reference StyledComponents Selector or an Animations name in the same file
+            // The css code of Mixins can't be used inside css as it has already been transformed to a class name
             if referenced_yak_css.kind == YakType::StyledComponent
               || referenced_yak_css.kind == YakType::Keyframes
             {
@@ -443,7 +424,12 @@ where
                 });
               }
             }
-          } else if let Some(module_path) = self.variables.get_imported_variable(&scoped_name) {
+          }
+          // Cross-file references
+          // e.g.:
+          // import { primary } from "./theme";
+          // styled.button`color: ${colors.primary};`
+          else if let Some(module_path) = self.variables.get_imported_variable(&scoped_name) {
             let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
             if is_mixin_expression(
               css_state.clone(),
@@ -469,7 +455,12 @@ where
               let (new_state, _) = parse_css(&css_code, css_state);
               css_state = Some(new_state);
             }
-          } else if let Some(value) = self.variables.get_variable(&scoped_name) {
+          }
+          // Constants
+          // e.g.:
+          // const primary = "red";
+          // styled.button`color: ${primary};`
+          else if let Some(value) = self.variables.get_variable(&scoped_name) {
             let (new_state, _) = parse_css(&value, css_state);
             css_state = Some(new_state);
           }

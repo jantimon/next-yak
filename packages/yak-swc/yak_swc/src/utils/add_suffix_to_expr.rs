@@ -28,27 +28,17 @@ pub fn add_suffix_to_expr(expr: Expr, helper: Ident, suffix: String) -> Expr {
 fn merge_suffix_into_expr(suffix: String, expr: Expr) -> Option<Expr> {
   match &expr {
     // merge strings e.g. "foo" -> "foo-suffix"
-    Expr::Lit(Lit::Str(str)) => {
-      return Some(
-        Expr::Lit(Lit::Str(Str {
-          span: DUMMY_SP,
-          value: format!("{}{}", str.value, suffix).into(),
-          raw: None,
-        }))
-        .into(),
-      );
-    }
+    Expr::Lit(Lit::Str(str)) => Some(Expr::Lit(Lit::Str(Str {
+      span: DUMMY_SP,
+      value: format!("{}{}", str.value, suffix).into(),
+      raw: None,
+    }))),
     // merge numbers e.g. 99 -> "99-suffix"
-    Expr::Lit(Lit::Num(num)) => {
-      return Some(
-        Expr::Lit(Lit::Str(Str {
-          span: DUMMY_SP,
-          value: format!("{}{}", num.value, suffix).into(),
-          raw: None,
-        }))
-        .into(),
-      );
-    }
+    Expr::Lit(Lit::Num(num)) => Some(Expr::Lit(Lit::Str(Str {
+      span: DUMMY_SP,
+      value: format!("{}{}", num.value, suffix).into(),
+      raw: None,
+    }))),
     // merge binary expressions for calculations  e.g. 4 * 3 -> 4 * 3 + "-suffix"
     Expr::Bin(bin_expr)
       if matches!(
@@ -56,19 +46,16 @@ fn merge_suffix_into_expr(suffix: String, expr: Expr) -> Option<Expr> {
         BinaryOp::Add | BinaryOp::Sub | BinaryOp::Mul | BinaryOp::Div | BinaryOp::Mod
       ) =>
     {
-      return Some(
-        Expr::Bin(BinExpr {
+      Some(Expr::Bin(BinExpr {
+        span: DUMMY_SP,
+        left: expr.clone().into(),
+        op: bin_expr.op,
+        right: Box::new(Expr::Lit(Lit::Str(Str {
           span: DUMMY_SP,
-          left: expr.clone().into(),
-          op: bin_expr.op,
-          right: Box::new(Expr::Lit(Lit::Str(Str {
-            span: DUMMY_SP,
-            value: suffix.into(),
-            raw: None,
-          }))),
-        })
-        .into(),
-      );
+          value: suffix.into(),
+          raw: None,
+        }))),
+      }))
     }
     // Otherwise it has to be replaced at runtime using a utility function
     _ => None,
