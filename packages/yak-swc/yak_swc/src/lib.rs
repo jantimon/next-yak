@@ -390,7 +390,7 @@ where
         // Handle constants in css expressions
         // e.g. styled.button`color: ${primary};` (Ident)
         // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
-        if let Some((id, member_expr_parts)) = extract_ident_and_parts(&expr) {
+        if let Some((id, member_expr_parts)) = extract_ident_and_parts(expr) {
           let scoped_name = id.to_string();
           // Known StyledComponents, Mixin or Animations in the same file
           if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {

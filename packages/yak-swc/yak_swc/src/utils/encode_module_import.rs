@@ -50,7 +50,7 @@ pub fn is_mixin_expression(
   let (_, next_declaration) = parse_css(format!("{}{}", css_code, next_css).as_str(), css_state);
   // If the next declaration is a import declaration, it is a mixin expression as the css parser expected a
   // css property value pair
-  next_declaration.len() > 0 && next_declaration.first().unwrap().property == "--yak-css-import"
+  !next_declaration.is_empty() && next_declaration.first().unwrap().property == "--yak-css-import"
 }
 
 #[cfg(test)]

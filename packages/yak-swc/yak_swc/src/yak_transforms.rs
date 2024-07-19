@@ -119,7 +119,7 @@ impl YakTransform for TransformNestedCss {
       arguments.push(
         expr_hash_map_to_object(HashMap::from([(
           "style".to_string(),
-          expr_hash_map_to_object(runtime_css_variables).into(),
+          expr_hash_map_to_object(runtime_css_variables),
         )]))
         .into(),
       );
@@ -194,7 +194,7 @@ impl YakTransform for TransformCssMixin {
       arguments.push(
         expr_hash_map_to_object(HashMap::from([(
           "style".to_string(),
-          expr_hash_map_to_object(runtime_css_variables).into(),
+          expr_hash_map_to_object(runtime_css_variables),
         )]))
         .into(),
       );
@@ -269,7 +269,7 @@ impl YakTransform for TransformStyled {
       arguments.push(
         expr_hash_map_to_object(HashMap::from([(
           "style".to_string(),
-          expr_hash_map_to_object(runtime_css_variables).into(),
+          expr_hash_map_to_object(runtime_css_variables),
         )]))
         .into(),
       );
@@ -345,7 +345,7 @@ impl YakTransform for TransformKeyframes {
       arguments.push(
         expr_hash_map_to_object(HashMap::from([(
           "style".to_string(),
-          expr_hash_map_to_object(runtime_css_variables).into(),
+          expr_hash_map_to_object(runtime_css_variables),
         )]))
         .into(),
       );

@@ -80,8 +80,8 @@ impl YakImportVisitor {
   pub fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
     self
       .yak_utilities
-      .iter()
-      .map(|(_, imported)| {
+      .values()
+      .map(|imported| {
         ImportSpecifier::Named(ImportNamedSpecifier {
           span: DUMMY_SP,
           local: imported.clone(),

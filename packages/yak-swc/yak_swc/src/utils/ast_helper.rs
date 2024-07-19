@@ -85,16 +85,14 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
 /// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
 pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<String>)> {
   match &expr {
-    Expr::Member(member) => member_expr_to_strings(&member)
-      .map(|(ident, parts)| (ident, parts))
-      .or_else(|| {
-        HANDLER.with(|handler| {
-          handler
-            .struct_span_err(member.span, "Could not parse member expression")
-            .emit();
-        });
-        None
-      }),
+    Expr::Member(member) => member_expr_to_strings(member).or_else(|| {
+      HANDLER.with(|handler| {
+        handler
+          .struct_span_err(member.span, "Could not parse member expression")
+          .emit();
+      });
+      None
+    }),
     Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.to_string()])),
     _ => None,
   }
