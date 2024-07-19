@@ -6,7 +6,7 @@ import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import { getStoredTheme } from "./getStoredTheme";
-import { compressToEncodedURIComponent } from "lz-string";
+import { saveToClipboard, updateWindowLocation } from "./editor/shareableState";
 
 let highlighterPromise: ReturnType<typeof getHighlighterCore>;
 
@@ -106,7 +106,10 @@ export const setupMonaco = async () => {
     getStoredTheme() === "dark" ? "vitesse-dark" : "vitesse-light"
   );
 
-  monaco.editor.registerCommand("copy-clipboard", saveToClipboard);
+  monaco.editor.registerCommand("copy-clipboard", () => {
+    updateWindowLocation(monaco.editor.getModels()[0]?.getValue() ?? "");
+    saveToClipboard();
+  });
   monaco.editor.addKeybindingRule({
     command: "copy-clipboard",
     when: undefined,
@@ -120,17 +123,11 @@ export const setupMonaco = async () => {
     contextMenuGroupId: "run",
     contextMenuOrder: 1.5,
 
-    run: saveToClipboard,
+    run: () => {
+      updateWindowLocation(monaco.editor.getModels()[0]?.getValue() ?? "");
+      saveToClipboard();
+    },
   });
 
   return highlighter;
 };
-
-function saveToClipboard() {
-  const result = compressToEncodedURIComponent(
-    monaco.editor.getModels()[0]?.getValue() ?? ""
-  );
-  window.history.replaceState({}, "", `?code=${result}`);
-  window.navigator.clipboard.writeText(location.href.toString());
-  // todo: show a toast
-}

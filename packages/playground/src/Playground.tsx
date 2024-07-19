@@ -3,7 +3,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { YakEditor } from "./editor/YakEditor";
 import { setupMonaco } from "./monaco";
 import { useYakCompiler } from "./useYakCompiler/useYakCompiler";
-import { decompressFromEncodedURIComponent } from "lz-string";
+import { readStateFromURL } from "./editor/shareableState";
 
 const defaultInputValue = `import { styled } from "next-yak";
 
@@ -20,6 +20,7 @@ export function Playground() {
   const [code, setCode] = useState(
     () => readStateFromURL() ?? defaultInputValue
   );
+  console.log({ code });
   const result = useHighlighter(code);
   return (
     <>
@@ -123,14 +124,6 @@ const useHighlighter = (code: string) => {
     });
   }, [result]);
   return highlightedResult;
-};
-
-const readStateFromURL = () => {
-  const params = new URLSearchParams(location.search);
-  const code = params.get("code");
-  if (code) {
-    return decompressFromEncodedURIComponent(code);
-  }
 };
 
 export default Playground;
