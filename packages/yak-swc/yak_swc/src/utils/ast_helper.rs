@@ -29,16 +29,20 @@ pub fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
 /// e.g. `foo.bar.baz` will return `(foo#0, ["foo", "bar", "baz"])`
 pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<String>)> {
   let mut props = vec![];
-  if let Some(ident) = member_expr.clone().prop.ident() {
-    props.push(ident.sym.to_string());
-  } else if let Some(computed) = member_expr.clone().prop.computed() {
-    if let Expr::Lit(Lit::Str(str)) = *computed.expr.clone() {
-      props.push(str.value.to_string());
-    } else {
-      return None;
+  match member_expr.prop.clone() {
+    MemberProp::Ident(ident) => {
+      props.push(ident.sym.to_string());
     }
-  } else {
-    return None;
+    MemberProp::Computed(computed) => match &*computed.expr {
+      Expr::Lit(Lit::Str(str)) => {
+        props.push(str.value.to_string());
+      }
+      Expr::Lit(Lit::Num(num)) => {
+        props.push(num.value.to_string());
+      }
+      _ => return None, 
+    },
+    MemberProp::PrivateName(_) => return None,
   }
   match *member_expr.obj.clone() {
     Expr::Ident(ident) => {
