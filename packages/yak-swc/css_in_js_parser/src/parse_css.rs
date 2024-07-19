@@ -21,7 +21,7 @@ impl ParserState {
       is_inside_property_value: false,
       is_inside_at_rule: false,
       current_scopes: Vec::new(),
-      current_declaration: new_declaration(),
+      current_declaration: Declaration::new(),
       pending_css_segment: String::new(),
     }
   }
@@ -63,14 +63,17 @@ pub struct Declaration {
   pub closed: bool,
 }
 
-fn new_declaration() -> Declaration {
-  Declaration {
-    property: String::new(),
-    value: String::new(),
-    scope: Vec::new(),
-    closed: false,
+impl Declaration {
+  fn new() -> Self {
+    Self {
+      property: String::new(),
+      value: String::new(),
+      scope: Vec::new(),
+      closed: false,
+    }
   }
 }
+
 /// Parses a CSS string and returns the final parser state along with parsed declarations.
 ///
 /// # Arguments
@@ -94,7 +97,7 @@ pub fn parse_css(
     state.current_comment_state = CommentStateType::None;
     state.is_inside_property_value = false;
     state.is_inside_at_rule = false;
-    state.current_declaration = new_declaration();
+    state.current_declaration = Declaration::new();
     state.pending_css_segment.clone() + css_string
   } else {
     css_string.to_string()
@@ -219,7 +222,7 @@ pub fn parse_css(
       if !state.current_declaration.property.is_empty() {
         state.current_declaration.closed = true;
         declarations.push(state.current_declaration.clone());
-        state.current_declaration = new_declaration();
+        state.current_declaration = Declaration::new();
       }
     }
     // Detect scope opening
@@ -260,7 +263,7 @@ pub fn parse_css(
           .scope
           .clone_from(&state.current_scopes);
         declarations.push(state.current_declaration.clone());
-        state.current_declaration = new_declaration();
+        state.current_declaration = Declaration::new();
       }
     }
     // Detect property value separator
