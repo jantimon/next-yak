@@ -20,7 +20,6 @@ export function Playground() {
   const [code, setCode] = useState(
     () => readStateFromURL() ?? defaultInputValue
   );
-  console.log({ code });
   const result = useHighlighter(code);
   return (
     <>
