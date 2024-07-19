@@ -46,6 +46,7 @@ pub fn to_css(declarations: &[Declaration]) -> String {
   css
 }
 
+// TODO: remove
 pub fn to_css_with_state(
   declarations: &[Declaration],
   parser_state: Option<ParserState>,
