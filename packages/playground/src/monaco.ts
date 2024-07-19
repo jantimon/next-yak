@@ -6,6 +6,7 @@ import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import { getStoredTheme } from "./getStoredTheme";
+import { compressToEncodedURIComponent } from "lz-string";
 
 let highlighterPromise: ReturnType<typeof getHighlighterCore>;
 
@@ -91,7 +92,7 @@ export const setupMonaco = async () => {
 
   monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
     jsx: monaco.languages.typescript.JsxEmit.Preserve,
-    jsxImportSource: 'next-yak',
+    jsxImportSource: "next-yak",
     esModuleInterop: true,
     paths: {
       react: ["/node_modules/@types/react"],
@@ -101,7 +102,35 @@ export const setupMonaco = async () => {
   // Register the themes from Shiki, and provide syntax highlighting for Monaco.
   shikiToMonaco(highlighter, monaco);
   // monaco is loaded after the theme is set, so we need to set it again
-  monaco.editor.setTheme( getStoredTheme() === "dark" ? "vitesse-dark" : "vitesse-light");
+  monaco.editor.setTheme(
+    getStoredTheme() === "dark" ? "vitesse-dark" : "vitesse-light"
+  );
+
+  monaco.editor.registerCommand("copy-clipboard", saveToClipboard);
+  monaco.editor.addKeybindingRule({
+    command: "copy-clipboard",
+    when: undefined,
+    keybinding: monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
+  });
+  monaco.editor.addEditorAction({
+    id: "copy-clipboard",
+    label: "Save to clipboard",
+    keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+
+    contextMenuGroupId: "run",
+    contextMenuOrder: 1.5,
+
+    run: saveToClipboard,
+  });
 
   return highlighter;
 };
+
+function saveToClipboard() {
+  const result = compressToEncodedURIComponent(
+    monaco.editor.getModels()[0]?.getValue() ?? ""
+  );
+  window.history.replaceState({}, "", `?code=${result}`);
+  window.navigator.clipboard.writeText(location.href.toString());
+  // todo: show a toast
+}
