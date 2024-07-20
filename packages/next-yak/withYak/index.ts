@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { NextConfig } from "../../example/node_modules/next/dist/server/config.js";
+import { NextConfig } from "../../../examples/simple/node_modules/next/dist/server/config.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
@@ -26,7 +26,7 @@ export type YakConfigOptions = {
 
 const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   const previousConfig = nextConfig.webpack;
-  nextConfig.webpack = (webpackConfig, options) => {
+  nextConfig.webpack = (webpackConfig: any, options: any) => {
     if (previousConfig) {
       webpackConfig = previousConfig(webpackConfig, options);
     }
