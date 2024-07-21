@@ -1,4 +1,4 @@
-use fxhash::FxHashSet;
+use rustc_hash::FxHashSet;
 use swc_core::common::{Span, Spanned};
 use swc_core::ecma::atoms::hstr::Atom;
 use swc_core::ecma::visit::VisitMutWith;

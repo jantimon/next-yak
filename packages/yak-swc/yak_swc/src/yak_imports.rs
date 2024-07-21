@@ -1,4 +1,4 @@
-use fxhash::{FxHashMap, FxHashSet};
+use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::{
   common::DUMMY_SP,
   ecma::{ast::*, atoms::hstr::Atom, visit::VisitMut},

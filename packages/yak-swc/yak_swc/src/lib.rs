@@ -1,6 +1,6 @@
 use css_in_js_parser::{parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
-use fxhash::FxHashMap;
+use rustc_hash::FxHashMap;
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
