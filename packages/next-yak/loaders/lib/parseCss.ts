@@ -56,8 +56,6 @@ export function parseCss(
 
   // Iterate over the CSS string character by character
   for (let index = 0; index < cssString.length; index++) {
-
-
     // Iterate until the end of the comment
     if (currentCommentState === "/*") {
       // Iterate over comment
@@ -76,18 +74,18 @@ export function parseCss(
       // Resume iteration over CSS string from the end of the comment
       index++;
       continue;
-  } else if (currentCommentState === "//") {
-    // Iterate over comment
-    for (; index < cssString.length; index++) {
-      // Find end of comment
-      if (cssString[index] === "\n") {
-        currentCommentState = false;
-        break;
+    } else if (currentCommentState === "//") {
+      // Iterate over comment
+      for (; index < cssString.length; index++) {
+        // Find end of comment
+        if (cssString[index] === "\n") {
+          currentCommentState = false;
+          break;
+        }
       }
+      // Resume iteration over CSS string from the end of the comment
+      continue;
     }
-    // Resume iteration over CSS string from the end of the comment
-    continue;
-  }
 
     let previousBackSlashes = backSlashes;
     const currentCharacter = cssString[index];
