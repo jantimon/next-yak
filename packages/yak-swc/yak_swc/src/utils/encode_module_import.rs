@@ -1,5 +1,6 @@
 use css_in_js_parser::{parse_css, ParserState};
 use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
+use swc_core::atoms::Atom;
 
 /// This function generates a special CSS selector that represents an import from another module,
 /// encoding the module path and imported properties to ensure CSS parser compatibility
@@ -24,7 +25,7 @@ use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 /// - The function uses URL encoding for the import chain to handle special characters
 /// - The resulting string is meant to be processed and resolved by the yak css loader
 /// - The kind gives a hint how the import can be used - to provide an error message if the import is not supported
-pub fn encode_module_import(module_path: &str, import_chain: Vec<String>) -> String {
+pub fn encode_module_import(module_path: &str, import_chain: Vec<Atom>) -> String {
   let encoded_chain = import_chain
     .into_iter()
     .map(|part| utf8_percent_encode(&part, NON_ALPHANUMERIC).to_string())
@@ -62,9 +63,9 @@ mod tests {
     let selector = encode_module_import(
       "./styles/media",
       vec![
-        "breakpoints".to_string(),
-        "<xs".to_string(),
-        "min".to_string(),
+        Atom::from("breakpoints"),
+        Atom::from("<xs"),
+        Atom::from("min"),
       ],
     );
     assert_eq!(
@@ -75,7 +76,7 @@ mod tests {
 
   #[test]
   fn test_encode_module_import_single_item_chain() {
-    let selector = encode_module_import("./styles/media", vec!["breakpoints".to_string()]);
+    let selector = encode_module_import("./styles/media", vec![Atom::from("breakpoints")]);
     assert_eq!(
       selector,
       "--yak-css-import: url(\"./styles/media:breakpoints\")"
@@ -86,7 +87,7 @@ mod tests {
   fn test_encode_module_import_special_characters() {
     let selector = encode_module_import(
       "./styles/media",
-      vec!["breakpoints".to_string(), "xs".to_string()],
+      vec![Atom::from("breakpoints"), Atom::from("xs")],
     );
     assert_eq!(
       selector,
@@ -98,7 +99,7 @@ mod tests {
   fn test_encode_module_import_special_characters_encoded() {
     let selector = encode_module_import(
       "./styles/media",
-      vec!["breakpoints".to_string(), "<:\">".to_string()],
+      vec![Atom::from("breakpoints"), Atom::from("<:\">")],
     );
     assert_eq!(
       selector,

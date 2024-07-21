@@ -1,6 +1,6 @@
 use rustc_hash::FxHashSet;
+use swc_core::atoms::Atom;
 use swc_core::common::{Span, Spanned};
-use swc_core::ecma::atoms::hstr::Atom;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
 use swc_core::plugin::errors::HANDLER;

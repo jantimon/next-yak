@@ -1,11 +1,8 @@
-use rustc_hash::FxHashMap;
 use itertools::Itertools;
+use rustc_hash::FxHashMap;
 
-use swc_core::{
-  common::DUMMY_SP,
-  ecma::{ast::*, atoms::hstr::Atom},
-  plugin::errors::HANDLER,
-};
+use swc_core::atoms::Atom;
+use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
 
 /// Convert a HashMap to an Object expression
 pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
@@ -31,18 +28,18 @@ pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
 
 /// Convert a member expression to a root identifier and a string vector of properties
 /// e.g. `foo.bar.baz` will return `(foo#0, ["foo", "bar", "baz"])`
-pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<String>)> {
-  let mut props = vec![];
+pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<Atom>)> {
+  let mut props: Vec<Atom> = vec![];
   match member_expr.prop.clone() {
     MemberProp::Ident(ident) => {
-      props.push(ident.sym.to_string());
+      props.push(ident.sym);
     }
     MemberProp::Computed(computed) => match &*computed.expr {
       Expr::Lit(Lit::Str(str)) => {
-        props.push(str.value.to_string());
+        props.push(str.value.clone());
       }
       Expr::Lit(Lit::Num(num)) => {
-        props.push(num.value.to_string());
+        props.push(Atom::from(num.value.to_string()));
       }
       _ => return None,
     },
@@ -51,14 +48,14 @@ pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<St
   match *member_expr.obj.clone() {
     Expr::Ident(ident) => {
       let root_ident = ident;
-      props.insert(0, root_ident.sym.to_string());
+      props.insert(0, root_ident.sym.clone());
       Some((root_ident.clone(), props))
     }
     Expr::Member(member) => {
       let result = member_expr_to_strings(&member)?;
       let (root_ident, mut nested_props) = result;
       nested_props.extend(props);
-      nested_props.insert(0, root_ident.sym.to_string());
+      nested_props.insert(0, root_ident.sym.clone());
       Some((root_ident, nested_props))
     }
     _ => None,
@@ -100,7 +97,7 @@ pub fn split_ident(ident: Atom) -> (String, String) {
 /// There are two use cases:
 /// 1. Member expressions (e.g., `colors.primary`) -> Some((colors#0, ["colors", "primary"]))
 /// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
-pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<String>)> {
+pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<Atom>)> {
   match &expr {
     Expr::Member(member) => member_expr_to_strings(member).or_else(|| {
       HANDLER.with(|handler| {
@@ -110,7 +107,7 @@ pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<String>)> {
       });
       None
     }),
-    Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.to_string()])),
+    Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.clone()])),
     _ => None,
   }
 }

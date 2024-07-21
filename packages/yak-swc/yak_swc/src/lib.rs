@@ -4,10 +4,10 @@ use rustc_hash::FxHashMap;
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
+use swc_core::atoms::{atom, Atom};
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, DUMMY_SP};
-use swc_core::ecma::atoms::hstr::{atom, Atom};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -283,7 +283,7 @@ where
           bin.right.visit_mut_with(self);
           self.current_condition.pop();
         }
-        Expr::Bin(bin @ BinExpr { op: op!("||"),.. }) => {
+        Expr::Bin(bin @ BinExpr { op: op!("||"), .. }) => {
           bin.left.visit_mut_with(self);
 
           // Push negated condition for right side
