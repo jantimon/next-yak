@@ -51,7 +51,6 @@ pub struct Config {
   /// The hash for a css-variable depends on the file name including createVar().
   /// To ensure that the hash is consistent accross multiple systems the relative path
   /// from the base dir to the source file is used.
-  #[serde()]
   pub base_path: String,
 }
 
