@@ -543,12 +543,13 @@ function transformYakExpressions(
   for (let i = 0; i < expression.cssPartQuasis.length; i++) {
     let cssChunk = expression.cssPartQuasis[i].replace(/\\\\/g, "\\");
     const quasiExpression = expression.path.node.quasi.expressions[i];
+    const isInSideComment = currentCssParserState.currentCommentState !== false;
 
     // Merge Component References directly into the css code before parsing
     // e.g.:
     // const Icon = styled.div``
     // const Button = styled.button`&:${Icon} { color: red; }`
-    if (babelTypes.isIdentifier(quasiExpression)) {
+    if (babelTypes.isIdentifier(quasiExpression) && !isInSideComment) {
       let replaceValue: string | null = null;
       // Component References
       if (componentTypeMapping[quasiExpression.name]) {
@@ -630,6 +631,10 @@ function transformYakExpressions(
 
     const parsedCss = parseCss(cssChunk, currentCssParserState);
     currentCssParserState = parsedCss.state;
+
+    if (parsedCss.state.currentCommentState) {
+      continue;
+    }
 
     if (babelTypes.isTSType(quasiExpression)) {
       throw new Error(

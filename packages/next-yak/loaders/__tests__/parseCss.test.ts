@@ -9,32 +9,12 @@ test("parseCss inComplete css 1", () => {
                         color: blue;
     `),
   ).toMatchInlineSnapshot(`
-      {
-        "declarations": [
-          {
-            "closed": true,
-            "property": "color",
-            "scope": [
-              {
-                "name": ".foo",
-                "type": "selector",
-              },
-              {
-                "name": ".fancy",
-                "type": "selector",
-              },
-            ],
-            "value": "blue",
-          },
-        ],
-        "state": {
-          "currentDeclaration": {
-            "closed": false,
-            "property": "",
-            "scope": [],
-            "value": "",
-          },
-          "currentScopes": [
+    {
+      "declarations": [
+        {
+          "closed": true,
+          "property": "color",
+          "scope": [
             {
               "name": ".foo",
               "type": "selector",
@@ -44,13 +24,33 @@ test("parseCss inComplete css 1", () => {
               "type": "selector",
             },
           ],
-          "isInsideAtRule": false,
-          "isInsideComment": false,
-          "isInsidePropertyValue": false,
-          "isInsideString": false,
+          "value": "blue",
         },
-      }
-    `);
+      ],
+      "state": {
+        "currentCommentState": false,
+        "currentDeclaration": {
+          "closed": false,
+          "property": "",
+          "scope": [],
+          "value": "",
+        },
+        "currentScopes": [
+          {
+            "name": ".foo",
+            "type": "selector",
+          },
+          {
+            "name": ".fancy",
+            "type": "selector",
+          },
+        ],
+        "isInsideAtRule": false,
+        "isInsidePropertyValue": false,
+        "isInsideString": false,
+      },
+    }
+  `);
 });
 
 test("parseCss inComplete css 1 ending inside a comment", () => {
@@ -64,6 +64,7 @@ test("parseCss inComplete css 1 ending inside a comment", () => {
     {
       "declarations": [],
       "state": {
+        "currentCommentState": "/*",
         "currentDeclaration": {
           "closed": false,
           "property": "",
@@ -90,7 +91,6 @@ test("parseCss inComplete css 1 ending inside a comment", () => {
           },
         ],
         "isInsideAtRule": false,
-        "isInsideComment": true,
         "isInsidePropertyValue": false,
         "isInsideString": false,
       },
@@ -126,6 +126,7 @@ test("parseCss inComplete css 1 ending inside a string", () => {
         },
       ],
       "state": {
+        "currentCommentState": false,
         "currentDeclaration": {
           "closed": false,
           "property": "background",
@@ -153,7 +154,6 @@ test("parseCss inComplete css 1 ending inside a string", () => {
           },
         ],
         "isInsideAtRule": false,
-        "isInsideComment": false,
         "isInsidePropertyValue": true,
         "isInsideString": "'",
       },
@@ -189,6 +189,7 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
         },
       ],
       "state": {
+        "currentCommentState": false,
         "currentDeclaration": {
           "closed": false,
           "property": "background",
@@ -216,7 +217,6 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
           },
         ],
         "isInsideAtRule": false,
-        "isInsideComment": false,
         "isInsidePropertyValue": true,
         "isInsideString": "\\"",
       },
@@ -253,6 +253,7 @@ test("parseCss inComplete css 1 ending outside a comment", () => {
         },
       ],
       "state": {
+        "currentCommentState": false,
         "currentDeclaration": {
           "closed": false,
           "property": "color",
@@ -280,7 +281,6 @@ test("parseCss inComplete css 1 ending outside a comment", () => {
           },
         ],
         "isInsideAtRule": false,
-        "isInsideComment": false,
         "isInsidePropertyValue": true,
         "isInsideString": false,
       },
@@ -303,79 +303,79 @@ test("parseCss inComplete css 1 with @media rule", () => {
                                 
         `),
   ).toMatchInlineSnapshot(`
-          {
-            "declarations": [
-              {
-                "closed": true,
-                "property": "background",
-                "scope": [
-                  {
-                    "name": ".foo",
-                    "type": "selector",
-                  },
-                  {
-                    "name": ".fancy",
-                    "type": "selector",
-                  },
-                ],
-                "value": "url('https://example.com')",
-              },
-              {
-                "closed": true,
-                "property": "color",
-                "scope": [
-                  {
-                    "name": ".foo",
-                    "type": "selector",
-                  },
-                  {
-                    "name": ".fancy",
-                    "type": "selector",
-                  },
-                  {
-                    "name": "@media (max-width: 600px)",
-                    "type": "at-rule",
-                  },
-                  {
-                    "name": ".baz",
-                    "type": "selector",
-                  },
-                ],
-                "value": "red",
-              },
-            ],
-            "state": {
-              "currentDeclaration": {
-                "closed": false,
-                "property": "",
-                "scope": [],
-                "value": "",
-              },
-              "currentScopes": [
-                {
-                  "name": ".foo",
-                  "type": "selector",
-                },
-                {
-                  "name": ".fancy",
-                  "type": "selector",
-                },
-                {
-                  "name": "@media (max-width: 600px)",
-                  "type": "at-rule",
-                },
-                {
-                  "name": ".baz",
-                  "type": "selector",
-                },
-              ],
-              "isInsideAtRule": false,
-              "isInsideComment": false,
-              "isInsidePropertyValue": false,
-              "isInsideString": false,
+    {
+      "declarations": [
+        {
+          "closed": true,
+          "property": "background",
+          "scope": [
+            {
+              "name": ".foo",
+              "type": "selector",
             },
-          }
-        `);
+            {
+              "name": ".fancy",
+              "type": "selector",
+            },
+          ],
+          "value": "url('https://example.com')",
+        },
+        {
+          "closed": true,
+          "property": "color",
+          "scope": [
+            {
+              "name": ".foo",
+              "type": "selector",
+            },
+            {
+              "name": ".fancy",
+              "type": "selector",
+            },
+            {
+              "name": "@media (max-width: 600px)",
+              "type": "at-rule",
+            },
+            {
+              "name": ".baz",
+              "type": "selector",
+            },
+          ],
+          "value": "red",
+        },
+      ],
+      "state": {
+        "currentCommentState": false,
+        "currentDeclaration": {
+          "closed": false,
+          "property": "",
+          "scope": [],
+          "value": "",
+        },
+        "currentScopes": [
+          {
+            "name": ".foo",
+            "type": "selector",
+          },
+          {
+            "name": ".fancy",
+            "type": "selector",
+          },
+          {
+            "name": "@media (max-width: 600px)",
+            "type": "at-rule",
+          },
+          {
+            "name": ".baz",
+            "type": "selector",
+          },
+        ],
+        "isInsideAtRule": false,
+        "isInsidePropertyValue": false,
+        "isInsideString": false,
+      },
+    }
+  `);
 });
 
 test("parseCss complete css with @media rule", () => {
@@ -466,6 +466,7 @@ test("parseCss complete css with @media rule", () => {
         },
       ],
       "state": {
+        "currentCommentState": false,
         "currentDeclaration": {
           "closed": false,
           "property": "",
@@ -474,7 +475,6 @@ test("parseCss complete css with @media rule", () => {
         },
         "currentScopes": [],
         "isInsideAtRule": false,
-        "isInsideComment": false,
         "isInsidePropertyValue": false,
         "isInsideString": false,
       },
@@ -550,6 +550,7 @@ test("parseCss inComplete css 1 with @keyframes rule", () => {
         },
       ],
       "state": {
+        "currentCommentState": false,
         "currentDeclaration": {
           "closed": false,
           "property": "",
@@ -558,7 +559,6 @@ test("parseCss inComplete css 1 with @keyframes rule", () => {
         },
         "currentScopes": [],
         "isInsideAtRule": false,
-        "isInsideComment": false,
         "isInsidePropertyValue": false,
         "isInsideString": false,
       },
@@ -595,6 +595,7 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
         },
       ],
       "state": {
+        "currentCommentState": false,
         "currentDeclaration": {
           "closed": false,
           "property": "color",
@@ -622,7 +623,6 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
           },
         ],
         "isInsideAtRule": false,
-        "isInsideComment": false,
         "isInsidePropertyValue": true,
         "isInsideString": false,
       },
