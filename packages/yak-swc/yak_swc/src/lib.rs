@@ -46,7 +46,7 @@ use yak_transforms::{
 #[serde(deny_unknown_fields)]
 pub struct Config {
   /// Use Readable CSS Variable Names
-  #[serde(default = "bool::default")]
+  #[serde(default)]
   pub dev_mode: bool,
   /// The hash for a css-variable depends on the file name including createVar().
   /// To ensure that the hash is consistent accross multiple systems the relative path
