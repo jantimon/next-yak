@@ -208,8 +208,7 @@ where
           src: Box::new(Str {
             span: DUMMY_SP,
             value: format!(
-              "./{}.yak.module.css!=!./{}?./{}.yak.module.css",
-              basename, basename, basename
+              "./{basename}.yak.module.css!=!./{basename}?./{basename}.yak.module.css"
             )
             .into(),
             raw: None,
