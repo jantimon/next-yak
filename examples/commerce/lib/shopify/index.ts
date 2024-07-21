@@ -1,9 +1,13 @@
 import { TAGS } from "lib/constants";
-import { Cart, Menu } from "lib/shopify/types";
+import { Cart, Menu, Product } from "lib/shopify/types";
 
-export async function getMenu(_: string): Promise<Menu[]> {
+export async function getMenu(collection: string): Promise<Menu[]> {
+  const queryParams = new URLSearchParams({
+    collection,
+  });
+
   return (
-    await fetch("http://localhost:3000/api/menu", {
+    await fetch(`http://localhost:3000/api/menu?${queryParams.toString()}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -85,4 +89,31 @@ export async function updateCart(
       cache: "no-store",
     })
   ).json();
+}
+
+
+export async function getCollectionProducts({
+  collection,
+  reverse,
+  sortKey
+}: {
+  collection: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const queryParams = new URLSearchParams({
+    collection,
+  });
+  if (reverse) {
+    queryParams.set('reverse', reverse.toString());
+  }
+  if (sortKey) {
+    queryParams.set('sortKey', sortKey);
+  }
+
+  return (await fetch(`http://localhost:3000/api/products?${queryParams.toString()}`, {
+    method: "GET",
+    next: { tags: [TAGS.collections, TAGS.products] },
+    cache: "no-store",
+  })).json();
 }

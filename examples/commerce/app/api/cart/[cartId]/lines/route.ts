@@ -1,5 +1,5 @@
 import { carts } from "db/carts";
-import { Product } from "lib/shopify/types";
+import { CartItem, Product } from "lib/shopify/types";
 
 type Params = {
   cartId: string;
@@ -35,7 +35,7 @@ export async function POST(request: Request, context: { params: Params }) {
           id: "1",
         } as Product,
       },
-    })),
+    } satisfies CartItem)),
   );
 
   return carts.get(context.params.cartId);

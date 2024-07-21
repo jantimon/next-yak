@@ -4,7 +4,7 @@ import LogoIcon from "./icons/logo";
 export default function LogoSquare({ size }: { size?: "sm" | undefined }) {
   return (
     <LogoWrapper $size={size}>
-      <Logo />
+      <LogoIcon />
     </LogoWrapper>
   );
 }
@@ -29,23 +29,18 @@ const LogoWrapper = styled.div<{ $size?: "sm" | undefined }>`
           height: 30px;
           width: 30px;
           border-radius: 0.5rem;
+          & > svg {
+            height: 10px;
+            width: 10px;
+          }
         `
       : css`
           height: 40px;
           width: 40px;
           border-radius: 0.75rem;
-        `}
-`;
-
-const Logo = styled(LogoIcon)<{ $size?: "sm" | undefined }>`
-  ${({ $size }) =>
-    $size === "sm"
-      ? css`
-          height: 10px;
-          width: 10px;
-        `
-      : css`
-          height: 16px;
-          width: 16px;
+          & > svg {
+            height: 16px;
+            width: 16px;
+}
         `}
 `;
