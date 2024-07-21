@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use fxhash::FxHashMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
@@ -52,7 +52,7 @@ pub trait YakTransform {
     css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
-    runtime_css_variables: HashMap<String, Expr>,
+    runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult;
 }
 
@@ -101,7 +101,7 @@ impl YakTransform for TransformNestedCss {
     css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
-    runtime_css_variables: HashMap<String, Expr>,
+    runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -117,7 +117,7 @@ impl YakTransform for TransformNestedCss {
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
       arguments.push(
-        expr_hash_map_to_object(HashMap::from([(
+        expr_hash_map_to_object(FxHashMap::from_iter([(
           "style".to_string(),
           expr_hash_map_to_object(runtime_css_variables),
         )]))
@@ -176,7 +176,7 @@ impl YakTransform for TransformCssMixin {
     css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
-    runtime_css_variables: HashMap<String, Expr>,
+    runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -192,7 +192,7 @@ impl YakTransform for TransformCssMixin {
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
       arguments.push(
-        expr_hash_map_to_object(HashMap::from([(
+        expr_hash_map_to_object(FxHashMap::from_iter([(
           "style".to_string(),
           expr_hash_map_to_object(runtime_css_variables),
         )]))
@@ -251,7 +251,7 @@ impl YakTransform for TransformStyled {
     css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
-    runtime_css_variables: HashMap<String, Expr>,
+    runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -267,7 +267,7 @@ impl YakTransform for TransformStyled {
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
       arguments.push(
-        expr_hash_map_to_object(HashMap::from([(
+        expr_hash_map_to_object(FxHashMap::from_iter([(
           "style".to_string(),
           expr_hash_map_to_object(runtime_css_variables),
         )]))
@@ -328,7 +328,7 @@ impl YakTransform for TransformKeyframes {
     css_module_identifier: Ident,
     _runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
-    runtime_css_variables: HashMap<String, Expr>,
+    runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -343,7 +343,7 @@ impl YakTransform for TransformKeyframes {
     }
     if !runtime_css_variables.is_empty() {
       arguments.push(
-        expr_hash_map_to_object(HashMap::from([(
+        expr_hash_map_to_object(FxHashMap::from_iter([(
           "style".to_string(),
           expr_hash_map_to_object(runtime_css_variables),
         )]))

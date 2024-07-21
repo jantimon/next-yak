@@ -1,7 +1,7 @@
 use css_in_js_parser::{parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
+use fxhash::FxHashMap;
 use serde::Deserialize;
-use std::collections::HashMap;
 use std::path::Path;
 use std::vec;
 use swc_core::common::comments::Comment;
@@ -84,7 +84,7 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_mapping: HashMap<String, YakCss>,
+  variable_name_mapping: FxHashMap<String, YakCss>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -110,7 +110,7 @@ where
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
       naming_convention: NamingConvention::new(),
-      variable_name_mapping: HashMap::new(),
+      variable_name_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
       dev_mode,
@@ -347,7 +347,7 @@ where
     // Literal expressions which can't be replaced by constant values
     // and must be kept for the final output (so they run at runtime)
     let mut runtime_expressions: Vec<Expr> = vec![];
-    let mut runtime_css_variables: HashMap<String, Expr> = HashMap::new();
+    let mut runtime_css_variables: FxHashMap<String, Expr> = FxHashMap::default();
     // When moving units into css variables it has to be removed from the next css code
     // e.g. styled.button`left: ${({$x}) => $x}px;` -> `left: var(--left);`
     let mut css_code_offset: usize = 0;

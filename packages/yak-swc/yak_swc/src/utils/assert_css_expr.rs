@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use fxhash::FxHashSet;
 use swc_core::common::{Span, Spanned};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
@@ -11,7 +11,7 @@ use swc_core::plugin::errors::HANDLER;
 /// css`foo:bar;`
 /// () => css`foo:bar;`
 /// ({$active}) => { return $active && css`foo:bar;` }
-pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: HashSet<String>) {
+pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet<String>) {
   let mut visitor = ExprVisitor::new(valid_idents);
   let error_spans = match expr {
     // if it's a function or a return statement, visit the children:
@@ -41,12 +41,12 @@ pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: HashSet<S
 /// Visitor implementation to walk the tree
 struct ExprVisitor {
   is_returning: bool,
-  valid_idents: HashSet<String>,
+  valid_idents: FxHashSet<String>,
   pub error_spans: Vec<Span>,
 }
 
 impl ExprVisitor {
-  pub fn new(valid_idents: HashSet<String>) -> Self {
+  pub fn new(valid_idents: FxHashSet<String>) -> Self {
     Self {
       is_returning: false,
       valid_idents,

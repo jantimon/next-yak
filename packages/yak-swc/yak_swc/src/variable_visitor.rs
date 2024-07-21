@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use fxhash::FxHashMap;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
 
@@ -6,15 +6,15 @@ use swc_core::ecma::{ast::*, visit::VisitMut};
 /// Visitor implementation to gather all variable declarations
 /// and their values from the AST
 pub struct VariableVisitor {
-  variables: HashMap<String, Box<Expr>>,
-  imports: HashMap<String, String>,
+  variables: FxHashMap<String, Box<Expr>>,
+  imports: FxHashMap<String, String>,
 }
 
 impl VariableVisitor {
   pub fn new() -> Self {
     Self {
-      variables: HashMap::new(),
-      imports: HashMap::new(),
+      variables: FxHashMap::default(),
+      imports: FxHashMap::default(),
     }
   }
 

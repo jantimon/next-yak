@@ -1,10 +1,10 @@
-use std::collections::HashMap;
-
+use fxhash::FxHashMap;
 use itertools::Itertools;
+
 use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
 
 /// Convert a HashMap to an Object expression
-pub fn expr_hash_map_to_object(values: HashMap<String, Expr>) -> Expr {
+pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
   let properties = values
     .into_iter()
     .sorted_by_key(|(key, _)| key.clone())
@@ -40,7 +40,7 @@ pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<St
       Expr::Lit(Lit::Num(num)) => {
         props.push(num.value.to_string());
       }
-      _ => return None, 
+      _ => return None,
     },
     MemberProp::PrivateName(_) => return None,
   }

@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use fxhash::{FxHashMap, FxHashSet};
 use swc_core::{
   common::DUMMY_SP,
   ecma::{ast::*, visit::VisitMut},
@@ -9,11 +9,11 @@ use swc_core::{
 /// Side effect: converts the import source from "next-yak" to "next-yak/internal"
 pub struct YakImportVisitor {
   /// Imports from "next-yak"
-  yak_library_imports: HashMap<String, String>,
+  yak_library_imports: FxHashMap<String, String>,
   /// Utilities used from "next-yak/internal"
-  yak_utilities: HashMap<String, Ident>,
+  yak_utilities: FxHashMap<String, Ident>,
   /// Identifiers used in the css function
-  pub yak_css_idents: HashSet<String>,
+  pub yak_css_idents: FxHashSet<String>,
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
@@ -21,9 +21,9 @@ const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
 impl YakImportVisitor {
   pub fn new() -> Self {
     Self {
-      yak_library_imports: HashMap::new(),
-      yak_utilities: HashMap::new(),
-      yak_css_idents: HashSet::new(),
+      yak_library_imports: FxHashMap::default(),
+      yak_utilities: FxHashMap::default(),
+      yak_css_idents: FxHashSet::default(),
     }
   }
 
