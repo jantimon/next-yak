@@ -1,5 +1,6 @@
 use fxhash::FxHashSet;
 use swc_core::common::{Span, Spanned};
+use swc_core::ecma::atoms::hstr::Atom;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
 use swc_core::plugin::errors::HANDLER;
@@ -11,7 +12,7 @@ use swc_core::plugin::errors::HANDLER;
 /// css`foo:bar;`
 /// () => css`foo:bar;`
 /// ({$active}) => { return $active && css`foo:bar;` }
-pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet<String>) {
+pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet<Atom>) {
   let mut visitor = ExprVisitor::new(valid_idents);
   let error_spans = match expr {
     // if it's a function or a return statement, visit the children:
@@ -41,12 +42,12 @@ pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet
 /// Visitor implementation to walk the tree
 struct ExprVisitor {
   is_returning: bool,
-  valid_idents: FxHashSet<String>,
+  valid_idents: FxHashSet<Atom>,
   pub error_spans: Vec<Span>,
 }
 
 impl ExprVisitor {
-  pub fn new(valid_idents: FxHashSet<String>) -> Self {
+  pub fn new(valid_idents: FxHashSet<Atom>) -> Self {
     Self {
       is_returning: false,
       valid_idents,
@@ -57,7 +58,7 @@ impl ExprVisitor {
   /// Verifies that the expression is a template literal with a valid identifier as tag
   pub fn is_valid_expr(&self, tagged_tpl: &TaggedTpl) -> bool {
     if let Some(ident) = tagged_tpl.tag.as_ref().clone().ident() {
-      return self.valid_idents.contains(ident.to_string().as_str());
+      return self.valid_idents.contains(&Atom::from(ident.to_string()));
     }
     false
   }
@@ -139,7 +140,7 @@ mod tests {
 
   #[test]
   fn test_css_expr_visitor() {
-    let mut visitor = ExprVisitor::new(["css#0".to_string()].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {
@@ -158,7 +159,7 @@ mod tests {
 
   #[test]
   fn test_css_expr_visitor_number() {
-    let mut visitor = ExprVisitor::new(["css#0".to_string()].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {
@@ -178,7 +179,7 @@ mod tests {
 
   #[test]
   fn test_css_expr_visitor_true() {
-    let mut visitor = ExprVisitor::new(["css#0".to_string()].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {
@@ -198,7 +199,7 @@ mod tests {
 
   #[test]
   fn test_css_expr_visitor_call_expr() {
-    let mut visitor = ExprVisitor::new(["css#0".to_string()].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {

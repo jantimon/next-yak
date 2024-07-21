@@ -1,7 +1,7 @@
 use fxhash::{FxHashMap, FxHashSet};
 use swc_core::{
   common::DUMMY_SP,
-  ecma::{ast::*, visit::VisitMut},
+  ecma::{ast::*, atoms::hstr::Atom, visit::VisitMut},
 };
 
 #[derive(Debug)]
@@ -12,8 +12,10 @@ pub struct YakImportVisitor {
   yak_library_imports: FxHashMap<String, String>,
   /// Utilities used from "next-yak/internal"
   yak_utilities: FxHashMap<String, Ident>,
-  /// Identifiers used in the css function
-  pub yak_css_idents: FxHashSet<String>,
+  /// Local Identifiers for the next-yak css function \
+  /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
+  /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
+  pub yak_css_idents: FxHashSet<Atom>,
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
@@ -115,7 +117,9 @@ impl VisitMut for YakImportVisitor {
           let local = named.local.sym.to_string();
           self.yak_library_imports.insert(local, imported.clone());
           if imported == "css" {
-            self.yak_css_idents.insert(named.local.to_string());
+            self
+              .yak_css_idents
+              .insert(Atom::from(named.local.to_string()));
           }
         }
       }
