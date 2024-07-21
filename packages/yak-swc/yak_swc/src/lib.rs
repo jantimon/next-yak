@@ -283,7 +283,7 @@ where
           bin.right.visit_mut_with(self);
           self.current_condition.pop();
         }
-        Expr::Bin(bin) if bin.op == BinaryOp::LogicalOr => {
+        Expr::Bin(bin @ BinExpr { op: op!("||"),.. }) => {
           bin.left.visit_mut_with(self);
 
           // Push negated condition for right side
