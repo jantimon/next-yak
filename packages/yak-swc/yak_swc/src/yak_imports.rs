@@ -73,7 +73,7 @@ impl YakImportVisitor {
       ident.clone()
     } else {
       let prefixed_name = format!("__yak_{}", name);
-      let ident = Ident::from(prefixed_name.clone());
+      let ident = Ident::new(prefixed_name.clone().into(), DUMMY_SP);
       self.yak_utilities.insert(prefixed_name, ident.clone());
       ident
     }
