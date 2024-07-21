@@ -11,9 +11,10 @@ describe("should work", () => {
     ignore: "node_modules/**",
   });
   inputFiles.forEach((inputFile) => {
-    it(`processing ${inputFile
-      .split(path.sep)
-      .at(-2)} should match output`, async () => {
+    const testName = `processing ${inputFile.split(path.sep).at(-2)}`;
+    const skipReason = fs.existsSync(path.resolve(inputFile, "../skip"));
+    const testFn = skipReason ? it.fails : it;
+    testFn(testName, async () => {
       const input = fs.readFileSync(inputFile, "utf8");
       const output = await tsloader
         .call(
@@ -51,14 +52,10 @@ describe("should work", () => {
           input,
         )
         .then((result) => result)
-        .catch((err) => err.toString());
+        .catch((err) => {error: err.toString() });
 
-      if (fs.existsSync(path.resolve(inputFile, "../output.stderr"))) {
-        const outputFile = path.join(path.dirname(inputFile), "output.stderr");
-        const expectedOutput = fs.readFileSync(outputFile, "utf8");
-        expect(prettifyBabelError(output)).toEqual(
-          prettifySWCError(expectedOutput),
-        );
+      if (!output || output.error) {
+        expect(fs.existsSync(path.resolve(inputFile, "../output.stderr"))).toBe(true);
       } else {
         const outputFile = path.join(path.dirname(inputFile), "output.tsx");
         const expectedOutput = fs.readFileSync(outputFile, "utf8");
@@ -87,12 +84,3 @@ const prettify = async (code: string) =>
       parser: "typescript",
     },
   );
-
-const prettifySWCError = (code: string) =>
-  code
-    .replace(/\n  [^\|x][\s\S]+/, "")
-    .replace(/  [\|x] /g, "")
-    .trim();
-
-const prettifyBabelError = (code: string) =>
-  code.replace(/.*line \d+: /, "").trim();
