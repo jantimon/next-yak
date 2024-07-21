@@ -11,6 +11,7 @@ pub fn add_suffix_to_expr(expr: Expr, helper: Ident, suffix: String) -> Expr {
   Expr::Call(CallExpr {
     span: DUMMY_SP,
     callee: Callee::Expr(helper.into()),
+    ctxt: Default::default(),
     args: vec![
       expr.into(),
       Expr::Lit(Lit::Str(Str {

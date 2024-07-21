@@ -1,8 +1,7 @@
-
   x Mixins are not allowed inside nested selectors
   | found: ${buttonStyles}
   | Use an inline css literal instead or move the selector into the mixin
-    ,-[input.js:21:1]
+    ,-[input.js:22:1]
  21 |    button {
  22 |       ${buttonStyles}
     :         ^^^^^^^^^^^^

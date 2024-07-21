@@ -131,6 +131,7 @@ impl YakTransform for TransformNestedCss {
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
+        ctxt: Default::default(),
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
@@ -206,6 +207,7 @@ impl YakTransform for TransformCssMixin {
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
+        ctxt: Default::default(),
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
@@ -281,6 +283,7 @@ impl YakTransform for TransformStyled {
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
+        ctxt: Default::default(),
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
@@ -357,6 +360,7 @@ impl YakTransform for TransformKeyframes {
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
+        ctxt: Default::default(),
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
