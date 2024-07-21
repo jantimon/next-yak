@@ -129,7 +129,7 @@ where
     self
       .current_variable_name
       .clone()
-      .unwrap_or("yak".to_string())
+      .unwrap_or_else(|| "yak".to_string())
   }
 
   /// Get the current filename without extension or path e.g. "App" from "/path/to/App.tsx
