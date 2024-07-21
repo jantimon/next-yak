@@ -117,3 +117,19 @@ export async function getCollectionProducts({
     cache: "no-store",
   })).json();
 }
+
+export async function getProduct(handle: string): Promise<Product | undefined> {
+  return (await fetch(`http://localhost:3000/api/products/${handle}`, {
+    method: "GET",
+    next: { tags: [TAGS.products] },
+    cache: "no-store",
+  })).json();
+}
+
+export async function getProductRecommendations(productId: string): Promise<Product[]> {
+  return (await fetch(`http://localhost:3000/api/recommendations/${productId}`, {
+    method: "GET",
+    next: { tags: [TAGS.products] },
+    cache: "no-store",
+  })).json();
+}
