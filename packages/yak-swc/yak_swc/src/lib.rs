@@ -368,7 +368,12 @@ where
       } else {
         quasi.raw.to_string()
       };
-      let (new_state, new_declarations) = parse_css(&css_code[css_code_offset..], css_state);
+      // The offset value is set by a previous expression when a unit is moved into a css variable
+      // e.g. styled.button`left: ${({$x}) => $x}px;` -> `left: var(--left);`
+      // The escapping of the css code is removed as a slash requires escaling in js string literals
+      // e.g. styled.button`content: "\\2022"` -> `content: "\2022"`
+      let quasi_css_code = &css_code[css_code_offset..].replace("\\\\", "\\");
+      let (new_state, new_declarations) = parse_css(qusi_css_code, css_state);
       css_code_offset = 0;
       css_state = Some(new_state);
       // Add the extracted CSS to the the root styled component
