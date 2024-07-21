@@ -273,7 +273,7 @@ where
           cond.alt.visit_mut_with(self);
           self.current_condition.pop();
         }
-        Expr::Bin(bin) if bin.op == BinaryOp::LogicalAnd => {
+        Expr::Bin(bin @ BinExpr { op: op!("&&"), .. }) => {
           bin.left.visit_mut_with(self);
 
           // Push condition for right side
