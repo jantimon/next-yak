@@ -3,6 +3,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { YakEditor } from "./editor/YakEditor";
 import { setupMonaco } from "./monaco";
 import { useYakCompiler } from "./useYakCompiler/useYakCompiler";
+import { readStateFromURL } from "./editor/shareableState";
 
 const defaultInputValue = `import { styled } from "next-yak";
 
@@ -16,7 +17,9 @@ export const Button = styled.button\`
 \`;`;
 
 export function Playground() {
-  const [code, setCode] = useState(defaultInputValue);
+  const [code, setCode] = useState(
+    () => readStateFromURL() ?? defaultInputValue
+  );
   const result = useHighlighter(code);
   return (
     <>
@@ -32,7 +35,7 @@ export function Playground() {
           }}
         >
           <YakEditor
-            initialValue={defaultInputValue}
+            initialValue={code}
             onChange={(value) => {
               setCode(value);
             }}
