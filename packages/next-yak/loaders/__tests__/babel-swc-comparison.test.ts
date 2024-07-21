@@ -52,10 +52,14 @@ describe("should work", () => {
           input,
         )
         .then((result) => result)
-        .catch((err) => {error: err.toString() });
+        .catch((err) => {
+          error: err.toString();
+        });
 
       if (!output || output.error) {
-        expect(fs.existsSync(path.resolve(inputFile, "../output.stderr"))).toBe(true);
+        expect(fs.existsSync(path.resolve(inputFile, "../output.stderr"))).toBe(
+          true,
+        );
       } else {
         const outputFile = path.join(path.dirname(inputFile), "output.tsx");
         const expectedOutput = fs.readFileSync(outputFile, "utf8");
