@@ -188,8 +188,7 @@ where
             import_declaration.specifiers.extend(
               self
                 .yak_library_imports
-                .get_yak_utility_import_declaration()
-                .into_iter(),
+                .get_yak_utility_import_declaration(),
             );
             break;
           }
