@@ -1,7 +1,11 @@
 use fxhash::FxHashMap;
 use itertools::Itertools;
 
-use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
+use swc_core::{
+  common::DUMMY_SP,
+  ecma::{ast::*, atoms::hstr::Atom},
+  plugin::errors::HANDLER,
+};
 
 /// Convert a HashMap to an Object expression
 pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
@@ -81,6 +85,15 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
   else {
     MemberProp::Ident(IdentName::from(s))
   }
+}
+
+/// Idents contain the name and a scope context suffix
+/// e.g. `foo#0` is the first `foo` in the current scope
+pub fn split_ident(ident: Atom) -> (String, String) {
+  let mut parts = ident.split('#');
+  let name = parts.next().unwrap().to_string();
+  let scope = parts.next().expect("An ident must include a #").to_string();
+  (name, scope)
 }
 
 /// Extracts the identifier and member expression parts from an expression

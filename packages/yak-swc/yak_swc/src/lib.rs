@@ -7,6 +7,7 @@ use std::vec;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, DUMMY_SP};
+use swc_core::ecma::atoms::hstr::{atom, Atom};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -16,7 +17,7 @@ use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
-use utils::ast_helper::{extract_ident_and_parts, TemplateIterator};
+use utils::ast_helper::{extract_ident_and_parts, split_ident, TemplateIterator};
 use utils::encode_module_import::{encode_module_import, is_mixin_expression};
 
 mod variable_visitor;
@@ -67,7 +68,7 @@ where
   /// All css declarations of the current root css expression
   current_declaration: Vec<Declaration>,
   /// e.g Button in const Button = styled.button`color: red;`
-  current_variable_name: Option<String>,
+  current_variable_name: Option<Atom>,
   /// Current condition to name nested css expressions
   current_condition: Vec<String>,
   /// SWC comments proxy to add extracted css as comments
@@ -83,7 +84,7 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_mapping: FxHashMap<String, YakCss>,
+  variable_name_mapping: FxHashMap<Atom, YakCss>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -125,11 +126,11 @@ where
 
   /// Try to get the component id of the current styled component mixin or animation
   /// e.g. const Button = styled.button`color: red;` -> Button#1
-  fn get_current_component_id(&self) -> String {
+  fn get_current_component_id(&self) -> Atom {
     self
       .current_variable_name
       .clone()
-      .unwrap_or_else(|| "yak".to_string())
+      .unwrap_or_else(|| atom!("yak"))
   }
 
   /// Get the current filename without extension or path e.g. "App" from "/path/to/App.tsx
@@ -232,7 +233,7 @@ where
     for decl in &mut n.decls {
       if let Pat::Ident(BindingIdent { id, .. }) = &decl.name {
         let previous_variable_name = self.current_variable_name.clone();
-        self.current_variable_name = Some(id.to_string());
+        self.current_variable_name = Some(Atom::from(id.to_string()));
         decl.init.visit_mut_with(self);
         self.current_variable_name = previous_variable_name;
       }
@@ -389,7 +390,7 @@ where
         // e.g. styled.button`color: ${primary};` (Ident)
         // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
         if let Some((id, member_expr_parts)) = extract_ident_and_parts(expr) {
-          let scoped_name = id.to_string();
+          let scoped_name = Atom::from(id.to_string());
           // Known StyledComponents, Mixin or Animations in the same file
           if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
             // Reference StyledComponents Selector or an Animations name in the same file
@@ -497,19 +498,16 @@ where
             // The css code offset is used to remove the unit from the next css code
             css_code_offset = unit.map_or(0, |unit_str| unit_str.len());
 
-            let mut readable_name = self
-              .current_variable_name
-              .clone()
-              .unwrap_or("yak".to_string());
-            if !readable_name.is_empty() {
-              // remove #0
-              readable_name = format!("{}__", readable_name)
-                .replace("#0", "")
-                .replace('#', "");
-            }
-            readable_name = format!(
-              "{}{}",
-              readable_name,
+            let readable_name = format!(
+              "{}__{}",
+              // Current variable name of the StyledComponent or Mixin
+              // e.g. Button for const Button = styled.button`color: red;`
+              self
+                .current_variable_name
+                .clone()
+                .map_or("yak".to_string(), |name| split_ident(name).0),
+              // Current property name
+              // e.g. color for styled.button`color: red;`
               css_state.as_ref().unwrap().current_declaration.property
             );
             let css_variable_name = self.naming_convention.get_css_variable_name(
