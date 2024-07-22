@@ -184,7 +184,7 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
               "type": "selector",
             },
           ],
-          "value": "url(\\"https://example.com
+          "value": "url("https://example.com
         ",
         },
       ],
@@ -203,7 +203,7 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
               "type": "selector",
             },
           ],
-          "value": "url(\\"https://example.com
+          "value": "url("https://example.com
         ",
         },
         "currentScopes": [
@@ -218,7 +218,7 @@ test("parseCss inComplete css 1 ending inside a double quote string", () => {
         ],
         "isInsideAtRule": false,
         "isInsidePropertyValue": true,
-        "isInsideString": "\\"",
+        "isInsideString": """,
       },
     }
   `);
@@ -413,7 +413,7 @@ test("parseCss complete css with @media rule", () => {
               "type": "selector",
             },
           ],
-          "value": "url(\\"https://example.com\\")",
+          "value": "url("https://example.com")",
         },
         {
           "closed": true,
@@ -447,7 +447,7 @@ test("parseCss complete css with @media rule", () => {
               "type": "selector",
             },
           ],
-          "value": "url(\\"https://example.com\\")",
+          "value": "url("https://example.com")",
         },
         {
           "closed": true,
@@ -633,7 +633,7 @@ test("parseCss inComplete css 1 ending outside a // comment", () => {
 test("Handles escaped backslashes in strings", () => {
   expect(
     parseCss(`a { content: "\\\\"; }`).declarations[0].value,
-  ).toMatchInlineSnapshot('"\\"\\\\\\\\\\""');
+  ).toMatchInlineSnapshot(`""\\\\""`);
 });
 
 test("Handles empty declarations", () => {
@@ -651,7 +651,7 @@ test("Handles empty declarations", () => {
             "type": "selector",
           },
         ],
-        "value": "\\"blue\\"",
+        "value": ""blue"",
       },
       {
         "closed": true,
@@ -706,8 +706,8 @@ test("Handles newlines in property values", () => {
               "type": "selector",
             },
           ],
-          "value": "\\"line1
-      line2\\"",
+          "value": ""line1
+      line2"",
         },
       ]
     `);

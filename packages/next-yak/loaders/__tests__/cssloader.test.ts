@@ -358,12 +358,12 @@ const headline = css\`
     ).toMatchInlineSnapshot(`
       ".headline {
         :before {
-          content: \\"\\\\2022\\";
+          content: "\\2022";
         }
         :after {
-          content: \\"\\\\2022\\";
+          content: "\\2022";
         }
-        content: \\"\\\\\\\\\\"
+        content: "\\\\"
       ;
       }"
     `);

@@ -10,6 +10,7 @@ export default defineConfig({
     environment: "jsdom",
   },
   resolve: {
+    // Use typescript files during tests
     alias: {
       "next-yak": fileURLToPath(new URL('./runtime', import.meta.url)),
     },
