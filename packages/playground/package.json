@@ -26,8 +26,8 @@
     "lz-string": "^1.5.0",
     "monaco-editor": "^0.50.0",
     "next-yak": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-resizable-panels": "^2.0.16"
   },
   "devDependencies": {

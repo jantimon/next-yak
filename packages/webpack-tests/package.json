@@ -2,6 +2,7 @@
   "name": "webpack-tests",
   "version": "1.0.0",
   "description": "next-yak e2e webpack tests",
+  "type": "module",
   "scripts": {
     "test": "vitest --no-watch",
     "test:watch": "vitest"
