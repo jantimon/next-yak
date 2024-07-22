@@ -9,8 +9,8 @@
  *
  * @example
  * // Let's say we want to create a module import for ${breakpoints["<xs"].min} from "./styles/media"
- * const selector = encodeModuleImport("./styles/media", "any", ["breakpoints", "<xs", "min"]);
- * console.log(selector); // ":yak-css-import(./styles/media:any:breakpoints:%3Cxs:min)"
+ * const selector = encodeModuleImport("./styles/media", ["breakpoints", "<xs", "min"]);
+ * console.log(selector); // ":yak-css-import(./styles/media:breakpoints:%3Cxs:min)"
  *
  * @notes
  * - The function uses URL encoding for the import chain to handle special characters
@@ -19,7 +19,6 @@
  */
 export function encodeModuleImport(
   modulePath: string,
-  kind: "any" | "inline",
   importChain: string[],
 ): string {
   const encodedChain = importChain
