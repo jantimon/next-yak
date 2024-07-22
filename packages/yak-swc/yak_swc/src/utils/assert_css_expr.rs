@@ -1,5 +1,4 @@
 use rustc_hash::FxHashSet;
-use swc_core::atoms::Atom;
 use swc_core::common::{Span, Spanned};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
@@ -12,7 +11,7 @@ use swc_core::plugin::errors::HANDLER;
 /// css`foo:bar;`
 /// () => css`foo:bar;`
 /// ({$active}) => { return $active && css`foo:bar;` }
-pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet<Atom>) {
+pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet<Id>) {
   let mut visitor = ExprVisitor::new(valid_idents);
   let error_spans = match expr {
     // if it's a function or a return statement, visit the children:
@@ -42,12 +41,12 @@ pub fn assert_css_expr(expr: &mut Expr, message: String, valid_idents: FxHashSet
 /// Visitor implementation to walk the tree
 struct ExprVisitor {
   is_returning: bool,
-  valid_idents: FxHashSet<Atom>,
+  valid_idents: FxHashSet<Id>,
   pub error_spans: Vec<Span>,
 }
 
 impl ExprVisitor {
-  pub fn new(valid_idents: FxHashSet<Atom>) -> Self {
+  pub fn new(valid_idents: FxHashSet<Id>) -> Self {
     Self {
       is_returning: false,
       valid_idents,
@@ -58,7 +57,7 @@ impl ExprVisitor {
   /// Verifies that the expression is a template literal with a valid identifier as tag
   pub fn is_valid_expr(&self, tagged_tpl: &TaggedTpl) -> bool {
     if let Some(ident) = tagged_tpl.tag.as_ref().clone().ident() {
-      return self.valid_idents.contains(&Atom::from(ident.to_string()));
+      return self.valid_idents.contains(&ident.to_id());
     }
     false
   }
@@ -135,12 +134,19 @@ impl VisitMut for ExprVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
   use swc_core::ecma::visit::as_folder;
+  use swc_core::atoms::Atom;
 
   #[test]
   fn test_css_expr_visitor() {
-    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new(
+      [(Id::from((Atom::from("css"), SyntaxContext::empty())))]
+        .iter()
+        .cloned()
+        .collect(),
+    );
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {
@@ -158,8 +164,37 @@ mod tests {
   }
 
   #[test]
+  fn test_css_expr_visitor_renamed() {
+    let mut visitor = ExprVisitor::new(
+      [(Id::from((Atom::from("myCss"), SyntaxContext::empty())))]
+        .iter()
+        .cloned()
+        .collect(),
+    );
+    let code = r#"
+    import { css as myCss } from "next-yak";
+    export const test = ({ active }) => {
+      return active ? myCss`foo:bar;`: false;
+    }
+    "#;
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      code,
+      code,
+      false,
+    );
+    assert_eq!(visitor.error_spans, []);
+  }
+
+  #[test]
   fn test_css_expr_visitor_number() {
-    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new(
+      [(Id::from((Atom::from("css"), SyntaxContext::empty())))]
+        .iter()
+        .cloned()
+        .collect(),
+    );
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {
@@ -179,7 +214,12 @@ mod tests {
 
   #[test]
   fn test_css_expr_visitor_true() {
-    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new(
+      [(Id::from((Atom::from("css"), SyntaxContext::empty())))]
+        .iter()
+        .cloned()
+        .collect(),
+    );
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {
@@ -199,7 +239,12 @@ mod tests {
 
   #[test]
   fn test_css_expr_visitor_call_expr() {
-    let mut visitor = ExprVisitor::new([Atom::from("css#0")].iter().cloned().collect());
+    let mut visitor = ExprVisitor::new(
+      [(Id::from((Atom::from("css"), SyntaxContext::empty())))]
+        .iter()
+        .cloned()
+        .collect(),
+    );
     let code = r#"
     import { css } from "next-yak";
     export const test = ({ active }) => {

@@ -10,13 +10,15 @@ use swc_core::{
 /// Side effect: converts the import source from "next-yak" to "next-yak/internal"
 pub struct YakImportVisitor {
   /// Imports from "next-yak"
-  yak_library_imports: FxHashMap<String, String>,
+  /// Local to Imported mapping
+  yak_library_imports: FxHashMap<Id, Id>,
   /// Utilities used from "next-yak/internal"
+  /// e.g. unitPostFix, mergeCssProp
   yak_utilities: FxHashMap<String, Ident>,
   /// Local Identifiers for the next-yak css function \
   /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
   /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
-  pub yak_css_idents: FxHashSet<Atom>,
+  pub yak_css_idents: FxHashSet<Id>,
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
@@ -37,14 +39,14 @@ impl YakImportVisitor {
 
   /// Get the name of the used next-yak library function
   /// e.g. styled.button`color: red;` -> styled
-  pub fn get_yak_library_function_name(&self, n: &TaggedTpl) -> Option<String> {
+  pub fn get_yak_library_function_name(&self, n: &TaggedTpl) -> Option<Atom> {
     if !self.is_using_next_yak() {
       return None;
     }
 
-    fn get_root_ident(expr: &Expr) -> Option<&Ident> {
+    fn get_root_ident(expr: &Expr) -> Option<Id> {
       match expr {
-        Expr::Ident(ident) => Some(ident),
+        Expr::Ident(ident) => Some(ident.to_id()),
         Expr::Member(MemberExpr { obj, .. }) => get_root_ident(obj),
         Expr::Call(CallExpr {
           callee: Callee::Expr(expr),
@@ -54,11 +56,10 @@ impl YakImportVisitor {
       }
     }
 
-    if let Some(ident) = get_root_ident(&n.tag) {
-      self
-        .yak_library_imports
-        .get(&ident.sym.to_string())
-        .cloned()
+    if let Some(id) = get_root_ident(&n.tag) {
+      // Return the original name
+      // e.g. import { styled as renamedStyled } from "next-yak" -> styled
+      self.yak_library_imports.get(&id).map(|id| id.0.clone())
     } else {
       None
     }
@@ -111,16 +112,14 @@ impl VisitMut for YakImportVisitor {
       for specifier in &import_decl.specifiers {
         if let ImportSpecifier::Named(named) = specifier {
           let imported = match &named.imported {
-            Some(ModuleExportName::Ident(i)) => i.sym.to_string(),
-            None => named.local.sym.to_string(),
+            Some(ModuleExportName::Ident(i)) => i.to_id(),
+            None => named.local.to_id(),
             _ => continue,
           };
-          let local = named.local.sym.to_string();
+          let local = named.local.to_id();
           self.yak_library_imports.insert(local, imported.clone());
-          if imported == "css" {
-            self
-              .yak_css_idents
-              .insert(Atom::from(named.local.to_string()));
+          if imported.0 == "css" {
+            self.yak_css_idents.insert(named.local.to_id());
           }
         }
       }
