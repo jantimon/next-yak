@@ -46,24 +46,22 @@ export default defineConfig({
         __dirname,
         "../next-yak/loaders/css-loader.ts"
       ),
-      "next-yak/ts-loader": path.resolve(
-        __dirname,
-        "../next-yak/loaders/ts-loader.ts"
-      ),
-      "next-yak/ts-post-loader": path.resolve(
-        __dirname,
-        "../next-yak/loaders/ts-post-loader.ts"
-      ),
+      // "next-yak/ts-loader": path.resolve(
+      //   __dirname,
+      //   "../next-yak/loaders/ts-loader.ts"
+      // ),
+      // "next-yak/ts-post-loader": path.resolve(
+      //   __dirname,
+      //   "../next-yak/loaders/ts-post-loader.ts"
+      // ),
       // use the dev version of useYakCompiler
-      "next-yak-playground/useYakCompiler": path.resolve(
-        __dirname,
-        "./src/useYakCompiler/useYakCompiler.ts"
-      ),
+      // "next-yak-playground/useYakCompiler": path.resolve(
+      //   __dirname,
+      //   "./src/useYakCompiler/useYakCompiler.ts"
+      // ),
       // patch getCssModuleLocalIdent to not use unaccessible globals
-      "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js": path.resolve(
-        __dirname,
-        "./src/fixes/getCssModuleLocalIdent.ts"
-      ),
+      "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js":
+        path.resolve(__dirname, "./src/fixes/getCssModuleLocalIdent.ts"),
     },
   },
 });

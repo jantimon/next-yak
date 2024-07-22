@@ -1,10 +1,16 @@
 import cssLoader from "next-yak/css-loader";
-import tsLoader from "next-yak/ts-loader";
 import type { LoaderContext } from "webpack";
+import { getTsLoader } from "./compileTS";
 
-export const compileCSS = async (code: string): Promise<string> => {
+export const compileCSS = async (
+  code: string,
+  yakVersion: string
+): Promise<string> => {
   const loaderContext = {
-    loadModule: (_, cb) => tsLoader.call(loaderContext, code).then((code) => cb(null, code || "", undefined, {} as any)),
+    loadModule: (_, cb) =>
+      getTsLoader(yakVersion)
+        .then((tsLoader) => tsLoader.call(loaderContext, code))
+        .then((code) => cb(null, code || "", undefined, {} as any)),
     resourcePath: "/some/path/to/file.tsx",
     rootContext: "/some",
     importModule: () => {

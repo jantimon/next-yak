@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { YakEditor } from "./editor/YakEditor";
 import { setupMonaco } from "./monaco";
-import { useYakCompiler } from "./useYakCompiler/useYakCompiler";
 import { readStateFromURL } from "./editor/shareableState";
+import { compileTS } from "./useYakCompiler/compileTS";
+import { compileCSS } from "./useYakCompiler/compileCSS";
 
 const defaultInputValue = `import { styled } from "next-yak";
 
@@ -16,13 +17,44 @@ export const Button = styled.button\`
   }
 \`;`;
 
+const compile = async (code: string, yakVersion: string = "0.2.6") => {
+  const highlighter = await setupMonaco();
+  const tsOutput = await compileTS(code, yakVersion);
+  const cssOutput = await compileCSS(tsOutput, yakVersion);
+  return {
+    code,
+    tsOutput: highlighter.codeToHtml(tsOutput, {
+      lang: "tsx",
+      themes: { dark: "vitesse-dark", light: "vitesse-light" },
+    }),
+    cssOutput: highlighter.codeToHtml(cssOutput, {
+      lang: "css-styled",
+      themes: { dark: "vitesse-dark", light: "vitesse-light" },
+    }),
+  };
+};
+
 export function Playground() {
-  const [code, setCode] = useState(
-    () => readStateFromURL() ?? defaultInputValue
-  );
-  const result = useHighlighter(code);
+  const [code, setCode] = useState<Awaited<ReturnType<typeof compile>>>();
+
+  useEffect(() => {
+    const code = readStateFromURL() ?? defaultInputValue;
+    compile(code).then(setCode);
+  }, []);
+
+  if (!code) return null;
+
   return (
     <>
+      <select
+        onChange={(e) => {
+          compile(code.code, e.currentTarget.value).then(setCode);
+        }}
+      >
+        <option value="0.2.6">0.2.6</option>
+        <option value="0.2.5">0.2.5</option>
+        <option value="0.2.4">0.2.4</option>
+      </select>
       <PanelGroup
         autoSaveId="example"
         direction="horizontal"
@@ -35,9 +67,9 @@ export function Playground() {
           }}
         >
           <YakEditor
-            initialValue={code}
+            initialValue={code.code}
             onChange={(value) => {
-              setCode(value);
+              compile(value).then(setCode);
             }}
           />
         </Panel>
@@ -61,7 +93,7 @@ export function Playground() {
               <p>Output TypeScript</p>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: result.tsOutput,
+                  __html: code.tsOutput,
                 }}
                 style={{
                   width: "100%",
@@ -84,7 +116,7 @@ export function Playground() {
               <p>Output CSS</p>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: result.cssOutput,
+                  __html: code.cssOutput,
                 }}
                 style={{
                   width: "100%",
@@ -100,29 +132,5 @@ export function Playground() {
     </>
   );
 }
-
-const useHighlighter = (code: string) => {
-  const result = useYakCompiler(code);
-  const [highlightedResult, setHighlightedResult] = useState({
-    tsOutput: "",
-    cssOutput: "",
-  });
-  useEffect(() => {
-    const highlighter = setupMonaco();
-    highlighter.then((highlighter) => {
-      setHighlightedResult({
-        tsOutput: highlighter.codeToHtml(result.tsOutput, {
-          lang: "tsx",
-          themes: { dark: "vitesse-dark", light: "vitesse-light" },
-        }),
-        cssOutput: highlighter.codeToHtml(result.cssOutput, {
-          lang: "css-styled",
-          themes: { dark: "vitesse-dark", light: "vitesse-light" },
-        }),
-      });
-    });
-  }, [result]);
-  return highlightedResult;
-};
 
 export default Playground;
