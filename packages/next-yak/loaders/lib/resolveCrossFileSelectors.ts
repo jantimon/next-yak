@@ -5,12 +5,15 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const moduleSelectorRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
+const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
+
 export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
   css: string,
 ): Promise<string> {
-  const matches = [...css.matchAll(moduleSelectorRegex)].map((match) => {
+  let fileBasedResolveCache = new Map<string, ReturnType<typeof resolveIdentifier>>();
+  // Find cross-file-imports
+  const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
     const [fullMatch, encodedArguments] = match;
     const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
@@ -28,21 +31,15 @@ export async function resolveCrossFileSelectors(
       size: fullMatch.length,
     };
   });
-
   const firstMatchPosition = matches[0]?.position;
   if (firstMatchPosition === undefined) {
     return css;
   }
+  // Replace the imports with the resolved values
   let result = "";
   for (let i = matches.length - 1; i >= 0; i--) {
     const { moduleSpecifier, specifier, position, size } = matches[i];
-
-    const resolved = await resolveIdentifier(
-      loader,
-      loader.context,
-      moduleSpecifier,
-      specifier[0],
-    );
+    const resolved = await resolveCrossFileValue(moduleSpecifier, specifier, fileBasedResolveCache, loader);
     if (resolved.type === "unsupported") {
       throw new Error(
         `yak could not import ${specifier.join(
@@ -50,7 +47,6 @@ export async function resolveCrossFileSelectors(
         )} from ${moduleSpecifier} - only styled-components, strings and numbers are supported`,
       );
     }
-
     const replacement =
       resolved.type === "styled-component"
         ? `:global(.${getCssModuleLocalIdent(
@@ -94,6 +90,58 @@ const getConstantFromResolvedValue = (
     `Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`,
   );
 };
+
+ /**
+  * Resolve the value of from a cross-file-import
+  * 
+  * For regular files the specifier is resolved with resolveIdentifier
+  * For .yak files the entire module is resolved and evaluated with resolveYakModule
+  */
+ async function resolveCrossFileValue (moduleSpecifier: string, specifier: string[], resolveCache: Map<string, ReturnType<typeof resolveIdentifier>>, loader: LoaderContext<{}>) {
+  const isYak = moduleSpecifier.endsWith(".yak");
+  let resolvedModule: ReturnType<typeof resolveIdentifier>;
+  if (!isYak) {
+    // For non .yak files only the specifier is resolved
+    // therfore only the specifier can be cached
+    const resolveKey = `${moduleSpecifier} : ${specifier[0]}`;
+    let resolvedFromCache = resolveCache.get(resolveKey);
+    resolvedModule = resolvedFromCache || resolveIdentifier(loader, loader.context, moduleSpecifier, specifier[0]);
+    if (!resolvedFromCache) {
+      resolveCache.set(resolveKey, resolvedModule);
+    }
+  } else {
+    // For yak files the entire module is executed with node (which is slower) and returned
+    // therefore the entire module can be cached as record
+    let resolvedFromCache = resolveCache.get(moduleSpecifier);
+    resolvedModule = resolvedFromCache || resolveYakModule(loader, moduleSpecifier);
+    if (!resolvedFromCache) {
+      resolveCache.set(moduleSpecifier, resolvedModule);
+    }
+    // To align the return value with the non-yak case, we need to resolve the specifier
+    resolvedModule = resolvedModule.then((moduleValues) => {
+      if (moduleValues.type !== "record") {
+        throw new Error("resolveYakModule returns always a record");
+      }
+      const value = moduleValues.value[specifier[0]];
+      if (typeof value === "string" || typeof value === "number") {
+        return {
+          type: "constant" as const,
+          value,
+        };
+      }
+      if (value && (Array.isArray(value) || typeof value === "object")) {
+        return {
+          type: "record" as const,
+          value,
+        };
+      }
+        throw new Error(
+          `Could not find export ${specifier[0]} in ${moduleSpecifier}`
+        );
+    });
+  }
+  return resolvedModule;
+}
 
 /**
  * Recursively follows the import chain to resolve the identifiers
@@ -344,4 +392,13 @@ function parseObjectExpression(
     }
   }
   return result;
+}
+
+function resolveYakModule(loader: LoaderContext<{}>, moduleSpecifier: string) {
+  return loader.importModule(moduleSpecifier).then((module) => (
+    {
+      type: "record" as const,
+      value: module as RecursiveRecord,
+    }
+  ));
 }
