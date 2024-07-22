@@ -131,8 +131,8 @@ test("handles escapes correctly", () => {
   ).toMatchInlineSnapshot(`
     "
     .foo {
-      content: \\"line1\\\\
-    line2\\";
+      content: "line1\\
+    line2";
     }"
   `);
 });

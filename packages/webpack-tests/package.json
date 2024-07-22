@@ -7,8 +7,8 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "vite": "^4.4.9",
-    "vitest": "0.34.5",
+    "vite": "5.3.4",
+    "vitest": "2.0.4",
     "webpack": "5.92.1",
     "swc-loader": "0.2.6",
     "next-yak": "workspace:*",
