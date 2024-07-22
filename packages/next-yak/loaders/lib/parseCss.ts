@@ -1,6 +1,6 @@
 export interface ParserState {
   isInsideString: "'" | '"' | false;
-  isInsideComment: boolean;
+  currentCommentState: "/*" | "//" | boolean;
   isInsidePropertyValue: boolean;
   isInsideAtRule: boolean;
   currentScopes: CssScope[];
@@ -34,7 +34,7 @@ export function parseCss(
   cssString: string,
   initialState: ParserState = {
     isInsideString: false,
-    isInsideComment: false,
+    currentCommentState: false,
     isInsidePropertyValue: false,
     isInsideAtRule: false,
     currentScopes: [],
@@ -42,7 +42,7 @@ export function parseCss(
   },
 ): { state: ParserState; declarations: Declaration[] } {
   let isInsideString: "'" | '"' | false = initialState.isInsideString;
-  let isInsideComment = initialState.isInsideComment;
+  let currentCommentState = initialState.currentCommentState;
   let isInsidePropertyValue = initialState.isInsidePropertyValue;
   let currentScopes = [...initialState.currentScopes];
   let currentCode = "";
@@ -56,6 +56,37 @@ export function parseCss(
 
   // Iterate over the CSS string character by character
   for (let index = 0; index < cssString.length; index++) {
+    // Iterate until the end of the comment
+    if (currentCommentState === "/*") {
+      // Iterate over comment
+      for (; index < cssString.length; index++) {
+        // Find end of comment
+        if (cssString[index] === "*" && cssString[index + 1] === "/") {
+          currentCommentState = false;
+          if (cssString[index + 2] === "\n") {
+            index++;
+          } else if (cssString[index + 2] + cssString[index + 3] === "\r\n") {
+            index += 2;
+          }
+          break;
+        }
+      }
+      // Resume iteration over CSS string from the end of the comment
+      index++;
+      continue;
+    } else if (currentCommentState === "//") {
+      // Iterate over comment
+      for (; index < cssString.length; index++) {
+        // Find end of comment
+        if (cssString[index] === "\n") {
+          currentCommentState = false;
+          break;
+        }
+      }
+      // Resume iteration over CSS string from the end of the comment
+      continue;
+    }
+
     let previousBackSlashes = backSlashes;
     const currentCharacter = cssString[index];
     if (currentCharacter === "\\") {
@@ -82,41 +113,14 @@ export function parseCss(
     }
     // Find beginning of `/*` type comment
     else if (currentCharacter === "/" && cssString[index + 1] === "*") {
-      let index2 = index + 2;
-      isInsideComment = true;
-
-      // Iterate over comment
-      for (; index2 < cssString.length; index2++) {
-        // Find end of comment
-        if (cssString[index2] === "*" && cssString[index2 + 1] === "/") {
-          isInsideComment = false;
-          if (cssString[index2 + 2] === "\n") {
-            index2++;
-          } else if (cssString[index2 + 2] + cssString[index2 + 3] === "\r\n") {
-            index2 += 2;
-          }
-          break;
-        }
-      }
-      // Resume iteration over CSS string from the end of the comment
-      index = index2 + 1;
+      index += 2;
+      currentCommentState = "/*";
       continue;
     }
     // find beginning of `//` type comment
     else if (currentCharacter === "/" && cssString[index + 1] === "/") {
-      let index2 = index + 2;
-      isInsideComment = true;
-
-      // Iterate over comment
-      for (; index2 < cssString.length; index2++) {
-        // Find end of comment
-        if (cssString[index2] === "\n") {
-          isInsideComment = false;
-          break;
-        }
-      }
-      // Resume iteration over CSS string from the end of the comment
-      index = index2 + 1;
+      index += 2;
+      currentCommentState = "//";
       continue;
     }
     // check if the current selector got closed
@@ -215,7 +219,7 @@ export function parseCss(
   return {
     state: {
       isInsideString,
-      isInsideComment,
+      currentCommentState,
       isInsidePropertyValue,
       isInsideAtRule,
       currentDeclaration,
