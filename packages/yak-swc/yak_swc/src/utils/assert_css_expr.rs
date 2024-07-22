@@ -134,10 +134,10 @@ impl VisitMut for ExprVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use swc_core::atoms::Atom;
   use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
   use swc_core::ecma::visit::as_folder;
-  use swc_core::atoms::Atom;
 
   #[test]
   fn test_css_expr_visitor() {
