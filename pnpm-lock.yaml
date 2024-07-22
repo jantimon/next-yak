@@ -31,8 +31,8 @@ importers:
         version: 6.1.1(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@codspeed/benchmark.js-plugin':
-        specifier: 2.2.0
-        version: 2.2.0(benchmark@2.1.4)
+        specifier: 3.1.0
+        version: 3.1.0(benchmark@2.1.4)
       '@types/benchmark':
         specifier: 2.1.5
         version: 2.1.5
@@ -200,9 +200,12 @@ importers:
       '@babel/standalone':
         specifier: ^7.24.4
         version: 7.24.4
+      lz-string:
+        specifier: ^1.5.0
+        version: 1.5.0
       monaco-editor:
-        specifier: ^0.46.0
-        version: 0.46.0
+        specifier: ^0.50.0
+        version: 0.50.0
       next-yak:
         specifier: workspace:*
         version: link:../next-yak
@@ -715,23 +718,28 @@ packages:
     bundledDependencies:
       - is-unicode-supported
 
-  /@codspeed/benchmark.js-plugin@2.2.0(benchmark@2.1.4):
-    resolution: {integrity: sha512-tAnf4QGylkCLtIC/1olNcPEWoLokZ5/u8a5sNK1ry/jGSgxV4bfNqEEnzw3ncHklGhSdh7egVEgLdyjQftTZzQ==}
+  /@codspeed/benchmark.js-plugin@3.1.0(benchmark@2.1.4):
+    resolution: {integrity: sha512-PHF/QJ3WzTEX9nyhq6EHPA/pkHfMCW0FtfmJvl1qQSt0yIqpM4f0iBIfowua1AzbyD+Pd6iOPvlLHqO7ziLc+Q==}
     peerDependencies:
       benchmark: ^2.1.0
     dependencies:
-      '@codspeed/core': 2.3.1
+      '@codspeed/core': 3.1.1
       benchmark: 2.1.4
-      find-up: 6.3.0
       lodash: 4.17.21
       stack-trace: 1.0.0-pre2
+    transitivePeerDependencies:
+      - debug
     dev: true
 
-  /@codspeed/core@2.3.1:
-    resolution: {integrity: sha512-7KRwBX4iXK33gEQwh8jPWBF9srGIjewm3oc+A/66caiG/aOyHmxJCapjAZxT2f2vIVYqR7CghzqlxY2ik0DNBg==}
+  /@codspeed/core@3.1.1:
+    resolution: {integrity: sha512-ONhERVDAtkm0nc+FYPivDozoMOlNUP2BWRBFDJYATGA18Iap5Kd2mZ1/Lwz54RB5+g+3YDOpsvotHa4hd3Q+7Q==}
     dependencies:
+      axios: 1.7.2
       find-up: 6.3.0
+      form-data: 4.0.0
       node-gyp-build: 4.8.1
+    transitivePeerDependencies:
+      - debug
     dev: true
 
   /@emotion/hash@0.9.1:
@@ -3601,6 +3609,16 @@ packages:
       possible-typed-array-names: 1.0.0
     dev: true
 
+  /axios@1.7.2:
+    resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: true
+
   /babel-jest@29.7.0(@babel/core@7.23.2):
     resolution: {integrity: sha512-BrvGY3xZSwEcCzKvKsCi2GgHqDqsYkOP4/by5xCgIwGXQxIEh+8ew3gmrE1y7XRR6LHZIj6yLYnUi/mm2KXKBg==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -5025,6 +5043,16 @@ packages:
 
   /flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
+    dev: true
+
+  /follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: true
 
   /for-each@0.3.3:
@@ -6601,7 +6629,6 @@ packages:
   /lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
-    dev: true
 
   /magic-string@0.30.10:
     resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
@@ -7335,8 +7362,8 @@ packages:
     resolution: {integrity: sha512-yoe+JbhTClckZ67b2itRtistFKf8yPYelHLc7e5xAwtNAXxM6wJTUx2C7QeVSJFDzKT7bCIFyBVybPMKvmB9AA==}
     dev: false
 
-  /monaco-editor@0.46.0:
-    resolution: {integrity: sha512-ADwtLIIww+9FKybWscd7OCfm9odsFYHImBRI1v9AviGce55QY8raT+9ihH8jX/E/e6QVSGM+pKj4jSUSRmALNQ==}
+  /monaco-editor@0.50.0:
+    resolution: {integrity: sha512-8CclLCmrRRh+sul7C08BmPBP3P8wVWfBHomsTcndxg5NRCEPfu/mc2AGU8k37ajjDVXcXFc12ORAMUkmk+lkFA==}
     dev: false
 
   /ms@2.0.0:
@@ -7974,6 +8001,10 @@ packages:
   /property-information@6.5.0:
     resolution: {integrity: sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig==}
     dev: false
+
+  /proxy-from-env@1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
+    dev: true
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}

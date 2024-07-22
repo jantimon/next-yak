@@ -208,7 +208,7 @@ const FancyButton = styled(Button)\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak/internal\\";
+      "import { styled, css, __yak_unitPostFix } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
       /*YAK Extracted CSS:
@@ -237,9 +237,9 @@ const FancyButton = styled(Button)\`
         $primary
       }) => $primary ? /*#__PURE__*/css(__styleYak.Button__$primary) : /*#__PURE__*/css(__styleYak.Button__not_$primary), {
         \\"style\\": {
-          \\"--Button__width_18fi82j\\": ({
+          \\"--Button__width_18fi82j\\": __yak_unitPostFix(({
             $iconWidth
-          }) => ($iconWidth) + \\"px\\"
+          }) => $iconWidth, \\"px\\")
         }
       });
       const FancyButton =
@@ -1149,7 +1149,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled } from \\"next-yak/internal\\";
+      import { styled, __yak_unitPostFix } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const Button =
       /*YAK Extracted CSS:
@@ -1163,11 +1163,11 @@ const Button = styled.button\`
       /*#__PURE__*/
       styled.button(__styleYak.Button, {
         \\"style\\": {
-          \\"--Button__padding_18fi82j\\": () => (10) + \\"rem\\",
-          \\"--Button__margin_18fi82j\\": () => (4 * 2) + \\"px\\",
+          \\"--Button__padding_18fi82j\\": __yak_unitPostFix(() => 10, \\"rem\\"),
+          \\"--Button__margin_18fi82j\\": __yak_unitPostFix(() => 4 * 2, \\"px\\"),
           \\"--Button__z-index_18fi82j\\": () => 10 + 4,
-          \\"--Button__transform_18fi82j\\": () => (10) + \\"px\\",
-          \\"--Button__transform_18fi82j_1\\": () => (10 / 2) + \\"px\\"
+          \\"--Button__transform_18fi82j\\": __yak_unitPostFix(() => 10, \\"px\\"),
+          \\"--Button__transform_18fi82j_1\\": __yak_unitPostFix(() => 10 / 2, \\"px\\")
         }
       });"
     `);
@@ -1188,7 +1188,7 @@ const Button = styled.button\`
       ),
     ).toMatchInlineSnapshot(`
       "import styles from \\"./page.module.css\\";
-      import { styled } from \\"next-yak/internal\\";
+      import { styled, __yak_unitPostFix } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const ClockNumber =
       /*YAK Extracted CSS:
@@ -1199,12 +1199,12 @@ const Button = styled.button\`
       /*#__PURE__*/
       styled.div(__styleYak.ClockNumber, {
         \\"style\\": {
-          \\"--ClockNumber__transform_18fi82j\\": ({
+          \\"--ClockNumber__transform_18fi82j\\": __yak_unitPostFix(({
             index
-          }) => (index * 30) + \\"deg\\",
-          \\"--ClockNumber__transform_18fi82j_1\\": ({
+          }) => index * 30, \\"deg\\"),
+          \\"--ClockNumber__transform_18fi82j_1\\": __yak_unitPostFix(({
             index
-          }) => (-index * 30) + \\"deg\\"
+          }) => -index * 30, \\"deg\\")
         }
       });"
     `);
@@ -1273,7 +1273,7 @@ const Button = styled.button\`
      `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak/internal\\";
+      "import { css, __yak_unitPostFix } from \\"next-yak/internal\\";
       import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
       const mixin1 =
       /*YAK Extracted CSS:
@@ -1283,7 +1283,7 @@ const Button = styled.button\`
       /*#__PURE__*/
       css(__styleYak.mixin1, {
         \\"style\\": {
-          \\"--mixin1__padding_18fi82j\\": () => (4) + \\"px\\"
+          \\"--mixin1__padding_18fi82j\\": __yak_unitPostFix(() => 4, \\"px\\")
         }
       });
       const value = 10;
@@ -1299,10 +1299,10 @@ const Button = styled.button\`
       /*#__PURE__*/
       css(__styleYak.mixin2, {
         \\"style\\": {
-          \\"--mixin2__margin_18fi82j\\": () => (size) + \\"px\\",
-          \\"--mixin2__top_18fi82j\\": () => (spacing.xs) + \\"px\\",
-          \\"--mixin2__bottom_18fi82j\\": () => (spacing[0]) + \\"PX\\",
-          \\"--mixin2__left_18fi82j\\": () => (spacing()) + \\"px\\"
+          \\"--mixin2__margin_18fi82j\\": __yak_unitPostFix(() => size, \\"px\\"),
+          \\"--mixin2__top_18fi82j\\": __yak_unitPostFix(() => spacing.xs, \\"px\\"),
+          \\"--mixin2__bottom_18fi82j\\": __yak_unitPostFix(() => spacing[0], \\"PX\\"),
+          \\"--mixin2__left_18fi82j\\": __yak_unitPostFix(() => spacing(), \\"px\\")
         }
       });"
     `);
@@ -1788,7 +1788,7 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled, __yak_mergeCssProp } from \\"next-yak/internal\\";
+        "import { css, styled, __yak_mergeCssProp, __yak_unitPostFix } from \\"next-yak/internal\\";
         import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
         const Elem = props => <div {...__yak_mergeCssProp(props,
         /*YAK Extracted CSS:
@@ -1801,7 +1801,7 @@ describe("css prop", () => {
         /*#__PURE__*/
         css(__styleYak.Elem, () => props.active && /*#__PURE__*/css(__styleYak.Elem__propsActive), {
           \\"style\\": {
-            \\"--Elem__padding_18fi82j\\": () => (props.dynamicPadding ? '10px' : \\"0\\") + \\"px\\"
+            \\"--Elem__padding_18fi82j\\": __yak_unitPostFix(() => props.dynamicPadding ? '10px' : \\"0\\", \\"px\\")
           }
         })({}))} />;"
       `);
@@ -1836,7 +1836,7 @@ describe("cross file", () => {
       const Button =
       /*YAK Extracted CSS:
       .Button {
-        :module-selector-import(Icon from './icon') {
+        --yak-css-import: url(\\"./icon:Icon\\") {
           margin: 0 10px;
         }
       }*/

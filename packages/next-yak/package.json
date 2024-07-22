@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "type": "module",
   "types": "./dist/",
   "license": "MIT",
@@ -65,6 +65,7 @@
     "build": "tsup",
     "watch": "tsup --watch",
     "test": "vitest run",
+    "test:snapshots": "vitest run -u",
     "test:types:code": "tsc -p tsconfig.json",
     "test:types:test": "tsc -p ./runtime/__tests__/tsconfig.json",
     "test:watch": "vitest --watch",
