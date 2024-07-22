@@ -4,10 +4,10 @@ use rustc_hash::FxHashMap;
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
-use swc_core::atoms::{atom, Atom};
+use swc_core::atoms::atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
-use swc_core::common::{Spanned, DUMMY_SP};
+use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -17,7 +17,7 @@ use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
-use utils::ast_helper::{extract_ident_and_parts, split_ident, TemplateIterator};
+use utils::ast_helper::{extract_ident_and_parts, TemplateIterator};
 use utils::encode_module_import::{encode_module_import, is_mixin_expression};
 
 mod variable_visitor;
@@ -68,7 +68,7 @@ where
   /// All css declarations of the current root css expression
   current_declaration: Vec<Declaration>,
   /// e.g Button in const Button = styled.button`color: red;`
-  current_variable_name: Option<Atom>,
+  current_variable_name: Option<Id>,
   /// Current condition to name nested css expressions
   current_condition: Vec<String>,
   /// SWC comments proxy to add extracted css as comments
@@ -84,7 +84,7 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_mapping: FxHashMap<Atom, YakCss>,
+  variable_name_mapping: FxHashMap<Id, YakCss>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -126,11 +126,11 @@ where
 
   /// Try to get the component id of the current styled component mixin or animation
   /// e.g. const Button = styled.button`color: red;` -> Button#1
-  fn get_current_component_id(&self) -> Atom {
+  fn get_current_component_id(&self) -> Id {
     self
       .current_variable_name
       .clone()
-      .unwrap_or_else(|| atom!("yak"))
+      .unwrap_or_else(|| Id::from((atom!("yak"), SyntaxContext::empty())))
   }
 
   /// Get the current filename without extension or path e.g. "App" from "/path/to/App.tsx
@@ -232,7 +232,7 @@ where
     for decl in &mut n.decls {
       if let Pat::Ident(BindingIdent { id, .. }) = &decl.name {
         let previous_variable_name = self.current_variable_name.clone();
-        self.current_variable_name = Some(Atom::from(id.to_string()));
+        self.current_variable_name = Some(id.to_id());
         decl.init.visit_mut_with(self);
         self.current_variable_name = previous_variable_name;
       }
@@ -328,7 +328,7 @@ where
 
     let current_variable_id = self.get_current_component_id();
     // Remove the scope postfix to make the variable name easier to read
-    let current_variable_name = current_variable_id.split('#').next().unwrap();
+    let current_variable_name = current_variable_id.0.to_string();
 
     // Current css parser state to parse an incomplete css code from a quasi
     // In css-in-js the outer css scope is missing e.g.:
@@ -338,7 +338,7 @@ where
     // a surrounding scope is added
     let mut css_state = Some(transform.create_css_state(
       &mut self.naming_convention,
-      current_variable_name,
+      &current_variable_name,
       self.current_css_state.clone(),
     ));
 
@@ -394,7 +394,7 @@ where
         // e.g. styled.button`color: ${primary};` (Ident)
         // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
         if let Some((id, member_expr_parts)) = extract_ident_and_parts(expr) {
-          let scoped_name = Atom::from(id.to_string());
+          let scoped_name = id.to_id();
           // Known StyledComponents, Mixin or Animations in the same file
           if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
             // Reference StyledComponents Selector or an Animations name in the same file
@@ -472,7 +472,17 @@ where
           else if current_css_state.is_inside_property_value {
             // If the variable is top but not a constant we can't access it
             // e.g. styled.button`color: ${color};`
-            panic!("Variable {} is not a constant", scoped_name);
+            HANDLER.with(|handler| {
+              handler
+                .struct_span_err(
+                  id.span,
+                  &format!(
+                    "The value of variable \"{}\" could not be extracted statically",
+                    scoped_name.0
+                  ),
+                )
+                .emit();
+            });
           } else {
             // If the variable is not found we can't access it
             panic!("You cant use '{}' outside of a css value", id.sym);
@@ -509,7 +519,7 @@ where
               self
                 .current_variable_name
                 .clone()
-                .map_or("yak".to_string(), |name| split_ident(name).0),
+                .map_or(atom!("yak"), |name| name.0),
               // Current property name
               // e.g. color for styled.button`color: red;`
               css_state.as_ref().unwrap().current_declaration.property

@@ -84,15 +84,6 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
   }
 }
 
-/// Idents contain the name and a scope context suffix
-/// e.g. `foo#0` is the first `foo` in the current scope
-pub fn split_ident(ident: Atom) -> (String, String) {
-  let mut parts = ident.split('#');
-  let name = parts.next().unwrap().to_string();
-  let scope = parts.next().expect("An ident must include a #").to_string();
-  (name, scope)
-}
-
 /// Extracts the identifier and member expression parts from an expression
 /// There are two use cases:
 /// 1. Member expressions (e.g., `colors.primary`) -> Some((colors#0, ["colors", "primary"]))

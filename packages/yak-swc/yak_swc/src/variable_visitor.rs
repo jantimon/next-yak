@@ -6,8 +6,8 @@ use swc_core::ecma::{ast::*, visit::VisitMut};
 /// Visitor implementation to gather all variable declarations
 /// and their values from the AST
 pub struct VariableVisitor {
-  variables: FxHashMap<String, Box<Expr>>,
-  imports: FxHashMap<String, String>,
+  variables: FxHashMap<Id, Box<Expr>>,
+  imports: FxHashMap<Id, String>,
 }
 
 impl VariableVisitor {
@@ -21,7 +21,7 @@ impl VariableVisitor {
   /// Returns the value of a variable if it exists
   /// Use id.to_string() (including the #0 suffix) to get the variable name
   /// Using sym.to_string() will always return None
-  pub fn get_variable(&mut self, name: &str) -> Option<String> {
+  pub fn get_variable(&mut self, name: &Id) -> Option<String> {
     if let Some(expr) = self.variables.get_mut(name) {
       if let Expr::Lit(lit) = &mut **expr {
         if let Lit::Str(str_) = lit {
@@ -37,7 +37,7 @@ impl VariableVisitor {
   // Returns the source of an imported variable if it exists
   /// Use id.to_string() (including the #0 suffix) to get the variable name
   /// Using sym.to_string() will always return None
-  pub fn get_imported_variable(&mut self, name: &str) -> Option<String> {
+  pub fn get_imported_variable(&mut self, name: &Id) -> Option<String> {
     if let Some(src) = self.imports.get(name) {
       return Some(src.to_string());
     }
@@ -51,7 +51,7 @@ impl VisitMut for VariableVisitor {
     var.decls.iter_mut().for_each(|decl| {
       if let Pat::Ident(ident) = &decl.name {
         if let Some(init) = &decl.init {
-          self.variables.insert(ident.to_string(), init.clone());
+          self.variables.insert(ident.to_id(), init.clone());
         }
       }
     });
@@ -63,7 +63,7 @@ impl VisitMut for VariableVisitor {
       if let ImportSpecifier::Named(named) = specifier {
         self
           .imports
-          .insert(named.local.to_string(), import.src.value.to_string());
+          .insert(named.local.to_id(), import.src.value.to_string());
       }
     });
     import.visit_mut_children_with(self);
@@ -73,6 +73,8 @@ impl VisitMut for VariableVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use swc::atoms::Atom;
+  use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
   use swc_core::ecma::visit::as_folder;
 
@@ -93,8 +95,14 @@ mod tests {
       code,
       true,
     );
-    let primary = &visitor.get_imported_variable("primary#0");
-    let duration = &visitor.get_variable("duration#0");
+    let primary = &visitor.get_imported_variable(&Id::from((
+      Atom::from("primary"),
+      SyntaxContext::from_u32(0),
+    )));
+    let duration = &visitor.get_variable(&Id::from((
+      Atom::from("duration"),
+      SyntaxContext::from_u32(0),
+    )));
     assert_eq!(*primary, Some("./theme".to_string()));
     assert_eq!(*duration, Some("34".to_string()));
   }
