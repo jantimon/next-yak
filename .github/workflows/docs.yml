@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "packages/docs/**"
+      - "packages/playground/**"
       - ".github/workflows/docs.yml"
 
 jobs:
