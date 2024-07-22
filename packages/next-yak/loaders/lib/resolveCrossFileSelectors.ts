@@ -11,7 +11,10 @@ export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
   css: string,
 ): Promise<string> {
-  let fileBasedResolveCache = new Map<string, ReturnType<typeof resolveIdentifier>>();
+  let fileBasedResolveCache = new Map<
+    string,
+    ReturnType<typeof resolveIdentifier>
+  >();
   // Find cross-file-imports
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
     const [fullMatch, encodedArguments] = match;
@@ -39,7 +42,12 @@ export async function resolveCrossFileSelectors(
   let result = "";
   for (let i = matches.length - 1; i >= 0; i--) {
     const { moduleSpecifier, specifier, position, size } = matches[i];
-    const resolved = await resolveCrossFileValue(moduleSpecifier, specifier, fileBasedResolveCache, loader);
+    const resolved = await resolveCrossFileValue(
+      moduleSpecifier,
+      specifier,
+      fileBasedResolveCache,
+      loader,
+    );
     if (resolved.type === "unsupported") {
       throw new Error(
         `yak could not import ${specifier.join(
@@ -91,13 +99,18 @@ const getConstantFromResolvedValue = (
   );
 };
 
- /**
-  * Resolve the value of from a cross-file-import
-  * 
-  * For regular files the specifier is resolved with resolveIdentifier
-  * For .yak files the entire module is resolved and evaluated with resolveYakModule
-  */
- async function resolveCrossFileValue (moduleSpecifier: string, specifier: string[], resolveCache: Map<string, ReturnType<typeof resolveIdentifier>>, loader: LoaderContext<{}>) {
+/**
+ * Resolve the value of from a cross-file-import
+ *
+ * For regular files the specifier is resolved with resolveIdentifier
+ * For .yak files the entire module is resolved and evaluated with resolveYakModule
+ */
+async function resolveCrossFileValue(
+  moduleSpecifier: string,
+  specifier: string[],
+  resolveCache: Map<string, ReturnType<typeof resolveIdentifier>>,
+  loader: LoaderContext<{}>,
+) {
   const isYak = moduleSpecifier.endsWith(".yak");
   let resolvedModule: ReturnType<typeof resolveIdentifier>;
   if (!isYak) {
@@ -105,7 +118,9 @@ const getConstantFromResolvedValue = (
     // therfore only the specifier can be cached
     const resolveKey = `${moduleSpecifier} : ${specifier[0]}`;
     let resolvedFromCache = resolveCache.get(resolveKey);
-    resolvedModule = resolvedFromCache || resolveIdentifier(loader, loader.context, moduleSpecifier, specifier[0]);
+    resolvedModule =
+      resolvedFromCache ||
+      resolveIdentifier(loader, loader.context, moduleSpecifier, specifier[0]);
     if (!resolvedFromCache) {
       resolveCache.set(resolveKey, resolvedModule);
     }
@@ -113,7 +128,8 @@ const getConstantFromResolvedValue = (
     // For yak files the entire module is executed with node (which is slower) and returned
     // therefore the entire module can be cached as record
     let resolvedFromCache = resolveCache.get(moduleSpecifier);
-    resolvedModule = resolvedFromCache || resolveYakModule(loader, moduleSpecifier);
+    resolvedModule =
+      resolvedFromCache || resolveYakModule(loader, moduleSpecifier);
     if (!resolvedFromCache) {
       resolveCache.set(moduleSpecifier, resolvedModule);
     }
@@ -135,9 +151,9 @@ const getConstantFromResolvedValue = (
           value,
         };
       }
-        throw new Error(
-          `Could not find export ${specifier[0]} in ${moduleSpecifier}`
-        );
+      throw new Error(
+        `Could not find export ${specifier[0]} in ${moduleSpecifier}`,
+      );
     });
   }
   return resolvedModule;
@@ -395,10 +411,8 @@ function parseObjectExpression(
 }
 
 function resolveYakModule(loader: LoaderContext<{}>, moduleSpecifier: string) {
-  return loader.importModule(moduleSpecifier).then((module) => (
-    {
-      type: "record" as const,
-      value: module as RecursiveRecord,
-    }
-  ));
+  return loader.importModule(moduleSpecifier).then((module) => ({
+    type: "record" as const,
+    value: module as RecursiveRecord,
+  }));
 }
