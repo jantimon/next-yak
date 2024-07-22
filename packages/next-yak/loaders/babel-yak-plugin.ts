@@ -599,10 +599,9 @@ function transformYakExpressions(
               file,
             );
           }
-          replaceValue = encodeModuleImport(
-            constantValue.source,
-            [constantValue.name],
-          );
+          replaceValue = encodeModuleImport(constantValue.source, [
+            constantValue.name,
+          ]);
         } else {
           replaceValue = String(constantValue?.value);
         }
