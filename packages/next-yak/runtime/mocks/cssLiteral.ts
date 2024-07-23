@@ -76,7 +76,7 @@ export function css<TProps>(
   }
   if (dynamicCssFunctions.length === 0) {
     return {
-      className: "css-mixin",
+      className: "",
       style: undefined,
     };
   }
@@ -87,7 +87,10 @@ export function css<TProps>(
       // the same way as in the real runtime
       executeDynamicExpressionRecursively(props, dynamicCssFunctions[i]);
     }
-    return {};
+    return {
+      className: "",
+      style: undefined,
+    };
   }) as ComponentStyles<TProps>;
 }
 
