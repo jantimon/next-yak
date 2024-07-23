@@ -170,6 +170,9 @@ importers:
       '@types/webpack':
         specifier: 5.28.5
         version: 5.28.5(esbuild@0.18.20)
+      fast-glob:
+        specifier: 3.3.2
+        version: 3.3.2
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0

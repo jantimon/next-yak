@@ -1,7 +1,7 @@
 import { it, describe, expect } from "vitest";
 import fs from "fs";
 import path from "path";
-import { glob } from "glob";
+import { glob } from "fast-glob";
 import tsloader from "../ts-loader";
 import * as prettier from "prettier";
 

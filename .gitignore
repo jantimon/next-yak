@@ -5,3 +5,4 @@ packages/next-yak/dist
 packages/playground/dist
 target
 .vercel
+.swc

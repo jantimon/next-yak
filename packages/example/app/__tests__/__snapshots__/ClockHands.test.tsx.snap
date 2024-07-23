@@ -2,8 +2,17 @@
 
 exports[`renders ClockHands component 1`] = `
 <DocumentFragment>
-  <div />
-  <div />
-  <div />
+  <div
+    class="SecondHand SecondHand__themehighContrast-01 ClockHand"
+    style="--ClockHand__transform_4acxch: 0deg;"
+  />
+  <div
+    class="MinuteHand ClockHand"
+    style="--ClockHand__transform_4acxch: 0deg;"
+  />
+  <div
+    class="HourHand ClockHand"
+    style="--ClockHand__transform_4acxch: 510deg;"
+  />
 </DocumentFragment>
 `;

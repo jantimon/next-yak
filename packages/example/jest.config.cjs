@@ -7,6 +7,12 @@ const createJestConfig = nextJest({ dir: './' })
 const customJestConfig = {
   setupFilesAfterEnv: [],
   testEnvironment: 'jsdom',
+
+  // Clock.tsx would render always a different snapshot without a fixed time
+  fakeTimers: {
+    enableGlobally: true,
+    now: new Date('2024-05-05T15:00:00Z').getTime(),
+  },
 }
  
 // createJestConfig is exported in this way to ensure that next/jest can load the Next.js configuration, which is async
