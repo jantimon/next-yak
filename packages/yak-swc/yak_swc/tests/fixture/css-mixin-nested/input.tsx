@@ -5,10 +5,12 @@ const buttonStyles = css`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  ${({ $active }) => $active && css`
-    background-color: #f0f0f0;
-    max-width: ${({ $letters }) => $letters * 15}px;
-  `}
+  @media (max-width: 600px) {
+    ${({ $active }) => $active && css`
+      background-color: #f0f0f0;
+      max-width: ${({ $letters }) => $letters * 15}px;
+    `}
+  }
   width: ${({ $letters }) => $letters * 10}px;
 `;
 

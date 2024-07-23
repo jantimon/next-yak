@@ -8,8 +8,10 @@ const buttonStyles = /*YAK Extracted CSS:
   cursor: pointer;
 }
 .buttonStyles__$active {
-  background-color: #f0f0f0;
-  max-width: var(--buttonStyles__max-width_o1wkyu);
+  @media (max-width: 600px) {
+    background-color: #f0f0f0;
+    max-width: var(--buttonStyles__max-width_o1wkyu);
+  }
 }
 .buttonStyles {
   width: var(--buttonStyles__width_o1wkyu);
