@@ -1,6 +1,7 @@
 import * as monaco from "monaco-editor";
 import { useEffect, useRef } from "react";
 import { useVocsTheme } from "../useVocsTheme";
+import { updateWindowLocation } from "./shareableState";
 
 export const YakEditor = ({
   initialValue,
@@ -13,7 +14,8 @@ export const YakEditor = ({
   const theme = useVocsTheme();
   useEffect(() => {
     if (monaco.editor.getModels().length > 0) {
-      return;
+      // remove active editors when switching from one link to another
+      monaco.editor.getModels().forEach((model) => model.dispose());
     }
     const model = monaco.editor.createModel(
       initialValue,
@@ -41,6 +43,14 @@ export const YakEditor = ({
     editor.onDidChangeModelContent(() => {
       onChange(editor.getModel()?.getValue() ?? "");
     });
+
+    window.addEventListener(
+      "focusout",
+      () => {
+        updateWindowLocation(editor.getModel()?.getValue() ?? "");
+      },
+      { passive: true }
+    );
   }, []);
 
   useEffect(() => {

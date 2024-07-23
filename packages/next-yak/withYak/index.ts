@@ -15,6 +15,12 @@ export type YakConfigOptions = {
   contextPath?: string;
   experiments?: {
     crossFileSelectors?: boolean;
+    debug?:
+      | boolean
+      | {
+          filter?: (path: string) => boolean;
+          type: "all" | "ts" | "css" | "css resolved";
+        };
   };
 };
 

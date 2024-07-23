@@ -134,5 +134,5 @@ export default function getCssName(
     const mixinName = getStyledComponentName(literal);
     return mixinName ? mixinName : "yak";
   }
-  return conditions.join("_").replace(/\$/g, "");
+  return conditions.join("_");
 }
