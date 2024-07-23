@@ -14,7 +14,6 @@ it("works fine with an empty object", () => {
   const Comp = styled.div.attrs({})``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
-      className=""
       style={{}}
     />
   `);
@@ -23,11 +22,10 @@ it("works fine with an empty object", () => {
 it("works fine with a function that returns an empty object", () => {
   const Comp = styled.div.attrs(() => ({}))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-  <div
-    className=""
-    style={{}}
-  />
-`);
+    <div
+      style={{}}
+    />
+  `);
 });
 
 it("pass a simple attr via object", () => {
@@ -36,7 +34,6 @@ it("pass a simple attr via object", () => {
   })``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       type="button"
     />
@@ -49,7 +46,6 @@ it("pass a simple attr via function with object return", () => {
   }))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       type="button"
     />
@@ -105,7 +101,6 @@ it("defaultProps are merged into what function attrs receives", () => {
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       color="red"
       data-color="red"
       style={{}}
@@ -120,7 +115,6 @@ it("pass props to the attr function", () => {
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       type="button"
     />
@@ -128,7 +122,6 @@ it("pass props to the attr function", () => {
   expect(TestRenderer.create(<Comp $submit />).toJSON()).toMatchInlineSnapshot(
     `
     <button
-      className=""
       style={{}}
       type="submit"
     />
@@ -144,7 +137,6 @@ it("should replace props with attrs", () => {
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       tabIndex={0}
       type="button"
@@ -152,22 +144,20 @@ it("should replace props with attrs", () => {
   `);
   expect(TestRenderer.create(<Comp type="reset" />).toJSON())
     .toMatchInlineSnapshot(`
-    <button
-      className=""
-      style={{}}
-      tabIndex={0}
-      type="button"
-    />
-  `);
+      <button
+        style={{}}
+        tabIndex={0}
+        type="button"
+      />
+    `);
   expect(TestRenderer.create(<Comp type="reset" tabIndex={-1} />).toJSON())
     .toMatchInlineSnapshot(`
-    <button
-      className=""
-      style={{}}
-      tabIndex={0}
-      type="button"
-    />
-  `);
+      <button
+        style={{}}
+        tabIndex={0}
+        type="button"
+      />
+    `);
 });
 
 it("should merge className", () => {
@@ -229,7 +219,6 @@ it("should merge style", () => {
     ).toJSON(),
   ).toMatchInlineSnapshot(`
     <div
-      className=""
       style={
         {
           "background": "blue",
@@ -249,7 +238,6 @@ it("should work with data and aria attributes", () => {
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
       aria-label="A simple FooBar"
-      className=""
       data-foo="bar"
       style={{}}
     />
@@ -266,7 +254,6 @@ it("merge attrs when inheriting SC", () => {
   }))``;
   expect(TestRenderer.create(<Child />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       tabIndex={0}
       type="submit"
@@ -305,7 +292,6 @@ it("should pass through children as a normal prop", () => {
   }))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
-      className=""
       style={{}}
     >
       Probably a bad idea
@@ -319,7 +305,6 @@ it("should pass through complex children as well", () => {
   }))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
-      className=""
       style={{}}
     >
       <span>
@@ -337,15 +322,14 @@ it("should override children", () => {
   }))``;
   expect(TestRenderer.create(<Comp>Something else</Comp>).toJSON())
     .toMatchInlineSnapshot(`
-    <div
-      className=""
-      style={{}}
-    >
-      <span>
-        Amazing
-      </span>
-    </div>
-  `);
+      <div
+        style={{}}
+      >
+        <span>
+          Amazing
+        </span>
+      </div>
+    `);
 });
 
 it('should shallow merge "style" prop + attr instead of overwriting', () => {
@@ -377,18 +361,17 @@ it('should shallow merge "style" prop + attr instead of overwriting', () => {
   const rendered = TestRenderer.create(<BlueText>Hello</BlueText>);
 
   expect(rendered.toJSON()).toMatchInlineSnapshot(`
-      <p
-        className=""
-        style={
-          {
-            "color": "blue",
-            "fontSize": "4em",
-          }
+    <p
+      style={
+        {
+          "color": "blue",
+          "fontSize": "4em",
         }
-      >
-        Hello
-      </p>
-    `);
+      }
+    >
+      Hello
+    </p>
+  `);
 });
 
 it("does not pass transient props to HTML element", () => {
@@ -404,7 +387,6 @@ it("does not pass transient props to HTML element", () => {
 
   expect(TestRenderer.create(<StyledComp />).toJSON()).toMatchInlineSnapshot(`
     <div
-      className=""
       style={{}}
     />
   `);
@@ -434,14 +416,12 @@ it("should remap props", () => {
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       type="button"
     />
   `);
   expect(TestRenderer.create(<Comp primary />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       primary={true}
       style={{}}
       type="button"
@@ -450,7 +430,6 @@ it("should remap props", () => {
 
   expect(TestRenderer.create(<Comp $submit />).toJSON()).toMatchInlineSnapshot(`
     <button
-      className=""
       style={{}}
       type="submit"
     />
@@ -464,18 +443,16 @@ it("should have optional attrs props as component interface", () => {
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <h1
-      className=""
       style={{}}
     />
   `);
 
   expect(TestRenderer.create(<Comp $primary />).toJSON())
     .toMatchInlineSnapshot(`
-    <h1
-      className=""
-      style={{}}
-    />
-  `);
+      <h1
+        style={{}}
+      />
+    `);
 });
 
 it("should have access to theme", () => {
@@ -494,7 +471,6 @@ it("should have access to theme", () => {
     ).toJSON(),
   ).toMatchInlineSnapshot(`
     <pre
-      className=""
       data-color="red"
       style={{}}
     />
@@ -517,7 +493,6 @@ it("should pass theme if theme is overwritten", () => {
     ).toJSON(),
   ).toMatchInlineSnapshot(`
     <pre
-      className=""
       style={{}}
     >
       {"color":"blue"}

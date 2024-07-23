@@ -16,9 +16,7 @@ it("should render a literal element", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <input
-        class=""
-      />
+      <input />
     </div>
   `);
 });
@@ -63,9 +61,7 @@ it("should forward children", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <div
-        class=""
-      >
+      <div>
         <button>
           Click me!
         </button>
@@ -81,9 +77,7 @@ it("should filter out properties starting with $", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <input
-        class=""
-      />
+      <input />
     </div>
   `);
 });
@@ -111,7 +105,6 @@ it("should forward properties to the next yak component", () => {
     <div>
       <input
         aria-label="hello world"
-        class=""
       />
     </div>
   `);
@@ -139,7 +132,6 @@ it("should concatenate styles", () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <input
-        class=""
         style="color: red;"
       />
     </div>
@@ -153,9 +145,7 @@ it("should not add class if prop is not set", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <input
-        class=""
-      />
+      <input />
     </div>
   `);
 });
@@ -187,15 +177,9 @@ it("should allow falsy values", () => {
 
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <input
-        class=""
-      />
-      <input
-        class=""
-      />
-      <input
-        class=""
-      />
+      <input />
+      <input />
+      <input />
     </div>
   `);
 });
