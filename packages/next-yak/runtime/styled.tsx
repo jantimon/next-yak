@@ -225,6 +225,7 @@ function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
 }
 
 const mergeClassNames = (a?: string, b?: string) => {
+  if (!a && !b) return undefined;
   if (!a) return b;
   if (!b) return a;
   return a + " " + b;

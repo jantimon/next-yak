@@ -66,7 +66,7 @@ const createWebpackConfig = (files: Record<string, string>): webpack.Configurati
         {
           test: /\.css$/,
           use: {
-            loader: path.resolve(__dirname, "./comment-loader.js"),
+            loader: path.resolve(__dirname, "./comment-loader.cjs"),
           },
         },
       ],
