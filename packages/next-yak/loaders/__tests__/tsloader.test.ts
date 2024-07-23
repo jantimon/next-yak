@@ -56,11 +56,11 @@ export const Main = () => <h1 className={headline({}).className}>Hello World</h1
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "\\"use client\\";
+      ""use client";
 
-      import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      import styles from "./page.module.css";
+      import { css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       type x = number;
       const headline =
       /*YAK Extracted CSS:
@@ -100,9 +100,9 @@ const headline = css\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const x = Math.random();
       const headline =
       /*YAK Extracted CSS:
@@ -150,9 +150,9 @@ const FancyButton = styled(Button)\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const x = Math.random();
       const Button =
       /*YAK Extracted CSS:
@@ -208,38 +208,38 @@ const FancyButton = styled(Button)\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { styled, css, __yak_unitPostFix } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Button =
       /*YAK Extracted CSS:
       .Button {
         font-size: 2rem;
         font-weight: bold;
       }
-      .Button__primary {
+      .Button__$primary {
         .Icon {
           background: black;
         }
       }
-      .Button__not_primary {
+      .Button__not_$primary {
         .Icon {
           background: white;
         }
       }
       .Button {
         .Icon {
-          width: var(--Button-width_18fi82j);
+          width: var(--Button__width_18fi82j);
         }
         display: block;
       }*/
       /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         $primary
-      }) => $primary ? /*#__PURE__*/css(__styleYak.Button__primary) : /*#__PURE__*/css(__styleYak.Button__not_primary), {
-        \\"style\\": {
-          \\"--Button-width_18fi82j\\": ({
+      }) => $primary ? /*#__PURE__*/css(__styleYak.Button__$primary) : /*#__PURE__*/css(__styleYak.Button__not_$primary), {
+        "style": {
+          "--Button__width_18fi82j": __yak_unitPostFix(({
             $iconWidth
-          }) => ($iconWidth) + \\"px\\"
+          }) => $iconWidth, "px")
         }
       });
       const FancyButton =
@@ -278,9 +278,9 @@ const FancyButton = styled(Button)\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const x = Math.random();
       const Button =
       /*YAK Extracted CSS:
@@ -300,7 +300,7 @@ const FancyButton = styled(Button)\`
       /*#__PURE__*/
       styled.button(__styleYak.Button, ({
         theme
-      }) => theme.mode === \\"dark\\" && /*#__PURE__*/css(__styleYak.Button__Button));
+      }) => theme.mode === "dark" && /*#__PURE__*/css(__styleYak.Button__Button));
       const FancyButton =
       /*YAK Extracted CSS:
       .FancyButton {
@@ -326,8 +326,8 @@ const headline = styled.input.attrs({
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const headline =
       /*YAK Extracted CSS:
       .headline {
@@ -335,7 +335,7 @@ const headline = styled.input.attrs({
       }*/
       /*#__PURE__*/
       styled.input.attrs({
-        type: \\"text\\"
+        type: "text"
       })(__styleYak.headline);"
     `);
   });
@@ -359,8 +359,8 @@ const newHeadline = styled(headline).attrs({
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const headline =
       /*YAK Extracted CSS:
       .headline {
@@ -375,7 +375,7 @@ const newHeadline = styled(headline).attrs({
       }*/
       /*#__PURE__*/
       styled(headline).attrs({
-        type: \\"text\\"
+        type: "text"
       })(__styleYak.newHeadline);"
     `);
   });
@@ -398,14 +398,14 @@ const headline = css\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      import { easing } from \\"styleguide\\";
+      "import styles from "./page.module.css";
+      import { css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
+      import { easing } from "styleguide";
       const headline =
       /*YAK Extracted CSS:
       .headline {
-        transition: color var(--headline-transition_18fi82j) var(--headline-transition_18fi82j_1);
+        transition: color var(--headline__transition_18fi82j) var(--headline__transition_18fi82j_1);
         display: block;
       }
       .headline__headline {
@@ -416,11 +416,11 @@ const headline = css\`
       }*/
       /*#__PURE__*/
       css(__styleYak.headline, css\`color: orange\`, css\`color: blue\`, {
-        \\"style\\": {
-          \\"--headline-transition_18fi82j\\": ({
+        "style": {
+          "--headline__transition_18fi82j": ({
             i
-          }) => i * 100 + \\"ms\\",
-          \\"--headline-transition_18fi82j_1\\": ({
+          }) => i * 100 + "ms",
+          "--headline__transition_18fi82j_1": ({
             easing
           }) => easing
         }
@@ -451,9 +451,9 @@ const FadeInButton = styled.button\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled, keyframes } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, keyframes } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const fadeIn =
       /*YAK Extracted CSS:
       @keyframes fadeIn {
@@ -508,8 +508,8 @@ const Wrapper = styled.div\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, keyframes } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { styled, keyframes } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Link =
       /*YAK Extracted CSS:
       .Link {
@@ -571,8 +571,8 @@ const Wrapper = styled.div\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, keyframes } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { styled, keyframes } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Link =
       /*YAK Extracted CSS:
       .Link {}
@@ -619,9 +619,9 @@ const Wrapper = styled.div\`
   \``,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      import { queries } from \\"@/theme/constants.yak\\";
+      "import { css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
+      import { queries } from "@/theme/constants.yak";
       const headline =
       /*YAK Extracted CSS:
       .headline {
@@ -629,20 +629,20 @@ const Wrapper = styled.div\`
           font-size: 1.5rem;
         }
       }
-      .headline__primary {
+      .headline__$primary {
         @media (min-width: 640px) {
           font-size: 1.7rem;
         }
       }
       .headline {
         &:before {
-          content: \\"\\\\2022\\";
+          content: "\\2022";
         }
       }*/
       /*#__PURE__*/
       css(__styleYak.headline, ({
         $primary
-      }) => $primary && /*#__PURE__*/css(__styleYak.headline__primary));"
+      }) => $primary && /*#__PURE__*/css(__styleYak.headline__$primary));"
     `);
   });
 
@@ -667,9 +667,9 @@ const Icon = styled.div\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
+      [Error: /some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
       found: \${bold}
-      Use an inline css literal instead or move the selector into the mixin"
+      Use an inline css literal instead or move the selector into the mixin]
     `);
   });
 
@@ -694,9 +694,9 @@ const Icon = styled.div\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
+      [Error: /some/special/path/page.tsx: line 11: Mixins are not allowed inside nested selectors
       found: \${bold()}
-      Use an inline css literal instead or move the selector into the mixin"
+      Use an inline css literal instead or move the selector into the mixin]
     `);
   });
 
@@ -743,9 +743,9 @@ const Icon = styled.div\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 6: Module constants are not allowed in this context
+      [Error: /some/special/path/page.tsx: line 6: Module constants are not allowed in this context
       found: \${test}
-      Use the 'experiments.crossFileSelectors' option to enable cross file selectors"
+      Use the 'experiments.crossFileSelectors' option to enable cross file selectors]
     `);
   });
 
@@ -765,9 +765,9 @@ const headline = css\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      const red = \\"#E50914\\";
+      "import { styled, css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
+      const red = "#E50914";
       const zIndex = 14;
       const headline =
       /*YAK Extracted CSS:
@@ -794,8 +794,8 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 6: Could not resolve value for red
-      found: \${red}"
+      [Error: /some/special/path/page.tsx: line 6: Could not resolve value for red
+      found: \${red}]
     `);
   });
 
@@ -817,8 +817,8 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 9: Could not resolve value for $red
-      found: \${$red}"
+      [Error: /some/special/path/page.tsx: line 9: Could not resolve value for $red
+      found: \${$red}]
     `);
   });
 
@@ -840,12 +840,12 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      [Error: /some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
       found: \${red()}
       Please move the constant to a .yak import or use an arrow function
       e.g.:
       |   import { primaryColor } from './foo.yak'
-      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`"
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`]
     `);
   });
 
@@ -867,12 +867,12 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      [Error: /some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
       found: \${colors.red()}
       Please move the constant to a .yak import or use an arrow function
       e.g.:
       |   import { primaryColor } from './foo.yak'
-      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`"
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`]
     `);
   });
 
@@ -894,9 +894,9 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 9: Module constants are not allowed in this context
+      [Error: /some/special/path/page.tsx: line 9: Module constants are not allowed in this context
       found: \${$red}
-      Use the 'experiments.crossFileSelectors' option to enable cross file selectors"
+      Use the 'experiments.crossFileSelectors' option to enable cross file selectors]
     `);
   });
 
@@ -918,12 +918,12 @@ const headline = css\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
+      [Error: /some/special/path/page.tsx: line 9: Possible constant used as runtime value for a css variable
       found: \${colors.red}
       Please move the constant to a .yak import or use an arrow function
       e.g.:
       |   import { primaryColor } from './foo.yak'
-      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`"
+      |   const MyStyledDiv = styled.div\`color: \${primaryColor};\`]
     `);
   });
 
@@ -945,23 +945,23 @@ const Button = styled.button\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { styled, css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Button =
       /*YAK Extracted CSS:
-      .Button__primary {
+      .Button__$primary {
         background-color: #4CAF50;
-        text-indent: var(--Button__primary-text-indent_18fi82j);
+        text-indent: var(--Button__$primary__text-indent_18fi82j);
       }*/
       /*#__PURE__*/
       styled.button(({
         $primary,
         $digits
       }) => {
-        const indent = $digits * 10 + \\"px\\";
-        return $primary && /*#__PURE__*/css(__styleYak.Button__primary, {
-          \\"style\\": {
-            \\"--Button__primary-text-indent_18fi82j\\": indent
+        const indent = $digits * 10 + "px";
+        return $primary && /*#__PURE__*/css(__styleYak.Button__$primary, {
+          "style": {
+            "--Button__$primary__text-indent_18fi82j": indent
           }
         });
       });"
@@ -986,9 +986,9 @@ const headline = css\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const x = Math.random();
       const headline =
       /*YAK Extracted CSS:
@@ -1016,9 +1016,9 @@ const Icon = styled.div\`
 `,
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "/some/special/path/page.tsx: line 6: Module constants are not allowed in this context
+      [Error: /some/special/path/page.tsx: line 6: Module constants are not allowed in this context
       found: \${test}
-      Use the 'experiments.crossFileSelectors' option to enable cross file selectors"
+      Use the 'experiments.crossFileSelectors' option to enable cross file selectors]
     `);
   });
 
@@ -1040,9 +1040,9 @@ const Button = styled.button\`
 `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Icon =
       /*YAK Extracted CSS:
       .Icon {}
@@ -1090,9 +1090,9 @@ const Button = styled.button\`
     `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled, css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Button =
       /*YAK Extracted CSS:
       .Button {
@@ -1102,22 +1102,22 @@ const Button = styled.button\`
           color: red;
         }
       }
-      .Button__primary {
+      .Button__$primary {
         .Icon {
           background: black;
         }
       }
-      .Button__primary_and_active {
+      .Button__$primary_and_$active {
         .Icon {
           color: red;
         }
       }
-      .Button__primary_and_active_and {
+      .Button__$primary_and_$active_and {
         .Icon {
           color: red;
         }
       }
-      .Button__not_primary {
+      .Button__not_$primary {
         .Icon {
           background: white;
         }
@@ -1126,7 +1126,7 @@ const Button = styled.button\`
         display: block;
       }*/
       /*#__PURE__*/
-      styled.button(__styleYak.Button, $primary => $primary ? /*#__PURE__*/css(__styleYak.Button__primary, $active => $active && /*#__PURE__*/css(__styleYak.Button__primary_and_active), $active => $active && Math.random() && /*#__PURE__*/css(__styleYak.Button__primary_and_active_and)) : /*#__PURE__*/css(__styleYak.Button__not_primary));"
+      styled.button(__styleYak.Button, $primary => $primary ? /*#__PURE__*/css(__styleYak.Button__$primary, $active => $active && /*#__PURE__*/css(__styleYak.Button__$primary_and_$active), $active => $active && Math.random() && /*#__PURE__*/css(__styleYak.Button__$primary_and_$active_and)) : /*#__PURE__*/css(__styleYak.Button__not_$primary));"
     `);
   });
 
@@ -1148,26 +1148,26 @@ const Button = styled.button\`
      `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, __yak_unitPostFix } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const Button =
       /*YAK Extracted CSS:
       .Button {
-        padding: var(--Button-padding_18fi82j);
-        margin: var(--Button-margin_18fi82j);
-        z-index: var(--Button-z-index_18fi82j);
-        transform: translateX(var(--Button-transform_18fi82j)) translateY(var(--Button-transform_18fi82j_1));
-        font-family: \\"Arial\\", sans-serif;
+        padding: var(--Button__padding_18fi82j);
+        margin: var(--Button__margin_18fi82j);
+        z-index: var(--Button__z-index_18fi82j);
+        transform: translateX(var(--Button__transform_18fi82j)) translateY(var(--Button__transform_18fi82j_1));
+        font-family: "Arial", sans-serif;
       }*/
       /*#__PURE__*/
       styled.button(__styleYak.Button, {
-        \\"style\\": {
-          \\"--Button-padding_18fi82j\\": () => (10) + \\"rem\\",
-          \\"--Button-margin_18fi82j\\": () => (4 * 2) + \\"px\\",
-          \\"--Button-z-index_18fi82j\\": () => 10 + 4,
-          \\"--Button-transform_18fi82j\\": () => (10) + \\"px\\",
-          \\"--Button-transform_18fi82j_1\\": () => (10 / 2) + \\"px\\"
+        "style": {
+          "--Button__padding_18fi82j": __yak_unitPostFix(() => 10, "rem"),
+          "--Button__margin_18fi82j": __yak_unitPostFix(() => 4 * 2, "px"),
+          "--Button__z-index_18fi82j": () => 10 + 4,
+          "--Button__transform_18fi82j": __yak_unitPostFix(() => 10, "px"),
+          "--Button__transform_18fi82j_1": __yak_unitPostFix(() => 10 / 2, "px")
         }
       });"
     `);
@@ -1187,24 +1187,24 @@ const Button = styled.button\`
      `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { styled, __yak_unitPostFix } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const ClockNumber =
       /*YAK Extracted CSS:
       .ClockNumber {
-        transform: translate(-50%, -50%) rotate(var(--ClockNumber-transform_18fi82j))
-      translate(0, -88px) rotate(var(--ClockNumber-transform_18fi82j_1));
+        transform: translate(-50%, -50%) rotate(var(--ClockNumber__transform_18fi82j))
+      translate(0, -88px) rotate(var(--ClockNumber__transform_18fi82j_1));
       }*/
       /*#__PURE__*/
       styled.div(__styleYak.ClockNumber, {
-        \\"style\\": {
-          \\"--ClockNumber-transform_18fi82j\\": ({
+        "style": {
+          "--ClockNumber__transform_18fi82j": __yak_unitPostFix(({
             index
-          }) => (index * 30) + \\"deg\\",
-          \\"--ClockNumber-transform_18fi82j_1\\": ({
+          }) => index * 30, "deg"),
+          "--ClockNumber__transform_18fi82j_1": __yak_unitPostFix(({
             index
-          }) => (-index * 30) + \\"deg\\"
+          }) => -index * 30, "deg")
         }
       });"
     `);
@@ -1229,26 +1229,25 @@ const Button = styled.button\`
      `,
       ),
     ).toMatchInlineSnapshot(`
-      "import styles from \\"./page.module.css\\";
-      import { css } from \\"next-yak/internal\\";
-      import { __yak_unitPostFix } from \\"next-yak/runtime-internals\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import styles from "./page.module.css";
+      import { css, __yak_unitPostFix } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const case1 =
       /*YAK Extracted CSS:
       .case1 {
-        padding: var(--case1-padding_18fi82j);
+        padding: var(--case1__padding_18fi82j);
       }*/
       /*#__PURE__*/
       css(__styleYak.case1, {
-        \\"style\\": {
-          \\"--case1-padding_18fi82j\\": __yak_unitPostFix(({
+        "style": {
+          "--case1__padding_18fi82j": __yak_unitPostFix(({
             $indent
           }) => {
             if ($indent > 0) {
               return $indent * 3;
             }
             return 0;
-          }, \\"px\\")
+          }, "px")
         }
       });"
     `);
@@ -1274,36 +1273,36 @@ const Button = styled.button\`
      `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, __yak_unitPostFix } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const mixin1 =
       /*YAK Extracted CSS:
       .mixin1 {
-        padding: var(--mixin1-padding_18fi82j);
+        padding: var(--mixin1__padding_18fi82j);
       }*/
       /*#__PURE__*/
       css(__styleYak.mixin1, {
-        \\"style\\": {
-          \\"--mixin1-padding_18fi82j\\": () => (4) + \\"px\\"
+        "style": {
+          "--mixin1__padding_18fi82j": __yak_unitPostFix(() => 4, "px")
         }
       });
       const value = 10;
       const mixin2 =
       /*YAK Extracted CSS:
       .mixin2 {
-        margin: var(--mixin2-margin_18fi82j);
-        top: var(--mixin2-top_18fi82j);
-        bottom: var(--mixin2-bottom_18fi82j);
-        left: var(--mixin2-left_18fi82j);
+        margin: var(--mixin2__margin_18fi82j);
+        top: var(--mixin2__top_18fi82j);
+        bottom: var(--mixin2__bottom_18fi82j);
+        left: var(--mixin2__left_18fi82j);
         right: 10px;
       }*/
       /*#__PURE__*/
       css(__styleYak.mixin2, {
-        \\"style\\": {
-          \\"--mixin2-margin_18fi82j\\": () => (size) + \\"px\\",
-          \\"--mixin2-top_18fi82j\\": () => (spacing.xs) + \\"px\\",
-          \\"--mixin2-bottom_18fi82j\\": () => (spacing[0]) + \\"PX\\",
-          \\"--mixin2-left_18fi82j\\": () => (spacing()) + \\"px\\"
+        "style": {
+          "--mixin2__margin_18fi82j": __yak_unitPostFix(() => size, "px"),
+          "--mixin2__top_18fi82j": __yak_unitPostFix(() => spacing.xs, "px"),
+          "--mixin2__bottom_18fi82j": __yak_unitPostFix(() => spacing[0], "PX"),
+          "--mixin2__left_18fi82j": __yak_unitPostFix(() => spacing(), "px")
         }
       });"
     `);
@@ -1344,8 +1343,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const elem = <div {...
       /*YAK Extracted CSS:
       .elem {
@@ -1367,8 +1366,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const MyComp = () => <div><p><div {...
           /*YAK Extracted CSS:
           .MyComp {
@@ -1392,8 +1391,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const MyComp = p => <div {...p}>anything</div>;
       const MyComp2 = () => <MyComp {...
       /*YAK Extracted CSS:
@@ -1420,8 +1419,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const TestObj = {
         TestMem: p => <div {...p}>anything</div>
       };
@@ -1452,8 +1451,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const test = {
         nested: {
           TestMem: p => <div {...p}>anything</div>
@@ -1481,8 +1480,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const MyComp2 = () => <custom-element {...
       /*YAK Extracted CSS:
       .MyComp2 {
@@ -1521,8 +1520,8 @@ describe("css prop", () => {
         `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const padding =
       /*YAK Extracted CSS:
       .padding {
@@ -1546,8 +1545,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const MyComp = () => <div {...(true &&
       /*YAK Extracted CSS:
       .MyComp {
@@ -1570,8 +1569,8 @@ describe("css prop", () => {
       `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const MyComp = () => <div {...(false &&
       /*YAK Extracted CSS:
       .MyComp {
@@ -1598,8 +1597,8 @@ describe("css prop", () => {
         `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
       const padding =
       /*YAK Extracted CSS:
       .padding {
@@ -1629,11 +1628,10 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = () => <div {...__yak_mergeCssProp({
-          className: \\"foo\\"
+          className: "foo"
         },
         /*YAK Extracted CSS:
         .Elem {
@@ -1655,12 +1653,11 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = () => <div {...__yak_mergeCssProp({
           style: {
-            padding: \\"5px\\"
+            padding: "5px"
           }
         },
         /*YAK Extracted CSS:
@@ -1683,11 +1680,10 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = () => <div {...__yak_mergeCssProp({
-          className: \\"foo\\"
+          className: "foo"
         },
         /*YAK Extracted CSS:
         .Elem {
@@ -1709,13 +1705,12 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = () => <div {...__yak_mergeCssProp({
-          className: \\"foo\\",
+          className: "foo",
           style: {
-            padding: \\"5px\\"
+            padding: "5px"
           }
         },
         /*YAK Extracted CSS:
@@ -1738,16 +1733,15 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = () => <div {...__yak_mergeCssProp({
-          className: \\"foo\\",
+          className: "foo",
           style: {
-            padding: \\"5px\\"
+            padding: "5px"
           },
           ...{
-            className: \\"foo2\\"
+            className: "foo2"
           }
         },
         /*YAK Extracted CSS:
@@ -1770,9 +1764,8 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = props => <div {...__yak_mergeCssProp(props,
         /*YAK Extracted CSS:
         .Elem {
@@ -1795,21 +1788,20 @@ describe("css prop", () => {
       `,
         ),
       ).toMatchInlineSnapshot(`
-        "import { css, styled } from \\"next-yak/internal\\";
-        import { __yak_mergeCssProp } from \\"next-yak/runtime-internals\\";
-        import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
+        "import { css, styled, __yak_mergeCssProp, __yak_unitPostFix } from "next-yak/internal";
+        import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
         const Elem = props => <div {...__yak_mergeCssProp(props,
         /*YAK Extracted CSS:
         .Elem {
-          padding: var(--Elem-padding_18fi82j);
+          padding: var(--Elem__padding_18fi82j);
         }
         .Elem__propsActive {
           color: orange;
         }*/
         /*#__PURE__*/
         css(__styleYak.Elem, () => props.active && /*#__PURE__*/css(__styleYak.Elem__propsActive), {
-          \\"style\\": {
-            \\"--Elem-padding_18fi82j\\": () => (props.dynamicPadding ? '10px' : \\"0\\") + \\"px\\"
+          "style": {
+            "--Elem__padding_18fi82j": __yak_unitPostFix(() => props.dynamicPadding ? '10px' : "0", "px")
           }
         })({}))} />;"
       `);
@@ -1838,13 +1830,13 @@ describe("cross file", () => {
     `,
       ),
     ).toMatchInlineSnapshot(`
-      "import { css, styled } from \\"next-yak/internal\\";
-      import __styleYak from \\"./page.yak.module.css!=!./page?./page.yak.module.css\\";
-      import { Icon } from \\"./icon\\";
+      "import { css, styled } from "next-yak/internal";
+      import __styleYak from "./page.yak.module.css!=!./page?./page.yak.module.css";
+      import { Icon } from "./icon";
       const Button =
       /*YAK Extracted CSS:
       .Button {
-        :module-selector-import(Icon from './icon') {
+        --yak-css-import: url("./icon:Icon") {
           margin: 0 10px;
         }
       }*/

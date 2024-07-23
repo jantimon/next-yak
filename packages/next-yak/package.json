@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "type": "module",
   "types": "./dist/",
   "license": "MIT",
@@ -28,10 +28,6 @@
     "./static": {
       "import": "./dist/static/index.js",
       "require": "./dist/static/index.cjs"
-    },
-    "./runtime-internals": {
-      "import": "./dist/runtime-internals/index.js",
-      "require": "./dist/runtime-internals/index.cjs"
     },
     "./internal": {
       "import": "./dist/internal.js",
@@ -69,6 +65,7 @@
     "build": "tsup",
     "watch": "tsup --watch",
     "test": "vitest run",
+    "test:snapshots": "vitest run -u",
     "test:types:code": "tsc -p tsconfig.json",
     "test:types:test": "tsc -p ./runtime/__tests__/tsconfig.json",
     "test:watch": "vitest --watch",
@@ -91,11 +88,11 @@
     "@types/react-test-renderer": "^18.0.3",
     "jsdom": "^22.1.0",
     "next": "14.2.4",
-    "react": "^18.2.0",
+    "react": "18.3.1",
     "react-test-renderer": "^18.2.0",
     "typescript": "5.5.2",
-    "vite": "^4.4.9",
-    "vitest": "0.34.5",
+    "vite": "5.3.4",
+    "vitest": "2.0.4",
     "tsup": "7.2.0"
   },
   "files": [
