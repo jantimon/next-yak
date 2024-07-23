@@ -11,7 +11,7 @@ const currentDir =
     ? __dirname
     : dirname(fileURLToPath(import.meta.url));
 
-const { resolve } = createRequire(__dirname + "/index.js");
+const { resolve } = createRequire(currentDir + "/index.js");
 
 export type YakConfigOptions = {
   contextPath?: string;
@@ -33,7 +33,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   nextConfig.experimental.swcPlugins ||= [];
   nextConfig.experimental.swcPlugins.push([
     resolve("yak-swc"),
-    { devMode: process.env.NODE_ENV !== "production", basePath: __dirname },
+    { devMode: process.env.NODE_ENV !== "production", basePath: currentDir },
   ]);
 
   nextConfig.webpack = (webpackConfig, options) => {
