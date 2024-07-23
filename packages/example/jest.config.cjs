@@ -11,7 +11,7 @@ const customJestConfig = {
   // Clock.tsx would render always a different snapshot without a fixed time
   fakeTimers: {
     enableGlobally: true,
-    now: new Date('2024-05-05T15:00:00Z').getTime(),
+    now: new Date('2024-05-05 15:00:00').getTime(),
   },
 }
  

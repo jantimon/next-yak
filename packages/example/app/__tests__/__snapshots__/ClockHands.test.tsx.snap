@@ -12,7 +12,7 @@ exports[`renders ClockHands component 1`] = `
   />
   <div
     class="HourHand ClockHand"
-    style="--ClockHand__transform_4acxch: 510deg;"
+    style="--ClockHand__transform_4acxch: 450deg;"
   />
 </DocumentFragment>
 `;
