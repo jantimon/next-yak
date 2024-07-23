@@ -106,12 +106,27 @@ importers:
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.0.0(react-dom@18.3.1)(react@18.3.1)
+      '@types/jest':
+        specifier: ^29.5.12
+        version: 29.5.12
+      '@vitejs/plugin-react':
+        specifier: 4.3.1
+        version: 4.3.1(vite@5.3.4)
       jest:
         specifier: ^29.6.2
         version: 29.6.2(@types/node@20.4.5)
       jest-environment-jsdom:
         specifier: ^29.6.2
         version: 29.6.2
+      jsdom:
+        specifier: ^22.1.0
+        version: 22.1.0
+      vite:
+        specifier: 5.3.4
+        version: 5.3.4(@types/node@20.4.5)
+      vitest:
+        specifier: 2.0.4
+        version: 2.0.4(@types/node@20.4.5)(jsdom@22.1.0)
 
   packages/next-yak:
     dependencies:
@@ -162,8 +177,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       react-test-renderer:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.3.1)
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
       tsup:
         specifier: 7.2.0
         version: 7.2.0(typescript@5.5.2)
@@ -3006,6 +3021,13 @@ packages:
       '@types/istanbul-lib-report': 3.0.3
     dev: true
 
+  /@types/jest@29.5.12:
+    resolution: {integrity: sha512-eDC8bTvT/QhYdxJAulQikueigY5AsdBRH2yDKW3yveW7svY3+DzN84/2NUgkw10RTiJbWqZrTtoGVdYlvFJdLw==}
+    dependencies:
+      expect: 29.7.0
+      pretty-format: 29.7.0
+    dev: true
+
   /@types/jest@29.5.5:
     resolution: {integrity: sha512-ebylz2hnsWR9mYvmBFbXJXr+33UPc4+ZdxyDXh5w0FlPBTfCVN3wPL+kuOiQt3xvrK419v7XWeAs+AeOksafXg==}
     dependencies:
@@ -3094,7 +3116,7 @@ packages:
   /@types/testing-library__jest-dom@5.14.9:
     resolution: {integrity: sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==}
     dependencies:
-      '@types/jest': 29.5.5
+      '@types/jest': 29.5.12
     dev: true
 
   /@types/tough-cookie@4.0.5:
@@ -3402,10 +3424,9 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.24.9)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.3.4(terser@5.28.1)
+      vite: 5.3.4(@types/node@20.4.5)
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@vitest/expect@2.0.4:
     resolution: {integrity: sha512-39jr5EguIoanChvBqe34I8m1hJFI4+jxvdOpD7gslZrVQBKhh8H9eD7J/LJX4zakrw23W+dITQTDqdt43xVcJw==}
@@ -8495,10 +8516,10 @@ packages:
       tslib: 2.6.3
     dev: false
 
-  /react-test-renderer@18.2.0(react@18.3.1):
-    resolution: {integrity: sha512-JWD+aQ0lh2gvh4NM3bBM42Kx+XybOxCpgYK7F8ugAlpaTSnWsX+39Z4XkOykGZAHrjwwTZT3x3KxswVWxHPUqA==}
+  /react-test-renderer@18.3.1(react@18.3.1):
+    resolution: {integrity: sha512-KkAgygexHUkQqtvvx/otwxtuFu5cVjfzTCtjXLH9boS19/Nbtg84zS7wIQn39G8IlrhThBpQsMKkq5ZHZIYFXA==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.3.1
     dependencies:
       react: 18.3.1
       react-is: 18.3.1
@@ -9967,7 +9988,6 @@ packages:
       rollup: 4.18.1
     optionalDependencies:
       fsevents: 2.3.3
-    dev: true
 
   /vite@5.3.4(terser@5.28.1):
     resolution: {integrity: sha512-Cw+7zL3ZG9/NZBB8C+8QbQZmR54GwqIz+WMI4b3JgdYJvX+ny9AjJXqkGQlDXSXRP9rP0B4tbciRMOVEKulVOA==}
