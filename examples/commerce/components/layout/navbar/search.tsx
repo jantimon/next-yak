@@ -54,7 +54,6 @@ export function SearchSkeleton() {
 }
 
 const Form = styled.form`
-  max-width: 550px;
   position: relative;
   width: 100%;
 

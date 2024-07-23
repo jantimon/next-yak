@@ -24,7 +24,7 @@ export default async function Navbar() {
         <LinkList>
           <HomeLink href="/">
             <LogoSquare />
-            <NameWrapper>{SITE_NAME}</NameWrapper>
+            <NameWrapper>{SITE_NAME || "ACME STORE"}</NameWrapper>
           </HomeLink>
           {menu.length ? (
             <List>

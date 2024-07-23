@@ -68,11 +68,12 @@ const LabelWrapper = styled.div<{$isCenter: boolean}>`
 	container-type: inline-size;
   container-name: label;
 
+	${props => props.$isCenter && css`
 	@media (min-width: 1024px) {
 		padding-left: 5rem;
     padding-right: 5rem;
 		padding-bottom: 35%;
-	}
+	}`}
 `;
 
 const PriceWrapper = styled.div`
