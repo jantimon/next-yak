@@ -172,7 +172,7 @@ export async function GET(request: Request, context: { params: Params }) {
 			"acme-cup",
 			"acme-baby-cap",
 			"acme-t-shirt",
-			"acme-pacificer",
+			"acme-pacifier",
 			"acme-baby-onesie",
 			"acme-geometric-circles-t-shirt",
 			"acme-mug",
@@ -188,7 +188,7 @@ export async function GET(request: Request, context: { params: Params }) {
 			"acme-t-shirt",
 			"acme-cup",
 			"acme-geometric-circles-t-shirt",
-			"acme-pacificer",
+			"acme-pacifier",
 			"acme-rainbow-prism-t-shirt",
 		]
 	}

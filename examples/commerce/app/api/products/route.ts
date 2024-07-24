@@ -1,4 +1,4 @@
-import { carouselProducts, gridProducts } from "db/products";
+import { carouselProducts, gridProducts, products } from "db/products";
 import { Product } from "lib/shopify/types";
 
 
@@ -15,7 +15,8 @@ export async function GET(request: Request) {
 		if (collection === 'hidden-homepage-carousel') {
 			return Response.json(carouselProducts);
 		}
+		return Response.json(gridProducts);
 	}
 
-	return Response.json(gridProducts);
+	return Response.json(products);
 }
