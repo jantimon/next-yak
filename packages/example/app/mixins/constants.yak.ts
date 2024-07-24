@@ -1,7 +1,7 @@
-import { mixin } from "next-yak/static";
+import { css } from "next-yak";
 
 export const typography = {
-  h1: `
+  h1: css`
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
