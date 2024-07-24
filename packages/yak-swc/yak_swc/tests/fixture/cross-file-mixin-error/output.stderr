@@ -1,5 +1,8 @@
-  x Mixins are not allowed inside nested selectors
-  | Use an inline css literal instead or move the selector into the mixin
+  x Mixins are not allowed inside selectors or media queries
+  | Possible solutions:
+  | - Use the an inline mixin directly in the `styled` css code
+  | - Move the media query or selector from the `styled` css code into the mixin
+  | - Static mixins can be moved to .yak files and be used inside nested selectors
    ,-[input.js:7:1]
  6 |   &:hover {
  7 |     ${fonts.h1}

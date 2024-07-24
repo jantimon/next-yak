@@ -21,7 +21,7 @@ use utils::ast_helper::{extract_ident_and_parts, TemplateIterator};
 use utils::encode_module_import::{encode_module_import, is_mixin_expression};
 
 mod variable_visitor;
-use variable_visitor::VariableVisitor;
+use variable_visitor::{ImportSourceType, VariableVisitor};
 mod yak_imports;
 use yak_imports::YakImportVisitor;
 
@@ -432,13 +432,18 @@ where
           // e.g.:
           // import { primary } from "./theme";
           // styled.button`color: ${colors.primary};`
-          else if let Some(module_path) = self.variables.get_imported_variable(&scoped_name) {
+          else if let Some((import_source_type, module_path)) =
+            self.variables.get_imported_variable(&scoped_name)
+          {
             let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
-            if is_mixin_expression(
-              css_state.clone(),
-              encode_module_import(module_path.as_str(), member_expr_parts.clone()),
-              next_css_code,
-            ) {
+            // Cross file mixin imports
+            if import_source_type == ImportSourceType::Normal
+              && is_mixin_expression(
+                css_state.clone(),
+                encode_module_import(module_path.as_str(), member_expr_parts.clone()),
+                next_css_code,
+              )
+            {
               if current_css_state.current_scopes.len() == 1 {
                 runtime_expressions.push(*expr.clone());
               } else {
@@ -446,13 +451,18 @@ where
                   handler
                     .struct_span_err(
                       expr.span(),
-                      "Mixins are not allowed inside nested selectors\nUse an inline css literal instead or move the selector into the mixin",
+                      "Mixins are not allowed inside selectors or media queries\n\
+                      Possible solutions:\n\
+                        - Use the an inline mixin directly in the `styled` css code\n\
+                        - Move the media query or selector from the `styled` css code into the mixin \n\
+                        - Static mixins can be moved to .yak files and be used inside nested selectors\
+                      "
                     )
                     .emit();
                 });
               }
             }
-            // An imported constant
+            // An imported constant or a mixin import from a .yak file
             else {
               let css_code = encode_module_import(module_path.as_str(), member_expr_parts);
               let (new_state, _) = parse_css(&css_code, css_state);

@@ -1,13 +1,25 @@
 use rustc_hash::FxHashMap;
+use swc_core::atoms::Atom;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{ast::*, visit::VisitMut};
+
+#[derive(PartialEq, Debug, Clone)]
+#[repr(u8)]
+pub enum ImportSourceType {
+  /// Imports from normal typescript files
+  /// Normal files are only statically analyzed
+  Normal = 0,
+  /// Imports from *.yak.ts or *.yak.tsx files
+  /// Yak files are executed during the build process
+  Yak = 1,
+}
 
 #[derive(Debug)]
 /// Visitor implementation to gather all variable declarations
 /// and their values from the AST
 pub struct VariableVisitor {
   variables: FxHashMap<Id, Box<Expr>>,
-  imports: FxHashMap<Id, String>,
+  imports: FxHashMap<Id, Atom>,
 }
 
 impl VariableVisitor {
@@ -34,12 +46,16 @@ impl VariableVisitor {
     None
   }
 
-  // Returns the source of an imported variable if it exists
-  /// Use id.to_string() (including the #0 suffix) to get the variable name
-  /// Using sym.to_string() will always return None
-  pub fn get_imported_variable(&mut self, name: &Id) -> Option<String> {
+  /// Returns the source of an imported variable if it exists
+  pub fn get_imported_variable(&mut self, name: &Id) -> Option<(ImportSourceType, String)> {
     if let Some(src) = self.imports.get(name) {
-      return Some(src.to_string());
+      let src = src.to_string();
+      let source_type = if src.ends_with(".yak") {
+        ImportSourceType::Yak
+      } else {
+        ImportSourceType::Normal
+      };
+      return Some((source_type, src.to_string()));
     }
     None
   }
@@ -63,7 +79,7 @@ impl VisitMut for VariableVisitor {
       if let ImportSpecifier::Named(named) = specifier {
         self
           .imports
-          .insert(named.local.to_id(), import.src.value.to_string());
+          .insert(named.local.to_id(), import.src.value.clone());
       }
     });
     import.visit_mut_children_with(self);
@@ -83,9 +99,10 @@ mod tests {
     let mut visitor = VariableVisitor::new();
     let code = r#"
     import { primary } from "./theme";
+    import { mixin } from "./constants.yak";
     const duration = 34;
     export function run(primary = "red") {
-      console.log(primary, duration);
+      console.log(primary, duration, mixin);
     }
     "#;
     test_transform(
@@ -99,11 +116,20 @@ mod tests {
       Atom::from("primary"),
       SyntaxContext::from_u32(0),
     )));
+    assert_eq!(
+      *primary,
+      Some((ImportSourceType::Normal, "./theme".to_string()))
+    );
+    let mixin =
+      &visitor.get_imported_variable(&Id::from((Atom::from("mixin"), SyntaxContext::from_u32(0))));
+    assert_eq!(
+      *mixin,
+      Some((ImportSourceType::Yak, "./constants.yak".to_string()))
+    );
     let duration = &visitor.get_variable(&Id::from((
       Atom::from("duration"),
       SyntaxContext::from_u32(0),
     )));
-    assert_eq!(*primary, Some("./theme".to_string()));
     assert_eq!(*duration, Some("34".to_string()));
   }
 }

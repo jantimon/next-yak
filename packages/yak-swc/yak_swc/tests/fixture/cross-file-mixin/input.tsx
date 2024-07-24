@@ -3,6 +3,9 @@ import { styled } from "next-yak";
 import { fonts } from "./fonts";
 // @ts-ignore
 import { fancy } from "./fancy";
+// @ts-ignore
+import { yakMixin } from "./constants.yak";
+
 
 export const Button = styled.button`
   ${fonts.h1}
@@ -25,5 +28,12 @@ export const Button4 = styled.button`
 export const Button5 = styled.button`
   ${fonts.h1};
   ${fancy};
+  color: green;
+`;
+
+export const Button6 = styled.button`
+  &:hover {
+    ${yakMixin};
+  }
   color: green;
 `;
