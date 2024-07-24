@@ -24,6 +24,8 @@ mod variable_visitor;
 use variable_visitor::{ImportSourceType, VariableVisitor};
 mod yak_imports;
 use yak_imports::YakImportVisitor;
+mod yak_file_visitor;
+use yak_file_visitor::YakFileVisitor;
 
 mod utils {
   pub(crate) mod add_suffix_to_expr;
@@ -667,6 +669,13 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
   let filename = metadata
     .get_context(&TransformPluginMetadataContextKind::Filename)
     .expect("failed to get filename");
+
+  // *.yak.ts and *.yak.tsx files follow different rules
+  // see yak_file_visitor.rs
+  if is_yak_file(&filename) {
+    return program.fold_with(&mut as_folder(YakFileVisitor::new()));
+  }
+
   // Get a relative posix path to generate always the same hash
   // on different machines or operating systems
   let deterministic_path = relative_posix_path::relative_posix_path(&config.base_path, &filename);
@@ -675,6 +684,10 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     deterministic_path,
     config.dev_mode,
   )))
+}
+
+fn is_yak_file(filename: &str) -> bool {
+  filename.ends_with(".yak.ts") || filename.ends_with(".yak.tsx")
 }
 
 #[cfg(test)]
@@ -697,6 +710,19 @@ mod tests {
       },
       &input,
       &input.with_file_name("output.tsx"),
+      FixtureTestConfig {
+        sourcemap: false,
+        allow_error: true,
+      },
+    )
+  }
+  #[testing::fixture("tests/fixture/**/input.yak.tsx")]
+  fn fixture_yak(input: PathBuf) {
+    test_fixture(
+      Default::default(),
+      &|_| as_folder(YakFileVisitor::new()),
+      &input,
+      &input.with_file_name("output.yak.tsx"),
       FixtureTestConfig {
         sourcemap: false,
         allow_error: true,
