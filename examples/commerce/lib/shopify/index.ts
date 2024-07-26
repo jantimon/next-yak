@@ -168,3 +168,11 @@ export async function getCollections(): Promise<Collection[]> {
     cache: "no-store",
   })).json();
 }
+
+export async function getCollection(handle: string): Promise<Collection | undefined> {
+  return (await fetch(`http://localhost:3000/api/collections/${handle}`, {
+    method: "GET",
+    next: { tags: [TAGS.collections] },
+    cache: "no-store",
+  })).json();
+}
