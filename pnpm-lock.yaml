@@ -99,6 +99,9 @@ importers:
       typescript:
         specifier: 5.5.2
         version: 5.5.2
+      yak-swc:
+        specifier: workspace:*
+        version: link:../yak-swc
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^5.17.0
@@ -136,9 +139,6 @@ importers:
       '@babel/plugin-syntax-typescript':
         specifier: 7.22.5
         version: 7.22.5(@babel/core@7.23.2)
-      yak-swc:
-        specifier: workspace:*
-        version: link:../yak-swc
     devDependencies:
       '@babel/types':
         specifier: 7.23.0
@@ -197,6 +197,9 @@ importers:
       vitest:
         specifier: 2.0.4
         version: 2.0.4(@types/node@20.4.5)(jsdom@22.1.0)
+      yak-swc:
+        specifier: workspace:*
+        version: link:../yak-swc
 
   packages/playground:
     dependencies:
