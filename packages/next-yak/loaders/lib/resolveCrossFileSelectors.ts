@@ -82,14 +82,6 @@ export async function resolveCrossFileSelectors(
       const { position, size } = matches[i];
       const resolved = resolvedValues[i];
 
-      if (resolved.type === "unsupported") {
-        throw new Error(
-          `Could not resolve constant value \`${matches[i].specifier.join(
-            "."
-          )}\` from "${matches[i].moduleSpecifier}"`
-        );
-      }
-
       const replacement =
         resolved.type === "styled-component"
           ? `:global(.${getCssModuleLocalIdent(
@@ -101,10 +93,7 @@ export async function resolveCrossFileSelectors(
               resolved.name,
               {}
             )})`
-          : getConstantFromResolvedValue(
-              resolved.value,
-              matches[i].specifier.slice(1)
-            );
+          : resolved.value;
 
       result =
         result.slice(0, position) +
@@ -180,7 +169,7 @@ async function parseFile(
       const module: Record<string, unknown> =
         await loader.importModule(filePath);
       const mappedModule = Object.fromEntries(
-        Object.entries(module).map(([key, value]): [string, ResolvedExport] => {
+        Object.entries(module).map(([key, value]): [string, ParsedExport] => {
           if (typeof value === "string" || typeof value === "number") {
             return [key, { type: "constant" as const, value }];
           } else if (
@@ -347,10 +336,11 @@ async function resolveModuleSpecifierRecursively(
   specifier: string[]
 ): Promise<ResolvedExport> {
   try {
-    let current = module.exports;
+    const exportName = specifier[0];
+    let exportValue = module.exports[exportName];
     // Follow star exports if there is only a single one
     // and the export does not exist in the current module
-    if (module.exports[specifier[0]] === undefined) {
+    if (exportValue === undefined) {
       const starExport = module.exports["*"];
       if (starExport?.type === "star-export") {
         if (starExport.from.length > 1) {
@@ -359,54 +349,59 @@ async function resolveModuleSpecifierRecursively(
               module.filePath
             } - Multiple star exports are not supported for performance reasons`
           );
-        } else {
-          current = {
-            [specifier[0]]: {
-              type: "re-export" as const,
-              from: starExport.from[0],
-              imported: specifier[0],
-            },
-          };
         }
-      }
-    }
-    /// Drill down the specifier e.g. colors.primary
-    for (const key of specifier) {
-      if (current[key] === undefined) {
+        exportValue = { 
+            type: "re-export" as const,
+            from: starExport.from[0],
+            imported: exportName,
+        };
+      } else {
         throw new Error(
-          `Could not resolve ${specifier.join(".")} in module ${
+          `Could not resolve "${specifier.join(".")}" in module ${
             module.filePath
           }`
         );
       }
-      current = current[key];
-      // Resolve named export
-      if (current.type === "re-export") {
-        const importedModule = await parseModule(
-          loader,
-          current.from,
-          path.dirname(module.filePath)
-        );
-        return resolveModuleSpecifierRecursively(loader, importedModule, [
-          current.imported,
-          ...specifier.slice(1),
-        ]);
-      }
+    }
+    // Follow reexport
+    if (exportValue.type === "re-export") {
+      const importedModule = await parseModule(
+        loader,
+        exportValue.from,
+        path.dirname(module.filePath)
+      );
+      return resolveModuleSpecifierRecursively(loader, importedModule, [
+        exportValue.imported,
+        ...specifier.slice(1),
+      ]);
     }
 
-    if (current.type === "styled-component") {
+    if (exportValue.type === "styled-component") {
       return {
         type: "styled-component",
         from: module.filePath,
         name: specifier[specifier.length - 1],
       };
-    } else if (current.type === "constant") {
-      return { type: "constant", value: current.value };
-    } else if (current.type === "record") {
-      return { type: "record", value: current.value };
+    } else if (exportValue.type === "constant") {
+      return { type: "constant", value: exportValue.value };
+    } else if (exportValue.type === "record") {
+      let current: any = exportValue.value;
+      let depth = 0;
+      /// Drill down the specifier e.g. colors.primary
+      do {
+        if (typeof current === "string" || typeof current === "number"){ 
+          return {
+            type: "constant" as const,
+            value: current
+          }
+        } else if (!current || (typeof current !== "object" && !Array.isArray(current))) {     
+          throw new Error(`Error unpacking Record/Array "${exportName}".\nKey "${specifier[depth]}" was of type "${typeof current}" but only String and Number are supported`);
+        }
+        depth++;
+        current = current[specifier[depth]];
+      } while( current );
     }
-
-    return { type: "unsupported" };
+    throw new Error(`Error unpacking Record/Array for unkown reason`);
   } catch (error) {
     throw new Error(
       `Error resolving from module ${module.filePath}: ${
@@ -416,61 +411,18 @@ async function resolveModuleSpecifierRecursively(
   }
 }
 
-/**
- * Get the constant value from a resolved value
- *
- * e.g.:
- * ```
- * getConstantFromResolvedValue(
- *  { colors: { primary: "red" } },
- *  ["colors", "primary"]
- * )
- * // => "red"
- * ```
- */
-function getConstantFromResolvedValue(
-  value: any,
-  specifier: string[]
-): string | number {
-  try {
-    let current = value;
-    for (const key of specifier) {
-      if (typeof current !== "object" || current === null) {
-        throw new Error(
-          `Could not resolve ${specifier.join(".")} in ${JSON.stringify(value)}`
-        );
-      }
-      current = current[key];
-    }
-    if (typeof current !== "string" && typeof current !== "number") {
-      throw new Error(
-        `Invalid value type for ${specifier.join(".")} in ${JSON.stringify(
-          value
-        )}`
-      );
-    }
-    return current;
-  } catch (error) {
-    throw new Error(
-      `Error getting constant from resolved value: ${(error as Error).message}`
-    );
-  }
-}
-
 type ParsedFile =
   | { type: "regular"; exports: Record<string, ParsedExport>; filePath: string }
-  | { type: "yak"; exports: Record<string, any>; filePath: string };
+  | { type: "yak"; exports: Record<string, ParsedExport>; filePath: string };
 
 type ParsedExport =
   | { type: "styled-component" }
   | { type: "constant"; value: string | number }
-  | { type: "record"; value: Record<string, any> }
+  | { type: "record"; value: {} }
   | { type: "unsupported" }
   | { type: "re-export"; from: string; imported: string }
   | { type: "star-export"; from: string[] };
 
 type ResolvedExport =
   | { type: "styled-component"; from: string; name: string }
-  | { type: "constant"; value: string | number }
-  | { type: "record"; value: Record<string, any> }
-  | { type: "unsupported" };
+  | { type: "constant"; value: string | number };
