@@ -33,7 +33,7 @@ const compilationCache = new WeakMap<
  */
 export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
-  css: string
+  css: string,
 ): Promise<string> {
   // Search for --yak-css-import: url("path/to/module") in the css
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
@@ -67,13 +67,17 @@ export async function resolveCrossFileSelectors(
           resolvedFromCache ||
           parseModule(loader, moduleSpecifier, loader.context).then(
             (parsedModule) =>
-              resolveModuleSpecifierRecursively(loader, parsedModule, specifier)
+              resolveModuleSpecifierRecursively(
+                loader,
+                parsedModule,
+                specifier,
+              ),
           );
         if (!resolvedFromCache) {
           exportCache.set(encodedArguments, resolvedValue);
         }
         return resolvedValue;
-      })
+      }),
     );
 
     // Replace the imports with the resolved values
@@ -91,7 +95,7 @@ export async function resolveCrossFileSelectors(
               },
               null,
               resolved.name,
-              {}
+              {},
             )})`
           : resolved.value;
 
@@ -106,7 +110,7 @@ export async function resolveCrossFileSelectors(
     throw new Error(
       `Error resolving cross-file selectors: ${
         (error as Error).message
-      }\nFile: ${loader.resourcePath}`
+      }\nFile: ${loader.resourcePath}`,
     );
   }
 }
@@ -123,7 +127,7 @@ export async function resolveCrossFileSelectors(
 async function parseModule(
   loader: LoaderContext<{}>,
   moduleSpecifier: string,
-  context: string
+  context: string,
 ): Promise<ParsedFile> {
   const compilation = loader._compilation;
   if (!compilation) {
@@ -159,7 +163,7 @@ async function parseModule(
 
 async function parseFile(
   loader: LoaderContext<{}>,
-  filePath: string
+  filePath: string,
 ): Promise<ParsedFile> {
   const isYak = filePath.endsWith(".yak.ts") || filePath.endsWith(".yak.tsx");
   const isTSX = filePath.endsWith(".tsx");
@@ -180,7 +184,7 @@ async function parseFile(
           } else {
             return [key, { type: "unsupported" as const }];
           }
-        })
+        }),
       );
       return { type: "yak", exports: mappedModule, filePath };
     }
@@ -188,21 +192,21 @@ async function parseFile(
       loader.fs.readFile(filePath, "utf-8", (err, result) => {
         if (err) return reject(err);
         resolve(result || "");
-      })
+      }),
     );
 
     const exports = await parseExports(sourceContents, isTSX);
     return { type: "regular", exports, filePath };
   } catch (error) {
     throw new Error(
-      `Error parsing file ${filePath}: ${(error as Error).message}`
+      `Error parsing file ${filePath}: ${(error as Error).message}`,
     );
   }
 }
 
 async function parseExports(
   sourceContents: string,
-  isTSX: boolean
+  isTSX: boolean,
 ): Promise<Record<string, ParsedExport>> {
   let exports: Record<string, ParsedExport> = {};
 
@@ -236,7 +240,7 @@ async function parseExports(
                       declaration.init
                     ) {
                       exports[declaration.id.name] = parseExportValueExpression(
-                        declaration.init
+                        declaration.init,
                       );
                     }
                   });
@@ -267,7 +271,7 @@ async function parseExports(
 }
 
 function parseExportValueExpression(
-  node: babel.types.Expression
+  node: babel.types.Expression,
 ): ParsedExport {
   if (
     node.type === "CallExpression" ||
@@ -285,7 +289,7 @@ function parseExportValueExpression(
 }
 
 function parseObjectExpression(
-  node: babel.types.ObjectExpression
+  node: babel.types.ObjectExpression,
 ): Record<string, any> {
   let result: Record<string, any> = {};
   for (const property of node.properties) {
@@ -295,7 +299,7 @@ function parseObjectExpression(
     ) {
       const key = property.key.name;
       result[key] = parseExportValueExpression(
-        property.value as babel.types.Expression
+        property.value as babel.types.Expression,
       );
     }
   }
@@ -333,7 +337,7 @@ function parseObjectExpression(
 async function resolveModuleSpecifierRecursively(
   loader: LoaderContext<{}>,
   module: ParsedFile,
-  specifier: string[]
+  specifier: string[],
 ): Promise<ResolvedExport> {
   try {
     const exportName = specifier[0];
@@ -347,19 +351,19 @@ async function resolveModuleSpecifierRecursively(
           throw new Error(
             `Could not resolve ${specifier.join(".")} in module ${
               module.filePath
-            } - Multiple star exports are not supported for performance reasons`
+            } - Multiple star exports are not supported for performance reasons`,
           );
         }
-        exportValue = { 
-            type: "re-export" as const,
-            from: starExport.from[0],
-            imported: exportName,
+        exportValue = {
+          type: "re-export" as const,
+          from: starExport.from[0],
+          imported: exportName,
         };
       } else {
         throw new Error(
           `Could not resolve "${specifier.join(".")}" in module ${
             module.filePath
-          }`
+          }`,
         );
       }
     }
@@ -368,7 +372,7 @@ async function resolveModuleSpecifierRecursively(
       const importedModule = await parseModule(
         loader,
         exportValue.from,
-        path.dirname(module.filePath)
+        path.dirname(module.filePath),
       );
       return resolveModuleSpecifierRecursively(loader, importedModule, [
         exportValue.imported,
@@ -389,24 +393,31 @@ async function resolveModuleSpecifierRecursively(
       let depth = 0;
       /// Drill down the specifier e.g. colors.primary
       do {
-        if (typeof current === "string" || typeof current === "number"){ 
+        if (typeof current === "string" || typeof current === "number") {
           return {
             type: "constant" as const,
-            value: current
-          }
-        } else if (!current || (typeof current !== "object" && !Array.isArray(current))) {     
-          throw new Error(`Error unpacking Record/Array "${exportName}".\nKey "${specifier[depth]}" was of type "${typeof current}" but only String and Number are supported`);
+            value: current,
+          };
+        } else if (
+          !current ||
+          (typeof current !== "object" && !Array.isArray(current))
+        ) {
+          throw new Error(
+            `Error unpacking Record/Array "${exportName}".\nKey "${
+              specifier[depth]
+            }" was of type "${typeof current}" but only String and Number are supported`,
+          );
         }
         depth++;
         current = current[specifier[depth]];
-      } while( current );
+      } while (current);
     }
     throw new Error(`Error unpacking Record/Array for unkown reason`);
   } catch (error) {
     throw new Error(
       `Error resolving from module ${module.filePath}: ${
         (error as Error).message
-      }`
+      }`,
     );
   }
 }
