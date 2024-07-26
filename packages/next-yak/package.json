@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "type": "module",
   "types": "./dist/",
   "license": "MIT",
@@ -71,18 +71,9 @@
     "test:watch": "vitest --watch",
     "prettier": "npx prettier --write \"./{loaders,runtime,withYak}/**/*.{ts,tsx,js,jsx}\""
   },
-  "publishConfig": {
-    "access": "public",
-    "dependencies": {
-      "@babel/core": "7.23.2",
-      "@babel/plugin-syntax-typescript": "7.22.5",
-      "yak-swc": "0.1.0"
-    }
-  },
   "dependencies": {
     "@babel/core": "7.23.2",
-    "@babel/plugin-syntax-typescript": "7.22.5",
-    "yak-swc": "workspace:*"
+    "@babel/plugin-syntax-typescript": "7.22.5"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.14",
@@ -103,7 +94,8 @@
     "typescript": "5.5.2",
     "vite": "5.3.4",
     "vitest": "2.0.4",
-    "tsup": "7.2.0"
+    "tsup": "7.2.0",
+    "yak-swc": "workspace:*"
   },
   "files": [
     "dist",
