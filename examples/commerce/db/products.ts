@@ -280,7 +280,7 @@ export const gridProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "13",
 			title: "Acme Drawstring Bag - Black - 7 x 9 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -296,7 +296,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "14",
 			title: "Acme Drawstring Bag - Black - 8 x 11 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -312,7 +312,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "15",
 			title: "Acme Drawstring Bag - Black - 9 x 12 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -328,7 +328,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "16",
 			title: "Acme Drawstring Bag - Black - 10 x 15 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -344,7 +344,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "5",
+			id: "17",
 			title: "Acme Drawstring Bag - Black - 12 x 16 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -360,7 +360,7 @@ export const gridProducts: Product[] = [{
 			},
 		},
 		{
-			id: "6",
+			id: "18",
 			title: "Acme Drawstring Bag - White - 6 x 8 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -376,7 +376,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "7",
+			id: "19",
 			title: "Acme Drawstring Bag - White - 7 x 9 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -392,7 +392,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "8",
+			id: "20",
 			title: "Acme Drawstring Bag - White - 8 x 11 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -408,7 +408,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "9",
+			id: "21",
 			title: "Acme Drawstring Bag - White - 9 x 12 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -424,7 +424,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "10",
+			id: "22",
 			title: "Acme Drawstring Bag - White - 10 x 15 inch",
 			availableForSale: true,
 			selectedOptions: [{
@@ -491,7 +491,7 @@ export const gridProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "23",
 			title: "Acme Cup - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -504,7 +504,7 @@ export const gridProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "24",
 			title: "Acme Cup - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -562,7 +562,7 @@ export const carouselProducts: Product[] = [{
 		},
 	},
 	variants: [{
-		id: "1",
+		id: "25",
 		title: "Acme Mug",
 		availableForSale: true,
 		selectedOptions: [],
@@ -619,7 +619,7 @@ export const carouselProducts: Product[] = [{
 	},
 	// xs, s, m, l, xl, xxl, xxxl
 	variants: [{
-		id: "1",
+		id: "26",
 		title: "Acme Hoodie - XS",
 		availableForSale: true,
 		selectedOptions: [{
@@ -632,7 +632,7 @@ export const carouselProducts: Product[] = [{
 		}
 	},
 	{
-		id: "2",
+		id: "27",
 		title: "Acme Hoodie - S",
 		availableForSale: true,
 		selectedOptions: [{
@@ -645,7 +645,7 @@ export const carouselProducts: Product[] = [{
 		}
 	},
 	{
-		id: "3",
+		id: "28",
 		title: "Acme Hoodie - M",
 		availableForSale: true,
 		selectedOptions: [{
@@ -658,7 +658,7 @@ export const carouselProducts: Product[] = [{
 		}
 	},
 	{
-		id: "4",
+		id: "29",
 		title: "Acme Hoodie - L",
 		availableForSale: true,
 		selectedOptions: [{
@@ -671,7 +671,7 @@ export const carouselProducts: Product[] = [{
 		}
 	},
 	{
-		id: "5",
+		id: "30",
 		title: "Acme Hoodie - XL",
 		availableForSale: true,
 		selectedOptions: [{
@@ -684,7 +684,7 @@ export const carouselProducts: Product[] = [{
 		}
 	},
 	{
-		id: "6",
+		id: "31",
 		title: "Acme Hoodie - XXL",
 		availableForSale: true,
 		selectedOptions: [{
@@ -697,7 +697,7 @@ export const carouselProducts: Product[] = [{
 		}
 	},
 	{
-		id: "7",
+		id: "32",
 		title: "Acme Hoodie - XXXL",
 		availableForSale: true,
 		selectedOptions: [{
@@ -762,7 +762,7 @@ export const carouselProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "33",
 			title: "Acme Baby Onesie - NB - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -778,7 +778,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "34",
 			title: "Acme Baby Onesie - NB - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -794,7 +794,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "35",
 			title: "Acme Baby Onesie - NB - Beige",
 			availableForSale: true,
 			selectedOptions: [{
@@ -810,7 +810,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "36",
 			title: "Acme Baby Onesie - 3M - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -826,7 +826,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "5",
+			id: "37",
 			title: "Acme Baby Onesie - 3M - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -842,7 +842,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "6",
+			id: "38",
 			title: "Acme Baby Onesie - 3M - Beige",
 			availableForSale: true,
 			selectedOptions: [{
@@ -858,7 +858,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "7",
+			id: "39",
 			title: "Acme Baby Onesie - 6M - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -874,7 +874,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "8",
+			id: "40",
 			title: "Acme Baby Onesie - 6M - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -890,7 +890,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "9",
+			id: "41",
 			title: "Acme Baby Onesie - 6M - Beige",
 			availableForSale: true,
 			selectedOptions: [{
@@ -906,7 +906,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "10",
+			id: "42",
 			title: "Acme Baby Onesie - 12M - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -922,7 +922,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "11",
+			id: "43",
 			title: "Acme Baby Onesie - 12M - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -938,7 +938,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "12",
+			id: "44",
 			title: "Acme Baby Onesie - 12M - Beige",
 			availableForSale: true,
 			selectedOptions: [{
@@ -954,7 +954,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "13",
+			id: "45",
 			title: "Acme Baby Onesie - 18M - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -970,7 +970,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "14",
+			id: "46",
 			title: "Acme Baby Onesie - 18M - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -986,7 +986,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "15",
+			id: "47",
 			title: "Acme Baby Onesie - 18M - Beige",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1002,7 +1002,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "16",
+			id: "48",
 			title: "Acme Baby Onesie - 24M - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1018,7 +1018,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "17",
+			id: "49",
 			title: "Acme Baby Onesie - 24M - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1034,7 +1034,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "18",
+			id: "50",
 			title: "Acme Baby Onesie - 24M - Beige",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1118,7 +1118,7 @@ export const carouselProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "51",
 			title: "Acme Baby Cap - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1131,7 +1131,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "52",
 			title: "Acme Baby Cap - Gray",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1144,7 +1144,7 @@ export const carouselProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "53",
 			title: "Acme Baby Cap - White",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1216,7 +1216,7 @@ const otherProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "54",
 			title: "Acme T-Shirt - Black - S",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1232,7 +1232,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "55",
 			title: "Acme T-Shirt - Black - M",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1248,7 +1248,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "56",
 			title: "Acme T-Shirt - Black - L",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1264,7 +1264,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "57",
 			title: "Acme T-Shirt - Black - XL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1280,7 +1280,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "5",
+			id: "58",
 			title: "Acme T-Shirt - Black - XXL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1296,7 +1296,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "6",
+			id: "59",
 			title: "Acme T-Shirt - Blue - S",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1312,7 +1312,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "7",
+			id: "60",
 			title: "Acme T-Shirt - Blue - M",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1328,7 +1328,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "8",
+			id: "61",
 			title: "Acme T-Shirt - Blue - L",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1344,7 +1344,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "9",
+			id: "62",
 			title: "Acme T-Shirt - Blue - XL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1360,7 +1360,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "10",
+			id: "63",
 			title: "Acme T-Shirt - Blue - XXL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1376,7 +1376,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "11",
+			id: "64",
 			title: "Acme T-Shirt - Gray - M",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1392,7 +1392,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "12",
+			id: "65",
 			title: "Acme T-Shirt - White - S",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1408,7 +1408,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "13",
+			id: "66",
 			title: "Acme T-Shirt - White - M",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1424,7 +1424,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "14",
+			id: "67",
 			title: "Acme T-Shirt - White - L",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1440,7 +1440,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "15",
+			id: "68",
 			title: "Acme T-Shirt - White - XL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1456,7 +1456,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "16",
+			id: "69",
 			title: "Acme T-Shirt - White - XXL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1535,7 +1535,7 @@ const otherProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "70",
 			title: "Acme Prism T-Shirt - XS",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1548,7 +1548,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "71",
 			title: "Acme Prism T-Shirt - M",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1561,7 +1561,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "72",
 			title: "Acme Prism T-Shirt - XL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1574,7 +1574,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "73",
 			title: "Acme Prism T-Shirt - XXXL",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1640,7 +1640,7 @@ const otherProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "74",
 			title: "Acme Cap",
 			availableForSale: true,
 			selectedOptions: [],
@@ -1698,7 +1698,7 @@ const otherProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "75",
 			title: "Acme Rainbow Sticker",
 			availableForSale: true,
 			selectedOptions: [],
@@ -1746,7 +1746,7 @@ const otherProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "76",
 			title: "Acme Sticker",
 			availableForSale: true,
 			selectedOptions: [],
@@ -1803,7 +1803,7 @@ const otherProducts: Product[] = [{
 	// size x color
 	variants: [
 		{
-			id: "1",
+			id: "77",
 			title: "Acme Bomber Jacket - XS - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1819,7 +1819,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "78",
 			title: "Acme Bomber Jacket - XS - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1835,7 +1835,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "79",
 			title: "Acme Bomber Jacket - S - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1851,7 +1851,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "80",
 			title: "Acme Bomber Jacket - S - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1867,7 +1867,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "5",
+			id: "81",
 			title: "Acme Bomber Jacket - M - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1883,7 +1883,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "6",
+			id: "82",
 			title: "Acme Bomber Jacket - M - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1899,7 +1899,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "7",
+			id: "83",
 			title: "Acme Bomber Jacket - L - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1915,7 +1915,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "8",
+			id: "84",
 			title: "Acme Bomber Jacket - L - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1931,7 +1931,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "9",
+			id: "85",
 			title: "Acme Bomber Jacket - XL - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1947,7 +1947,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "10",
+			id: "86",
 			title: "Acme Bomber Jacket - XL - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1964,7 +1964,7 @@ const otherProducts: Product[] = [{
 		},
 
 		{
-			id: "11",
+			id: "87",
 			title: "Acme Bomber Jacket - XXL - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1980,7 +1980,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "12",
+			id: "88",
 			title: "Acme Bomber Jacket - XXL - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -1996,7 +1996,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "13",
+			id: "89",
 			title: "Acme Bomber Jacket - XXXL - Army",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2012,7 +2012,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "14",
+			id: "90",
 			title: "Acme Bomber Jacket - XXXL - Black",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2071,7 +2071,7 @@ const otherProducts: Product[] = [{
 	},
 	variants: [
 		{
-			id: "1",
+			id: "91",
 			title: "Acme Pacifier",
 			availableForSale: true,
 			selectedOptions: [],
@@ -2144,7 +2144,7 @@ const otherProducts: Product[] = [{
 	// color x size
 	variants: [
 		{
-			id: "1",
+			id: "92",
 			title: "Acme Cowboy Hat - Black - 6 3/4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2160,7 +2160,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "93",
 			title: "Acme Cowboy Hat - Black - 6 7/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2176,7 +2176,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "94",
 			title: "Acme Cowboy Hat - Black - 7",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2192,7 +2192,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "95",
 			title: "Acme Cowboy Hat - Black - 7 1/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2208,7 +2208,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "5",
+			id: "96",
 			title: "Acme Cowboy Hat - Black - 7 1/4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2224,7 +2224,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "6",
+			id: "97",
 			title: "Acme Cowboy Hat - Black - 7 3/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2240,7 +2240,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "7",
+			id: "98",
 			title: "Acme Cowboy Hat - Black - 7 1/2",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2256,7 +2256,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "8",
+			id: "99",
 			title: "Acme Cowboy Hat - Black - 7 5/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2272,7 +2272,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "9",
+			id: "100",
 			title: "Acme Cowboy Hat - Black - 7 3/4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2288,7 +2288,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "10",
+			id: "101",
 			title: "Acme Cowboy Hat - Tan - 6 3/4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2304,7 +2304,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "11",
+			id: "102",
 			title: "Acme Cowboy Hat - Tan - 6 7/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2320,7 +2320,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "12",
+			id: "103",
 			title: "Acme Cowboy Hat - Tan - 7",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2336,7 +2336,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "13",
+			id: "104",
 			title: "Acme Cowboy Hat - Tan - 7 1/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2352,7 +2352,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "14",
+			id: "105",
 			title: "Acme Cowboy Hat - Tan - 7 1/4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2368,7 +2368,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "15",
+			id: "106",
 			title: "Acme Cowboy Hat - Tan - 7 3/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2384,7 +2384,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "16",
+			id: "107",
 			title: "Acme Cowboy Hat - Tan - 7 1/2",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2400,7 +2400,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "17",
+			id: "108",
 			title: "Acme Cowboy Hat - Tan - 7 5/8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2416,7 +2416,7 @@ const otherProducts: Product[] = [{
 			},
 		},
 		{
-			id: "18",
+			id: "109",
 			title: "Acme Cowboy Hat - Tan - 7 3/4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2538,7 +2538,7 @@ const otherProducts: Product[] = [{
 	// all but 2.5, 5.5, 6, 10.5
 	variants: [
 		{
-			id: "1",
+			id: "110",
 			title: "Acme Slip-On Shoes - 1",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2551,7 +2551,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "2",
+			id: "111",
 			title: "Acme Slip-On Shoes - 1.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2564,7 +2564,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "3",
+			id: "112",
 			title: "Acme Slip-On Shoes - 2",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2577,7 +2577,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "4",
+			id: "113",
 			title: "Acme Slip-On Shoes - 3",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2590,7 +2590,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "5",
+			id: "114",
 			title: "Acme Slip-On Shoes - 3.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2603,7 +2603,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "6",
+			id: "115",
 			title: "Acme Slip-On Shoes - 4",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2616,7 +2616,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "7",
+			id: "116",
 			title: "Acme Slip-On Shoes - 4.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2629,7 +2629,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "8",
+			id: "117",
 			title: "Acme Slip-On Shoes - 5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2642,7 +2642,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "9",
+			id: "118",
 			title: "Acme Slip-On Shoes - 6.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2655,7 +2655,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "10",
+			id: "119",
 			title: "Acme Slip-On Shoes - 7",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2668,7 +2668,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "11",
+			id: "120",
 			title: "Acme Slip-On Shoes - 7.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2681,7 +2681,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "12",
+			id: "121",
 			title: "Acme Slip-On Shoes - 8",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2694,7 +2694,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "13",
+			id: "122",
 			title: "Acme Slip-On Shoes - 8.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2707,7 +2707,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "14",
+			id: "123",
 			title: "Acme Slip-On Shoes - 9",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2720,7 +2720,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "15",
+			id: "124",
 			title: "Acme Slip-On Shoes - 9.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2733,7 +2733,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "16",
+			id: "125",
 			title: "Acme Slip-On Shoes - 10",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2746,7 +2746,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "17",
+			id: "126",
 			title: "Acme Slip-On Shoes - 11",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2759,7 +2759,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "18",
+			id: "127",
 			title: "Acme Slip-On Shoes - 11.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2772,7 +2772,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "19",
+			id: "128",
 			title: "Acme Slip-On Shoes - 12",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2785,7 +2785,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "20",
+			id: "129",
 			title: "Acme Slip-On Shoes - 12.5",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2798,7 +2798,7 @@ const otherProducts: Product[] = [{
 			}
 		},
 		{
-			id: "21",
+			id: "130",
 			title: "Acme Slip-On Shoes - 13",
 			availableForSale: true,
 			selectedOptions: [{
@@ -2904,7 +2904,7 @@ const otherProducts: Product[] = [{
 		},
 	},
 	variants: [{
-		id: "1",
+		id: "131",
 		title: "Acme Dog Sweater - 0 - 5 lbs",
 		availableForSale: true,
 		selectedOptions: [{
@@ -2916,7 +2916,7 @@ const otherProducts: Product[] = [{
 			currencyCode: "USD",
 		}
 	}, {
-		id: "2",
+		id: "132",
 		title: "Acme Dog Sweater - 5 - 20 lbs",
 		availableForSale: true,
 		selectedOptions: [{
@@ -2928,7 +2928,7 @@ const otherProducts: Product[] = [{
 			currencyCode: "USD",
 		}
 	}, {
-		id: "3",
+		id: "133",
 		title: "Acme Dog Sweater - 20 - 50 lbs",
 		availableForSale: true,
 		selectedOptions: [{
@@ -2940,7 +2940,7 @@ const otherProducts: Product[] = [{
 			currencyCode: "USD",
 		}
 	}, {
-		id: "4",
+		id: "134",
 		title: "Acme Dog Sweater - 50 - 75 lbs",
 		availableForSale: true,
 		selectedOptions: [{
@@ -2952,7 +2952,7 @@ const otherProducts: Product[] = [{
 			currencyCode: "USD",
 		}
 	}, {
-		id: "5",
+		id: "135",
 		title: "Acme Dog Sweater - 75+ lbs",
 		availableForSale: true,
 		selectedOptions: [{
