@@ -481,4 +481,17 @@ mod tests {
       .collect::<Vec<_>>();
     assert_debug_snapshot!((state1, state2, all_declarations));
   }
+
+  #[test]
+  fn test_parse_css_starting_with_an_invalid_curly() {
+    let (state, declarations) = parse_css(
+      r#"
+        }
+        .foo {
+          color: orange
+    "#,
+      None,
+    );
+    assert_debug_snapshot!((state, declarations));
+  }
 }
