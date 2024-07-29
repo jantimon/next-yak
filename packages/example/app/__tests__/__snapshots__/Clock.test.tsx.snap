@@ -2,72 +2,111 @@
 
 exports[`renders Clock component 1`] = `
 <DocumentFragment>
-  <div>
-    <div>
-      <div />
+  <div
+    class="ClockWrapper"
+  >
+    <div
+      class="ClockFace"
+    >
       <div
+        class="ClockCenter"
+      />
+      <div
+        class="ClockNumber"
         index="0"
+        style="--ClockNumber__transform_15c3sj0: 0deg; --ClockNumber__transform_15c3sj0-01: 0deg;"
       >
         12
       </div>
       <div
+        class="ClockNumber"
         index="1"
+        style="--ClockNumber__transform_15c3sj0: 30deg; --ClockNumber__transform_15c3sj0-01: -30deg;"
       >
         1
       </div>
       <div
+        class="ClockNumber"
         index="2"
+        style="--ClockNumber__transform_15c3sj0: 60deg; --ClockNumber__transform_15c3sj0-01: -60deg;"
       >
         2
       </div>
       <div
+        class="ClockNumber"
         index="3"
+        style="--ClockNumber__transform_15c3sj0: 90deg; --ClockNumber__transform_15c3sj0-01: -90deg;"
       >
         3
       </div>
       <div
+        class="ClockNumber"
         index="4"
+        style="--ClockNumber__transform_15c3sj0: 120deg; --ClockNumber__transform_15c3sj0-01: -120deg;"
       >
         4
       </div>
       <div
+        class="ClockNumber"
         index="5"
+        style="--ClockNumber__transform_15c3sj0: 150deg; --ClockNumber__transform_15c3sj0-01: -150deg;"
       >
         5
       </div>
       <div
+        class="ClockNumber"
         index="6"
+        style="--ClockNumber__transform_15c3sj0: 180deg; --ClockNumber__transform_15c3sj0-01: -180deg;"
       >
         6
       </div>
       <div
+        class="ClockNumber"
         index="7"
+        style="--ClockNumber__transform_15c3sj0: 210deg; --ClockNumber__transform_15c3sj0-01: -210deg;"
       >
         7
       </div>
       <div
+        class="ClockNumber"
         index="8"
+        style="--ClockNumber__transform_15c3sj0: 240deg; --ClockNumber__transform_15c3sj0-01: -240deg;"
       >
         8
       </div>
       <div
+        class="ClockNumber"
         index="9"
+        style="--ClockNumber__transform_15c3sj0: 270deg; --ClockNumber__transform_15c3sj0-01: -270deg;"
       >
         9
       </div>
       <div
+        class="ClockNumber"
         index="10"
+        style="--ClockNumber__transform_15c3sj0: 300deg; --ClockNumber__transform_15c3sj0-01: -300deg;"
       >
         10
       </div>
       <div
+        class="ClockNumber"
         index="11"
+        style="--ClockNumber__transform_15c3sj0: 330deg; --ClockNumber__transform_15c3sj0-01: -330deg;"
       >
         11
       </div>
-      <div />
-      <div />
-      <div />
+      <div
+        class="SecondHand SecondHand__themehighContrast-01 ClockHand"
+        style="--ClockHand__transform_4acxch: 0deg;"
+      />
+      <div
+        class="MinuteHand ClockHand"
+        style="--ClockHand__transform_4acxch: 0deg;"
+      />
+      <div
+        class="HourHand ClockHand"
+        style="--ClockHand__transform_4acxch: 450deg;"
+      />
     </div>
   </div>
 </DocumentFragment>

@@ -269,7 +269,7 @@ const Container = styled.div`
 ## Yak shaving
 
 While trying to get next-yak to work properly we stumbled accross several bugs.  
-Thanks for merging our prs fixes in next.js and postcss ❤️
+Thanks for merging our prs fixes in next.js, webpack and postcss ❤️
 
 <details>
   <summary>PRS</summary>
@@ -296,6 +296,11 @@ Thanks for merging our prs fixes in next.js and postcss ❤️
 
 ## Acknowledgments
 
+Massive kudos to:
+
+  - @sokra: For guiding us through the webpacks module and loader APIs
+  - @kdy1: For his support while rewriting our Babel plugin as a blazing fast SWC Rust WASM plugin
+
 Special thanks to the contributors and the inspiring projects that influenced next-yak:
 
   - Styled-Components 💅: For pioneering the styled syntax and redefining styling in the React ecosystem.
@@ -303,7 +308,7 @@ Special thanks to the contributors and the inspiring projects that influenced ne
   - Emotion: For pushing the boundaries of CSS-in-JS and providing a high-performance styling experience.
   - Vanilla Extract: For its focus on type-safe, zero-runtime CSS and contributing to the evolution of styling techniques.
   - Tailwind CSS: For its exceptional atomic CSS approach, enabling efficient and customizable styling solutions.
-
+  
 ## License
 
 **next-yak** is licensed under the [MIT License](link/to/LICENSE).

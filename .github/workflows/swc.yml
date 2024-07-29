@@ -1,0 +1,31 @@
+name: SWC validation
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    name: Rust tests & lints
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Enable caching
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: packages/yak-swc
+      - name: Run cargo check
+        run: cargo check --manifest-path packages/yak-swc/Cargo.toml
+      - name: Run cargo test
+        run: cargo test --manifest-path packages/yak-swc/Cargo.toml
+      - name: Run cargo fmt
+        run: cargo fmt --manifest-path packages/yak-swc/Cargo.toml --all -- --check
+      - name: Run cargo clippy
+        run: cargo clippy --manifest-path packages/yak-swc/Cargo.toml
