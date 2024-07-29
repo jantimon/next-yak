@@ -220,8 +220,6 @@ where
         })),
       );
     }
-
-    // TODO: delete all unused mixins and animations
   }
 
   /// Visit variable declarations
