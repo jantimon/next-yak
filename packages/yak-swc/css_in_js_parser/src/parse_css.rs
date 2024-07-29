@@ -4,7 +4,7 @@ use serde_repr::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ParserState {
-  pub is_inside_string: Option<char>, // TODO: enum
+  pub is_inside_string: Option<char>,
   pub current_comment_state: CommentStateType,
   pub is_inside_property_value: bool,
   pub is_inside_at_rule: bool,
