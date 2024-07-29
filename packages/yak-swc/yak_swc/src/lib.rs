@@ -111,7 +111,7 @@ where
       current_condition: vec![],
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
-      naming_convention: NamingConvention::new(),
+      naming_convention: NamingConvention::new(filename.clone()),
       variable_name_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
@@ -536,11 +536,9 @@ where
               // e.g. color for styled.button`color: red;`
               css_state.as_ref().unwrap().current_declaration.property
             );
-            let css_variable_name = self.naming_convention.get_css_variable_name(
-              readable_name.as_str(),
-              self.filename.as_str(),
-              self.dev_mode,
-            );
+            let css_variable_name = self
+              .naming_convention
+              .get_css_variable_name(readable_name.as_str(), self.dev_mode);
             let css_variable_runtime_expr = if let Some(unit) = unit {
               add_suffix_to_expr(
                 *expr.clone(),
