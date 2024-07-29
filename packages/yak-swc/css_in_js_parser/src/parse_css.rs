@@ -156,13 +156,13 @@ pub fn parse_css(
       }
     }
 
-    // Detect unescaped strings
+    // Detect unescaped strings and store the string delimiter
     // e.g.:
     // url("Hello, World!")
-    //     ^
+    //     ^                  -> is_inside_string = Some('"')
     // or
     // url('Hello, World!')
-    //     ^
+    //     ^                  -> is_inside_string = Some('\'')
     if previous_back_slashes % 2 == 0 && (current_character == '"' || current_character == '\'') {
       if state.is_inside_string == Some(current_character) {
         state.is_inside_string = None;
