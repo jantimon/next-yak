@@ -2,6 +2,8 @@
 
 This package contains the Rust SWC plugin for [next-yak](https://www.npmjs.com/package/next-yak), a build time CSS-in-JS solution.
 
+![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/548ed098-fad3-4991-938d-e67607fb1851)
+
 ## Overview
 
 `yak-swc` is a SWC (Speedy Web Compiler) plugin written in rust to transform the CSS-in-JS code at build time
