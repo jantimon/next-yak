@@ -50,11 +50,12 @@ impl VariableVisitor {
   pub fn get_imported_variable(&mut self, name: &Id) -> Option<(ImportSourceType, String)> {
     if let Some(src) = self.imports.get(name) {
       let src = src.to_string();
-      let source_type = if src.ends_with(".yak") {
-        ImportSourceType::Yak
-      } else {
-        ImportSourceType::Normal
-      };
+      let source_type =
+        if (src.ends_with(".yak") || src.ends_with(".yak.js") || src.ends_with(".yak.mjs")) {
+          ImportSourceType::Yak
+        } else {
+          ImportSourceType::Normal
+        };
       return Some((source_type, src.to_string()));
     }
     None
