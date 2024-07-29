@@ -680,7 +680,15 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
 }
 
 fn is_yak_file(filename: &str) -> bool {
-  filename.ends_with(".yak.ts") || filename.ends_with(".yak.tsx")
+  // Ignore the valid case of a file with only 7 characters
+  // as it would have only an extension and no filename
+  if filename.len() < 8 {
+    return false;
+  }
+  matches!(
+    &filename[filename.len() - 8..],
+    ".yak.tsx" | ".yak.jsx" | ".yak.mjs"
+  ) || matches!(&filename[filename.len() - 7..], ".yak.ts" | ".yak.js")
 }
 
 #[cfg(test)]
