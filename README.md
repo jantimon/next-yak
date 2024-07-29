@@ -294,6 +294,31 @@ Thanks for merging our prs fixes in next.js, webpack and postcss ❤️
   - https://yacijs.vercel.app/
 </details>
 
+## SWC
+
+Next-yak provides a SWC Rust Plugin on [npm](https://www.npmjs.com/package/yak-swc).
+It will become the default plugin for next-yak in the future but unfortunately it doesn't 
+work on Stackblitz because of https://github.com/swc-project/swc/issues/3934
+
+To use it locally you can install it via:
+
+```bash
+npm install yak-swc
+```
+
+And activate it in your `next.config.js`:
+
+```js
+// next.config.js
+import { withYak } from "next-yak/withYakSwc";
+
+const nextConfig = {
+  // your next.js config
+};
+
+export default withYak(nextConfig);
+```
+
 ## Acknowledgments
 
 Massive kudos to:
