@@ -589,21 +589,18 @@ where
       self.current_declaration = vec![];
     }
     let css_code = to_css(&transform_result.css.declarations);
-    // TODO: this works only for call expressions
-    // can we make this more generic?
-    if let Expr::Call(call) = &*transform_result.expression {
-      if !css_code.is_empty() && is_top_level {
-        self.comments.add_leading(
-          call.span.lo,
-          Comment {
-            kind: swc_core::common::comments::CommentKind::Block,
-            span: DUMMY_SP,
-            text: format!("YAK Extracted CSS:\n{}\n", css_code.trim()).into(),
-          },
-        );
-      }
-      self.comments.add_leading(call.span.lo, pure_annotation());
+    let result_span = transform_result.expression.span();
+    if !css_code.is_empty() && is_top_level {
+      self.comments.add_leading(
+        result_span.lo,
+        Comment {
+          kind: swc_core::common::comments::CommentKind::Block,
+          span: DUMMY_SP,
+          text: format!("YAK Extracted CSS:\n{}\n", css_code.trim()).into(),
+        },
+      );
     }
+    self.comments.add_leading(result_span.lo, pure_annotation());
     self.expression_replacement = Some(transform_result.expression);
     self
       .variable_name_mapping
