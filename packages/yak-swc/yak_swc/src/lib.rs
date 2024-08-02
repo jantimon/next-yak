@@ -73,6 +73,8 @@ where
   current_variable_name: Option<Id>,
   /// Current condition to name nested css expressions
   current_condition: Vec<String>,
+  /// Current css expression is exported
+  current_exported: bool,
   /// SWC comments proxy to add extracted css as comments
   comments: Option<GenericComments>,
   /// Extracted variables from the AST
@@ -109,6 +111,7 @@ where
       current_declaration: vec![],
       current_variable_name: None,
       current_condition: vec![],
+      current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
       naming_convention: NamingConvention::new(filename.clone()),
@@ -222,6 +225,15 @@ where
     }
   }
 
+  /// Visit export declarations
+  /// To store the current export state
+  /// e.g. export const Button = styled.button`color: red;`
+  fn visit_mut_export_decl(&mut self, n: &mut ExportDecl) {
+    self.current_exported = true;
+    n.visit_mut_children_with(self);
+    self.current_exported = false;
+  }
+
   /// Visit variable declarations
   /// To store the current name which can be used for class names
   /// e.g. Button for const Button = styled.button`color: red;`
@@ -310,6 +322,13 @@ where
     }
 
     let is_top_level = !self.is_inside_css_expression();
+
+    if is_top_level && self.current_exported && yak_library_function_name.as_deref() == Some("css")
+    {
+      // Add null to the expression replacement to skip the export
+      self.expression_replacement = Some(Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))));
+      return;
+    }
 
     let mut transform: Box<dyn YakTransform> = match yak_library_function_name.as_deref() {
       // Styled Components transform works only on top level
