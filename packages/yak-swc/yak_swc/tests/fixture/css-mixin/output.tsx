@@ -11,9 +11,28 @@ const buttonStyles = /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$
         "--buttonStyles__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
     }
 });
-export const ThemedButton = /*#__PURE__*/ styled.button(buttonStyles);
+export const ThemedButton = /*YAK Extracted CSS:
+.ThemedButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  max-width: var(--ThemedButton__max-width_o1wkyu);
+  width: var(--ThemedButton__width_o1wkyu);
+  color: red;
+}
+*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton);
 export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton {
   color: red;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  max-width: var(--CustomThemedButton__max-width_o1wkyu);
+  width: var(--CustomThemedButton__width_o1wkyu);
+  color: red;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton, buttonStyles);
+*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton);

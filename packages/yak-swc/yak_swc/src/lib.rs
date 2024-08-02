@@ -8,7 +8,6 @@ use swc_core::atoms::atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
-use swc_core::ecma::transforms;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -40,8 +39,8 @@ use naming_convention::NamingConvention;
 
 mod yak_transforms;
 use yak_transforms::{
-  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakCss, YakTransform,
-  YakType,
+  TransformCssMixin, TransformInlineCSS, TransformKeyframes, TransformNestedCss, TransformStyled,
+  YakTransform,
 };
 
 /// Static plugin configuration.
@@ -76,6 +75,8 @@ where
   current_condition: Vec<String>,
   /// Current css expression is exported
   current_exported: bool,
+  /// Flag to check if we are inlining a css expression
+  current_is_inlining: bool,
   /// SWC comments proxy to add extracted css as comments
   comments: Option<GenericComments>,
   /// Extracted variables from the AST
@@ -89,7 +90,10 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_mapping: FxHashMap<Id, YakCss>,
+  variable_name_selector_mapping: FxHashMap<Id, String>,
+  /// Variable Name to Expression Mapping
+  /// Used for mixins that are used inside css expressions
+  variable_expression_mapping: FxHashMap<Id, TaggedTpl>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -113,10 +117,12 @@ where
       current_variable_name: None,
       current_condition: vec![],
       current_exported: false,
+      current_is_inlining: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
       naming_convention: NamingConvention::new(filename.clone()),
-      variable_name_mapping: FxHashMap::default(),
+      variable_name_selector_mapping: FxHashMap::default(),
+      variable_expression_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
       dev_mode,
@@ -184,7 +190,7 @@ where
 
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
-    if !self.variable_name_mapping.is_empty() {
+    if !self.variable_name_selector_mapping.is_empty() {
       // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
       let mut yak_import_index = 0;
       for (i, item) in module.body.iter_mut().enumerate() {
@@ -255,6 +261,16 @@ where
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
+    if self.is_inside_css_expression() {
+      if let Expr::Ident(id) = n {
+        if let Some(css_mixin) = self.variable_expression_mapping.get(&id.to_id()) {
+          let mut cloned_css_mixin = css_mixin.clone();
+          cloned_css_mixin.span = n.span();
+          *n = *Box::new(Expr::TaggedTpl(cloned_css_mixin));
+        }
+      }
+    }
+
     // Transform tagged template literals
     // e.g. styled.button`color: red;`
     if let Expr::TaggedTpl(tpl) = n {
@@ -336,10 +352,9 @@ where
       Some("styled") if is_top_level => Box::new(TransformStyled::new()),
       // Keyframes transform works only on top level
       Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new()),
+      Some("css") if self.current_is_inlining => Box::new(TransformInlineCSS::new()),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => {
-        Box::new(TransformCssMixin::new(self.current_exported.clone()))
-      }
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
       _ => panic!(
@@ -363,6 +378,19 @@ where
       &current_variable_name,
       self.current_css_state.clone(),
     ));
+
+    if transform.can_be_inlined() {
+      // If the current expression is a mixin we need to store the expression
+      self
+        .variable_expression_mapping
+        .insert(current_variable_id.clone(), n.clone());
+    }
+
+    if let Some(css_reference_name) = transform.get_css_reference_name() {
+      self
+        .variable_name_selector_mapping
+        .insert(current_variable_id, css_reference_name);
+    }
 
     // Literal expressions which can't be replaced by constant values
     // and must be kept for the final output (so they run at runtime)
@@ -417,38 +445,31 @@ where
         // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
         if let Some((id, member_expr_parts)) = extract_ident_and_parts(expr) {
           let scoped_name = id.to_id();
-          // Known StyledComponents, Mixin or Animations in the same file
-          if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
+          // Known StyledComponents or Animations in the same file
+          if let Some(referenced_yak_css) = self.variable_name_selector_mapping.get(&scoped_name) {
             // Reference StyledComponents Selector or an Animations name in the same file
             // The css code of Mixins can't be used inside css as it has already been transformed to a class name
-            if referenced_yak_css.kind == YakType::StyledComponent
-              || referenced_yak_css.kind == YakType::Keyframes
-            {
-              let (new_state, new_declarations) =
-                parse_css(referenced_yak_css.name.as_str(), css_state);
-              css_state = Some(new_state);
-              self.current_declaration.extend(new_declarations);
-            }
-            // Mixins e.g.
-            // const highlight = css`color: red;`
-            // styled.button`${highlight};`
-            else if referenced_yak_css.kind == YakType::Mixin {
-              // Add the mixin to the react component
-              runtime_expressions.push(*expr.clone());
+            let (new_state, new_declarations) = parse_css(referenced_yak_css, css_state);
+            css_state = Some(new_state);
+            self.current_declaration.extend(new_declarations);
+          }
+          // Mixins e.g.
+          // const highlight = css`color: red;`
+          // styled.button`${highlight};`
+          else if let Some(referenced_mixin) = self.variable_expression_mapping.get(&scoped_name)
+          {
+            // Used for resetting the css state after processing all expressions
+            let css_state_before = self.current_css_state.clone();
+            let current_is_inlining_before = self.current_is_inlining;
+            // store the current css state so we can use it in nested css expressions
+            self.current_css_state.clone_from(&css_state);
+            self.current_is_inlining = true;
 
-              if current_css_state.current_scopes.len() > 1 {
-                // If the mixin is used as scoped inline mixin
-                // e.g. styled.button`&:hover { ${highlight}; }`
-                HANDLER.with(|handler| {
-                  handler
-                    .struct_span_err(
-                      id.span,
-                      &format!("Mixins are not allowed inside nested selectors\nfound: ${{{}}}\nUse an inline css literal instead or move the selector into the mixin", id.sym),
-                    )
-                    .emit();
-                });
-              }
-            }
+            referenced_mixin.clone().visit_mut_with(self);
+
+            // revert to the css state before the current expression or literal
+            self.current_is_inlining = current_is_inlining_before;
+            self.current_css_state = css_state_before;
           }
           // Cross-file references
           // e.g.:
@@ -624,11 +645,10 @@ where
         );
       }
     }
-    self.comments.add_leading(result_span.lo, pure_annotation());
-    self.expression_replacement = Some(transform_result.expression);
-    self
-      .variable_name_mapping
-      .insert(current_variable_id, transform_result.css);
+    if transform_result.expression.is_some() {
+      self.comments.add_leading(result_span.lo, pure_annotation());
+    }
+    self.expression_replacement = transform_result.expression;
   }
 }
 

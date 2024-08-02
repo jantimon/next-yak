@@ -11,4 +11,17 @@ const buttonStyles = /*#__PURE__*/ css(__styleYak.buttonStyles, ({ $active })=>$
         "--buttonStyles__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
     }
 });
-export const Wrapper = /*#__PURE__*/ styled.button(buttonStyles);
+export const Wrapper = /*YAK Extracted CSS:
+.Wrapper {
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    max-width: var(--Wrapper__max-width_o1wkyu);
+    width: var(--Wrapper__width_o1wkyu);
+    color: red;
+  }
+}
+*/ /*#__PURE__*/ styled.button(__styleYak.Wrapper);
