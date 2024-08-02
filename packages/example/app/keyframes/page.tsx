@@ -2,7 +2,7 @@ import { styled, keyframes } from "next-yak";
 import styles from "../page.module.css";
 import { Clock } from "../Clock";
 import { ClockHand } from "../ClockHands";
-import { verySlow } from "./duration";
+import { verySlow } from "./durationStar";
 
 const rotate = keyframes`
   from {

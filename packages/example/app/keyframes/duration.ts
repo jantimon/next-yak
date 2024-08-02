@@ -1,1 +1,1 @@
-export const verySlow = "3s";
+export { verySlow } from "./duration.yak";
