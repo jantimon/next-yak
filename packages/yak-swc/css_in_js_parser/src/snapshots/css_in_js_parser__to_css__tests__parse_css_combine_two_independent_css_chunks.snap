@@ -1,0 +1,10 @@
+---
+source: src/to_css.rs
+expression: to_css(&combined_declarations)
+---
+.foo {
+  .fancy {
+    color: blue;
+    background: red;
+  }
+}

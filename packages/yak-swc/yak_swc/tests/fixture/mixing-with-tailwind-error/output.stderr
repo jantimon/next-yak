@@ -1,0 +1,7 @@
+  x Inside nested selectors you can only use css literals, constants or dynamic values
+   ,-[input.js:6:1]
+ 5 |   &:hover {
+ 6 |     ${atoms("bg-blue-700")}
+   :       ^^^^^^^^^^^^^^^^^^^^
+ 7 |   }
+   `----

@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "pnpm run --filter=next-yak build",
+    "build:swc": "pnpm run --filter=yak-swc build",
     "watch": "pnpm run --filter=next-yak watch",
     "example": "pnpm --filter=next-yak-example run dev",
     "test": "pnpm run build && pnpm --filter=next-yak --filter=webpack-tests --filter=next-yak-example run \"/test($|:types)/\"",

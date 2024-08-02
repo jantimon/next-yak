@@ -1,0 +1,16 @@
+[package]
+name = "relative_posix_path"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jan Nicklas <j.nicklas@me.com>"]
+description = "A small utility to calculate relative POSIX paths from any two paths, regardless of the current operating system"
+repository = "https://github.com/jantimon/next-yak"
+license = "MIT"
+readme = "README.md"
+keywords = ["path", "posix", "relative", "cross-platform", "filesystem"]
+categories = ["filesystem", "os::unix-apis", "os::windows-apis"]
+
+[dependencies]
+lazy_static = "1.4.0"
+pathdiff = "0.2.1"
+regex = "1.10.3"

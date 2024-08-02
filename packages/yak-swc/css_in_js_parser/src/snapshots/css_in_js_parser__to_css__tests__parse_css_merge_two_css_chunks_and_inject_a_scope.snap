@@ -1,0 +1,16 @@
+---
+source: src/to_css.rs
+expression: to_css(&combined_declarations)
+---
+.foo {
+  .fancy {
+    color: blue;
+  }
+}
+.isActive {
+  .foo {
+    &:hover {
+      color: orange;
+    }
+  }
+}

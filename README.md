@@ -269,7 +269,7 @@ const Container = styled.div`
 ## Yak shaving
 
 While trying to get next-yak to work properly we stumbled accross several bugs.  
-Thanks for merging our prs fixes in next.js and postcss ❤️
+Thanks for merging our prs fixes in next.js, webpack and postcss ❤️
 
 <details>
   <summary>PRS</summary>
@@ -294,7 +294,39 @@ Thanks for merging our prs fixes in next.js and postcss ❤️
   - https://yacijs.vercel.app/
 </details>
 
+## SWC
+
+![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/72494b1c-db1a-4ff7-bd6f-2ed3535fb126)
+
+Next-yak provides a SWC Rust Plugin on [npm](https://www.npmjs.com/package/yak-swc).
+It will become the default plugin for next-yak in future but unfortunately it doesn't 
+work on Stackblitz because of https://github.com/swc-project/swc/issues/3934
+
+To use it locally you can install it via:
+
+```bash
+npm install yak-swc
+```
+
+And activate it in your `next.config.js`:
+
+```js
+// next.config.js
+import { withYak } from "next-yak/withYakSwc";
+
+const nextConfig = {
+  // your next.js config
+};
+
+export default withYak(nextConfig);
+```
+
 ## Acknowledgments
+
+Massive kudos to:
+
+  - @sokra: For guiding us through the webpacks module and loader APIs
+  - @kdy1: For his support while rewriting our Babel plugin as a blazing fast SWC Rust WASM plugin
 
 Special thanks to the contributors and the inspiring projects that influenced next-yak:
 
@@ -303,7 +335,7 @@ Special thanks to the contributors and the inspiring projects that influenced ne
   - Emotion: For pushing the boundaries of CSS-in-JS and providing a high-performance styling experience.
   - Vanilla Extract: For its focus on type-safe, zero-runtime CSS and contributing to the evolution of styling techniques.
   - Tailwind CSS: For its exceptional atomic CSS approach, enabling efficient and customizable styling solutions.
-
+  
 ## License
 
 **next-yak** is licensed under the [MIT License](link/to/LICENSE).
