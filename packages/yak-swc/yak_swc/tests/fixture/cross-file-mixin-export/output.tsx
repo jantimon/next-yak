@@ -1,12 +1,7 @@
 import { css } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
-const textStyles = /*YAK Extracted CSS:
-.textStyles {
-  font-size: 16px;
-  color: black;
-}
-*/ /*#__PURE__*/ css(__styleYak.textStyles);
-export const buttonStyles = /*YAK Extracted CSS:
+const textStyles = /*#__PURE__*/ css(__styleYak.textStyles);
+export const buttonStyles = /*YAK Extracted MIXIN:buttonStyles
 .buttonStyles {
   padding: 10px 20px;
   border: none;

@@ -25,6 +25,7 @@ pub struct YakCss {
   /// ```
   pub name: String,
   pub kind: YakType,
+  pub comment_prefix: Option<String>,
   /// The generated CSS code
   pub declarations: Vec<Declaration>,
 }
@@ -128,6 +129,7 @@ impl YakTransform for TransformNestedCss {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::Mixin,
+        comment_prefix: None,
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
@@ -145,11 +147,15 @@ impl YakTransform for TransformNestedCss {
 pub struct TransformCssMixin {
   /// ClassName of the mixin
   class_name: Option<String>,
+  is_exported: bool,
 }
 
 impl TransformCssMixin {
-  pub fn new() -> TransformCssMixin {
-    TransformCssMixin { class_name: None }
+  pub fn new(is_exported: bool) -> TransformCssMixin {
+    TransformCssMixin {
+      class_name: None,
+      is_exported,
+    }
   }
 }
 
@@ -199,9 +205,18 @@ impl YakTransform for TransformCssMixin {
         .into(),
       );
     }
+    let css_prefix = if self.is_exported {
+      Some(format!(
+        "YAK Extracted MIXIN:{}",
+        self.class_name.as_ref().unwrap(),
+      ))
+    } else {
+      None
+    };
     YakTransformResult {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
+        comment_prefix: css_prefix,
         kind: YakType::Mixin,
         declarations: declarations.to_vec(),
       },
@@ -278,6 +293,7 @@ impl YakTransform for TransformStyled {
       css: YakCss {
         name: self.class_name.as_ref().unwrap().to_string(),
         kind: YakType::StyledComponent,
+        comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {
@@ -354,6 +370,7 @@ impl YakTransform for TransformKeyframes {
       css: YakCss {
         name: self.animation_name.as_ref().unwrap().to_string(),
         kind: YakType::Keyframes,
+        comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
       expression: Box::new(Expr::Call(CallExpr {

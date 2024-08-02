@@ -8,6 +8,7 @@ use swc_core::atoms::atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
+use swc_core::ecma::transforms;
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -336,7 +337,9 @@ where
       // Keyframes transform works only on top level
       Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new()),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => Box::new(TransformCssMixin::new()),
+      Some("css") if is_top_level => {
+        Box::new(TransformCssMixin::new(self.current_exported.clone()))
+      }
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
       _ => panic!(
@@ -610,14 +613,16 @@ where
     let css_code = to_css(&transform_result.css.declarations);
     let result_span = transform_result.expression.span();
     if !css_code.is_empty() && is_top_level {
-      self.comments.add_leading(
-        result_span.lo,
-        Comment {
-          kind: swc_core::common::comments::CommentKind::Block,
-          span: DUMMY_SP,
-          text: format!("YAK Extracted CSS:\n{}\n", css_code.trim()).into(),
-        },
-      );
+      if let Some(comment_prefix) = transform_result.css.comment_prefix.clone() {
+        self.comments.add_leading(
+          result_span.lo,
+          Comment {
+            kind: swc_core::common::comments::CommentKind::Block,
+            span: DUMMY_SP,
+            text: format!("{}\n{}\n", comment_prefix, css_code.trim()).into(),
+          },
+        );
+      }
     }
     self.comments.add_leading(result_span.lo, pure_annotation());
     self.expression_replacement = Some(transform_result.expression);
