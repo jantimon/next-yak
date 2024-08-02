@@ -7,412 +7,437 @@ import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/cs
 
 const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
 
+const compilationCache = new WeakMap<
+  Compilation,
+  Map<string, Promise<ParsedFile>>
+>();
+
+/**
+ * Resolves cross-file selectors in css files
+ *
+ * e.g.:
+ * theme.ts:
+ * ```ts
+ * export const colors = {
+ *   primary: "#ff0000",
+ *   secondary: "#00ff00",
+ * };
+ * ```
+ *
+ * styles.ts:
+ * ```ts
+ * import { colors } from "./theme";
+ * export const button = css`
+ *  background-color: ${colors.primary};
+ * `;
+ */
 export async function resolveCrossFileSelectors(
   loader: LoaderContext<{}>,
   css: string,
 ): Promise<string> {
-  let fileBasedResolveCache = new Map<
-    string,
-    ReturnType<typeof resolveIdentifier>
-  >();
-  // Find cross-file-imports
+  // Search for --yak-css-import: url("path/to/module") in the css
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
     const [fullMatch, encodedArguments] = match;
     const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
-    const position = match.index!;
-    if (specifier.length === 0) {
-      throw new Error(
-        `Invalid module import selector ${fullMatch} - no specifier provided`,
-      );
-    }
     return {
+      encodedArguments,
       moduleSpecifier,
       specifier,
-      position,
+      position: match.index!,
       size: fullMatch.length,
     };
   });
-  const firstMatchPosition = matches[0]?.position;
-  if (firstMatchPosition === undefined) {
-    return css;
-  }
-  // Replace the imports with the resolved values
-  let result = "";
-  for (let i = matches.length - 1; i >= 0; i--) {
-    const { moduleSpecifier, specifier, position, size } = matches[i];
-    const resolved = await resolveCrossFileValue(
-      moduleSpecifier,
-      specifier,
-      fileBasedResolveCache,
-      loader,
+  if (matches.length === 0) return css;
+
+  try {
+    // Resolve all imports concurrently
+    const exportCache = new Map<string, Promise<ResolvedExport>>();
+    const resolvedValues = await Promise.all(
+      matches.map(({ moduleSpecifier, specifier, encodedArguments }) => {
+        // The cache prevents resolving the same specifier multiple times
+        // e.g.:
+        // const a = css`
+        //   color: ${colors.primary};
+        //   border-color: ${colors.primary};
+        // `;
+        const resolvedFromCache = exportCache.get(encodedArguments);
+        const resolvedValue =
+          resolvedFromCache ||
+          parseModule(loader, moduleSpecifier, loader.context).then(
+            (parsedModule) =>
+              resolveModuleSpecifierRecursively(
+                loader,
+                parsedModule,
+                specifier,
+              ),
+          );
+        if (!resolvedFromCache) {
+          exportCache.set(encodedArguments, resolvedValue);
+        }
+        return resolvedValue;
+      }),
     );
-    if (resolved.type === "unsupported") {
-      throw new Error(
-        `yak could not import ${specifier.join(
-          ".",
-        )} from ${moduleSpecifier} - only styled-components, strings and numbers are supported`,
-      );
-    }
-    const replacement =
-      resolved.type === "styled-component"
-        ? `:global(.${getCssModuleLocalIdent(
-            {
-              rootContext: loader.rootContext,
-              resourcePath: resolved.from,
-            },
-            null,
-            resolved.name,
-            {},
-          )})`
-        : getConstantFromResolvedValue(resolved.value, specifier.slice(1));
 
-    // should be the internal namedExport identifier not the exported one
-    result =
-      String(replacement) +
-      css.slice(position + size, matches[i + 1]?.position) +
-      result;
+    // Replace the imports with the resolved values
+    let result = css;
+    for (let i = matches.length - 1; i >= 0; i--) {
+      const { position, size } = matches[i];
+      const resolved = resolvedValues[i];
+
+      const replacement =
+        resolved.type === "styled-component"
+          ? `:global(.${getCssModuleLocalIdent(
+              {
+                rootContext: loader.rootContext,
+                resourcePath: resolved.from,
+              },
+              null,
+              resolved.name,
+              {},
+            )})`
+          : resolved.value;
+
+      result =
+        result.slice(0, position) +
+        String(replacement) +
+        result.slice(position + size);
+    }
+
+    return result;
+  } catch (error) {
+    throw new Error(
+      `Error resolving cross-file selectors: ${
+        (error as Error).message
+      }\nFile: ${loader.resourcePath}`,
+    );
   }
-  result = css.slice(0, firstMatchPosition) + result;
-  return result;
 }
 
-const getConstantFromResolvedValue = (
-  record: RecursiveRecord | string | number,
-  specifier: string[],
-): string | number => {
-  let current: string | number | RecursiveRecord = record;
-  for (const key of specifier) {
-    if (typeof current === "string" || typeof current === "number") {
-      throw new Error(
-        `Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`,
-      );
-    }
-    current = current[key];
-  }
-  if (typeof current === "string" || typeof current === "number") {
-    return current;
-  }
-  throw new Error(
-    `Could not resolve ${specifier.join(".")} in ${JSON.stringify(record)}`,
-  );
-};
-
 /**
- * Resolve the value of from a cross-file-import
+ * Resolves a module specifier to a parsed file
  *
- * For regular files the specifier is resolved with resolveIdentifier
- * For .yak files the entire module is resolved and evaluated with resolveYakModule
+ * e.g.:
+ * ```
+ * parseModule(loader, "./theme", "/path/to/styles.ts")
+ * // -> { type: 'regular', secondary: { type: 'constant', value: '#00ff00' } } }, filePath: '/path/to/theme.ts' }
+ * ```
  */
-async function resolveCrossFileValue(
+async function parseModule(
+  loader: LoaderContext<{}>,
   moduleSpecifier: string,
-  specifier: string[],
-  resolveCache: Map<string, ReturnType<typeof resolveIdentifier>>,
-  loader: LoaderContext<{}>,
-) {
-  const isYak = moduleSpecifier.endsWith(".yak");
-  let resolvedModule: ReturnType<typeof resolveIdentifier>;
-  if (!isYak) {
-    // For non .yak files only the specifier is resolved
-    // therfore only the specifier can be cached
-    const resolveKey = `${moduleSpecifier} : ${specifier[0]}`;
-    let resolvedFromCache = resolveCache.get(resolveKey);
-    resolvedModule =
-      resolvedFromCache ||
-      resolveIdentifier(loader, loader.context, moduleSpecifier, specifier[0]);
-    if (!resolvedFromCache) {
-      resolveCache.set(resolveKey, resolvedModule);
-    }
-  } else {
-    // For yak files the entire module is executed with node (which is slower) and returned
-    // therefore the entire module can be cached as record
-    let resolvedFromCache = resolveCache.get(moduleSpecifier);
-    resolvedModule =
-      resolvedFromCache || resolveYakModule(loader, moduleSpecifier);
-    if (!resolvedFromCache) {
-      resolveCache.set(moduleSpecifier, resolvedModule);
-    }
-    // To align the return value with the non-yak case, we need to resolve the specifier
-    resolvedModule = resolvedModule.then((moduleValues) => {
-      if (moduleValues.type !== "record") {
-        throw new Error("resolveYakModule returns always a record");
-      }
-      const value = moduleValues.value[specifier[0]];
-      if (typeof value === "string" || typeof value === "number") {
-        return {
-          type: "constant" as const,
-          value,
-        };
-      }
-      if (value && (Array.isArray(value) || typeof value === "object")) {
-        return {
-          type: "record" as const,
-          value,
-        };
-      }
-      throw new Error(
-        `Could not find export ${specifier[0]} in ${moduleSpecifier}`,
-      );
-    });
-  }
-  return resolvedModule;
-}
-
-/**
- * Recursively follows the import chain to resolve the identifiers
- * type, name and value.
- *
- * Currently only supports named exports
- */
-async function resolveIdentifier(
-  loader: LoaderContext<{}>,
   context: string,
-  sourcePath: string,
-  identifier: string,
-): Promise<
-  | {
-      type: "styled-component";
-      from: string;
-      name: string;
-    }
-  | {
-      type: "unsupported";
-      name: string;
-    }
-  | {
-      type: "record";
-      value: RecursiveRecord;
-    }
-  | {
-      type: "constant";
-      value: string | number;
-    }
-> {
-  const resolved = await new Promise<string>((resolve, reject) => {
-    loader.resolve(context, sourcePath, (err, result) => {
-      if (err) {
-        return reject(err);
-      }
-      if (!result) {
-        return reject(new Error(`Could not resolve ${sourcePath}`));
-      }
-      resolve(result);
-    });
-  });
-  loader.addDependency(resolved);
-  const exports = await getAllExports(
-    loader,
-    resolved,
-    resolved.endsWith(".tsx"),
-  );
-  const exportForIdentifier = exports[identifier];
-  if (!exportForIdentifier) {
-    throw new Error(`Could not find export ${identifier} in ${resolved}
-Currently only named exports are supported.
-Available exports: ${Object.keys(exports).join(", ")}`);
+): Promise<ParsedFile> {
+  const compilation = loader._compilation;
+  if (!compilation) {
+    throw new Error("Webpack compilation object not available");
   }
-  if (exportForIdentifier.type === "styled-component") {
-    return {
-      type: "styled-component",
-      from: resolved,
-      name: exportForIdentifier.name,
-    };
+  let cache = compilationCache.get(compilation);
+  if (!cache) {
+    cache = new Map();
+    compilationCache.set(compilation, cache);
   }
-  return exportForIdentifier.type !== "named-export"
-    ? exportForIdentifier
-    : resolveIdentifier(
-        loader,
-        path.dirname(resolved),
-        exportForIdentifier.from,
-        exportForIdentifier.name,
-      );
+  // The cache key is valid for the entire project so it can be reused
+  // for different source files
+  const cacheKey = path.resolve(context, moduleSpecifier);
+  let filePromise = cache.get(cacheKey);
+  if (!filePromise) {
+    filePromise = (async () => {
+      const resolved = await new Promise<string>((resolve, reject) => {
+        loader.resolve(context, moduleSpecifier, (err, result) => {
+          if (err) return reject(err);
+          if (!result)
+            return reject(new Error(`Could not resolve ${moduleSpecifier}`));
+          resolve(result);
+        });
+      });
+      return parseFile(loader, resolved);
+    })();
+    cache.set(cacheKey, filePromise);
+  }
+  // on file change, invalidate the cache
+  loader.addDependency((await filePromise).filePath);
+  return filePromise;
 }
 
-type RecursiveRecord = {
-  [key: string]: RecursiveRecord | number | string;
-};
-
-type ResolvedExport =
-  | {
-      type: "unsupported";
-      name: string;
-    }
-  | {
-      type: "styled-component";
-      name: string;
-    }
-  | {
-      type: "constant";
-      value: string | number;
-    }
-  | {
-      type: "record";
-      value: RecursiveRecord;
-    }
-  | {
-      type: "named-export";
-      name: string;
-      from: string;
-    };
-
-/**
- *  Cache the exports per file name to avoid parsing the same file multiple times
- */
-const exportsCache = new WeakMap<
-  Compilation,
-  Map<string, Record<string, ResolvedExport>>
->();
-
-/**
- * Use babel together with the "@babel/plugin-syntax-typescript" to extract all exports from a typescript file
- */
-async function getAllExports(
+async function parseFile(
   loader: LoaderContext<{}>,
-  source: string,
-  isTSX: boolean,
-): Promise<{ [key: string]: ResolvedExport }> {
-  const compilationCache =
-    loader._compilation && exportsCache.get(loader._compilation)?.get(source);
-  if (compilationCache) {
-    return compilationCache;
+  filePath: string,
+): Promise<ParsedFile> {
+  const isYak =
+    filePath.endsWith(".yak.ts") ||
+    filePath.endsWith(".yak.tsx") ||
+    filePath.endsWith(".yak.js") ||
+    filePath.endsWith(".yak.jsx");
+  const isTSX = filePath.endsWith(".tsx");
+
+  try {
+    if (isYak) {
+      const module: Record<string, unknown> =
+        await loader.importModule(filePath);
+      const mappedModule = Object.fromEntries(
+        Object.entries(module).map(([key, value]): [string, ParsedExport] => {
+          if (typeof value === "string" || typeof value === "number") {
+            return [key, { type: "constant" as const, value }];
+          } else if (
+            value &&
+            (typeof value === "object" || Array.isArray(value))
+          ) {
+            return [key, { type: "record" as const, value }];
+          } else {
+            return [key, { type: "unsupported" as const }];
+          }
+        }),
+      );
+      return { type: "yak", exports: mappedModule, filePath };
+    }
+    const sourceContents = await new Promise<string>((resolve, reject) =>
+      loader.fs.readFile(filePath, "utf-8", (err, result) => {
+        if (err) return reject(err);
+        resolve(result || "");
+      }),
+    );
+
+    const exports = await parseExports(sourceContents, isTSX);
+    return { type: "regular", exports, filePath };
+  } catch (error) {
+    throw new Error(
+      `Error parsing file ${filePath}: ${(error as Error).message}`,
+    );
   }
+}
 
-  const sourceContents = await new Promise<string>((resolve, reject) =>
-    loader.fs.readFile(source, "utf-8", (err, result) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(result || "");
-    }),
-  );
+async function parseExports(
+  sourceContents: string,
+  isTSX: boolean,
+): Promise<Record<string, ParsedExport>> {
+  let exports: Record<string, ParsedExport> = {};
 
-  let result: { [key: string]: ResolvedExport } = {};
-  babel.transformSync(sourceContents, {
-    configFile: false,
-    plugins: [
-      [babelPlugin, { isTSX }],
-      [
-        (): babel.PluginObj => ({
-          visitor: {
-            ExportNamedDeclaration({ node }) {
-              // reexports e.g. export { Baz as Bar } from "./foo"
-              if (node.source) {
-                node.specifiers.forEach((specifier) => {
-                  const exportSource = node.source?.value;
-                  if (
-                    specifier.exported.type === "Identifier" &&
-                    specifier.exported.name &&
-                    specifier.type === "ExportSpecifier" &&
-                    specifier.local.type === "Identifier" &&
-                    specifier.local.name &&
-                    exportSource
-                  ) {
-                    result[specifier.exported.name] = {
-                      type: "named-export",
-                      name: specifier.local.name,
-                      from: exportSource,
-                    };
-                  }
-                });
-              } // named export e.g. export const Foo = 1
-              else if (node.declaration?.type === "VariableDeclaration") {
-                node.declaration.declarations.forEach((declaration) => {
-                  if (
-                    declaration.id.type === "Identifier" &&
-                    declaration.id.name &&
-                    declaration.init
-                  ) {
-                    // TODO: check if this is a styled component, or constant, or sth unsupported
+  try {
+    babel.transformSync(sourceContents, {
+      configFile: false,
+      plugins: [
+        [babelPlugin, { isTSX }],
+        [
+          (): babel.PluginObj => ({
+            visitor: {
+              ExportNamedDeclaration({ node }) {
+                if (node.source) {
+                  node.specifiers.forEach((specifier) => {
                     if (
-                      declaration.init.type === "CallExpression" ||
-                      declaration.init.type === "TaggedTemplateExpression"
+                      specifier.type === "ExportSpecifier" &&
+                      specifier.exported.type === "Identifier" &&
+                      specifier.local.type === "Identifier"
                     ) {
-                      result[declaration.id.name] = {
-                        type: "styled-component",
-                        name: declaration.id.name,
-                      };
-                    } else if (
-                      declaration.init.type === "StringLiteral" ||
-                      declaration.init.type === "NumericLiteral"
-                    ) {
-                      result[declaration.id.name] = {
-                        type: "constant",
-                        value: declaration.init.value,
-                      };
-                    } else if (
-                      declaration.init.type === "TemplateLiteral" &&
-                      declaration.init.quasis.length === 1
-                    ) {
-                      result[declaration.id.name] = {
-                        type: "constant",
-                        value: declaration.init.quasis[0].value.raw,
-                      };
-                    } else if (declaration.init.type === "ObjectExpression") {
-                      result[declaration.id.name] = {
-                        type: "record",
-                        value: parseObjectExpression(declaration.init),
-                      };
-                    } else {
-                      result[declaration.id.name] = {
-                        type: "unsupported",
-                        name: declaration.id.name,
+                      exports[specifier.exported.name] = {
+                        type: "re-export",
+                        from: node.source!.value,
+                        imported: specifier.local.name,
                       };
                     }
+                  });
+                } else if (node.declaration?.type === "VariableDeclaration") {
+                  node.declaration.declarations.forEach((declaration) => {
+                    if (
+                      declaration.id.type === "Identifier" &&
+                      declaration.init
+                    ) {
+                      exports[declaration.id.name] = parseExportValueExpression(
+                        declaration.init,
+                      );
+                    }
+                  });
+                }
+              },
+              ExportAllDeclaration({ node }) {
+                if (Object.keys(exports).length === 0) {
+                  exports["*"] ||= {
+                    type: "star-export",
+                    from: [],
+                  };
+                  if (exports["*"].type !== "star-export") {
+                    throw new Error("Invalid star export state");
                   }
-                });
-              }
+                  exports["*"].from.push(node.source.value);
+                }
+              },
             },
-            ExportDefaultDeclaration() {
-              // TODO: add support for default exports
-            },
-          },
-        }),
+          }),
+        ],
       ],
-    ],
-  });
-  if (loader._compilation) {
-    const compilationCache = exportsCache.get(loader._compilation);
-    const exportsPerFile = compilationCache || new Map();
-    exportsPerFile.set(source, result);
-    if (!compilationCache) {
-      exportsCache.set(loader._compilation, exportsPerFile);
-    }
+    });
+
+    return exports;
+  } catch (error) {
+    throw new Error(`Error parsing exports: ${(error as Error).message}`);
   }
-  return result;
+}
+
+function parseExportValueExpression(
+  node: babel.types.Expression,
+): ParsedExport {
+  if (
+    node.type === "CallExpression" ||
+    node.type === "TaggedTemplateExpression"
+  ) {
+    return { type: "styled-component" };
+  } else if (node.type === "StringLiteral" || node.type === "NumericLiteral") {
+    return { type: "constant", value: node.value };
+  } else if (node.type === "TemplateLiteral" && node.quasis.length === 1) {
+    return { type: "constant", value: node.quasis[0].value.raw };
+  } else if (node.type === "ObjectExpression") {
+    return { type: "record", value: parseObjectExpression(node) };
+  }
+  return { type: "unsupported" };
 }
 
 function parseObjectExpression(
   node: babel.types.ObjectExpression,
-): RecursiveRecord {
-  let result: RecursiveRecord = {};
+): Record<string, any> {
+  let result: Record<string, any> = {};
   for (const property of node.properties) {
     if (
       property.type === "ObjectProperty" &&
       property.key.type === "Identifier"
     ) {
       const key = property.key.name;
-      if (
-        property.value.type === "StringLiteral" ||
-        property.value.type === "NumericLiteral"
-      ) {
-        result[key] = property.value.value;
-      } else if (
-        property.value.type === "TemplateLiteral" &&
-        property.value.quasis.length === 1
-      ) {
-        result[key] = property.value.quasis[0].value.raw;
-      } else if (property.value.type === "ObjectExpression") {
-        result[key] = parseObjectExpression(property.value);
-      }
+      result[key] = parseExportValueExpression(
+        property.value as babel.types.Expression,
+      );
     }
   }
   return result;
 }
 
-function resolveYakModule(loader: LoaderContext<{}>, moduleSpecifier: string) {
-  return loader.importModule(moduleSpecifier).then((module) => ({
-    type: "record" as const,
-    value: module as RecursiveRecord,
-  }));
+/**
+ * Follows a specifier recursively until it finds its constant value
+ * for example here it follows "colors.primary"
+ *
+ * ```
+ * resolveModuleSpecifierRecursively(loader, "@/theme", ["colors", "primary"], "colors:primary")`
+ * // -> { type: 'constant', value: '#ff0000' }
+ * ```
+ *
+ * example structure:
+ *
+ * styles.ts:
+ * ```
+ * import { colors } from "@/theme";
+ * export const button = css`color: ${colors.primary}`;
+ * ```
+ *
+ * theme.ts:
+ * ```
+ * export { colors } from "./colors";
+ * ```
+ *
+ * colors.ts:
+ * ```
+ * export const colors = { primary: "#ff0000" };
+ * ```
+ *
+ */
+async function resolveModuleSpecifierRecursively(
+  loader: LoaderContext<{}>,
+  module: ParsedFile,
+  specifier: string[],
+): Promise<ResolvedExport> {
+  try {
+    const exportName = specifier[0];
+    let exportValue = module.exports[exportName];
+    // Follow star exports if there is only a single one
+    // and the export does not exist in the current module
+    if (exportValue === undefined) {
+      const starExport = module.exports["*"];
+      if (starExport?.type === "star-export") {
+        if (starExport.from.length > 1) {
+          throw new Error(
+            `Could not resolve ${specifier.join(".")} in module ${
+              module.filePath
+            } - Multiple star exports are not supported for performance reasons`,
+          );
+        }
+        exportValue = {
+          type: "re-export" as const,
+          from: starExport.from[0],
+          imported: exportName,
+        };
+      } else {
+        throw new Error(
+          `Could not resolve "${specifier.join(".")}" in module ${
+            module.filePath
+          }`,
+        );
+      }
+    }
+    // Follow reexport
+    if (exportValue.type === "re-export") {
+      const importedModule = await parseModule(
+        loader,
+        exportValue.from,
+        path.dirname(module.filePath),
+      );
+      return resolveModuleSpecifierRecursively(loader, importedModule, [
+        exportValue.imported,
+        ...specifier.slice(1),
+      ]);
+    }
+
+    if (exportValue.type === "styled-component") {
+      return {
+        type: "styled-component",
+        from: module.filePath,
+        name: specifier[specifier.length - 1],
+      };
+    } else if (exportValue.type === "constant") {
+      return { type: "constant", value: exportValue.value };
+    } else if (exportValue.type === "record") {
+      let current: any = exportValue.value;
+      let depth = 0;
+      /// Drill down the specifier e.g. colors.primary
+      do {
+        if (typeof current === "string" || typeof current === "number") {
+          return {
+            type: "constant" as const,
+            value: current,
+          };
+        } else if (
+          !current ||
+          (typeof current !== "object" && !Array.isArray(current))
+        ) {
+          throw new Error(
+            `Error unpacking Record/Array "${exportName}".\nKey "${
+              specifier[depth]
+            }" was of type "${typeof current}" but only String and Number are supported`,
+          );
+        }
+        depth++;
+        current = current[specifier[depth]];
+      } while (current);
+    }
+    throw new Error(`Error unpacking Record/Array for unkown reason`);
+  } catch (error) {
+    throw new Error(
+      `Error resolving from module ${module.filePath}: ${
+        (error as Error).message
+      }`,
+    );
+  }
 }
+
+type ParsedFile =
+  | { type: "regular"; exports: Record<string, ParsedExport>; filePath: string }
+  | { type: "yak"; exports: Record<string, ParsedExport>; filePath: string };
+
+type ParsedExport =
+  | { type: "styled-component" }
+  | { type: "constant"; value: string | number }
+  | { type: "record"; value: {} }
+  | { type: "unsupported" }
+  | { type: "re-export"; from: string; imported: string }
+  | { type: "star-export"; from: string[] };
+
+type ResolvedExport =
+  | { type: "styled-component"; from: string; name: string }
+  | { type: "constant"; value: string | number };
