@@ -10,6 +10,9 @@ pub struct YakFileVisitor {
   is_inside_css_tpl: bool,
 }
 
+/// A vistor which transform the AST of a .yak.tsx .yak.ts or .yak.js file
+/// by removing the next-yak imports and converting tagged template literals
+/// so that it can evaluated as a pure nodejs module
 impl YakFileVisitor {
   pub fn new() -> Self {
     Self {

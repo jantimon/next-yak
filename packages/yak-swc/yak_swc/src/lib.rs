@@ -473,7 +473,10 @@ where
           // e.g.:
           // const primary = "red";
           // styled.button`color: ${primary};`
-          else if let Some(value) = self.variables.get_variable(&scoped_name) {
+          else if let Some(value) = self
+            .variables
+            .get_const_value(&scoped_name, member_expr_parts)
+          {
             let (new_state, _) = parse_css(&value, css_state);
             css_state = Some(new_state);
           }
@@ -510,7 +513,7 @@ where
           let is_inside_property_value = css_state.as_ref().unwrap().is_inside_property_value;
 
           // If the expression is inside a css property value
-          // it has to be replaced with a css variable
+          // it has to be replaced with a css variable 
           if is_inside_property_value {
             // Check if the next quasi starts with a unit
             // e.g. styled.button`left: ${({$x}) => $x}px;`
