@@ -131,6 +131,20 @@ impl VisitMut for VariableVisitor {
     });
     import.visit_mut_children_with(self);
   }
+  /// Ignores function declarations (for speed)
+  fn visit_mut_fn_decl(&mut self, _: &mut FnDecl) {}
+
+  /// Ignores class declarations (for spee d)
+  fn visit_mut_class_decl(&mut self, _: &mut ClassDecl) {}
+
+  /// Ignores function expressions (for spee d)
+  fn visit_mut_fn_expr(&mut self, _: &mut FnExpr) {}
+
+  /// Ignores arrow functions (for speed)
+  fn visit_mut_arrow_expr(&mut self, _: &mut ArrowExpr) {}
+
+  /// Ignores if statements (for speed)
+  fn visit_mut_if_stmt(&mut self, _: &mut IfStmt) {}
 }
 
 fn get_expr_value(expr: &Expr) -> Option<String> {

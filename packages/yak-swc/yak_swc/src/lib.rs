@@ -513,7 +513,7 @@ where
           let is_inside_property_value = css_state.as_ref().unwrap().is_inside_property_value;
 
           // If the expression is inside a css property value
-          // it has to be replaced with a css variable 
+          // it has to be replaced with a css variable
           if is_inside_property_value {
             // Check if the next quasi starts with a unit
             // e.g. styled.button`left: ${({$x}) => $x}px;`
