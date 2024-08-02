@@ -165,7 +165,7 @@ async function parseFile(
   loader: LoaderContext<{}>,
   filePath: string,
 ): Promise<ParsedFile> {
-  const isYak = filePath.endsWith(".yak.ts") || filePath.endsWith(".yak.tsx");
+  const isYak = filePath.endsWith(".yak.ts") || filePath.endsWith(".yak.tsx") || filePath.endsWith(".yak.js")  || filePath.endsWith(".yak.jsx");
   const isTSX = filePath.endsWith(".tsx");
 
   try {
