@@ -6,4 +6,11 @@ const textStyles = /*YAK Extracted CSS:
   color: black;
 }
 */ /*#__PURE__*/ css(__styleYak.textStyles);
-export const buttonStyles = null;
+export const buttonStyles = /*YAK Extracted CSS:
+.buttonStyles {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+*/ /*#__PURE__*/ css(__styleYak.buttonStyles, textStyles);

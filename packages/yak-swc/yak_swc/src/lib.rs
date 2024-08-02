@@ -323,11 +323,11 @@ where
 
     let is_top_level = !self.is_inside_css_expression();
 
-    if is_top_level && self.current_exported && yak_library_function_name.as_deref() == Some("css")
+    if is_top_level && !self.current_exported && yak_library_function_name.as_deref() == Some("css")
     {
-      // Add null to the expression replacement to skip the export
-      self.expression_replacement = Some(Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))));
-      return;
+      // TODO: uncomment once same file css mixins are supported
+      // self.expression_replacement = Some(Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))));
+      // return;
     }
 
     let mut transform: Box<dyn YakTransform> = match yak_library_function_name.as_deref() {
