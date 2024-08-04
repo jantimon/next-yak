@@ -30,20 +30,10 @@ impl VariableVisitor {
     }
   }
 
-  /// Returns the value of a variable if it exists
-  /// Use id.to_string() (including the #0 suffix) to get the variable name
-  /// Using sym.to_string() will always return None
-  pub fn get_const_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<String> {
-    if let Some(expr) = self.get_const_value_with_parts(name, parts) {
-      get_expr_value(&expr)
-    } else {
-      None
-    }
-  }
-
-  /// Try to get a constant value with parts
-  /// e.g. get_const_value_with_parts("primary#0", vec![atom!("primary"), atom!("red")])
-  pub fn get_const_value_with_parts(&mut self, name: &Id, parts: Vec<Atom>) -> Option<Box<Expr>> {
+  /// Try to get a constant value for a variable id
+  /// Supports normal constant values, object properties and array elements
+  /// e.g. get_const_value("primary#0", vec![atom!("primary"), atom!("red")])
+  pub fn get_const_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<Box<Expr>> {
     if let Some(expr) = self.variables.get_mut(name) {
       // Start with the initial expression
       let mut current_expr: &Expr = expr;
@@ -92,6 +82,16 @@ impl VariableVisitor {
     }
   }
 
+  /// Try to get a constant string or number value for a variable id as string
+  /// Supports normal constant values, object properties and array elements
+  /// e.g. get_const_literal_value("primary#0", vec![atom!("primary"), atom!("red")]) -> Some("red")
+  pub fn get_const_literal_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<String> {
+    if let Some(expr) = self.get_const_value(name, parts) {
+      get_expr_value(&expr)
+    } else {
+      None
+    }
+  }
   /// Returns the source of an imported variable if it exists
   pub fn get_imported_variable(&mut self, name: &Id) -> Option<(ImportSourceType, String)> {
     if let Some(src) = self.imports.get(name) {
@@ -196,7 +196,7 @@ mod tests {
       *mixin,
       Some((ImportSourceType::Yak, "./constants.yak".to_string()))
     );
-    let duration = &visitor.get_const_value(
+    let duration = &visitor.get_const_literal_value(
       &Id::from((Atom::from("duration"), SyntaxContext::from_u32(0))),
       vec![],
     );
@@ -225,7 +225,7 @@ mod tests {
     // Test accessing a nested property
     let nested_value = get_expr_value(
       &visitor
-        .get_const_value_with_parts(
+        .get_const_value(
           &Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
           vec![atom!("obj"), atom!("prop1"), atom!("nestedProp")],
         )
@@ -235,7 +235,7 @@ mod tests {
     assert_eq!(nested_value, Some("fancy".to_string()));
 
     // Test accessing an array element
-    let array_elem = &visitor.get_const_value_with_parts(
+    let array_elem = &visitor.get_const_value(
       &Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
       vec![atom!("obj"), atom!("prop2"), atom!("1")],
     );
