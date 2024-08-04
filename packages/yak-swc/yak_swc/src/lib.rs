@@ -285,7 +285,10 @@ where
           // e.g.:
           // const primary = "red";
           // styled.button`color: ${primary};`
-          else if let Some(value) = self.variables.get_variable(&scoped_name) {
+          else if let Some(value) = self
+            .variables
+            .get_const_literal_value(&scoped_name, member_expr_parts)
+          {
             let (new_state, _) = parse_css(&value, css_state);
             css_state = Some(new_state);
           }

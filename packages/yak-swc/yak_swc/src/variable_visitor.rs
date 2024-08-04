@@ -30,22 +30,68 @@ impl VariableVisitor {
     }
   }
 
-  /// Returns the value of a variable if it exists
-  /// Use id.to_string() (including the #0 suffix) to get the variable name
-  /// Using sym.to_string() will always return None
-  pub fn get_variable(&mut self, name: &Id) -> Option<String> {
+  /// Try to get a constant value for a variable id
+  /// Supports normal constant values, object properties and array elements
+  /// e.g. get_const_value("primary#0", vec![atom!("primary"), atom!("red")])
+  pub fn get_const_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<Box<Expr>> {
     if let Some(expr) = self.variables.get_mut(name) {
-      if let Expr::Lit(lit) = &mut **expr {
-        if let Lit::Str(str_) = lit {
-          return Some(str_.value.to_string());
-        } else if let Lit::Num(num) = lit {
-          return Some(num.value.to_string());
+      // Start with the initial expression
+      let mut current_expr: &Expr = expr;
+      // Iterate over the parts (skipping the first one as it's the variable name)
+      for part in parts.iter().skip(1) {
+        match current_expr {
+          Expr::Object(obj) => {
+            // For object expressions, look for a property with matching key
+            if let Some(prop) = obj.props.iter().find_map(|prop| match prop {
+              PropOrSpread::Prop(prop) => match &**prop {
+                Prop::KeyValue(kv) => match &kv.key {
+                  PropName::Ident(ident) if ident.sym == *part => Some(&kv.value),
+                  _ => None,
+                },
+                _ => None,
+              },
+              _ => None,
+            }) {
+              current_expr = prop;
+            } else {
+              return None; // Property not found
+            }
+          }
+          Expr::Array(arr) => {
+            // For array expressions, try to parse the part as an index
+            if let Ok(index) = part.to_string().parse::<usize>() {
+              if let Some(Some(elem)) = arr.elems.get(index) {
+                if elem.spread.is_some() {
+                  return None; // Spread operator not supported
+                }
+                current_expr = &elem.expr;
+              } else {
+                return None;
+              }
+            } else {
+              return None;
+            }
+          } // Unsupported expression type
+          _ => return None,
         }
       }
+      // After traversing all parts, return the final expression
+      Some(Box::new(current_expr.clone()))
+    } else {
+      None // Variable not found
     }
-    None
   }
 
+  /// Try to get a constant string or number value for a variable id as string
+  /// Supports normal constant values, object properties and array elements
+  /// e.g. get_const_literal_value("primary#0", vec![atom!("primary"), atom!("red")]) -> Some("red")
+  pub fn get_const_literal_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<String> {
+    if let Some(expr) = self.get_const_value(name, parts) {
+      get_expr_value(&expr)
+    } else {
+      None
+    }
+  }
   /// Returns the source of an imported variable if it exists
   pub fn get_imported_variable(&mut self, name: &Id) -> Option<(ImportSourceType, String)> {
     if let Some(src) = self.imports.get(name) {
@@ -85,6 +131,28 @@ impl VisitMut for VariableVisitor {
     });
     import.visit_mut_children_with(self);
   }
+  /// Ignores function declarations (for speed)
+  fn visit_mut_fn_decl(&mut self, _: &mut FnDecl) {}
+
+  /// Ignores class declarations (for spee d)
+  fn visit_mut_class_decl(&mut self, _: &mut ClassDecl) {}
+
+  /// Ignores function expressions (for spee d)
+  fn visit_mut_fn_expr(&mut self, _: &mut FnExpr) {}
+
+  /// Ignores arrow functions (for speed)
+  fn visit_mut_arrow_expr(&mut self, _: &mut ArrowExpr) {}
+
+  /// Ignores if statements (for speed)
+  fn visit_mut_if_stmt(&mut self, _: &mut IfStmt) {}
+}
+
+fn get_expr_value(expr: &Expr) -> Option<String> {
+  match expr {
+    Expr::Lit(Lit::Str(str)) => Some(str.value.to_string()),
+    Expr::Lit(Lit::Num(num)) => Some(num.value.to_string()),
+    _ => None,
+  }
 }
 
 #[cfg(test)]
@@ -92,6 +160,7 @@ mod tests {
   use super::*;
   use swc::atoms::Atom;
   use swc_core::common::SyntaxContext;
+  use swc_core::ecma::atoms::atom;
   use swc_core::ecma::transforms::testing::test_transform;
   use swc_core::ecma::visit::as_folder;
 
@@ -127,10 +196,50 @@ mod tests {
       *mixin,
       Some((ImportSourceType::Yak, "./constants.yak".to_string()))
     );
-    let duration = &visitor.get_variable(&Id::from((
-      Atom::from("duration"),
-      SyntaxContext::from_u32(0),
-    )));
+    let duration = &visitor.get_const_literal_value(
+      &Id::from((Atom::from("duration"), SyntaxContext::from_u32(0))),
+      vec![],
+    );
     assert_eq!(*duration, Some("34".to_string()));
+  }
+
+  #[test]
+  fn test_get_const_value_with_parts() {
+    let mut visitor = VariableVisitor::new();
+    let code = r#"
+      const obj = {
+        prop1: {
+          nestedProp: "fancy"
+        },
+        prop2: [1, 2, 3]
+      };
+      "#;
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      code,
+      code,
+      true,
+    );
+
+    // Test accessing a nested property
+    let nested_value = get_expr_value(
+      &visitor
+        .get_const_value(
+          &Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
+          vec![atom!("obj"), atom!("prop1"), atom!("nestedProp")],
+        )
+        .unwrap(),
+    );
+
+    assert_eq!(nested_value, Some("fancy".to_string()));
+
+    // Test accessing an array element
+    let array_elem = &visitor.get_const_value(
+      &Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
+      vec![atom!("obj"), atom!("prop2"), atom!("1")],
+    );
+    let array_value = get_expr_value(array_elem.as_ref().unwrap());
+    assert_eq!(array_value, Some("2".to_string()));
   }
 }

@@ -1,0 +1,28 @@
+import { styled } from "next-yak";
+
+const colors = {
+  primary: "#007bff",
+  secondary: "#6c757d",
+  success: "#28a745",
+  danger: "#dc3545",
+  warning: "#ffc107",
+  info: "#17a2b8",
+  light: "#f8f9fa",
+  dark: "#343a40",
+};
+
+const borderRadius = "4px";
+
+export const Button = styled.button`
+  background-color: ${colors.primary};
+  color: ${colors.light};
+  padding: 10px 20px;
+  border: none;
+  border-radius: ${borderRadius};
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  &:hover {
+    background-color: ${colors.dark};
+  }
+`;
