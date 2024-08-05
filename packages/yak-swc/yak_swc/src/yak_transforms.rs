@@ -16,7 +16,7 @@ pub struct YakCss {
 }
 
 pub struct YakTransformResult {
-  pub expression: Option<Box<Expr>>,
+  pub expression: Box<Expr>,
   pub css: YakCss,
 }
 
@@ -40,10 +40,6 @@ pub trait YakTransform {
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult;
-  /// Indicates if the transform should keep the original expression
-  fn can_be_inlined(&self) -> bool {
-    false
-  }
   /// Get animation or styled component selector name
   fn get_css_reference_name(&self) -> Option<String> {
     None
@@ -123,48 +119,12 @@ impl YakTransform for TransformNestedCss {
         comment_prefix: None,
         declarations: declarations.to_vec(),
       },
-      expression: Some(Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
       }))),
-    }
-  }
-}
-
-pub struct TransformInlineCSS {}
-
-impl TransformInlineCSS {
-  pub fn new() -> TransformInlineCSS {
-    TransformInlineCSS {}
-  }
-}
-
-impl YakTransform for TransformInlineCSS {
-  fn create_css_state(
-    &mut self,
-    _: &mut NamingConvention,
-    _: &str,
-    previous_parser_state: Option<ParserState>,
-  ) -> ParserState {
-    previous_parser_state.expect("Inline CSS should always be nested")
-  }
-
-  fn transform_expression(
-    &mut self,
-    _: &mut TaggedTpl,
-    _: Ident,
-    _: Vec<Expr>,
-    declarations: &[Declaration],
-    _: FxHashMap<String, Expr>,
-  ) -> YakTransformResult {
-    YakTransformResult {
-      css: YakCss {
-        comment_prefix: None,
-        declarations: declarations.to_vec(),
-      },
-      expression: None,
     }
   }
 }
@@ -250,18 +210,13 @@ impl YakTransform for TransformCssMixin {
           declaration
         }),
       },
-      expression: Some(Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
       }))),
     }
-  }
-
-  /// In order to be able to inline the mixin within the same file, we need to keep the original expression
-  fn can_be_inlined(&self) -> bool {
-    true
   }
 }
 
@@ -329,7 +284,7 @@ impl YakTransform for TransformStyled {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
-      expression: Some(Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
@@ -409,7 +364,7 @@ impl YakTransform for TransformKeyframes {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
-      expression: Some(Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,

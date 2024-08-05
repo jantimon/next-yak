@@ -39,8 +39,7 @@ use naming_convention::NamingConvention;
 
 mod yak_transforms;
 use yak_transforms::{
-  TransformCssMixin, TransformInlineCSS, TransformKeyframes, TransformNestedCss, TransformStyled,
-  YakTransform,
+  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakTransform,
 };
 
 /// Static plugin configuration.
@@ -75,8 +74,6 @@ where
   current_condition: Vec<String>,
   /// Current css expression is exported
   current_exported: bool,
-  /// Flag to check if we are inlining a css expression
-  current_is_inlining: bool,
   /// SWC comments proxy to add extracted css as comments
   comments: Option<GenericComments>,
   /// Extracted variables from the AST
@@ -91,9 +88,6 @@ where
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
   variable_name_selector_mapping: FxHashMap<Id, String>,
-  /// Variable Name to Expression Mapping
-  /// Used for mixins that are used inside css expressions
-  variable_expression_mapping: FxHashMap<Id, TaggedTpl>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -117,12 +111,10 @@ where
       current_variable_name: None,
       current_condition: vec![],
       current_exported: false,
-      current_is_inlining: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
       naming_convention: NamingConvention::new(filename.clone()),
       variable_name_selector_mapping: FxHashMap::default(),
-      variable_expression_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
       dev_mode,
@@ -527,16 +519,28 @@ where
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
+    // Visiting a constant mixin expression e.g.:
+    // const highlight = css`color: red;`
+    // const Button = styled.button`${({$active}) => $active && highlight};`
     if self.is_inside_css_expression() {
-      if let Expr::Ident(id) = n {
-        if let Some(css_mixin) = self.variable_expression_mapping.get(&id.to_id()) {
-          let mut cloned_css_mixin = css_mixin.clone();
-          cloned_css_mixin.span = n.span();
-          *n = *Box::new(Expr::TaggedTpl(cloned_css_mixin));
+      if let Some((id, member_expr_parts)) = extract_ident_and_parts(n) {
+        if let Some(constant_value) = self
+          .variables
+          .get_const_value(&id.to_id(), member_expr_parts)
+        {
+          if let Expr::TaggedTpl(tpl) = *constant_value {
+            let replacement_before = self.expression_replacement.clone();
+            let tpl = &mut tpl.clone();
+            tpl.span = n.span();
+            self.visit_mut_tagged_tpl(tpl);
+            if let Some(replacement) = self.expression_replacement.clone() {
+              *n = *replacement;
+            }
+            self.expression_replacement = replacement_before;
+          }
         }
       }
     }
-
     // Transform tagged template literals
     // e.g. styled.button`color: red;`
     if let Expr::TaggedTpl(tpl) = n {
@@ -618,7 +622,6 @@ where
       Some("styled") if is_top_level => Box::new(TransformStyled::new()),
       // Keyframes transform works only on top level
       Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new()),
-      Some("css") if self.current_is_inlining => Box::new(TransformInlineCSS::new()),
       // CSS Mixin e.g. const highlight = css`color: red;`
       Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
@@ -644,13 +647,6 @@ where
       &current_variable_name,
       self.current_css_state.clone(),
     ));
-
-    if transform.can_be_inlined() {
-      // If the current expression is a mixin we need to store the expression
-      self
-        .variable_expression_mapping
-        .insert(current_variable_id.clone(), n.clone());
-    }
 
     if let Some(css_reference_name) = transform.get_css_reference_name() {
       self
@@ -686,10 +682,8 @@ where
         );
       }
     }
-    if transform_result.expression.is_some() {
-      self.comments.add_leading(result_span.lo, pure_annotation());
-    }
-    self.expression_replacement = transform_result.expression;
+    self.comments.add_leading(result_span.lo, pure_annotation());
+    self.expression_replacement = Some(transform_result.expression);
   }
 }
 

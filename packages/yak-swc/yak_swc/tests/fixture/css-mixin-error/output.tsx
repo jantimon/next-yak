@@ -36,4 +36,14 @@ export const Wrapper = /*YAK Extracted CSS:
     color: red;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Wrapper);
+*/ /*#__PURE__*/ styled.button(__styleYak.Wrapper, ({ $active })=>$active && css(__styleYak.Wrapper__$active, {
+        "style": {
+            "--Wrapper__max-width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
+        }
+    }), function({ $letters }) {
+    return $letters > 5 && css(__styleYak.Wrapper__);
+}, {
+    "style": {
+        "--Wrapper__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
+    }
+});

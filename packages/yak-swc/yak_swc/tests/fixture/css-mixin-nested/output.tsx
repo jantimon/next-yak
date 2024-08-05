@@ -25,7 +25,15 @@ export const ThemedButton = /*YAK Extracted CSS:
 .ThemedButton {
   width: var(--ThemedButton__width_o1wkyu);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton);
+*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton, ({ $active })=>$active && css(__styleYak.ThemedButton__$active, {
+        "style": {
+            "--ThemedButton__max-width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
+        }
+    }), {
+    "style": {
+        "--ThemedButton__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
+    }
+});
 export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton {
   color: red;
@@ -43,4 +51,12 @@ export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton {
   width: var(--CustomThemedButton__width_o1wkyu);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton);
+*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton, ({ $active })=>$active && css(__styleYak.CustomThemedButton__$active, {
+        "style": {
+            "--CustomThemedButton__max-width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
+        }
+    }), {
+    "style": {
+        "--CustomThemedButton__width_o1wkyu": __yak_unitPostFix(({ $letters })=>$letters * 10, "px")
+    }
+});
