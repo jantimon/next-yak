@@ -286,7 +286,7 @@ where
                     .struct_span_err(
                       id.span,
                       &format!(
-                        "Unssupported \"{}\" template literal in css expression - only css`` mixins are allowed",
+                        "Unsupported \"{}\" template literal in css expression - only css`` mixins are allowed",
                         scoped_name.0
                       ),
                     )
@@ -326,10 +326,21 @@ where
         // Handle inline css literals
         // e.g. styled.button`${css`color: red;`};`
         else if let Expr::TaggedTpl(tpl) = &mut **expr {
-          let (inline_runtime_exprs, inline_runtime_css_vars) =
-            self.process_yak_literal(tpl, css_state.clone());
-          runtime_expressions.extend(inline_runtime_exprs);
-          runtime_css_variables.extend(inline_runtime_css_vars);
+          if is_valid_tagged_tpl(tpl, self.yak_library_imports.yak_css_idents.clone()) {
+            let (inline_runtime_exprs, inline_runtime_css_vars) =
+              self.process_yak_literal(tpl, css_state.clone());
+            runtime_expressions.extend(inline_runtime_exprs);
+            runtime_css_variables.extend(inline_runtime_css_vars);
+          } else {
+            HANDLER.with(|handler| {
+              handler
+                .struct_span_err(
+                  tpl.span,
+                  "Only css template literals are allowed inside css expressions",
+                )
+                .emit();
+            });
+          }
         }
         // Visit nested css expressions
         // e.g. styled.button`.foo { ${({$x}) => $x && css`color: red`}; }`
