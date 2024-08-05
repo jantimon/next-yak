@@ -29,7 +29,6 @@ use yak_file_visitor::YakFileVisitor;
 
 mod utils {
   pub(crate) mod add_suffix_to_expr;
-  pub(crate) mod assert_css_expr;
   pub(crate) mod ast_helper;
   pub(crate) mod encode_module_import;
   pub(crate) mod murmur_hash;
@@ -399,12 +398,6 @@ where
             );
             let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
             css_state = Some(new_state);
-          } else {
-            // Check if an invalid expression is used inside nested selectors
-            if current_css_state.current_scopes.len() > 1 {
-              utils::assert_css_expr::assert_css_expr(expr, "Inside nested selectors you can only use css literals, constants or dynamic values".to_string(), 
-              self.yak_library_imports.yak_css_idents.clone());
-            }
           }
 
           expr.visit_mut_children_with(self);

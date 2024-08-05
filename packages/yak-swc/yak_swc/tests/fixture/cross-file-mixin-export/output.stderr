@@ -1,7 +1,0 @@
-  x Inside nested selectors you can only use css literals, constants or dynamic values
-    ,-[input.js:26:1]
- 25 |   &:hover {
- 26 |     ${({ $isSet }) => $isSet && true && true && true && textStyles};
-    :                                                         ^^^^^^^^^^
- 27 |   }
-    `----

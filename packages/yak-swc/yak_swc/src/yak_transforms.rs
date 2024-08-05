@@ -3,7 +3,7 @@ use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
-use swc_core::common::DUMMY_SP;
+use swc_core::common::{Span, DUMMY_SP};
 use swc_core::ecma::ast::*;
 
 use crate::naming_convention::NamingConvention;
@@ -120,7 +120,10 @@ impl YakTransform for TransformNestedCss {
         declarations: declarations.to_vec(),
       },
       expression: (Box::new(Expr::Call(CallExpr {
-        span: expression.span,
+        // Use a sepcial span as this expression might be cloned as part
+        // of a parent expression and therefore needs a unique span to
+        // avoid collisions for the comments
+        span: Span::dummy_with_cmt(),
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
