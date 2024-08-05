@@ -529,14 +529,16 @@ where
           .get_const_value(&id.to_id(), member_expr_parts)
         {
           if let Expr::TaggedTpl(tpl) = *constant_value {
-            let replacement_before = self.expression_replacement.clone();
-            let tpl = &mut tpl.clone();
-            tpl.span = n.span();
-            self.visit_mut_tagged_tpl(tpl);
-            if let Some(replacement) = self.expression_replacement.clone() {
-              *n = *replacement;
+            if is_valid_tagged_tpl(&tpl, self.yak_library_imports.yak_css_idents.clone()) {
+              let replacement_before = self.expression_replacement.clone();
+              let tpl = &mut tpl.clone();
+              tpl.span = n.span();
+              self.visit_mut_tagged_tpl(tpl);
+              if let Some(replacement) = self.expression_replacement.clone() {
+                *n = *replacement;
+              }
+              self.expression_replacement = replacement_before;
             }
-            self.expression_replacement = replacement_before;
           }
         }
       }
@@ -619,10 +621,23 @@ where
       Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
-      _ => panic!(
-        "Invalid context for next-yak function {:?}",
-        yak_library_function_name
-      ),
+      _ => {
+        if !is_top_level {
+          HANDLER.with(|handler| {
+            handler
+              .struct_span_err(
+                n.span,
+                "Only css template literals can be nested inside other css template literals",
+              )
+              .emit();
+          });
+          return;
+        }
+        panic!(
+          "Invalid context for next-yak function {:?}",
+          yak_library_function_name
+        )
+      }
     };
 
     let current_variable_id = self.get_current_component_id();
