@@ -610,13 +610,6 @@ where
 
     let is_top_level = !self.is_inside_css_expression();
 
-    if is_top_level && !self.current_exported && yak_library_function_name.as_deref() == Some("css")
-    {
-      // TODO: uncomment once same file css mixins are supported
-      // self.expression_replacement = Some(Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))));
-      // return;
-    }
-
     let mut transform: Box<dyn YakTransform> = match yak_library_function_name.as_deref() {
       // Styled Components transform works only on top level
       Some("styled") if is_top_level => Box::new(TransformStyled::new()),
