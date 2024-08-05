@@ -176,16 +176,6 @@ impl YakTransform for TransformCssMixin {
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
-    if !declarations.is_empty() {
-      arguments.push(
-        Expr::Member(MemberExpr {
-          span: DUMMY_SP,
-          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-          prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
-        })
-        .into(),
-      );
-    }
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
       arguments.push(
