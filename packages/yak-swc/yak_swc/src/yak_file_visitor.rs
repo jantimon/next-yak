@@ -65,7 +65,8 @@ impl VisitMut for YakFileVisitor {
             })))]
             .into_iter()
             .collect(),
-          }.into();
+          }
+          .into();
         }
       }
     }
