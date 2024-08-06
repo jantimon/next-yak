@@ -5,7 +5,7 @@ import { queries, colors } from "@/theme/constants.yak";
 import { Clock } from "./Clock";
 import { Inputs } from "@/app/Input";
 import { HighContrastToggle } from "./HighContrastToggle";
-import { typography } from "./mixins/constants.yak";
+import { typography } from "./mixins";
 
 const headline = css<{ $primary?: boolean }>`
   ${typography.h1};

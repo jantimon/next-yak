@@ -46,16 +46,26 @@ impl VisitMut for YakFileVisitor {
 
   fn visit_mut_expr(&mut self, expr: &mut Expr) {
     expr.visit_mut_children_with(self);
-    // Convert tagged template literals to plain template literals
+    // Convert tagged template literals to an object with plain template literals
+    // e.g. css`font-size: ${20}px;` => { __yak: `font-size: ${20}px;` }
+    // This is necessary as the mixin is also imported at runtime and a string would be
+    // interpreted as a class name
     if let Expr::TaggedTpl(n) = expr {
       if let Some(name) = self.yak_imports.get_yak_library_function_name(n) {
         if name == atom!("css") {
-          *expr = Tpl {
+          *expr = ObjectLit {
             span: n.span,
-            exprs: n.tpl.exprs.clone(),
-            quasis: n.tpl.quasis.clone(),
-          }
-          .into();
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+              key: PropName::Ident(Ident::new("__yak".into(), n.span)),
+              value: Box::new(Expr::Tpl(Tpl {
+                span: n.span,
+                exprs: n.tpl.exprs.clone(),
+                quasis: n.tpl.quasis.clone(),
+              })),
+            })))]
+            .into_iter()
+            .collect(),
+          }.into();
         }
       }
     }
@@ -131,9 +141,10 @@ mod tests {
                 `;
             "#,
       r#"
-                export const heading = `
+                export const heading = {
+                  __yak: `
                   font-size: ${20}px;
-                `;
+                `};
             "#,
       true,
     );

@@ -170,7 +170,7 @@ impl YakTransform for TransformCssMixin {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
-    css_module_identifier: Ident,
+    _css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
@@ -188,7 +188,7 @@ impl YakTransform for TransformCssMixin {
     }
     let css_prefix = if self.is_exported {
       Some(format!(
-        "YAK Extracted MIXIN:{}",
+        "YAK EXPORTED MIXIN:{}",
         self.class_name.as_ref().unwrap(),
       ))
     } else {
