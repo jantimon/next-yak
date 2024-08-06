@@ -209,10 +209,14 @@ async function parseFile(
     const exports = await parseExports(await sourceContents, isTSX);
     const mixins = parseMixins(await tranformedSource);
 
-    return { type: "regular", exports: {
-      ...exports,
-      ...mixins
-    }, filePath };
+    return {
+      type: "regular",
+      exports: {
+        ...exports,
+        ...mixins,
+      },
+      filePath,
+    };
   } catch (error) {
     throw new Error(
       `Error parsing file ${filePath}: ${(error as Error).message}`,
@@ -286,7 +290,9 @@ async function parseExports(
   }
 }
 
-function parseMixins(sourceContents: string): Record<string, { type: "mixin"; value: string }> {
+function parseMixins(
+  sourceContents: string,
+): Record<string, { type: "mixin"; value: string }> {
   // Mixins are always in the following format:
   // /*YAK EXPORTED MIXIN:name
   // css
@@ -450,13 +456,25 @@ async function resolveModuleSpecifierRecursively(
         }
       } while (current);
       if (specifier[depth] === undefined) {
-        throw new Error(`Error unpacking Record/Array - could not extract \`${specifier.slice(0, depth).join(".")}\` is not a string or number`);
+        throw new Error(
+          `Error unpacking Record/Array - could not extract \`${specifier
+            .slice(0, depth)
+            .join(".")}\` is not a string or number`,
+        );
       }
-      throw new Error(`Error unpacking Record/Array - could not extract \`${specifier[depth]}\` from \`${specifier.slice(0, depth).join(".")}\``);
+      throw new Error(
+        `Error unpacking Record/Array - could not extract \`${
+          specifier[depth]
+        }\` from \`${specifier.slice(0, depth).join(".")}\``,
+      );
     } else if (exportValue.type === "mixin") {
       return { type: "constant", value: exportValue.value };
     }
-    throw new Error(`Error unpacking Record/Array - unexpected exportValue "${exportValue.type}" for specifier "${specifier.join(".")}"`);
+    throw new Error(
+      `Error unpacking Record/Array - unexpected exportValue "${
+        exportValue.type
+      }" for specifier "${specifier.join(".")}"`,
+    );
   } catch (error) {
     throw new Error(
       `Error resolving from module ${module.filePath}: ${
