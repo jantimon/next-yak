@@ -37,19 +37,25 @@ export const ThemedButton = /*YAK Extracted CSS:
 export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton {
   color: red;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  &:not([disabled]) {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 }
 .CustomThemedButton__$active {
-  @media (max-width: 600px) {
-    background-color: #f0f0f0;
-    max-width: var(--CustomThemedButton__max-width_o1wkyu);
+  &:not([disabled]) {
+    @media (max-width: 600px) {
+      background-color: #f0f0f0;
+      max-width: var(--CustomThemedButton__max-width_o1wkyu);
+    }
   }
 }
 .CustomThemedButton {
-  width: var(--CustomThemedButton__width_o1wkyu);
+  &:not([disabled]) {
+    width: var(--CustomThemedButton__width_o1wkyu);
+  }
 }
 */ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.CustomThemedButton__$active, {
         "style": {
