@@ -687,6 +687,38 @@ where
     self.comments.add_leading(result_span.lo, pure_annotation());
     self.expression_replacement = Some(transform_result.expression);
   }
+  
+  /// Report nested atom calls as an error
+  /// e.g. const Button = styled.button`&:hover { ${atoms("flex")} }`
+  fn visit_mut_call_expr(&mut self, n: &mut CallExpr) {
+    if self.is_inside_css_expression() {
+      if let Some(css_state) = self.current_css_state.clone() {
+        if css_state.current_scopes.len() > 1
+          && css_state.current_comment_state == CommentStateType::None
+        {
+          if let Callee::Expr(callee) = &n.callee {
+            if let Expr::Ident(ident) = &**callee {
+              if self
+                .yak_library_imports
+                .get_yak_library_name_for_ident(&ident.to_id())
+                == Some(atom!("atoms"))
+              {
+                HANDLER.with(|handler| {
+                  handler
+                    .struct_span_err(
+                      n.span,
+                      "atoms() must not be used inside selectors or media query",
+                    )
+                    .emit();
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+    n.visit_mut_children_with(self);
+  }
 }
 
 /// Converts an expression to a string

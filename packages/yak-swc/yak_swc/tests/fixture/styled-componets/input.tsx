@@ -2,6 +2,8 @@
 import styled from "styled-components";
 import { styled as styledYak } from "next-yak";
 
+const textColor = "red";
+
 // Should be transformed as it is yak
 export const CustomThemedButton = styledYak.button`
   color: blue;
@@ -9,5 +11,5 @@ export const CustomThemedButton = styledYak.button`
 
 // Should not be transformed as it is NOT yak
 export const StyledComponent = styled.button`
-  color: red;
+  color: ${textColor};
 `
