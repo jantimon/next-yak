@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 
 use swc_core::atoms::Atom;
 use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
@@ -101,6 +101,17 @@ pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<Atom>)> {
     Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.clone()])),
     _ => None,
   }
+}
+
+/// Get a constant template literal from an expression
+pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_name: FxHashSet<Id>) -> bool {
+  let TaggedTpl { tag, .. } = tagged_tpl;
+  if let Expr::Ident(id) = &**tag {
+    if literal_name.contains(&id.to_id()) {
+      return true;
+    }
+  }
+  false
 }
 
 pub struct TemplateIterator<'a> {

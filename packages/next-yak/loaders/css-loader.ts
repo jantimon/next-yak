@@ -1,7 +1,8 @@
 import type { LoaderContext } from "webpack";
-import { resolveCrossFileSelectors } from "./lib/resolveCrossFileSelectors.js";
+import { resolveCrossFileConstant } from "./lib/resolveCrossFileSelectors.js";
 import { relative } from "path";
 import type { YakConfigOptions } from "../withYak/index.js";
+import { file } from "@babel/types";
 
 /**
  * Transform typescript to css
@@ -29,7 +30,7 @@ export default async function cssExtractLoader(
     const css = extractCss(source);
     debugLog("css", css);
 
-    return resolveCrossFileSelectors(this, css).then((result) => {
+    return resolveCrossFileConstant(this, css).then((result) => {
       debugLog("css resolved", css);
       return callback(null, result, sourceMap);
     }, callback);

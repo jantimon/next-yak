@@ -65,6 +65,15 @@ impl YakImportVisitor {
     }
   }
 
+  /// Get the name of the used next-yak library function
+  /// e.g. atom("flex") -> atom
+  pub fn get_yak_library_name_for_ident(&self, id: &Id) -> Option<Atom> {
+    if !self.is_using_next_yak() {
+      return None;
+    }
+    return self.yak_library_imports.get(id).map(|id| id.0.clone());
+  }
+
   /// Returns the utility function identifier
   pub fn get_yak_utility_ident(&mut self, name: String) -> Ident {
     if !UTILITIES.contains(&name.as_str()) {

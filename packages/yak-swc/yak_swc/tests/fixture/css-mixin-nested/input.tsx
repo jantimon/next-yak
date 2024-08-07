@@ -20,5 +20,7 @@ export const ThemedButton = styled.button`
 
 export const CustomThemedButton = styled.button`
   color: red;
-   ${buttonStyles}
+  &:not([disabled]) {
+     ${buttonStyles}
+  }
 `; 
