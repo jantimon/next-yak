@@ -71,7 +71,7 @@ impl YakImportVisitor {
     if !self.is_using_next_yak() {
       return None;
     }
-    return self.yak_library_imports.get(&id).map(|id| id.0.clone());
+    return self.yak_library_imports.get(id).map(|id| id.0.clone());
   }
 
   /// Returns the utility function identifier

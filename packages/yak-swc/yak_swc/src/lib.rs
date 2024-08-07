@@ -687,7 +687,7 @@ where
     self.comments.add_leading(result_span.lo, pure_annotation());
     self.expression_replacement = Some(transform_result.expression);
   }
-  
+
   /// Report nested atom calls as an error
   /// e.g. const Button = styled.button`&:hover { ${atoms("flex")} }`
   fn visit_mut_call_expr(&mut self, n: &mut CallExpr) {
