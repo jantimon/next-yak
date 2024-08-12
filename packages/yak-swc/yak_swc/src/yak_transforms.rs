@@ -135,6 +135,7 @@ impl YakTransform for TransformNestedCss {
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
+        ctxt: Default::default(),
       })),
     }
   }
@@ -210,6 +211,7 @@ impl YakTransform for TransformCssMixin {
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
+        ctxt: Default::default(),
       })),
     }
   }
@@ -285,6 +287,7 @@ impl YakTransform for TransformStyled {
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
+        ctxt: Default::default(),
       })),
     }
   }
@@ -361,6 +364,7 @@ impl YakTransform for TransformKeyframes {
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
+        ctxt: Default::default(),
       })),
     }
   }

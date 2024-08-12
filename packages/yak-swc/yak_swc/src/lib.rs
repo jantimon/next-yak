@@ -431,7 +431,7 @@ where
   /// ? is a fix for Next.js loaders which ignore the !=! statement
   fn visit_mut_module(&mut self, module: &mut Module) {
     let basename = self.get_file_name_without_extension();
-    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP);
+    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP, Default::default());
     self.css_module_identifier = Some(css_module_identifier.clone());
 
     module.visit_mut_children_with(self);
@@ -642,7 +642,7 @@ fn condition_to_string(expr: &Expr, negate: bool) -> String {
     Expr::Member(MemberExpr { obj, prop, .. }) => {
       let obj = condition_to_string(obj, false);
       let prop = match prop {
-        MemberProp::Ident(Ident { sym, .. }) => sym.to_string(),
+        MemberProp::Ident(IdentName { sym, .. }) => sym.to_string(),
         _ => "".to_string(),
       };
       if prop.is_empty() || obj.is_empty() {
@@ -720,13 +720,16 @@ fn is_yak_file(filename: &str) -> bool {
 mod tests {
   use super::*;
   use std::path::PathBuf;
-  use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
-  use swc_ecma_transforms_testing::FixtureTestConfig;
+  use swc_ecma_parser::{Syntax, TsSyntax};
+  use swc_ecma_transforms_testing::{test_fixture, test_transform, FixtureTestConfig};
 
   #[testing::fixture("tests/fixture/**/input.tsx")]
   fn fixture(input: PathBuf) {
     test_fixture(
-      Default::default(),
+      Syntax::Typescript(TsSyntax {
+        tsx: true,
+        ..Default::default()
+      }),
       &|tester| {
         as_folder(TransformVisitor::new(
           Some(tester.comments.clone()),

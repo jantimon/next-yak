@@ -21,6 +21,7 @@ pub fn add_suffix_to_expr(expr: Expr, helper: Ident, suffix: String) -> Expr {
       .into(),
     ],
     type_args: None,
+    ctxt: Default::default(),
   })
 }
 
