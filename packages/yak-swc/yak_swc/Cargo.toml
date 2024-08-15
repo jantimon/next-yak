@@ -22,6 +22,7 @@ divan = "0.1.14"
 regex = "1.10.3"
 swc = "0.279.0"
 swc_ecma_transforms_testing = "0.143.1"
+swc_ecma_parser = "0.146.12"
 testing = "0.36.0"
 
 [[bench]]
