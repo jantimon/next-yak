@@ -52,14 +52,13 @@ type Attrs<
   | ((p: Substitute<TBaseProps & { theme: YakTheme }, TIn>) => Partial<TOut>);
 
 //
-// The `styled()` and `styled.` API
+// The `styled()` API without `styled.` syntax
 //
 // The API design is inspired by styled-components:
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/constructors/styled.tsx
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
-
-const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
+export const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
     attrs: <
       TAttrsIn extends object = {},
@@ -192,7 +191,9 @@ type StyledLiteral<T> = <TCSSProps>(
  * `;
  * ```
  */
-export const styled = new Proxy(
+export const styled =
+// The proxy adds the styled.div, styled.button, etc. syntax
+new Proxy(
   StyledFactory as typeof StyledFactory & {
     [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
       attrs: <
