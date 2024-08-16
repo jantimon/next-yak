@@ -1,6 +1,6 @@
-# next-yak Webpack Tests
+# next-yak Cross File Tests
 
-This package contains Webpack integration tests for next-yak, to ensure that our custom TypeScript and CSS loaders work correctly with Next.js.
+This package contains Webpack integration tests for next-yak, to ensure that our custom TypeScript and CSS loaders work correctly together.
 
 ## Purpose
 

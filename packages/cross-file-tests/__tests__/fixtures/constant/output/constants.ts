@@ -1,0 +1,1 @@
+export var siteMaxWidth = 10;

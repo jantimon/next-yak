@@ -1,4 +1,4 @@
-import { withYak, type YakConfigOptions } from "next-yak/withYak";
+import { withYakSwc, type YakConfigOptions } from "next-yak/withYak";
 import webpack from "webpack";
 import { createFsFromVolume, Volume } from "memfs";
 import path from "path";
@@ -14,7 +14,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
  */
 export const compile = async (
   files: Record<string, string>,
-  yakConfig: YakConfigOptions = {}
+  yakConfig: YakConfigOptions = {},
 ): Promise<Record<string, string>> => {
   const { hybridFileSystem } = setupFileSystems(files);
   const webpackConfig = createWebpackConfig(files);
@@ -47,15 +47,15 @@ const setupFileSystems = (files: Record<string, string>) => {
  * Sets up entry points, output settings, module rules, and resolve options.
  */
 const createWebpackConfig = (files: Record<string, string>): webpack.Configuration => {
+  const entry = Object.entries(files)
+    // take only the first file as the entry point
+    .find(([name]) => name.endsWith("index.tsx")) ||
+    // fallback to the first file
+    Object.entries(files)[0];
   return {
     context: __dirname,
     mode: "development",
-    entry: Object.fromEntries(
-      Object.entries(files)
-        // take only the first file as the entry point
-        .filter(([, file], i) => i === 0)
-        .map(([filename]) => [path.basename(filename), filename])
-    ),
+    entry: Object.fromEntries([[path.basename(entry[0]), entry[0]] as const]),
     output: {
       path: "/dist",
       filename: "[name].js",
@@ -76,6 +76,26 @@ const createWebpackConfig = (files: Record<string, string>): webpack.Configurati
     },
   };
 };
+
+const attachSWCLoader = (webpackConfig: webpack.Configuration) => {
+  const loader = {
+    test: /\.tsx?$/,
+    use: {
+      loader: "swc-loader",
+      options: {
+        "jsc": {
+          "experimental": {
+            "plugins": [] as unknown[],
+          }
+        }
+      }
+    },
+  };
+  webpackConfig.module = webpackConfig.module || { };
+  webpackConfig.module.rules = webpackConfig.module.rules || [];
+  webpackConfig.module.rules.push(loader);
+  return loader;
+}
 
 /**
  * This listener captures the compilation results for each module,
@@ -117,11 +137,18 @@ const attachLoaderCompilationListener = (webpackConfig: webpack.Configuration): 
  * Basically, it just adds the Yak loader to the Webpack configuration with the given options
  */
 const applyYakConfig = async (webpackConfig: webpack.Configuration, yakConfig: YakConfigOptions) => {
-  return await withYak(yakConfig, {
+  const loader = attachSWCLoader(webpackConfig);
+  const miniNextConfig = await withYakSwc(yakConfig, {
     webpack: () => ({
       ...webpackConfig,
     }),
-  }).webpack();
+  });
+  loader.use.options.jsc.experimental.plugins = (miniNextConfig as {
+    experimental?: {
+      swcPlugins: unknown[];
+    };
+  }).experimental?.swcPlugins || [];
+  return miniNextConfig.webpack();
 };
 
 /**
