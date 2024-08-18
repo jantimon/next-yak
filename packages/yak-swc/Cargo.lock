@@ -3176,6 +3176,7 @@ dependencies = [
  "serde_json",
  "swc",
  "swc_core",
+ "swc_ecma_parser",
  "swc_ecma_transforms_testing",
  "testing",
 ]

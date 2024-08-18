@@ -809,12 +809,16 @@ mod tests {
   use super::*;
   use std::path::PathBuf;
   use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
+  use swc_ecma_parser::{Syntax, TsSyntax};
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
   #[testing::fixture("tests/fixture/**/input.tsx")]
   fn fixture(input: PathBuf) {
     test_fixture(
-      Default::default(),
+      Syntax::Typescript(TsSyntax {
+        tsx: true,
+        ..Default::default()
+      }),
       &|tester| {
         as_folder(TransformVisitor::new(
           Some(tester.comments.clone()),
@@ -833,7 +837,10 @@ mod tests {
   #[testing::fixture("tests/fixture/**/input.yak.tsx")]
   fn fixture_yak(input: PathBuf) {
     test_fixture(
-      Default::default(),
+      Syntax::Typescript(TsSyntax {
+        tsx: true,
+        ..Default::default()
+      }),
       &|_| as_folder(YakFileVisitor::new()),
       &input,
       &input.with_file_name("output.yak.tsx"),
