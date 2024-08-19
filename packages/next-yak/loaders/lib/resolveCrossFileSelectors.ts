@@ -213,16 +213,18 @@ async function parseFile(
     // Recursively resolve cross-file constants in mixins
     // e.g. cross file mixins inside a cross file mixin
     // or a cross file selector inside a cross file mixin
-    await Promise.all(Object.entries(mixins).map(async ([name, mixin]) => {
-      mixins[name] = {
-        type: "mixin",
-        value: await resolveCrossFileConstant(
-          loader,
-          path.dirname(filePath),
-          mixin.value,
-        ),
-      };
-    }));
+    await Promise.all(
+      Object.entries(mixins).map(async ([name, mixin]) => {
+        mixins[name] = {
+          type: "mixin",
+          value: await resolveCrossFileConstant(
+            loader,
+            path.dirname(filePath),
+            mixin.value,
+          ),
+        };
+      }),
+    );
 
     return {
       type: "regular",
