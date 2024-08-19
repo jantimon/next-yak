@@ -29,7 +29,7 @@ export default async function cssExtractLoader(
     const css = extractCss(source);
     debugLog("css", css);
 
-    return resolveCrossFileConstant(this, css).then((result) => {
+    return resolveCrossFileConstant(this, this.context, css).then((result) => {
       debugLog("css resolved", css);
       return callback(null, result, sourceMap);
     }, callback);

@@ -10,7 +10,7 @@ export const buttonMixin = css<{ $hasIcon: boolean; $disabled: boolean }>`
   ${buttonTextMixin};
   ${({ $hasIcon }) => $hasIcon && css`
     ${Icon} {
-      ${buttonTextMixin}
+      ${buttonTextMixin};
     }
   `}
 `;

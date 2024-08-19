@@ -33,6 +33,7 @@ const compilationCache = new WeakMap<
  */
 export async function resolveCrossFileConstant(
   loader: LoaderContext<{}>,
+  pathContext: string,
   css: string,
 ): Promise<string> {
   // Search for --yak-css-import: url("path/to/module") in the css
@@ -65,7 +66,7 @@ export async function resolveCrossFileConstant(
         const resolvedFromCache = exportCache.get(encodedArguments);
         const resolvedValue =
           resolvedFromCache ||
-          parseModule(loader, moduleSpecifier, loader.context).then(
+          parseModule(loader, moduleSpecifier, pathContext).then(
             (parsedModule) =>
               resolveModuleSpecifierRecursively(
                 loader,
@@ -208,6 +209,20 @@ async function parseFile(
 
     const exports = await parseExports(await sourceContents, isTSX);
     const mixins = parseMixins(await tranformedSource);
+
+    // Recursively resolve cross-file constants in mixins
+    // e.g. cross file mixins inside a cross file mixin
+    // or a cross file selector inside a cross file mixin
+    await Promise.all(Object.entries(mixins).map(async ([name, mixin]) => {
+      mixins[name] = {
+        type: "mixin",
+        value: await resolveCrossFileConstant(
+          loader,
+          path.dirname(filePath),
+          mixin.value,
+        ),
+      };
+    }));
 
     return {
       type: "regular",

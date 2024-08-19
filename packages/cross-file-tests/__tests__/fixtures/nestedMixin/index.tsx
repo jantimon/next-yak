@@ -1,8 +1,11 @@
 import { styled } from 'next-yak';
 import { buttonMixin } from './mixin';
+import { primaryButtonMixin } from './helper/anotherMixin';
 
-const Button = styled.button`
+export const Button = styled.button<{ $hasIcon: boolean; $disabled: boolean }>`
   ${buttonMixin};
 `;
 
-export default Button;
+export const PrimaryButton = styled(Button)`
+  ${primaryButtonMixin};
+`;
