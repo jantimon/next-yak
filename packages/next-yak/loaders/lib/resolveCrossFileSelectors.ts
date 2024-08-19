@@ -5,7 +5,7 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
+const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)"\);?/g;
 
 const compilationCache = new WeakMap<
   Compilation,

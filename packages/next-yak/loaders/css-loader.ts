@@ -2,7 +2,6 @@ import type { LoaderContext } from "webpack";
 import { resolveCrossFileConstant } from "./lib/resolveCrossFileSelectors.js";
 import { relative } from "path";
 import type { YakConfigOptions } from "../withYak/index.js";
-import { file } from "@babel/types";
 
 /**
  * Transform typescript to css
