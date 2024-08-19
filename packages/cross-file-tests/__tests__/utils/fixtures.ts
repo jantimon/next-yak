@@ -50,12 +50,21 @@ export const getSnapshot = async (
     .replace(/output[\\\/]fixture[\\\/][^\\\/]*[\\\/]/, "output/");
   const fileDir = path.dirname(filePath);
   await fs.mkdir(fileDir, { recursive: true });
+
+  const snapshot = await readFile(filePath);
+  if (snapshot === null || process.env.UPDATE) {
+    await fs.writeFile(filePath, content);
+    return content;
+  }
+  return snapshot;
+};
+
+const readFile = async (filePath: string): Promise<string | null> => {
   try {
     return await fs.readFile(filePath, "utf-8");
   } catch (error) {
     if (error.code === "ENOENT") {
-      await fs.writeFile(filePath, content);
-      return content;
+      return null
     }
     throw error;
   }
