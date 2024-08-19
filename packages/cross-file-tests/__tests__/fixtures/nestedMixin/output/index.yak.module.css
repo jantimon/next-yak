@@ -1,0 +1,9 @@
+.Button {
+  color: black;
+opacity: 0.5;
+--yak-css-import: url("./icon:Icon") {
+  color: black;
+  opacity: 0.5;
+}
+;
+}
