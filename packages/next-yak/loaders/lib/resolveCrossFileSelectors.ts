@@ -5,7 +5,7 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)"\);?/g;
+const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)",(mixin|selector)\);?/g;
 
 const compilationCache = new WeakMap<
   Compilation,
@@ -38,7 +38,7 @@ export async function resolveCrossFileConstant(
 ): Promise<string> {
   // Search for --yak-css-import: url("path/to/module") in the css
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
-    const [fullMatch, encodedArguments] = match;
+    const [fullMatch, encodedArguments, importKind] = match;
     const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
@@ -46,6 +46,7 @@ export async function resolveCrossFileConstant(
       encodedArguments,
       moduleSpecifier,
       specifier,
+      importKind,
       position: match.index!,
       size: fullMatch.length,
     };
@@ -84,8 +85,16 @@ export async function resolveCrossFileConstant(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size } = matches[i];
+      const { position, size, importKind, moduleSpecifier, specifier } = matches[i];
       const resolved = resolvedValues[i];
+
+      if (importKind === "selector") {
+        if (resolved.type === "mixin") {
+          throw new Error(
+            `Found mixin but expected a selector - did you forget a semicolon after \`${specifier.join(".")}\`?`,
+          );
+        }
+      }
 
       const replacement =
         resolved.type === "styled-component"
@@ -465,13 +474,14 @@ async function resolveModuleSpecifierRecursively(
           );
         }
         depth++;
-        // mixins in .yak files ware wrapped inside an object with a __yak key
-        if (depth === specifier.length) {
-          current = current["__yak"];
-        } else {
+        // mixins in .yak files are wrapped inside an object with a __yak key
+        if (depth !== specifier.length) {
           current = current[specifier[depth]];
         }
       } while (current);
+      if (current && current["__yak"]) {
+        return { type: "mixin", value: current["__yak"] };
+      }
       if (specifier[depth] === undefined) {
         throw new Error(
           `Error unpacking Record/Array - could not extract \`${specifier
@@ -485,7 +495,7 @@ async function resolveModuleSpecifierRecursively(
         }\` from \`${specifier.slice(0, depth).join(".")}\``,
       );
     } else if (exportValue.type === "mixin") {
-      return { type: "constant", value: exportValue.value };
+      return { type: "mixin", value: exportValue.value };
     }
     throw new Error(
       `Error unpacking Record/Array - unexpected exportValue "${
@@ -516,4 +526,5 @@ type ParsedExport =
 
 type ResolvedExport =
   | { type: "styled-component"; from: string; name: string }
+  | { type: "mixin"; value: string | number }
   | { type: "constant"; value: string | number };

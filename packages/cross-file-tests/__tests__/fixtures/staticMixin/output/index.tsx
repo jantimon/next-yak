@@ -5,8 +5,8 @@ var ListItem = /*YAK Extracted CSS:
 .ListItem {
   margin-bottom: 10px;
   &:hover {
-    --yak-css-import: url("./mixin:lastChildMixin");
+    --yak-css-import: url("./mixin:lastChildMixin",mixin);
   }
 }
-*/ /*#__PURE__*/ styled.li(__styleYak.ListItem, lastChildMixin);
+*/ /*#__PURE__*/ styled.li(__styleYak.ListItem);
 export default ListItem;

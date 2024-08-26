@@ -10,7 +10,7 @@ border-radius: 5px;
 cursor: pointer;
 font-size: 16px;
 color: black;
---yak-css-import: url("./typography:typogaphyMixin");
+--yak-css-import: url("./typography:typogaphyMixin",mixin);
 */ /*#__PURE__*/ css();
 export const Button = /*YAK Extracted CSS:
 .Button {

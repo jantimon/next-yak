@@ -1,18 +1,14 @@
 .Button {
   color: black;
-opacity: 0.5;
 :global(.icon_Icon__vdEsc) {
   color: black;
-  opacity: 0.5;
 }
 
 }
 .PrimaryButton {
   color: black;
-opacity: 0.5;
 :global(.icon_Icon__vdEsc) {
   color: black;
-  opacity: 0.5;
 }
 
 color: green;

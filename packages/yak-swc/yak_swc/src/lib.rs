@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, to_css, CommentStateType};
+use css_in_js_parser::{find_char, parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use rustc_hash::FxHashMap;
 use serde::Deserialize;
@@ -18,10 +18,10 @@ use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
 use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIterator};
-use utils::encode_module_import::{encode_module_import, is_mixin_expression};
+use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
-use variable_visitor::{ImportSourceType, VariableVisitor};
+use variable_visitor::VariableVisitor;
 mod yak_imports;
 use yak_imports::YakImportVisitor;
 mod yak_file_visitor;
@@ -163,6 +163,8 @@ where
     // e.g. styled.button`left: ${({$x}) => $x}px;` -> `left: var(--left);`
     let mut css_code_offset: usize = 0;
 
+    let quasis = n.tpl.quasis.clone();
+
     let mut template_iter = TemplateIterator::new(&mut n.tpl);
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
@@ -216,34 +218,40 @@ where
           }
           // Cross-file references
           // e.g.:
-          // import { primary } from "./theme";
+          // import { colors } from "./theme";
           // styled.button`color: ${colors.primary};`
-          else if let Some((import_source_type, module_path)) =
+          else if let Some((_import_source_type, module_path)) =
             self.variables.get_imported_variable(&scoped_name)
           {
-            let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
-            // TODO: We can probably remove ImportSourceType::Normal and
-            // stop handling .yak imports differently from normal imports
+            let import_kind: ImportKind = match find_char(
+              &quasis[pair.index..]
+                .iter()
+                .map(|quasi| quasi.raw.as_str())
+                .collect::<String>(),
+              &[';', '{', '}', '@'],
+            ) {
+              Some((char, _)) =>
+              // e.g. styled.button`${Icon} { ... }`
+              {
+                if char == '{' {
+                  ImportKind::Selector
+                }
+                // e.g. styled.button`${colors.primary} @media { ... }`
+                // e.g. styled.button`.foo { ${colors.primary} }`
+                // e.g. styled.button`${colors.primary};`
+                else {
+                  ImportKind::Mixin
+                }
+              }
+              // e.g. styled.button`${colors.primary}`
+              None => ImportKind::Mixin,
+            };
             let cross_file_import_token =
-              encode_module_import(module_path.as_str(), member_expr_parts);
+              encode_module_import(module_path.as_str(), member_expr_parts, import_kind);
 
-            // Cross file mixin imports
-            if import_source_type == ImportSourceType::Normal
-              && is_mixin_expression(
-                css_state.clone(),
-                cross_file_import_token.clone(),
-                next_css_code,
-              )
-            {
-              let (new_state, _) = parse_css(&cross_file_import_token, css_state);
-              css_state = Some(new_state);
-              // TODO Track Dynamic Mixins as runtime dependency to pass props: `runtime_expressions.push(*expr.clone());`
-            }
-            // An imported constant or a mixin import from a .yak file
-            else {
-              let (new_state, _) = parse_css(&cross_file_import_token, css_state);
-              css_state = Some(new_state);
-            }
+            // TODO Track Dynamic Mixins as runtime dependency to pass props: `runtime_expressions.push(*expr.clone());`
+            let (new_state, _) = parse_css(&cross_file_import_token, css_state);
+            css_state = Some(new_state);
           }
           // Constants
           else if let Some(value) = self

@@ -116,7 +116,7 @@ pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_name: FxHashSet<Id>) 
 
 pub struct TemplateIterator<'a> {
   tpl: &'a mut Tpl,
-  tpl_clone: Tpl,
+  quasis: Vec<swc_core::ecma::ast::TplElement>,
   current: usize,
 }
 
@@ -125,12 +125,13 @@ pub struct TemplatePart<'a> {
   pub expr: Option<&'a mut Box<Expr>>,
   pub next_quasi: Option<&'a TplElement>,
   pub is_last: bool,
+  pub index: usize,
 }
 
 impl<'a> TemplateIterator<'a> {
   pub fn new(tpl: &'a mut Tpl) -> Self {
     Self {
-      tpl_clone: tpl.clone(),
+      quasis: tpl.quasis.clone(),
       tpl,
       current: 0,
     }
@@ -143,13 +144,14 @@ impl<'a> TemplateIterator<'a> {
     let quasi_count = self.tpl.quasis.len();
     let is_last = self.current == quasi_count - 1;
     let next_quasi = if !is_last {
-      Some(&self.tpl_clone.quasis[self.current + 1])
+      Some(&self.quasis[self.current + 1])
     } else {
       None
     };
     let quasi = &mut self.tpl.quasis[self.current];
 
     let expr = self.tpl.exprs.get_mut(self.current);
+    let index = self.current;
     self.current += 1;
 
     Some(TemplatePart {
@@ -157,6 +159,7 @@ impl<'a> TemplateIterator<'a> {
       expr,
       next_quasi,
       is_last,
+      index,
     })
   }
 }

@@ -4,6 +4,6 @@ import { siteMaxWidth } from "./constants";
 export var Button = /*YAK Extracted CSS:
 .Button {
   color: red;
-  height: --yak-css-import: url("./constants:siteMaxWidth")px;
+  height: --yak-css-import: url("./constants:siteMaxWidth",mixin)px;
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button);
