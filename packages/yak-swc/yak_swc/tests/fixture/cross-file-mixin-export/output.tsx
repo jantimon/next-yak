@@ -1,5 +1,6 @@
 import { css, styled } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import { typogaphyMixin } from "./typography";
 const textColor = /*#__PURE__*/ css();
 const textStyles = /*#__PURE__*/ css();
 export const buttonStyles = /*YAK EXPORTED MIXIN:buttonStyles
@@ -9,6 +10,7 @@ border-radius: 5px;
 cursor: pointer;
 font-size: 16px;
 color: black;
+--yak-css-import: url("./typography:typogaphyMixin");
 */ /*#__PURE__*/ css();
 export const Button = /*YAK Extracted CSS:
 .Button {

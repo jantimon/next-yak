@@ -1,4 +1,5 @@
 import { css, styled } from "next-yak";
+import { typogaphyMixin } from "./typography";
 
 const textColor = css`
   color: black;
@@ -15,6 +16,7 @@ export const buttonStyles = css`
   border-radius: 5px;
   cursor: pointer;
   ${textStyles};
+  ${typogaphyMixin};
 `;
 
 export const Button = styled.button`

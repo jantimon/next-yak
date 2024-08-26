@@ -237,7 +237,7 @@ where
             {
               let (new_state, _) = parse_css(&cross_file_import_token, css_state);
               css_state = Some(new_state);
-              runtime_expressions.push(*expr.clone());
+              // TODO Track Dynamic Mixins as runtime dependency to pass props: `runtime_expressions.push(*expr.clone());`
             }
             // An imported constant or a mixin import from a .yak file
             else {
