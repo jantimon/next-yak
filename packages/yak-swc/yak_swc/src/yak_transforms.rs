@@ -5,6 +5,7 @@ use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use swc_core::common::{Span, DUMMY_SP};
 use swc_core::ecma::ast::*;
+use swc_core::plugin::errors::HANDLER;
 
 use crate::naming_convention::NamingConvention;
 
@@ -175,6 +176,19 @@ impl YakTransform for TransformCssMixin {
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
+    // For now dynamic mixins are not supported cross file
+    // as the scope handling is quite complicated
+    if self.is_exported && (!runtime_expressions.is_empty() || !runtime_css_variables.is_empty()) {
+      HANDLER.with(|handler| {
+        handler
+          .struct_span_err(
+            expression.span,
+            "Dynamic mixins must not be exported. Please ensure that this mixin requires no props.",
+          )
+          .emit();
+      });
+    }
+
     let mut arguments: Vec<ExprOrSpread> = vec![];
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
