@@ -5,7 +5,8 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)",(mixin|selector)\);?/g;
+const yakCssImportRegex =
+  /--yak-css-import\:\s*url\("([^"]+)",(mixin|selector)\);?/g;
 
 const compilationCache = new WeakMap<
   Compilation,
@@ -85,13 +86,16 @@ export async function resolveCrossFileConstant(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size, importKind, moduleSpecifier, specifier } = matches[i];
+      const { position, size, importKind, moduleSpecifier, specifier } =
+        matches[i];
       const resolved = resolvedValues[i];
 
       if (importKind === "selector") {
         if (resolved.type === "mixin") {
           throw new Error(
-            `Found mixin but expected a selector - did you forget a semicolon after \`${specifier.join(".")}\`?`,
+            `Found mixin but expected a selector - did you forget a semicolon after \`${specifier.join(
+              ".",
+            )}\`?`,
           );
         }
       }
