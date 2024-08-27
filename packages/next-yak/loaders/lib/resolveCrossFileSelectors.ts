@@ -87,8 +87,7 @@ export async function resolveCrossFileConstant(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size, importKind, specifier } =
-        matches[i];
+      const { position, size, importKind, specifier } = matches[i];
       const resolved = resolvedValues[i];
 
       if (importKind === "selector") {
