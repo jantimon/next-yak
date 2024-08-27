@@ -6,7 +6,8 @@ import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
 const yakCssImportRegex =
-  /--yak-css-import\:\s*url\("([^"]+)",(mixin|selector)\);?/g;
+  // Make mixin and selector non optional once we dropped support for the babel plugin
+  /--yak-css-import\:\s*url\("([^"]+)",?(|mixin|selector)\);?/g;
 
 const compilationCache = new WeakMap<
   Compilation,
@@ -86,7 +87,7 @@ export async function resolveCrossFileConstant(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size, importKind, moduleSpecifier, specifier } =
+      const { position, size, importKind, specifier } =
         matches[i];
       const resolved = resolvedValues[i];
 
@@ -479,13 +480,12 @@ async function resolveModuleSpecifierRecursively(
         }
         depth++;
         // mixins in .yak files are wrapped inside an object with a __yak key
-        if (depth !== specifier.length) {
+        if (depth === specifier.length && "__yak" in current) {
+          return { type: "mixin", value: current["__yak"] };
+        } else {
           current = current[specifier[depth]];
         }
       } while (current);
-      if (current && current["__yak"]) {
-        return { type: "mixin", value: current["__yak"] };
-      }
       if (specifier[depth] === undefined) {
         throw new Error(
           `Error unpacking Record/Array - could not extract \`${specifier
