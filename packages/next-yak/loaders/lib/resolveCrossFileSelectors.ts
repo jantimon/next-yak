@@ -112,7 +112,7 @@ export async function resolveCrossFileConstant(
               resolved.name,
               {},
             )})`
-          : resolved.value + (
+          : resolved.value +
             // resolved.value can be of two different types:
             // - mixin:
             //   ${mixinName};
@@ -120,12 +120,9 @@ export async function resolveCrossFileConstant(
             //   color: ${value};
             // For mixins the semicolon is already included in the value
             // but for constants it has to be added manually
-            [
-              "}",
-              ";",
-            ].includes(String(resolved.value).trimEnd().slice(-1))
-            ? "" : semicolon
-          );
+            (["}", ";"].includes(String(resolved.value).trimEnd().slice(-1))
+              ? ""
+              : semicolon);
 
       result =
         result.slice(0, position) +
