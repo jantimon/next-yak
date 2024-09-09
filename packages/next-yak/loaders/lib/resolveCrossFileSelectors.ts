@@ -7,7 +7,7 @@ import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/cs
 
 const yakCssImportRegex =
   // Make mixin and selector non optional once we dropped support for the babel plugin
-  /--yak-css-import\:\s*url\("([^"]+)",?(|mixin|selector)\);?/g;
+  /--yak-css-import\:\s*url\("([^"]+)",?(|mixin|selector)\)(;?)/g;
 
 const compilationCache = new WeakMap<
   Compilation,
@@ -40,7 +40,7 @@ export async function resolveCrossFileConstant(
 ): Promise<string> {
   // Search for --yak-css-import: url("path/to/module") in the css
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
-    const [fullMatch, encodedArguments, importKind] = match;
+    const [fullMatch, encodedArguments, importKind, semicolon] = match;
     const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
@@ -49,6 +49,7 @@ export async function resolveCrossFileConstant(
       moduleSpecifier,
       specifier,
       importKind,
+      semicolon,
       position: match.index!,
       size: fullMatch.length,
     };
@@ -87,7 +88,7 @@ export async function resolveCrossFileConstant(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size, importKind, specifier } = matches[i];
+      const { position, size, importKind, specifier, semicolon } = matches[i];
       const resolved = resolvedValues[i];
 
       if (importKind === "selector") {
@@ -111,7 +112,20 @@ export async function resolveCrossFileConstant(
               resolved.name,
               {},
             )})`
-          : resolved.value;
+          : resolved.value + (
+            // resolved.value can be of two different types:
+            // - mixin:
+            //   ${mixinName};
+            // - constant:
+            //   color: ${value};
+            // For mixins the semicolon is already included in the value
+            // but for constants it has to be added manually
+            [
+              "}",
+              ";",
+            ].includes(String(resolved.value).trimEnd().slice(-1))
+            ? "" : semicolon
+          );
 
       result =
         result.slice(0, position) +
