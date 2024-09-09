@@ -481,6 +481,8 @@ async function resolveModuleSpecifierRecursively(
         // mixins in .yak files are wrapped inside an object with a __yak key
         if (depth === specifier.length && "__yak" in current) {
           return { type: "mixin", value: current["__yak"] };
+        } else if (depth === specifier.length && "value" in current) {
+          return { type: "constant", value: current["value"] };
         } else {
           current = current[specifier[depth]];
         }

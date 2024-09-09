@@ -1,4 +1,6 @@
 .Button {
   color: red;
   height: 10px;
+  color: var(--color-primary)
+  background-color: var(--color-secondary)
 }
