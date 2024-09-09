@@ -82,16 +82,6 @@ impl VariableVisitor {
     }
   }
 
-  /// Try to get a constant string or number value for a variable id as string
-  /// Supports normal constant values, object properties and array elements
-  /// e.g. get_const_literal_value("primary#0", vec![atom!("primary"), atom!("red")]) -> Some("red")
-  pub fn get_const_literal_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<String> {
-    if let Some(expr) = self.get_const_value(name, parts) {
-      get_expr_value(&expr)
-    } else {
-      None
-    }
-  }
   /// Returns the source of an imported variable if it exists
   pub fn get_imported_variable(&mut self, name: &Id) -> Option<(ImportSourceType, String)> {
     if let Some(src) = self.imports.get(name) {
@@ -147,14 +137,6 @@ impl VisitMut for VariableVisitor {
   fn visit_mut_if_stmt(&mut self, _: &mut IfStmt) {}
 }
 
-fn get_expr_value(expr: &Expr) -> Option<String> {
-  match expr {
-    Expr::Lit(Lit::Str(str)) => Some(str.value.to_string()),
-    Expr::Lit(Lit::Num(num)) => Some(num.value.to_string()),
-    _ => None,
-  }
-}
-
 #[cfg(test)]
 mod tests {
   use super::*;
@@ -163,6 +145,14 @@ mod tests {
   use swc_core::ecma::atoms::atom;
   use swc_core::ecma::transforms::testing::test_transform;
   use swc_core::ecma::visit::as_folder;
+
+  fn get_expr_value(expr: &Expr) -> Option<String> {
+    match expr {
+      Expr::Lit(Lit::Str(str)) => Some(str.value.to_string()),
+      Expr::Lit(Lit::Num(num)) => Some(num.value.to_string()),
+      _ => None,
+    }
+  }
 
   #[test]
   fn test_import_visitor() {
@@ -196,11 +186,15 @@ mod tests {
       *mixin,
       Some((ImportSourceType::Yak, "./constants.yak".to_string()))
     );
-    let duration = &visitor.get_const_literal_value(
-      &Id::from((Atom::from("duration"), SyntaxContext::from_u32(0))),
-      vec![],
+    let duration = get_expr_value(
+      &visitor
+        .get_const_value(
+          &Id::from((Atom::from("duration"), SyntaxContext::from_u32(0))),
+          vec![],
+        )
+        .unwrap(),
     );
-    assert_eq!(*duration, Some("34".to_string()));
+    assert_eq!(duration, Some("34".to_string()));
   }
 
   #[test]

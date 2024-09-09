@@ -1,4 +1,4 @@
-use css_in_js_parser::{parse_css, to_css, CommentStateType};
+use css_in_js_parser::{find_char, parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use rustc_hash::FxHashMap;
 use serde::Deserialize;
@@ -17,11 +17,11 @@ use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
-use utils::ast_helper::{extract_ident_and_parts, TemplateIterator};
-use utils::encode_module_import::{encode_module_import, is_mixin_expression};
+use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIterator};
+use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
-use variable_visitor::{ImportSourceType, VariableVisitor};
+use variable_visitor::VariableVisitor;
 mod yak_imports;
 use yak_imports::YakImportVisitor;
 mod yak_file_visitor;
@@ -29,7 +29,6 @@ use yak_file_visitor::YakFileVisitor;
 
 mod utils {
   pub(crate) mod add_suffix_to_expr;
-  pub(crate) mod assert_css_expr;
   pub(crate) mod ast_helper;
   pub(crate) mod encode_module_import;
   pub(crate) mod murmur_hash;
@@ -39,8 +38,7 @@ use naming_convention::NamingConvention;
 
 mod yak_transforms;
 use yak_transforms::{
-  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakCss, YakTransform,
-  YakType,
+  TransformCssMixin, TransformKeyframes, TransformNestedCss, TransformStyled, YakTransform,
 };
 
 /// Static plugin configuration.
@@ -73,6 +71,8 @@ where
   current_variable_name: Option<Id>,
   /// Current condition to name nested css expressions
   current_condition: Vec<String>,
+  /// Current css expression is exported
+  current_exported: bool,
   /// SWC comments proxy to add extracted css as comments
   comments: Option<GenericComments>,
   /// Extracted variables from the AST
@@ -86,7 +86,7 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_mapping: FxHashMap<Id, YakCss>,
+  variable_name_selector_mapping: FxHashMap<Id, String>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -109,10 +109,11 @@ where
       current_declaration: vec![],
       current_variable_name: None,
       current_condition: vec![],
+      current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
       naming_convention: NamingConvention::new(filename.clone()),
-      variable_name_mapping: FxHashMap::default(),
+      variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
       dev_mode,
@@ -162,6 +163,8 @@ where
     // e.g. styled.button`left: ${({$x}) => $x}px;` -> `left: var(--left);`
     let mut css_code_offset: usize = 0;
 
+    let quasis = n.tpl.quasis.clone();
+
     let mut template_iter = TemplateIterator::new(&mut n.tpl);
     // Javascript Quasi (TplElement) and Expressions (Exprs) are interleaved
     // e.g. styled.button`color: ${primary};` => [TplElement, Expr, TplElement]
@@ -208,118 +211,133 @@ where
         if let Some((id, member_expr_parts)) = extract_ident_and_parts(expr) {
           let scoped_name = id.to_id();
           // Known StyledComponents, Mixin or Animations in the same file
-          if let Some(referenced_yak_css) = self.variable_name_mapping.get(&scoped_name) {
-            // Reference StyledComponents Selector or an Animations name in the same file
-            // The css code of Mixins can't be used inside css as it has already been transformed to a class name
-            if referenced_yak_css.kind == YakType::StyledComponent
-              || referenced_yak_css.kind == YakType::Keyframes
-            {
-              let (new_state, new_declarations) =
-                parse_css(referenced_yak_css.name.as_str(), css_state);
-              css_state = Some(new_state);
-              self.current_declaration.extend(new_declarations);
-            }
-            // Mixins e.g.
-            // const highlight = css`color: red;`
-            // styled.button`${highlight};`
-            else if referenced_yak_css.kind == YakType::Mixin {
-              // Add the mixin to the react component
-              runtime_expressions.push(*expr.clone());
-
-              if current_css_state.current_scopes.len() > 1 {
-                // If the mixin is used as scoped inline mixin
-                // e.g. styled.button`&:hover { ${highlight}; }`
-                HANDLER.with(|handler| {
-                  handler
-                    .struct_span_err(
-                      id.span,
-                      &format!("Mixins are not allowed inside nested selectors\nfound: ${{{}}}\nUse an inline css literal instead or move the selector into the mixin", id.sym),
-                    )
-                    .emit();
-                });
-              }
-            }
+          if let Some(referenced_yak_css) = self.variable_name_selector_mapping.get(&scoped_name) {
+            let (new_state, new_declarations) = parse_css(referenced_yak_css, css_state);
+            css_state = Some(new_state);
+            self.current_declaration.extend(new_declarations);
           }
           // Cross-file references
           // e.g.:
-          // import { primary } from "./theme";
+          // import { colors } from "./theme";
           // styled.button`color: ${colors.primary};`
-          else if let Some((import_source_type, module_path)) =
+          else if let Some((_import_source_type, module_path)) =
             self.variables.get_imported_variable(&scoped_name)
           {
-            let next_css_code = pair.next_quasi.map(|next_quasi| next_quasi.raw.to_string());
-            // Cross file mixin imports
-            if import_source_type == ImportSourceType::Normal
-              && is_mixin_expression(
-                css_state.clone(),
-                encode_module_import(module_path.as_str(), member_expr_parts.clone()),
-                next_css_code,
-              )
-            {
-              if current_css_state.current_scopes.len() == 1 {
-                runtime_expressions.push(*expr.clone());
+            let import_kind: ImportKind = match find_char(
+              &quasis[pair.index..]
+                .iter()
+                .map(|quasi| quasi.raw.as_str())
+                .collect::<String>(),
+              &[';', '{', '}', '@'],
+            ) {
+              Some((char, _)) =>
+              // e.g. styled.button`${Icon} { ... }`
+              {
+                if char == '{' {
+                  ImportKind::Selector
+                }
+                // e.g. styled.button`${colors.primary} @media { ... }`
+                // e.g. styled.button`.foo { ${colors.primary} }`
+                // e.g. styled.button`${colors.primary};`
+                else {
+                  ImportKind::Mixin
+                }
+              }
+              // e.g. styled.button`${colors.primary}`
+              None => ImportKind::Mixin,
+            };
+            let cross_file_import_token =
+              encode_module_import(module_path.as_str(), member_expr_parts, import_kind);
+
+            // TODO Track Dynamic Mixins as runtime dependency to pass props: `runtime_expressions.push(*expr.clone());`
+            let (new_state, _) = parse_css(&cross_file_import_token, css_state);
+            css_state = Some(new_state);
+          }
+          // Constants
+          else if let Some(value) = self
+            .variables
+            .get_const_value(&scoped_name, member_expr_parts)
+          {
+            // e.g.:
+            // const primary = "red";
+            // styled.button`color: ${primary};`
+            if let Some(literal_value) = match *value.clone() {
+              Expr::Lit(Lit::Str(str)) => Some(str.value.to_string()),
+              Expr::Lit(Lit::Num(num)) => Some(num.value.to_string()),
+              _ => None,
+            } {
+              let (new_state, _) = parse_css(&literal_value, css_state);
+              css_state = Some(new_state);
+            } else if let Expr::TaggedTpl(tagged_tpl) = *value {
+              // constant mixins e.g.
+              // const highlight = css`color: red;`
+              // const Button = styled.button`&:hover { ${highlight}; }`
+              if is_valid_tagged_tpl(&tagged_tpl, self.yak_library_imports.yak_css_idents.clone()) {
+                let (inline_runtime_exprs, inline_runtime_css_vars) =
+                  self.process_yak_literal(&mut tagged_tpl.clone(), css_state.clone());
+                runtime_expressions.extend(inline_runtime_exprs);
+                runtime_css_variables.extend(inline_runtime_css_vars);
               } else {
                 HANDLER.with(|handler| {
                   handler
                     .struct_span_err(
-                      expr.span(),
-                      "Mixins are not allowed inside selectors or media queries\n\
-                      Possible solutions:\n\
-                        - Use the an inline mixin directly in the `styled` css code\n\
-                        - Move the media query or selector from the `styled` css code into the mixin \n\
-                        - Static mixins can be moved to .yak files and be used inside nested selectors\
-                      "
+                      id.span,
+                      &format!(
+                        "Unsupported \"{}\" template literal in css expression - only css`` mixins are allowed",
+                        scoped_name.0
+                      ),
                     )
                     .emit();
                 });
               }
+            } else {
+              HANDLER.with(|handler| {
+                handler
+                  .struct_span_err(
+                    id.span,
+                    &format!(
+                      "The value for constant \"{}\" is not a valid css value or css mixin",
+                      scoped_name.0
+                    ),
+                  )
+                  .emit();
+              });
             }
-            // An imported constant or a mixin import from a .yak file
-            else {
-              let css_code = encode_module_import(module_path.as_str(), member_expr_parts);
-              let (new_state, _) = parse_css(&css_code, css_state);
-              css_state = Some(new_state);
-            }
-          }
-          // Constants
-          // e.g.:
-          // const primary = "red";
-          // styled.button`color: ${primary};`
-          else if let Some(value) = self
-            .variables
-            .get_const_literal_value(&scoped_name, member_expr_parts)
-          {
-            let (new_state, _) = parse_css(&value, css_state);
-            css_state = Some(new_state);
           }
           // A property with a dynamic value
           // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
-          else if current_css_state.is_inside_property_value {
-            // If the variable is top but not a constant we can't access it
-            // e.g. styled.button`color: ${color};`
+          else {
             HANDLER.with(|handler| {
               handler
                 .struct_span_err(
                   id.span,
                   &format!(
-                    "The value of variable \"{}\" could not be extracted statically",
+                    "The value for variable \"{}\" could not be found in the top scope",
                     scoped_name.0
                   ),
                 )
                 .emit();
             });
-          } else {
-            // If the variable is not found we can't access it
-            panic!("You cant use '{}' outside of a css value", id.sym);
           }
         }
         // Handle inline css literals
         // e.g. styled.button`${css`color: red;`};`
         else if let Expr::TaggedTpl(tpl) = &mut **expr {
-          let (inline_runtime_exprs, inline_runtime_css_vars) =
-            self.process_yak_literal(tpl, css_state.clone());
-          runtime_expressions.extend(inline_runtime_exprs);
-          runtime_css_variables.extend(inline_runtime_css_vars);
+          if is_valid_tagged_tpl(tpl, self.yak_library_imports.yak_css_idents.clone()) {
+            let (inline_runtime_exprs, inline_runtime_css_vars) =
+              self.process_yak_literal(tpl, css_state.clone());
+            runtime_expressions.extend(inline_runtime_exprs);
+            runtime_css_variables.extend(inline_runtime_css_vars);
+          } else {
+            HANDLER.with(|handler| {
+              handler
+                .struct_span_err(
+                  tpl.span,
+                  "Only css template literals are allowed inside css expressions",
+                )
+                .emit();
+            });
+          }
         }
         // Visit nested css expressions
         // e.g. styled.button`.foo { ${({$x}) => $x && css`color: red`}; }`
@@ -378,12 +396,6 @@ where
             );
             let (new_state, _) = parse_css(&format!("var(--{})", css_variable_name), css_state);
             css_state = Some(new_state);
-          } else {
-            // Check if an invalid expression is used inside nested selectors
-            if current_css_state.current_scopes.len() > 1 {
-              utils::assert_css_expr::assert_css_expr(expr, "Inside nested selectors you can only use css literals, constants or dynamic values".to_string(), 
-              self.yak_library_imports.yak_css_idents.clone());
-            }
           }
 
           expr.visit_mut_children_with(self);
@@ -438,7 +450,7 @@ where
 
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
-    if !self.variable_name_mapping.is_empty() {
+    if !self.variable_name_selector_mapping.is_empty() {
       // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
       let mut yak_import_index = 0;
       for (i, item) in module.body.iter_mut().enumerate() {
@@ -480,6 +492,15 @@ where
     }
   }
 
+  /// Visit export declarations
+  /// To store the current export state
+  /// e.g. export const Button = styled.button`color: red;`
+  fn visit_mut_export_decl(&mut self, n: &mut ExportDecl) {
+    self.current_exported = true;
+    n.visit_mut_children_with(self);
+    self.current_exported = false;
+  }
+
   /// Visit variable declarations
   /// To store the current name which can be used for class names
   /// e.g. Button for const Button = styled.button`color: red;`
@@ -500,6 +521,30 @@ where
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
+    // Visiting a constant mixin expression e.g.:
+    // const highlight = css`color: red;`
+    // const Button = styled.button`${({$active}) => $active && highlight};`
+    if self.is_inside_css_expression() {
+      if let Some((id, member_expr_parts)) = extract_ident_and_parts(n) {
+        if let Some(constant_value) = self
+          .variables
+          .get_const_value(&id.to_id(), member_expr_parts)
+        {
+          if let Expr::TaggedTpl(tpl) = *constant_value {
+            if is_valid_tagged_tpl(&tpl, self.yak_library_imports.yak_css_idents.clone()) {
+              let replacement_before = self.expression_replacement.clone();
+              let tpl = &mut tpl.clone();
+              tpl.span = n.span();
+              self.visit_mut_tagged_tpl(tpl);
+              if let Some(replacement) = self.expression_replacement.clone() {
+                *n = *replacement;
+              }
+              self.expression_replacement = replacement_before;
+            }
+          }
+        }
+      }
+    }
     // Transform tagged template literals
     // e.g. styled.button`color: red;`
     if let Expr::TaggedTpl(tpl) = n {
@@ -575,13 +620,26 @@ where
       // Keyframes transform works only on top level
       Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new()),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => Box::new(TransformCssMixin::new()),
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
-      _ => panic!(
-        "Invalid context for next-yak function {:?}",
-        yak_library_function_name
-      ),
+      _ => {
+        if !is_top_level {
+          HANDLER.with(|handler| {
+            handler
+              .struct_span_err(
+                n.span,
+                "Only css template literals can be nested inside other css template literals",
+              )
+              .emit();
+          });
+          return;
+        }
+        panic!(
+          "Invalid context for next-yak function {:?}",
+          yak_library_function_name
+        )
+      }
     };
 
     let current_variable_id = self.get_current_component_id();
@@ -600,7 +658,14 @@ where
       self.current_css_state.clone(),
     ));
 
-    let (runtime_expressions, runtime_css_variables) = self.process_yak_literal(n, css_state);
+    if let Some(css_reference_name) = transform.get_css_reference_name() {
+      self
+        .variable_name_selector_mapping
+        .insert(current_variable_id, css_reference_name);
+    }
+
+    let (runtime_expressions, runtime_css_variables) =
+      self.process_yak_literal(n, css_state.clone());
 
     let transform_result = transform.transform_expression(
       n,
@@ -616,20 +681,51 @@ where
     let css_code = to_css(&transform_result.css.declarations);
     let result_span = transform_result.expression.span();
     if !css_code.is_empty() && is_top_level {
-      self.comments.add_leading(
-        result_span.lo,
-        Comment {
-          kind: swc_core::common::comments::CommentKind::Block,
-          span: DUMMY_SP,
-          text: format!("YAK Extracted CSS:\n{}\n", css_code.trim()).into(),
-        },
-      );
+      if let Some(comment_prefix) = transform_result.css.comment_prefix.clone() {
+        self.comments.add_leading(
+          result_span.lo,
+          Comment {
+            kind: swc_core::common::comments::CommentKind::Block,
+            span: DUMMY_SP,
+            text: format!("{}\n{}\n", comment_prefix, css_code.trim()).into(),
+          },
+        );
+      }
     }
     self.comments.add_leading(result_span.lo, pure_annotation());
     self.expression_replacement = Some(transform_result.expression);
-    self
-      .variable_name_mapping
-      .insert(current_variable_id, transform_result.css);
+  }
+
+  /// Report nested atom calls as an error
+  /// e.g. const Button = styled.button`&:hover { ${atoms("flex")} }`
+  fn visit_mut_call_expr(&mut self, n: &mut CallExpr) {
+    if self.is_inside_css_expression() {
+      if let Some(css_state) = self.current_css_state.clone() {
+        if css_state.current_scopes.len() > 1
+          && css_state.current_comment_state == CommentStateType::None
+        {
+          if let Callee::Expr(callee) = &n.callee {
+            if let Expr::Ident(ident) = &**callee {
+              if self
+                .yak_library_imports
+                .get_yak_library_name_for_ident(&ident.to_id())
+                == Some(atom!("atoms"))
+              {
+                HANDLER.with(|handler| {
+                  handler
+                    .struct_span_err(
+                      n.span,
+                      "atoms() must not be used inside selectors or media query",
+                    )
+                    .emit();
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+    n.visit_mut_children_with(self);
   }
 }
 

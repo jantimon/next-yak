@@ -27,13 +27,14 @@ export const Button4 = styled.button`
 
 export const Button5 = styled.button`
   ${fonts.h1};
-  ${fancy};
+  ${fancy.mixins.specialEffect};
   color: green;
 `;
 
 export const Button6 = styled.button`
   &:hover {
     ${yakMixin};
+    ${fancy.mixins.specialEffect}
   }
   color: green;
 `;

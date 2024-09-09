@@ -8,9 +8,9 @@ import { fonts } from "./fonts";
 import { sizes } from "./sizes";
 export const Button = /*YAK Extracted CSS:
 .Button {
-  font-size: --yak-css-import: url("./fonts:fonts:sm");
-  color: --yak-css-import: url("./colors:colors:colors:dark:primary");
-  background-color: --yak-css-import: url("./colors:colors:colors:light:full%20opacity");
-  height: --yak-css-import: url("./sizes:sizes:0");
+  font-size: --yak-css-import: url("./fonts:fonts:sm",mixin);
+  color: --yak-css-import: url("./colors:colors:colors:dark:primary",mixin);
+  background-color: --yak-css-import: url("./colors:colors:colors:light:full%20opacity",mixin);
+  height: --yak-css-import: url("./sizes:sizes:0",mixin);
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button);

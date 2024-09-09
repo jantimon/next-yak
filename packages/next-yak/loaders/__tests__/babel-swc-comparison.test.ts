@@ -52,9 +52,9 @@ describe("should work", () => {
           input,
         )
         .then((result) => result)
-        .catch((err) => {
-          error: err.toString();
-        });
+        .catch((err) => ({
+          error: err.toString(),
+        }));
 
       if (!output || output.error) {
         expect(fs.existsSync(path.resolve(inputFile, "../output.stderr"))).toBe(

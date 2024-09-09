@@ -1,30 +1,17 @@
 use rustc_hash::FxHashMap;
+use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
-use swc_core::common::DUMMY_SP;
+use swc_core::common::{Span, DUMMY_SP};
 use swc_core::ecma::ast::*;
+use swc_core::plugin::errors::HANDLER;
 
 use crate::naming_convention::NamingConvention;
 
-#[derive(PartialEq)]
-pub enum YakType {
-  Mixin,
-  Keyframes,
-  StyledComponent,
-}
-
 /// Represents a CSS result after the transformation
 pub struct YakCss {
-  /// The name is used to reference the css from another expression
-  ///
-  /// E.g.:
-  /// ```ts
-  /// const Icon = styled.div`..`
-  /// const Button = styled.button`${Icon} { ... }`
-  /// ```
-  pub name: String,
-  pub kind: YakType,
+  pub comment_prefix: Option<String>,
   /// The generated CSS code
   pub declarations: Vec<Declaration>,
 }
@@ -54,6 +41,10 @@ pub trait YakTransform {
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult;
+  /// Get animation or styled component selector name
+  fn get_css_reference_name(&self) -> Option<String> {
+    None
+  }
 }
 
 /// Transform for nested css mixins
@@ -126,16 +117,18 @@ impl YakTransform for TransformNestedCss {
     }
     YakTransformResult {
       css: YakCss {
-        name: self.class_name.as_ref().unwrap().to_string(),
-        kind: YakType::Mixin,
+        comment_prefix: None,
         declarations: declarations.to_vec(),
       },
-      expression: Box::new(Expr::Call(CallExpr {
-        span: expression.span,
+      expression: (Box::new(Expr::Call(CallExpr {
+        // Use a sepcial span as this expression might be cloned as part
+        // of a parent expression and therefore needs a unique span to
+        // avoid collisions for the comments
+        span: Span::dummy_with_cmt(),
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
-      })),
+      }))),
     }
   }
 }
@@ -145,11 +138,15 @@ impl YakTransform for TransformNestedCss {
 pub struct TransformCssMixin {
   /// ClassName of the mixin
   class_name: Option<String>,
+  is_exported: bool,
 }
 
 impl TransformCssMixin {
-  pub fn new() -> TransformCssMixin {
-    TransformCssMixin { class_name: None }
+  pub fn new(is_exported: bool) -> TransformCssMixin {
+    TransformCssMixin {
+      class_name: None,
+      is_exported,
+    }
   }
 }
 
@@ -163,6 +160,7 @@ impl YakTransform for TransformCssMixin {
     let css_identifier = naming_convention.generate_unique_name(declaration_name);
     self.class_name = Some(css_identifier.clone());
     let mut parser_state = ParserState::new();
+    // TODO: Remove the unused scope once nested mixins work again
     parser_state.current_scopes = vec![CssScope {
       name: format!(".{}", css_identifier),
       scope_type: ScopeType::AtRule,
@@ -173,22 +171,25 @@ impl YakTransform for TransformCssMixin {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
-    css_module_identifier: Ident,
+    _css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
-    let mut arguments: Vec<ExprOrSpread> = vec![];
-    if !declarations.is_empty() {
-      arguments.push(
-        Expr::Member(MemberExpr {
-          span: DUMMY_SP,
-          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-          prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
-        })
-        .into(),
-      );
+    // For now dynamic mixins are not supported cross file
+    // as the scope handling is quite complicated
+    if self.is_exported && (!runtime_expressions.is_empty() || !runtime_css_variables.is_empty()) {
+      HANDLER.with(|handler| {
+        handler
+          .struct_span_err(
+            expression.span,
+            "Dynamic mixins must not be exported. Please ensure that this mixin requires no props.",
+          )
+          .emit();
+      });
     }
+
+    let mut arguments: Vec<ExprOrSpread> = vec![];
     arguments.extend(runtime_expressions.into_iter().map(ExprOrSpread::from));
     if !runtime_css_variables.is_empty() {
       arguments.push(
@@ -199,18 +200,29 @@ impl YakTransform for TransformCssMixin {
         .into(),
       );
     }
+    let css_prefix = if self.is_exported {
+      Some(format!(
+        "YAK EXPORTED MIXIN:{}",
+        self.class_name.as_ref().unwrap(),
+      ))
+    } else {
+      None
+    };
     YakTransformResult {
       css: YakCss {
-        name: self.class_name.as_ref().unwrap().to_string(),
-        kind: YakType::Mixin,
-        declarations: declarations.to_vec(),
+        comment_prefix: css_prefix,
+        declarations: declarations.to_vec().move_map(|mut declaration| {
+          // TODO: Fix nested mixins
+          declaration.scope.remove(0);
+          declaration
+        }),
       },
-      expression: Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
-      })),
+      }))),
     }
   }
 }
@@ -276,17 +288,21 @@ impl YakTransform for TransformStyled {
     }
     YakTransformResult {
       css: YakCss {
-        name: self.class_name.as_ref().unwrap().to_string(),
-        kind: YakType::StyledComponent,
+        comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
-      expression: Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
-      })),
+      }))),
     }
+  }
+
+  /// Get the selector for the specific styled component to be used in other expressions
+  fn get_css_reference_name(&self) -> Option<String> {
+    Some(format!(".{}", self.class_name.clone().unwrap()))
   }
 }
 
@@ -352,16 +368,20 @@ impl YakTransform for TransformKeyframes {
     }
     YakTransformResult {
       css: YakCss {
-        name: self.animation_name.as_ref().unwrap().to_string(),
-        kind: YakType::Keyframes,
+        comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
-      expression: Box::new(Expr::Call(CallExpr {
+      expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
-      })),
+      }))),
     }
+  }
+
+  /// Get the selector for the keyframe to be used in other expressions
+  fn get_css_reference_name(&self) -> Option<String> {
+    Some(self.animation_name.clone().unwrap())
   }
 }
