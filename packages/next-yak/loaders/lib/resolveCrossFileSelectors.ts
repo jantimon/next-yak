@@ -309,7 +309,7 @@ async function parseExports(
               },
               ExportDeclaration({ node }) {
                 if ("specifiers" in node && node.source) {
-                  const {specifiers, source} = node;
+                  const { specifiers, source } = node;
                   specifiers.forEach((specifier) => {
                     // export * as color from "./colors";
                     if (
@@ -321,7 +321,6 @@ async function parseExports(
                         from: [source.value],
                       };
                     }
-
                   });
                 }
               },
@@ -477,7 +476,7 @@ async function resolveModuleSpecifierRecursively(
         exportValue.imported,
         ...specifier.slice(1),
       ]);
-    } 
+    }
     // Namespace export
     // e.g. export * as colors from "./colors";
     else if (exportValue.type === "star-export") {
@@ -486,7 +485,11 @@ async function resolveModuleSpecifierRecursively(
         exportValue.from[0],
         path.dirname(module.filePath),
       );
-      return resolveModuleSpecifierRecursively(loader, importedModule, specifier.slice(1));
+      return resolveModuleSpecifierRecursively(
+        loader,
+        importedModule,
+        specifier.slice(1),
+      );
     }
 
     if (exportValue.type === "styled-component") {
