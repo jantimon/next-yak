@@ -7,7 +7,7 @@ import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/cs
 
 const yakCssImportRegex =
   // Make mixin and selector non optional once we dropped support for the babel plugin
-  /--yak-css-import\:\s*url\("([^"]+)",?(|mixin|selector)\);?/g;
+  /--yak-css-import\:\s*url\("([^"]+)",?(|mixin|selector)\)(;?)/g;
 
 const compilationCache = new WeakMap<
   Compilation,
@@ -40,7 +40,7 @@ export async function resolveCrossFileConstant(
 ): Promise<string> {
   // Search for --yak-css-import: url("path/to/module") in the css
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
-    const [fullMatch, encodedArguments, importKind] = match;
+    const [fullMatch, encodedArguments, importKind, semicolon] = match;
     const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
@@ -49,6 +49,7 @@ export async function resolveCrossFileConstant(
       moduleSpecifier,
       specifier,
       importKind,
+      semicolon,
       position: match.index!,
       size: fullMatch.length,
     };
@@ -87,7 +88,7 @@ export async function resolveCrossFileConstant(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size, importKind, specifier } = matches[i];
+      const { position, size, importKind, specifier, semicolon } = matches[i];
       const resolved = resolvedValues[i];
 
       if (importKind === "selector") {
@@ -111,7 +112,17 @@ export async function resolveCrossFileConstant(
               resolved.name,
               {},
             )})`
-          : resolved.value;
+          : resolved.value +
+            // resolved.value can be of two different types:
+            // - mixin:
+            //   ${mixinName};
+            // - constant:
+            //   color: ${value};
+            // For mixins the semicolon is already included in the value
+            // but for constants it has to be added manually
+            (["}", ";"].includes(String(resolved.value).trimEnd().slice(-1))
+              ? ""
+              : semicolon);
 
       result =
         result.slice(0, position) +
@@ -296,6 +307,23 @@ async function parseExports(
                   });
                 }
               },
+              ExportDeclaration({ node }) {
+                if ("specifiers" in node && node.source) {
+                  const { specifiers, source } = node;
+                  specifiers.forEach((specifier) => {
+                    // export * as color from "./colors";
+                    if (
+                      specifier.type === "ExportNamespaceSpecifier" &&
+                      specifier.exported.type === "Identifier"
+                    ) {
+                      exports[specifier.exported.name] = {
+                        type: "star-export",
+                        from: [source.value],
+                      };
+                    }
+                  });
+                }
+              },
               ExportAllDeclaration({ node }) {
                 if (Object.keys(exports).length === 0) {
                   exports["*"] ||= {
@@ -437,6 +465,7 @@ async function resolveModuleSpecifierRecursively(
       }
     }
     // Follow reexport
+    // e.g. export { colors as primaryColors } from "./colors";
     if (exportValue.type === "re-export") {
       const importedModule = await parseModule(
         loader,
@@ -447,6 +476,20 @@ async function resolveModuleSpecifierRecursively(
         exportValue.imported,
         ...specifier.slice(1),
       ]);
+    }
+    // Namespace export
+    // e.g. export * as colors from "./colors";
+    else if (exportValue.type === "star-export") {
+      const importedModule = await parseModule(
+        loader,
+        exportValue.from[0],
+        path.dirname(module.filePath),
+      );
+      return resolveModuleSpecifierRecursively(
+        loader,
+        importedModule,
+        specifier.slice(1),
+      );
     }
 
     if (exportValue.type === "styled-component") {
@@ -481,6 +524,8 @@ async function resolveModuleSpecifierRecursively(
         // mixins in .yak files are wrapped inside an object with a __yak key
         if (depth === specifier.length && "__yak" in current) {
           return { type: "mixin", value: current["__yak"] };
+        } else if (depth === specifier.length && "value" in current) {
+          return { type: "constant", value: current["value"] };
         } else {
           current = current[specifier[depth]];
         }
