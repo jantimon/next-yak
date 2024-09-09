@@ -272,6 +272,7 @@ async function parseExports(
   let exports: Record<string, ParsedExport> = {};
 
   try {
+    console.log({sourceContents});
     babel.transformSync(sourceContents, {
       configFile: false,
       plugins: [
@@ -307,7 +308,26 @@ async function parseExports(
                   });
                 }
               },
+              ExportDeclaration({ node }) {
+                if ("specifiers" in node && node.source) {
+                  const {specifiers, source} = node;
+                  specifiers.forEach((specifier) => {
+                    // export * as color from "./colors";
+                    if (
+                      specifier.type === "ExportNamespaceSpecifier" &&
+                      specifier.exported.type === "Identifier"
+                    ) {
+                      exports[specifier.exported.name] = {
+                        type: "star-export",
+                        from: [source.value],
+                      };
+                    }
+
+                  });
+                }
+              },
               ExportAllDeclaration({ node }) {
+                console.log({node});
                 if (Object.keys(exports).length === 0) {
                   exports["*"] ||= {
                     type: "star-export",
@@ -448,6 +468,7 @@ async function resolveModuleSpecifierRecursively(
       }
     }
     // Follow reexport
+    // e.g. export { colors as primaryColors } from "./colors";
     if (exportValue.type === "re-export") {
       const importedModule = await parseModule(
         loader,
@@ -458,6 +479,16 @@ async function resolveModuleSpecifierRecursively(
         exportValue.imported,
         ...specifier.slice(1),
       ]);
+    } 
+    // Namespace export
+    // e.g. export * as colors from "./colors";
+    else if (exportValue.type === "star-export") {
+      const importedModule = await parseModule(
+        loader,
+        exportValue.from[0],
+        path.dirname(module.filePath),
+      );
+      return resolveModuleSpecifierRecursively(loader, importedModule, specifier.slice(1));
     }
 
     if (exportValue.type === "styled-component") {
