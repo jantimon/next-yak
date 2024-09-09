@@ -272,7 +272,6 @@ async function parseExports(
   let exports: Record<string, ParsedExport> = {};
 
   try {
-    console.log({sourceContents});
     babel.transformSync(sourceContents, {
       configFile: false,
       plugins: [
@@ -327,7 +326,6 @@ async function parseExports(
                 }
               },
               ExportAllDeclaration({ node }) {
-                console.log({node});
                 if (Object.keys(exports).length === 0) {
                   exports["*"] ||= {
                     type: "star-export",
