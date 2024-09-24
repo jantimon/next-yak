@@ -10,7 +10,15 @@ const config = {
     optimizePackageImports: ["shiki", "@shikijs/monaco"],
     // serverComponentsExternalPackages: ["next-yak"],
   },
-  webpack: (config) => {
+  transpilePackages: ["yak-swc"],
+  webpack: (config, { isServer, webpack }) => {
+    if (isServer) {
+      config.plugins.push(
+        new webpack.ProvidePlugin({
+          YourDependency: "yak-swc",
+        })
+      );
+    }
     config.module.rules.push({
       test: /\.d\.c?ts$/,
       resourceQuery: /raw/,
