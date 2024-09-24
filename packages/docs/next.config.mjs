@@ -1,4 +1,5 @@
 import { createMDX } from "fumadocs-mdx/next";
+import path from "path";
 
 const withMDX = createMDX();
 
@@ -8,6 +9,19 @@ const config = {
   experimental: {
     optimizePackageImports: ["shiki", "@shikijs/monaco"],
     // serverComponentsExternalPackages: ["next-yak"],
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.d\.c?ts$/,
+      resourceQuery: /raw/,
+      use: "raw-loader",
+      // include: [
+      //   path.resolve(process.cwd(), "node_modules"), // Allow importing from node_modules
+      //   path.resolve(process.cwd()), // And from your source directory
+      // ],
+    });
+
+    return config;
   },
 
   // webpack: (config, { isServer }) => {

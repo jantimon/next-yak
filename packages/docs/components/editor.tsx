@@ -14,6 +14,7 @@ import { useRef, useState } from "react";
 import { Primitive } from "fumadocs-ui/components/tabs";
 import { useTheme } from "next-themes";
 import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
+import { addTypesToMonaco } from "@/lib/editor/addTypes";
 
 const highlighter = createHighlighterCoreSync({
   themes: [vitesseLight, vitesseDark],
@@ -27,8 +28,6 @@ export default function Editor() {
   // list of refs to keep track of the models
   const modelRefs = useRef<Array<any>>([]);
   const [response, setResponse] = useState(initialResponse);
-
-  console.log({ themeConfig });
 
   return (
     <PanelGroup autoSaveId="horizontal" direction="horizontal">
@@ -88,14 +87,7 @@ export default function Editor() {
               lineNumbersMinChars: 4,
               tabSize: 2,
             }}
-            beforeMount={(monaco) => {
-              // LANGS.forEach((lang) => {
-              //   if (!monaco) return;
-              //   monaco.languages.register({
-              //     id: MONACO_SHIKI_LANGS[lang as keyof typeof MONACO_SHIKI_LANGS],
-              //   });
-              // });
-
+            beforeMount={async (monaco) => {
               // maybe clone this to change that the highlighter sets tsx coloring to typescript language of the editor
               // because the editor has to be set to typescript to get type information and shiki wants to be set to tsx for the
               // correct coloring
@@ -115,61 +107,7 @@ export default function Editor() {
               });
             }}
             onMount={async (editor, monaco) => {
-              const react = await (
-                await fetch(
-                  "https://unpkg.com/@types/react@18.3.1/ts5.0/index.d.ts",
-                  {
-                    method: "GET",
-                  }
-                )
-              ).text();
-
-              const reactJSXRuntime = await (
-                await fetch(
-                  "https://unpkg.com/@types/react@18.3.1/ts5.0/jsx-runtime.d.ts",
-                  {
-                    method: "GET",
-                  }
-                )
-              ).text();
-
-              const nextYak = await (
-                await fetch(
-                  "https://unpkg.com/next-yak@0.3.1/dist/index.d.ts",
-                  {
-                    method: "GET",
-                  }
-                )
-              ).text();
-              const nextYakJSXRuntime = await (
-                await fetch(
-                  "https://unpkg.com/next-yak@0.3.1/dist/jsx-runtime.d.ts",
-                  {
-                    method: "GET",
-                  }
-                )
-              ).text();
-
-              monaco.languages.typescript.typescriptDefaults.addExtraLib(
-                nextYak,
-                "file:///node_modules/next-yak/index.d.ts"
-              );
-
-              monaco.languages.typescript.typescriptDefaults.addExtraLib(
-                nextYakJSXRuntime,
-                "file:///node_modules/next-yak/jsx-runtime.d.ts"
-              );
-
-              monaco.languages.typescript.typescriptDefaults.addExtraLib(
-                react,
-                "file:///node_modules/@types/react/index.d.ts"
-              );
-
-              monaco.languages.typescript.typescriptDefaults.addExtraLib(
-                reactJSXRuntime,
-                "file:///node_modules/@types/react/jsx-runtime.d.ts"
-              );
-
+              addTypesToMonaco(monaco);
               monaco.languages.typescript.typescriptDefaults.setCompilerOptions(
                 {
                   jsx: monaco.languages.typescript.JsxEmit.ReactJSX,
@@ -206,7 +144,7 @@ export default function Editor() {
           <Panel
             defaultSize={80}
             style={{
-              borderColor: "hsl(var(--border)/1);",
+              borderColor: "hsl(var(--border)/1)",
               borderWidth: "0 1px 1px 1px",
             }}
           >
@@ -262,7 +200,7 @@ export default function Editor() {
             collapsedSize={0}
             defaultSize={20}
             style={{
-              borderColor: "hsl(var(--border)/1);",
+              borderColor: "hsl(var(--border)/1)",
               borderWidth: "0 1px 1px 1px",
             }}
           >
