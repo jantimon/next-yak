@@ -5,8 +5,4 @@ const nextConfig = {
 
 }
 
-export default withYak({
-    experiments: {
-        crossFileSelectors: true
-    }
-}, nextConfig)
+export default withYak({}, nextConfig)
