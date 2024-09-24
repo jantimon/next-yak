@@ -1,6 +1,6 @@
 # next-yak
 
-![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/2dcaf443-7205-4ef3-ba44-fbbe3ef2807d)
+![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/72494b1c-db1a-4ff7-bd6f-2ed3535fb126)
 
 [![npm version](https://badge.fury.io/js/next-yak.svg)](https://www.npmjs.com/package/next-yak)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jantimon/next-yak/blob/main/LICENSE)
