@@ -1,8 +1,11 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
+
+overrides:
+  yak-swc: workspace:*
 
 importers:
 
@@ -145,7 +148,7 @@ importers:
         specifier: ^1.17.7
         version: 1.18.0
       yak-swc:
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../yak-swc
     devDependencies:
       '@types/mdx':
@@ -236,6 +239,9 @@ importers:
       '@babel/plugin-syntax-typescript':
         specifier: 7.22.5
         version: 7.22.5(@babel/core@7.23.2)
+      yak-swc:
+        specifier: workspace:*
+        version: link:../yak-swc
     devDependencies:
       '@babel/types':
         specifier: 7.23.0
@@ -294,9 +300,6 @@ importers:
       vitest:
         specifier: 2.0.4
         version: 2.0.4(@types/node@20.4.5)(jsdom@22.1.0)
-      yak-swc:
-        specifier: workspace:*
-        version: link:../yak-swc
 
   packages/yak-swc:
     dependencies:
