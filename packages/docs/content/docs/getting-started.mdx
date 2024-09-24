@@ -1,0 +1,104 @@
+---
+title: Getting started
+description: How to get started with next-yak
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+
+# next-yak
+
+**next-yak** is a CSS-in-JS solution tailored for [Next.js](https://nextjs.org/) that seamlessly combines 
+the expressive power of styled-components syntax with efficient build-time extraction of CSS using 
+Next.js's built-in CSS configuration.
+
+## Installation
+
+<Steps>
+<Step>
+
+### Install the package
+
+Install next-yak dependency using your favorite package manager.
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+<Tab value="npm">
+```bash 
+npm i next-yak
+```
+</Tab>
+<Tab value="pnpm">
+```bash 
+pnpm i next-yak
+```
+</Tab>
+<Tab value="yarn">
+```bash
+yarn add next-yak
+```
+</Tab>
+<Tab value="bun">
+```bash 
+bun add next-yak
+```
+</Tab>
+</Tabs>
+</Step>
+<Step>
+
+### Enable next-yak
+
+Add next-yak to your `next.config.mjs` or `next.config.js`:
+
+<Tabs items={['next.config.mjs', 'next.config.js']}>
+<Tab value="next.config.mjs">
+```js 
+import { withYak } from "next-yak/withYak";
+
+const nextConfig = {
+  // your next.js config
+};
+
+export default withYak(nextConfig);
+```
+</Tab>
+<Tab value="next.config.js">
+```js
+const { withYak } = require("next-yak/withYak");
+
+const nextConfig = {
+  // your next.js config
+};
+
+module.exports = withYak(nextConfig);
+```
+</Tab>
+</Tabs>
+</Step>
+<Step>
+
+### Start using next-yak
+
+With the installation and configuration done, you can now use next-yak directly in your components. Here's a simple example:
+
+
+```jsx [pages/index.tsx]
+import { styled } from 'next-yak';
+
+const StyledDiv = styled.div`
+  color: #333;
+  padding: 16px;
+  background-color: #f0f0f0;
+`;
+
+function HomePage() {
+  return <StyledDiv>Hello, next-yak!</StyledDiv>;
+}
+
+export default HomePage;
+```
+
+You're now ready to use next-yak in your Next.js project.
+</Step>
+
+</Steps>
