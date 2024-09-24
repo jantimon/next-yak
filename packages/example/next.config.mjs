@@ -1,11 +1,11 @@
-import { withYakSwc } from 'next-yak/withYak';
+import { withYak } from 'next-yak/withYak';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 
 }
 
-export default withYakSwc({
+export default withYak({
     experiments: {
         crossFileSelectors: true
     }
