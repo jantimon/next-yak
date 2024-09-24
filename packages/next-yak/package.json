@@ -65,7 +65,6 @@
     }
   },
   "scripts": {
-    "prepack": "npx only-allow pnpm",
     "prepublishOnly": "npm run build && npm run test && npm run test:types:code && npm run test:types:test",
     "build": "tsup",
     "watch": "tsup --watch",
@@ -78,7 +77,8 @@
   },
   "dependencies": {
     "@babel/core": "7.23.2",
-    "@babel/plugin-syntax-typescript": "7.22.5"
+    "@babel/plugin-syntax-typescript": "7.22.5",
+    "yak-swc": "0.3.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.14",
@@ -99,12 +99,11 @@
     "typescript": "5.5.2",
     "vite": "5.3.4",
     "vitest": "2.0.4",
-    "tsup": "7.2.0",
-    "yak-swc": "workspace:*"
+    "tsup": "7.2.0"
   },
-  "publishConfig": {
-    "dependencies": {
-      "yak-swc": "0.3.0"
+  "pnpm": {
+    "overrides": {
+      "yak-swc": "workspace:*"
     }
   },
   "files": [
