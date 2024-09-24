@@ -1,6 +1,6 @@
 # next-yak
 
-![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/2dcaf443-7205-4ef3-ba44-fbbe3ef2807d)
+![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/72494b1c-db1a-4ff7-bd6f-2ed3535fb126)
 
 [![npm version](https://badge.fury.io/js/next-yak.svg)](https://www.npmjs.com/package/next-yak)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jantimon/next-yak/blob/main/LICENSE)
@@ -293,33 +293,6 @@ Thanks for merging our prs fixes in next.js, webpack and postcss ❤️
   - https://next-yak-benchmark.vercel.app/
   - https://yacijs.vercel.app/
 </details>
-
-## SWC
-
-![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/72494b1c-db1a-4ff7-bd6f-2ed3535fb126)
-
-Next-yak provides a SWC Rust Plugin on [npm](https://www.npmjs.com/package/yak-swc).
-It will become the default plugin for next-yak in future but unfortunately it doesn't 
-work on Stackblitz because of https://github.com/swc-project/swc/issues/3934
-
-To use it locally you can install it via:
-
-```bash
-npm install yak-swc
-```
-
-And activate it in your `next.config.js`:
-
-```js
-// next.config.js
-import { withYak } from "next-yak/withYakSwc";
-
-const nextConfig = {
-  // your next.js config
-};
-
-export default withYak(nextConfig);
-```
 
 ## Acknowledgments
 

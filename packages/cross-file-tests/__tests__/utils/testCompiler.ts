@@ -1,4 +1,4 @@
-import { withYakSwc, type YakConfigOptions } from "next-yak/withYak";
+import { withYak, type YakConfigOptions } from "next-yak/withYak";
 import webpack from "webpack";
 import { createFsFromVolume, Volume } from "memfs";
 import path from "path";
@@ -138,7 +138,7 @@ const attachLoaderCompilationListener = (webpackConfig: webpack.Configuration): 
  */
 const applyYakConfig = async (webpackConfig: webpack.Configuration, yakConfig: YakConfigOptions) => {
   const loader = attachSWCLoader(webpackConfig);
-  const miniNextConfig = await withYakSwc(yakConfig, {
+  const miniNextConfig = await withYak(yakConfig, {
     webpack: () => ({
       ...webpackConfig,
     }),
