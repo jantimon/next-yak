@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useCallback } from "react";
 import MonacoEditor from "@monaco-editor/react";
 import { shikiToMonaco } from "@shikijs/monaco";
 import { createHighlighterCoreSync } from "shiki";
@@ -15,6 +15,7 @@ import { Primitive } from "fumadocs-ui/components/tabs";
 import { useTheme } from "next-themes";
 import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
 import { addTypesToMonaco } from "@/lib/editor/addTypes";
+import { useSearchParams } from "next/navigation";
 
 const highlighter = createHighlighterCoreSync({
   themes: [vitesseLight, vitesseDark],
@@ -28,13 +29,40 @@ export default function Editor() {
   // list of refs to keep track of the models
   const modelRefs = useRef<Array<any>>([]);
   const [response, setResponse] = useState(initialResponse);
+  const searchParams = useSearchParams();
+  const realtime = !!searchParams.get("realtime");
+
+  const updateCode = useCallback(() => {
+    const code = modelRefs.current.reduce((acc, model) => {
+      acc[model.uri] = model.getValue();
+      return acc;
+    }, {});
+    fetch("/api/transform", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(code),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        setResponse(response);
+      });
+  }, []);
 
   return (
-    <PanelGroup autoSaveId="horizontal" direction="horizontal">
+    <PanelGroup
+      autoSaveId="horizontal"
+      direction="horizontal"
+      style={{
+        maxWidth: "1400px",
+        margin: "0 auto",
+      }}
+    >
       <Panel
-        defaultSize={66}
+        defaultSize={50}
         style={{
-          borderWidth: "0 0 1px 0",
+          borderWidth: "0 0 1px 1px",
         }}
       >
         <h1
@@ -54,7 +82,9 @@ export default function Editor() {
             height: "100%",
             backgroundColor:
               themeConfig.resolvedTheme === "dark" ? "#121212" : "#ffffff",
+            position: "relative",
           }}
+          className="group"
         >
           <Primitive.TabsList>
             <Primitive.TabsTrigger value="index.tsx">
@@ -67,6 +97,40 @@ export default function Editor() {
               different.yak.ts
             </Primitive.TabsTrigger>
           </Primitive.TabsList>
+
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md p-2 text-sm font-medium duration-100 disabled:pointer-events-none disabled:opacity-50 hover:bg-fd-accent hover:text-fd-accent-foreground absolute z-[2]"
+            aria-label="Copy Text"
+            style={{
+              top: "3rem",
+              right: "1rem",
+            }}
+            onClick={updateCode}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.2}
+              stroke="currentColor"
+              style={{
+                width: "2rem",
+                height: "2rem",
+              }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+              />
+            </svg>
+          </button>
           <MonacoEditor
             height="90vh"
             language="typescript"
@@ -119,30 +183,19 @@ export default function Editor() {
                 }
               );
             }}
-            onChange={async () => {
-              const code = modelRefs.current.reduce((acc, model) => {
-                acc[model.uri] = model.getValue();
-                return acc;
-              }, {});
-              const response = await (
-                await fetch("http://localhost:3000/api/transform", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(code),
-                })
-              ).json();
-              setResponse(response);
+            onChange={() => {
+              if (realtime) {
+                updateCode();
+              }
             }}
           />
         </Primitive.Tabs>
       </Panel>
       <PanelResizeHandle />
-      <Panel defaultSize={34}>
+      <Panel defaultSize={50}>
         <PanelGroup autoSaveId="vertical" direction="vertical">
           <Panel
-            defaultSize={80}
+            defaultSize={60}
             style={{
               borderColor: "hsl(var(--border)/1)",
               borderWidth: "0 1px 1px 1px",
@@ -198,7 +251,7 @@ export default function Editor() {
           <Panel
             collapsible
             collapsedSize={0}
-            defaultSize={20}
+            defaultSize={40}
             style={{
               borderColor: "hsl(var(--border)/1)",
               borderWidth: "0 1px 1px 1px",

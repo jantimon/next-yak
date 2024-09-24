@@ -198,9 +198,9 @@ class MockLoaderContext {
 
   getOptions() {
     return {
-      experiments: {
-        debug: true,
-      },
+      // experiments: {
+      // debug: true,
+      // },
     };
   }
 }
