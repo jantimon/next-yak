@@ -50,7 +50,7 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
     // is able to import a context which works for server components
     const yakContext = resolveYakContext(
       yakOptions.contextPath,
-      webpackConfig.context,
+      webpackConfig.context || process.cwd(),
     );
     if (yakContext) {
       webpackConfig.resolve.alias["next-yak/context/baseContext"] = yakContext;
