@@ -13,12 +13,14 @@ use swc_core::plugin::errors::HANDLER;
 use crate::naming_convention::NamingConvention;
 
 /// Represents a CSS result after the transformation
+#[derive(Debug)]
 pub struct YakCss {
   pub comment_prefix: Option<String>,
   /// The generated CSS code
   pub declarations: Vec<Declaration>,
 }
 
+#[derive(Debug)]
 pub struct YakTransformResult {
   pub expression: Box<Expr>,
   pub css: YakCss,
@@ -145,13 +147,15 @@ pub struct TransformCssMixin {
   /// ClassName of the mixin
   export_name: Option<ScopedVariableReference>,
   is_exported: bool,
+  is_within_jsx_attribute: bool,
 }
 
 impl TransformCssMixin {
-  pub fn new(is_exported: bool) -> TransformCssMixin {
+  pub fn new(is_exported: bool, is_within_jsx_attribute: bool) -> TransformCssMixin {
     TransformCssMixin {
       export_name: None,
       is_exported,
+      is_within_jsx_attribute,
     }
   }
 }
@@ -179,21 +183,24 @@ impl YakTransform for TransformCssMixin {
   fn transform_expression(
     &mut self,
     expression: &mut TaggedTpl,
-    _css_module_identifier: Ident,
+    css_module_identifier: Ident,
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
-    // For now dynamic mixins are not supported cross file
-    // as the scope handling is quite complicated
-    if self.is_exported && (!runtime_expressions.is_empty() || !runtime_css_variables.is_empty()) {
+    let has_dynamic_content = !runtime_expressions.is_empty() || !runtime_css_variables.is_empty();
+
+    if (self.is_exported || self.is_within_jsx_attribute) && has_dynamic_content {
+      // For now dynamic mixins are not supported cross file
+      // as the scope handling is quite complicated
+      let error_msg = if self.is_exported {
+        "Dynamic mixins must not be exported. Please ensure that this mixin requires no props."
+      } else {
+        "Dynamic mixins must not be used within JSX attributes. Please ensure that this mixin requires no props."
+      };
+
       HANDLER.with(|handler| {
-        handler
-          .struct_span_err(
-            expression.span,
-            "Dynamic mixins must not be exported. Please ensure that this mixin requires no props.",
-          )
-          .emit();
+        handler.struct_span_err(expression.span, error_msg).emit();
       });
     }
 
@@ -208,8 +215,8 @@ impl YakTransform for TransformCssMixin {
         .into(),
       );
     }
-    let css_prefix = if self.is_exported {
-      Some(format!(
+    let css_prefix = match (self.is_exported, self.is_within_jsx_attribute) {
+      (true, _) => Some(format!(
         "YAK EXPORTED MIXIN:{}",
         self
           .export_name
@@ -219,16 +226,34 @@ impl YakTransform for TransformCssMixin {
           .iter()
           .map(|atom| encode_percent(atom.as_str()))
           .join(":")
-      ))
-    } else {
-      None
+      )),
+      (_, true) => {
+        // Add the class name and an empty object to the arguments (css in props only allows static content)
+        arguments.extend([
+          Expr::Member(MemberExpr {
+            span: DUMMY_SP,
+            obj: Box::new(Expr::Ident(css_module_identifier.clone())),
+            prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
+          })
+          .into(),
+          Expr::Object(ObjectLit {
+            span: DUMMY_SP,
+            props: vec![],
+          })
+          .into(),
+        ]);
+        Some("YAK Extracted CSS:".to_string())
+      }
+      _ => None,
     };
     YakTransformResult {
       css: YakCss {
         comment_prefix: css_prefix,
         declarations: declarations.to_vec().move_map(|mut declaration| {
           // TODO: Fix nested mixins
-          declaration.scope.remove(0);
+          if !self.is_within_jsx_attribute {
+            declaration.scope.remove(0);
+          }
           declaration
         }),
       },
@@ -239,6 +264,13 @@ impl YakTransform for TransformCssMixin {
         type_args: None,
       }))),
     }
+  }
+
+  fn get_css_reference_name(&self) -> Option<String> {
+    if self.is_within_jsx_attribute {
+      return Some(self.class_name.clone().unwrap());
+    }
+    None
   }
 }
 

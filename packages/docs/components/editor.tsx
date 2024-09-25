@@ -290,6 +290,7 @@ export default function Editor() {
               <div
                 style={{
                   margin: "16px 1ch",
+                  overflow: "auto",
                 }}
                 dangerouslySetInnerHTML={{
                   __html: highlighter.codeToHtml(

@@ -101,6 +101,8 @@ where
   css_module_identifier: Option<Ident>,
   /// Dev mode to use readable css variable names
   dev_mode: bool,
+  /// Flag to check if we are inside a css expression
+  inside_css_attribute: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -120,6 +122,7 @@ where
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
+      inside_css_attribute: false,
       dev_mode,
       filename,
       comments,
@@ -592,6 +595,67 @@ where
         }
       }
       props_or_spread.visit_mut_with(self);
+  fn visit_mut_jsx_attr(&mut self, n: &mut JSXAttr) {
+    if let JSXAttrName::Ident(ident) = &n.name {
+      if ident.sym == "css" {
+        let previous_inside_css_attribute = self.inside_css_attribute;
+        self.inside_css_attribute = true;
+        n.visit_mut_children_with(self);
+        self.inside_css_attribute = previous_inside_css_attribute;
+      }
+    }
+  }
+
+  // Visit JSX expressions for css prop support
+  fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
+    n.visit_mut_children_with(self);
+
+    if let Some((index, value)) = n.attrs.iter().enumerate().find_map(|(index, attr)| {
+      if let JSXAttrOrSpread::JSXAttr(attr) = attr {
+        if let JSXAttrName::Ident(ident) = &attr.name {
+          if ident.sym == *"css" {
+            return Some((index, attr.value.clone()));
+          }
+        }
+      }
+      None
+    }) {
+      // Remove the css attribute
+      n.attrs.remove(index);
+
+      // extract the expression from the css attribute
+      let expr = match value {
+        Some(JSXAttrValue::JSXExprContainer(container)) => match container.expr {
+          JSXExpr::Expr(expr) => expr,
+          _ => {
+            HANDLER.with(|handler| {
+              handler
+                .struct_span_err(
+                  container.span,
+                  "Expected an expression in the css attribute",
+                )
+                .emit();
+            });
+            return;
+          }
+        },
+        _ => {
+          HANDLER.with(|handler| {
+            handler
+              .struct_span_err(n.span, "css attribute must contain a JSX expression")
+              .emit();
+          });
+          return;
+        }
+      };
+
+      let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
+        dot3_token: DUMMY_SP,
+        expr,
+      });
+
+      // Replace the attribute with a spread attribute
+      n.attrs.insert(index, spread_attr);
     }
   }
 
@@ -705,7 +769,10 @@ where
           }),
       )),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new(
+        self.current_exported,
+        self.inside_css_attribute,
+      )),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
       _ => {
