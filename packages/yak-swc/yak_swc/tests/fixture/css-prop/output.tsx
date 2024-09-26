@@ -6,4 +6,4 @@ const Elem = ()=><div style={{
 .Elem {
   padding: 10px;
 }
-*/ /*#__PURE__*/ css(__styleYak.Elem, {})}/>;
+*/ /*#__PURE__*/ css(__styleYak.Elem)({})}/>;

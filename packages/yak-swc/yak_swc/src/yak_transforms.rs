@@ -213,20 +213,15 @@ impl YakTransform for TransformCssMixin {
         self.class_name.as_ref().unwrap(),
       )),
       (_, true) => {
-        // Add the class name and an empty object to the arguments (css in props only allows static content)
-        arguments.extend([
+        // Add the class name to the arguments, to be created by the CSS loader
+        arguments.push(
           Expr::Member(MemberExpr {
             span: DUMMY_SP,
             obj: Box::new(Expr::Ident(css_module_identifier.clone())),
             prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
           })
           .into(),
-          Expr::Object(ObjectLit {
-            span: DUMMY_SP,
-            props: vec![],
-          })
-          .into(),
-        ]);
+        );
         Some("YAK Extracted CSS:".to_string())
       }
       _ => None,
