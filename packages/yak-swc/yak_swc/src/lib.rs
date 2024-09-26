@@ -623,6 +623,55 @@ where
       // Remove the css attribute
       n.attrs.remove(index);
 
+      let relevant_props: Vec<JSXAttrOrSpread> = n
+        .attrs
+        .iter()
+        .filter(|attr| match attr {
+          JSXAttrOrSpread::SpreadElement(_) => true,
+          JSXAttrOrSpread::JSXAttr(attr) => {
+            if let JSXAttrName::Ident(ident) = &attr.name {
+              ident.sym == *"className" || ident.sym == *"style"
+            } else {
+              false
+            }
+          }
+        })
+        .cloned()
+        .collect();
+
+      n.attrs.retain(|attr| !relevant_props.contains(attr));
+
+      let mapped_props: Vec<PropOrSpread> = relevant_props
+        .into_iter()
+        .map(|prop| match prop {
+          JSXAttrOrSpread::JSXAttr(attr) => {
+            if let JSXAttrName::Ident(ident) = attr.name {
+              PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Ident(ident),
+                value: match attr.value {
+                  Some(JSXAttrValue::Lit(lit)) => Box::new(Expr::Lit(lit)),
+                  Some(JSXAttrValue::JSXExprContainer(container)) => match container.expr {
+                    JSXExpr::Expr(expr) => expr,
+                    _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
+                  },
+                  _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
+                },
+              })))
+            } else {
+              PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                  span: DUMMY_SP,
+                  value: "invalid".into(),
+                  raw: None,
+                }),
+                value: Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
+              })))
+            }
+          }
+          JSXAttrOrSpread::SpreadElement(spread) => PropOrSpread::Spread(spread),
+        })
+        .collect();
+
       // extract the expression from the css attribute
       let expr = match value {
         Some(JSXAttrValue::JSXExprContainer(container)) => match container.expr {
@@ -643,7 +692,7 @@ where
               handler
                 .struct_span_err(
                   container.span,
-                  "Expected an expression in the css attribute",
+                  "Expected an expression in the css attribute. Please use the css prop like this: css={css`color: red;`}",
                 )
                 .emit();
             });
@@ -660,13 +709,44 @@ where
         }
       };
 
-      let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
-        dot3_token: DUMMY_SP,
-        expr,
+      let merge_call = Expr::Call(CallExpr {
+        span: DUMMY_SP,
+        callee: Callee::Expr(Box::new(Expr::Ident(
+          self
+            .yak_library_imports
+            .get_yak_utility_ident("mergeCssProp".to_string()),
+        ))),
+        args: vec![
+          ExprOrSpread {
+            spread: None,
+            expr: Box::new(Expr::Object(ObjectLit {
+              span: DUMMY_SP,
+              props: mapped_props.clone(),
+            })),
+          },
+          ExprOrSpread {
+            spread: None,
+            expr: expr.clone(),
+          },
+        ],
+        type_args: None,
       });
 
-      // Replace the attribute with a spread attribute
-      n.attrs.insert(index, spread_attr);
+      if mapped_props.is_empty() {
+        let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
+          dot3_token: DUMMY_SP,
+          expr,
+        });
+        // Replace the attribute with a spread attribute
+        n.attrs.insert(index, spread_attr);
+      } else {
+        let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
+          dot3_token: DUMMY_SP,
+          expr: Box::new(merge_call),
+        });
+        // Replace the attribute with a spread attribute
+        n.attrs.push(spread_attr);
+      }
     }
   }
 
