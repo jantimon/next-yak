@@ -626,7 +626,18 @@ where
       // extract the expression from the css attribute
       let expr = match value {
         Some(JSXAttrValue::JSXExprContainer(container)) => match container.expr {
-          JSXExpr::Expr(expr) => expr,
+          JSXExpr::Expr(expr) => Box::new(Expr::Call(CallExpr {
+            span: DUMMY_SP,
+            callee: Callee::Expr(expr),
+            args: vec![ExprOrSpread {
+              spread: None,
+              expr: Box::new(Expr::Object(ObjectLit {
+                span: DUMMY_SP,
+                props: vec![],
+              })),
+            }],
+            type_args: None,
+          })),
           _ => {
             HANDLER.with(|handler| {
               handler
