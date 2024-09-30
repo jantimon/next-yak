@@ -15,14 +15,17 @@ const noTheme = {};
  * Hack to hide .yak from the type definition and to deal with ExoticComponents
  */
 const yakForwardRef: <TProps>(
-  component: ForwardRefRenderFunction<any, TProps>
+  component: ForwardRefRenderFunction<any, TProps>,
+  attrsFn?: (props: any) => any
 ) => FunctionComponent<TProps> & {
   // type only identifier to allow targeting components
   // e.g. styled.svg`${Button}:hover & { fill: red; }`
   // warning: `__yak` is undefined during runtime
-  __yak: true;
-} = (component) =>
-  Object.assign(React.forwardRef(component), { yak: component }) as any;
+  [yakComponentSymbol]: [typeof component, typeof attrsFn];
+} = (component, attrsFn) =>
+  Object.assign(React.forwardRef(component), {
+    [yakComponentSymbol]: [component, attrsFn],
+  }) as any;
 
 /**
  * All valid html tags
@@ -69,30 +72,50 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
     ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
+const yakComponentSymbol = Symbol("yak");
+
 const yakStyled = <
   T,
   TAttrsIn extends object = {},
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 >(
-  Component: FunctionComponent<T> | HtmlTags,
+  Component:
+    | (FunctionComponent<T> & {
+        [yakComponentSymbol]?: [
+          any,
+          (
+            p: Substitute<T & { theme: YakTheme }, TAttrsIn>
+          ) => Partial<TAttrsOut>,
+        ];
+      })
+    | HtmlTags,
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>
 ) => {
+  const isYakComponent =
+    typeof Component !== "string" && yakComponentSymbol in Component;
+
+  const [parentYakComponent, parentAttrsFn] = isYakComponent
+    ? Component[yakComponentSymbol]
+    : ([] as any);
+
+  const attrsFn = buildRuntimeAttrsProcessor(
+    attrs as any,
+    parentAttrsFn as any
+  );
+
+  const processAttrs = attrsFn || (() => null);
+
   return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
     const getRuntimeStyles = css(styles, ...values);
-    const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
-      combineProps(
-        props,
-        typeof attrs === "function" ? (attrs as Function)(props) : attrs
-      );
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
       // if the css component does not require arguments
       // it can be call without arguments and skip calling useTheme()
       //
-      // `__yak` is NOT against the rule of hooks as
-      // getRuntimeStyles is a constant defined outside of the component
+      // `attrsFn || getRuntimeStyles.length` is NOT against the rule of hooks as
+      // getRuntimeStyles and attrsFn are constants defined outside of the component
       //
       // for example
       //
@@ -100,13 +123,17 @@ const yakStyled = <
       //       ^ does not need to have access to theme
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
-      //       ^ must be have acces to theme
-      const theme = attrs || getRuntimeStyles.length ? useTheme() : noTheme;
+      //       ^ must be have access to theme
+      const theme = attrsFn || getRuntimeStyles.length ? useTheme() : noTheme;
+
       // execute attrs
-      const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs({
-        theme,
-        ...props,
-      } as Substitute<TCSSProps & T, TAttrsIn>);
+      const combinedProps: Substitute<TCSSProps & T, TAttrsIn> =
+        "$__attrs" in props
+          ? props
+          : (combineProps(
+              { theme, ...props, $__attrs: true },
+              processAttrs({ theme, ...props })
+            ) as any);
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
       const runtimeStyles = getRuntimeStyles(combinedProps as any);
@@ -119,13 +146,10 @@ const yakStyled = <
       const propsBeforeFiltering =
         themeAfterAttr === theme ? combinedPropsWithoutTheme : combinedProps;
 
-      const isYakComponent =
-        typeof Component !== "string" && "yak" in Component;
-
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
       const filteredProps = !isYakComponent
-        ? removePrefixedProperties(propsBeforeFiltering)
+        ? removePrefixedAndUndefinedProperties(propsBeforeFiltering)
         : propsBeforeFiltering;
 
       // yak provides a className and style prop that needs to be merged with the
@@ -144,17 +168,13 @@ const yakStyled = <
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
-      if (isYakComponent) {
-        return (
-          Component as typeof Component & {
-            yak: FunctionComponent<typeof filteredProps>;
-          }
-        ).yak(filteredProps, ref);
+      if (parentYakComponent) {
+        return parentYakComponent(filteredProps, ref);
       }
       (filteredProps as { ref?: unknown }).ref = ref;
       return <Component {...(filteredProps as any)} />;
     };
-    return yakForwardRef(yak);
+    return yakForwardRef(yak, attrsFn);
   };
 };
 
@@ -176,7 +196,7 @@ type StyledLiteral<T> = <TCSSProps>(
   // type only identifier to allow targeting components
   // e.g. styled.svg`${Button}:hover & { fill: red; }`
   // warning: this is undefined during runtime
-  __yak: true;
+  [yakComponentSymbol]: [any, any];
 };
 
 /**
@@ -214,10 +234,12 @@ export const styled = new Proxy(
 );
 
 // Remove all entries that start with a $ sign
-function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
+function removePrefixedAndUndefinedProperties<
+  T extends Record<string, unknown>,
+>(obj: T) {
   const result = {} as T;
   for (const key in obj) {
-    if (!key.startsWith("$")) {
+    if (!key.startsWith("$") && obj[key] !== undefined) {
       result[key] = obj[key];
     }
   }
@@ -231,16 +253,6 @@ const mergeClassNames = (a?: string, b?: string) => {
   return a + " " + b;
 };
 
-const removeUndefined = <T,>(obj: T) => {
-  const result = {} as T;
-  for (const key in obj) {
-    if (obj[key] !== undefined) {
-      result[key] = obj[key];
-    }
-  }
-  return result;
-};
-
 const combineProps = <
   T extends {
     className?: string;
@@ -250,27 +262,15 @@ const combineProps = <
   props: T,
   newProps: T
 ) => {
-  console.log(props, newProps);
   if (!newProps) return props;
-  const combinedProps: T =
-    "$__attrs" in props
-      ? // allow overriding props when attrs was used previously
-        {
-          ...newProps,
-          ...props,
-        }
-      : {
-          ...props,
-          ...newProps,
-        };
   return {
-    ...combinedProps,
+    ...props,
+    ...newProps,
     className: mergeClassNames(
       props.className as string,
       newProps.className as string
     ),
     style: { ...(props.style || {}), ...(newProps.style || {}) },
-    $__attrs: true,
   };
 };
 
@@ -286,3 +286,27 @@ export type Substitute<A extends object, B extends object> = FastOmit<
   keyof B
 > &
   B;
+
+const buildRuntimeAttrsProcessor = <
+  T,
+  TAttrsIn extends object,
+  TAttrsOut extends AttrsMerged<T, TAttrsIn>,
+>(
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
+  parentAttrsFn?: (props: TAttrsIn) => TAttrsIn
+) => {
+  const ownAttrsFn =
+    attrs && (typeof attrs === "function" ? attrs : () => attrs);
+
+  if (ownAttrsFn && parentAttrsFn) {
+    return (props: Substitute<T & { theme: YakTheme }, TAttrsIn>) => {
+      const parentProps = parentAttrsFn(props);
+      return combineProps(
+        parentProps,
+        ownAttrsFn(combineProps(props, parentProps) as any) as any
+      );
+    };
+  }
+
+  return ownAttrsFn || parentAttrsFn;
+};

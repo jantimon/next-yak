@@ -183,7 +183,7 @@ it("should merge className from folded attrs", () => {
   expect(TestRenderer.create(<Comp className="something" />).toJSON())
     .toMatchInlineSnapshot(`
       <div
-        className="something meow nya foo"
+        className="something foo meow nya"
         style={{}}
       />
     `);
@@ -245,13 +245,22 @@ it("should work with data and aria attributes", () => {
 });
 
 it("merge attrs when inheriting SC", () => {
-  const Parent = styled.button.attrs(() => ({
-    type: "button",
-    tabIndex: 0,
-  }))``;
-  const Child = styled(Parent).attrs(() => ({
-    type: "submit",
-  }))``;
+  let i = 0;
+  const Parent = styled.button.attrs((p) => {
+    expect(i).toEqual(0);
+    i++;
+    return {
+      type: "button",
+      tabIndex: 0,
+    };
+  })``;
+  const Child = styled(Parent).attrs((p) => {
+    expect(i).toEqual(1);
+    i++;
+    return {
+      type: "submit",
+    };
+  })``;
   expect(TestRenderer.create(<Child />).toJSON()).toMatchInlineSnapshot(`
     <button
       style={{}}
