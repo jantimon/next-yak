@@ -1,5 +1,5 @@
 import { ForwardRefRenderFunction, FunctionComponent } from "react";
-import { CSSInterpolation, css } from "./cssLiteral.js";
+import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
 import React from "react";
 
 // the following export is not relative as "next-yak/context"
@@ -10,7 +10,6 @@ import type { YakTheme } from "./context/index.d.ts";
 
 /** Symbols */
 const noTheme = {};
-const yakComponentSymbol = Symbol("yak");
 
 /**
  * Hack to hide {[yakComponentSymbol]:[parentComponent, parentAttributeFunction]}
@@ -87,8 +86,8 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
  */
 type YakComponent<
   T,
-  TAttrsIn extends object,
-  TAttrsOut extends AttrsMerged<T, TAttrsIn>,
+  TAttrsIn extends object = {},
+  TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 > = FunctionComponent<T> & {
   [yakComponentSymbol]: [
     FunctionComponent<T>,
@@ -227,12 +226,7 @@ type StyledLiteral<T> = <TCSSProps>(
         NoInfer<TCSSProps> & { theme: YakTheme }
     >
   >
-) => FunctionComponent<TCSSProps & T> & {
-  // type only identifier to allow targeting components
-  // e.g. styled.svg`${Button}:hover & { fill: red; }`
-  // warning: this is undefined during runtime
-  __yak: true;
-};
+) => YakComponent<TCSSProps & T>;
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
