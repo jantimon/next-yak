@@ -9,7 +9,7 @@ import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
 
 /** Symbols */
-const noTheme = {};
+const noTheme: YakTheme = {};
 
 /**
  * Hack to hide {[yakComponentSymbol]:[parentComponent, parentAttributeFunction]}
@@ -137,7 +137,7 @@ const yakStyled = <
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
       //       ^ must be have access to theme, so we call useTheme()
-      const theme: YakTheme =
+      const theme =
         mergedAttrsFn || getRuntimeStyles.length ? useTheme() : noTheme;
 
       // The first components which is not wrapped in a yak component will execute all attrs functions
