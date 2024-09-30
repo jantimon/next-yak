@@ -84,7 +84,6 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
  * A yak component has a special symbol attached to it that allows to
  * target the component from a child component and to correctly handle the attrs function (if any).
  * e.g. styled.svg`${Button}:hover & { fill: red; }` or styled(Button)`color: red;`
- * warning: `[yakComponentSymbol]` is undefined during runtime
  */
 type YakComponent<
   T,
@@ -232,7 +231,7 @@ type StyledLiteral<T> = <TCSSProps>(
   // type only identifier to allow targeting components
   // e.g. styled.svg`${Button}:hover & { fill: red; }`
   // warning: this is undefined during runtime
-  [yakComponentSymbol]: [FunctionComponent<unknown>, (p: unknown) => unknown];
+  __yak: true;
 };
 
 /**
