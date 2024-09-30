@@ -10,9 +10,9 @@ import type { YakTheme } from "./context/index.d.ts";
 
 /** Symbols */
 
-/** 
+/**
  * This Symbol is a fake theme which was used instead of the real one from the context
- * to speed up rendering 
+ * to speed up rendering
  */
 const noTheme: YakTheme = {};
 
