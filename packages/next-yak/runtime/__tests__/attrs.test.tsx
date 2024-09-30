@@ -509,8 +509,8 @@ it("should pass theme if theme is overwritten", () => {
   `);
 });
 
-describe("attrs bug #163", () => {
-  it("should allow delete a prop", () => {
+describe("attrs bug next-yak/issues/163", () => {
+  it("should allow to delete a prop", () => {
     const Comp = styled.h1.attrs<{ primary?: boolean }>({
       primary: undefined,
     })``;
@@ -523,7 +523,7 @@ describe("attrs bug #163", () => {
   `);
   });
 
-  it("should allow rename a prop", () => {
+  it("should allow to rename a prop", () => {
     const Comp = styled.h1.attrs<{ primary?: boolean }>((p) => ({
       ...p,
       primary: undefined,
@@ -538,25 +538,26 @@ describe("attrs bug #163", () => {
   `);
   });
 
-  it("should allow rename a prop", () => {
-    const Child = styled.h1.attrs<{ primary?: boolean }>((p) => {
-      // expect(p.primary).toBe(1);
+  it("should allow to rename a prop in overwritten attrs", () => {
+    const Parent = styled.h1.attrs<{ count: number }>((p) => {
+      expect(p.count).toBe(1);
       return {
-        ...p,
-        primary: undefined,
-        $primary: p.primary,
+        count: ++p.count,
       };
     })``;
-    const Comp = styled(Child).attrs<{ primary?: boolean }>((p) => {
-      // expect(p.primary).toBe(2);
-      return {};
+    const Comp = styled(Parent).attrs<{ count: number }>((p) => {
+      expect(p.count).toBe(2);
+      return {
+        count: ++p.count,
+      };
     })``;
 
-    expect(TestRenderer.create(<Comp primary />).toJSON())
+    expect(TestRenderer.create(<Comp count={1} />).toJSON())
       .toMatchInlineSnapshot(`
-    <h1
-      style={{}}
-    />
-  `);
+        <h1
+          count={3}
+          style={{}}
+        />
+      `);
   });
 });
