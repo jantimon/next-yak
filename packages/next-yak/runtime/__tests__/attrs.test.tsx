@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import TestRenderer from "react-test-renderer";
-import { beforeEach, expect, it, vi } from "vitest";
+import { beforeEach, expect, describe, it, vi } from "vitest";
 import { YakThemeProvider } from "../context";
 import { styled } from "../styled";
 
@@ -509,49 +509,54 @@ it("should pass theme if theme is overwritten", () => {
   `);
 });
 
-it("should allow delete a prop", () => {
-  const Comp = styled.h1.attrs<{ primary?: boolean }>({
-    primary: undefined,
-  })``;
+describe("attrs bug #163", () => {
+  it("should allow delete a prop", () => {
+    const Comp = styled.h1.attrs<{ primary?: boolean }>({
+      primary: undefined,
+    })``;
 
-  expect(TestRenderer.create(<Comp primary />).toJSON()).toMatchInlineSnapshot(`
+    expect(TestRenderer.create(<Comp primary />).toJSON())
+      .toMatchInlineSnapshot(`
     <h1
       style={{}}
     />
   `);
-});
+  });
 
-it("should allow rename a prop", () => {
-  const Comp = styled.h1.attrs<{ primary?: boolean }>((p) => ({
-    ...p,
-    primary: undefined,
-    $primary: p.primary,
-  }))``;
-
-  expect(TestRenderer.create(<Comp primary />).toJSON()).toMatchInlineSnapshot(`
-    <h1
-      style={{}}
-    />
-  `);
-});
-
-it("should allow rename a prop", () => {
-  const Child = styled.h1.attrs<{ primary?: boolean }>((p) => {
-    // expect(p.primary).toBe(1);
-    return {
+  it("should allow rename a prop", () => {
+    const Comp = styled.h1.attrs<{ primary?: boolean }>((p) => ({
       ...p,
       primary: undefined,
       $primary: p.primary,
-    };
-  })``;
-  const Comp = styled(Child).attrs<{ primary?: boolean }>((p) => {
-    // expect(p.primary).toBe(2);
-    return {};
-  })``;
+    }))``;
 
-  expect(TestRenderer.create(<Comp primary />).toJSON()).toMatchInlineSnapshot(`
+    expect(TestRenderer.create(<Comp primary />).toJSON())
+      .toMatchInlineSnapshot(`
     <h1
       style={{}}
     />
   `);
+  });
+
+  it("should allow rename a prop", () => {
+    const Child = styled.h1.attrs<{ primary?: boolean }>((p) => {
+      // expect(p.primary).toBe(1);
+      return {
+        ...p,
+        primary: undefined,
+        $primary: p.primary,
+      };
+    })``;
+    const Comp = styled(Child).attrs<{ primary?: boolean }>((p) => {
+      // expect(p.primary).toBe(2);
+      return {};
+    })``;
+
+    expect(TestRenderer.create(<Comp primary />).toJSON())
+      .toMatchInlineSnapshot(`
+    <h1
+      style={{}}
+    />
+  `);
+  });
 });
