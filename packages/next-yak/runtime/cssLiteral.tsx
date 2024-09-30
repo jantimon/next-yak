@@ -1,6 +1,8 @@
 import { CSSProperties } from "react";
 import type { YakTheme } from "./index.d.ts";
 
+export const yakComponentSymbol = Symbol("yak");
+
 type ComponentStyles<TProps> = (props: TProps) => {
   className: string;
   style?: {
@@ -24,7 +26,7 @@ export type CSSInterpolation<TProps> =
   | {
       // type only identifier to allow targeting components
       // e.g. styled.svg`${Button}:hover & { fill: red; }`
-      __yak: true;
+      [yakComponentSymbol]: any;
     }
   | ((props: TProps) => CSSInterpolation<TProps>);
 

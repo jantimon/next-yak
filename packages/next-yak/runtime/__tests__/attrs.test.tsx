@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import TestRenderer from "react-test-renderer";
-import { beforeEach, expect, it, vi } from "vitest";
+import { beforeEach, expect, describe, it, vi } from "vitest";
 import { YakThemeProvider } from "../context";
 import { styled } from "../styled";
 
@@ -183,7 +183,7 @@ it("should merge className from folded attrs", () => {
   expect(TestRenderer.create(<Comp className="something" />).toJSON())
     .toMatchInlineSnapshot(`
       <div
-        className="something meow nya foo"
+        className="something foo meow nya"
         style={{}}
       />
     `);
@@ -245,13 +245,26 @@ it("should work with data and aria attributes", () => {
 });
 
 it("merge attrs when inheriting SC", () => {
-  const Parent = styled.button.attrs(() => ({
-    type: "button",
-    tabIndex: 0,
-  }))``;
-  const Child = styled(Parent).attrs(() => ({
-    type: "submit",
-  }))``;
+  let attrsCallCount = 0;
+  const Parent = styled.button.attrs(() => {
+    // Parent should be called first and only once
+    // to behave exactly like styled-components
+    expect(attrsCallCount).toEqual(0);
+    attrsCallCount++;
+    return {
+      type: "button",
+      tabIndex: 0,
+    };
+  })``;
+  const Child = styled(Parent).attrs(() => {
+    // Child should be called second and only once
+    // to behave exactly like styled-components
+    expect(attrsCallCount).toEqual(1);
+    attrsCallCount++;
+    return {
+      type: "submit",
+    };
+  })``;
   expect(TestRenderer.create(<Child />).toJSON()).toMatchInlineSnapshot(`
     <button
       style={{}}
@@ -498,4 +511,57 @@ it("should pass theme if theme is overwritten", () => {
       {"color":"blue"}
     </pre>
   `);
+});
+
+describe("attrs bug next-yak/issues/163", () => {
+  it("should allow to delete a prop", () => {
+    const Comp = styled.h1.attrs<{ primary?: boolean }>({
+      primary: undefined,
+    })``;
+
+    expect(TestRenderer.create(<Comp primary />).toJSON())
+      .toMatchInlineSnapshot(`
+    <h1
+      style={{}}
+    />
+  `);
+  });
+
+  it("should allow to rename a prop", () => {
+    const Comp = styled.h1.attrs<{ primary?: boolean }>((p) => ({
+      ...p,
+      primary: undefined,
+      $primary: p.primary,
+    }))``;
+
+    expect(TestRenderer.create(<Comp primary />).toJSON())
+      .toMatchInlineSnapshot(`
+    <h1
+      style={{}}
+    />
+  `);
+  });
+
+  it("should allow to rename a prop in overwritten attrs", () => {
+    const Parent = styled.h1.attrs<{ count: number }>((p) => {
+      expect(p.count).toBe(1);
+      return {
+        count: ++p.count,
+      };
+    })``;
+    const Comp = styled(Parent).attrs<{ count: number }>((p) => {
+      expect(p.count).toBe(2);
+      return {
+        count: ++p.count,
+      };
+    })``;
+
+    expect(TestRenderer.create(<Comp count={1} />).toJSON())
+      .toMatchInlineSnapshot(`
+        <h1
+          count={3}
+          style={{}}
+        />
+      `);
+  });
 });

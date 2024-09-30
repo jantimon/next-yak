@@ -1,5 +1,5 @@
 import { ForwardRefRenderFunction, FunctionComponent } from "react";
-import { CSSInterpolation, css } from "./cssLiteral.js";
+import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
 import React from "react";
 
 // the following export is not relative as "next-yak/context"
@@ -8,21 +8,29 @@ import React from "react";
 import { useTheme } from "next-yak/context";
 import type { YakTheme } from "./context/index.d.ts";
 
-/** Symbol */
-const noTheme = {};
+/** Symbols */
 
 /**
- * Hack to hide .yak from the type definition and to deal with ExoticComponents
+ * This Symbol is a fake theme which was used instead of the real one from the context
+ * to speed up rendering
  */
-const yakForwardRef: <TProps>(
+const noTheme: YakTheme = {};
+
+/**
+ * Hack to hide {[yakComponentSymbol]:[parentComponent, parentAttributeFunction]}
+ * from the type definition and to deal with ExoticComponents
+ */
+const yakForwardRef: <
+  TProps,
+  TAttrsIn extends object,
+  TAttrsOut extends AttrsMerged<TProps, TAttrsIn>,
+>(
   component: ForwardRefRenderFunction<any, TProps>,
-) => FunctionComponent<TProps> & {
-  // type only identifier to allow targeting components
-  // e.g. styled.svg`${Button}:hover & { fill: red; }`
-  // warning: `__yak` is undefined during runtime
-  __yak: true;
-} = (component) =>
-  Object.assign(React.forwardRef(component), { yak: component }) as any;
+  attrsFn?: (props: any) => any,
+) => YakComponent<TProps, TAttrsIn, TAttrsOut> = (component, attrsFn) =>
+  Object.assign(React.forwardRef(component), {
+    [yakComponentSymbol]: [component, attrsFn],
+  }) as any;
 
 /**
  * All valid html tags
@@ -39,6 +47,16 @@ type AttrsMerged<TBaseProps, TIn extends object = {}> = Substitute<
 >;
 
 /**
+ * The attrs function allows to add additional props in a function that receives
+ * the current props as argument.
+ */
+type AttrsFunction<
+  TBaseProps,
+  TIn extends object,
+  TOut extends AttrsMerged<TBaseProps, TIn> = AttrsMerged<TBaseProps, TIn>,
+> = (p: Substitute<TBaseProps & { theme: YakTheme }, TIn>) => Partial<TOut>;
+
+/**
  * The attrs function allows to add additional props to a styled component.
  * The props can be specified as an object or as a function that receives the
  * current props as argument.
@@ -47,9 +65,7 @@ type Attrs<
   TBaseProps,
   TIn extends object = {},
   TOut extends AttrsMerged<TBaseProps, TIn> = AttrsMerged<TBaseProps, TIn>,
-> =
-  | Partial<TOut>
-  | ((p: Substitute<TBaseProps & { theme: YakTheme }, TIn>) => Partial<TOut>);
+> = Partial<TOut> | AttrsFunction<TBaseProps, TIn, TOut>;
 
 //
 // The `styled()` and `styled.` API
@@ -58,7 +74,6 @@ type Attrs<
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/constructors/styled.tsx
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
-
 const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
     attrs: <
@@ -69,47 +84,96 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
     ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
+/**
+ * A yak component has a special symbol attached to it that allows to
+ * target the component from a child component and to correctly handle the attrs function (if any).
+ * e.g. styled.svg`${Button}:hover & { fill: red; }` or styled(Button)`color: red;`
+ */
+type YakComponent<
+  T,
+  TAttrsIn extends object = {},
+  TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
+> = FunctionComponent<T> & {
+  [yakComponentSymbol]: [
+    FunctionComponent<T>,
+    AttrsFunction<T, TAttrsIn, TAttrsOut>,
+  ];
+};
+
 const yakStyled = <
   T,
   TAttrsIn extends object = {},
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 >(
-  Component: FunctionComponent<T> | HtmlTags,
+  Component:
+    | FunctionComponent<T>
+    | YakComponent<T, TAttrsIn, TAttrsOut>
+    | HtmlTags,
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
 ) => {
+  const isYakComponent =
+    typeof Component !== "string" && yakComponentSymbol in Component;
+
+  // if the component that is wrapped is a yak component, we can extract it to render the underlying component directly
+  // and we can also extract the attrs function to merge it with the current attrs function so that the sequence of
+  // the attrs functions is preserved
+  const [parentYakComponent, parentAttrsFn] = isYakComponent
+    ? Component[yakComponentSymbol]
+    : [];
+
+  const mergedAttrsFn = buildRuntimeAttrsProcessor(attrs, parentAttrsFn);
+
   return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
     ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
   ) => {
     const getRuntimeStyles = css(styles, ...values);
-    const processAttrs = (props: Substitute<TCSSProps & T, TAttrsIn>) =>
-      combineProps(
-        props,
-        typeof attrs === "function" ? (attrs as Function)(props) : attrs,
-      );
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
       // if the css component does not require arguments
-      // it can be call without arguments and skip calling useTheme()
+      // it can be called without arguments and we skip calling useTheme()
       //
-      // `__yak` is NOT against the rule of hooks as
-      // getRuntimeStyles is a constant defined outside of the component
+      // `attrsFn || getRuntimeStyles.length` is NOT against the rule of hooks as
+      // getRuntimeStyles and attrsFn are constants defined outside of the component
       //
       // for example
       //
       // const Button = styled.button`color: red;`
-      //       ^ does not need to have access to theme
+      //       ^ does not need to have access to theme, so we skip calling useTheme()
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
-      //       ^ must be have acces to theme
-      const theme = attrs || getRuntimeStyles.length ? useTheme() : noTheme;
-      // execute attrs
-      const combinedProps: Substitute<TCSSProps & T, TAttrsIn> = processAttrs({
-        theme,
-        ...props,
-      } as Substitute<TCSSProps & T, TAttrsIn>);
+      //       ^ must be have access to theme, so we call useTheme()
+      const theme =
+        mergedAttrsFn || getRuntimeStyles.length ? useTheme() : noTheme;
+
+      // The first components which is not wrapped in a yak component will execute all attrs functions
+      // starting from the innermost yak component to the outermost yak component (itself)
+      const combinedProps =
+        "$__attrs" in props
+          ? // if the props already contain the $__attrs key, we assume that the props have already been processed
+            // and skip processing the attrs again.
+            // e.g. const Child = styled(Parent)`color: red;`
+            // We process the attrs once in the child (with all attrs functions merged (including the one from the child))
+            // and in the subsequent call in the parent we skip processing the attrs again
+            props
+          : // overwrite and merge the current props with the processed attrs
+            combineProps(
+              {
+                theme,
+                ...(props as {
+                  className?: string;
+                  style?: React.CSSProperties;
+                }),
+                // mark the props as processed
+                $__attrs: true,
+              },
+              mergedAttrsFn?.({ theme, ...props } as Substitute<
+                T & { theme: YakTheme },
+                TAttrsIn
+              >),
+            );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
-      const runtimeStyles = getRuntimeStyles(combinedProps as any);
+      const runtimeStyles = getRuntimeStyles(combinedProps as T & TCSSProps);
 
       // delete the yak theme from the props
       // this must happen after the runtimeStyles are calculated
@@ -118,9 +182,6 @@ const yakStyled = <
         combinedProps as { theme?: unknown };
       const propsBeforeFiltering =
         themeAfterAttr === theme ? combinedPropsWithoutTheme : combinedProps;
-
-      const isYakComponent =
-        typeof Component !== "string" && "yak" in Component;
 
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
@@ -132,7 +193,7 @@ const yakStyled = <
       // user provided className and style prop
       (filteredProps as { className?: string }).className = mergeClassNames(
         (filteredProps as { className?: string }).className,
-        runtimeStyles.className as string,
+        runtimeStyles.className,
       );
       (filteredProps as { style?: React.CSSProperties }).style =
         "style" in filteredProps
@@ -144,17 +205,13 @@ const yakStyled = <
       // if the styled(Component) syntax is used and the component is a yak component
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
-      if (isYakComponent) {
-        return (
-          Component as typeof Component & {
-            yak: FunctionComponent<typeof filteredProps>;
-          }
-        ).yak(filteredProps, ref);
+      if (parentYakComponent) {
+        return parentYakComponent(filteredProps as T, ref);
       }
       (filteredProps as { ref?: unknown }).ref = ref;
       return <Component {...(filteredProps as any)} />;
     };
-    return yakForwardRef(yak);
+    return yakForwardRef(yak, mergedAttrsFn);
   };
 };
 
@@ -172,12 +229,7 @@ type StyledLiteral<T> = <TCSSProps>(
         NoInfer<TCSSProps> & { theme: YakTheme }
     >
   >
-) => FunctionComponent<TCSSProps & T> & {
-  // type only identifier to allow targeting components
-  // e.g. styled.svg`${Button}:hover & { fill: red; }`
-  // warning: this is undefined during runtime
-  __yak: true;
-};
+) => YakComponent<TCSSProps & T>;
 
 /**
  * The `styled` method works perfectly on all of your own or any third-party component,
@@ -213,8 +265,15 @@ export const styled = new Proxy(
   },
 );
 
-// Remove all entries that start with a $ sign
-function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
+/**
+ * Remove all entries that start with a $ sign
+ *
+ * This allows to have props that are used for internal stylingen purposes
+ * but are not be passed to the DOM element
+ */
+const removePrefixedProperties = <T extends Record<string, unknown>>(
+  obj: T,
+) => {
   const result = {} as T;
   for (const key in obj) {
     if (!key.startsWith("$")) {
@@ -222,8 +281,9 @@ function removePrefixedProperties<T extends Record<string, unknown>>(obj: T) {
     }
   }
   return result;
-}
+};
 
+// util function to merge class names, as they are concatenated with a space
 const mergeClassNames = (a?: string, b?: string) => {
   if (!a && !b) return undefined;
   if (!a) return b;
@@ -231,47 +291,45 @@ const mergeClassNames = (a?: string, b?: string) => {
   return a + " " + b;
 };
 
-const removeUndefined = <T,>(obj: T) => {
-  const result = {} as T;
-  for (const key in obj) {
-    if (obj[key] !== undefined) {
-      result[key] = obj[key];
-    }
-  }
-  return result;
-};
-
+/**
+ * merge props and processed props (including class names and styles)
+ * e.g.:\
+ * `{ className: "a", foo: 1 }` and `{ className: "b", bar: 2 }` \
+ * => `{ className: "a b", foo: 1, bar: 2 }`
+ */
 const combineProps = <
   T extends {
     className?: string;
     style?: React.CSSProperties;
   },
+  TOther extends
+    | {
+        className?: string;
+        style?: React.CSSProperties;
+      }
+    | null
+    | undefined,
 >(
   props: T,
-  newProps: T,
-) => {
-  if (!newProps) return props;
-  const combinedProps: T =
-    "$__attrs" in props
-      ? // allow overriding props when attrs was used previously
+  newProps: TOther,
+) =>
+  newProps
+    ? (props.className === newProps.className || !newProps.className) &&
+      (props.style === newProps.style || !newProps.style)
+      ? // shortcut if no style and class merging is necessary
         {
-          ...removeUndefined(newProps),
           ...props,
+          ...newProps,
         }
-      : {
+      : // merge class names and styles
+        {
           ...props,
-          ...removeUndefined(newProps),
-        };
-  return {
-    ...combinedProps,
-    className: mergeClassNames(
-      props.className as string,
-      newProps.className as string,
-    ),
-    style: { ...(props.style || {}), ...(newProps.style || {}) },
-    $__attrs: true,
-  };
-};
+          ...newProps,
+          className: mergeClassNames(props.className, newProps.className),
+          style: { ...(props.style || {}), ...(newProps.style || {}) },
+        }
+    : // if no new props are provided, no merging is necessary
+      props;
 
 // util type to remove properties from an object
 type FastOmit<T extends object, U extends string | number | symbol> = {
@@ -285,3 +343,42 @@ export type Substitute<A extends object, B extends object> = FastOmit<
   keyof B
 > &
   B;
+
+/**
+ * Merges the attrs function of the current component with the attrs function of the parent component
+ * in order to preserve the sequence of the attrs functions.
+ * Note: In theory, the parentAttrsFn can have different types for TAttrsIn and TAttrsOut
+ * but as this is only used internally, we can ignore and simplify this case
+ * @param attrs The attrs object or function of the current component (if any)
+ * @param parentAttrsFn The attrs function of the parent/wrapped component (if any)
+ * @returns A function that receives the props and returns the transformed props
+ */
+const buildRuntimeAttrsProcessor = <
+  T,
+  TAttrsIn extends object,
+  TAttrsOut extends AttrsMerged<T, TAttrsIn>,
+>(
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
+  parentAttrsFn?: AttrsFunction<T, TAttrsIn, TAttrsOut>,
+): AttrsFunction<T, TAttrsIn, TAttrsOut> | undefined => {
+  const ownAttrsFn =
+    attrs && (typeof attrs === "function" ? attrs : () => attrs);
+
+  if (ownAttrsFn && parentAttrsFn) {
+    return (props) => {
+      const parentProps = parentAttrsFn(props);
+
+      // overwrite and merge the parent props with the props received from the attrs function
+      // after they went through the parent attrs function.
+      //
+      // This makes sure the linearity of the attrs functions is preserved and all attrs function receive
+      // the whole props object calculated from the previous attrs functions
+      return combineProps(
+        parentProps,
+        ownAttrsFn(combineProps(props, parentProps)),
+      );
+    };
+  }
+
+  return ownAttrsFn || parentAttrsFn;
+};
