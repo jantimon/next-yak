@@ -246,7 +246,7 @@ function removePrefixedAndUndefinedProperties<
 >(obj: T) {
   const result = {} as T;
   for (const key in obj) {
-    if (!key.startsWith("$") && obj[key] !== undefined) {
+    if (!key.startsWith("$")) {
       result[key] = obj[key];
     }
   }
