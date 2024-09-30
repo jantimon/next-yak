@@ -186,7 +186,7 @@ const yakStyled = <
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
       const filteredProps = !isYakComponent
-        ? removePrefixedProperties(propsBeforeFiltering)
+        ? removeNonDomProperties(propsBeforeFiltering)
         : propsBeforeFiltering;
 
       // yak provides a className and style prop that needs to be merged with the
@@ -271,12 +271,10 @@ export const styled = new Proxy(
  * This allows to have props that are used for internal stylingen purposes
  * but are not be passed to the DOM element
  */
-const removePrefixedProperties = <T extends Record<string, unknown>>(
-  obj: T,
-) => {
+const removeNonDomProperties = <T extends Record<string, unknown>>(obj: T) => {
   const result = {} as T;
   for (const key in obj) {
-    if (!key.startsWith("$")) {
+    if (!key.startsWith("$") && obj[key] !== undefined) {
       result[key] = obj[key];
     }
   }
