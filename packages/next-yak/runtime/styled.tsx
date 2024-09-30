@@ -21,7 +21,7 @@ const yakForwardRef: <
   TAttrsOut extends AttrsMerged<TProps, TAttrsIn>,
 >(
   component: ForwardRefRenderFunction<any, TProps>,
-  attrsFn?: (props: any) => any,
+  attrsFn?: (props: any) => any
 ) => YakComponent<TProps, TAttrsIn, TAttrsOut> = (component, attrsFn) =>
   Object.assign(React.forwardRef(component), {
     [yakComponentSymbol]: [component, attrsFn],
@@ -75,7 +75,7 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
       TAttrsIn extends object = {},
       TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
     >(
-      attrs: Attrs<T, TAttrsIn, TAttrsOut>,
+      attrs: Attrs<T, TAttrsIn, TAttrsOut>
     ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
@@ -104,7 +104,7 @@ const yakStyled = <
     | FunctionComponent<T>
     | YakComponent<T, TAttrsIn, TAttrsOut>
     | HtmlTags,
-  attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>
 ) => {
   const isYakComponent =
     typeof Component !== "string" && yakComponentSymbol in Component;
@@ -117,9 +117,6 @@ const yakStyled = <
     : [];
 
   const mergedAttrsFn = buildRuntimeAttrsProcessor(attrs, parentAttrsFn);
-
-  // convenience function to process the attrs in a function regardless of whether the current component has attr or not
-  const processAttrs = mergedAttrsFn || (() => null);
 
   return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
@@ -140,10 +137,11 @@ const yakStyled = <
       //
       // const Button = styled.button`${({ theme }) => css`color: ${theme.color};`}`
       //       ^ must be have access to theme, so we call useTheme()
-      const theme =
+      const theme: YakTheme =
         mergedAttrsFn || getRuntimeStyles.length ? useTheme() : noTheme;
 
-      // execute attrs
+      // The first components which is not wrapped in a yak component will execute all attrs functions
+      // starting from the innermost yak component to the outermost yak component (itself)
       const combinedProps =
         "$__attrs" in props
           ? // if the props already contain the $__attrs key, we assume that the props have already been processed
@@ -163,14 +161,14 @@ const yakStyled = <
                 // mark the props as processed
                 $__attrs: true,
               },
-              processAttrs({ theme, ...props } as Substitute<
+              mergedAttrsFn?.({ theme, ...props } as Substitute<
                 T & { theme: YakTheme },
                 TAttrsIn
-              >),
+              >)
             );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
-      const runtimeStyles = getRuntimeStyles(combinedProps as any);
+      const runtimeStyles = getRuntimeStyles(combinedProps as T & TCSSProps);
 
       // delete the yak theme from the props
       // this must happen after the runtimeStyles are calculated
@@ -183,14 +181,14 @@ const yakStyled = <
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
       const filteredProps = !isYakComponent
-        ? removePrefixedAndUndefinedProperties(propsBeforeFiltering)
+        ? removePrefixedProperties(propsBeforeFiltering)
         : propsBeforeFiltering;
 
       // yak provides a className and style prop that needs to be merged with the
       // user provided className and style prop
       (filteredProps as { className?: string }).className = mergeClassNames(
         (filteredProps as { className?: string }).className,
-        runtimeStyles.className as string,
+        runtimeStyles.className
       );
       (filteredProps as { style?: React.CSSProperties }).style =
         "style" in filteredProps
@@ -251,7 +249,7 @@ export const styled = new Proxy(
           TAttrsIn
         > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
       >(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
       ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
     };
   },
@@ -259,13 +257,18 @@ export const styled = new Proxy(
     get(target, TagName: keyof JSX.IntrinsicElements) {
       return target(TagName);
     },
-  },
+  }
 );
 
-// Remove all entries that start with a $ sign
-function removePrefixedAndUndefinedProperties<
+/** 
+ * Remove all entries that start with a $ sign 
+ * 
+ * This allows to have props that are used for internal stylingen purposes 
+ * but are not be passed to the DOM element
+ */
+const removePrefixedProperties = <
   T extends Record<string, unknown>,
->(obj: T) {
+>(obj: T) => {
   const result = {} as T;
   for (const key in obj) {
     if (!key.startsWith("$")) {
@@ -283,7 +286,12 @@ const mergeClassNames = (a?: string, b?: string) => {
   return a + " " + b;
 };
 
-// util function to merge props and processed props (from attributes)
+/** 
+ * merge props and processed props (including class names and styles) 
+ * e.g.:\
+ * `{ className: "a", foo: 1 }` and `{ className: "b", bar: 2 }` \
+ * => `{ className: "a b", foo: 1, bar: 2 }`
+ */
 const combineProps = <
   T extends {
     className?: string;
@@ -292,22 +300,28 @@ const combineProps = <
   TOther extends {
     className?: string;
     style?: React.CSSProperties;
-  } | null,
+  } | null | undefined,
 >(
   props: T,
-  newProps: TOther,
-) => {
-  if (!newProps) return props;
-  return {
-    ...props,
-    ...newProps,
-    className: mergeClassNames(
-      props.className as string,
-      newProps.className as string,
-    ),
-    style: { ...(props.style || {}), ...(newProps.style || {}) },
-  };
-};
+  newProps: TOther
+) =>
+  newProps
+    ? (props.className === newProps.className || !newProps.className) &&
+      (props.style === newProps.style || !newProps.style)
+      ? // shortcut if no style and class merging is necessary
+        {
+          ...props,
+          ...newProps,
+        }
+      : // merge class names and styles
+        {
+          ...props,
+          ...newProps,
+          className: mergeClassNames(props.className, newProps.className),
+          style: { ...(props.style || {}), ...(newProps.style || {}) },
+        }
+    : // if no new props are provided, no merging is necessary
+      props;
 
 // util type to remove properties from an object
 type FastOmit<T extends object, U extends string | number | symbol> = {
@@ -337,7 +351,7 @@ const buildRuntimeAttrsProcessor = <
   TAttrsOut extends AttrsMerged<T, TAttrsIn>,
 >(
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
-  parentAttrsFn?: AttrsFunction<T, TAttrsIn, TAttrsOut>,
+  parentAttrsFn?: AttrsFunction<T, TAttrsIn, TAttrsOut>
 ): AttrsFunction<T, TAttrsIn, TAttrsOut> | undefined => {
   const ownAttrsFn =
     attrs && (typeof attrs === "function" ? attrs : () => attrs);
@@ -353,7 +367,7 @@ const buildRuntimeAttrsProcessor = <
       // the whole props object calculated from the previous attrs functions
       return combineProps(
         parentProps,
-        ownAttrsFn(combineProps(props, parentProps)),
+        ownAttrsFn(combineProps(props, parentProps))
       );
     };
   }
