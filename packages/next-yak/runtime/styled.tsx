@@ -271,9 +271,7 @@ export const styled = new Proxy(
  * This allows to have props that are used for internal stylingen purposes
  * but are not be passed to the DOM element
  */
-const removeNonDomProperties = <T extends Record<string, unknown>>(
-  obj: T,
-) => {
+const removeNonDomProperties = <T extends Record<string, unknown>>(obj: T) => {
   const result = {} as T;
   for (const key in obj) {
     if (!key.startsWith("$") && obj[key] !== undefined) {
