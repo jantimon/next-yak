@@ -245,18 +245,22 @@ it("should work with data and aria attributes", () => {
 });
 
 it("merge attrs when inheriting SC", () => {
-  let i = 0;
-  const Parent = styled.button.attrs((p) => {
-    expect(i).toEqual(0);
-    i++;
+  let attrsCallCount = 0;
+  const Parent = styled.button.attrs(() => {
+    // Parent should be called first and only once
+    // to behave exactly like styled-components
+    expect(attrsCallCount).toEqual(0);
+    attrsCallCount++;
     return {
       type: "button",
       tabIndex: 0,
     };
   })``;
-  const Child = styled(Parent).attrs((p) => {
-    expect(i).toEqual(1);
-    i++;
+  const Child = styled(Parent).attrs(() => {
+    // Child should be called second and only once
+    // to behave exactly like styled-components
+    expect(attrsCallCount).toEqual(1);
+    attrsCallCount++;
     return {
       type: "submit",
     };
