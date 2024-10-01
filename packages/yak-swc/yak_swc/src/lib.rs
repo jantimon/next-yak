@@ -9,7 +9,7 @@ use swc_core::atoms::Atom;
 
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
-use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
+use swc_core::common::{Span, Spanned, SyntaxContext, DUMMY_SP};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -449,6 +449,31 @@ where
     }
     (runtime_expressions, runtime_css_variables)
   }
+
+  fn create_merge_call(&mut self, mapped_props: &[PropOrSpread], expr: Box<Expr>) -> Box<Expr> {
+          Box::new(Expr::Call(CallExpr {
+              span: DUMMY_SP,
+              callee: Callee::Expr(Box::new(Expr::Ident(
+                  self.yak_library_imports
+                    .get_yak_utility_ident("mergeCssProp".into())
+                      .clone(),
+              ))),
+              args: vec![
+                  ExprOrSpread {
+                      spread: None,
+                      expr: Box::new(Expr::Object(ObjectLit {
+                          span: DUMMY_SP,
+                          props: mapped_props.to_vec(),
+                      })),
+                  },
+                  ExprOrSpread {
+                      spread: None,
+                      expr,
+                  },
+              ],
+              type_args: None,
+          }))
+      }
 }
 
 impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
@@ -609,6 +634,64 @@ where
   // Visit JSX expressions for css prop support
   fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
     n.visit_mut_children_with(self);
+
+    let mut css_index = None;
+    let mut css_prop_value = None;
+    let mut relevant_props = Vec::new();
+
+    for (index, attr) in n.attrs.iter().enumerate() {
+      match attr {
+        JSXAttrOrSpread::JSXAttr(attr) => {
+          if let JSXAttrName::Ident(ident) = &attr.name {
+            if ident.sym == "css" {
+              css_index = Some(index);
+              css_prop_value = attr.value.clone();
+            } else if ident.sym == "className" || ident.sym == "style" {
+              relevant_props.push(index);
+            }
+          }
+        }
+        JSXAttrOrSpread::SpreadElement(_) => {
+          relevant_props.push(index);
+        }
+      }
+    }
+
+    if let (Some(css_index), Some(css_prop_value)) = (css_index, css_prop_value) {
+      n.attrs.remove(css_index);
+
+      let (merge_call, insert_index) = if relevant_props.is_empty() {
+        (extract_css_expr(css_prop_value, n.span), css_index)
+      } else {
+        // Remove relevant props
+        let removed_attrs: Vec<_> = relevant_props
+          .iter()
+          .rev()
+          .map(|&index| {
+            let adjusted_index = if index > css_index { index - 1 } else { index };
+            n.attrs.remove(adjusted_index)
+          })
+          .collect();
+        let mapped_props = map_props(&removed_attrs);
+        let css_expr = extract_css_expr(css_prop_value, n.span);
+        match css_expr {
+          Some(css_expr) => (Some(self.create_merge_call(&mapped_props, css_expr)), n.attrs.len()),
+          None => (None, n.attrs.len()),
+        }
+      };
+
+      if merge_call.is_none() {
+       return;
+      }
+
+      // Insert the spread attribute
+      let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
+          dot3_token: DUMMY_SP,
+          expr: merge_call.unwrap(),
+      });
+      n.attrs.insert(insert_index, spread_attr);
+
+    }
 
     if let Some((index, value)) = n.attrs.iter().enumerate().find_map(|(index, attr)| {
       if let JSXAttrOrSpread::JSXAttr(attr) = attr {
@@ -1052,6 +1135,68 @@ fn is_yak_file(filename: &str) -> bool {
     ".yak.tsx" | ".yak.jsx" | ".yak.mjs"
   ) || matches!(&filename[filename.len() - 7..], ".yak.ts" | ".yak.js")
 }
+
+fn extract_css_expr(value: JSXAttrValue, span: Span) -> Option<Box<Expr>> {
+  match value {
+    JSXAttrValue::JSXExprContainer(container) => match container.expr {
+      JSXExpr::Expr(expr) => Some(Box::new(Expr::Call(CallExpr { span: DUMMY_SP, callee: Callee::Expr(expr), args: vec![ExprOrSpread {
+          spread: None,
+            expr: Box::new(Expr::Object(ObjectLit { span: DUMMY_SP, props: vec![] })),
+      }], type_args: None }))),
+      _ => {
+        HANDLER.with(|handler| {
+                                handler.struct_span_err(container.span, "Expected an expression in the css attribute. Please use the css prop like this: css={css`color: red;`}").emit();
+                            });
+        None
+      }
+    },
+    _ => {
+      HANDLER.with(|handler| {
+        handler
+          .struct_span_err(span, "css attribute must contain a JSX expression")
+          .emit();
+      });
+      None
+    }
+  }
+}
+
+fn map_props(props: &[JSXAttrOrSpread]) -> Vec<PropOrSpread> {
+    props.iter().rev().map(|prop| match prop {
+        JSXAttrOrSpread::JSXAttr(attr) => map_jsx_attr(attr),
+        JSXAttrOrSpread::SpreadElement(spread) => PropOrSpread::Spread(spread.clone()),
+    }).collect()
+}
+
+fn map_jsx_attr(attr: &JSXAttr) -> PropOrSpread {
+        PropOrSpread::Prop(Box::new(match &attr.name {
+            JSXAttrName::Ident(ident) => Prop::KeyValue(KeyValueProp {
+                key: PropName::Ident(ident.clone()),
+                value: extract_value(&attr.value),
+            }),
+            _ => Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    value: "invalid".into(),
+                    raw: None,
+                }),
+                value: Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
+            }),
+        }))
+    }
+
+
+fn extract_value(value: &Option<JSXAttrValue>) -> Box<Expr> {
+        match value {
+            Some(JSXAttrValue::Lit(lit)) => Box::new(Expr::Lit(lit.clone())),
+            Some(JSXAttrValue::JSXExprContainer(container)) => match &container.expr {
+                JSXExpr::Expr(expr) => expr.clone(),
+                _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
+            },
+            _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
+        }
+    }
+
 
 #[cfg(test)]
 mod tests {
