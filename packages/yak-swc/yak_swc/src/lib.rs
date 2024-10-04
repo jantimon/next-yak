@@ -9,7 +9,7 @@ use swc_core::atoms::Atom;
 
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
-use swc_core::common::{Span, Spanned, SyntaxContext, DUMMY_SP};
+use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
 use swc_core::ecma::visit::VisitMutWith;
 use swc_core::ecma::{
   ast::*,
@@ -20,6 +20,7 @@ use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
 use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIterator};
+use utils::css_prop::HasCSSProp;
 use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
@@ -34,6 +35,7 @@ use math_evaluate::try_evaluate;
 mod utils {
   pub(crate) mod add_suffix_to_expr;
   pub(crate) mod ast_helper;
+  pub(crate) mod css_prop;
   pub(crate) mod encode_module_import;
   pub(crate) mod murmur_hash;
 }
@@ -101,8 +103,8 @@ where
   css_module_identifier: Option<Ident>,
   /// Dev mode to use readable css variable names
   dev_mode: bool,
-  /// Flag to check if we are inside a css expression
-  inside_css_attribute: bool,
+  /// Flag to check if we are inside a css attribute
+  inside_element_with_css_attribute: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -122,7 +124,7 @@ where
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
-      inside_css_attribute: false,
+      inside_element_with_css_attribute: false,
       dev_mode,
       filename,
       comments,
@@ -449,31 +451,6 @@ where
     }
     (runtime_expressions, runtime_css_variables)
   }
-
-  fn create_merge_call(&mut self, mapped_props: &[PropOrSpread], expr: Box<Expr>) -> Box<Expr> {
-          Box::new(Expr::Call(CallExpr {
-              span: DUMMY_SP,
-              callee: Callee::Expr(Box::new(Expr::Ident(
-                  self.yak_library_imports
-                    .get_yak_utility_ident("mergeCssProp".into())
-                      .clone(),
-              ))),
-              args: vec![
-                  ExprOrSpread {
-                      spread: None,
-                      expr: Box::new(Expr::Object(ObjectLit {
-                          span: DUMMY_SP,
-                          props: mapped_props.to_vec(),
-                      })),
-                  },
-                  ExprOrSpread {
-                      spread: None,
-                      expr,
-                  },
-              ],
-              type_args: None,
-          }))
-      }
 }
 
 impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
@@ -633,203 +610,18 @@ where
 
   // Visit JSX expressions for css prop support
   fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
-    n.visit_mut_children_with(self);
-
-    let mut css_index = None;
-    let mut css_prop_value = None;
-    let mut relevant_props = Vec::new();
-
-    for (index, attr) in n.attrs.iter().enumerate() {
-      match attr {
-        JSXAttrOrSpread::JSXAttr(attr) => {
-          if let JSXAttrName::Ident(ident) = &attr.name {
-            if ident.sym == "css" {
-              css_index = Some(index);
-              css_prop_value = attr.value.clone();
-            } else if ident.sym == "className" || ident.sym == "style" {
-              relevant_props.push(index);
-            }
-          }
-        }
-        JSXAttrOrSpread::SpreadElement(_) => {
-          relevant_props.push(index);
-        }
-      }
-    }
-
-    if let (Some(css_index), Some(css_prop_value)) = (css_index, css_prop_value) {
-      n.attrs.remove(css_index);
-
-      let (merge_call, insert_index) = if relevant_props.is_empty() {
-        (extract_css_expr(css_prop_value, n.span), css_index)
-      } else {
-        // Remove relevant props
-        let removed_attrs: Vec<_> = relevant_props
-          .iter()
-          .rev()
-          .map(|&index| {
-            let adjusted_index = if index > css_index { index - 1 } else { index };
-            n.attrs.remove(adjusted_index)
-          })
-          .collect();
-        let mapped_props = map_props(&removed_attrs);
-        let css_expr = extract_css_expr(css_prop_value, n.span);
-        match css_expr {
-          Some(css_expr) => (Some(self.create_merge_call(&mapped_props, css_expr)), n.attrs.len()),
-          None => (None, n.attrs.len()),
-        }
-      };
-
-      if merge_call.is_none() {
-       return;
-      }
-
-      // Insert the spread attribute
-      let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
-          dot3_token: DUMMY_SP,
-          expr: merge_call.unwrap(),
-      });
-      n.attrs.insert(insert_index, spread_attr);
-
-    }
-
-    if let Some((index, value)) = n.attrs.iter().enumerate().find_map(|(index, attr)| {
-      if let JSXAttrOrSpread::JSXAttr(attr) = attr {
-        if let JSXAttrName::Ident(ident) = &attr.name {
-          if ident.sym == *"css" {
-            return Some((index, attr.value.clone()));
-          }
-        }
-      }
-      None
-    }) {
-      // Remove the css attribute
-      n.attrs.remove(index);
-
-      let relevant_props: Vec<JSXAttrOrSpread> = n
-        .attrs
-        .iter()
-        .filter(|attr| match attr {
-          JSXAttrOrSpread::SpreadElement(_) => true,
-          JSXAttrOrSpread::JSXAttr(attr) => {
-            if let JSXAttrName::Ident(ident) = &attr.name {
-              ident.sym == *"className" || ident.sym == *"style"
-            } else {
-              false
-            }
-          }
-        })
-        .cloned()
-        .collect();
-
-      n.attrs.retain(|attr| !relevant_props.contains(attr));
-
-      let mapped_props: Vec<PropOrSpread> = relevant_props
-        .into_iter()
-        .map(|prop| match prop {
-          JSXAttrOrSpread::JSXAttr(attr) => {
-            if let JSXAttrName::Ident(ident) = attr.name {
-              PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Ident(ident),
-                value: match attr.value {
-                  Some(JSXAttrValue::Lit(lit)) => Box::new(Expr::Lit(lit)),
-                  Some(JSXAttrValue::JSXExprContainer(container)) => match container.expr {
-                    JSXExpr::Expr(expr) => expr,
-                    _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
-                  },
-                  _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
-                },
-              })))
-            } else {
-              PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                  span: DUMMY_SP,
-                  value: "invalid".into(),
-                  raw: None,
-                }),
-                value: Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
-              })))
-            }
-          }
-          JSXAttrOrSpread::SpreadElement(spread) => PropOrSpread::Spread(spread),
-        })
-        .collect();
-
-      // extract the expression from the css attribute
-      let expr = match value {
-        Some(JSXAttrValue::JSXExprContainer(container)) => match container.expr {
-          JSXExpr::Expr(expr) => Box::new(Expr::Call(CallExpr {
-            span: DUMMY_SP,
-            callee: Callee::Expr(expr),
-            args: vec![ExprOrSpread {
-              spread: None,
-              expr: Box::new(Expr::Object(ObjectLit {
-                span: DUMMY_SP,
-                props: vec![],
-              })),
-            }],
-            type_args: None,
-          })),
-          _ => {
-            HANDLER.with(|handler| {
-              handler
-                .struct_span_err(
-                  container.span,
-                  "Expected an expression in the css attribute. Please use the css prop like this: css={css`color: red;`}",
-                )
-                .emit();
-            });
-            return;
-          }
-        },
-        _ => {
-          HANDLER.with(|handler| {
-            handler
-              .struct_span_err(n.span, "css attribute must contain a JSX expression")
-              .emit();
-          });
-          return;
-        }
-      };
-
-      let merge_call = Expr::Call(CallExpr {
-        span: DUMMY_SP,
-        callee: Callee::Expr(Box::new(Expr::Ident(
-          self
-            .yak_library_imports
-            .get_yak_utility_ident("mergeCssProp".to_string()),
-        ))),
-        args: vec![
-          ExprOrSpread {
-            spread: None,
-            expr: Box::new(Expr::Object(ObjectLit {
-              span: DUMMY_SP,
-              props: mapped_props.clone(),
-            })),
-          },
-          ExprOrSpread {
-            spread: None,
-            expr: expr.clone(),
-          },
-        ],
-        type_args: None,
-      });
-
-      if mapped_props.is_empty() {
-        let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
-          dot3_token: DUMMY_SP,
-          expr,
-        });
-        // Replace the attribute with a spread attribute
-        n.attrs.insert(index, spread_attr);
-      } else {
-        let spread_attr = JSXAttrOrSpread::SpreadElement(SpreadElement {
-          dot3_token: DUMMY_SP,
-          expr: Box::new(merge_call),
-        });
-        // Replace the attribute with a spread attribute
-        n.attrs.push(spread_attr);
-      }
+    let css_prop = n.has_css_prop();
+    if let Some(css_prop) = css_prop {
+      let previous_inside_css_attribute = self.inside_element_with_css_attribute;
+      self.inside_element_with_css_attribute = true;
+      n.visit_mut_children_with(self);
+      self.inside_element_with_css_attribute = previous_inside_css_attribute;
+      css_prop.transform(
+        n,
+        &self
+          .yak_library_imports
+          .get_yak_utility_ident("mergeCssProp".into()),
+      );
     }
   }
 
@@ -945,7 +737,7 @@ where
       // CSS Mixin e.g. const highlight = css`color: red;`
       Some("css") if is_top_level => Box::new(TransformCssMixin::new(
         self.current_exported,
-        self.inside_css_attribute,
+        self.inside_element_with_css_attribute,
       )),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
@@ -1135,68 +927,6 @@ fn is_yak_file(filename: &str) -> bool {
     ".yak.tsx" | ".yak.jsx" | ".yak.mjs"
   ) || matches!(&filename[filename.len() - 7..], ".yak.ts" | ".yak.js")
 }
-
-fn extract_css_expr(value: JSXAttrValue, span: Span) -> Option<Box<Expr>> {
-  match value {
-    JSXAttrValue::JSXExprContainer(container) => match container.expr {
-      JSXExpr::Expr(expr) => Some(Box::new(Expr::Call(CallExpr { span: DUMMY_SP, callee: Callee::Expr(expr), args: vec![ExprOrSpread {
-          spread: None,
-            expr: Box::new(Expr::Object(ObjectLit { span: DUMMY_SP, props: vec![] })),
-      }], type_args: None }))),
-      _ => {
-        HANDLER.with(|handler| {
-                                handler.struct_span_err(container.span, "Expected an expression in the css attribute. Please use the css prop like this: css={css`color: red;`}").emit();
-                            });
-        None
-      }
-    },
-    _ => {
-      HANDLER.with(|handler| {
-        handler
-          .struct_span_err(span, "css attribute must contain a JSX expression")
-          .emit();
-      });
-      None
-    }
-  }
-}
-
-fn map_props(props: &[JSXAttrOrSpread]) -> Vec<PropOrSpread> {
-    props.iter().rev().map(|prop| match prop {
-        JSXAttrOrSpread::JSXAttr(attr) => map_jsx_attr(attr),
-        JSXAttrOrSpread::SpreadElement(spread) => PropOrSpread::Spread(spread.clone()),
-    }).collect()
-}
-
-fn map_jsx_attr(attr: &JSXAttr) -> PropOrSpread {
-        PropOrSpread::Prop(Box::new(match &attr.name {
-            JSXAttrName::Ident(ident) => Prop::KeyValue(KeyValueProp {
-                key: PropName::Ident(ident.clone()),
-                value: extract_value(&attr.value),
-            }),
-            _ => Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    value: "invalid".into(),
-                    raw: None,
-                }),
-                value: Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
-            }),
-        }))
-    }
-
-
-fn extract_value(value: &Option<JSXAttrValue>) -> Box<Expr> {
-        match value {
-            Some(JSXAttrValue::Lit(lit)) => Box::new(Expr::Lit(lit.clone())),
-            Some(JSXAttrValue::JSXExprContainer(container)) => match &container.expr {
-                JSXExpr::Expr(expr) => expr.clone(),
-                _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
-            },
-            _ => Box::new(Expr::Lit(Lit::Null(Null { span: DUMMY_SP }))),
-        }
-    }
-
 
 #[cfg(test)]
 mod tests {
