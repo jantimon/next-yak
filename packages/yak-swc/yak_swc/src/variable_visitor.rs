@@ -22,6 +22,32 @@ pub struct VariableVisitor {
   imports: FxHashMap<Id, Atom>,
 }
 
+#[derive(Debug, Clone, Hash, Eq, PartialEq)]
+/// ScopedVariableReference stores the swc reference name to
+/// - a variable e.g. foo -> (foo#3, [foo])
+/// - a member expression e.g. foo.bar -> (foo#3, [foo, bar])
+pub struct ScopedVariableReference {
+  /// The swc id of the variable 
+  pub id: Id,
+  /// The parts of the variable reference
+  /// - e.g. foo.bar.baz -> [foo, bar, baz]
+  /// - e.g. foo -> [foo]
+  pub parts: Vec<Atom>,
+}
+impl ScopedVariableReference {
+  pub fn new(id: Id, parts: Vec<Atom>) -> Self {
+    Self { id, parts }
+  }
+  pub fn to_readable_string(&self) -> String {
+    self
+      .parts
+      .iter()
+      .map(|atom| atom.as_str())
+      .collect::<Vec<&str>>()
+      .join(".")
+  }
+}
+
 impl VariableVisitor {
   pub fn new() -> Self {
     Self {
@@ -32,13 +58,13 @@ impl VariableVisitor {
 
   /// Try to get a constant value for a variable id
   /// Supports normal constant values, object properties and array elements
-  /// e.g. get_const_value("primary#0", vec![atom!("primary"), atom!("red")])
-  pub fn get_const_value(&mut self, name: &Id, parts: Vec<Atom>) -> Option<Box<Expr>> {
-    if let Some(expr) = self.variables.get_mut(name) {
+  /// e.g. get_const_value(("primary#0", vec![atom!("primary"), atom!("red")]))
+  pub fn get_const_value(&mut self, scoped_name: &ScopedVariableReference) -> Option<Box<Expr>> {
+    if let Some(expr) = self.variables.get_mut(&scoped_name.id) {
       // Start with the initial expression
       let mut current_expr: &Expr = expr;
       // Iterate over the parts (skipping the first one as it's the variable name)
-      for part in parts.iter().skip(1) {
+      for part in scoped_name.parts.iter().skip(1) {
         match current_expr {
           Expr::Object(obj) => {
             // For object expressions, look for a property with matching key
@@ -188,10 +214,10 @@ mod tests {
     );
     let duration = get_expr_value(
       &visitor
-        .get_const_value(
-          &Id::from((Atom::from("duration"), SyntaxContext::from_u32(0))),
+        .get_const_value(&ScopedVariableReference::new(
+          Id::from((Atom::from("duration"), SyntaxContext::from_u32(0))),
           vec![],
-        )
+        ))
         .unwrap(),
     );
     assert_eq!(duration, Some("34".to_string()));
@@ -219,20 +245,20 @@ mod tests {
     // Test accessing a nested property
     let nested_value = get_expr_value(
       &visitor
-        .get_const_value(
-          &Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
+        .get_const_value(&ScopedVariableReference::new(
+          Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
           vec![atom!("obj"), atom!("prop1"), atom!("nestedProp")],
-        )
+        ))
         .unwrap(),
     );
 
     assert_eq!(nested_value, Some("fancy".to_string()));
 
     // Test accessing an array element
-    let array_elem = &visitor.get_const_value(
-      &Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
+    let array_elem = &visitor.get_const_value(&ScopedVariableReference::new(
+      Id::from((Atom::from("obj"), SyntaxContext::from_u32(0))),
       vec![atom!("obj"), atom!("prop2"), atom!("1")],
-    );
+    ));
     let array_value = get_expr_value(array_elem.as_ref().unwrap());
     assert_eq!(array_value, Some("2".to_string()));
   }

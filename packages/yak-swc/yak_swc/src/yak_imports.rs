@@ -146,10 +146,10 @@ impl VisitMut for YakImportVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::as_folder;
   use swc_core::atoms::atom;
   use swc_core::common::SyntaxContext;
+  use swc_core::ecma::transforms::testing::test_transform;
+  use swc_core::ecma::visit::as_folder;
 
   #[test]
   fn test_yak_import_visitor_no_yak() {
@@ -216,9 +216,10 @@ mod tests {
       "#,
       true,
     );
-    assert!(visitor.yak_css_idents.contains(&Id::from((atom!("css"), SyntaxContext::empty()))));
+    assert!(visitor
+      .yak_css_idents
+      .contains(&Id::from((atom!("css"), SyntaxContext::empty()))));
   }
-
 
   #[test]
   fn test_yak_import_visitor_renamed_css_ident() {
@@ -236,7 +237,9 @@ mod tests {
       "#,
       true,
     );
-    assert!(visitor.yak_css_idents.contains(&Id::from((atom!("myCss"), SyntaxContext::empty()))));
+    assert!(visitor
+      .yak_css_idents
+      .contains(&Id::from((atom!("myCss"), SyntaxContext::empty()))));
   }
 
   #[test]
@@ -255,7 +258,9 @@ mod tests {
       "#,
       true,
     );
-    assert!(visitor.yak_keyframes_idents.contains(&Id::from((atom!("keyframes"), SyntaxContext::empty()))));
+    assert!(visitor
+      .yak_keyframes_idents
+      .contains(&Id::from((atom!("keyframes"), SyntaxContext::empty()))));
   }
 
   #[test]
@@ -274,7 +279,9 @@ mod tests {
       "#,
       true,
     );
-    assert!(visitor.yak_keyframes_idents.contains(&Id::from((atom!("myKeyframes"), SyntaxContext::empty()))));
+    assert!(visitor
+      .yak_keyframes_idents
+      .contains(&Id::from((atom!("myKeyframes"), SyntaxContext::empty()))));
   }
 
   #[test]

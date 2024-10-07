@@ -5,6 +5,8 @@ use serde::Deserialize;
 use std::path::Path;
 use std::vec;
 use swc_core::atoms::atom;
+
+use swc_core::atoms::Atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
@@ -21,7 +23,7 @@ use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIt
 use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
-use variable_visitor::VariableVisitor;
+use variable_visitor::{ScopedVariableReference, VariableVisitor};
 mod yak_imports;
 use yak_imports::YakImportVisitor;
 mod yak_file_visitor;
@@ -68,7 +70,7 @@ where
   /// All css declarations of the current root css expression
   current_declaration: Vec<Declaration>,
   /// e.g Button in const Button = styled.button`color: red;`
-  current_variable_name: Option<Id>,
+  current_variable_name: Option<ScopedVariableReference>,
   /// Current condition to name nested css expressions
   current_condition: Vec<String>,
   /// Current css expression is exported
@@ -86,7 +88,7 @@ where
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
   /// Used to replace expressions with the actual class name or keyframes name
-  variable_name_selector_mapping: FxHashMap<Id, String>,
+  variable_name_selector_mapping: FxHashMap<ScopedVariableReference, String>,
   /// Naming convention to generate unique css identifiers
   naming_convention: NamingConvention,
   /// Expression replacement to replace a yak library call with the transformed one
@@ -129,11 +131,13 @@ where
 
   /// Try to get the component id of the current styled component mixin or animation
   /// e.g. const Button = styled.button`color: red;` -> Button#1
-  fn get_current_component_id(&self) -> Id {
-    self
-      .current_variable_name
-      .clone()
-      .unwrap_or_else(|| Id::from((atom!("yak"), SyntaxContext::empty())))
+  fn get_current_component_id(&self) -> ScopedVariableReference {
+    self.current_variable_name.clone().unwrap_or_else(|| {
+      ScopedVariableReference::new(
+        Id::from((atom!("yak"), SyntaxContext::empty())),
+        vec![atom!("yak")],
+      )
+    })
   }
 
   /// Get the current filename without extension or path e.g. "App" from "/path/to/App.tsx
@@ -208,8 +212,7 @@ where
         // Handle constants in css expressions
         // e.g. styled.button`color: ${primary};` (Ident)
         // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
-        if let Some((id, member_expr_parts)) = extract_ident_and_parts(expr) {
-          let scoped_name = id.to_id();
+        if let Some(scoped_name) = extract_ident_and_parts(expr) {
           // Known StyledComponents, Mixin or Animations in the same file
           if let Some(referenced_yak_css) = self.variable_name_selector_mapping.get(&scoped_name) {
             let (new_state, new_declarations) = parse_css(referenced_yak_css, css_state);
@@ -221,7 +224,7 @@ where
           // import { colors } from "./theme";
           // styled.button`color: ${colors.primary};`
           else if let Some((_import_source_type, module_path)) =
-            self.variables.get_imported_variable(&scoped_name)
+            self.variables.get_imported_variable(&scoped_name.id)
           {
             let import_kind: ImportKind = match find_char(
               &quasis[pair.index..]
@@ -247,17 +250,14 @@ where
               None => ImportKind::Mixin,
             };
             let cross_file_import_token =
-              encode_module_import(module_path.as_str(), member_expr_parts, import_kind);
+              encode_module_import(module_path.as_str(), scoped_name.parts, import_kind);
 
             // TODO Track Dynamic Mixins as runtime dependency to pass props: `runtime_expressions.push(*expr.clone());`
             let (new_state, _) = parse_css(&cross_file_import_token, css_state);
             css_state = Some(new_state);
           }
           // Constants
-          else if let Some(value) = self
-            .variables
-            .get_const_value(&scoped_name, member_expr_parts)
-          {
+          else if let Some(value) = self.variables.get_const_value(&scoped_name) {
             // e.g.:
             // const primary = "red";
             // styled.button`color: ${primary};`
@@ -281,10 +281,10 @@ where
                 HANDLER.with(|handler| {
                   handler
                     .struct_span_err(
-                      id.span,
+                      expr.span(),
                       &format!(
                         "Unsupported \"{}\" template literal in css expression - only css`` mixins are allowed",
-                        scoped_name.0
+                        scoped_name.to_readable_string()
                       ),
                     )
                     .emit();
@@ -294,10 +294,10 @@ where
               HANDLER.with(|handler| {
                 handler
                   .struct_span_err(
-                    id.span,
+                    expr.span(),
                     &format!(
                       "The value for constant \"{}\" is not a valid css value or css mixin",
-                      scoped_name.0
+                      scoped_name.to_readable_string()
                     ),
                   )
                   .emit();
@@ -310,10 +310,10 @@ where
             HANDLER.with(|handler| {
               handler
                 .struct_span_err(
-                  id.span,
+                  expr.span(),
                   &format!(
                     "The value for variable \"{}\" could not be found in the top scope",
-                    scoped_name.0
+                    scoped_name.id.0
                   ),
                 )
                 .emit();
@@ -368,9 +368,10 @@ where
               // Current variable name of the StyledComponent or Mixin
               // e.g. Button for const Button = styled.button`color: red;`
               self
-                .current_variable_name
-                .clone()
-                .map_or(atom!("yak"), |name| name.0),
+                // TODO: check if parts should also be used for the name:
+                .get_current_component_id()
+                .id
+                .0,
               // Current property name
               // e.g. color for styled.button`color: red;`
               css_state.as_ref().unwrap().current_declaration.property
@@ -511,7 +512,10 @@ where
     for decl in &mut n.decls {
       if let Pat::Ident(BindingIdent { id, .. }) = &decl.name {
         let previous_variable_name = self.current_variable_name.clone();
-        self.current_variable_name = Some(id.to_id());
+        self.current_variable_name = Some(ScopedVariableReference::new(
+          id.to_id(),
+          vec![id.sym.clone()],
+        ));
         decl.init.visit_mut_with(self);
         self.current_variable_name = previous_variable_name;
       }
@@ -525,11 +529,8 @@ where
     // const highlight = css`color: red;`
     // const Button = styled.button`${({$active}) => $active && highlight};`
     if self.is_inside_css_expression() {
-      if let Some((id, member_expr_parts)) = extract_ident_and_parts(n) {
-        if let Some(constant_value) = self
-          .variables
-          .get_const_value(&id.to_id(), member_expr_parts)
-        {
+      if let Some(scoped_name) = extract_ident_and_parts(n) {
+        if let Some(constant_value) = self.variables.get_const_value(&scoped_name) {
           if let Expr::TaggedTpl(tpl) = *constant_value {
             if is_valid_tagged_tpl(&tpl, self.yak_library_imports.yak_css_idents.clone()) {
               let replacement_before = self.expression_replacement.clone();
@@ -644,7 +645,7 @@ where
 
     let current_variable_id = self.get_current_component_id();
     // Remove the scope postfix to make the variable name easier to read
-    let current_variable_name = current_variable_id.0.to_string();
+    let current_variable_name = current_variable_id.id.0.to_string();
 
     // Current css parser state to parse an incomplete css code from a quasi
     // In css-in-js the outer css scope is missing e.g.:

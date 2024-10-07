@@ -4,6 +4,8 @@ use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
 use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
 
+use crate::variable_visitor::ScopedVariableReference;
+
 /// Convert a HashMap to an Object expression
 pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
   let properties = values
@@ -88,17 +90,26 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
 /// There are two use cases:
 /// 1. Member expressions (e.g., `colors.primary`) -> Some((colors#0, ["colors", "primary"]))
 /// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
-pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<Atom>)> {
+pub fn extract_ident_and_parts(expr: &Expr) -> Option<ScopedVariableReference> {
   match &expr {
-    Expr::Member(member) => member_expr_to_strings(member).or_else(|| {
-      HANDLER.with(|handler| {
-        handler
-          .struct_span_err(member.span, "Could not parse member expression")
-          .emit();
-      });
-      None
-    }),
-    Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.clone()])),
+    Expr::Member(member) => member_expr_to_strings(member).map_or_else(
+      || {
+        HANDLER.with(|handler| {
+          handler
+            .struct_span_err(member.span, "Could not parse member expression")
+            .emit();
+        });
+        None
+      },
+      |member_exp_strings| {
+        let (root_ident, props) = member_exp_strings;
+        Some(ScopedVariableReference::new(root_ident.to_id(), props))
+      },
+    ),
+    Expr::Ident(ident) => Some(ScopedVariableReference::new(
+      ident.to_id(),
+      vec![ident.sym.clone()],
+    )),
     _ => None,
   }
 }
