@@ -6,7 +6,6 @@ use std::path::Path;
 use std::vec;
 use swc_core::atoms::atom;
 
-use swc_core::atoms::Atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
@@ -277,6 +276,24 @@ where
                   self.process_yak_literal(&mut tagged_tpl.clone(), css_state.clone());
                 runtime_expressions.extend(inline_runtime_exprs);
                 runtime_css_variables.extend(inline_runtime_css_vars);
+              }
+              // keyframes - of animations which have not been parsed yet
+              // const Button = styled.button`animation: ${highlight};`
+              // const highlight = keyframes`from { color: red; }`
+              else if is_valid_tagged_tpl(
+                &tagged_tpl,
+                self.yak_library_imports.yak_keyframes_idents.clone(),
+              ) {
+                // Create a unique name for the keyframe
+                let keyframe_name = self
+                  .naming_convention
+                  .generate_unique_name_for_variable(&scoped_name);
+                // Store the keyframe for the later keyframe declaration
+                self
+                  .variable_name_selector_mapping
+                  .insert(scoped_name.clone(), keyframe_name.clone());
+                let (new_state, _) = parse_css(keyframe_name.as_str(), css_state);
+                css_state = Some(new_state);
               } else {
                 HANDLER.with(|handler| {
                   handler
@@ -522,6 +539,38 @@ where
     }
   }
 
+  /// Visit object member value declarations
+  /// To store the current name which can be used for class names
+  /// e.g. Button for const obj = { Button: styled.button`color: red;` }
+  fn visit_mut_object_lit(&mut self, n: &mut ObjectLit) {
+    if !self.yak_library_imports.is_using_next_yak() {
+      return;
+    }
+    if self.current_variable_name.is_none() {
+      n.visit_mut_children_with(self);
+      return;
+    }
+    let current_variable_name = self.current_variable_name.clone().unwrap();
+    for props_or_spread in &mut n.props {
+      if let PropOrSpread::Prop(prop) = props_or_spread {
+        if let Some(key_value) = prop.as_key_value() {
+          if let PropName::Ident(value) = &key_value.key {
+            let mut new_parts = current_variable_name.parts.clone();
+            new_parts.push(value.sym.clone());
+            self.current_variable_name = Some(ScopedVariableReference::new(
+              current_variable_name.id.clone(),
+              new_parts,
+            ));
+            prop.visit_mut_with(self);
+            self.current_variable_name = Some(current_variable_name.clone());
+            continue;
+          }
+        }
+      }
+      props_or_spread.visit_mut_with(self);
+    }
+  }
+
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
@@ -614,12 +663,17 @@ where
     }
 
     let is_top_level = !self.is_inside_css_expression();
+    let current_variable_id = self.get_current_component_id();
 
     let mut transform: Box<dyn YakTransform> = match yak_library_function_name.as_deref() {
       // Styled Components transform works only on top level
       Some("styled") if is_top_level => Box::new(TransformStyled::new()),
       // Keyframes transform works only on top level
-      Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new()),
+      Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new(
+        self
+          .variable_name_selector_mapping
+          .get(&current_variable_id),
+      )),
       // CSS Mixin e.g. const highlight = css`color: red;`
       Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
@@ -643,7 +697,6 @@ where
       }
     };
 
-    let current_variable_id = self.get_current_component_id();
     // Remove the scope postfix to make the variable name easier to read
     let current_variable_name = current_variable_id.id.0.to_string();
 

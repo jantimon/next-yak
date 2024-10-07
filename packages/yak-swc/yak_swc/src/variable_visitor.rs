@@ -27,7 +27,7 @@ pub struct VariableVisitor {
 /// - a variable e.g. foo -> (foo#3, [foo])
 /// - a member expression e.g. foo.bar -> (foo#3, [foo, bar])
 pub struct ScopedVariableReference {
-  /// The swc id of the variable 
+  /// The swc id of the variable
   pub id: Id,
   /// The parts of the variable reference
   /// - e.g. foo.bar.baz -> [foo, bar, baz]

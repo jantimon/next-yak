@@ -314,9 +314,9 @@ pub struct TransformKeyframes {
 }
 
 impl TransformKeyframes {
-  pub fn new() -> TransformKeyframes {
+  pub fn new(animation_name: Option<&String>) -> TransformKeyframes {
     TransformKeyframes {
-      animation_name: None,
+      animation_name: animation_name.cloned(),
     }
   }
 }
@@ -328,8 +328,13 @@ impl YakTransform for TransformKeyframes {
     declaration_name: &str,
     _previous_parser_state: Option<ParserState>,
   ) -> ParserState {
-    let css_identifier = naming_convention.generate_unique_name(declaration_name);
-    self.animation_name = Some(css_identifier.clone());
+    let css_identifier = if self.animation_name.is_none() {
+      let new_identifier = naming_convention.generate_unique_name(declaration_name);
+      self.animation_name = Some(new_identifier.clone());
+      new_identifier
+    } else {
+      self.animation_name.clone().unwrap()
+    };
     let mut parser_state = ParserState::new();
     parser_state.current_scopes = vec![CssScope {
       name: format!("@keyframes {}", css_identifier),
