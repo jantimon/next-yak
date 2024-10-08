@@ -561,7 +561,7 @@ where
             PropName::Num(value) => Some(Atom::from(value.value.to_string())),
             PropName::BigInt(value) => Some(Atom::from(value.value.to_string())),
             // Skip computed property names
-            PropName::Computed(_) => None, 
+            PropName::Computed(_) => None,
           };
 
           if let Some(part) = new_part {
