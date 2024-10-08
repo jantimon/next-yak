@@ -5,4 +5,13 @@ const nextConfig = {
 
 }
 
-export default withYak({}, nextConfig)
+export default withYak(
+    {
+        experiments: {
+            debug: {
+                filter: (name) => name.includes("page"),
+                type: "all"
+            }
+        }
+    }    
+, nextConfig)
