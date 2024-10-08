@@ -3,7 +3,7 @@
 exports[`renders ClockHands component 1`] = `
 <DocumentFragment>
   <div
-    class="SecondHand SecondHand__themehighContrast-01 ClockHand"
+    class="SecondHand SecondHand__theme_highContrast-01 ClockHand"
     style="--ClockHand__transform_4acxch: 0deg;"
   />
   <div
