@@ -1,4 +1,4 @@
-use crate::utils::murmur_hash::murmurhash2_32_gc;
+use crate::{utils::murmur_hash::murmurhash2_32_gc, variable_visitor::ScopedVariableReference};
 use rustc_hash::FxHashMap;
 
 pub struct NamingConvention {
@@ -52,6 +52,15 @@ impl NamingConvention {
     }
   }
 
+  // Generate a unique name for a variable reference
+  // e.g "foo.bar" -> "foo_bar-01"
+  pub fn generate_unique_name_for_variable(
+    &mut self,
+    variable: &ScopedVariableReference,
+  ) -> String {
+    self.generate_unique_name(&variable.to_readable_string())
+  }
+
   /// Generate a unique CSS variable name based on the file name and a base name
   pub fn get_css_variable_name(&mut self, base_name: &str, dev_mode: bool) -> String {
     let name: &str = if dev_mode {
@@ -75,12 +84,12 @@ fn escape_css_identifier(input: &str) -> String {
   for c in chars {
     match c {
       'a'..='z' | 'A'..='Z' | '-' | '_' | '$' | '\\' => result.push(c),
-      // Whitespace
-      ' ' | '\t' => {
+      // Whitespace and member expression separator
+      ' ' | '\t' | '.' => {
         result.push('_');
       }
       // Remove control characters
-      '\0'..='\x1F' | '\x7F' | '.' => continue,
+      '\0'..='\x1F' | '\x7F' => continue,
       // Escape Unicode characters
       c if c > '\u{00FF}' => {
         result.push('\\');
@@ -118,6 +127,7 @@ mod tests {
     assert_eq!(escape_css_identifier("foo\\bar"), "foo\\bar");
     assert_eq!(escape_css_identifier("foo💩bar"), "foo\\💩bar");
     assert_eq!(escape_css_identifier("foo bar"), "foo_bar");
+    assert_eq!(escape_css_identifier("foo.bar"), "foo_bar");
     assert_eq!(escape_css_identifier("foo\tbar"), "foo_bar");
     assert_eq!(escape_css_identifier("foo\nbar"), "foobar");
     assert_eq!(escape_css_identifier("1foo"), "_1foo");

@@ -19,6 +19,10 @@ pub struct YakImportVisitor {
   /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
   /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
   pub yak_css_idents: FxHashSet<Id>,
+  /// Local Identifiers for the next-yak keyframes function \
+  /// Most of the time it is just `keyframes#0` for `import { keyframes } from "next-yak"` \
+  /// but it might also contain renamings like `import { keyframes as keyframes_ } from "next-yak"`
+  pub yak_keyframes_idents: FxHashSet<Id>,
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
@@ -29,6 +33,7 @@ impl YakImportVisitor {
       yak_library_imports: FxHashMap::default(),
       yak_utilities: FxHashMap::default(),
       yak_css_idents: FxHashSet::default(),
+      yak_keyframes_idents: FxHashSet::default(),
     }
   }
 
@@ -129,6 +134,8 @@ impl VisitMut for YakImportVisitor {
           self.yak_library_imports.insert(local, imported.clone());
           if imported.0 == "css" {
             self.yak_css_idents.insert(named.local.to_id());
+          } else if imported.0 == "keyframes" {
+            self.yak_keyframes_idents.insert(named.local.to_id());
           }
         }
       }
@@ -139,6 +146,8 @@ impl VisitMut for YakImportVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use swc_core::atoms::atom;
+  use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
   use swc_core::ecma::visit::as_folder;
 
@@ -189,5 +198,98 @@ mod tests {
       true,
     );
     assert_eq!(visitor.is_using_next_yak(), true);
+  }
+
+  #[test]
+  fn test_yak_import_visitor_css_ident() {
+    let mut visitor = YakImportVisitor::new();
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      r#"
+        import { css } from "next-yak";
+        const styles = css`color: red;`;
+      "#,
+      r#"
+        import { css } from "next-yak/internal";
+        const styles = css`color: red;`;
+      "#,
+      true,
+    );
+    assert!(visitor
+      .yak_css_idents
+      .contains(&Id::from((atom!("css"), SyntaxContext::empty()))));
+  }
+
+  #[test]
+  fn test_yak_import_visitor_renamed_css_ident() {
+    let mut visitor = YakImportVisitor::new();
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      r#"
+        import { css as myCss } from "next-yak";
+        const styles = myCss`color: red;`;
+      "#,
+      r#"
+        import { css as myCss } from "next-yak/internal";
+        const styles = myCss`color: red;`;
+      "#,
+      true,
+    );
+    assert!(visitor
+      .yak_css_idents
+      .contains(&Id::from((atom!("myCss"), SyntaxContext::empty()))));
+  }
+
+  #[test]
+  fn test_yak_import_visitor_keyframes_ident() {
+    let mut visitor = YakImportVisitor::new();
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      r#"
+        import { keyframes } from "next-yak";
+        const animation = keyframes`from { opacity: 0; } to { opacity: 1; }`;
+      "#,
+      r#"
+        import { keyframes } from "next-yak/internal";
+        const animation = keyframes`from { opacity: 0; } to { opacity: 1; }`;
+      "#,
+      true,
+    );
+    assert!(visitor
+      .yak_keyframes_idents
+      .contains(&Id::from((atom!("keyframes"), SyntaxContext::empty()))));
+  }
+
+  #[test]
+  fn test_yak_import_visitor_renamed_keyframes_ident() {
+    let mut visitor = YakImportVisitor::new();
+    test_transform(
+      Default::default(),
+      |_| as_folder(&mut visitor),
+      r#"
+        import { keyframes as myKeyframes } from "next-yak";
+        const animation = myKeyframes`from { opacity: 0; } to { opacity: 1; }`;
+      "#,
+      r#"
+        import { keyframes as myKeyframes } from "next-yak/internal";
+        const animation = myKeyframes`from { opacity: 0; } to { opacity: 1; }`;
+      "#,
+      true,
+    );
+    assert!(visitor
+      .yak_keyframes_idents
+      .contains(&Id::from((atom!("myKeyframes"), SyntaxContext::empty()))));
+  }
+
+  #[test]
+  fn test_yak_import_visitor_utility_ident() {
+    let mut visitor = YakImportVisitor::new();
+    let ident = visitor.get_yak_utility_ident("unitPostFix".to_string());
+    assert_eq!(ident.sym, "__yak_unitPostFix");
+    let ident = visitor.get_yak_utility_ident("mergeCssProp".to_string());
+    assert_eq!(ident.sym, "__yak_mergeCssProp");
   }
 }

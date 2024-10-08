@@ -4,6 +4,8 @@ use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
 use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
 
+use crate::variable_visitor::ScopedVariableReference;
+
 /// Convert a HashMap to an Object expression
 pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
   let properties = values
@@ -88,26 +90,38 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
 /// There are two use cases:
 /// 1. Member expressions (e.g., `colors.primary`) -> Some((colors#0, ["colors", "primary"]))
 /// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
-pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<Atom>)> {
+pub fn extract_ident_and_parts(expr: &Expr) -> Option<ScopedVariableReference> {
   match &expr {
-    Expr::Member(member) => member_expr_to_strings(member).or_else(|| {
-      HANDLER.with(|handler| {
-        handler
-          .struct_span_err(member.span, "Could not parse member expression")
-          .emit();
-      });
-      None
-    }),
-    Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.clone()])),
+    Expr::Member(member_expr) => member_expr_to_strings(member_expr).map_or_else(
+      || {
+        HANDLER.with(|handler| {
+          handler
+            .struct_span_err(member_expr.span, "Could not parse member expression")
+            .emit();
+        });
+        None
+      },
+      |member_parts| {
+        let (base_ident, member_chain) = member_parts;
+        Some(ScopedVariableReference::new(
+          base_ident.to_id(),
+          member_chain,
+        ))
+      },
+    ),
+    Expr::Ident(ident) => Some(ScopedVariableReference::new(
+      ident.to_id(),
+      vec![ident.sym.clone()],
+    )),
     _ => None,
   }
 }
 
 /// Get a constant template literal from an expression
-pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_name: FxHashSet<Id>) -> bool {
+pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_names: &FxHashSet<Id>) -> bool {
   let TaggedTpl { tag, .. } = tagged_tpl;
   if let Expr::Ident(id) = &**tag {
-    if literal_name.contains(&id.to_id()) {
+    if literal_names.contains(&id.to_id()) {
       return true;
     }
   }
