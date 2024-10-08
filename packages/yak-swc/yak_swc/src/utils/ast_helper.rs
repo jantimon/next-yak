@@ -92,18 +92,21 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
 /// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
 pub fn extract_ident_and_parts(expr: &Expr) -> Option<ScopedVariableReference> {
   match &expr {
-    Expr::Member(member) => member_expr_to_strings(member).map_or_else(
+    Expr::Member(member_expr) => member_expr_to_strings(member_expr).map_or_else(
       || {
         HANDLER.with(|handler| {
           handler
-            .struct_span_err(member.span, "Could not parse member expression")
+            .struct_span_err(member_expr.span, "Could not parse member expression")
             .emit();
         });
         None
       },
-      |member_exp_strings| {
-        let (root_ident, props) = member_exp_strings;
-        Some(ScopedVariableReference::new(root_ident.to_id(), props))
+      |member_parts| {
+        let (base_ident, member_chain) = member_parts;
+        Some(ScopedVariableReference::new(
+          base_ident.to_id(),
+          member_chain,
+        ))
       },
     ),
     Expr::Ident(ident) => Some(ScopedVariableReference::new(
