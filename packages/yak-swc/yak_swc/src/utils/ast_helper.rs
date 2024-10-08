@@ -115,10 +115,10 @@ pub fn extract_ident_and_parts(expr: &Expr) -> Option<ScopedVariableReference> {
 }
 
 /// Get a constant template literal from an expression
-pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_name: FxHashSet<Id>) -> bool {
+pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_names: &FxHashSet<Id>) -> bool {
   let TaggedTpl { tag, .. } = tagged_tpl;
   if let Expr::Ident(id) = &**tag {
-    if literal_name.contains(&id.to_id()) {
+    if literal_names.contains(&id.to_id()) {
       return true;
     }
   }
