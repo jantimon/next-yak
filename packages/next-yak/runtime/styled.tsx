@@ -204,12 +204,15 @@ const yakStyled = <
       // we can call the yak function directly to avoid an unnecessary wrapper with an additional
       // forwardRef call
       if (parentYakComponent) {
-        return parentYakComponent({
-          // mark the props as processed
-          $__attrs: true, 
-          theme,
-          ...filteredProps
-        } as T, ref);
+        return parentYakComponent(
+          {
+            // mark the props as processed
+            $__attrs: true,
+            theme,
+            ...filteredProps,
+          } as T,
+          ref,
+        );
       }
       (filteredProps as { ref?: unknown }).ref = ref;
       return <Component {...(filteredProps as any)} />;
