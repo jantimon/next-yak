@@ -5,6 +5,7 @@ use serde::Deserialize;
 use std::path::Path;
 use std::vec;
 use swc_core::atoms::atom;
+use swc_core::atoms::Atom;
 
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
@@ -554,9 +555,18 @@ where
     for props_or_spread in &mut n.props {
       if let PropOrSpread::Prop(prop) = props_or_spread {
         if let Some(key_value) = prop.as_key_value() {
-          if let PropName::Ident(value) = &key_value.key {
+          let new_part = match &key_value.key {
+            PropName::Ident(value) => Some(value.sym.clone()),
+            PropName::Str(value) => Some(value.value.clone()),
+            PropName::Num(value) => Some(Atom::from(value.value.to_string())),
+            PropName::BigInt(value) => Some(Atom::from(value.value.to_string())),
+            // Skip computed property names
+            PropName::Computed(_) => None, 
+          };
+
+          if let Some(part) = new_part {
             let mut new_parts = current_variable_name.parts.clone();
-            new_parts.push(value.sym.clone());
+            new_parts.push(part);
             self.current_variable_name = Some(ScopedVariableReference::new(
               current_variable_name.id.clone(),
               new_parts,
@@ -672,7 +682,13 @@ where
       Some("keyframes") if is_top_level => Box::new(TransformKeyframes::new(
         self
           .variable_name_selector_mapping
-          .get(&current_variable_id),
+          .get(&current_variable_id)
+          .map(|s| s.to_string())
+          .unwrap_or_else(|| {
+            self
+              .naming_convention
+              .generate_unique_name_for_variable(&current_variable_id)
+          }),
       )),
       // CSS Mixin e.g. const highlight = css`color: red;`
       Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),

@@ -314,9 +314,9 @@ pub struct TransformKeyframes {
 }
 
 impl TransformKeyframes {
-  pub fn new(animation_name: Option<&String>) -> TransformKeyframes {
+  pub fn new(animation_name: String) -> TransformKeyframes {
     TransformKeyframes {
-      animation_name: animation_name.cloned(),
+      animation_name: Some(animation_name),
     }
   }
 }

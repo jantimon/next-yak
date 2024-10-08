@@ -34,3 +34,31 @@ const animations = {
 }
 */ /*#__PURE__*/ keyframes(__styleYak.animations_fadeOut)
 };
+const slides = {
+    200: /*YAK Extracted CSS:
+@keyframes slides_200 {
+  to {
+    transform: translate(200px, 200px);
+  }
+}
+*/ /*#__PURE__*/ keyframes(__styleYak.slides_200),
+    "x400": /*YAK Extracted CSS:
+@keyframes slides_x400 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(400px);
+  }
+}
+*/ /*#__PURE__*/ keyframes(__styleYak.slides_x400)
+};
+export const FancyButton = /*YAK Extracted CSS:
+.FancyButton {
+  background-color: #f00;
+  animation: slides_x400 1s ease-in-out, animations_fadeIn 1s ease-in;
+  &:hover {
+    animation: slides_200 1s ease-in-out, animations_fadeOut 1s ease-in;
+  }
+}
+*/ /*#__PURE__*/ styled.button(__styleYak.FancyButton);
