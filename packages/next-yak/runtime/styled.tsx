@@ -154,7 +154,10 @@ const yakStyled = <
             // e.g. const Child = styled(Parent)`color: red;`
             // We process the attrs once in the child (with all attrs functions merged (including the one from the child))
             // and in the subsequent call in the parent we skip processing the attrs again
-            props
+            {
+              theme,
+              ...props,
+            }
           : // overwrite and merge the current props with the processed attrs
             combineProps(
               {
