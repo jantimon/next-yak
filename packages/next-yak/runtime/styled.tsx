@@ -156,7 +156,7 @@ const yakStyled = <
             // and in the subsequent call in the parent we skip processing the attrs again
             {
               theme,
-              ...props
+              ...props,
             }
           : // overwrite and merge the current props with the processed attrs
             combineProps(
