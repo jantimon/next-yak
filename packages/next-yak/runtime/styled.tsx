@@ -166,6 +166,8 @@ const yakStyled = <
                   className?: string;
                   style?: React.CSSProperties;
                 }),
+                // mark the props as processed
+                $__attrs: true,
               },
               mergedAttrsFn?.({ theme, ...props } as Substitute<
                 T & { theme: YakTheme },
