@@ -597,19 +597,14 @@ where
         }
       }
       props_or_spread.visit_mut_with(self);
-  fn visit_mut_jsx_attr(&mut self, n: &mut JSXAttr) {
-    if let JSXAttrName::Ident(ident) = &n.name {
-      if ident.sym == "css" {
-        let previous_inside_css_attribute = self.inside_css_attribute;
-        self.inside_css_attribute = true;
-        n.visit_mut_children_with(self);
-        self.inside_css_attribute = previous_inside_css_attribute;
-      }
     }
   }
 
   // Visit JSX expressions for css prop support
   fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
+    if !self.yak_library_imports.is_using_next_yak() {
+      return;
+    }
     let css_prop = n.has_css_prop();
     if let Some(css_prop) = css_prop {
       let previous_inside_css_attribute = self.inside_element_with_css_attribute;

@@ -1,9 +1,7 @@
 use swc_core::{
   common::{Span, DUMMY_SP},
   ecma::ast::{
-    CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
-    JSXAttrValue, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop, PropName,
-    PropOrSpread, SpreadElement,
+    CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread, SpreadElement
   },
   plugin::errors::HANDLER,
 };
@@ -15,6 +13,31 @@ pub struct CSSProp {
 }
 
 impl CSSProp {
+  /// Transforms the css prop to a spread attribute, changes the call to invoke it without parameters
+  /// and inserts it into the correct position.
+  /// If the css prop has relevant props, they are removed and transformed into a merge call.
+  ///
+  /// e.g.
+  /// ```jsx
+  /// <div css={css("divClassName")} />
+  /// ```
+  /// becomes
+  /// ```jsx
+  /// <div {...css("divClassName")({})} />
+  /// ```
+  /// and
+  /// ```jsx
+  /// <div css={css("divClassName")} style={{color: red}} className="myClassName" />
+  /// ```
+  /// becomes
+  /// ```jsx
+  /// <div {...__yak_mergeCssProp(
+  ///   css("divClassName")({}),
+  ///   {
+  ///     style: {color: red},
+  ///     className: "myClassName"
+  ///   })} />
+  /// ```
   pub fn transform(&self, opening_element: &mut JSXOpeningElement, merge_ident: &Ident) {
     let result: Result<_, TransformError> = (|| {
       let value = opening_element.attrs.remove(self.index);
@@ -148,7 +171,13 @@ pub trait HasCSSProp {
 }
 
 impl HasCSSProp for JSXOpeningElement {
+  /// Returns the index of the `css` attribute and the indices of other relevant attributes
+  /// (like `className` and `style`).
   fn has_css_prop(&self) -> Option<CSSProp> {
+    if !is_native_element(&self.name) {
+      return None;
+    }
+
     let mut css_index = None;
     let mut relevant_props = Vec::new();
 
@@ -172,6 +201,17 @@ impl HasCSSProp for JSXOpeningElement {
       relevant_props_indices: relevant_props,
     })
   }
+}
+
+// good enough for now. Better to use a list of known native elements.
+fn is_native_element(name: &JSXElementName) -> bool {
+    match name {
+        JSXElementName::Ident(ident) => {
+            let first_char = ident.sym.chars().next().unwrap_or('\0');
+            first_char.is_ascii_lowercase()
+        }
+        _ => false,
+    }
 }
 
 #[derive(Debug)]
