@@ -1,7 +1,9 @@
 use swc_core::{
   common::{Span, DUMMY_SP},
   ecma::ast::{
-    CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread, SpreadElement
+    CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
+    JSXAttrValue, JSXElementName, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop,
+    PropName, PropOrSpread, SpreadElement,
   },
   plugin::errors::HANDLER,
 };
@@ -205,13 +207,13 @@ impl HasCSSProp for JSXOpeningElement {
 
 // good enough for now. Better to use a list of known native elements.
 fn is_native_element(name: &JSXElementName) -> bool {
-    match name {
-        JSXElementName::Ident(ident) => {
-            let first_char = ident.sym.chars().next().unwrap_or('\0');
-            first_char.is_ascii_lowercase()
-        }
-        _ => false,
+  match name {
+    JSXElementName::Ident(ident) => {
+      let first_char = ident.sym.chars().next().unwrap_or('\0');
+      first_char.is_ascii_lowercase()
     }
+    _ => false,
+  }
 }
 
 #[derive(Debug)]
