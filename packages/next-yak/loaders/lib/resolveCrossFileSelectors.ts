@@ -389,9 +389,15 @@ function parseExportValueExpression(
     expression.type === "TaggedTemplateExpression"
   ) {
     return { type: "styled-component" };
-  } else if (expression.type === "StringLiteral" || expression.type === "NumericLiteral") {
+  } else if (
+    expression.type === "StringLiteral" ||
+    expression.type === "NumericLiteral"
+  ) {
     return { type: "constant", value: expression.value };
-  } else if (expression.type === "TemplateLiteral" && expression.quasis.length === 1) {
+  } else if (
+    expression.type === "TemplateLiteral" &&
+    expression.quasis.length === 1
+  ) {
     return { type: "constant", value: expression.quasis[0].value.raw };
   } else if (expression.type === "ObjectExpression") {
     return { type: "record", value: parseObjectExpression(expression) };
