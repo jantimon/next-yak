@@ -367,20 +367,34 @@ function parseMixins(
   return mixins;
 }
 
+/**
+ * Unpacks a TSAsExpression to its expression value
+ */
+function unpackTSAsExpression(
+  node: babel.types.TSAsExpression | babel.types.Expression,
+): babel.types.Expression {
+  if (node.type === "TSAsExpression") {
+    return unpackTSAsExpression(node.expression);
+  }
+  return node;
+}
+
 function parseExportValueExpression(
   node: babel.types.Expression,
 ): ParsedExport {
+  // ignores `as` casts so it doesn't interfere with the ast node type detection
+  const expression = unpackTSAsExpression(node);
   if (
-    node.type === "CallExpression" ||
-    node.type === "TaggedTemplateExpression"
+    expression.type === "CallExpression" ||
+    expression.type === "TaggedTemplateExpression"
   ) {
     return { type: "styled-component" };
-  } else if (node.type === "StringLiteral" || node.type === "NumericLiteral") {
-    return { type: "constant", value: node.value };
-  } else if (node.type === "TemplateLiteral" && node.quasis.length === 1) {
-    return { type: "constant", value: node.quasis[0].value.raw };
-  } else if (node.type === "ObjectExpression") {
-    return { type: "record", value: parseObjectExpression(node) };
+  } else if (expression.type === "StringLiteral" || expression.type === "NumericLiteral") {
+    return { type: "constant", value: expression.value };
+  } else if (expression.type === "TemplateLiteral" && expression.quasis.length === 1) {
+    return { type: "constant", value: expression.quasis[0].value.raw };
+  } else if (expression.type === "ObjectExpression") {
+    return { type: "record", value: parseObjectExpression(expression) };
   }
   return { type: "unsupported" };
 }
