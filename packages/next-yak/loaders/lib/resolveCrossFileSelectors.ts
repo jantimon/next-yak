@@ -523,10 +523,8 @@ async function resolveModuleSpecifierRecursively(
     } else if (exportValue.type === "record") {
       let current: any = exportValue.value;
 
-      // Remove any duplicate "layout" entries from the specifier
-      specifier = specifier.filter(
-        (item, index) => index === 0 || item !== "layout",
-      );
+      // It's possible that we have a specifier like ['layout', 'layout', 'sectorBandHeight', 'val']
+      specifier = removeDuplicates(specifier);
 
       for (let depth = 1; depth < specifier.length; depth++) {
         if (current === undefined) {
@@ -537,9 +535,12 @@ async function resolveModuleSpecifierRecursively(
           );
         }
 
-        // Handle CSSVariable objects
-        if (current && typeof current === "object" && "val" in current) {
-          return { type: "constant", value: current.val };
+        if (
+          current &&
+          typeof current === "object" &&
+          typeof current[specifier[depth]] === "string"
+        ) {
+          return { type: "constant", value: current[specifier[depth]] };
         }
 
         if (typeof current === "string" || typeof current === "number") {
@@ -560,10 +561,6 @@ async function resolveModuleSpecifierRecursively(
             );
           }
           if (typeof finalValue === "object" && finalValue !== null) {
-            // Handle CSSVariable objects
-            if ("val" in finalValue) {
-              return { type: "constant", value: finalValue.val };
-            }
             return { type: "record", value: finalValue };
           } else {
             return { type: "constant", value: finalValue };
@@ -593,6 +590,10 @@ async function resolveModuleSpecifierRecursively(
       }`,
     );
   }
+}
+
+function removeDuplicates(specifiers: string[]): string[] {
+  return Array.from(new Set(specifiers));
 }
 
 type ParsedFile =
