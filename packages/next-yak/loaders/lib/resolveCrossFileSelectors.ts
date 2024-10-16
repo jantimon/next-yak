@@ -522,59 +522,56 @@ async function resolveModuleSpecifierRecursively(
       return { type: "constant", value: exportValue.value };
     } else if (exportValue.type === "record") {
       let current: any = exportValue.value;
+      let depth = 0;
 
       // It's possible that we have a specifier like ['layout', 'layout', 'sectorBandHeight', 'val']
       specifier = removeDuplicates(specifier);
 
-      for (let depth = 1; depth < specifier.length; depth++) {
-        if (current === undefined) {
-          throw new Error(
-            `Error unpacking Record/Array "${exportName}".\nKey "${
-              specifier[depth - 1]
-            }" is undefined`,
-          );
-        }
-
+      /// Drill down the specifier e.g. colors.primary
+      do {
         if (
           current &&
           typeof current === "object" &&
           typeof current[specifier[depth]] === "string"
         ) {
           return { type: "constant", value: current[specifier[depth]] };
-        }
-
-        if (typeof current === "string" || typeof current === "number") {
-          return { type: "constant", value: current };
-        } else if (typeof current !== "object" || current === null) {
+        } else if (typeof current === "string" || typeof current === "number") {
+          return {
+            type: "constant" as const,
+            value: current,
+          };
+        } else if (
+          !current ||
+          (typeof current !== "object" && !Array.isArray(current))
+        ) {
           throw new Error(
             `Error unpacking Record/Array "${exportName}".\nKey "${
-              specifier[depth - 1]
-            }" was of type "${typeof current}" but only Object, String, and Number are supported`,
+              specifier[depth]
+            }" was of type "${typeof current}" but only String and Number are supported`,
           );
         }
-
-        if (depth === specifier.length - 1) {
-          const finalValue = current[specifier[depth]];
-          if (finalValue === undefined) {
-            throw new Error(
-              `Error unpacking Record/Array "${exportName}".\nKey "${specifier[depth]}" is undefined`,
-            );
-          }
-          if (typeof finalValue === "object" && finalValue !== null) {
-            return { type: "record", value: finalValue };
-          } else {
-            return { type: "constant", value: finalValue };
-          }
+        depth++;
+        // mixins in .yak files are wrapped inside an object with a __yak key
+        if (depth === specifier.length && "__yak" in current) {
+          return { type: "mixin", value: current["__yak"] };
+        } else if (depth === specifier.length && "value" in current) {
+          return { type: "constant", value: current["value"] };
         } else {
           current = current[specifier[depth]];
         }
+      } while (current);
+      if (specifier[depth] === undefined) {
+        throw new Error(
+          `Error unpacking Record/Array - could not extract \`${specifier
+            .slice(0, depth)
+            .join(".")}\` is not a string or number`,
+        );
       }
-
-      // If we've made it here, we're at the end of the specifier
-      if (current && typeof current === "object" && "val" in current) {
-        return { type: "constant", value: current.val };
-      }
-      return { type: "constant", value: current };
+      throw new Error(
+        `Error unpacking Record/Array - could not extract \`${
+          specifier[depth]
+        }\` from \`${specifier.slice(0, depth).join(".")}\``,
+      );
     } else if (exportValue.type === "mixin") {
       return { type: "mixin", value: exportValue.value };
     }
@@ -612,5 +609,4 @@ type ParsedExport =
 type ResolvedExport =
   | { type: "styled-component"; from: string; name: string }
   | { type: "mixin"; value: string | number }
-  | { type: "constant"; value: string | number }
-  | { type: "record"; value: Record<string, any> };
+  | { type: "constant"; value: string | number };
