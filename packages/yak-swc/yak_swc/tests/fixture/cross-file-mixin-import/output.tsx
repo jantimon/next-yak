@@ -32,7 +32,7 @@ export const Button4 = /*YAK Extracted CSS:
 export const Button5 = /*YAK Extracted CSS:
 .Button5 {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
-  --yak-css-import: url("./fancy:fancy:fancy:mixins:specialEffect",mixin);
+  --yak-css-import: url("./fancy:fancy:mixins:specialEffect",mixin);
   color: green;
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button5);
@@ -41,7 +41,7 @@ export const Button6 = /*YAK Extracted CSS:
   &:hover {
     --yak-css-import: url("./constants.yak:yakMixin",selector);
   }
-  --yak-css-import: url("./fancy:fancy:fancy:mixins:specialEffect",mixin)
+  --yak-css-import: url("./fancy:fancy:mixins:specialEffect",mixin)
 ;
   color: green;
 }
