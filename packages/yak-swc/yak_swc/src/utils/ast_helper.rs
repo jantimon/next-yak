@@ -57,7 +57,6 @@ pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<At
       let result = member_expr_to_strings(&member)?;
       let (root_ident, mut nested_props) = result;
       nested_props.extend(props);
-      nested_props.insert(0, root_ident.sym.clone());
       Some((root_ident, nested_props))
     }
     _ => None,
