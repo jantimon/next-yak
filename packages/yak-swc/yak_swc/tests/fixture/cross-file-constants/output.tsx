@@ -1,16 +1,17 @@
 import { styled } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 // @ts-ignore
-import { colors } from "./colors";
+import { colors } from "./colorDefinitions";
 // @ts-ignore
-import { fonts } from "./fonts";
+import { fonts } from "./fontDefinitions";
 // @ts-ignore
-import { sizes } from "./sizes";
+import { sizes } from "./sizeDefinitions";
 export const Button = /*YAK Extracted CSS:
 .Button {
-  font-size: --yak-css-import: url("./fonts:fonts:sm",mixin);
-  color: --yak-css-import: url("./colors:colors:dark:primary",mixin);
-  background-color: --yak-css-import: url("./colors:colors:light:full%20opacity",mixin);
-  height: --yak-css-import: url("./sizes:sizes:0",mixin);
+  font-size: --yak-css-import: url("./fontDefinitions:fonts:sm",mixin);
+  color: --yak-css-import: url("./colorDefinitions:colors:dark:primary",mixin);
+  border-color: --yak-css-import: url("./colorDefinitions:colors:shadows:dark:primary",mixin);
+  background-color: --yak-css-import: url("./colorDefinitions:colors:light:full%20opacity",mixin);
+  height: --yak-css-import: url("./sizeDefinitions:sizes:0",mixin);
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button);
