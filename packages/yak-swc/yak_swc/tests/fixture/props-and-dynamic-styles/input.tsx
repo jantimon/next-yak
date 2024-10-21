@@ -6,5 +6,7 @@ export const FlexContainer = styled.div`
   flex-direction: ${({ $direction }) => $direction || 'row'};
   justify-content: ${({ $justify }) => $justify || 'flex-start'};
   padding: 20px;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom || '0'}px;
+  top: ${({ $top }) => $top * 20}%;
   background-color: #f0f0f0;
 `;

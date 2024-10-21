@@ -833,7 +833,9 @@ fn pure_annotation() -> Comment {
 /// Extracts the leading css unit from a css code
 /// Use a heuristic to determine if the unit is a valid css unit by checking the length
 fn extract_leading_css_unit(css: &str) -> Option<&str> {
-  let end = css.find(|c: char| !c.is_alphabetic()).unwrap_or(css.len());
+  let end = css
+    .find(|c: char| !c.is_alphabetic() && c != '%')
+    .unwrap_or(css.len());
   if end > 0 && end <= 4 {
     let unit = &css[..end];
     return Some(unit);
