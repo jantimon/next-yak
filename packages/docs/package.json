@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
+    "build": "pnpm run build:yak && pnpm run build:next",
+    "build:next": "next build",
+    "build:yak": "pnpm run --filter next-yak build",
+    "build:swc": "pnpm run --filter yak-swc build",
     "start": "next start",
+    "lint": "next lint",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
