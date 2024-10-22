@@ -29,7 +29,11 @@ For details please refer to the [next-yak documentation](https://yak.js.org/).
 
 ## Contributing
 
-Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the [next-yak GitHub repository](https://github.com/jantimon/next-yak).
+Contributions are welcome!
+
+The [contributing guide](https://github.com/jantimon/next-yak/blob/main/contributing-guide.md) helps you get started with setting up the development environment and explains the development workflow.
+
+If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the [next-yak GitHub repository](https://github.com/jantimon/next-yak).
 
 ## License
 
