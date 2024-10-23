@@ -39,7 +39,7 @@ export const Button5 = /*YAK Extracted CSS:
 export const Button6 = /*YAK Extracted CSS:
 .Button6 {
   &:hover {
-    --yak-css-import: url("./constants.yak:yakMixin",selector);
+    --yak-css-import: url("./constants.yak:yakMixin",mixin);
   }
   --yak-css-import: url("./fancy:fancy:mixins:specialEffect",mixin)
 ;
