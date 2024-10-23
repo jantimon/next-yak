@@ -28,6 +28,8 @@ mod yak_imports;
 use yak_imports::YakImportVisitor;
 mod yak_file_visitor;
 use yak_file_visitor::YakFileVisitor;
+mod math_evaluate;
+use math_evaluate::try_evaluate;
 
 mod utils {
   pub(crate) mod add_suffix_to_expr;
@@ -209,10 +211,24 @@ where
       // e.g. const Button = styled.button`color: ${() => /* ... */};`
       //                                            ^^^^^^^^^^^^^^^^
       if let Some(expr) = pair.expr {
+        // Handle simple math expressions in css expressions
+        // e.g. styled.button`width: ${100 + 20}px;`
+        if let Some(evaluated_math_calculation) = try_evaluate(expr, &self.variables) {
+          // Format to 4 decimal places
+          let (new_state, new_declarations) = parse_css(
+            &format!("{:.4}", evaluated_math_calculation)
+              .trim_end_matches('0')
+              .trim_end_matches('.')
+              .to_string(),
+            css_state,
+          );
+          css_state = Some(new_state);
+          self.current_declaration.extend(new_declarations);
+        }
         // Handle constants in css expressions
         // e.g. styled.button`color: ${primary};` (Ident)
         // e.g. styled.button`color: ${colors.primary};` (MemberExpression)
-        if let Some(scoped_name) = extract_ident_and_parts(expr) {
+        else if let Some(scoped_name) = extract_ident_and_parts(expr) {
           // Known StyledComponents, Mixin or Animations in the same file
           if let Some(referenced_yak_css) = self.variable_name_selector_mapping.get(&scoped_name) {
             let (new_state, new_declarations) = parse_css(referenced_yak_css, css_state);
