@@ -59,8 +59,8 @@ impl VariableVisitor {
   /// Try to get a constant value for a variable id
   /// Supports normal constant values, object properties and array elements
   /// e.g. get_const_value(("primary#0", vec![atom!("primary"), atom!("red")]))
-  pub fn get_const_value(&mut self, scoped_name: &ScopedVariableReference) -> Option<Box<Expr>> {
-    if let Some(expr) = self.variables.get_mut(&scoped_name.id) {
+  pub fn get_const_value(&self, scoped_name: &ScopedVariableReference) -> Option<Box<Expr>> {
+    if let Some(expr) = self.variables.get(&scoped_name.id) {
       // Start with the initial expression
       let mut current_expr: &Expr = expr;
       // Iterate over the parts (skipping the first one as it's the variable name)
