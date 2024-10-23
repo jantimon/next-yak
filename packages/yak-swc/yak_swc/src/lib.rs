@@ -242,29 +242,28 @@ where
           else if let Some((_import_source_type, module_path)) =
             self.variables.get_imported_variable(&scoped_name.id)
           {
-            let import_kind: ImportKind = match find_char(
-              &quasis[pair.index..]
-                .iter()
-                .map(|quasi| quasi.raw.as_str())
-                .collect::<String>(),
-              &[';', '{', '}', '@'],
-            ) {
-              Some((char, _)) =>
-              // e.g. styled.button`${Icon} { ... }`
-              {
-                if char == '{' {
-                  ImportKind::Selector
+            let code_after_expression = &quasis[pair.index + 1..]
+              .iter()
+              .map(|quasi| quasi.raw.as_str())
+              .collect::<String>();
+            let import_kind: ImportKind =
+              match find_char(&code_after_expression, &[';', '{', '}', '@']) {
+                Some((char, _)) =>
+                // e.g. styled.button`${Icon} { ... }`
+                {
+                  if char == '{' {
+                    ImportKind::Selector
+                  }
+                  // e.g. styled.button`${colors.primary} @media { ... }`
+                  // e.g. styled.button`.foo { ${colors.primary} }`
+                  // e.g. styled.button`${colors.primary};`
+                  else {
+                    ImportKind::Mixin
+                  }
                 }
-                // e.g. styled.button`${colors.primary} @media { ... }`
-                // e.g. styled.button`.foo { ${colors.primary} }`
-                // e.g. styled.button`${colors.primary};`
-                else {
-                  ImportKind::Mixin
-                }
-              }
-              // e.g. styled.button`${colors.primary}`
-              None => ImportKind::Mixin,
-            };
+                // e.g. styled.button`${colors.primary}`
+                None => ImportKind::Mixin,
+              };
             let cross_file_import_token =
               encode_module_import(module_path.as_str(), scoped_name.parts, import_kind);
 
