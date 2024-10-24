@@ -167,7 +167,10 @@ impl YakTransform for TransformCssMixin {
     let mut parser_state = ParserState::new();
     // TODO: Remove the unused scope once nested mixins work again
     parser_state.current_scopes = vec![CssScope {
-      name: format!(".{}", naming_convention.generate_unique_name_for_variable(declaration_name)),
+      name: format!(
+        ".{}",
+        naming_convention.generate_unique_name_for_variable(declaration_name)
+      ),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
@@ -208,8 +211,14 @@ impl YakTransform for TransformCssMixin {
     let css_prefix = if self.is_exported {
       Some(format!(
         "YAK EXPORTED MIXIN:{}",
-        self.export_name.as_ref().unwrap().parts.iter()
-        .map(|atom| encode_percent(atom.as_str())).join(":")
+        self
+          .export_name
+          .as_ref()
+          .unwrap()
+          .parts
+          .iter()
+          .map(|atom| encode_percent(atom.as_str()))
+          .join(":")
       ))
     } else {
       None
