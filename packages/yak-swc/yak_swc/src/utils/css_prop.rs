@@ -2,7 +2,7 @@ use swc_core::{
   common::{Span, DUMMY_SP},
   ecma::ast::{
     CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
-    JSXAttrValue, JSXElementName, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop,
+    JSXAttrValue, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop,
     PropName, PropOrSpread, SpreadElement,
   },
   plugin::errors::HANDLER,
@@ -82,6 +82,9 @@ impl CSSProp {
     }
   }
 
+  /// Extracts the CSS expression from a JSX attribute or spread element.
+  /// Returns the expression wrapped in a function call with an empty object argument.
+  /// e.g. `css\`color: red\`` becomes `css\`color: red\`({})`
   fn extract_css_expr(attr: &JSXAttrOrSpread, span: Span) -> Result<Box<Expr>, TransformError> {
     match attr {
       JSXAttrOrSpread::JSXAttr(jsx_attr) => jsx_attr
@@ -110,6 +113,10 @@ impl CSSProp {
     }
   }
 
+  /// Maps JSX attributes or spread elements to PropOrSpread elements.
+  /// This is used to convert JSX attributes to object properties for the merge call.
+  /// Because the order of the properties are already reversed, the attributes are iterated in reverse order.
+  /// This is done to maintain the order of the attributes when they are merged.
   fn map_props(props: &[JSXAttrOrSpread]) -> Result<Vec<PropOrSpread>, TransformError> {
     props
       .iter()
@@ -121,6 +128,9 @@ impl CSSProp {
       .collect()
   }
 
+  /// Maps a single JSX attribute to a PropOrSpread element.
+  /// This is used to convert a JSX attribute to an object property for the merge call.
+  /// e.g. `style={{color: red}}` becomes `{style: {color: red}}`
   fn map_jsx_attr(attr: &JSXAttr) -> Result<PropOrSpread, TransformError> {
     match &attr.name {
       JSXAttrName::Ident(ident) => Ok(PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
@@ -131,6 +141,9 @@ impl CSSProp {
     }
   }
 
+  /// Extracts the value from a JSX attribute.
+  /// This handles different types of attribute values and converts them to expressions.
+  /// e.g. `style={{color: red}}` becomes `{color: red}`
   fn extract_value(value: &Option<JSXAttrValue>, span: Span) -> Result<Box<Expr>, TransformError> {
     value
       .as_ref()
@@ -145,6 +158,9 @@ impl CSSProp {
       })
   }
 
+  /// Creates a merge call expression that combines the CSS props with other relevant props.
+  /// This is used when there are additional props (like className or style) that need to be merged.
+  /// e.g. `style={{color: "red"}} className="foo"` becomes `merge_ident({style: {color: "red"}}, {className: "foo"})`
   fn create_merge_call(
     mapped_props: &[PropOrSpread],
     expr: Box<Expr>,
@@ -176,10 +192,6 @@ impl HasCSSProp for JSXOpeningElement {
   /// Returns the index of the `css` attribute and the indices of other relevant attributes
   /// (like `className` and `style`).
   fn has_css_prop(&self) -> Option<CSSProp> {
-    if !is_native_element(&self.name) {
-      return None;
-    }
-
     let mut css_index = None;
     let mut relevant_props = Vec::new();
 
@@ -202,17 +214,6 @@ impl HasCSSProp for JSXOpeningElement {
       index,
       relevant_props_indices: relevant_props,
     })
-  }
-}
-
-// good enough for now. Better to use a list of known native elements.
-fn is_native_element(name: &JSXElementName) -> bool {
-  match name {
-    JSXElementName::Ident(ident) => {
-      let first_char = ident.sym.chars().next().unwrap_or('\0');
-      first_char.is_ascii_lowercase()
-    }
-    _ => false,
   }
 }
 
