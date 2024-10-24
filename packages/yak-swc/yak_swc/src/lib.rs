@@ -216,10 +216,9 @@ where
         if let Some(evaluated_math_calculation) = try_evaluate(expr, &self.variables) {
           // Format to 4 decimal places
           let (new_state, new_declarations) = parse_css(
-            &format!("{:.4}", evaluated_math_calculation)
+            format!("{:.4}", evaluated_math_calculation)
               .trim_end_matches('0')
-              .trim_end_matches('.')
-              .to_string(),
+              .trim_end_matches('.'),
             css_state,
           );
           css_state = Some(new_state);
@@ -247,7 +246,7 @@ where
               .map(|quasi| quasi.raw.as_str())
               .collect::<String>();
             let import_kind: ImportKind =
-              match find_char(&code_after_expression, &[';', '{', '}', '@']) {
+              match find_char(code_after_expression, &[';', '{', '}', '@']) {
                 Some((char, _)) =>
                 // e.g. styled.button`${Icon} { ... }`
                 {
@@ -728,9 +727,6 @@ where
       }
     };
 
-    // Remove the scope postfix to make the variable name easier to read
-    let current_variable_name = current_variable_id.id.0.to_string();
-
     // Current css parser state to parse an incomplete css code from a quasi
     // In css-in-js the outer css scope is missing e.g.:
     // styled.button`color: red;` => .button { color: red; }
@@ -739,7 +735,7 @@ where
     // a surrounding scope is added
     let css_state = Some(transform.create_css_state(
       &mut self.naming_convention,
-      &current_variable_name,
+      &current_variable_id,
       self.current_css_state.clone(),
     ));
 

@@ -1,7 +1,10 @@
+use itertools::Itertools;
 use rustc_hash::FxHashMap;
 use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
+use crate::utils::encode_module_import::encode_percent;
+use crate::variable_visitor::ScopedVariableReference;
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use swc_core::common::{Span, DUMMY_SP};
 use swc_core::ecma::ast::*;
@@ -28,7 +31,7 @@ pub trait YakTransform {
   fn create_css_state(
     &mut self,
     naming_convention: &mut NamingConvention,
-    declaration_name: &str,
+    declaration_name: &ScopedVariableReference,
     previous_parser_state: Option<ParserState>,
   ) -> ParserState;
   /// Transform the expression\
@@ -69,12 +72,15 @@ impl YakTransform for TransformNestedCss {
   fn create_css_state(
     &mut self,
     naming_convention: &mut NamingConvention,
-    declaration_name: &str,
+    declaration_name: &ScopedVariableReference,
     previous_parser_state: Option<ParserState>,
   ) -> ParserState {
     let condition = self.condition.join("-and-");
-    let css_identifier =
-      naming_convention.generate_unique_name(&format!("{}__{}", declaration_name, condition));
+    let css_identifier = naming_convention.generate_unique_name(&format!(
+      "{}__{}",
+      declaration_name.to_readable_string(),
+      condition
+    ));
     self.class_name = Some(css_identifier.clone());
     // It is safe to unwrap here because the previous_parser_state is always set for a nested css
     let mut parser_state = previous_parser_state.clone().unwrap();
@@ -137,14 +143,14 @@ impl YakTransform for TransformNestedCss {
 /// e.g. const myMixin = css`...`
 pub struct TransformCssMixin {
   /// ClassName of the mixin
-  class_name: Option<String>,
+  export_name: Option<ScopedVariableReference>,
   is_exported: bool,
 }
 
 impl TransformCssMixin {
   pub fn new(is_exported: bool) -> TransformCssMixin {
     TransformCssMixin {
-      class_name: None,
+      export_name: None,
       is_exported,
     }
   }
@@ -154,15 +160,17 @@ impl YakTransform for TransformCssMixin {
   fn create_css_state(
     &mut self,
     naming_convention: &mut NamingConvention,
-    declaration_name: &str,
+    declaration_name: &ScopedVariableReference,
     _previous_parser_state: Option<ParserState>,
   ) -> ParserState {
-    let css_identifier = naming_convention.generate_unique_name(declaration_name);
-    self.class_name = Some(css_identifier.clone());
+    self.export_name = Some(declaration_name.clone());
     let mut parser_state = ParserState::new();
     // TODO: Remove the unused scope once nested mixins work again
     parser_state.current_scopes = vec![CssScope {
-      name: format!(".{}", css_identifier),
+      name: format!(
+        ".{}",
+        naming_convention.generate_unique_name_for_variable(declaration_name)
+      ),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
@@ -203,7 +211,14 @@ impl YakTransform for TransformCssMixin {
     let css_prefix = if self.is_exported {
       Some(format!(
         "YAK EXPORTED MIXIN:{}",
-        self.class_name.as_ref().unwrap(),
+        self
+          .export_name
+          .as_ref()
+          .unwrap()
+          .parts
+          .iter()
+          .map(|atom| encode_percent(atom.as_str()))
+          .join(":")
       ))
     } else {
       None
@@ -244,10 +259,10 @@ impl YakTransform for TransformStyled {
   fn create_css_state(
     &mut self,
     naming_convention: &mut NamingConvention,
-    declaration_name: &str,
+    declaration_name: &ScopedVariableReference,
     _previous_parser_state: Option<ParserState>,
   ) -> ParserState {
-    let css_identifier = naming_convention.generate_unique_name(declaration_name);
+    let css_identifier = naming_convention.generate_unique_name_for_variable(declaration_name);
     self.class_name = Some(css_identifier.clone());
     let mut parser_state = ParserState::new();
     parser_state.current_scopes = vec![CssScope {
@@ -325,11 +340,11 @@ impl YakTransform for TransformKeyframes {
   fn create_css_state(
     &mut self,
     naming_convention: &mut NamingConvention,
-    declaration_name: &str,
+    declaration_name: &ScopedVariableReference,
     _previous_parser_state: Option<ParserState>,
   ) -> ParserState {
     let css_identifier = if self.animation_name.is_none() {
-      let new_identifier = naming_convention.generate_unique_name(declaration_name);
+      let new_identifier = naming_convention.generate_unique_name_for_variable(declaration_name);
       self.animation_name = Some(new_identifier.clone());
       new_identifier
     } else {
