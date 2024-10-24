@@ -2,8 +2,8 @@ use swc_core::{
   common::{Span, DUMMY_SP},
   ecma::ast::{
     CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
-    JSXAttrValue, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop,
-    PropName, PropOrSpread, SpreadElement,
+    JSXAttrValue, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop, PropName,
+    PropOrSpread, SpreadElement,
   },
   plugin::errors::HANDLER,
 };

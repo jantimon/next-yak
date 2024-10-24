@@ -233,7 +233,9 @@ impl YakTransform for TransformCssMixin {
           Expr::Member(MemberExpr {
             span: DUMMY_SP,
             obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-            prop: create_member_prop_from_string(self.export_name.clone().unwrap().to_readable_string()),
+            prop: create_member_prop_from_string(
+              self.export_name.clone().unwrap().to_readable_string(),
+            ),
           })
           .into(),
         );
