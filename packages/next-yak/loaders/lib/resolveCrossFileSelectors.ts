@@ -238,7 +238,7 @@ async function parseFile(
     // e.g. cross file mixins inside a cross file mixin
     // or a cross file selector inside a cross file mixin
     await Promise.all(
-      Object.entries(mixins).map(async ([name, {value, nameParts}]) => {
+      Object.entries(mixins).map(async ([name, { value, nameParts }]) => {
         const resolvedValue = await resolveCrossFileConstant(
           loader,
           path.dirname(filePath),
@@ -261,7 +261,7 @@ async function parseFile(
             let next = current[nameParts[i]];
             if (!next) {
               next = { type: "record", value: {} };
-              current[nameParts[i]] = next
+              current[nameParts[i]] = next;
             } else if (next.type !== "record") {
               throw new Error(
                 `Error parsing file ${filePath}: ${nameParts[i]} is not a record`,
@@ -269,7 +269,10 @@ async function parseFile(
             }
             current = next.value;
           }
-          current[nameParts[nameParts.length - 1]] = { type: "mixin", value: resolvedValue };
+          current[nameParts[nameParts.length - 1]] = {
+            type: "mixin",
+            value: resolvedValue,
+          };
         }
       }),
     );
@@ -371,26 +374,26 @@ async function parseExports(
 
 function parseMixins(
   sourceContents: string,
-): Record<string, { type: "mixin"; value: string,
-  nameParts: string[]
- }> {
+): Record<string, { type: "mixin"; value: string; nameParts: string[] }> {
   // Mixins are always in the following format:
   // /*YAK EXPORTED MIXIN:fancy:aspectRatio:16:9
   // css
   // */
   const mixinParts = sourceContents.split("/*YAK EXPORTED MIXIN:");
-  let mixins: Record<string, { type: "mixin"; value: string, nameParts: string[]
-   }> = {};
-  
+  let mixins: Record<
+    string,
+    { type: "mixin"; value: string; nameParts: string[] }
+  > = {};
+
   for (let i = 1; i < mixinParts.length; i++) {
     const [comment] = mixinParts[i].split("*/", 1);
     const position = comment.indexOf("\n");
     const name = comment.slice(0, position);
     const value = comment.slice(position + 1);
-    mixins[name] = { 
-      type: "mixin", 
+    mixins[name] = {
+      type: "mixin",
       value,
-      nameParts: name.split(":").map(part => decodeURIComponent(part))
+      nameParts: name.split(":").map((part) => decodeURIComponent(part)),
     };
   }
   return mixins;
