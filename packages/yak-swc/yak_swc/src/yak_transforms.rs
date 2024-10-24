@@ -233,7 +233,7 @@ impl YakTransform for TransformCssMixin {
           Expr::Member(MemberExpr {
             span: DUMMY_SP,
             obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-            prop: create_member_prop_from_string(self.class_name.clone().unwrap()),
+            prop: create_member_prop_from_string(self.export_name.clone().unwrap().to_readable_string()),
           })
           .into(),
         );
@@ -263,7 +263,7 @@ impl YakTransform for TransformCssMixin {
 
   fn get_css_reference_name(&self) -> Option<String> {
     if self.is_within_jsx_attribute {
-      return Some(self.class_name.clone().unwrap());
+      return Some(self.export_name.as_ref().unwrap().to_readable_string());
     }
     None
   }
