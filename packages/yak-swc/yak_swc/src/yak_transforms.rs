@@ -1,7 +1,9 @@
+use itertools::Itertools;
 use rustc_hash::FxHashMap;
 use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
+use crate::utils::encode_module_import::encode_percent;
 use crate::variable_visitor::ScopedVariableReference;
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use swc_core::common::{Span, DUMMY_SP};
@@ -141,14 +143,14 @@ impl YakTransform for TransformNestedCss {
 /// e.g. const myMixin = css`...`
 pub struct TransformCssMixin {
   /// ClassName of the mixin
-  class_name: Option<String>,
+  export_name: Option<ScopedVariableReference>,
   is_exported: bool,
 }
 
 impl TransformCssMixin {
   pub fn new(is_exported: bool) -> TransformCssMixin {
     TransformCssMixin {
-      class_name: None,
+      export_name: None,
       is_exported,
     }
   }
@@ -161,12 +163,11 @@ impl YakTransform for TransformCssMixin {
     declaration_name: &ScopedVariableReference,
     _previous_parser_state: Option<ParserState>,
   ) -> ParserState {
-    let css_identifier = naming_convention.generate_unique_name_for_variable(declaration_name);
-    self.class_name = Some(css_identifier.clone());
+    self.export_name = Some(declaration_name.clone());
     let mut parser_state = ParserState::new();
     // TODO: Remove the unused scope once nested mixins work again
     parser_state.current_scopes = vec![CssScope {
-      name: format!(".{}", css_identifier),
+      name: format!(".{}", naming_convention.generate_unique_name_for_variable(declaration_name)),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
@@ -207,7 +208,8 @@ impl YakTransform for TransformCssMixin {
     let css_prefix = if self.is_exported {
       Some(format!(
         "YAK EXPORTED MIXIN:{}",
-        self.class_name.as_ref().unwrap(),
+        self.export_name.as_ref().unwrap().parts.iter()
+        .map(|atom| encode_percent(atom.as_str())).join(":")
       ))
     } else {
       None

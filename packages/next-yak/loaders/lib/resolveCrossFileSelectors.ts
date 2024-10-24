@@ -238,24 +238,45 @@ async function parseFile(
     // e.g. cross file mixins inside a cross file mixin
     // or a cross file selector inside a cross file mixin
     await Promise.all(
-      Object.entries(mixins).map(async ([name, mixin]) => {
-        mixins[name] = {
-          type: "mixin",
-          value: await resolveCrossFileConstant(
-            loader,
-            path.dirname(filePath),
-            mixin.value,
-          ),
-        };
+      Object.entries(mixins).map(async ([name, {value, nameParts}]) => {
+        const resolvedValue = await resolveCrossFileConstant(
+          loader,
+          path.dirname(filePath),
+          value,
+        );
+        if (nameParts.length === 1) {
+          exports[name] = { type: "mixin", value: resolvedValue };
+        } else {
+          let exportEntry: undefined | ParsedExport = exports[nameParts[0]];
+          if (!exportEntry) {
+            exportEntry = { type: "record", value: {} };
+            exports[nameParts[0]] = exportEntry;
+          } else if (exportEntry.type !== "record") {
+            throw new Error(
+              `Error parsing file ${filePath}: ${nameParts[0]} is not a record`,
+            );
+          }
+          let current = exportEntry.value as Record<any, ParsedExport>;
+          for (let i = 1; i < nameParts.length - 1; i++) {
+            let next = current[nameParts[i]];
+            if (!next) {
+              next = { type: "record", value: {} };
+              current[nameParts[i]] = next
+            } else if (next.type !== "record") {
+              throw new Error(
+                `Error parsing file ${filePath}: ${nameParts[i]} is not a record`,
+              );
+            }
+            current = next.value;
+          }
+          current[nameParts[nameParts.length - 1]] = { type: "mixin", value: resolvedValue };
+        }
       }),
     );
 
     return {
       type: "regular",
-      exports: {
-        ...exports,
-        ...mixins,
-      },
+      exports,
       filePath,
     };
   } catch (error) {
@@ -350,19 +371,27 @@ async function parseExports(
 
 function parseMixins(
   sourceContents: string,
-): Record<string, { type: "mixin"; value: string }> {
+): Record<string, { type: "mixin"; value: string,
+  nameParts: string[]
+ }> {
   // Mixins are always in the following format:
-  // /*YAK EXPORTED MIXIN:name
+  // /*YAK EXPORTED MIXIN:fancy:aspectRatio:16:9
   // css
   // */
   const mixinParts = sourceContents.split("/*YAK EXPORTED MIXIN:");
-  let mixins: Record<string, { type: "mixin"; value: string }> = {};
+  let mixins: Record<string, { type: "mixin"; value: string, nameParts: string[]
+   }> = {};
+  
   for (let i = 1; i < mixinParts.length; i++) {
     const [comment] = mixinParts[i].split("*/", 1);
     const position = comment.indexOf("\n");
     const name = comment.slice(0, position);
     const value = comment.slice(position + 1);
-    mixins[name] = { type: "mixin", value };
+    mixins[name] = { 
+      type: "mixin", 
+      value,
+      nameParts: name.split(":").map(part => decodeURIComponent(part))
+    };
   }
   return mixins;
 }
@@ -407,8 +436,8 @@ function parseExportValueExpression(
 
 function parseObjectExpression(
   node: babel.types.ObjectExpression,
-): Record<string, any> {
-  let result: Record<string, any> = {};
+): Record<string, ParsedExport> {
+  let result: Record<string, ParsedExport> = {};
   for (const property of node.properties) {
     if (
       property.type === "ObjectProperty" &&
@@ -587,7 +616,7 @@ type ParsedExport =
   | { type: "styled-component" }
   | { type: "mixin"; value: string }
   | { type: "constant"; value: string | number }
-  | { type: "record"; value: {} }
+  | { type: "record"; value: Record<any, ParsedExport> | {} }
   | { type: "unsupported" }
   | { type: "re-export"; from: string; imported: string }
   | { type: "star-export"; from: string[] };

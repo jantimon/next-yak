@@ -55,6 +55,11 @@ const Headline = styled.h1<{ $primary?: boolean }>`
   ${headline}
 `;
 
+const SubHeadline = styled.h2`
+  ${typography.h2};
+  color: #323248;
+`;
+
 const Button = styled.button<{ $primary?: boolean }>`
   display: block;
   ${({ theme }) =>
@@ -117,6 +122,7 @@ export default function Home() {
     <YakThemeProvider>
       <main className={styles.main}>
         <Headline $primary>Hello world</Headline>
+        <SubHeadline $primary>example page</SubHeadline>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">

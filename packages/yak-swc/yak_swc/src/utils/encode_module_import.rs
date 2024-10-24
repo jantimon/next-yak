@@ -37,7 +37,7 @@ pub fn encode_module_import(
 ) -> String {
   let encoded_chain = import_chain
     .into_iter()
-    .map(|part| utf8_percent_encode(&part, NON_ALPHANUMERIC).to_string())
+    .map(|part| encode_percent(&part))
     .collect::<Vec<String>>()
     .join(":");
   format!(
@@ -50,6 +50,12 @@ pub fn encode_module_import(
       "mixin"
     }
   )
+}
+
+/// Encode a string to be used in a URL
+/// e.g: "foo bar" -> "foo%20bar"
+pub fn encode_percent(input: &str) -> String {
+  utf8_percent_encode(input, NON_ALPHANUMERIC).to_string()
 }
 
 #[cfg(test)]
