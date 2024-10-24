@@ -122,7 +122,7 @@ export default function Home() {
     <YakThemeProvider>
       <main className={styles.main}>
         <Headline $primary>Hello world</Headline>
-        <SubHeadline $primary>example page</SubHeadline>
+        <SubHeadline>example page</SubHeadline>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">
