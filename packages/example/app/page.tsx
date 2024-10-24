@@ -61,16 +61,18 @@ const SubHeadline = styled.h2`
 `;
 
 const Button = styled.button<{ $primary?: boolean }>`
-  display: block;
-  ${({ theme }) =>
-    theme.highContrast
-      ? css`
-          color: ${colors.dark};
-        `
-      : css`
-          color: #009688;
-        `}
-  background: #fff;
+  @layer base {
+    display: block;
+    ${({ theme }) =>
+      theme.highContrast
+        ? css`
+            color: ${colors.dark};
+          `
+        : css`
+            color: #009688;
+          `}
+    background: #fff;
+  }
   border: 1px solid currentColor;
   font-size: 17px;
   padding: 7px 12px;
