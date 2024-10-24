@@ -34,3 +34,14 @@ export const Button = /*YAK Extracted CSS:
   }
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button, ({ $isSet })=>$isSet && true && true && true && /*#__PURE__*/ css(__styleYak.Button__));
+export const aspectRatios = {
+    base: /*YAK EXPORTED MIXIN:aspectRatios_base
+padding-top: 100%;
+*/ /*#__PURE__*/ css(),
+    "16:9": /*YAK EXPORTED MIXIN:aspectRatios_16\:9
+padding-top: 56.25%;
+*/ /*#__PURE__*/ css(),
+    "4:3": /*YAK EXPORTED MIXIN:aspectRatios_4\:3
+padding-top: 75%;
+*/ /*#__PURE__*/ css()
+};

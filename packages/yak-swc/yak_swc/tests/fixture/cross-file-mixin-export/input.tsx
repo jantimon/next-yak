@@ -32,3 +32,15 @@ export const Button = styled.button`
     ${textStyles};
   }
 `;
+
+export const aspectRatios = {
+  base: css`
+    padding-top: 100%;
+  `,
+  "16:9": css`
+    padding-top: 56.25%;
+  `,
+  "4:3": css`
+    padding-top: 75%;
+  `,
+}

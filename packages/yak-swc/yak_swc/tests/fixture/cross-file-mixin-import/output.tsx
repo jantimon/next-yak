@@ -46,3 +46,13 @@ export const Button6 = /*YAK Extracted CSS:
   color: green;
 }
 */ /*#__PURE__*/ styled.button(__styleYak.Button6);
+export const Button7 = /*YAK Extracted CSS:
+.Button7 {
+  &:hover {
+    --yak-css-import: url("./constants.yak:yakMixin",mixin);
+  }
+  --yak-css-import: url("./fancy:fancy:aspectRatio:16%3A9",mixin)
+;
+  color: green;
+}
+*/ /*#__PURE__*/ styled.button(__styleYak.Button7);

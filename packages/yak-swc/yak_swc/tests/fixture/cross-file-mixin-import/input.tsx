@@ -38,3 +38,11 @@ export const Button6 = styled.button`
   }
   color: green;
 `;
+
+export const Button7 = styled.button`
+  &:hover {
+    ${yakMixin};
+    ${fancy.aspectRatio["16:9"]}
+  }
+  color: green;
+`;
