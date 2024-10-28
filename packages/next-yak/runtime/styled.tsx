@@ -214,6 +214,10 @@ const yakStyled = <
         return parentYakComponent(filteredProps as T, ref);
       }
       (filteredProps as { ref?: unknown }).ref = ref;
+      if (typeof Component === "string" && "as" in filteredProps) {
+        const { as: Tag, ...rest } = filteredProps as { as: string };
+        return <Tag {...rest} />;
+      }
       return <Component {...(filteredProps as any)} />;
     };
     return yakForwardRef(yak, mergedAttrsFn);
