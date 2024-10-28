@@ -225,6 +225,10 @@ const CompositionOverridingAndMergingTest = () => {
     // @ts-expect-error $active should not be required
     <Button2 $active={true}>Click me</Button2>;
 
+    // should be callable without any properties
+    <Button>Click me</Button>;
+    <Button2>Click me</Button2>;
+
     // the types should be equal
     type Equal = typeof Button extends typeof Button2 ? true : false;
     const _: Equal = true;
