@@ -214,6 +214,7 @@ const yakStyled = <
         return parentYakComponent(filteredProps as T, ref);
       }
       (filteredProps as { ref?: unknown }).ref = ref;
+      // allow to overwrite the html tag with `as`
       if (typeof Component === "string" && "as" in filteredProps) {
         const { as: Tag, ...rest } = filteredProps as { as: string };
         return <Tag {...rest} />;
