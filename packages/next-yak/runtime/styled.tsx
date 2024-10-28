@@ -125,7 +125,9 @@ const yakStyled = <
 
   return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
-    ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
+    ...values: Array<
+      CSSInterpolation<T & NoInfer<TCSSProps> & { theme: YakTheme }>
+    >
   ) => {
     const getRuntimeStyles = css(styles, ...values);
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {

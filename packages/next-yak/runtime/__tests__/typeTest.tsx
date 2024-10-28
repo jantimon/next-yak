@@ -204,4 +204,29 @@ const CompositionOverridingAndMergingTest = () => {
       </Parent>
     );
   };
+
+  const case4 = () => {
+    const Wrap = styled.button``;
+    const Icon = styled.svg<{ $active: boolean }>``;
+    const Button = styled(Wrap)`
+      ${Icon} {
+        color: red;
+      }
+    `;
+    const Button2 = styled.button`
+      ${Icon} {
+        color: red;
+      }
+    `;
+
+    // @ts-expect-error $active should not be required
+    <Button $active={true}>Click me</Button>;
+
+    // @ts-expect-error $active should not be required
+    <Button2 $active={true}>Click me</Button2>;
+
+    // the types should be equal
+    type Equal = typeof Button extends typeof Button2 ? true : false;
+    const _: Equal = true;
+  };
 };
