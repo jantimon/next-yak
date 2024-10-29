@@ -1,4 +1,4 @@
-import { styled } from "next-yak";
+import { styled, css } from "next-yak";
 
 export const FlexContainer = styled.div`
   display: flex;
@@ -9,4 +9,5 @@ export const FlexContainer = styled.div`
   margin-bottom: ${({ $marginBottom }) => $marginBottom || '0'}px;
   top: ${({ $top }) => $top * 20}%;
   background-color: #f0f0f0;
+  ${({ $bottom }) => css`bottom:${$bottom * 20}%`};
 `;
