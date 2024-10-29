@@ -431,7 +431,7 @@ function parseExportValueExpression(
     expression.operator === "-" &&
     expression.argument.type === "NumericLiteral"
   ) {
-    return { type: "constant", value: -expression.argument.value }; 
+    return { type: "constant", value: -expression.argument.value };
   } else if (
     expression.type === "TemplateLiteral" &&
     expression.quasis.length === 1
@@ -626,7 +626,7 @@ type ParsedExport =
   | { type: "mixin"; value: string }
   | { type: "constant"; value: string | number }
   | { type: "record"; value: Record<any, ParsedExport> | {} }
-  | { type: "unsupported", hint?: string }
+  | { type: "unsupported"; hint?: string }
   | { type: "re-export"; from: string; imported: string }
   | { type: "star-export"; from: string[] };
 
