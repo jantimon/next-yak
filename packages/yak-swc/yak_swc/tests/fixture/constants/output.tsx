@@ -18,6 +18,7 @@ export const Button = /*YAK Extracted CSS:
   color: #f8f9fa;
   padding: 10px 33.3333%;
   z-index: 1;
+  margin-top: -1px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
