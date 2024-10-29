@@ -16,7 +16,7 @@ export const FlexContainer = /*YAK Extracted CSS:
 }
 */ /*#__PURE__*/ styled.div(__styleYak.FlexContainer, ({ $bottom })=>/*#__PURE__*/ css(__styleYak.FlexContainer__, {
         "style": {
-            "--FlexContainer__bottom_o1wkyu": $bottom * 20 * "%"
+            "--FlexContainer__bottom_o1wkyu": __yak_unitPostFix($bottom * 20, "%")
         }
     }), {
     "style": {
