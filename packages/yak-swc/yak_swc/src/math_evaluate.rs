@@ -18,6 +18,15 @@ pub fn try_evaluate(expr: &Expr, variable_visitor: &VariableVisitor) -> Option<f
         None
       }
     }
+    // allow expressions like ${-14}
+    Expr::Unary(unary_expr) => {
+      let arg_value = try_evaluate(&unary_expr.arg, variable_visitor)?;
+      match unary_expr.op {
+        UnaryOp::Minus => Some(-arg_value),
+        UnaryOp::Plus => Some(arg_value),
+        _ => None,
+      }
+    }
     Expr::Lit(Lit::Num(num)) => Some(num.value),
     Expr::Bin(bin_expr) => {
       match (&*bin_expr.left, &*bin_expr.right) {
