@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest --no-watch",
+    "test:snapshots": "UPDATE=1 vitest --no-watch",
     "test:watch": "vitest"
   },
   "devDependencies": {

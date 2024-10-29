@@ -211,7 +211,7 @@ async function parseFile(
           ) {
             return [key, { type: "record" as const, value }];
           } else {
-            return [key, { type: "unsupported" as const }];
+            return [key, { type: "unsupported" as const, hint: String(value) }];
           }
         }),
       );
@@ -427,6 +427,12 @@ function parseExportValueExpression(
   ) {
     return { type: "constant", value: expression.value };
   } else if (
+    expression.type === "UnaryExpression" &&
+    expression.operator === "-" &&
+    expression.argument.type === "NumericLiteral"
+  ) {
+    return { type: "constant", value: -expression.argument.value }; 
+  } else if (
     expression.type === "TemplateLiteral" &&
     expression.quasis.length === 1
   ) {
@@ -434,7 +440,7 @@ function parseExportValueExpression(
   } else if (expression.type === "ObjectExpression") {
     return { type: "record", value: parseObjectExpression(expression) };
   }
-  return { type: "unsupported" };
+  return { type: "unsupported", hint: expression.type };
 }
 
 function parseObjectExpression(
@@ -606,7 +612,7 @@ async function resolveModuleSpecifierRecursively(
     throw new Error(
       `Error resolving from module ${module.filePath}: ${
         (error as Error).message
-      }`,
+      }\nExtracted values: ${JSON.stringify(module.exports, null, 2)}`,
     );
   }
 }
@@ -620,7 +626,7 @@ type ParsedExport =
   | { type: "mixin"; value: string }
   | { type: "constant"; value: string | number }
   | { type: "record"; value: Record<any, ParsedExport> | {} }
-  | { type: "unsupported" }
+  | { type: "unsupported", hint?: string }
   | { type: "re-export"; from: string; imported: string }
   | { type: "star-export"; from: string[] };
 
