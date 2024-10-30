@@ -234,3 +234,33 @@ const CompositionOverridingAndMergingTest = () => {
     const _: Equal = true;
   };
 };
+
+const GenericComponentWorks = () => {
+  interface MyGenericProps<T> {
+    input: T;
+  }
+
+  type MyGenericComponent<T> = React.ElementType<MyGenericProps<T>> & {
+    <TOther>(props: MyGenericProps<TOther>): React.ReactNode;
+  };
+
+  type MyDefaultType = {
+    [x: string]: any;
+  };
+
+  const GenericComponent: MyGenericComponent<MyDefaultType> = () => {
+    return null;
+  };
+
+  const ConcreteStyledComponent = GenericComponent<"test">;
+
+  const MyComponent = styled(ConcreteStyledComponent)``;
+
+  const Test = () => {
+    return (
+      <div>
+        <MyComponent input="test" />
+      </div>
+    );
+  };
+};
