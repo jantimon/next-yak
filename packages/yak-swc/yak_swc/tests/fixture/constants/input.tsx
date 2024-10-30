@@ -19,6 +19,7 @@ export const Button = styled.button`
   color: ${colors.light};
   padding: 10px ${100 / 3}%;
   z-index: ${stacking};
+  margin-top: ${-1}px;
   border: none;
   border-radius: ${borderRadius};
   cursor: pointer;

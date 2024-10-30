@@ -1,1 +1,0 @@
-Right now our Babel Plugin can't skip comments, but the SWC Plugin can.
