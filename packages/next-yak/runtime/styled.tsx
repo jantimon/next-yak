@@ -1,4 +1,4 @@
-import { ForwardRefRenderFunction, FunctionComponent } from "react";
+import { ForwardRefRenderFunction } from "react";
 import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
 import React from "react";
 
@@ -31,6 +31,11 @@ const yakForwardRef: <
   Object.assign(React.forwardRef(component), {
     [yakComponentSymbol]: [component, attrsFn],
   }) as any;
+
+/**
+ * Minimal type for a function component that works with next-yak
+ */
+type FunctionComponent<T> = (props: T, context?: any) => React.ReactNode;
 
 /**
  * All valid html tags
@@ -125,7 +130,9 @@ const yakStyled = <
 
   return <TCSSProps extends object = {}>(
     styles: TemplateStringsArray,
-    ...values: Array<CSSInterpolation<T & TCSSProps & { theme: YakTheme }>>
+    ...values: Array<
+      CSSInterpolation<T & NoInfer<TCSSProps> & { theme: YakTheme }>
+    >
   ) => {
     const getRuntimeStyles = css(styles, ...values);
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {

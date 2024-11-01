@@ -173,6 +173,7 @@ where
     // When moving units into css variables it has to be removed from the next css code
     // e.g. styled.button`left: ${({$x}) => $x}px;` -> `left: var(--left);`
     let mut css_code_offset: usize = 0;
+    let is_top_level = !self.is_inside_css_expression();
 
     let quasis = n.tpl.quasis.clone();
 
@@ -390,6 +391,11 @@ where
           // If the expression is inside a css property value
           // it has to be replaced with a css variable
           if is_inside_property_value {
+            // Show an error if the expression is not valid
+            // e.g. styled.button`left: ${getPosition()}px;`
+            if is_top_level {
+              verify_valid_property_value_expr(expr);
+            }
             // Check if the next quasi starts with a unit
             // e.g. styled.button`left: ${({$x}) => $x}px;`
             let unit = if let Some(next_quasi) = pair.next_quasi {
@@ -880,6 +886,30 @@ fn extract_leading_css_unit(css: &str) -> Option<&str> {
     return Some(unit);
   }
   None
+}
+
+/// Validates expressions used in CSS property values.
+/// Currently only allows arrow functions for dynamic values to make runtime behavior explicit.
+fn verify_valid_property_value_expr(expr: &Expr) -> bool {
+  match expr {
+    // Allow arrow functions - this is the preferred format
+    // e.g. styled.button`left: ${({$x}) => $x}px;`
+    Expr::Arrow(_) => true,
+
+    // For all other expression types, show an error explaining the requirement
+    _ => {
+      HANDLER.with(|handler| {
+              handler
+                  .struct_span_err(
+                      expr.span(),
+                      "Dynamic values in CSS properties must be wrapped in arrow functions to make runtime behavior explicit.\n\
+                       Example: ${() => getValue()} instead of ${getValue()}"
+                  )
+                  .emit();
+          });
+      false
+    }
+  }
 }
 
 #[plugin_transform]

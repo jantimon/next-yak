@@ -1,12 +1,13 @@
 import { styled, css } from "next-yak/internal";
 import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
-import { colors, siteMaxWidth } from "./constants";
+import { colors, negative, siteMaxWidth } from "./constants";
 export var Button = /*YAK Extracted CSS:
 .Button {
   color: red;
   height: --yak-css-import: url("./constants:siteMaxWidth",mixin)px;
   color: --yak-css-import: url("./constants:colors:primary",mixin);
   background-color: --yak-css-import: url("./constants:colors:secondary",mixin);
+  z-index: --yak-css-import: url("./constants:negative",mixin);
 }
 .Button__ {
   color: --yak-css-import: url("./constants:colors:secondary",mixin);
