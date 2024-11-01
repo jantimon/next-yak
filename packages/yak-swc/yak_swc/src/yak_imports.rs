@@ -152,7 +152,7 @@ mod tests {
   use swc_core::atoms::atom;
   use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::fold_pass;
+  use swc_core::ecma::visit::{visit_mut_pass};
 
   #[test]
   fn test_yak_import_visitor_no_yak() {
@@ -167,7 +167,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -180,7 +180,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { styled, css } from "next-yak";
         import { styled as renamedStyled, keyframes } from "next-yak";
@@ -209,7 +209,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { css } from "next-yak";
         const styles = css`color: red;`;
@@ -230,7 +230,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { css as myCss } from "next-yak";
         const styles = myCss`color: red;`;
@@ -251,7 +251,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { keyframes } from "next-yak";
         const animation = keyframes`from { opacity: 0; } to { opacity: 1; }`;
@@ -272,7 +272,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { keyframes as myKeyframes } from "next-yak";
         const animation = myKeyframes`from { opacity: 0; } to { opacity: 1; }`;

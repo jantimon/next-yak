@@ -86,7 +86,7 @@ fn apply_op(op: &BinaryOp, left: f64, right: f64) -> Option<f64> {
 mod tests {
   use super::*;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::fold_pass;
+  use swc_core::ecma::visit::visit_mut_pass;
   use swc_core::ecma::visit::Fold;
   use swc_core::ecma::visit::VisitMut;
   use swc_core::ecma::visit::VisitMutWith;
@@ -150,7 +150,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -172,7 +172,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -194,7 +194,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -216,7 +216,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -238,7 +238,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -257,7 +257,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -280,7 +280,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -304,7 +304,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -328,7 +328,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
@@ -349,7 +349,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
     );
