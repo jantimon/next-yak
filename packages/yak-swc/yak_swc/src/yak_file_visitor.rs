@@ -152,7 +152,7 @@ impl Fold for YakFileVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc_core::ecma::{transforms::testing::test_transform, visit::fold_pass};
+  use swc_core::ecma::{transforms::testing::test_transform, visit::visit_mut_pass};
 
   #[test]
   fn test_yak_file_visitor() {
@@ -160,7 +160,7 @@ mod tests {
     test_transform(
       Default::default(),
       Some(true),
-      |_| fold_pass(&mut visitor),
+      |_| visit_mut_pass(&mut visitor),
       r#"
                 import { css } from "next-yak";
                 export const heading = css`
