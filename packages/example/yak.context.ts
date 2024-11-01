@@ -3,7 +3,7 @@ import { cache } from "react";
 
 const hasHighContrast = cache(() => {
     const cookieStore = cookies()
-    return cookieStore.get("highContrast")?.value === "true"
+    return false
 });
 
 export function getYakThemeContext() {

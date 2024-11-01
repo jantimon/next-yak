@@ -10,7 +10,7 @@ use swc_core::atoms::Atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
-use swc_core::ecma::visit::{fold_pass, Fold, VisitMutWith};
+use swc_core::ecma::visit::{visit_mut_pass, Fold, VisitMutWith};
 use swc_core::ecma::{ast::*, visit::VisitMut};
 use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
@@ -899,13 +899,13 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
   // *.yak.ts and *.yak.tsx files follow different rules
   // see yak_file_visitor.rs
   if is_yak_file(&filename) {
-    return program.apply(fold_pass(&mut YakFileVisitor::new()));
+    return program.apply(visit_mut_pass(&mut YakFileVisitor::new()));
   }
 
   // Get a relative posix path to generate always the same hash
   // on different machines or operating systems
   let deterministic_path = relative_posix_path::relative_posix_path(&config.base_path, &filename);
-  program.apply(fold_pass(&mut TransformVisitor::new(
+  program.apply(visit_mut_pass(&mut TransformVisitor::new(
     metadata.comments,
     deterministic_path,
     config.dev_mode,
