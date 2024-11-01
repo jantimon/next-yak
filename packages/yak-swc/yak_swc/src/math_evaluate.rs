@@ -86,7 +86,8 @@ fn apply_op(op: &BinaryOp, left: f64, right: f64) -> Option<f64> {
 mod tests {
   use super::*;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::as_folder;
+  use swc_core::ecma::visit::fold_pass;
+  use swc_core::ecma::visit::Fold;
   use swc_core::ecma::visit::VisitMut;
   use swc_core::ecma::visit::VisitMutWith;
 
@@ -114,6 +115,8 @@ mod tests {
       &self.variables
     }
   }
+
+  impl Fold for TestVisitor {}
 
   impl VisitMut for TestVisitor {
     fn visit_mut_program(&mut self, program: &mut Program) {
@@ -146,10 +149,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -168,10 +171,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -190,10 +193,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -212,10 +215,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -234,10 +237,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -253,10 +256,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -276,10 +279,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -300,10 +303,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -324,10 +327,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();
@@ -345,10 +348,10 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| fold_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     let expr = visitor.get_variable_initializer().unwrap();

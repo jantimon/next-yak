@@ -10,11 +10,8 @@ use swc_core::atoms::Atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
-use swc_core::ecma::visit::VisitMutWith;
-use swc_core::ecma::{
-  ast::*,
-  visit::{as_folder, FoldWith, VisitMut},
-};
+use swc_core::ecma::visit::{fold_pass, Fold, VisitMutWith};
+use swc_core::ecma::{ast::*, visit::VisitMut};
 use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
@@ -98,7 +95,7 @@ where
   /// The current file name e.g. "App.tsx"
   filename: String,
   /// The imported css module from the virtual yak.module.css
-  css_module_identifier: Option<Ident>,
+  css_module_identifier: Option<IdentName>,
   /// Dev mode to use readable css variable names
   dev_mode: bool,
 }
@@ -454,6 +451,8 @@ where
   }
 }
 
+impl<GenericComments> Fold for TransformVisitor<GenericComments> where GenericComments: Comments {}
+
 impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
 where
   GenericComments: Comments,
@@ -482,7 +481,7 @@ where
   /// ? is a fix for Next.js loaders which ignore the !=! statement
   fn visit_mut_module(&mut self, module: &mut Module) {
     let basename = self.get_file_name_without_extension();
-    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP);
+    let css_module_identifier = IdentName::new("__styleYak".into(), DUMMY_SP);
     self.css_module_identifier = Some(css_module_identifier.clone());
 
     module.visit_mut_children_with(self);
@@ -513,7 +512,7 @@ where
           span: DUMMY_SP,
           specifiers: vec![ImportDefaultSpecifier {
             span: DUMMY_SP,
-            local: css_module_identifier,
+            local: css_module_identifier.into(),
           }
           .into()],
           src: Box::new(Str {
@@ -756,7 +755,7 @@ where
 
     let transform_result = transform.transform_expression(
       n,
-      self.css_module_identifier.clone().unwrap(),
+      self.css_module_identifier.clone().unwrap().into(),
       runtime_expressions,
       &self.current_declaration,
       runtime_css_variables,
@@ -825,7 +824,7 @@ fn condition_to_string(expr: &Expr, negate: bool) -> String {
     Expr::Member(MemberExpr { obj, prop, .. }) => {
       let obj = condition_to_string(obj, false);
       let prop = match prop {
-        MemberProp::Ident(Ident { sym, .. }) => sym.to_string(),
+        MemberProp::Ident(IdentName { sym, .. }) => sym.to_string(),
         _ => "".to_string(),
       };
       if prop.is_empty() || obj.is_empty() {
@@ -900,13 +899,13 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
   // *.yak.ts and *.yak.tsx files follow different rules
   // see yak_file_visitor.rs
   if is_yak_file(&filename) {
-    return program.fold_with(&mut as_folder(YakFileVisitor::new()));
+    return program.apply(fold_pass(&mut YakFileVisitor::new()));
   }
 
   // Get a relative posix path to generate always the same hash
   // on different machines or operating systems
   let deterministic_path = relative_posix_path::relative_posix_path(&config.base_path, &filename);
-  program.fold_with(&mut as_folder(TransformVisitor::new(
+  program.apply(fold_pass(&mut TransformVisitor::new(
     metadata.comments,
     deterministic_path,
     config.dev_mode,
@@ -929,7 +928,10 @@ fn is_yak_file(filename: &str) -> bool {
 mod tests {
   use super::*;
   use std::path::PathBuf;
-  use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
+  use swc_core::ecma::{
+    transforms::testing::{test_fixture, test_transform},
+    visit::visit_mut_pass,
+  };
   use swc_ecma_parser::{Syntax, TsSyntax};
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
@@ -941,7 +943,7 @@ mod tests {
         ..Default::default()
       }),
       &|tester| {
-        as_folder(TransformVisitor::new(
+        visit_mut_pass(TransformVisitor::new(
           Some(tester.comments.clone()),
           "path/input.tsx".to_string(),
           true,
@@ -950,6 +952,7 @@ mod tests {
       &input,
       &input.with_file_name("output.tsx"),
       FixtureTestConfig {
+        module: None,
         sourcemap: false,
         allow_error: true,
       },
@@ -962,10 +965,11 @@ mod tests {
         tsx: true,
         ..Default::default()
       }),
-      &|_| as_folder(YakFileVisitor::new()),
+      &|_| fold_pass(YakFileVisitor::new()),
       &input,
       &input.with_file_name("output.yak.tsx"),
       FixtureTestConfig {
+        module: None,
         sourcemap: false,
         allow_error: true,
       },
@@ -992,18 +996,18 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(TestVisitor::new()),
+      Some(false),
+      |_| visit_mut_pass(TestVisitor::new()),
       "member.example.test",
       "\"member.example.test\"",
-      false,
     );
 
     test_transform(
       Default::default(),
-      |_| as_folder(TestVisitor::new()),
+      Some(false),
+      |_| visit_mut_pass(TestVisitor::new()),
       "fooBar",
       "\"fooBar\"",
-      false,
     );
   }
 

@@ -81,7 +81,7 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
   }
   // otherwise "bar" -> foo.bar
   else {
-    MemberProp::Ident(Ident::new(s.into(), DUMMY_SP))
+    MemberProp::Ident(IdentName::new(s.into(), DUMMY_SP))
   }
 }
 
