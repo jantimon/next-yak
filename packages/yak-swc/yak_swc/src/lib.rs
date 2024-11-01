@@ -965,7 +965,7 @@ mod tests {
         tsx: true,
         ..Default::default()
       }),
-      &|_| fold_pass(YakFileVisitor::new()),
+      &|_| visit_mut_pass(YakFileVisitor::new()),
       &input,
       &input.with_file_name("output.yak.tsx"),
       FixtureTestConfig {

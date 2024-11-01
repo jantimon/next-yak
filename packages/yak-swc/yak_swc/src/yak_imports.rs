@@ -152,7 +152,7 @@ mod tests {
   use swc_core::atoms::atom;
   use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::{visit_mut_pass};
+  use swc_core::ecma::visit::visit_mut_pass;
 
   #[test]
   fn test_yak_import_visitor_no_yak() {

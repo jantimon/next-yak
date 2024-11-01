@@ -123,31 +123,7 @@ impl VisitMut for YakFileVisitor {
   }
 }
 
-impl Fold for YakFileVisitor {
-  // Convert your visit_mut_* methods to fold_* methods
-  // For example:
-  // Instead of:
-  // fn visit_mut_module(&mut self, module: &mut Module) {
-  //     /* your code */
-  // }
-
-  // Use:
-  fn fold_module(&mut self, module: Module) -> Module {
-    // Your transformation code here
-    module
-  }
-
-  // Instead of:
-  // fn visit_mut_import_decl(&mut self, import: &mut ImportDecl) {
-  //     /* your code */
-  // }
-
-  // Use:
-  fn fold_import_decl(&mut self, import: ImportDecl) -> ImportDecl {
-    // Your transformation code here
-    import
-  }
-}
+impl Fold for YakFileVisitor {}
 
 #[cfg(test)]
 mod tests {

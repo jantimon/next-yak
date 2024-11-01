@@ -172,7 +172,7 @@ mod tests {
   use swc_core::common::SyntaxContext;
   use swc_core::ecma::atoms::atom;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::{visit_mut_pass};
+  use swc_core::ecma::visit::visit_mut_pass;
 
   fn get_expr_value(expr: &Expr) -> Option<String> {
     match expr {
