@@ -88,8 +88,19 @@ mod tests {
   }
 
   #[test]
-  fn test_hash_is_base36() {
-    let hash = hash_to_css("base36 test");
-    assert!(hash.chars().all(|c| c.is_digit(36)));
+  fn test_hash_starts_with_letter() {
+    for i in 0..100 {
+      let hash = hash_to_css(&i.to_string());
+      assert!(hash.chars().next().unwrap().is_alphabetic());
+    }
+  }
+
+  #[test]
+  fn test_hash_contains_only_valid_chars() {
+    const VALID_CHARS: &str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+    for i in 0..100 {
+      let hash = hash_to_css(&i.to_string());
+      assert!(hash.chars().all(|c| VALID_CHARS.contains(c)));
+    }
   }
 }
