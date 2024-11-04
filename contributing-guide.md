@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to next-yak! This document provides guidelines and instructions for contributing to the project.
 
-## Table of Contents
+## Table of contents
 
 - [Development Setup](#development-setup)
   - [Prerequisites](#prerequisites)
@@ -17,11 +17,11 @@ Thank you for your interest in contributing to next-yak! This document provides 
 - [Making Contributions](#making-contributions)
 - [Common Issues](#common-issues)
 
-## Development Setup
+## Development setup
 
 ### Prerequisites
 
-Before you begin, make sure you have the following installed:
+Before you begin, make sure you have the following installed
 
 1. Node.js (v20 or later)
 2. pnpm (v8.6.1 or later)
@@ -33,33 +33,44 @@ Before you begin, make sure you have the following installed:
    rustup target add wasm32-wasi
    ```
 
-### Initial Setup
+### Initial setup
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/jantimon/next-yak.git
-   cd next-yak
-   ```
+Clone the repository
 
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+```bash
+git clone https://github.com/jantimon/next-yak.git
+cd next-yak
+```
 
-3. Build the SWC plugin (required before running examples or tests):
-   ```bash
-   pnpm run build:swc
-   ```
+Install dependencies
+
+```bash
+pnpm install
+```
+
+Build everything (required before running examples or tests)
+
+```bash
+pnpm run build
+```
 
 ### Project Structure
 
-The repository is organized into several key directories:
+The repository is organized into several key directories, using a monorepo structure:
 
-- `/css_in_js_parser/` - Rust library for parsing CSS-in-JS syntax
-- `/relative_posix_path/` - Rust utility for path handling
-- `/yak_swc/` - Core SWC plugin implementation in Rust
-- `/packages/next-yak/` - Main NPM package with TypeScript/JavaScript code
-- `/example/` - Example Next.js application demonstrating usage
+The packages under `./packages/`:
+
+- [benchmark](./packages/benchmark) - CI-benchmarking tool
+- [example](./packages/example) - Demo Next.js application, featuring various use cases
+- [docs](./packages/docs) - Documentation and playground, hosted at [yak.js.org](https://yak.js.org/)
+- [next-yak](./packages/next-yak) - Main NPM package with TypeScript/JavaScript code
+- [yak-swc](./packages/yak-swc) - SWC plugin
+
+Rust packages under `./packages/yak-swc/`:
+
+- [./yak_swc](./packages/yak-swc/yak_swc) - Core SWC plugin implementation in Rust
+- [./css_in_js_parser](./packages/yak-swc/css_in_js_parser) - Rust library for parsing CSS-in-JS syntax
+- [./relative_posix_path](./packages/yak-swc/relative_posix_path) - Rust utility for path handling
 
 ## Development Workflow
 
@@ -67,64 +78,84 @@ The repository is organized into several key directories:
 
 The project includes tests for both JavaScript and Rust components:
 
-1. Run all tests:
-   ```bash
-   pnpm test
-   ```
+Run all tests:
 
-2. Run only Rust tests:
-   ```bash
-   cd yak_swc
-   cargo test
-   ```
+```bash
+pnpm test
+```
 
-3. Watch mode for JavaScript tests:
-   ```bash
-   pnpm test:watch
-   ```
+Run all `next-yak` tests:
+
+```bash
+pnpm test:next-yak
+```
+
+Run `yak-swc` tests:
+
+```bash
+pnpm test:yak-swc
+```
+
+Watch mode for `next-yak` tests:
+
+```bash
+pnpm test:next-yak:watch
+```
 
 ### Updating Test Snapshots
 
-For updating test snapshots in the SWC plugin:
+Update all snapshots
 
-```bash
-cd yak_swc
-UPDATE=1 cargo test
-```
-
-For JavaScript snapshots:
 ```bash
 pnpm test:snapshots
 ```
 
+For updating test snapshots in the `next-yak` package:
+
+```bash
+pnpm test:snapshots:next-yak
+```
+
+For updating test snapshots in the SWC plugin:
+
+```bash
+pnpm test:snapshots:yak-swc
+```
+
 ### Running the Example App
 
-1. Ensure you've built the SWC plugin first:
-   ```bash
-   pnpm run build:swc
-   ```
+Build everything and start the example app
 
-2. Start the example app:
-   ```bash
-   pnpm example
-   ```
+```bash
+pnpm run build
+pnpm example
+```
 
 ## Building
 
-1. Build everything:
-   ```bash
-   pnpm run build
-   ```
+Build everything
 
-2. Build only the SWC plugin:
-   ```bash
-   pnpm run build:swc
-   ```
+```bash
+pnpm run build
+```
 
-3. Watch mode for development:
-   ```bash
-   pnpm run watch
-   ```
+Build only `next-yak`
+
+```bash
+pnpm run build:next-yak
+```
+
+Build only the SWC plugin
+
+```bash
+pnpm run build:swc
+```
+
+Watch mode during development
+
+```bash
+pnpm run watch
+```
 
 ## Debugging
 
@@ -135,11 +166,12 @@ When debugging the SWC plugin, you can enable debug logging:
 export default withYak({
   experiments: {
     debug: true, // or { filter: (path) => path.includes('component.tsx'), type: 'css' }
-  }
+  },
 });
 ```
 
 Debug types:
+
 - `'ts'` - Show transformed TypeScript
 - `'css'` - Show extracted CSS
 - `'css resolved'` - Show CSS after resolving imports
@@ -174,8 +206,7 @@ Debug types:
 
 ### Test Issues
 
-- **Snapshot test failures**: Use `UPDATE=1 cargo test` in the yak_swc directory to update Rust snapshots
-- **JavaScript test failures**: Run `pnpm test:snapshots` to update JavaScript snapshots
+- **Snapshot test failures**: Use `pnpm test:snapshots` to update all snapshots, swc and JavaScript
 
 ---
 
