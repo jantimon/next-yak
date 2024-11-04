@@ -34,8 +34,8 @@ use math_evaluate::try_evaluate;
 mod utils {
   pub(crate) mod add_suffix_to_expr;
   pub(crate) mod ast_helper;
+  pub(crate) mod css_hash;
   pub(crate) mod encode_module_import;
-  pub(crate) mod murmur_hash;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -99,8 +99,6 @@ where
   filename: String,
   /// The imported css module from the virtual yak.module.css
   css_module_identifier: Option<Ident>,
-  /// Dev mode to use readable css variable names
-  dev_mode: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -116,11 +114,10 @@ where
       current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
-      naming_convention: NamingConvention::new(filename.clone()),
+      naming_convention: NamingConvention::new(filename.clone(), dev_mode),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
-      dev_mode,
       filename,
       comments,
     }
@@ -416,7 +413,7 @@ where
             );
             let css_variable_name = self
               .naming_convention
-              .get_css_variable_name(readable_name.as_str(), self.dev_mode);
+              .get_css_variable_name(readable_name.as_str());
             let css_variable_runtime_expr = if let Some(unit) = unit {
               add_suffix_to_expr(
                 *expr.clone(),
