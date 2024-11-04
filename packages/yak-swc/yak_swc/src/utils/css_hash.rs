@@ -20,7 +20,7 @@ fn to_css_identifier(mut num: u64) -> String {
   const DIGITS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let digit_count = DIGITS.len() as u64;
 
-  let mut result = Vec::new();
+  let mut result = Vec::with_capacity(6);
 
   if num == 0 {
     return "a00000".to_string();
