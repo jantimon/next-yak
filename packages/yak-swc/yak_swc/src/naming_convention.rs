@@ -79,21 +79,6 @@ impl NamingConvention {
     let css_variable_name = format!("{}{}", name, self.get_file_name_hash());
     self.generate_unique_name(&css_variable_name)
   }
-
-  /// Generate a unique CSS class name based on the file name and a base name
-  pub fn get_css_class_name(&mut self, base_name: &str) -> String {
-    let prefix: String = if self.dev_mode {
-      if base_name.is_empty() {
-        String::from("yak_")
-      } else {
-        format!("{}_", base_name)
-      }
-    } else {
-      String::from("y")
-    };
-    let class_name = format!("{}{}", prefix, self.get_file_name_hash());
-    self.generate_unique_name(&class_name)
-  }
 }
 
 fn escape_css_identifier(input: &str) -> String {
@@ -177,21 +162,5 @@ mod tests {
     assert_eq!(convention.get_css_variable_name("foo"), "foo_upb5bt");
     assert_eq!(convention.get_css_variable_name("foo"), "foo_upb5bt-01");
     assert_eq!(convention.get_css_variable_name(""), "yak_upb5bt");
-  }
-
-  #[test]
-  fn css_class_name() {
-    let mut convention = NamingConvention::new("file.css".into(), false);
-    assert_eq!(convention.get_css_class_name("foo"), "yupb5bt");
-    assert_eq!(convention.get_css_class_name("foo"), "yupb5bt1");
-    assert_eq!(convention.get_css_class_name(""), "yupb5bt2");
-  }
-
-  #[test]
-  fn css_class_name_dev_mode() {
-    let mut convention = NamingConvention::new("file.css".into(), true);
-    assert_eq!(convention.get_css_class_name("foo"), "foo_upb5bt");
-    assert_eq!(convention.get_css_class_name("foo"), "foo_upb5bt-01");
-    assert_eq!(convention.get_css_class_name(""), "yak_upb5bt");
   }
 }
