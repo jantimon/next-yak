@@ -8,27 +8,30 @@ pub fn hash_to_css(input: &str) -> String {
   let mut hasher = DefaultHasher::new();
   input.hash(&mut hasher);
   let hash = hasher.finish();
-
-  // Convert to u32 to maintain similar output length as original
   to_css_identifier(hash)
 }
 
-// Helper function to convert u32 to a valid CSS identifier
+// Helper function to convert u64 to a valid CSS identifier
 fn to_css_identifier(mut num: u64) -> String {
-  const DIGITS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+  // CSS Identifiers must start with a letter
+  const FIRST_LETTER_DIGITS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let first_letter_count = FIRST_LETTER_DIGITS.len() as u64;
+  // CSS Identifiers can contain letters, digits, hyphens, and underscores
+  const DIGITS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let digit_count = DIGITS.len() as u64;
+
   let mut result = Vec::new();
 
   if num == 0 {
     return "a00000".to_string();
   }
 
-  // CSS Identifiers must start with a letter
-  result.push(DIGITS[(num % 52) as usize]);
-  num /= 52;
+  result.push(DIGITS[(num % first_letter_count) as usize]);
+  num /= first_letter_count;
 
   while num > 0 {
-    result.push(DIGITS[(num % 62) as usize]);
-    num /= 62;
+    result.push(DIGITS[(num % digit_count) as usize]);
+    num /= digit_count;
     if result.len() == 6 {
       break;
     }
