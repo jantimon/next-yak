@@ -1,11 +1,11 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 // @ts-ignore
 import { fonts } from "./fonts";
 // @ts-ignore
 import { fancy } from "./fancy";
 // @ts-ignore
 import { yakMixin } from "./constants.yak";
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Button = /*YAK Extracted CSS:
 .Button {
   --yak-css-import: url("./fonts:fonts:h1",mixin);

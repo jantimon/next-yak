@@ -490,12 +490,9 @@ where
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
     if !self.variable_name_selector_mapping.is_empty() {
-      // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
-      let mut yak_import_index = 0;
-      for (i, item) in module.body.iter_mut().enumerate() {
+      for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-            yak_import_index = i + 1;
             // Add utility functions
             import_declaration.specifiers.extend(
               self
@@ -506,8 +503,16 @@ where
           }
         }
       }
+
+      // insert it as last import to avoid changing css order issues
+      let mut last_import_index = 0;
+      for (i, item) in module.body.iter_mut().enumerate() {
+        if let ModuleItem::ModuleDecl(ModuleDecl::Import(_import_declaration)) = item {
+          last_import_index = i + 1;
+        }
+      }
       module.body.insert(
-        yak_import_index,
+        last_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
           phase: Default::default(),
           span: DUMMY_SP,
