@@ -1,6 +1,6 @@
 import { css, styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 import { typogaphyMixin } from "./typography";
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const textColor = /*#__PURE__*/ css();
 const textStyles = /*#__PURE__*/ css();
 export const buttonStyles = /*YAK EXPORTED MIXIN:buttonStyles
