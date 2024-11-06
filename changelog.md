@@ -1,3 +1,7 @@
+## [2.2.0](https://github.com/jantimon/next-yak/releases/tag/v2.2.0) - 2024-11-06
+### Fixed
+- Fixed CSS ordering issues with styled component inheritance by ensuring CSS module imports appear after component dependencies #202
+
 ## [2.1.0](https://github.com/jantimon/next-yak/releases/tag/v2.1.0) - 2024-11-01
 ### Added
 - Added support for generic components with improved type handling
