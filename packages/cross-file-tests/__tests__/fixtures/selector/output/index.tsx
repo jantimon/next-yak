@@ -1,6 +1,6 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 import { AnyIcon, Icon } from "./icon";
+import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 export var Button = /*YAK Extracted CSS:
 .Button {
   --yak-css-import: url("./icon:Icon",selector) {
