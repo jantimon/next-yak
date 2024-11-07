@@ -1,6 +1,6 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 import { typography } from "./typography.yak";
+import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 export var Headline = /*YAK Extracted CSS:
 .Headline {
   color: red;
