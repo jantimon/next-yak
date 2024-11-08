@@ -1,6 +1,17 @@
 # next-yak
 
-## 2.4.1
+## 3.0.0
+
+### Major Changes
+
+- 94f083f: Upgrade SWC to 3.x to add support for Next.js 15.0.0
+
+### Patch Changes
+
+- Updated dependencies [94f083f]
+  - yak-swc@3.0.0
+
+## 2.4.0
 
 ### Patch Changes
 
