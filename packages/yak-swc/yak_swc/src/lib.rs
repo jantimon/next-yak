@@ -20,6 +20,7 @@ use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
 use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIterator};
+use utils::css_prop::HasCSSProp;
 use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
@@ -35,6 +36,7 @@ mod utils {
   pub(crate) mod add_suffix_to_expr;
   pub(crate) mod ast_helper;
   pub(crate) mod css_hash;
+  pub(crate) mod css_prop;
   pub(crate) mod encode_module_import;
 }
 mod naming_convention;
@@ -99,6 +101,8 @@ where
   filename: String,
   /// The imported css module from the virtual yak.module.css
   css_module_identifier: Option<Ident>,
+  /// Flag to check if we are inside a css attribute
+  inside_element_with_css_attribute: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -118,6 +122,7 @@ where
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
+      inside_element_with_css_attribute: false,
       filename,
       comments,
     }
@@ -487,12 +492,9 @@ where
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
     if !self.variable_name_selector_mapping.is_empty() {
-      // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
-      let mut yak_import_index = 0;
-      for (i, item) in module.body.iter_mut().enumerate() {
+      for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-            yak_import_index = i + 1;
             // Add utility functions
             import_declaration.specifiers.extend(
               self
@@ -503,8 +505,19 @@ where
           }
         }
       }
+
+      // search for the last import statement as position to insert the css module import
+      // it has to be the last import to ensure that the css module is loaded after the other imports
+      // and therefore the css is added to the end of the bundle css file
+      // see https://github.com/jantimon/next-yak/issues/202
+      let mut last_import_index = 0;
+      for (i, item) in module.body.iter_mut().enumerate() {
+        if matches!(item, ModuleItem::ModuleDecl(ModuleDecl::Import(_))) {
+          last_import_index = i + 1;
+        }
+      }
       module.body.insert(
-        yak_import_index,
+        last_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
           phase: Default::default(),
           span: DUMMY_SP,
@@ -595,6 +608,26 @@ where
         }
       }
       props_or_spread.visit_mut_with(self);
+    }
+  }
+
+  // Visit JSX expressions for css prop support
+  fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
+    if !self.yak_library_imports.is_using_next_yak() {
+      return;
+    }
+    let css_prop = n.has_css_prop();
+    if let Some(css_prop) = css_prop {
+      let previous_inside_css_attribute = self.inside_element_with_css_attribute;
+      self.inside_element_with_css_attribute = true;
+      n.visit_mut_children_with(self);
+      self.inside_element_with_css_attribute = previous_inside_css_attribute;
+      css_prop.transform(
+        n,
+        &self
+          .yak_library_imports
+          .get_yak_utility_ident("mergeCssProp".into()),
+      );
     }
   }
 
@@ -708,7 +741,10 @@ where
           }),
       )),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new(
+        self.current_exported,
+        self.inside_element_with_css_attribute,
+      )),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
       _ => {
