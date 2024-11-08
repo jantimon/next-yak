@@ -6,12 +6,14 @@ on:
     paths:
       - './package.json'
       - 'packages/next-yak/**'
+      - 'packages/yak-swc/**'
       - '.github/workflows/node.js.yml'
   pull_request:
     branches: [ "main" ]
     paths:
       - './package.json'
       - 'packages/next-yak/**'
+      - 'packages/yak-swc/**'
       - '.github/workflows/node.js.yml'
 
 jobs:
@@ -70,3 +72,6 @@ jobs:
 
       - name: Test
         run: pnpm run test
+
+      - name: Changeset Check
+        run: pnpm changeset status --since=main

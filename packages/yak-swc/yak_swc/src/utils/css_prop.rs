@@ -1,5 +1,5 @@
 use swc_core::{
-  common::{Span, DUMMY_SP},
+  common::{Span, SyntaxContext, DUMMY_SP},
   ecma::ast::{
     CallExpr, Callee, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
     JSXAttrValue, JSXExpr, JSXOpeningElement, KeyValueProp, ObjectLit, Prop, PropName,
@@ -103,6 +103,7 @@ impl CSSProp {
                   props: vec![],
                 })),
               }],
+              ctxt: SyntaxContext::empty(),
               type_args: None,
             }))),
             _ => Err(TransformError::InvalidCSSAttribute(container.span)),
@@ -179,6 +180,7 @@ impl CSSProp {
         },
         ExprOrSpread { spread: None, expr },
       ],
+      ctxt: SyntaxContext::empty(),
       type_args: None,
     }))
   }
