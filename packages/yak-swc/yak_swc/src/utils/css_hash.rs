@@ -17,6 +17,7 @@ fn to_css_identifier(mut num: u64) -> String {
   const FIRST_LETTER_DIGITS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let first_letter_count = FIRST_LETTER_DIGITS.len() as u64;
   // CSS Identifiers can contain letters, digits, hyphens, and underscores
+  // but we only use letters and digits for better readability for now
   const DIGITS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let digit_count = DIGITS.len() as u64;
 
