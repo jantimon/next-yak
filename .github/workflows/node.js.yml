@@ -73,5 +73,5 @@ jobs:
       - name: Test
         run: pnpm run test
 
-      - name: Changeset
+      - name: Changeset Check
         run: pnpm changeset status --since=main
