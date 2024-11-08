@@ -10,9 +10,13 @@
     "build": "pnpm run --filter=next-yak build",
     "build:swc": "pnpm run --filter=yak-swc build",
     "example": "pnpm --filter=next-yak-example run dev",
+    "test": "pnpm run build && pnpm --filter=next-yak --filter=cross-file-tests --filter=next-yak-example run \"/test($|:types)/\"",
+    "test:watch": "pnpm --filter=next-yak run test:watch",
+    "test:snapshots": "pnpm --filter=next-yak --filter=cross-file-tests --filter=yak-swc run test:snapshots",
     "package:types": "npx --package=@arethetypeswrong/cli attw --pack packages/next-yak",
     "prettier": "pnpm run --recursive --if-present prettier",
     "test": "pnpm run build:next-yak && pnpm --filter=next-yak --filter=cross-file-tests --filter=next-yak-example run \"/test($|:types)/\"",
+    "changeset": "changeset"
     "test:watch": "pnpm --filter=next-yak run test:watch",
     "test:snapshots": "pnpm --filter=next-yak run test:snapshots",
     "watch": "pnpm run --filter=next-yak watch"
@@ -29,6 +33,7 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "@changesets/cli": "^2.27.9"
   }
 }

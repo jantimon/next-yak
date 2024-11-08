@@ -1,6 +1,6 @@
 use rustc_hash::FxHashMap;
 use swc_core::atoms::Atom;
-use swc_core::ecma::visit::VisitMutWith;
+use swc_core::ecma::visit::{Fold, VisitMutWith};
 use swc_core::ecma::{ast::*, visit::VisitMut};
 
 #[derive(PartialEq, Debug, Clone)]
@@ -124,6 +124,8 @@ impl VariableVisitor {
   }
 }
 
+impl Fold for VariableVisitor {}
+
 impl VisitMut for VariableVisitor {
   /// Scans the AST for variable declarations and extracts the variable names
   fn visit_mut_var_decl(&mut self, var: &mut VarDecl) {
@@ -166,11 +168,11 @@ impl VisitMut for VariableVisitor {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc::atoms::Atom;
+  use swc_core::atoms::Atom;
   use swc_core::common::SyntaxContext;
   use swc_core::ecma::atoms::atom;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::as_folder;
+  use swc_core::ecma::visit::visit_mut_pass;
 
   fn get_expr_value(expr: &Expr) -> Option<String> {
     match expr {
@@ -193,10 +195,10 @@ mod tests {
     "#;
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
-      true,
     );
     let primary = &visitor.get_imported_variable(&Id::from((
       Atom::from("primary"),
@@ -236,10 +238,10 @@ mod tests {
       "#;
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
-      true,
     );
 
     // Test accessing a nested property

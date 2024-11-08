@@ -10,16 +10,14 @@ use swc_core::atoms::Atom;
 use swc_core::common::comments::Comment;
 use swc_core::common::comments::Comments;
 use swc_core::common::{Spanned, SyntaxContext, DUMMY_SP};
-use swc_core::ecma::visit::VisitMutWith;
-use swc_core::ecma::{
-  ast::*,
-  visit::{as_folder, FoldWith, VisitMut},
-};
+use swc_core::ecma::visit::{visit_mut_pass, Fold, VisitMutWith};
+use swc_core::ecma::{ast::*, visit::VisitMut};
 use swc_core::plugin::errors::HANDLER;
 use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
 use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIterator};
+use utils::css_prop::HasCSSProp;
 use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
@@ -34,8 +32,9 @@ use math_evaluate::try_evaluate;
 mod utils {
   pub(crate) mod add_suffix_to_expr;
   pub(crate) mod ast_helper;
+  pub(crate) mod css_hash;
+  pub(crate) mod css_prop;
   pub(crate) mod encode_module_import;
-  pub(crate) mod murmur_hash;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -99,8 +98,8 @@ where
   filename: String,
   /// The imported css module from the virtual yak.module.css
   css_module_identifier: Option<Ident>,
-  /// Dev mode to use readable css variable names
-  dev_mode: bool,
+  /// Flag to check if we are inside a css attribute
+  inside_element_with_css_attribute: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -116,11 +115,11 @@ where
       current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
-      naming_convention: NamingConvention::new(filename.clone()),
+      naming_convention: NamingConvention::new(filename.clone(), dev_mode),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
-      dev_mode,
+      inside_element_with_css_attribute: false,
       filename,
       comments,
     }
@@ -416,7 +415,7 @@ where
             );
             let css_variable_name = self
               .naming_convention
-              .get_css_variable_name(readable_name.as_str(), self.dev_mode);
+              .get_css_variable_name(readable_name.as_str());
             let css_variable_runtime_expr = if let Some(unit) = unit {
               add_suffix_to_expr(
                 *expr.clone(),
@@ -454,6 +453,8 @@ where
   }
 }
 
+impl<GenericComments> Fold for TransformVisitor<GenericComments> where GenericComments: Comments {}
+
 impl<GenericComments> VisitMut for TransformVisitor<GenericComments>
 where
   GenericComments: Comments,
@@ -482,7 +483,7 @@ where
   /// ? is a fix for Next.js loaders which ignore the !=! statement
   fn visit_mut_module(&mut self, module: &mut Module) {
     let basename = self.get_file_name_without_extension();
-    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP);
+    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP, SyntaxContext::empty());
     self.css_module_identifier = Some(css_module_identifier.clone());
 
     module.visit_mut_children_with(self);
@@ -609,6 +610,26 @@ where
     }
   }
 
+  // Visit JSX expressions for css prop support
+  fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
+    if !self.yak_library_imports.is_using_next_yak() {
+      return;
+    }
+    let css_prop = n.has_css_prop();
+    if let Some(css_prop) = css_prop {
+      let previous_inside_css_attribute = self.inside_element_with_css_attribute;
+      self.inside_element_with_css_attribute = true;
+      n.visit_mut_children_with(self);
+      self.inside_element_with_css_attribute = previous_inside_css_attribute;
+      css_prop.transform(
+        n,
+        &self
+          .yak_library_imports
+          .get_yak_utility_ident("mergeCssProp".into()),
+      );
+    }
+  }
+
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
@@ -719,7 +740,10 @@ where
           }),
       )),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new(
+        self.current_exported,
+        self.inside_element_with_css_attribute,
+      )),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
       _ => {
@@ -833,7 +857,7 @@ fn condition_to_string(expr: &Expr, negate: bool) -> String {
     Expr::Member(MemberExpr { obj, prop, .. }) => {
       let obj = condition_to_string(obj, false);
       let prop = match prop {
-        MemberProp::Ident(Ident { sym, .. }) => sym.to_string(),
+        MemberProp::Ident(IdentName { sym, .. }) => sym.to_string(),
         _ => "".to_string(),
       };
       if prop.is_empty() || obj.is_empty() {
@@ -908,13 +932,13 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
   // *.yak.ts and *.yak.tsx files follow different rules
   // see yak_file_visitor.rs
   if is_yak_file(&filename) {
-    return program.fold_with(&mut as_folder(YakFileVisitor::new()));
+    return program.apply(visit_mut_pass(&mut YakFileVisitor::new()));
   }
 
   // Get a relative posix path to generate always the same hash
   // on different machines or operating systems
   let deterministic_path = relative_posix_path::relative_posix_path(&config.base_path, &filename);
-  program.fold_with(&mut as_folder(TransformVisitor::new(
+  program.apply(visit_mut_pass(&mut TransformVisitor::new(
     metadata.comments,
     deterministic_path,
     config.dev_mode,
@@ -937,7 +961,10 @@ fn is_yak_file(filename: &str) -> bool {
 mod tests {
   use super::*;
   use std::path::PathBuf;
-  use swc_core::ecma::transforms::testing::{test_fixture, test_transform};
+  use swc_core::ecma::{
+    transforms::testing::{test_fixture, test_transform},
+    visit::visit_mut_pass,
+  };
   use swc_ecma_parser::{Syntax, TsSyntax};
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
@@ -949,7 +976,7 @@ mod tests {
         ..Default::default()
       }),
       &|tester| {
-        as_folder(TransformVisitor::new(
+        visit_mut_pass(TransformVisitor::new(
           Some(tester.comments.clone()),
           "path/input.tsx".to_string(),
           true,
@@ -958,6 +985,7 @@ mod tests {
       &input,
       &input.with_file_name("output.tsx"),
       FixtureTestConfig {
+        module: None,
         sourcemap: false,
         allow_error: true,
       },
@@ -970,10 +998,11 @@ mod tests {
         tsx: true,
         ..Default::default()
       }),
-      &|_| as_folder(YakFileVisitor::new()),
+      &|_| visit_mut_pass(YakFileVisitor::new()),
       &input,
       &input.with_file_name("output.yak.tsx"),
       FixtureTestConfig {
+        module: None,
         sourcemap: false,
         allow_error: true,
       },
@@ -1000,18 +1029,18 @@ mod tests {
 
     test_transform(
       Default::default(),
-      |_| as_folder(TestVisitor::new()),
+      Some(false),
+      |_| visit_mut_pass(TestVisitor::new()),
       "member.example.test",
       "\"member.example.test\"",
-      false,
     );
 
     test_transform(
       Default::default(),
-      |_| as_folder(TestVisitor::new()),
+      Some(false),
+      |_| visit_mut_pass(TestVisitor::new()),
       "fooBar",
       "\"fooBar\"",
-      false,
     );
   }
 
