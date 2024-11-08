@@ -6,6 +6,6 @@
   "linked": [],
   "access": "restricted",
   "baseBranch": "main",
-  "updateInternalDependencies": "minor",
+  "updateInternalDependencies": "patch",
   "ignore": ["benchmarks", "cross-file-tests", "docs", "next-yak-example"]
 }
