@@ -311,13 +311,13 @@ Special thanks to the contributors and the inspiring projects that influenced ne
 
 ## License
 
-**next-yak** is licensed under the [MIT License](link/to/LICENSE).
+**next-yak** is licensed under the [MIT License](./packages/next-yak/LICENSE).
 
 ## Contributing
 
 Contributions are welcome!
 
-The [contributing guide](https://github.com/jantimon/next-yak/blob/main/contributing-guide.md) helps you get started with setting up the development environment and explains the development workflow
+The [contributing guide](https://github.com/jantimon/next-yak/blob/main/CONTRIBUTION.md) helps you get started with setting up the development environment and explains the development workflow
 
 ---
 

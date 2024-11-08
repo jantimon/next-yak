@@ -134,7 +134,8 @@ The example app is a Next.js application that demonstrates the features of `next
 Build everything and start the example app
 
 ```bash
-pnpm run build && pnpm run build:swc
+pnpm run build
+pnpm run build:swc
 pnpm example
 ```
 
