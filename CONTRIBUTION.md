@@ -4,18 +4,18 @@ Thank you for your interest in contributing to next-yak! This document provides 
 
 ## Table of contents
 
-- [Development Setup](#development-setup)
+- [Development setup](#development-setup)
   - [Prerequisites](#prerequisites)
-  - [Initial Setup](#initial-setup)
-  - [Project Structure](#project-structure)
-- [Development Workflow](#development-workflow)
-  - [Running Tests](#running-tests)
-  - [Updating Test Snapshots](#updating-test-snapshots)
-  - [Running the Example App](#running-the-example-app)
-- [Building](#building)
-- [Debugging](#debugging)
-- [Making Contributions](#making-contributions)
-- [Common Issues](#common-issues)
+  - [Initial setup](#initial-setup)
+  - [Project structure](#project-structure)
+- [Developping `next-yak` TypeScript/JavaScript](#developping-next-yak-typescriptjavascript)
+- [Developing `yak-swc` Rust](#developing-yak-swc-rust)
+  - [Running the example app](#running-the-example-app)
+- [Submitting a pull request](#submitting-a-pull-request)
+- [Common issues](#common-issues)
+  - [Rust setup issues](#rust-setup-issues)
+  - [Build issues](#build-issues)
+  - [Test issues](#test-issues)
 
 ## Development setup
 
@@ -150,7 +150,7 @@ export default withYak({
 });
 ```
 
-## Contribution steps
+## Submitting a pull request
 
 1. Fork the repository
 2. Create a new feature branch:
@@ -169,20 +169,20 @@ export default withYak({
    ```
 6. Push changes and create a pull request
 
-## Common Issues
+## Common issues
 
-### Rust Setup Issues
+### Rust setup issues
 
 - **Permission problems with Rust**: Make sure to install Rust from [rust-lang.org](https://www.rust-lang.org/tools/install) and not through package managers
 - **Missing wasm32-wasi target**: Run `rustup target add wasm32-wasi`
 - **Cargo build failures**: Ensure you have the latest stable Rust toolchain with `rustup update stable`
 
-### Build Issues
+### Build issues
 
 - **SWC plugin not found**: Make sure to run `pnpm run build:swc` before starting the example app
 - **Missing dependencies**: Run `pnpm install` and ensure all peer dependencies are satisfied
 
-### Test Issues
+### Test issues
 
 - **Snapshot test failures**: Use `pnpm test:snapshots` to update all snapshots, swc and JavaScript
 
