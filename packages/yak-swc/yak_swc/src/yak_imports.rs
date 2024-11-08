@@ -1,5 +1,6 @@
 use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
+use swc_core::ecma::visit::Fold;
 use swc_core::{
   common::DUMMY_SP,
   ecma::{ast::*, visit::VisitMut},
@@ -88,7 +89,7 @@ impl YakImportVisitor {
       ident.clone()
     } else {
       let prefixed_name = format!("__yak_{}", name);
-      let ident = Ident::new(prefixed_name.clone().into(), DUMMY_SP);
+      let ident = Ident::from(prefixed_name.clone());
       self.yak_utilities.insert(prefixed_name, ident.clone());
       ident
     }
@@ -143,13 +144,15 @@ impl VisitMut for YakImportVisitor {
   }
 }
 
+impl Fold for YakImportVisitor {}
+
 #[cfg(test)]
 mod tests {
   use super::*;
   use swc_core::atoms::atom;
   use swc_core::common::SyntaxContext;
   use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::as_folder;
+  use swc_core::ecma::visit::visit_mut_pass;
 
   #[test]
   fn test_yak_import_visitor_no_yak() {
@@ -163,10 +166,10 @@ mod tests {
     "#;
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       code,
       code,
-      true,
     );
     assert_eq!(visitor.is_using_next_yak(), false);
   }
@@ -176,7 +179,8 @@ mod tests {
     let mut visitor = YakImportVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { styled, css } from "next-yak";
         import { styled as renamedStyled, keyframes } from "next-yak";
@@ -195,7 +199,6 @@ mod tests {
             console.log(primary, duration);
         }
     "#,
-      true,
     );
     assert_eq!(visitor.is_using_next_yak(), true);
   }
@@ -205,7 +208,8 @@ mod tests {
     let mut visitor = YakImportVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { css } from "next-yak";
         const styles = css`color: red;`;
@@ -214,7 +218,6 @@ mod tests {
         import { css } from "next-yak/internal";
         const styles = css`color: red;`;
       "#,
-      true,
     );
     assert!(visitor
       .yak_css_idents
@@ -226,7 +229,8 @@ mod tests {
     let mut visitor = YakImportVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { css as myCss } from "next-yak";
         const styles = myCss`color: red;`;
@@ -235,7 +239,6 @@ mod tests {
         import { css as myCss } from "next-yak/internal";
         const styles = myCss`color: red;`;
       "#,
-      true,
     );
     assert!(visitor
       .yak_css_idents
@@ -247,7 +250,8 @@ mod tests {
     let mut visitor = YakImportVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { keyframes } from "next-yak";
         const animation = keyframes`from { opacity: 0; } to { opacity: 1; }`;
@@ -256,7 +260,6 @@ mod tests {
         import { keyframes } from "next-yak/internal";
         const animation = keyframes`from { opacity: 0; } to { opacity: 1; }`;
       "#,
-      true,
     );
     assert!(visitor
       .yak_keyframes_idents
@@ -268,7 +271,8 @@ mod tests {
     let mut visitor = YakImportVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
         import { keyframes as myKeyframes } from "next-yak";
         const animation = myKeyframes`from { opacity: 0; } to { opacity: 1; }`;
@@ -277,7 +281,6 @@ mod tests {
         import { keyframes as myKeyframes } from "next-yak/internal";
         const animation = myKeyframes`from { opacity: 0; } to { opacity: 1; }`;
       "#,
-      true,
     );
     assert!(visitor
       .yak_keyframes_idents

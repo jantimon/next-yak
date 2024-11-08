@@ -6,7 +6,7 @@ use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_
 use crate::utils::encode_module_import::encode_percent;
 use crate::variable_visitor::ScopedVariableReference;
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
-use swc_core::common::{Span, DUMMY_SP};
+use swc_core::common::{Span, SyntaxContext, DUMMY_SP};
 use swc_core::ecma::ast::*;
 use swc_core::plugin::errors::HANDLER;
 
@@ -134,6 +134,7 @@ impl YakTransform for TransformNestedCss {
         // avoid collisions for the comments
         span: Span::dummy_with_cmt(),
         callee: Callee::Expr(expression.tag.clone()),
+        ctxt: SyntaxContext::empty(),
         args: arguments,
         type_args: None,
       }))),
@@ -256,6 +257,7 @@ impl YakTransform for TransformCssMixin {
       },
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
+        ctxt: SyntaxContext::empty(),
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
@@ -337,6 +339,7 @@ impl YakTransform for TransformStyled {
       },
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
+        ctxt: SyntaxContext::empty(),
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,
@@ -422,6 +425,7 @@ impl YakTransform for TransformKeyframes {
       },
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
+        ctxt: SyntaxContext::empty(),
         callee: Callee::Expr(expression.tag.clone()),
         args: arguments,
         type_args: None,

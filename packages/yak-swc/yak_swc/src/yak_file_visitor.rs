@@ -2,7 +2,7 @@ use crate::yak_imports::YakImportVisitor;
 use swc_core::atoms::atom;
 use swc_core::common::Spanned;
 use swc_core::ecma::ast::*;
-use swc_core::ecma::visit::{VisitMut, VisitMutWith};
+use swc_core::ecma::visit::{Fold, VisitMut, VisitMutWith};
 use swc_core::plugin::errors::HANDLER;
 
 pub struct YakFileVisitor {
@@ -56,7 +56,7 @@ impl VisitMut for YakFileVisitor {
           *expr = ObjectLit {
             span: n.span,
             props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-              key: PropName::Ident(Ident::new("__yak".into(), n.span)),
+              key: PropName::Ident(IdentName::new("__yak".into(), n.span)),
               value: Box::new(Expr::Tpl(Tpl {
                 span: n.span,
                 exprs: n.tpl.exprs.clone(),
@@ -123,18 +123,20 @@ impl VisitMut for YakFileVisitor {
   }
 }
 
+impl Fold for YakFileVisitor {}
+
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::as_folder;
+  use swc_core::ecma::{transforms::testing::test_transform, visit::visit_mut_pass};
 
   #[test]
   fn test_yak_file_visitor() {
     let mut visitor = YakFileVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
                 import { css } from "next-yak";
                 export const heading = css`
@@ -147,7 +149,6 @@ mod tests {
                   font-size: ${20}px;
                 `};
             "#,
-      true,
     );
   }
 }
