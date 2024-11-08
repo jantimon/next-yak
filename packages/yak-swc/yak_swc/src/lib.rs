@@ -17,6 +17,7 @@ use swc_core::plugin::metadata::TransformPluginMetadataContextKind;
 use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 use utils::add_suffix_to_expr::add_suffix_to_expr;
 use utils::ast_helper::{extract_ident_and_parts, is_valid_tagged_tpl, TemplateIterator};
+use utils::css_prop::HasCSSProp;
 use utils::encode_module_import::{encode_module_import, ImportKind};
 
 mod variable_visitor;
@@ -31,6 +32,7 @@ use math_evaluate::try_evaluate;
 mod utils {
   pub(crate) mod add_suffix_to_expr;
   pub(crate) mod ast_helper;
+  pub(crate) mod css_prop;
   pub(crate) mod encode_module_import;
   pub(crate) mod murmur_hash;
 }
@@ -98,6 +100,8 @@ where
   css_module_identifier: Option<Ident>,
   /// Dev mode to use readable css variable names
   dev_mode: bool,
+  /// Flag to check if we are inside a css attribute
+  inside_element_with_css_attribute: bool,
 }
 
 impl<GenericComments> TransformVisitor<GenericComments>
@@ -117,6 +121,7 @@ where
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
+      inside_element_with_css_attribute: false,
       dev_mode,
       filename,
       comments,
@@ -608,6 +613,26 @@ where
     }
   }
 
+  // Visit JSX expressions for css prop support
+  fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
+    if !self.yak_library_imports.is_using_next_yak() {
+      return;
+    }
+    let css_prop = n.has_css_prop();
+    if let Some(css_prop) = css_prop {
+      let previous_inside_css_attribute = self.inside_element_with_css_attribute;
+      self.inside_element_with_css_attribute = true;
+      n.visit_mut_children_with(self);
+      self.inside_element_with_css_attribute = previous_inside_css_attribute;
+      css_prop.transform(
+        n,
+        &self
+          .yak_library_imports
+          .get_yak_utility_ident("mergeCssProp".into()),
+      );
+    }
+  }
+
   // Visit ternary expressions
   // To store the current condition which can be used for class names of nested css expressions
   fn visit_mut_expr(&mut self, n: &mut Expr) {
@@ -718,7 +743,10 @@ where
           }),
       )),
       // CSS Mixin e.g. const highlight = css`color: red;`
-      Some("css") if is_top_level => Box::new(TransformCssMixin::new(self.current_exported)),
+      Some("css") if is_top_level => Box::new(TransformCssMixin::new(
+        self.current_exported,
+        self.inside_element_with_css_attribute,
+      )),
       // CSS Inline mixin e.g. styled.button`${() => css`color: red;`}`
       Some("css") => Box::new(TransformNestedCss::new(self.current_condition.clone())),
       _ => {

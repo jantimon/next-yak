@@ -135,7 +135,13 @@ export default function Home() {
         <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
         </StyledLink>
-        <p>CSS Prop works if this is green</p>
+        <p
+          css={css`
+            color: green;
+          `}
+        >
+          CSS Prop works if this is green
+        </p>
         <Inputs />
       </main>
     </YakThemeProvider>
