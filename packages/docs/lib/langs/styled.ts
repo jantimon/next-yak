@@ -2,6 +2,7 @@ import type { LanguageRegistration } from "shiki";
 
 // taken from https://github.com/styled-components/vscode-styled-components/tree/main/syntaxes
 const language: LanguageRegistration = {
+  // @ts-expect-error - this is a valid language definition
   $schema:
     "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   name: "css-styled",
@@ -49,7 +50,6 @@ const language: LanguageRegistration = {
       include: "#properties",
     },
   ],
-  // @ts-expect-error - this is a valid language definition
   repository: {
     at_rule_fontface: {
       patterns: [

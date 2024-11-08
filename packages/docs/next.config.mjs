@@ -1,5 +1,5 @@
 import { createMDX } from "fumadocs-mdx/next";
-import path from "path";
+import {withYak} from "next-yak/withYak";
 
 const withMDX = createMDX();
 
@@ -40,4 +40,4 @@ const config = {
   // },
 };
 
-export default withMDX(config);
+export default withYak(withMDX(config));

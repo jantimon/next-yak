@@ -13,7 +13,6 @@ const language: LanguageRegistration = {
     "source.vue",
     "source.svelte",
   ],
-  // @ts-expect-error - this is a valid language definition
   repository: {},
   scopeName: "styled",
   name: "styled",

@@ -1,8 +1,8 @@
-import { DocsLayout } from "fumadocs-ui/layout";
+import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import type { ReactNode } from "react";
-import { baseOptions } from "../layout.config";
-import { source } from "@/app/source";
-import "fumadocs-ui/twoslash.css";
+import { baseOptions } from "@/app/layout.config";
+import { source } from "@/lib/source";
+import "fumadocs-twoslash/twoslash.css";
 import "./global.css";
 
 export default function Layout({ children }: { children: ReactNode }) {

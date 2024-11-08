@@ -165,7 +165,7 @@ export default function Editor() {
                 const model = monaco.editor.createModel(
                   value,
                   language,
-                  monaco.Uri.parse(`file:///${path}`)
+                  monaco.Uri.parse(`file:///${path}`),
                 );
                 modelRefs.current.push(model);
               });
@@ -180,7 +180,7 @@ export default function Editor() {
                   paths: {
                     react: ["/node_modules/@types/react"],
                   },
-                }
+                },
               );
             }}
             onChange={() => {
@@ -241,7 +241,7 @@ export default function Editor() {
                         themeConfig.resolvedTheme === "dark"
                           ? "vitesse-dark"
                           : "vitesse-light",
-                    }
+                    },
                   ),
                 }}
               />
@@ -300,7 +300,7 @@ export default function Editor() {
                         themeConfig.resolvedTheme === "dark"
                           ? "vitesse-dark"
                           : "vitesse-light",
-                    }
+                    },
                   ),
                 }}
               />
