@@ -1,5 +1,11 @@
 # next-yak
 
+## 2.4.1
+
+### Patch Changes
+
+- Improve hashing of css variables (yak-swc@0.8.0)
+
 ## 2.3.0
 
 ### Added
