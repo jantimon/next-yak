@@ -1,11 +1,11 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 // @ts-ignore
 import { colors } from "./colorDefinitions";
 // @ts-ignore
 import { fonts } from "./fontDefinitions";
 // @ts-ignore
 import { sizes } from "./sizeDefinitions";
+import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Button = /*YAK Extracted CSS:
 .Button {
   font-size: --yak-css-import: url("./fontDefinitions:fonts:sm",mixin);

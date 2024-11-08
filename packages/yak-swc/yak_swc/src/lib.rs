@@ -490,12 +490,9 @@ where
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
     if !self.variable_name_selector_mapping.is_empty() {
-      // insert it after the first yak import to avoid changing the order of "use-server" or similar definitions
-      let mut yak_import_index = 0;
-      for (i, item) in module.body.iter_mut().enumerate() {
+      for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-            yak_import_index = i + 1;
             // Add utility functions
             import_declaration.specifiers.extend(
               self
@@ -506,8 +503,19 @@ where
           }
         }
       }
+
+      // search for the last import statement as position to insert the css module import
+      // it has to be the last import to ensure that the css module is loaded after the other imports
+      // and therefore the css is added to the end of the bundle css file
+      // see https://github.com/jantimon/next-yak/issues/202
+      let mut last_import_index = 0;
+      for (i, item) in module.body.iter_mut().enumerate() {
+        if matches!(item, ModuleItem::ModuleDecl(ModuleDecl::Import(_))) {
+          last_import_index = i + 1;
+        }
+      }
       module.body.insert(
-        yak_import_index,
+        last_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
           phase: Default::default(),
           span: DUMMY_SP,
