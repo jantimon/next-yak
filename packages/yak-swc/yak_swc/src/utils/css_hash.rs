@@ -1,14 +1,26 @@
-use std::hash::{DefaultHasher, Hash, Hasher};
+/// Implementation of the FNV-1a (Fowler-Noll-Vo) hash algorithm for CSS identifiers
+/// This is a non-cryptographic hash function that is:
+/// - Fast and simple
+/// - Deterministic across platforms
+/// - Good distribution for short strings
+const FNV_PRIME: u64 = 1099511628211;
+const FNV_OFFSET_BASIS: u64 = 14695981039346656037;
 
-/// Creates a CSS-compatible identifier using Rust's DefaultHasher (SipHash-1-3)
-///
-/// Takes an ASCII string and returns a base62 encoded hash result
-/// that is a valid CSS identifier starting with a letter
+/// Creates a CSS-compatible identifier using FNV-1a hash
+/// Returns a base62 encoded hash result that is a valid CSS identifier
 pub fn hash_to_css(input: &str) -> String {
-  let mut hasher = DefaultHasher::new();
-  input.hash(&mut hasher);
-  let hash = hasher.finish();
+  let hash = fnv1a_64(input);
   to_css_identifier(hash)
+}
+
+/// FNV-1a 64-bit hash implementation
+fn fnv1a_64(input: &str) -> u64 {
+  let mut hash = FNV_OFFSET_BASIS;
+  for byte in input.bytes() {
+    hash ^= u64::from(byte);
+    hash = hash.wrapping_mul(FNV_PRIME);
+  }
+  hash
 }
 
 // Helper function to convert u64 to a valid CSS identifier
@@ -47,24 +59,24 @@ mod tests {
 
   #[test]
   fn test_empty_string() {
-    assert_eq!(hash_to_css(""), "hQ4kcJ");
+    assert_eq!(hash_to_css(""), "brmrUI");
   }
 
   #[test]
   fn test_short_string() {
-    assert_eq!(hash_to_css("special/path/page.tsx"), "Uy8NrL");
+    assert_eq!(hash_to_css("special/path/page.tsx"), "TzYwQZ");
   }
 
   #[test]
   fn test_medium_string() {
-    assert_eq!(hash_to_css("hello"), "H6oyDl");
+    assert_eq!(hash_to_css("hello"), "RMT3qV");
   }
 
   #[test]
   fn test_long_string() {
     assert_eq!(
       hash_to_css("The quick brown fox jumps over the lazy dog"),
-      "zqke8J"
+      "OkGoM1"
     );
   }
 

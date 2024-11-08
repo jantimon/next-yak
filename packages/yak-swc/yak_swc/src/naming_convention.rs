@@ -151,16 +151,16 @@ mod tests {
   #[test]
   fn css_variable_name() {
     let mut convention = NamingConvention::new("file.css".into(), false);
-    assert_eq!(convention.get_css_variable_name("foo"), "yupb5bt");
-    assert_eq!(convention.get_css_variable_name("foo"), "yupb5bt1");
-    assert_eq!(convention.get_css_variable_name(""), "yupb5bt2");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU1");
+    assert_eq!(convention.get_css_variable_name(""), "yoPBkbU2");
   }
 
   #[test]
   fn css_variable_name_dev_mode() {
     let mut convention = NamingConvention::new("file.css".into(), true);
-    assert_eq!(convention.get_css_variable_name("foo"), "foo_upb5bt");
-    assert_eq!(convention.get_css_variable_name("foo"), "foo_upb5bt-01");
-    assert_eq!(convention.get_css_variable_name(""), "yak_upb5bt");
+    assert_eq!(convention.get_css_variable_name("foo"), "foo_oPBkbU");
+    assert_eq!(convention.get_css_variable_name("foo"), "foo_oPBkbU-01");
+    assert_eq!(convention.get_css_variable_name(""), "yak_oPBkbU");
   }
 }
