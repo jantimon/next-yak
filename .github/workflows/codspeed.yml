@@ -2,19 +2,19 @@ name: codspeed-benchmarks
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'packages/next-yak/**'
-      - 'packages/yak-swc/**'
-      - 'packages/benchmarks/**'
-      - '.github/workflows/codspeed.yml'
+      - "packages/next-yak/**"
+      - "packages/yak-swc/**"
+      - "packages/benchmarks/**"
+      - ".github/workflows/codspeed.yml"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'packages/next-yak/**'
-      - 'packages/yak-swc/**'
-      - 'packages/benchmarks/**'
-      - '.github/workflows/codspeed.yml'
+      - "packages/next-yak/**"
+      - "packages/yak-swc/**"
+      - "packages/benchmarks/**"
+      - ".github/workflows/codspeed.yml"
   workflow_dispatch:
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8.6.1
+          version: 9.12.3
           run_install: false
       - name: Get pnpm store directory
         shell: bash
