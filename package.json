@@ -27,7 +27,7 @@
       "yak-swc": "workspace:*"
     }
   },
-  "packageManager": "pnpm@8.6.1",
+  "packageManager": "pnpm@9.12.3",
   "author": "Jan Nicklas",
   "license": "MIT",
   "devDependencies": {
