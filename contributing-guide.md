@@ -162,7 +162,11 @@ export default withYak({
    - Keep commits focused and atomic
    - Write clear commit messages
 4. Run tests to ensure everything works
-5. Push changes and create a pull request
+5. Create a changlog entry
+   ```bash
+   pnpm changeset
+   ```
+6. Push changes and create a pull request
 
 ## Common Issues
 
