@@ -1,6 +1,6 @@
 import { styled, css } from "next-yak/internal";
-import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 import { colors, negative, siteMaxWidth } from "./constants";
+import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 export var Button = /*YAK Extracted CSS:
 .Button {
   color: red;
