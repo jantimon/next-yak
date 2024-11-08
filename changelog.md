@@ -1,3 +1,7 @@
+## [2.3.0](https://github.com/jantimon/next-yak/releases/tag/v2.3.0) - 2024-11-08
+### Added
+- Allow using css prop in jsx components #169
+
 ## [2.2.0](https://github.com/jantimon/next-yak/releases/tag/v2.2.0) - 2024-11-06
 ### Fixed
 - Fixed CSS ordering issues with styled component inheritance by ensuring CSS module imports appear after component dependencies #202
