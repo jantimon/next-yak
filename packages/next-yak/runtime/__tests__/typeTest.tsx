@@ -264,35 +264,3 @@ const GenericComponentWorks = () => {
     );
   };
 };
-
-declare const Image: React.ForwardRefExoticComponent<
-  Omit<
-    React.DetailedHTMLProps<
-      React.ImgHTMLAttributes<HTMLImageElement>,
-      HTMLImageElement
-    >,
-    "height" | "width" | "loading" | "ref" | "alt" | "src" | "srcSet"
-  > & {
-    src: string;
-    alt: string;
-    width?: number | `${number}`;
-    height?: number | `${number}`;
-    fill?: boolean;
-    loader?: any;
-    quality?: number | `${number}`;
-    priority?: boolean;
-    loading?: "eager" | "lazy" | undefined;
-    placeholder?: string;
-    blurDataURL?: string;
-    unoptimized?: boolean;
-    overrideSrc?: string;
-    onLoadingComplete?: any;
-    layout?: string;
-    objectFit?: string;
-    objectPosition?: string;
-    lazyBoundary?: string;
-    lazyRoot?: string;
-  } & React.RefAttributes<HTMLImageElement | null>
->;
-
-const x = styled(Image)``;
