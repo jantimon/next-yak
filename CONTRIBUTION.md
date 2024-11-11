@@ -167,9 +167,15 @@ export default withYak({
    - Write clear commit messages
 4. Run tests to ensure everything works
 5. Create a changlog entry
+
+   This step is mandatory, if there is no change to
+   the public API, you may want to add an empty changeset
+   by adding the `--empty` flag.
+
    ```bash
    pnpm changeset
    ```
+
 6. Push changes and create a pull request
 
 ## Common issues
