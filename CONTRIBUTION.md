@@ -29,7 +29,10 @@ Before you begin
   **⚠️ Important**<br />
   Do _not_ use brew or other package managers to install Rust, as this can lead to permission issues<br />
   Install Rust from [rust-lang.org](https://www.rust-lang.org/tools/install), following the official instructions for your platform
-- Execute `rustup target add wasm32-wasi` to add the Rust WebAssembly target
+- Add the Rust WebAssembly target, execute
+  ```bash
+  rustup target add wasm32-wasi
+  ```
 
 ### Initial setup
 
