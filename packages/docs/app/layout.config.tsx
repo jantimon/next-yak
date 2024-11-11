@@ -1,4 +1,5 @@
-import { type HomeLayoutProps } from "fumadocs-ui/home-layout";
+import { YakLogo } from "@/components/lazyYakIcon";
+import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 
 /**
  * Shared layout configurations
@@ -7,23 +8,9 @@ import { type HomeLayoutProps } from "fumadocs-ui/home-layout";
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-export const baseOptions: HomeLayoutProps = {
+export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: (
-      <div
-        style={{
-          display: "flex",
-          gap: "6px",
-        }}
-      >
-        <img
-          src="/yak-icon-dark.svg"
-          alt="Next Yak"
-          style={{ width: "20px", height: "20px" }}
-        />
-        Yak
-      </div>
-    ),
+    title: <YakLogo />,
   },
   links: [
     {

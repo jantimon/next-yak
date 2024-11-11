@@ -28,14 +28,17 @@ const yakForwardRef: <
   component: ForwardRefRenderFunction<any, TProps>,
   attrsFn?: (props: any) => any,
 ) => YakComponent<TProps, TAttrsIn, TAttrsOut> = (component, attrsFn) =>
-  Object.assign(React.forwardRef(component), {
+  Object.assign(React.forwardRef(component as any), {
     [yakComponentSymbol]: [component, attrsFn],
   }) as any;
 
 /**
  * Minimal type for a function component that works with next-yak
  */
-type FunctionComponent<T> = (props: T, context?: any) => React.ReactNode;
+type FunctionComponent<T> = (
+  props: T,
+  context?: any,
+) => React.ReactNode | React.ReactElement;
 
 /**
  * All valid html tags

@@ -50,33 +50,33 @@ export async function POST(request: NextRequest) {
       module: {
         type: "commonjs",
       },
-    }
+    },
   );
 
   const mockLoader = new MockLoaderContext(transpiledYakFile.code);
   mockLoader.fs.setFile(
     "/src/index.tsx",
-    result["file:///index.tsx"].transformed
+    result["file:///index.tsx"].transformed,
   );
   mockLoader.fs.setFile(
     "/src/./index.tsx",
-    result["file:///index.tsx"].transformed
+    result["file:///index.tsx"].transformed,
   );
   mockLoader.fs.setFile(
     "/src/other.tsx",
-    result["file:///other.tsx"].transformed
+    result["file:///other.tsx"].transformed,
   );
   mockLoader.fs.setFile(
     "/src/./other.tsx",
-    result["file:///other.tsx"].transformed
+    result["file:///other.tsx"].transformed,
   );
   mockLoader.fs.setFile(
     "/src/different.yak.tsx",
-    result["file:///different.yak.ts"].transformed
+    result["file:///different.yak.ts"].transformed,
   );
   mockLoader.fs.setFile(
     "/src/./different.yak.tsx",
-    result["file:///different.yak.ts"].transformed
+    result["file:///different.yak.ts"].transformed,
   );
 
   mockLoader.resourcePath = "/src/index.tsx";
@@ -128,7 +128,7 @@ class MockFileSystem {
   readFile(
     path: string,
     encoding: string,
-    callback: (err: Error | null, result: string | null) => void
+    callback: (err: Error | null, result: string | null) => void,
   ) {
     const content = this.files.get(path);
     if (content) {
@@ -156,7 +156,7 @@ class MockLoaderContext {
   async resolve(
     context: string,
     request: string,
-    callback: (err: Error | null, result: string | null) => void
+    callback: (err: Error | null, result: string | null) => void,
   ) {
     const resolvedPath = `${context}/${request}.tsx`;
     callback(null, resolvedPath);
@@ -177,7 +177,7 @@ class MockLoaderContext {
 
   loadModule(
     request: string,
-    callback: (err: Error | null, source: string | null) => void
+    callback: (err: Error | null, source: string | null) => void,
   ) {
     callback(null, this.fs.files.get(request) || null);
   }

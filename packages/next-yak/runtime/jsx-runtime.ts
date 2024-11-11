@@ -1,11 +1,8 @@
 import ReactJSXRuntime from "react/jsx-runtime";
 import type { StaticCSSProp } from "./mocks/cssLiteral.js";
 
-// @ts-expect-error as the types are not exported
 const Fragment = ReactJSXRuntime.Fragment;
-// @ts-expect-error as the types are not exported
 const jsx = ReactJSXRuntime.jsx;
-// @ts-expect-error as the types are not exported
 const jsxs = ReactJSXRuntime.jsxs;
 
 export declare namespace YakJSX {
