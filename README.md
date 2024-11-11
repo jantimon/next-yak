@@ -312,7 +312,7 @@ Special thanks to the contributors and the inspiring projects that influenced ne
 
 ## License
 
-**next-yak** is licensed under the [MIT License](./packages/next-yak/LICENSE).
+**next-yak** is licensed under the [MIT License](https://github.com/jantimon/next-yak/blob/main/packages/next-yak/LICENSE).
 
 ## Contributing
 

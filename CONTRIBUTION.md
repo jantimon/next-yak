@@ -29,7 +29,10 @@ Before you begin
   **⚠️ Important**<br />
   Do _not_ use brew or other package managers to install Rust, as this can lead to permission issues<br />
   Install Rust from [rust-lang.org](https://www.rust-lang.org/tools/install), following the official instructions for your platform
-- Execute `rustup target add wasm32-wasi` to add the Rust WebAssembly target
+- Add the Rust WebAssembly target, execute
+  ```bash
+  rustup target add wasm32-wasi
+  ```
 
 ### Initial setup
 
@@ -81,7 +84,7 @@ The main package is written in TypeScript. The package is responsible for transf
 Building, from the the `./` or the `./packages/next-yak` directory:
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 Running the tests
@@ -112,7 +115,7 @@ Running the scripts from the `./packages/yak-swc` directory:
 Build the SWC plugin
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 Tests for the SWC plugin
@@ -134,8 +137,8 @@ The example app is a Next.js application that demonstrates the features of `next
 Build everything and start the example app
 
 ```bash
-pnpm run build
-pnpm run build:swc
+pnpm build
+pnpm build:swc
 pnpm example
 ```
 
@@ -164,9 +167,15 @@ export default withYak({
    - Write clear commit messages
 4. Run tests to ensure everything works
 5. Create a changlog entry
+
+   This step is mandatory, if there is no change to
+   the public API, you may want to add an empty changeset
+   by adding the `--empty` flag.
+
    ```bash
    pnpm changeset
    ```
+
 6. Push changes and create a pull request
 
 ## Common issues
@@ -179,7 +188,7 @@ export default withYak({
 
 ### Build issues
 
-- **SWC plugin not found**: Make sure to run `pnpm run build:swc` before starting the example app
+- **SWC plugin not found**: Make sure to run `pnpm build:swc` before starting the example app
 - **Missing dependencies**: Run `pnpm install` and ensure all peer dependencies are satisfied
 
 ### Test issues
