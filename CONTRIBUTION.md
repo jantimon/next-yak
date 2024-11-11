@@ -84,7 +84,7 @@ The main package is written in TypeScript. The package is responsible for transf
 Building, from the the `./` or the `./packages/next-yak` directory:
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 Running the tests
@@ -115,7 +115,7 @@ Running the scripts from the `./packages/yak-swc` directory:
 Build the SWC plugin
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 Tests for the SWC plugin
@@ -137,8 +137,8 @@ The example app is a Next.js application that demonstrates the features of `next
 Build everything and start the example app
 
 ```bash
-pnpm run build
-pnpm run build:swc
+pnpm build
+pnpm build:swc
 pnpm example
 ```
 
@@ -182,7 +182,7 @@ export default withYak({
 
 ### Build issues
 
-- **SWC plugin not found**: Make sure to run `pnpm run build:swc` before starting the example app
+- **SWC plugin not found**: Make sure to run `pnpm build:swc` before starting the example app
 - **Missing dependencies**: Run `pnpm install` and ensure all peer dependencies are satisfied
 
 ### Test issues
