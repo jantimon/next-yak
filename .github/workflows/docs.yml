@@ -1,4 +1,7 @@
-name: docs
+name: Build and Deploy packages/docs
+env:
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
 on:
   push:
@@ -7,45 +10,77 @@ on:
     paths:
       - "packages/docs/**"
       - ".github/workflows/docs.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "packages/docs/**"
+      - ".github/workflows/docs.yml"
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8.6.1
+          run_install: false
+      
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "lts/*"
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 9.12.3
-          run_install: false
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-      - name: Install
-        working-directory: ./packages/docs
+          node-version: 20
+          cache: "pnpm"
+      
+      - name: Install node_modules
         run: pnpm install
-      - name: Build docs
-        working-directory: ./packages/docs
-        run: pnpm build
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/docs/docs/dist
-          cname: yak.js.org
+          toolchain: stable
+          profile: minimal
+          override: true
+
+      - name: Add wasm32-wasi target
+        run: rustup target add wasm32-wasi
+
+      - name: Enable caching
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: packages/yak-swc
+
+      - name: Build with SWC
+        run: pnpm run build:swc
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@35
+
+      - name: Link Vercel project
+        run: vercel link --yes --token ${{ secrets.VERCEL_TOKEN }}
+
+      # Preview deployment (for pull requests and non-main pushes)
+      - name: Pull Vercel environment information (Preview)
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/main')
+        run: vercel pull --yes --environment=preview --token ${{ secrets.VERCEL_TOKEN }}
+      - name: Build project artifacts (Preview)
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/main')
+        run: vercel build --token ${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel (Preview)
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/main')
+        run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
+
+      # Production deployment (for main branch pushes)
+      - name: Pull Vercel environment information (Production)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: vercel pull --yes --environment=production --token ${{ secrets.VERCEL_TOKEN }}
+      - name: Build project artifacts (Production)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: vercel build --prod --token ${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel (Production)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: vercel deploy --prebuilt --prod --token ${{ secrets.VERCEL_TOKEN }}
