@@ -10,15 +10,16 @@ const config = {
     optimizePackageImports: ["shiki", "@shikijs/monaco"],
     // serverComponentsExternalPackages: ["next-yak"],
   },
+  outputFileTracingIncludes: {
+    // add yak-swc as a dependency for the /api/transform route
+    '/api/transform': ['./node_modules/yak-swc/**/*'],
+  },
+  // use the raw-loader for .d.ts files (used by the playground)
   webpack: (config) => {
     config.module.rules.push({
       test: /\.d\.c?ts$/,
       resourceQuery: /raw/,
       use: "raw-loader",
-      // include: [
-      //   path.resolve(process.cwd(), "node_modules"), // Allow importing from node_modules
-      //   path.resolve(process.cwd()), // And from your source directory
-      // ],
     });
 
     return config;
