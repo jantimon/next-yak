@@ -7,7 +7,7 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ["shiki", "@shikijs/monaco"],
+    optimizePackageImports: ["shiki", "@shikijs/monaco", "yak-swc"],
     // serverComponentsExternalPackages: ["next-yak"],
   },
   outputFileTracingIncludes: {
