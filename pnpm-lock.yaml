@@ -133,7 +133,7 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-yak:
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../next-yak
       raw-loader:
         specifier: 4.0.2
