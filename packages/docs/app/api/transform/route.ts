@@ -6,6 +6,8 @@ import * as swc from "@swc/core";
 import cssLoader = require("next-yak/loaders/css-loader");
 import path from "path";
 
+export const maxDuration = 60;
+
 const wasmPath = path.resolve(
   process.cwd(),
   "./node_modules",
