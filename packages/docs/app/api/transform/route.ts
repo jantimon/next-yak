@@ -6,7 +6,11 @@ import * as swc from "@swc/core";
 import cssLoader = require("next-yak/loaders/css-loader");
 import path from "path";
 
-const wasmPath = path.resolve(process.cwd(), "./node_modules", "yak-swc/target/wasm32-wasi/release/yak_swc.wasm");
+const wasmPath = path.resolve(
+  process.cwd(),
+  "./node_modules",
+  "yak-swc/target/wasm32-wasi/release/yak_swc.wasm",
+);
 
 export async function POST(request: NextRequest) {
   const code = (await request.json()) as Record<`file:///${string}`, string>;
