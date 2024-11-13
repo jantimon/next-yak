@@ -12,7 +12,11 @@ const config = {
   },
   outputFileTracingIncludes: {
     // add yak-swc as a dependency for the /api/transform route
-    '/api/transform': ['./node_modules/yak-swc/**/*'],
+    '/api/transform': ['./node_modules/yak-swc/*'],
+    '/api/transform': ['./node_modules/yak-swc/target/wasm32-wasi/release/*'],
+  },
+  outputFileTracingExcludes: {
+    '/api/transform': ['../../node_modules/yak-swc/**/*'],
   },
   // use the raw-loader for .d.ts files (used by the playground)
   webpack: (config) => {
