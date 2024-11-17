@@ -6,9 +6,19 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "packages/example/**"
+      - "packages/yak-swc/**"
+      - "packages/next-yak/**"
+      - ".github/workflows/example.yml"
   pull_request:
     branches:
       - main
+    paths:
+      - "packages/example/**"
+      - "packages/yak-swc/**"
+      - "packages/next-yak/**"
+      - ".github/workflows/example.yml"
 
 jobs:
   build-and-deploy:
