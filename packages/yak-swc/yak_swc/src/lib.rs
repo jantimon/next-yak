@@ -359,9 +359,9 @@ where
                               expr.span(),
                               &format!(
                                 "The shorthand access to the variable \"{var}\" is not allowed in a nested expression.
-          To be able to use the property turn it into a CSS variable by wrapping it in a function:
+To be able to use the property turn it into a CSS variable by wrapping it in a function:
 
-          ${{() => {var}}};\n",
+${{() => {var}}};\n",
                                 var=scoped_name.id.0
                               ),
                             )
