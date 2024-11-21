@@ -277,4 +277,4 @@ const KeyframesWithConstants = () => {
       transform: ${constString};
     }
   `;
-}
+};
