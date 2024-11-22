@@ -4,7 +4,15 @@ import * as swc from "@swc/core";
 // had to update package exports
 // @ts-ignore
 import cssLoader = require("next-yak/loaders/css-loader");
-// import * as cssLoader from "next-yak/loaders/css-loader";
+import path from "path";
+
+export const maxDuration = 60;
+
+const wasmPath = path.resolve(
+  process.cwd(),
+  "./node_modules",
+  "yak-swc/target/wasm32-wasi/release/yak_swc.wasm",
+);
 
 export async function POST(request: NextRequest) {
   const code = (await request.json()) as Record<`file:///${string}`, string>;
@@ -23,7 +31,7 @@ export async function POST(request: NextRequest) {
         filename: "/bar/index.tsx",
         jsc: {
           experimental: {
-            plugins: [["yak-swc", { basePath: "/foo/" }]],
+            plugins: [[wasmPath, { basePath: "/foo/" }]],
           },
           target: "es2022",
           loose: false,

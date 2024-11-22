@@ -7,18 +7,23 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ["shiki", "@shikijs/monaco"],
+    optimizePackageImports: ["shiki", "@shikijs/monaco", "yak-swc"],
     // serverComponentsExternalPackages: ["next-yak"],
   },
+  outputFileTracingIncludes: {
+    // add yak-swc as a dependency for the /api/transform route
+    '/api/transform': ['./node_modules/yak-swc/*'],
+    '/api/transform': ['./node_modules/yak-swc/target/wasm32-wasi/release/*'],
+  },
+  outputFileTracingExcludes: {
+    '/api/transform': ['../../node_modules/yak-swc/**/*'],
+  },
+  // use the raw-loader for .d.ts files (used by the playground)
   webpack: (config) => {
     config.module.rules.push({
       test: /\.d\.c?ts$/,
       resourceQuery: /raw/,
       use: "raw-loader",
-      // include: [
-      //   path.resolve(process.cwd(), "node_modules"), // Allow importing from node_modules
-      //   path.resolve(process.cwd()), // And from your source directory
-      // ],
     });
 
     return config;
