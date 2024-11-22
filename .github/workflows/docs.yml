@@ -9,12 +9,16 @@ on:
       - main
     paths:
       - "packages/docs/**"
+      - "packages/yak-swc/**"
+      - "packages/next-yak/**"
       - ".github/workflows/docs.yml"
   pull_request:
     branches:
       - main
     paths:
       - "packages/docs/**"
+      - "packages/yak-swc/**"
+      - "packages/next-yak/**"
       - ".github/workflows/docs.yml"
 
 jobs:
