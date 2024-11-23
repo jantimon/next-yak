@@ -1,9 +1,6 @@
-import type {css as cssInternal, PropsToClassNameFn} from "../cssLiteral.js";
+import type { css as cssInternal, PropsToClassNameFn } from "../cssLiteral.js";
 
-
-export type {StaticCSSProp, CSSInterpolation} from "../cssLiteral.js"
-
-
+export type { StaticCSSProp, CSSInterpolation } from "../cssLiteral.js";
 
 /**
  * Allows to use CSS styles in a styled or css block
@@ -48,7 +45,7 @@ export const css: typeof cssInternal = (
       style: undefined,
     };
   }) as any;
-}
+};
 
 function executeDynamicExpressionRecursively(
   props: unknown,
