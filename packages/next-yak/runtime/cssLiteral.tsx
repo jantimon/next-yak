@@ -61,7 +61,7 @@ export type PropsToClassNameFn = (props: unknown) =>
 export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
 export function css<TProps = {}>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
+  ...values: CSSInterpolation<NoInfer<TProps> & { theme: YakTheme }>[]
 ): ComponentStyles<TProps>;
 export function css<TProps>(
   ...args: Array<any>
