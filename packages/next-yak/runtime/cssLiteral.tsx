@@ -39,7 +39,7 @@ type CSSFunction = <TProps = {}>(
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => ComponentStyles<TProps>;
 
-type PropsToClassNameFn = (props: unknown) =>
+export type PropsToClassNameFn = (props: unknown) =>
   | {
       className?: string;
       style?: Record<string, string>;
