@@ -1,5 +1,5 @@
 import { writeFile } from "fs";
-import tsLoader from "../../next-yak/loaders/ts-loader";
+import * as swc from "@swc/core";
 
 // Function to generate the content of JapaneseLetterComponent.tsx for Kanji characters
 async function generateKanjiComponentFile() {
@@ -300,37 +300,25 @@ export const KanjiLetterComponent${
 
     // Precompile yak similar to how it would be compiled by our loader
     if (lib === "next-yak") {
-      const loaderContext = {
-        resourcePath: "/some/special/path/page.tsx",
-        rootContext: "/some",
-        mode: "development",
-        importModule: () => {
-          return {
-            replaces: {
-              queries: {
-                sm: "@media (min-width: 640px)",
-                md: "@media (min-width: 768px)",
-                lg: "@media (min-width: 1024px)",
-                xl: "@media (min-width: 1280px)",
-                xxl: "@media (min-width: 1536px)",
-              },
-            },
-          };
-        },
-        getOptions: () => ({
-          configPath: "/some/special/path/config",
-        }),
-        async: () => (err, result) => {
-          if (err) {
-            throw err;
-          }
-          return result;
-        },
-      };
-      let i = 0;
       const compiled =
         "// @ts-nocheck\n" +
-        (await tsLoader.call(loaderContext, fileContent))
+        swc.transformSync(fileContent, {
+        filename: "/foo/index.tsx",
+        jsc: {
+          experimental: {
+            plugins: [["yak-swc", { basePath: "/foo/" }]],
+          },
+          target: "es2022",
+          loose: false,
+          minify: {
+            compress: false,
+            mangle: false,
+          },
+          preserveAllComments: true,
+        },
+        minify: false,
+        isModule: true,
+      }).code
           // Remove __styleYak import
           .replace(/import[^;\n]+yak.module.css";/, "")
           // Replace __styleYak usage to a string
