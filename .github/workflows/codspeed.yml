@@ -48,7 +48,7 @@ jobs:
       - name: Build Yak
         run: pnpm run build
       - name: Build benchmark suite
-        run: cd packages/benchmarks && pnpm install && pnpm run codspeed
+        run: cd packages/benchmarks && pnpm run codspeed
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
