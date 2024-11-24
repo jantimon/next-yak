@@ -60,8 +60,7 @@
       "import": "./dist/jsx-dev-runtime.js"
     },
     "./loaders/css-loader": {
-      "require": "./dist/loaders/css-loader.cjs",
-      "import": "./dist/loaders/css-loader.js"
+      "require": "./dist/loaders/css-loader.cjs"
     }
   },
   "scripts": {
