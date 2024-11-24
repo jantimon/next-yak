@@ -45,6 +45,25 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+        
+      - name: Add wasm32-wasi target
+        run: rustup target add wasm32-wasi
+
+      - name: Enable caching
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: packages/yak-swc
+
+      - name: Build with SWC
+        run: pnpm run build:swc
+
       - name: Build Yak
         run: pnpm run build
       - name: Build benchmark suite
