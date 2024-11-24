@@ -309,24 +309,25 @@ export const KanjiLetterComponent${
     if (lib === "next-yak") {
       const compiled =
         "// @ts-nocheck\n" +
-        swc.transformSync(fileContent, {
-        filename: "/foo/index.tsx",
-        jsc: {
-          experimental: {
-            plugins: [[require.resolve("yak-swc"), { basePath: "/foo/" }]],
-          },
-          target: "es2022",
-          loose: false,
-          minify: {
-            compress: false,
-            mangle: false,
-          },
-          preserveAllComments: true,
-        },
-        minify: false,
-        isModule: true,
-      }).code
-          // Remove __styleYak import
+        swc
+          .transformSync(fileContent, {
+            filename: "/foo/index.tsx",
+            jsc: {
+              experimental: {
+                plugins: [[require.resolve("yak-swc"), { basePath: "/foo/" }]],
+              },
+              target: "es2022",
+              loose: false,
+              minify: {
+                compress: false,
+                mangle: false,
+              },
+              preserveAllComments: true,
+            },
+            minify: false,
+            isModule: true,
+          })
+          .code// Remove __styleYak import
           .replace(/import[^;\n]+yak.module.css";/, "")
           // Replace __styleYak usage to a string
           .replace(/__styleYak.(\w+)/g, `"$1"`);
