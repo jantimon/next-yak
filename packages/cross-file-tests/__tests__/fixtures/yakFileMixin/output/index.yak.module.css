@@ -1,4 +1,4 @@
-// cssmodules-pure-ignore
+/* cssmodules-pure-ignore * /
 :global(.Headline_mxjUbw) {
   color: red;
   
@@ -9,7 +9,7 @@
         letter-spacing: 0.00938em;
     
 }
-// cssmodules-pure-ignore
+/* cssmodules-pure-ignore * /
 :global(.Button_mxjUbw) {
   color: red;
   

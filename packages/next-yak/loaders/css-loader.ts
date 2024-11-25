@@ -43,6 +43,8 @@ function extractCss(code: string): string {
     const codeUntilEnd = codeParts[i].split("*/")[0];
     result += codeUntilEnd;
   }
+  // postcss can't handle // comments
+  result = result.replace(/\/\/ cssmodules-pure-ignore/g, "/* cssmodules-pure-ignore */");
   return result;
 }
 

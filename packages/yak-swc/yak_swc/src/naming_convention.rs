@@ -52,7 +52,7 @@ impl NamingConvention {
     } else if self.dev_mode {
       format!("{}-{:02}", escaped_name, *counter - 1)
     } else {
-      format!("{}{}", escaped_name, *counter - 1)
+      format!("{}{}", escaped_name, minify_number(*counter - 1))
     }
   }
 
@@ -133,6 +133,26 @@ fn escape_css_identifier(input: &str) -> String {
   result
 }
 
+/// Convert a number to a CSS-safe string
+fn minify_number(num: u32) -> String {
+  const CSS_CHARS: &[char] = &[
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
+    'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+    'v', 'w', 'x', 'y', 'z', '-', '_',
+  ];
+  let mut n = num;
+  let mut result = String::new();
+  loop {
+    result.insert(0, CSS_CHARS[(n % 64) as usize]);
+    n /= 64;
+    if n == 0 {
+      break;
+    }
+  }
+  result
+}
+
 #[cfg(test)]
 mod tests {
   use super::*;
@@ -168,7 +188,16 @@ mod tests {
     let mut convention = NamingConvention::new("file.css".into(), false);
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU");
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU1");
-    assert_eq!(convention.get_css_variable_name(""), "yoPBkbU2");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU2");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU3");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU4");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU5");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU6");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU7");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU8");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU9");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbUA");
+    assert_eq!(convention.get_css_variable_name(""), "yoPBkbUB");
   }
 
   #[test]
