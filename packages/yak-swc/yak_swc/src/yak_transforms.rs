@@ -147,6 +147,7 @@ pub struct TransformCssMixin {
   export_name: Option<ScopedVariableReference>,
   is_exported: bool,
   is_within_jsx_attribute: bool,
+  class_name: Option<String>,
 }
 
 impl TransformCssMixin {
@@ -155,6 +156,7 @@ impl TransformCssMixin {
       export_name: None,
       is_exported,
       is_within_jsx_attribute,
+      class_name: None,
     }
   }
 }
@@ -168,12 +170,11 @@ impl YakTransform for TransformCssMixin {
   ) -> ParserState {
     self.export_name = Some(declaration_name.clone());
     let mut parser_state = ParserState::new();
-    // TODO: Remove the unused scope once nested mixins work again
+    let css_identifier =
+      naming_convention.get_css_class_name(&declaration_name.to_readable_string());
+    self.class_name = Some(css_identifier.clone());
     parser_state.current_scopes = vec![CssScope {
-      name: format!(
-        ".{}",
-        naming_convention.generate_unique_name_for_variable(declaration_name)
-      ),
+      name: format!("// cssmodules-pure-ignore\n:global(.{})", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
@@ -230,12 +231,7 @@ impl YakTransform for TransformCssMixin {
         arguments.push(
           Expr::Lit(Lit::Str(Str {
             span: DUMMY_SP,
-            value: self
-              .export_name
-              .clone()
-              .unwrap()
-              .to_readable_string()
-              .into(),
+            value: self.class_name.as_ref().unwrap().as_str().into(),
             raw: None,
           }))
           .into(),
