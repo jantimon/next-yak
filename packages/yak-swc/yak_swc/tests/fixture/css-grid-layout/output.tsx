@@ -1,7 +1,8 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const GridLayout = /*YAK Extracted CSS:
-.GridLayout {
+// cssmodules-pure-ignore
+:global(.GridLayout_m7uBBu) {
   display: grid;
   grid-template-areas: "header header header"
 "nav content sidebar"
@@ -56,4 +57,4 @@ export const GridLayout = /*YAK Extracted CSS:
     text-align: center;
   }
 }
-*/ /*#__PURE__*/ styled.div(__styleYak.GridLayout);
+*/ /*#__PURE__*/ styled.div("GridLayout_m7uBBu");

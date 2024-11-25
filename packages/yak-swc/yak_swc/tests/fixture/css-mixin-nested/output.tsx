@@ -1,6 +1,6 @@
 import { styled, css, __yak_unitPostFix } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
-const buttonStyles = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ css(__styleYak.buttonStyles__$active, {
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
+const buttonStyles = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ css("buttonStyles__$active_m7uBBu", {
         "style": {
             "--buttonStyles__max-width_m7uBBu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }
@@ -10,22 +10,25 @@ const buttonStyles = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ c
     }
 });
 export const ThemedButton = /*YAK Extracted CSS:
-.ThemedButton {
+// cssmodules-pure-ignore
+:global(.ThemedButton_m7uBBu) {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-.ThemedButton__$active {
+// cssmodules-pure-ignore
+:global(.ThemedButton__$active_m7uBBu) {
   @media (max-width: 600px) {
     background-color: #f0f0f0;
     max-width: var(--ThemedButton__max-width_m7uBBu);
   }
 }
-.ThemedButton {
+// cssmodules-pure-ignore
+:global(.ThemedButton_m7uBBu) {
   width: var(--ThemedButton__width_m7uBBu);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.ThemedButton__$active, {
+*/ /*#__PURE__*/ styled.button("ThemedButton_m7uBBu", ({ $active })=>$active && /*#__PURE__*/ css("ThemedButton__$active_m7uBBu", {
         "style": {
             "--ThemedButton__max-width_m7uBBu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }
@@ -35,7 +38,8 @@ export const ThemedButton = /*YAK Extracted CSS:
     }
 });
 export const CustomThemedButton = /*YAK Extracted CSS:
-.CustomThemedButton {
+// cssmodules-pure-ignore
+:global(.CustomThemedButton_m7uBBu) {
   color: red;
   &:not([disabled]) {
     padding: 10px 20px;
@@ -44,7 +48,8 @@ export const CustomThemedButton = /*YAK Extracted CSS:
     cursor: pointer;
   }
 }
-.CustomThemedButton__$active {
+// cssmodules-pure-ignore
+:global(.CustomThemedButton__$active_m7uBBu) {
   &:not([disabled]) {
     @media (max-width: 600px) {
       background-color: #f0f0f0;
@@ -52,12 +57,13 @@ export const CustomThemedButton = /*YAK Extracted CSS:
     }
   }
 }
-.CustomThemedButton {
+// cssmodules-pure-ignore
+:global(.CustomThemedButton_m7uBBu) {
   &:not([disabled]) {
     width: var(--CustomThemedButton__width_m7uBBu);
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.CustomThemedButton__$active, {
+*/ /*#__PURE__*/ styled.button("CustomThemedButton_m7uBBu", ({ $active })=>$active && /*#__PURE__*/ css("CustomThemedButton__$active_m7uBBu", {
         "style": {
             "--CustomThemedButton__max-width_m7uBBu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }

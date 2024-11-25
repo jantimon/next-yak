@@ -1,17 +1,20 @@
 import { styled, css, keyframes } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FadeInText = /*YAK Extracted CSS:
-.FadeInText__$reverse {
+// cssmodules-pure-ignore
+:global(.FadeInText__$reverse_m7uBBu) {
   animation: animations_fadeOut 1s ease-in;
 }
-.FadeInText__not_$reverse {
+// cssmodules-pure-ignore
+:global(.FadeInText__not_$reverse_m7uBBu) {
   animation: animations_fadeIn 1s ease-in;
 }
-.FadeInText {
+// cssmodules-pure-ignore
+:global(.FadeInText_m7uBBu) {
   font-size: 18px;
   color: #333;
 }
-*/ /*#__PURE__*/ styled.p(__styleYak.FadeInText, ({ $reverse })=>$reverse ? /*#__PURE__*/ css(__styleYak.FadeInText__$reverse) : /*#__PURE__*/ css(__styleYak.FadeInText__not_$reverse));
+*/ /*#__PURE__*/ styled.p("FadeInText_m7uBBu", ({ $reverse })=>$reverse ? /*#__PURE__*/ css("FadeInText__$reverse_m7uBBu") : /*#__PURE__*/ css("FadeInText__not_$reverse_m7uBBu"));
 const animations = {
     fadeIn: /*YAK Extracted CSS:
 @keyframes animations_fadeIn {
@@ -22,7 +25,7 @@ const animations = {
     opacity: 1;
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.animations_fadeIn),
+*/ /*#__PURE__*/ keyframes("animations_fadeIn"),
     fadeOut: /*YAK Extracted CSS:
 @keyframes animations_fadeOut {
   from {
@@ -32,7 +35,7 @@ const animations = {
     opacity: 0;
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.animations_fadeOut)
+*/ /*#__PURE__*/ keyframes("animations_fadeOut")
 };
 const slides = {
     200: /*YAK Extracted CSS:
@@ -41,7 +44,7 @@ const slides = {
     transform: translate(200px, 200px);
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.slides_200),
+*/ /*#__PURE__*/ keyframes("slides_200"),
     "x400": /*YAK Extracted CSS:
 @keyframes slides_x400 {
   from {
@@ -51,14 +54,15 @@ const slides = {
     transform: translateX(400px);
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.slides_x400)
+*/ /*#__PURE__*/ keyframes("slides_x400")
 };
 export const FancyButton = /*YAK Extracted CSS:
-.FancyButton {
+// cssmodules-pure-ignore
+:global(.FancyButton_m7uBBu) {
   background-color: #f00;
-  animation: slides_x400 1s ease-in-out, animations_fadeIn 1s ease-in;
+  animation: global(slides_x400) 1s ease-in-out, global(animations_fadeIn) 1s ease-in;
   &:hover {
-    animation: slides_200 1s ease-in-out, animations_fadeOut 1s ease-in;
+    animation: global(slides_200) 1s ease-in-out, global(animations_fadeOut) 1s ease-in;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.FancyButton);
+*/ /*#__PURE__*/ styled.button("FancyButton_m7uBBu");

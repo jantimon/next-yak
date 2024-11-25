@@ -1,5 +1,5 @@
 import { styled, keyframes } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const fadeIn = /*YAK Extracted CSS:
 @keyframes fadeIn {
   from {
@@ -9,11 +9,12 @@ const fadeIn = /*YAK Extracted CSS:
     opacity: 1;
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.fadeIn);
+*/ /*#__PURE__*/ keyframes("fadeIn");
 export const FadeInText = /*YAK Extracted CSS:
-.FadeInText {
-  animation: fadeIn 1s ease-in;
+// cssmodules-pure-ignore
+:global(.FadeInText_m7uBBu) {
+  animation: global(fadeIn) 1s ease-in;
   font-size: 18px;
   color: #333;
 }
-*/ /*#__PURE__*/ styled.p(__styleYak.FadeInText);
+*/ /*#__PURE__*/ styled.p("FadeInText_m7uBBu");

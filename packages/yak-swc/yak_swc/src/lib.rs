@@ -96,8 +96,6 @@ where
   expression_replacement: Option<Box<Expr>>,
   /// The current file name e.g. "App.tsx"
   filename: String,
-  /// The imported css module from the virtual yak.module.css
-  css_module_identifier: Option<Ident>,
   /// Flag to check if we are inside a css attribute
   inside_element_with_css_attribute: bool,
 }
@@ -118,7 +116,6 @@ where
       naming_convention: NamingConvention::new(filename.clone(), dev_mode),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
-      css_module_identifier: None,
       inside_element_with_css_attribute: false,
       filename,
       comments,
@@ -483,8 +480,6 @@ where
   /// ? is a fix for Next.js loaders which ignore the !=! statement
   fn visit_mut_module(&mut self, module: &mut Module) {
     let basename = self.get_file_name_without_extension();
-    let css_module_identifier = Ident::new("__styleYak".into(), DUMMY_SP, SyntaxContext::empty());
-    self.css_module_identifier = Some(css_module_identifier.clone());
 
     module.visit_mut_children_with(self);
 
@@ -520,11 +515,7 @@ where
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
           phase: Default::default(),
           span: DUMMY_SP,
-          specifiers: vec![ImportDefaultSpecifier {
-            span: DUMMY_SP,
-            local: css_module_identifier,
-          }
-          .into()],
+          specifiers: vec![],
           src: Box::new(Str {
             span: DUMMY_SP,
             value: format!(
@@ -788,7 +779,6 @@ where
 
     let transform_result = transform.transform_expression(
       n,
-      self.css_module_identifier.clone().unwrap(),
       runtime_expressions,
       &self.current_declaration,
       runtime_css_variables,

@@ -79,6 +79,21 @@ impl NamingConvention {
     let css_variable_name = format!("{}{}", name, self.get_file_name_hash());
     self.generate_unique_name(&css_variable_name)
   }
+
+  /// Generate a unique CSS variable name based on the file name and a base name
+  pub fn get_css_class_name(&mut self, base_name: &str) -> String {
+    let name: String = if self.dev_mode {
+      if base_name.is_empty() {
+        String::from("yak_")
+      } else {
+        format!("{}_", base_name)
+      }
+    } else {
+      String::from("y")
+    };
+    let css_variable_name = format!("{}{}", name, self.get_file_name_hash());
+    self.generate_unique_name(&css_variable_name)
+  }
 }
 
 fn escape_css_identifier(input: &str) -> String {
