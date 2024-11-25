@@ -20,9 +20,9 @@
  * `;
  * ```
  */
-export const keyframes = (
+export const keyframes = <T extends (string | number | bigint)[] = never>(
   styles: TemplateStringsArray,
-  ...dynamic: never[]
+  ...dynamic: T
 ): string => {
   // the keyframes function is a no-op in the mock
   // as it has no dynamic runtime behavior but only css
