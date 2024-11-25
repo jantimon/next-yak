@@ -44,7 +44,10 @@ function extractCss(code: string): string {
     result += codeUntilEnd;
   }
   // postcss can't handle // comments
-  result = result.replace(/\/\/ cssmodules-pure-ignore/g, "/* cssmodules-pure-ignore */");
+  result = result.replace(
+    /\/\/ cssmodules-pure-ignore/g,
+    "/* cssmodules-pure-ignore */",
+  );
   return result;
 }
 
