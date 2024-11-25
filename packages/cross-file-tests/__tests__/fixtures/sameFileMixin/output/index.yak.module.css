@@ -1,12 +1,16 @@
-.Button {
+// cssmodules-pure-ignore
+:global(.Button_xEUJ1U) {
   color: black;
 }
-.Button__$disabled {
+// cssmodules-pure-ignore
+:global(.Button__$disabled_xEUJ1U) {
   opacity: 0.5;
 }
-.Button__$hasIcon {
+// cssmodules-pure-ignore
+:global(.Button__$hasIcon_xEUJ1U) {
   padding-left: 30px;
 }
-.Button__$disabled-01 {
+// cssmodules-pure-ignore
+:global(.Button__$disabled_xEUJ1U-01) {
   color: gray;
 }

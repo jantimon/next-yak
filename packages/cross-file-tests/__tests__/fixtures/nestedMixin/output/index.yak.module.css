@@ -1,11 +1,13 @@
-.Button {
+// cssmodules-pure-ignore
+:global(.Button_oPtJMe) {
   color: black;
 :global(.icon_Icon__vdEsc) {
   color: black;
 }
 
 }
-.PrimaryButton {
+// cssmodules-pure-ignore
+:global(.PrimaryButton_oPtJMe) {
   color: black;
 :global(.icon_Icon__vdEsc) {
   color: black;

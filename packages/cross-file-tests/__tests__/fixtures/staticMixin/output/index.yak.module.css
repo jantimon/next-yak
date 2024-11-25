@@ -1,4 +1,5 @@
-.ListItem {
+// cssmodules-pure-ignore
+:global(.ListItem_PZqRtI) {
   margin-bottom: 10px;
   &:hover {
     &:last-child {
