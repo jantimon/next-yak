@@ -26,7 +26,7 @@ const yakForwardRef: <
   TAttrsOut extends AttrsMerged<TProps, TAttrsIn>,
 >(
   component: ForwardRefRenderFunction<any, TProps>,
-  attrsFn?: (props: any) => any,
+  attrsFn?: (props: any) => any
 ) => YakComponent<TProps, TAttrsIn, TAttrsOut> = (component, attrsFn) =>
   Object.assign(React.forwardRef(component as any), {
     [yakComponentSymbol]: [component, attrsFn],
@@ -37,7 +37,7 @@ const yakForwardRef: <
  */
 type FunctionComponent<T> = (
   props: T,
-  context?: any,
+  context?: any
 ) => React.ReactNode | React.ReactElement;
 
 /**
@@ -88,7 +88,7 @@ const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
       TAttrsIn extends object = {},
       TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
     >(
-      attrs: Attrs<T, TAttrsIn, TAttrsOut>,
+      attrs: Attrs<T, TAttrsIn, TAttrsOut>
     ) => yakStyled<T, TAttrsIn, TAttrsOut>(Component, attrs),
   });
 
@@ -117,7 +117,7 @@ const yakStyled = <
     | FunctionComponent<T>
     | YakComponent<T, TAttrsIn, TAttrsOut>
     | HtmlTags,
-  attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
+  attrs?: Attrs<T, TAttrsIn, TAttrsOut>
 ) => {
   const isYakComponent =
     typeof Component !== "string" && yakComponentSymbol in Component;
@@ -137,7 +137,7 @@ const yakStyled = <
       CSSInterpolation<T & NoInfer<TCSSProps> & { theme: YakTheme }>
     >
   ) => {
-    const getRuntimeStyles = css(styles, ...values);
+    const getRuntimeStyles = css(styles, ...(values as any));
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
       // if the css component does not require arguments
       // it can be called without arguments and we skip calling useTheme()
@@ -182,7 +182,7 @@ const yakStyled = <
               mergedAttrsFn?.({ theme, ...props } as Substitute<
                 T & { theme: YakTheme },
                 TAttrsIn
-              >),
+              >)
             );
       // execute all functions inside the style literal
       // e.g. styled.button`color: ${props => props.color};`
@@ -206,7 +206,7 @@ const yakStyled = <
       // user provided className and style prop
       (filteredProps as { className?: string }).className = mergeClassNames(
         (filteredProps as { className?: string }).className,
-        runtimeStyles.className,
+        runtimeStyles.className
       );
       (filteredProps as { style?: React.CSSProperties }).style =
         "style" in filteredProps
@@ -267,7 +267,7 @@ export const styled = new Proxy(
           TAttrsIn
         > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
       >(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
       ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
     };
   },
@@ -275,7 +275,7 @@ export const styled = new Proxy(
     get(target, TagName: keyof JSX.IntrinsicElements) {
       return target(TagName);
     },
-  },
+  }
 );
 
 /**
@@ -322,7 +322,7 @@ const combineProps = <
     | undefined,
 >(
   props: T,
-  newProps: TOther,
+  newProps: TOther
 ) =>
   newProps
     ? (props.className === newProps.className || !newProps.className) &&
@@ -370,7 +370,7 @@ const buildRuntimeAttrsProcessor = <
   TAttrsOut extends AttrsMerged<T, TAttrsIn>,
 >(
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
-  parentAttrsFn?: AttrsFunction<T, TAttrsIn, TAttrsOut>,
+  parentAttrsFn?: AttrsFunction<T, TAttrsIn, TAttrsOut>
 ): AttrsFunction<T, TAttrsIn, TAttrsOut> | undefined => {
   const ownAttrsFn =
     attrs && (typeof attrs === "function" ? attrs : () => attrs);
@@ -386,7 +386,7 @@ const buildRuntimeAttrsProcessor = <
       // the whole props object calculated from the previous attrs functions
       return combineProps(
         parentProps,
-        ownAttrsFn(combineProps(props, parentProps)),
+        ownAttrsFn(combineProps(props, parentProps))
       );
     };
   }
