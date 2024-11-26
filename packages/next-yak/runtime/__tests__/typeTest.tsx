@@ -264,6 +264,7 @@ const GenericComponentWorks = () => {
     );
   };
 };
+
 const KeyframesWithConstants = () => {
   const constString = "rotate(360deg)";
   const constNumber = 360;

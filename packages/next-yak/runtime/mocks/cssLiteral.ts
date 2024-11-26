@@ -19,12 +19,12 @@ export const css: typeof cssInternal = (
   ...args: unknown[]
 ) => {
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
-  for (const arg of args) {
+  for (const arg of args as Array<string | Function | object>) {
     // Dynamic CSS e.g.
     // css`${props => props.active && css`color: red;`}`
     // compiled -> css((props: { active: boolean }) => props.active && css("yak31e4"))
     if (typeof arg === "function") {
-      dynamicCssFunctions.push(arg as PropsToClassNameFn);
+      dynamicCssFunctions.push(arg as unknown as PropsToClassNameFn);
     }
   }
   if (dynamicCssFunctions.length === 0) {
