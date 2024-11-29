@@ -1,12 +1,5 @@
-import { writeFile } from "fs";
 import * as swc from "@swc/core";
-// import path from "path";
-
-// const wasmPath = path.resolve(
-//   process.cwd(),
-//   "node_modules",
-//   "yak-swc/target/wasm32-wasi/release/yak_swc.wasm",
-// );
+import { writeFile } from "fs";
 
 // Function to generate the content of JapaneseLetterComponent.tsx for Kanji characters
 async function generateKanjiComponentFile() {
@@ -26,7 +19,7 @@ async function generateKanjiComponentFile() {
     const styled = libs[lib];
 
     const fileContent = `
-"use client";    
+"use client";
 import React, { type FunctionComponent } from 'react';
 import ${
       lib === "next-yak" ? `{ styled as ${styled}, css }` : `{ ${styled}, css }`
@@ -240,10 +233,10 @@ export const KanjiLetterComponent${
     <LibHeader onClick={() => document.location.href = "${
       lib === "next-yak" ? "/styled" : "/yak"
     }"}>${lib}</LibHeader>
-    <Wrapper 
-      style={{ 
+    <Wrapper
+      style={{
         // @ts-ignore
-        "--count0": count0 
+        "--count0": count0
       }}
       className={\`wrapper-\${count5}\`}
     >
@@ -287,7 +280,7 @@ export const KanjiLetterComponent${
         )
         .join("\n      ")}
     </Wrapper>
-    
+
         <a href="https://github.com/jantimon/next-yak/">next-yak</a>
     </>
   );
