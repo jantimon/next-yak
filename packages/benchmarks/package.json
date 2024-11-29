@@ -15,20 +15,22 @@
     "codspeed:run": "NODE_ENV=production node ./codspeed/dist/index.bench.mjs"
   },
   "dependencies": {
+    "@swc/core": "1.7.42",
     "next": "15.0.2",
+    "next-yak": "workspace:*",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "next-yak": "workspace:*",
-    "styled-components": "6.1.1"
+    "styled-components": "6.1.1",
+    "yak-swc": "workspace:^"
   },
   "devDependencies": {
+    "@codspeed/benchmark.js-plugin": "3.1.0",
+    "@types/benchmark": "2.1.5",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
-    "@types/benchmark": "2.1.5",
     "benchmark": "2.1.4",
-    "typescript": "5.5.2",
     "tree-kill": "1.2.2",
-    "@codspeed/benchmark.js-plugin": "3.1.0",
-    "tsup": "7.2.0"
+    "tsup": "7.2.0",
+    "typescript": "5.5.2"
   }
 }
