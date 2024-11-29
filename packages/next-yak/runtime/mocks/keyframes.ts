@@ -1,3 +1,5 @@
+import type { keyframes as keyframesInternal } from "../keyframes.js";
+
 /**
  * Allows to use CSS keyframe animations in a styled or css block
  *
@@ -20,10 +22,7 @@
  * `;
  * ```
  */
-export const keyframes = (
-  styles: TemplateStringsArray,
-  ...dynamic: never[]
-): string => {
+export const keyframes: typeof keyframesInternal = (styles, ...dynamic) => {
   // the keyframes function is a no-op in the mock
   // as it has no dynamic runtime behavior but only css
   return "";

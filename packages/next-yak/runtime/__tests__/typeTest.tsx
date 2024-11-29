@@ -264,3 +264,36 @@ const GenericComponentWorks = () => {
     );
   };
 };
+
+const KeyframesWithConstants = () => {
+  const constString = "rotate(360deg)";
+  const constNumber = 360;
+
+  const rotate = keyframes`
+    from {
+      transform: rotate(${constNumber}deg);
+    }
+    to {
+      transform: ${constString};
+    }
+  `;
+};
+
+const SelectorMixinsShouldNotAlterType = () => {
+  const Button = styled.button<{ $primary?: boolean }>``;
+
+  const Mixin = css`
+    ${Button} {
+      color: red;
+    }
+  `;
+
+  const X = styled.div`
+    ${Button} {
+      color: blue;
+    }
+    ${Mixin};
+  `;
+
+  <X />;
+};
