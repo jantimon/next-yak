@@ -4,6 +4,15 @@
 
 ### Patch Changes
 
+- 6806558: Allow keyframe values to reference typed constants
+- ea831c6: Fix typings of selectors within mixin
+- Updated dependencies [f24770d]
+  - yak-swc@0.8.1
+
+## 2.4.1
+
+### Patch Changes
+
 - Improve hashing of css variables (yak-swc@0.8.0)
 
 ## 2.3.0

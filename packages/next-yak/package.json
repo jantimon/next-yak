@@ -1,6 +1,6 @@
 {
   "name": "next-yak",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "type": "module",
   "types": "./dist/",
   "license": "MIT",
@@ -78,7 +78,7 @@
   "dependencies": {
     "@babel/core": "7.23.2",
     "@babel/plugin-syntax-typescript": "7.22.5",
-    "yak-swc": "0.8.0"
+    "yak-swc": "0.8.1"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.14",
