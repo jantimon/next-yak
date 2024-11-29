@@ -986,7 +986,7 @@ mod tests {
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
   #[testing::fixture("tests/fixture/**/input.tsx")]
-  fn fixture(input: PathBuf) {
+  fn fixture_dev(input: PathBuf) {
     test_fixture(
       Syntax::Typescript(TsSyntax {
         tsx: true,
@@ -1000,7 +1000,7 @@ mod tests {
         ))
       },
       &input,
-      &input.with_file_name("output.tsx"),
+      &input.with_file_name("output.dev.tsx"),
       FixtureTestConfig {
         module: None,
         sourcemap: false,
@@ -1008,6 +1008,31 @@ mod tests {
       },
     )
   }
+
+  #[testing::fixture("tests/fixture/**/input.tsx")]
+  fn fixture_prod(input: PathBuf) {
+    test_fixture(
+      Syntax::Typescript(TsSyntax {
+        tsx: true,
+        ..Default::default()
+      }),
+      &|tester| {
+        visit_mut_pass(TransformVisitor::new(
+          Some(tester.comments.clone()),
+          "path/input.tsx".to_string(),
+          false,
+        ))
+      },
+      &input,
+      &input.with_file_name("output.prod.tsx"),
+      FixtureTestConfig {
+        module: None,
+        sourcemap: false,
+        allow_error: true,
+      },
+    )
+  }
+
   #[testing::fixture("tests/fixture/**/input.yak.tsx")]
   fn fixture_yak(input: PathBuf) {
     test_fixture(
