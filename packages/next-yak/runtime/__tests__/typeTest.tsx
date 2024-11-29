@@ -278,3 +278,22 @@ const KeyframesWithConstants = () => {
     }
   `;
 };
+
+const SelectorMixinsShouldNotAlterType = () => {
+  const Button = styled.button<{ $primary?: boolean }>``;
+
+  const Mixin = css`
+    ${Button} {
+      color: red;
+    }
+  `;
+
+  const X = styled.div`
+    ${Button} {
+      color: blue;
+    }
+    ${Mixin};
+  `;
+
+  <X />;
+};
