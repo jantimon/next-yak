@@ -10,7 +10,7 @@ crate-type = ["cdylib", "rlib"]
 lazy_static = "1.4.0"
 serde = "1.0.203"
 serde_json = "1.0.120"
-swc_core = { version = "0.96.0", features = ["ecma_plugin_transform"] }
+swc_core = { version = "3.0.2", features = ["ecma_plugin_transform"] }
 css_in_js_parser = { path = "../css_in_js_parser" }
 relative_posix_path = { path = "../relative_posix_path" }
 itertools = "0.13.0"
@@ -20,9 +20,10 @@ rustc-hash = "2.0.0"
 [dev-dependencies]
 divan = "0.1.14"
 regex = "1.10.3"
-swc = "0.279.0"
-swc_ecma_transforms_testing = "0.143.1"
-testing = "0.36.0"
+swc = "3.0.2"
+swc_ecma_transforms_testing = "3.0.0"
+swc_ecma_parser = "3.0.1"
+testing = "3.0.0"
 
 [[bench]]
 name = "extension_detection"

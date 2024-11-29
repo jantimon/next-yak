@@ -1,21 +1,48 @@
 {
   "name": "docs",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
   "scripts": {
-    "dev": "vocs dev",
-    "build": "pnpm run build:next-yak && pnpm run build:playground && pnpm run build:vocs",
-    "build:next-yak": "pnpm run --filter next-yak build",
-    "build:playground": "pnpm run --filter next-yak-playground build",
-    "build:vocs": "vocs build",
-    "preview": "vocs preview"
+    "build": "pnpm run build:yak && pnpm run build:next",
+    "build:next": "next build",
+    "build:yak": "pnpm run --filter next-yak build",
+    "build:swc": "pnpm run --filter yak-swc build",
+    "dev": "next dev",
+    "start": "next start",
+    "postinstall": "fumadocs-mdx",
+    "prettier": "npx prettier --write \"./{lib,components,app}/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
+    "@babel/preset-typescript": "7.26.0",
+    "@monaco-editor/react": "4.6.0",
+    "@next/mdx": "15.0.2",
+    "@shikijs/monaco": "1.22.2",
+    "@shikijs/transformers": "1.22.2",
+    "@swc/core": "1.7.42",
+    "fumadocs-core": "14.3.1",
+    "fumadocs-mdx": "11.1.1",
+    "fumadocs-openapi": "5.5.9",
+    "fumadocs-twoslash": "2.0.1",
+    "fumadocs-ui": "14.3.1",
+    "next": "15.0.2",
+    "next-themes": "0.4.3",
     "next-yak": "workspace:*",
-    "react": "latest",
-    "react-dom": "latest",
-    "vocs": "latest",
-    "next-yak-playground": "workspace:*"
+    "raw-loader": "4.0.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-resizable-panels": "2.1.6",
+    "shiki": "1.22.2",
+    "yak-swc": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/mdx": "2.0.13",
+    "@types/node": "22.9.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@types/webpack": "5.28.5",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "5.5.2"
   }
 }

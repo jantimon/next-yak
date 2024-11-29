@@ -2,7 +2,7 @@ use crate::yak_imports::YakImportVisitor;
 use swc_core::atoms::atom;
 use swc_core::common::Spanned;
 use swc_core::ecma::ast::*;
-use swc_core::ecma::visit::{VisitMut, VisitMutWith};
+use swc_core::ecma::visit::{Fold, VisitMut, VisitMutWith};
 use swc_core::plugin::errors::HANDLER;
 
 pub struct YakFileVisitor {
@@ -46,14 +46,25 @@ impl VisitMut for YakFileVisitor {
 
   fn visit_mut_expr(&mut self, expr: &mut Expr) {
     expr.visit_mut_children_with(self);
-    // Convert tagged template literals to plain template literals
+    // Convert tagged template literals to an object with plain template literals
+    // e.g. css`font-size: ${20}px;` => { __yak: `font-size: ${20}px;` }
+    // This is necessary as the mixin is also imported at runtime and a string would be
+    // interpreted as a class name
     if let Expr::TaggedTpl(n) = expr {
       if let Some(name) = self.yak_imports.get_yak_library_function_name(n) {
         if name == atom!("css") {
-          *expr = Tpl {
+          *expr = ObjectLit {
             span: n.span,
-            exprs: n.tpl.exprs.clone(),
-            quasis: n.tpl.quasis.clone(),
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+              key: PropName::Ident(IdentName::new("__yak".into(), n.span)),
+              value: Box::new(Expr::Tpl(Tpl {
+                span: n.span,
+                exprs: n.tpl.exprs.clone(),
+                quasis: n.tpl.quasis.clone(),
+              })),
+            })))]
+            .into_iter()
+            .collect(),
           }
           .into();
         }
@@ -112,18 +123,20 @@ impl VisitMut for YakFileVisitor {
   }
 }
 
+impl Fold for YakFileVisitor {}
+
 #[cfg(test)]
 mod tests {
   use super::*;
-  use swc_core::ecma::transforms::testing::test_transform;
-  use swc_core::ecma::visit::as_folder;
+  use swc_core::ecma::{transforms::testing::test_transform, visit::visit_mut_pass};
 
   #[test]
   fn test_yak_file_visitor() {
     let mut visitor = YakFileVisitor::new();
     test_transform(
       Default::default(),
-      |_| as_folder(&mut visitor),
+      Some(true),
+      |_| visit_mut_pass(&mut visitor),
       r#"
                 import { css } from "next-yak";
                 export const heading = css`
@@ -131,11 +144,11 @@ mod tests {
                 `;
             "#,
       r#"
-                export const heading = `
+                export const heading = {
+                  __yak: `
                   font-size: ${20}px;
-                `;
+                `};
             "#,
-      true,
     );
   }
 }

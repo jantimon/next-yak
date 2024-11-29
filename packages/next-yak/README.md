@@ -1,6 +1,6 @@
 # next-yak
 
-![Yak At Work as Frontend Dev](https://github.com/jantimon/next-yak/assets/4113649/2dcaf443-7205-4ef3-ba44-fbbe3ef2807d)
+![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/72494b1c-db1a-4ff7-bd6f-2ed3535fb126)
 
 [![npm version](https://badge.fury.io/js/next-yak.svg)](https://www.npmjs.com/package/next-yak)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jantimon/next-yak/blob/main/LICENSE)
@@ -19,16 +19,27 @@
 [Preview (Video)](https://github.com/jantimon/next-yak/assets/4113649/f5a220fc-2a0f-46be-a8e7-c855f7faa337
 )
 
+## Compatibility
+
+| next-yak version | Next.js version | swc_core version |
+|------------------|-----------------|------------------|
+| 3.x              | 15.x            | 3.0.2            |
+| 2.x              | 14.x            | 0.279.0          |
+
+Make sure to use a compatible version when installing:
+
+
 ## Installation
 
 ```bash
-npm install next-yak
-```
+# For Next.js 15.x
+npm install next-yak@3
 
-or
+# For Next.js 14.x 
+npm install next-yak@2
 
-```bash
-yarn add next-yak
+# For Next.js 13.x
+npm install next-yak@1
 ```
 
 ## Getting Started

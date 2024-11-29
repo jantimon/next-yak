@@ -11,11 +11,14 @@ const colors = {
     dark: "#343a40"
 };
 const borderRadius = "4px";
+const stacking = 1;
 export const Button = /*YAK Extracted CSS:
 .Button {
   background-color: #007bff;
   color: #f8f9fa;
-  padding: 10px 20px;
+  padding: 10px 33.3333%;
+  z-index: 1;
+  margin-top: -1px;
   border: none;
   border-radius: 4px;
   cursor: pointer;

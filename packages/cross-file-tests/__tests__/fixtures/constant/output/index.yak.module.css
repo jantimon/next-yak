@@ -1,0 +1,11 @@
+.Button {
+  color: red;
+  height: 10px;
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+  z-index: -1;
+}
+.Button__ {
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+}

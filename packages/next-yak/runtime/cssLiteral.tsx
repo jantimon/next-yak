@@ -1,6 +1,8 @@
 import { CSSProperties } from "react";
 import type { YakTheme } from "./index.d.ts";
 
+export const yakComponentSymbol = Symbol("yak");
+
 type ComponentStyles<TProps> = (props: TProps) => {
   className: string;
   style?: {
@@ -24,7 +26,7 @@ export type CSSInterpolation<TProps> =
   | {
       // type only identifier to allow targeting components
       // e.g. styled.svg`${Button}:hover & { fill: red; }`
-      __yak: true;
+      [yakComponentSymbol]: any;
     }
   | ((props: TProps) => CSSInterpolation<TProps>);
 
@@ -37,7 +39,7 @@ type CSSFunction = <TProps = {}>(
   ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
 ) => ComponentStyles<TProps>;
 
-type PropsToClassNameFn = (props: unknown) =>
+export type PropsToClassNameFn = (props: unknown) =>
   | {
       className?: string;
       style?: Record<string, string>;
@@ -59,7 +61,7 @@ type PropsToClassNameFn = (props: unknown) =>
 export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
 export function css<TProps = {}>(
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
+  ...values: CSSInterpolation<NoInfer<TProps> & { theme: YakTheme }>[]
 ): ComponentStyles<TProps>;
 export function css<TProps>(
   ...args: Array<any>

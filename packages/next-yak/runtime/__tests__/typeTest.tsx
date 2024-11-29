@@ -204,4 +204,96 @@ const CompositionOverridingAndMergingTest = () => {
       </Parent>
     );
   };
+
+  const case4 = () => {
+    const Wrap = styled.button``;
+    const Icon = styled.svg<{ $active: boolean }>``;
+    const Button = styled(Wrap)`
+      ${Icon} {
+        color: red;
+      }
+    `;
+    const Button2 = styled.button`
+      ${Icon} {
+        color: red;
+      }
+    `;
+
+    // @ts-expect-error $active should not be required
+    <Button $active={true}>Click me</Button>;
+
+    // @ts-expect-error $active should not be required
+    <Button2 $active={true}>Click me</Button2>;
+
+    // should be callable without any properties
+    <Button>Click me</Button>;
+    <Button2>Click me</Button2>;
+
+    // the types should be equal
+    type Equal = typeof Button extends typeof Button2 ? true : false;
+    const _: Equal = true;
+  };
+};
+
+const GenericComponentWorks = () => {
+  interface MyGenericProps<T> {
+    input: T;
+  }
+
+  type MyGenericComponent<T> = React.ElementType<MyGenericProps<T>> & {
+    <TOther>(props: MyGenericProps<TOther>): React.ReactNode;
+  };
+
+  type MyDefaultType = {
+    [x: string]: any;
+  };
+
+  const GenericComponent: MyGenericComponent<MyDefaultType> = () => {
+    return null;
+  };
+
+  const ConcreteStyledComponent = GenericComponent<"test">;
+
+  const MyComponent = styled(ConcreteStyledComponent)``;
+
+  const Test = () => {
+    return (
+      <div>
+        <MyComponent input="test" />
+      </div>
+    );
+  };
+};
+
+const KeyframesWithConstants = () => {
+  const constString = "rotate(360deg)";
+  const constNumber = 360;
+
+  const rotate = keyframes`
+    from {
+      transform: rotate(${constNumber}deg);
+    }
+    to {
+      transform: ${constString};
+    }
+  `;
+};
+
+const SelectorMixinsShouldNotAlterType = () => {
+  const Button = styled.button<{ $primary?: boolean }>``;
+
+  const Mixin = css`
+    ${Button} {
+      color: red;
+    }
+  `;
+
+  const X = styled.div`
+    ${Button} {
+      color: blue;
+    }
+    ${Mixin};
+  `;
+
+  <X />;
 };

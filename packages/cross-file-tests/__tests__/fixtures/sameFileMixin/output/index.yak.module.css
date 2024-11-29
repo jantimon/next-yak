@@ -1,0 +1,12 @@
+.Button {
+  color: black;
+}
+.Button__$disabled {
+  opacity: 0.5;
+}
+.Button__$hasIcon {
+  padding-left: 30px;
+}
+.Button__$disabled-01 {
+  color: gray;
+}

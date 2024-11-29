@@ -5,7 +5,7 @@ import { queries, colors } from "@/theme/constants.yak";
 import { Clock } from "./Clock";
 import { Inputs } from "@/app/Input";
 import { HighContrastToggle } from "./HighContrastToggle";
-import { typography } from "./mixins/constants.yak";
+import { typography } from "./mixins";
 
 const headline = css<{ $primary?: boolean }>`
   ${typography.h1};
@@ -55,17 +55,24 @@ const Headline = styled.h1<{ $primary?: boolean }>`
   ${headline}
 `;
 
+const SubHeadline = styled.h2`
+  ${typography.h2};
+  color: #323248;
+`;
+
 const Button = styled.button<{ $primary?: boolean }>`
-  display: block;
-  ${({ theme }) =>
-    theme.highContrast
-      ? css`
-          color: ${colors.dark};
-        `
-      : css`
-          color: #009688;
-        `}
-  background: #fff;
+  @layer base {
+    display: block;
+    ${({ theme }) =>
+      theme.highContrast
+        ? css`
+            color: ${colors.dark};
+          `
+        : css`
+            color: #009688;
+          `}
+    background: #fff;
+  }
   border: 1px solid currentColor;
   font-size: 17px;
   padding: 7px 12px;
@@ -117,6 +124,7 @@ export default function Home() {
     <YakThemeProvider>
       <main className={styles.main}>
         <Headline $primary>Hello world</Headline>
+        <SubHeadline>example page</SubHeadline>
         <Button>Ghost</Button>
         <Button $primary>Primary Ghost</Button>
         <FancyButton $primary title="fancy">
@@ -127,7 +135,13 @@ export default function Home() {
         <StyledLink href="https://github.com/jantimon/next-yak/tree/main/packages/example/app">
           view code
         </StyledLink>
-        <p>CSS Prop works if this is green</p>
+        <p
+          css={css`
+            color: green;
+          `}
+        >
+          CSS Prop works if this is green
+        </p>
         <Inputs />
       </main>
     </YakThemeProvider>

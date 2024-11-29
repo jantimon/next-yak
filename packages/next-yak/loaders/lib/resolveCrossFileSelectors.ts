@@ -5,7 +5,9 @@ import babelPlugin from "@babel/plugin-syntax-typescript";
 import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
 
-const yakCssImportRegex = /--yak-css-import\:\s*url\("([^"]+)"\)/g;
+const yakCssImportRegex =
+  // Make mixin and selector non optional once we dropped support for the babel plugin
+  /--yak-css-import\:\s*url\("([^"]+)",?(|mixin|selector)\)(;?)/g;
 
 const compilationCache = new WeakMap<
   Compilation,
@@ -31,13 +33,14 @@ const compilationCache = new WeakMap<
  *  background-color: ${colors.primary};
  * `;
  */
-export async function resolveCrossFileSelectors(
+export async function resolveCrossFileConstant(
   loader: LoaderContext<{}>,
+  pathContext: string,
   css: string,
 ): Promise<string> {
   // Search for --yak-css-import: url("path/to/module") in the css
   const matches = [...css.matchAll(yakCssImportRegex)].map((match) => {
-    const [fullMatch, encodedArguments] = match;
+    const [fullMatch, encodedArguments, importKind, semicolon] = match;
     const [moduleSpecifier, ...specifier] = encodedArguments
       .split(":")
       .map((entry) => decodeURIComponent(entry));
@@ -45,6 +48,8 @@ export async function resolveCrossFileSelectors(
       encodedArguments,
       moduleSpecifier,
       specifier,
+      importKind,
+      semicolon,
       position: match.index!,
       size: fullMatch.length,
     };
@@ -65,7 +70,7 @@ export async function resolveCrossFileSelectors(
         const resolvedFromCache = exportCache.get(encodedArguments);
         const resolvedValue =
           resolvedFromCache ||
-          parseModule(loader, moduleSpecifier, loader.context).then(
+          parseModule(loader, moduleSpecifier, pathContext).then(
             (parsedModule) =>
               resolveModuleSpecifierRecursively(
                 loader,
@@ -83,8 +88,18 @@ export async function resolveCrossFileSelectors(
     // Replace the imports with the resolved values
     let result = css;
     for (let i = matches.length - 1; i >= 0; i--) {
-      const { position, size } = matches[i];
+      const { position, size, importKind, specifier, semicolon } = matches[i];
       const resolved = resolvedValues[i];
+
+      if (importKind === "selector") {
+        if (resolved.type === "mixin") {
+          throw new Error(
+            `Found mixin but expected a selector - did you forget a semicolon after \`${specifier.join(
+              ".",
+            )}\`?`,
+          );
+        }
+      }
 
       const replacement =
         resolved.type === "styled-component"
@@ -97,7 +112,17 @@ export async function resolveCrossFileSelectors(
               resolved.name,
               {},
             )})`
-          : resolved.value;
+          : resolved.value +
+            // resolved.value can be of two different types:
+            // - mixin:
+            //   ${mixinName};
+            // - constant:
+            //   color: ${value};
+            // For mixins the semicolon is already included in the value
+            // but for constants it has to be added manually
+            (["}", ";"].includes(String(resolved.value).trimEnd().slice(-1))
+              ? ""
+              : semicolon);
 
       result =
         result.slice(0, position) +
@@ -186,21 +211,77 @@ async function parseFile(
           ) {
             return [key, { type: "record" as const, value }];
           } else {
-            return [key, { type: "unsupported" as const }];
+            return [key, { type: "unsupported" as const, hint: String(value) }];
           }
         }),
       );
       return { type: "yak", exports: mappedModule, filePath };
     }
-    const sourceContents = await new Promise<string>((resolve, reject) =>
+    const sourceContents = new Promise<string>((resolve, reject) =>
       loader.fs.readFile(filePath, "utf-8", (err, result) => {
         if (err) return reject(err);
         resolve(result || "");
       }),
     );
 
-    const exports = await parseExports(sourceContents, isTSX);
-    return { type: "regular", exports, filePath };
+    const tranformedSource = new Promise<string>((resolve, reject) => {
+      loader.loadModule(filePath, (err, source) => {
+        if (err) return reject(err);
+        resolve(source || "");
+      });
+    });
+
+    const exports = await parseExports(await sourceContents, isTSX);
+    const mixins = parseMixins(await tranformedSource);
+
+    // Recursively resolve cross-file constants in mixins
+    // e.g. cross file mixins inside a cross file mixin
+    // or a cross file selector inside a cross file mixin
+    await Promise.all(
+      Object.entries(mixins).map(async ([name, { value, nameParts }]) => {
+        const resolvedValue = await resolveCrossFileConstant(
+          loader,
+          path.dirname(filePath),
+          value,
+        );
+        if (nameParts.length === 1) {
+          exports[name] = { type: "mixin", value: resolvedValue };
+        } else {
+          let exportEntry: undefined | ParsedExport = exports[nameParts[0]];
+          if (!exportEntry) {
+            exportEntry = { type: "record", value: {} };
+            exports[nameParts[0]] = exportEntry;
+          } else if (exportEntry.type !== "record") {
+            throw new Error(
+              `Error parsing file ${filePath}: ${nameParts[0]} is not a record`,
+            );
+          }
+          let current = exportEntry.value as Record<any, ParsedExport>;
+          for (let i = 1; i < nameParts.length - 1; i++) {
+            let next = current[nameParts[i]];
+            if (!next) {
+              next = { type: "record", value: {} };
+              current[nameParts[i]] = next;
+            } else if (next.type !== "record") {
+              throw new Error(
+                `Error parsing file ${filePath}: ${nameParts[i]} is not a record`,
+              );
+            }
+            current = next.value;
+          }
+          current[nameParts[nameParts.length - 1]] = {
+            type: "mixin",
+            value: resolvedValue,
+          };
+        }
+      }),
+    );
+
+    return {
+      type: "regular",
+      exports,
+      filePath,
+    };
   } catch (error) {
     throw new Error(
       `Error parsing file ${filePath}: ${(error as Error).message}`,
@@ -250,6 +331,23 @@ async function parseExports(
                   });
                 }
               },
+              ExportDeclaration({ node }) {
+                if ("specifiers" in node && node.source) {
+                  const { specifiers, source } = node;
+                  specifiers.forEach((specifier) => {
+                    // export * as color from "./colors";
+                    if (
+                      specifier.type === "ExportNamespaceSpecifier" &&
+                      specifier.exported.type === "Identifier"
+                    ) {
+                      exports[specifier.exported.name] = {
+                        type: "star-export",
+                        from: [source.value],
+                      };
+                    }
+                  });
+                }
+              },
               ExportAllDeclaration({ node }) {
                 if (Object.keys(exports).length === 0) {
                   exports["*"] ||= {
@@ -274,28 +372,81 @@ async function parseExports(
   }
 }
 
+function parseMixins(
+  sourceContents: string,
+): Record<string, { type: "mixin"; value: string; nameParts: string[] }> {
+  // Mixins are always in the following format:
+  // /*YAK EXPORTED MIXIN:fancy:aspectRatio:16:9
+  // css
+  // */
+  const mixinParts = sourceContents.split("/*YAK EXPORTED MIXIN:");
+  let mixins: Record<
+    string,
+    { type: "mixin"; value: string; nameParts: string[] }
+  > = {};
+
+  for (let i = 1; i < mixinParts.length; i++) {
+    const [comment] = mixinParts[i].split("*/", 1);
+    const position = comment.indexOf("\n");
+    const name = comment.slice(0, position);
+    const value = comment.slice(position + 1);
+    mixins[name] = {
+      type: "mixin",
+      value,
+      nameParts: name.split(":").map((part) => decodeURIComponent(part)),
+    };
+  }
+  return mixins;
+}
+
+/**
+ * Unpacks a TSAsExpression to its expression value
+ */
+function unpackTSAsExpression(
+  node: babel.types.TSAsExpression | babel.types.Expression,
+): babel.types.Expression {
+  if (node.type === "TSAsExpression") {
+    return unpackTSAsExpression(node.expression);
+  }
+  return node;
+}
+
 function parseExportValueExpression(
   node: babel.types.Expression,
 ): ParsedExport {
+  // ignores `as` casts so it doesn't interfere with the ast node type detection
+  const expression = unpackTSAsExpression(node);
   if (
-    node.type === "CallExpression" ||
-    node.type === "TaggedTemplateExpression"
+    expression.type === "CallExpression" ||
+    expression.type === "TaggedTemplateExpression"
   ) {
     return { type: "styled-component" };
-  } else if (node.type === "StringLiteral" || node.type === "NumericLiteral") {
-    return { type: "constant", value: node.value };
-  } else if (node.type === "TemplateLiteral" && node.quasis.length === 1) {
-    return { type: "constant", value: node.quasis[0].value.raw };
-  } else if (node.type === "ObjectExpression") {
-    return { type: "record", value: parseObjectExpression(node) };
+  } else if (
+    expression.type === "StringLiteral" ||
+    expression.type === "NumericLiteral"
+  ) {
+    return { type: "constant", value: expression.value };
+  } else if (
+    expression.type === "UnaryExpression" &&
+    expression.operator === "-" &&
+    expression.argument.type === "NumericLiteral"
+  ) {
+    return { type: "constant", value: -expression.argument.value };
+  } else if (
+    expression.type === "TemplateLiteral" &&
+    expression.quasis.length === 1
+  ) {
+    return { type: "constant", value: expression.quasis[0].value.raw };
+  } else if (expression.type === "ObjectExpression") {
+    return { type: "record", value: parseObjectExpression(expression) };
   }
-  return { type: "unsupported" };
+  return { type: "unsupported", hint: expression.type };
 }
 
 function parseObjectExpression(
   node: babel.types.ObjectExpression,
-): Record<string, any> {
-  let result: Record<string, any> = {};
+): Record<string, ParsedExport> {
+  let result: Record<string, ParsedExport> = {};
   for (const property of node.properties) {
     if (
       property.type === "ObjectProperty" &&
@@ -372,6 +523,7 @@ async function resolveModuleSpecifierRecursively(
       }
     }
     // Follow reexport
+    // e.g. export { colors as primaryColors } from "./colors";
     if (exportValue.type === "re-export") {
       const importedModule = await parseModule(
         loader,
@@ -382,6 +534,20 @@ async function resolveModuleSpecifierRecursively(
         exportValue.imported,
         ...specifier.slice(1),
       ]);
+    }
+    // Namespace export
+    // e.g. export * as colors from "./colors";
+    else if (exportValue.type === "star-export") {
+      const importedModule = await parseModule(
+        loader,
+        exportValue.from[0],
+        path.dirname(module.filePath),
+      );
+      return resolveModuleSpecifierRecursively(
+        loader,
+        importedModule,
+        specifier.slice(1),
+      );
     }
 
     if (exportValue.type === "styled-component") {
@@ -413,15 +579,40 @@ async function resolveModuleSpecifierRecursively(
           );
         }
         depth++;
-        current = current[specifier[depth]];
+        // mixins in .yak files are wrapped inside an object with a __yak key
+        if (depth === specifier.length && "__yak" in current) {
+          return { type: "mixin", value: current["__yak"] };
+        } else if (depth === specifier.length && "value" in current) {
+          return { type: "constant", value: current["value"] };
+        } else {
+          current = current[specifier[depth]];
+        }
       } while (current);
+      if (specifier[depth] === undefined) {
+        throw new Error(
+          `Error unpacking Record/Array - could not extract \`${specifier
+            .slice(0, depth)
+            .join(".")}\` is not a string or number`,
+        );
+      }
+      throw new Error(
+        `Error unpacking Record/Array - could not extract \`${
+          specifier[depth]
+        }\` from \`${specifier.slice(0, depth).join(".")}\``,
+      );
+    } else if (exportValue.type === "mixin") {
+      return { type: "mixin", value: exportValue.value };
     }
-    throw new Error(`Error unpacking Record/Array for unkown reason`);
+    throw new Error(
+      `Error unpacking Record/Array - unexpected exportValue "${
+        exportValue.type
+      }" for specifier "${specifier.join(".")}"`,
+    );
   } catch (error) {
     throw new Error(
       `Error resolving from module ${module.filePath}: ${
         (error as Error).message
-      }`,
+      }\nExtracted values: ${JSON.stringify(module.exports, null, 2)}`,
     );
   }
 }
@@ -432,12 +623,14 @@ type ParsedFile =
 
 type ParsedExport =
   | { type: "styled-component" }
+  | { type: "mixin"; value: string }
   | { type: "constant"; value: string | number }
-  | { type: "record"; value: {} }
-  | { type: "unsupported" }
+  | { type: "record"; value: Record<any, ParsedExport> | {} }
+  | { type: "unsupported"; hint?: string }
   | { type: "re-export"; from: string; imported: string }
   | { type: "star-export"; from: string[] };
 
 type ResolvedExport =
   | { type: "styled-component"; from: string; name: string }
+  | { type: "mixin"; value: string | number }
   | { type: "constant"; value: string | number };

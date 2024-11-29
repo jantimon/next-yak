@@ -2,7 +2,7 @@ name: autofix.ci
 on:
   pull_request:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 permissions:
   contents: read
 
@@ -21,7 +21,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8.6.1
+          version: 9.12.3
           run_install: false
 
       - name: Get pnpm store directory
@@ -47,6 +47,6 @@ jobs:
         run: npx prettier --write "packages/example/app/**/*.{ts,tsx,js,jsx}"
 
       - name: Benchmarks
-        run: npx prettier --write "packages/benchmark/**/*.{ts,tsx}" --ignore-path "packages/benchmark/.prettierignore"
+        run: npx prettier --write "packages/benchmarks/**/*.{ts,tsx}" --ignore-path "packages/benchmarks/.prettierignore"
 
       - uses: autofix-ci/action@d3e591514b99d0fca6779455ff8338516663f7cc

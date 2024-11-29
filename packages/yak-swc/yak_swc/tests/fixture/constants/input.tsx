@@ -12,11 +12,14 @@ const colors = {
 };
 
 const borderRadius = "4px";
+const stacking = 1;
 
 export const Button = styled.button`
   background-color: ${colors.primary};
   color: ${colors.light};
-  padding: 10px 20px;
+  padding: 10px ${100 / 3}%;
+  z-index: ${stacking};
+  margin-top: ${-1}px;
   border: none;
   border-radius: ${borderRadius};
   cursor: pointer;

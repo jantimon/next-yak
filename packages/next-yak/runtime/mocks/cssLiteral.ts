@@ -1,48 +1,6 @@
-import { CSSProperties } from "react";
-import type { YakTheme } from "../index.d.ts";
+import type { css as cssInternal, PropsToClassNameFn } from "../cssLiteral.js";
 
-type ComponentStyles<TProps> = (props: TProps) => {
-  className: string;
-  style?: {
-    [key: string]: string;
-  };
-};
-
-export type StaticCSSProp = {
-  className: string;
-  style?: CSSProperties;
-};
-
-export type CSSInterpolation<TProps> =
-  | string
-  | number
-  | undefined
-  | null
-  | false
-  | ComponentStyles<TProps>
-  | StaticCSSProp
-  | {
-      // type only identifier to allow targeting components
-      // e.g. styled.svg`${Button}:hover & { fill: red; }`
-      __yak: true;
-    }
-  | ((props: TProps) => CSSInterpolation<TProps>);
-
-type CSSStyles<TProps = {}> = {
-  style: { [key: string]: string | ((props: TProps) => string) };
-};
-
-type CSSFunction = <TProps = {}>(
-  styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-) => ComponentStyles<TProps>;
-
-type PropsToClassNameFn = (props: unknown) =>
-  | {
-      className?: string;
-      style?: Record<string, string>;
-    }
-  | PropsToClassNameFn;
+export type { StaticCSSProp, CSSInterpolation } from "../cssLiteral.js";
 
 /**
  * Allows to use CSS styles in a styled or css block
@@ -56,17 +14,12 @@ type PropsToClassNameFn = (props: unknown) =>
  * `;
  * ```
  */
-export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
-export function css<TProps = {}>(
+export const css: typeof cssInternal = (
   styles: TemplateStringsArray,
-  ...values: CSSInterpolation<TProps & { theme: YakTheme }>[]
-): ComponentStyles<TProps>;
-export function css<TProps>(
-  styles: TemplateStringsArray,
-  ...args: CSSInterpolation<TProps & { theme: YakTheme }>[]
-): StaticCSSProp | ComponentStyles<TProps> {
+  ...args: unknown[]
+) => {
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
-  for (const arg of args as Array<string | CSSFunction | CSSStyles<any>>) {
+  for (const arg of args as Array<string | Function | object>) {
     // Dynamic CSS e.g.
     // css`${props => props.active && css`color: red;`}`
     // compiled -> css((props: { active: boolean }) => props.active && css("yak31e4"))
@@ -80,7 +33,7 @@ export function css<TProps>(
       style: undefined,
     };
   }
-  return (<T>(props: T) => {
+  return ((props: unknown) => {
     for (let i = 0; i < dynamicCssFunctions.length; i++) {
       // run the dynamic expressions and ignore the return value
       // the execution is important to ensure that the user code is executed
@@ -91,8 +44,8 @@ export function css<TProps>(
       className: "",
       style: undefined,
     };
-  }) as ComponentStyles<TProps>;
-}
+  }) as any;
+};
 
 function executeDynamicExpressionRecursively(
   props: unknown,

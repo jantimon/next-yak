@@ -1,0 +1,23 @@
+{
+  "name": "cross-file-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "next-yak e2e webpack tests to ensure css-loader and swc loader work together",
+  "type": "module",
+  "scripts": {
+    "test": "vitest --no-watch",
+    "test:snapshots": "UPDATE=1 vitest --no-watch",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vite": "5.3.4",
+    "vitest": "2.0.4",
+    "webpack": "5.92.1",
+    "swc-loader": "0.2.6",
+    "@swc/core": "1.7.42",
+    "next-yak": "workspace:*",
+    "memfs": "4.9.3",
+    "unionfs": "4.5.4",
+    "fast-glob": "3.3.2"
+  }
+}

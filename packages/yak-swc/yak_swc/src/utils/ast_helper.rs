@@ -1,8 +1,10 @@
 use itertools::Itertools;
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 
 use swc_core::atoms::Atom;
 use swc_core::{common::DUMMY_SP, ecma::ast::*, plugin::errors::HANDLER};
+
+use crate::variable_visitor::ScopedVariableReference;
 
 /// Convert a HashMap to an Object expression
 pub fn expr_hash_map_to_object(values: FxHashMap<String, Expr>) -> Expr {
@@ -55,7 +57,6 @@ pub fn member_expr_to_strings(member_expr: &MemberExpr) -> Option<(Ident, Vec<At
       let result = member_expr_to_strings(&member)?;
       let (root_ident, mut nested_props) = result;
       nested_props.extend(props);
-      nested_props.insert(0, root_ident.sym.clone());
       Some((root_ident, nested_props))
     }
     _ => None,
@@ -80,7 +81,7 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
   }
   // otherwise "bar" -> foo.bar
   else {
-    MemberProp::Ident(Ident::new(s.into(), DUMMY_SP))
+    MemberProp::Ident(IdentName::new(s.into(), DUMMY_SP))
   }
 }
 
@@ -88,24 +89,47 @@ pub fn create_member_prop_from_string(s: String) -> MemberProp {
 /// There are two use cases:
 /// 1. Member expressions (e.g., `colors.primary`) -> Some((colors#0, ["colors", "primary"]))
 /// 2. Simple identifiers (e.g., `primaryColor`) -> Some((primaryColor#0, ["primaryColor"]))
-pub fn extract_ident_and_parts(expr: &Expr) -> Option<(Ident, Vec<Atom>)> {
+pub fn extract_ident_and_parts(expr: &Expr) -> Option<ScopedVariableReference> {
   match &expr {
-    Expr::Member(member) => member_expr_to_strings(member).or_else(|| {
-      HANDLER.with(|handler| {
-        handler
-          .struct_span_err(member.span, "Could not parse member expression")
-          .emit();
-      });
-      None
-    }),
-    Expr::Ident(ident) => Some((ident.clone(), vec![ident.sym.clone()])),
+    Expr::Member(member_expr) => member_expr_to_strings(member_expr).map_or_else(
+      || {
+        HANDLER.with(|handler| {
+          handler
+            .struct_span_err(member_expr.span, "Could not parse member expression")
+            .emit();
+        });
+        None
+      },
+      |member_parts| {
+        let (base_ident, member_chain) = member_parts;
+        Some(ScopedVariableReference::new(
+          base_ident.to_id(),
+          member_chain,
+        ))
+      },
+    ),
+    Expr::Ident(ident) => Some(ScopedVariableReference::new(
+      ident.to_id(),
+      vec![ident.sym.clone()],
+    )),
     _ => None,
   }
 }
 
+/// Get a constant template literal from an expression
+pub fn is_valid_tagged_tpl(tagged_tpl: &TaggedTpl, literal_names: &FxHashSet<Id>) -> bool {
+  let TaggedTpl { tag, .. } = tagged_tpl;
+  if let Expr::Ident(id) = &**tag {
+    if literal_names.contains(&id.to_id()) {
+      return true;
+    }
+  }
+  false
+}
+
 pub struct TemplateIterator<'a> {
   tpl: &'a mut Tpl,
-  tpl_clone: Tpl,
+  quasis: Vec<swc_core::ecma::ast::TplElement>,
   current: usize,
 }
 
@@ -114,12 +138,13 @@ pub struct TemplatePart<'a> {
   pub expr: Option<&'a mut Box<Expr>>,
   pub next_quasi: Option<&'a TplElement>,
   pub is_last: bool,
+  pub index: usize,
 }
 
 impl<'a> TemplateIterator<'a> {
   pub fn new(tpl: &'a mut Tpl) -> Self {
     Self {
-      tpl_clone: tpl.clone(),
+      quasis: tpl.quasis.clone(),
       tpl,
       current: 0,
     }
@@ -132,13 +157,14 @@ impl<'a> TemplateIterator<'a> {
     let quasi_count = self.tpl.quasis.len();
     let is_last = self.current == quasi_count - 1;
     let next_quasi = if !is_last {
-      Some(&self.tpl_clone.quasis[self.current + 1])
+      Some(&self.quasis[self.current + 1])
     } else {
       None
     };
     let quasi = &mut self.tpl.quasis[self.current];
 
     let expr = self.tpl.exprs.get_mut(self.current);
+    let index = self.current;
     self.current += 1;
 
     Some(TemplatePart {
@@ -146,6 +172,7 @@ impl<'a> TemplateIterator<'a> {
       expr,
       next_quasi,
       is_last,
+      index,
     })
   }
 }

@@ -1,2 +1,0 @@
-Right now the babel plugin rejects to processes the cross file `fonts.sm` constant
-The SWC plugin injects a reference to foreign file
