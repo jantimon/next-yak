@@ -1,5 +1,17 @@
 # next-yak
 
+## 3.0.1
+
+### Patch Changes
+
+- fb2b2ca: Fix types to allow using constants in keyframes
+- 70a94a9: Updated React TypeScript definitions:
+  - @types/react from 18.2.28 to 18.3.12
+  - @types/react-dom from 18.2.13 to 18.3.1
+- 365af90: Fix type inference bug for selectors inside mixins
+- Updated dependencies [411ad36]
+  - yak-swc@3.0.1
+
 ## 3.0.0
 
 ### Major Changes

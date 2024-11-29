@@ -1,5 +1,11 @@
 # yak-swc
 
+## 3.0.1
+
+### Patch Changes
+
+- 411ad36: Better error message for wrong usage of dynamic properties in nested template
+
 ## 3.0.0
 
 ### Major Changes
