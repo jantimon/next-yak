@@ -1,5 +1,5 @@
+import * as swc from "@swc/core";
 import { writeFile } from "fs";
-import tsLoader from "../../next-yak/loaders/ts-loader";
 
 // Function to generate the content of JapaneseLetterComponent.tsx for Kanji characters
 async function generateKanjiComponentFile() {
@@ -19,7 +19,7 @@ async function generateKanjiComponentFile() {
     const styled = libs[lib];
 
     const fileContent = `
-"use client";    
+"use client";
 import React, { type FunctionComponent } from 'react';
 import ${
       lib === "next-yak" ? `{ styled as ${styled}, css }` : `{ ${styled}, css }`
@@ -233,10 +233,10 @@ export const KanjiLetterComponent${
     <LibHeader onClick={() => document.location.href = "${
       lib === "next-yak" ? "/styled" : "/yak"
     }"}>${lib}</LibHeader>
-    <Wrapper 
-      style={{ 
+    <Wrapper
+      style={{
         // @ts-ignore
-        "--count0": count0 
+        "--count0": count0
       }}
       className={\`wrapper-\${count5}\`}
     >
@@ -280,7 +280,7 @@ export const KanjiLetterComponent${
         )
         .join("\n      ")}
     </Wrapper>
-    
+
         <a href="https://github.com/jantimon/next-yak/">next-yak</a>
     </>
   );
@@ -300,38 +300,27 @@ export const KanjiLetterComponent${
 
     // Precompile yak similar to how it would be compiled by our loader
     if (lib === "next-yak") {
-      const loaderContext = {
-        resourcePath: "/some/special/path/page.tsx",
-        rootContext: "/some",
-        mode: "development",
-        importModule: () => {
-          return {
-            replaces: {
-              queries: {
-                sm: "@media (min-width: 640px)",
-                md: "@media (min-width: 768px)",
-                lg: "@media (min-width: 1024px)",
-                xl: "@media (min-width: 1280px)",
-                xxl: "@media (min-width: 1536px)",
-              },
-            },
-          };
-        },
-        getOptions: () => ({
-          configPath: "/some/special/path/config",
-        }),
-        async: () => (err, result) => {
-          if (err) {
-            throw err;
-          }
-          return result;
-        },
-      };
-      let i = 0;
       const compiled =
         "// @ts-nocheck\n" +
-        (await tsLoader.call(loaderContext, fileContent))
-          // Remove __styleYak import
+        swc
+          .transformSync(fileContent, {
+            filename: "/foo/index.tsx",
+            jsc: {
+              experimental: {
+                plugins: [[require.resolve("yak-swc"), { basePath: "/foo/" }]],
+              },
+              target: "es2022",
+              loose: false,
+              minify: {
+                compress: false,
+                mangle: false,
+              },
+              preserveAllComments: true,
+            },
+            minify: false,
+            isModule: true,
+          })
+          .code // Remove __styleYak import
           .replace(/import[^;\n]+yak.module.css";/, "")
           // Replace __styleYak usage to a string
           .replace(/__styleYak.(\w+)/g, `"$1"`);
