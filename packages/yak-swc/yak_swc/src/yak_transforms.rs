@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
-use swc_core::atoms::Atom;
 use swc_core::atoms::atom;
+use swc_core::atoms::Atom;
 use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
@@ -292,19 +292,26 @@ impl TransformStyled {
 
   fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
     return match *expression.clone() {
-       Expr::Member(MemberExpr { obj: parent, prop: member, ..}) => {
+      Expr::Member(MemberExpr {
+        obj: parent,
+        prop: member,
+        ..
+      }) => {
         if let Expr::Ident(ident) = *parent {
           if ident.sym == atom!("styled") {
             if let MemberProp::Ident(member_ident) = member {
               let member_name = member_ident.sym.as_str();
               let mut new_ident = ident.clone();
               new_ident.sym = Atom::new(format!("__yak_{member_name}"));
-              return (Box::new(Expr::Ident(new_ident.clone())), Some(new_ident.to_id()) )
+              return (
+                Box::new(Expr::Ident(new_ident.clone())),
+                Some(new_ident.to_id()),
+              );
             }
           }
         }
         (expression, None)
-      },
+      }
       Expr::Call(call_expression) => {
         if let Callee::Expr(callee) = call_expression.callee {
           if let Expr::Ident(ident) = *callee {
@@ -313,10 +320,10 @@ impl TransformStyled {
             }
           }
         }
-       (expression, None)
-      },
-      _ => (expression, None)
-    }
+        (expression, None)
+      }
+      _ => (expression, None),
+    };
   }
 }
 

@@ -515,37 +515,42 @@ where
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
             if !self.yak_transformed_library_imports.is_empty() {
-                // yak styled import got transformed into specific components
-                // Now we remove the generic styled import and add all explicit imports
-                import_declaration.specifiers.retain(|import_specifier| {
-                  match import_specifier {
-                    ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
-                      if local.sym == atom!("styled") {
-                        return false;
-                      }
-                      return true;
-                    },
-                  _ => true
+              // yak styled import got transformed into specific components
+              // Now we remove the generic styled import and add all explicit imports
+              import_declaration
+                .specifiers
+                .retain(|import_specifier| match import_specifier {
+                  ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
+                    if local.sym == atom!("styled") {
+                      return false;
+                    }
+                    return true;
                   }
+                  _ => true,
                 });
-                let asdf = self.yak_transformed_library_imports.clone();
-                dbg!(format!("💩💩💩💩💩💩💩set contains: {asdf:?}"));
+              let asdf = self.yak_transformed_library_imports.clone();
+              dbg!(format!("💩💩💩💩💩💩💩set contains: {asdf:?}"));
               //Add all transformed imports
-                import_declaration.specifiers.extend(
-                  self
-                    .yak_transformed_library_imports
-                    .iter()
-                    .sorted_by_key(|ident| ident.0.clone())
-                    .map(|(sym, ctxt)| {
-                      ImportSpecifier::Named(ImportNamedSpecifier {
+              import_declaration.specifiers.extend(
+                self
+                  .yak_transformed_library_imports
+                  .iter()
+                  .sorted_by_key(|ident| ident.0.clone())
+                  .map(|(sym, ctxt)| {
+                    ImportSpecifier::Named(ImportNamedSpecifier {
+                      span: DUMMY_SP,
+                      local: Ident {
                         span: DUMMY_SP,
-                        local: Ident { span: DUMMY_SP, ctxt: *ctxt, sym: sym.clone(), optional: false },
-                        imported: None,
-                        is_type_only: false,
-                      })
+                        ctxt: *ctxt,
+                        sym: sym.clone(),
+                        optional: false,
+                      },
+                      imported: None,
+                      is_type_only: false,
                     })
-                );
-              }
+                  }),
+              );
+            }
 
             // Add utility functions
             import_declaration.specifiers.extend(
@@ -553,7 +558,7 @@ where
                 .yak_library_imports
                 .get_yak_utility_import_declaration(),
             );
-            
+
             break;
           }
         }
@@ -572,11 +577,10 @@ where
 
       for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
-          if import_declaration.src.value == "next-yak/internal" {
+          if import_declaration.src.value == "next-yak/internal" {}
         }
       }
-      }
-      
+
       module.body.insert(
         last_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
