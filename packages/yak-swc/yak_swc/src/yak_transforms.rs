@@ -291,47 +291,30 @@ impl TransformStyled {
 
   fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Ident>) {
     return match *expression.clone() {
-       Expr::Member(MemberExpr { span, obj, prop }) => {
-        match *obj.clone() {
-         Expr::Ident(Ident { sym: symbol, span:ident_span, ctxt, optional}) => {
-          if symbol.as_str() == "styled" {
-            match prop.clone() {
-              MemberProp::Ident(IdentName { span: _, sym }) => {
-                if sym.as_str() == "button" {
-                  let ident = Ident { span, ctxt, sym: atom!("__yak_button"), optional}; 
-                 return (Box::new(Expr::Ident(ident.clone())), Some(ident)
-                 )
-                }
-                ()
-              },
-              _ => ()
+       Expr::Member(MemberExpr { obj: parent, prop: member, ..}) => {
+        if let Expr::Ident(ident) = *parent {
+          if ident.sym == atom!("styled") {
+            if let MemberProp::Ident(member_ident) = member {
+              // TODO: all other types of member props
+              if member_ident.sym == atom!("button") {
+                let mut new_ident = ident.clone();
+                new_ident.sym = atom!("__yak_button");
+                return (Box::new(Expr::Ident(new_ident.clone())), Some(new_ident) )
+              }
             }
           }
-            ()
-          },
-          _ => ()
         }
-        return (Box::new(Expr::Member(MemberExpr {
-          span: span,
-          obj: obj,
-           prop: prop
-        })), None)
+        return (expression, None);
       },
-      Expr::Call(CallExpr { span, ctxt, callee, args, type_args }) => {
-        match callee {
-          Callee::Expr(ex) =>  {
-            match *ex.clone() {
-              Expr::Ident(ident) => {
-                if ident.sym.as_str() == "styled" {
-                  return (expression, Some(ident))
-                }
-                (expression, None)
-              },
-              _ => (expression, None)
+      Expr::Call(call_expression) => {
+        if let Callee::Expr(callee) = call_expression.callee {
+          if let Expr::Ident(ident) = *callee {
+            if ident.sym == atom!("styled") {
+              return (expression, Some(ident));
             }
-          },
-          _ => (expression, None)
+          }
         }
+        return (expression, None)
       },
       _ => {
         (expression, None)
