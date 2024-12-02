@@ -310,12 +310,12 @@ impl TransformStyled {
                 span: member.span,
                 ctxt: SyntaxContext::empty(),
                 callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
-                args: vec![ExprOrSpread::from(Box::new(Expr::Ident(Ident{
-                  sym: Atom::new(member_name),
-                  span: DUMMY_SP,
-                  ctxt:  SyntaxContext::empty(),
-                  optional: false
-                })))],
+                args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(
+                  Str {
+                span: DUMMY_SP,
+                value: Atom::new(member_name),
+                raw: None,
+                }))))],
                 type_args: None,
               })), Some(ident.to_id()))
             }
