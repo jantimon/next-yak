@@ -25,7 +25,7 @@ pub struct YakCss {
 pub struct YakTransformResult {
   pub expression: Box<Expr>,
   pub css: YakCss,
-  pub import: Option<Ident>,
+  pub import: Option<Id>,
 }
 
 pub trait YakTransform {
@@ -289,7 +289,7 @@ impl TransformStyled {
     TransformStyled { class_name: None }
   }
 
-  fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Ident>) {
+  fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
     return match *expression.clone() {
        Expr::Member(MemberExpr { obj: parent, prop: member, ..}) => {
         if let Expr::Ident(ident) = *parent {
@@ -299,7 +299,7 @@ impl TransformStyled {
               if member_ident.sym == atom!("button") {
                 let mut new_ident = ident.clone();
                 new_ident.sym = atom!("__yak_button");
-                return (Box::new(Expr::Ident(new_ident.clone())), Some(new_ident) )
+                return (Box::new(Expr::Ident(new_ident.clone())), Some(new_ident.to_id()) )
               }
             }
           }
@@ -310,7 +310,7 @@ impl TransformStyled {
         if let Callee::Expr(callee) = call_expression.callee {
           if let Expr::Ident(ident) = *callee {
             if ident.sym == atom!("styled") {
-              return (expression, Some(ident));
+              return (expression, Some(ident.to_id()));
             }
           }
         }

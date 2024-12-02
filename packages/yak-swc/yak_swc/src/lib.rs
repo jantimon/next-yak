@@ -1,6 +1,7 @@
 use css_in_js_parser::{find_char, parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
-use rustc_hash::FxHashMap;
+use itertools::Itertools;
+use rustc_hash::{FxHashMap, FxHashSet};
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
@@ -85,7 +86,7 @@ where
   /// Used to check if the current program is using next-yak
   /// to idenftify css-in-js expressions
   yak_library_imports: YakImportVisitor,
-  yak_transformed_library_imports: Vec<Ident>,
+  yak_transformed_library_imports: FxHashSet<Id>,
   /// Variable Name to Unique CSS Identifier Mapping\
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
@@ -116,7 +117,7 @@ where
       current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
-      yak_transformed_library_imports: vec![],
+      yak_transformed_library_imports: FxHashSet::default(),
       naming_convention: NamingConvention::new(filename.clone(), dev_mode),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
@@ -527,15 +528,18 @@ where
                   _ => true
                   }
                 });
+                let asdf = self.yak_transformed_library_imports.clone();
+                dbg!(format!("💩💩💩💩💩💩💩set contains: {asdf:?}"));
               //Add all transformed imports
                 import_declaration.specifiers.extend(
                   self
                     .yak_transformed_library_imports
                     .iter()
-                    .map(|imported| {
+                    .sorted_by_key(|ident| ident.0.clone())
+                    .map(|(sym, ctxt)| {
                       ImportSpecifier::Named(ImportNamedSpecifier {
                         span: DUMMY_SP,
-                        local: Ident { span: DUMMY_SP, ctxt: imported.ctxt, sym: imported.sym.clone(), optional: false },
+                        local: Ident { span: DUMMY_SP, ctxt: *ctxt, sym: sym.clone(), optional: false },
                         imported: None,
                         is_type_only: false,
                       })
@@ -852,7 +856,7 @@ where
       runtime_css_variables,
     );
     if let Some(id) = transform_result.import {
-      self.yak_transformed_library_imports.push(id);
+      self.yak_transformed_library_imports.insert(id);
     }
 
     if is_top_level {
