@@ -1,5 +1,6 @@
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
+use swc_core::atoms::Atom;
 use swc_core::atoms::atom;
 use swc_core::common::util::move_map::MoveMap;
 
@@ -295,16 +296,14 @@ impl TransformStyled {
         if let Expr::Ident(ident) = *parent {
           if ident.sym == atom!("styled") {
             if let MemberProp::Ident(member_ident) = member {
-              // TODO: all other types of member props
-              if member_ident.sym == atom!("button") {
-                let mut new_ident = ident.clone();
-                new_ident.sym = atom!("__yak_button");
-                return (Box::new(Expr::Ident(new_ident.clone())), Some(new_ident.to_id()) )
-              }
+              let member_name = member_ident.sym.as_str();
+              let mut new_ident = ident.clone();
+              new_ident.sym = Atom::new(format!("__yak_{member_name}"));
+              return (Box::new(Expr::Ident(new_ident.clone())), Some(new_ident.to_id()) )
             }
           }
         }
-        return (expression, None);
+        (expression, None)
       },
       Expr::Call(call_expression) => {
         if let Callee::Expr(callee) = call_expression.callee {
@@ -314,11 +313,9 @@ impl TransformStyled {
             }
           }
         }
-        return (expression, None)
+       (expression, None)
       },
-      _ => {
-        (expression, None)
-      }
+      _ => (expression, None)
     }
   }
 }
