@@ -296,6 +296,7 @@ impl TransformStyled {
       Expr::Member(member) => {
         if let Expr::Ident(ident) = *member.obj {
           if ident.sym == atom!("styled") {
+            // styled.element``usages
             if let MemberProp::Ident(member_ident) = member.prop {
               let member_name = member_ident.sym.as_str();
               return if VALID_ELEMENTS.contains(member_name) {
@@ -306,6 +307,7 @@ impl TransformStyled {
                   Some(new_ident.to_id()),
                 )
               } else {
+                // Transform unknown elements to styled("element-name")
                (Box::new(Expr::Call(CallExpr {
                 span: member.span,
                 ctxt: SyntaxContext::empty(),
