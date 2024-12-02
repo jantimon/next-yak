@@ -1,4 +1,4 @@
-import { styled } from "next-yak/internal";
+import { __yak_div } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const GridLayout = /*YAK Extracted CSS:
 .GridLayout {
@@ -56,4 +56,4 @@ export const GridLayout = /*YAK Extracted CSS:
     text-align: center;
   }
 }
-*/ /*#__PURE__*/ styled.div(__styleYak.GridLayout);
+*/ /*#__PURE__*/ __yak_div(__styleYak.GridLayout);

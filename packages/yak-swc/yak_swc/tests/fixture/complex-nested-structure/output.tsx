@@ -1,4 +1,4 @@
-import { styled } from "next-yak/internal";
+import { __yak_article } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const ArticleCard = /*YAK Extracted CSS:
 .ArticleCard {
@@ -52,4 +52,4 @@ export const ArticleCard = /*YAK Extracted CSS:
     }
   }
 }
-*/ /*#__PURE__*/ styled.article(__styleYak.ArticleCard);
+*/ /*#__PURE__*/ __yak_article(__styleYak.ArticleCard);

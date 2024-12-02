@@ -1,4 +1,4 @@
-import { __yak_button } from "next-yak/internal";
+import { __yak_button, __yak_div } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const ThemedButton = /*YAK Extracted CSS:
 .ThemedButton {
@@ -20,4 +20,4 @@ export const ThemeProvider = /*YAK Extracted CSS:
   --secondary-color: #6c757d;
   --font-size-base: 16px;
 }
-*/ /*#__PURE__*/ styled.div(__styleYak.ThemeProvider);
+*/ /*#__PURE__*/ __yak_div(__styleYak.ThemeProvider);
