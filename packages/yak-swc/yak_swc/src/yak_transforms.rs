@@ -1,5 +1,6 @@
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
+use swc_core::atoms::atom;
 use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
@@ -24,10 +25,11 @@ pub struct YakCss {
 pub struct YakTransformResult {
   pub expression: Box<Expr>,
   pub css: YakCss,
+  pub import: Option<Ident>,
 }
 
 pub trait YakTransform {
-  /// Create a CSS Scope\
+  /// Create a CSS Scope\x§
   /// This CSS Scope will surround the entire CSS for this literal\
   /// e.g. const myMixin = css`...` -> .myMixin { ... }
   fn create_css_state(
@@ -128,6 +130,7 @@ impl YakTransform for TransformNestedCss {
         comment_prefix: None,
         declarations: declarations.to_vec(),
       },
+      import: None,
       expression: (Box::new(Expr::Call(CallExpr {
         // Use a sepcial span as this expression might be cloned as part
         // of a parent expression and therefore needs a unique span to
@@ -255,6 +258,7 @@ impl YakTransform for TransformCssMixin {
           declaration
         }),
       },
+      import: None,
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         ctxt: SyntaxContext::empty(),
@@ -284,6 +288,61 @@ impl TransformStyled {
   pub fn new() -> TransformStyled {
     TransformStyled { class_name: None }
   }
+
+  fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Ident>) {
+    dbg!(format!("💩💩 Trying to transform root expression {expression:?}"));
+
+    return match *expression.clone() {
+       Expr::Member(MemberExpr { span, obj, prop }) => {
+        dbg!(format!("💩💩 Matched MemberExpr {obj:?}"));
+        match *obj.clone() {
+         Expr::Ident(Ident { sym: symbol, span:ident_span, ctxt, optional}) => {
+          if symbol.as_str() == "styled" {
+            dbg!(format!("💩💩 found styled identifier styled"));
+            match prop.clone() {
+              MemberProp::Ident(IdentName { span: _, sym }) => {
+                if sym.as_str() == "button" {
+                  let ident = Ident { span, ctxt, sym: atom!("__yak_button"), optional}; 
+                 return (Box::new(Expr::Ident(ident.clone())), Some(ident)
+                 )
+                }
+                ()
+              },
+              _ => ()
+            }
+          }
+            ()
+          },
+          _ => ()
+        }
+        return (Box::new(Expr::Member(MemberExpr {
+          span: span,
+          obj: obj,
+           prop: prop
+        })), None)
+      },
+      Expr::Call(CallExpr { span, ctxt, callee, args, type_args }) => {
+        match callee {
+          Callee::Expr(ex) =>  {
+            match *ex.clone() {
+              Expr::Ident(ident) => {
+                if ident.sym.as_str() == "styled" {
+                  return (expression, Some(ident))
+                }
+                (expression, None)
+              },
+              _ => (expression, None)
+            }
+          },
+          _ => (expression, None)
+        }
+      },
+      _ => {
+        dbg!(format!("🙈 Not Member or Call {expression:?}"));
+        (expression, None)
+      }
+    }
+  }
 }
 
 impl YakTransform for TransformStyled {
@@ -312,6 +371,7 @@ impl YakTransform for TransformStyled {
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
+    dbg!(format!("transform expression {expression:?}"));
     if !declarations.is_empty() {
       arguments.push(
         Expr::Member(MemberExpr {
@@ -332,15 +392,19 @@ impl YakTransform for TransformStyled {
         .into(),
       );
     }
+    let (tag_expression, ident) = self.transform_styled_dot_expression(expression.tag.clone());
+
+    dbg!(format!("💩💩 Got tag expression {tag_expression:?}"));
     YakTransformResult {
       css: YakCss {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
+      import: ident,
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         ctxt: SyntaxContext::empty(),
-        callee: Callee::Expr(expression.tag.clone()),
+        callee: Callee::Expr(tag_expression),
         args: arguments,
         type_args: None,
       }))),
@@ -423,6 +487,7 @@ impl YakTransform for TransformKeyframes {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
+      import: None,
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         ctxt: SyntaxContext::empty(),

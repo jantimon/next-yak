@@ -85,6 +85,7 @@ where
   /// Used to check if the current program is using next-yak
   /// to idenftify css-in-js expressions
   yak_library_imports: YakImportVisitor,
+  yak_transformed_library_imports: Vec<Ident>,
   /// Variable Name to Unique CSS Identifier Mapping\
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
@@ -115,6 +116,7 @@ where
       current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: YakImportVisitor::new(),
+      yak_transformed_library_imports: vec![],
       naming_convention: NamingConvention::new(filename.clone(), dev_mode),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
@@ -511,12 +513,43 @@ where
       for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
+            if !self.yak_transformed_library_imports.is_empty() {
+                // yak styled import got transformed into specific components
+                // Now we remove the generic styled import and add all explicit imports
+                import_declaration.specifiers.retain(|import_specifier| {
+                  match import_specifier {
+                    ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
+                      if local.sym == atom!("styled") {
+                        return false;
+                      }
+                      return true;
+                    },
+                  _ => true
+                  }
+                });
+              //Add all transformed imports
+                import_declaration.specifiers.extend(
+                  self
+                    .yak_transformed_library_imports
+                    .iter()
+                    .map(|imported| {
+                      ImportSpecifier::Named(ImportNamedSpecifier {
+                        span: DUMMY_SP,
+                        local: Ident { span: DUMMY_SP, ctxt: imported.ctxt, sym: imported.sym.clone(), optional: false },
+                        imported: None,
+                        is_type_only: false,
+                      })
+                    })
+                );
+              }
+
             // Add utility functions
             import_declaration.specifiers.extend(
               self
                 .yak_library_imports
                 .get_yak_utility_import_declaration(),
             );
+            
             break;
           }
         }
@@ -532,6 +565,17 @@ where
           last_import_index = i + 1;
         }
       }
+      dbg!(format!("🙈 last import index {last_import_index}"));
+
+      for item in module.body.iter_mut() {
+        if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
+          if import_declaration.src.value == "next-yak/internal" {
+          let asdf = import_declaration.specifiers.clone();
+          dbg!(format!("🙈import specifiers {asdf:?}"));
+        }
+      }
+      }
+      
       module.body.insert(
         last_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
@@ -810,6 +854,10 @@ where
       &self.current_declaration,
       runtime_css_variables,
     );
+    if let Some(id) = transform_result.import {
+      dbg!(format!("adding transformed import {id:?}"));
+      self.yak_transformed_library_imports.push(id);
+    }
 
     if is_top_level {
       self.current_declaration = vec![];
