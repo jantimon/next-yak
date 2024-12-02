@@ -124,16 +124,14 @@ export const __yak_foreignObject = /*#__PURE__*/ styled("foreignObject");
 export const __yak_g = /*#__PURE__*/ styled("g");
 export const __yak_image = /*#__PURE__*/ styled("image");
 export const __yak_line = /*#__PURE__*/ styled("line");
-export const __yak_linearGradient =
-  /*#__PURE__*/ styled("linearGradient");
+export const __yak_linearGradient = /*#__PURE__*/ styled("linearGradient");
 export const __yak_marker = /*#__PURE__*/ styled("marker");
 export const __yak_mask = /*#__PURE__*/ styled("mask");
 export const __yak_path = /*#__PURE__*/ styled("path");
 export const __yak_pattern = /*#__PURE__*/ styled("pattern");
 export const __yak_polygon = /*#__PURE__*/ styled("polygon");
 export const __yak_polyline = /*#__PURE__*/ styled("polyline");
-export const __yak_radialGradient =
-  /*#__PURE__*/ styled("radialGradient");
+export const __yak_radialGradient = /*#__PURE__*/ styled("radialGradient");
 export const __yak_rect = /*#__PURE__*/ styled("rect");
 export const __yak_stop = /*#__PURE__*/ styled("stop");
 export const __yak_svg = /*#__PURE__*/ styled("svg");
