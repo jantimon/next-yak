@@ -1,4 +1,4 @@
-import { __yak_button, __yak_button, __yak_button, __yak_button, __yak_button, __yak_button, __yak_button } from "next-yak/internal";
+import { __yak_button } from "next-yak/internal";
 // @ts-ignore
 import { fonts } from "./fonts";
 // @ts-ignore
