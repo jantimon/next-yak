@@ -290,15 +290,11 @@ impl TransformStyled {
   }
 
   fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Ident>) {
-    dbg!(format!("💩💩 Trying to transform root expression {expression:?}"));
-
     return match *expression.clone() {
        Expr::Member(MemberExpr { span, obj, prop }) => {
-        dbg!(format!("💩💩 Matched MemberExpr {obj:?}"));
         match *obj.clone() {
          Expr::Ident(Ident { sym: symbol, span:ident_span, ctxt, optional}) => {
           if symbol.as_str() == "styled" {
-            dbg!(format!("💩💩 found styled identifier styled"));
             match prop.clone() {
               MemberProp::Ident(IdentName { span: _, sym }) => {
                 if sym.as_str() == "button" {
@@ -338,7 +334,6 @@ impl TransformStyled {
         }
       },
       _ => {
-        dbg!(format!("🙈 Not Member or Call {expression:?}"));
         (expression, None)
       }
     }
@@ -371,7 +366,6 @@ impl YakTransform for TransformStyled {
     runtime_css_variables: FxHashMap<String, Expr>,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
-    dbg!(format!("transform expression {expression:?}"));
     if !declarations.is_empty() {
       arguments.push(
         Expr::Member(MemberExpr {
@@ -393,8 +387,6 @@ impl YakTransform for TransformStyled {
       );
     }
     let (tag_expression, ident) = self.transform_styled_dot_expression(expression.tag.clone());
-
-    dbg!(format!("💩💩 Got tag expression {tag_expression:?}"));
     YakTransformResult {
       css: YakCss {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),

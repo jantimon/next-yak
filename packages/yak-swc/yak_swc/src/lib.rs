@@ -565,13 +565,10 @@ where
           last_import_index = i + 1;
         }
       }
-      dbg!(format!("🙈 last import index {last_import_index}"));
 
       for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-          let asdf = import_declaration.specifiers.clone();
-          dbg!(format!("🙈import specifiers {asdf:?}"));
         }
       }
       }
@@ -855,7 +852,6 @@ where
       runtime_css_variables,
     );
     if let Some(id) = transform_result.import {
-      dbg!(format!("adding transformed import {id:?}"));
       self.yak_transformed_library_imports.push(id);
     }
 
