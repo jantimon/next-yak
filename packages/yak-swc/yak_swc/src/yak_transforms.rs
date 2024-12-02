@@ -327,9 +327,10 @@ impl TransformStyled {
         }
         (expression, None)
       }
-      // styled.button.attrs({}) is a call expression and should be tranformed
-      // to __yak_button.attrs
       Expr::Call(CallExpr { callee: Callee::Expr(callee), ..}) => {
+        // styled.button.attrs({}) is a call expression and should be tranformed
+      // to __yak_button.attrs
+        dbg!(format!("💩💩💩💩💩💩💩 call case: {expression:?}"));
         if let Expr::Ident(ident) = *callee {
           if ident.sym == atom!("styled") {
             return (expression, Some(ident.to_id()));
