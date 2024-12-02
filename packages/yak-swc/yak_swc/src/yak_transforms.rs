@@ -290,16 +290,12 @@ impl TransformStyled {
     TransformStyled { class_name: None }
   }
 
-  fn transform_styled_dot_expression<'a>(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
-    return match *expression.clone() {
-      Expr::Member(MemberExpr {
-        obj: parent,
-        prop: member,
-        ..
-      }) => {
-        if let Expr::Ident(ident) = *parent {
+  fn transform_styled_usages(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
+    match *expression.clone() {
+      Expr::Member(member) => {
+        if let Expr::Ident(ident) = *member.obj {
           if ident.sym == atom!("styled") {
-            if let MemberProp::Ident(member_ident) = member {
+            if let MemberProp::Ident(member_ident) = member.prop {
               let member_name = member_ident.sym.as_str();
               let mut new_ident = ident.clone();
               new_ident.sym = Atom::new(format!("__yak_{member_name}"));
@@ -312,18 +308,16 @@ impl TransformStyled {
         }
         (expression, None)
       }
-      Expr::Call(call_expression) => {
-        if let Callee::Expr(callee) = call_expression.callee {
-          if let Expr::Ident(ident) = *callee {
-            if ident.sym == atom!("styled") {
-              return (expression, Some(ident.to_id()));
-            }
+      Expr::Call(CallExpr { callee: Callee::Expr(callee), ..}) => {
+        if let Expr::Ident(ident) = *callee {
+          if ident.sym == atom!("styled") {
+            return (expression, Some(ident.to_id()));
           }
         }
         (expression, None)
       }
       _ => (expression, None),
-    };
+    }
   }
 }
 
@@ -373,7 +367,7 @@ impl YakTransform for TransformStyled {
         .into(),
       );
     }
-    let (tag_expression, ident) = self.transform_styled_dot_expression(expression.tag.clone());
+    let (tag_expression, ident) = self.transform_styled_usages(expression.tag.clone());
     YakTransformResult {
       css: YakCss {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
