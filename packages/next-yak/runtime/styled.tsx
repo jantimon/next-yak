@@ -257,8 +257,8 @@ type StyledLiteral<T> = <TCSSProps>(
  * `;
  * ```
  */
-export const styled = StyledFactory as 
-  // this type is wrong - but it will work correctly with compiled code
+export const styled =
+  StyledFactory as // this type is wrong - but it will work correctly with compiled code
   typeof StyledFactory & {
     [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
       attrs: <
