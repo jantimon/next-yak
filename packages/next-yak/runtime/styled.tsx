@@ -82,7 +82,7 @@ type Attrs<
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/constructors/styled.tsx
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
-export const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
+const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
     attrs: <
       TAttrsIn extends object = {},
@@ -257,20 +257,21 @@ type StyledLiteral<T> = <TCSSProps>(
  * `;
  * ```
  */
-export const styled = StyledFactory as typeof StyledFactory & {
+export const styled =
   // this type is wrong - but it will work correctly with compiled code
-  [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
-    attrs: <
-      TAttrsIn extends object = {},
-      TAttrsOut extends AttrsMerged<
-        JSX.IntrinsicElements[Tag],
-        TAttrsIn
-      > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
-    >(
-      attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
-    ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
+  StyledFactory as typeof StyledFactory & {
+    [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
+      attrs: <
+        TAttrsIn extends object = {},
+        TAttrsOut extends AttrsMerged<
+          JSX.IntrinsicElements[Tag],
+          TAttrsIn
+        > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
+      >(
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>
+      ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
+    };
   };
-};
 
 /**
  * Remove all entries that start with a $ sign
