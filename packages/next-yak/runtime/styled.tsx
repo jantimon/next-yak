@@ -257,21 +257,19 @@ type StyledLiteral<T> = <TCSSProps>(
  * `;
  * ```
  */
-export const styled =
-  StyledFactory as // this type is wrong - but it will work correctly with compiled code
-  typeof StyledFactory & {
-    [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
-      attrs: <
-        TAttrsIn extends object = {},
-        TAttrsOut extends AttrsMerged<
-          JSX.IntrinsicElements[Tag],
-          TAttrsIn
-        > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
-      >(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
-      ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
-    };
+export const styled = StyledFactory as typeof StyledFactory & { // this type is wrong - but it will work correctly with compiled code
+  [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
+    attrs: <
+      TAttrsIn extends object = {},
+      TAttrsOut extends AttrsMerged<
+        JSX.IntrinsicElements[Tag],
+        TAttrsIn
+      > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
+    >(
+      attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
+    ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
   };
+};
 
 /**
  * Remove all entries that start with a $ sign
