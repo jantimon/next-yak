@@ -1,4 +1,4 @@
-import { styled } from "next-yak/internal";
+import { __yak_li } from "next-yak/internal";
 import { lastChildMixin } from './mixin';
 import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 var ListItem = /*YAK Extracted CSS:
@@ -8,5 +8,5 @@ var ListItem = /*YAK Extracted CSS:
     --yak-css-import: url("./mixin:lastChildMixin",mixin);
   }
 }
-*/ /*#__PURE__*/ styled.li(__styleYak.ListItem);
+*/ /*#__PURE__*/ __yak_li(__styleYak.ListItem);
 export default ListItem;
