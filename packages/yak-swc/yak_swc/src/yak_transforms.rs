@@ -30,7 +30,7 @@ pub struct YakTransformResult {
 }
 
 pub trait YakTransform {
-  /// Create a CSS Scope\x§
+  /// Create a CSS Scope\
   /// This CSS Scope will surround the entire CSS for this literal\
   /// e.g. const myMixin = css`...` -> .myMixin { ... }
   fn create_css_state(

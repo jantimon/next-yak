@@ -527,16 +527,11 @@ where
               import_declaration
                 .specifiers
                 .retain(|import_specifier| match import_specifier {
-                  ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
-                    if local.sym == atom!("styled") {
-                      return false;
-                    }
-                    true
+                  ImportSpecifier::Named(ImportNamedSpecifier { local: Ident { sym, ..}, .. }) => {
+                    *sym != atom!("styled")
                   }
                   _ => true,
                 });
-              let asdf = self.yak_transformed_library_imports.clone();
-              dbg!(format!("💩💩💩💩💩💩💩set contains: {asdf:?}"));
               //Add all transformed imports
               import_declaration.specifiers.extend(
                 self
