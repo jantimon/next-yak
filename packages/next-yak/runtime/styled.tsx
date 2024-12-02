@@ -257,28 +257,21 @@ type StyledLiteral<T> = <TCSSProps>(
  * `;
  * ```
  */
-export const styled =
-  // The proxy adds the styled.div, styled.button, etc. syntax
-  new Proxy(
-    StyledFactory as typeof StyledFactory & {
-      [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
-        attrs: <
-          TAttrsIn extends object = {},
-          TAttrsOut extends AttrsMerged<
-            JSX.IntrinsicElements[Tag],
-            TAttrsIn
-          > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
-        >(
-          attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
-        ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
-      };
-    },
-    {
-      get(target, TagName: keyof JSX.IntrinsicElements) {
-        return target(TagName);
-      },
-    },
-  );
+export const styled = StyledFactory as 
+  // this type is wrong - but it will work correctly with compiled code
+  typeof StyledFactory & {
+    [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
+      attrs: <
+        TAttrsIn extends object = {},
+        TAttrsOut extends AttrsMerged<
+          JSX.IntrinsicElements[Tag],
+          TAttrsIn
+        > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
+      >(
+        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
+      ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
+    };
+  };
 
 /**
  * Remove all entries that start with a $ sign
