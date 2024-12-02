@@ -36,6 +36,7 @@ mod utils {
   pub(crate) mod css_hash;
   pub(crate) mod css_prop;
   pub(crate) mod encode_module_import;
+  pub(crate) mod native_elements;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;

@@ -6,6 +6,7 @@ use swc_core::common::util::move_map::MoveMap;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use crate::utils::encode_module_import::encode_percent;
+use crate::utils::native_elements::VALID_ELEMENTS;
 use crate::variable_visitor::ScopedVariableReference;
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use swc_core::common::{Span, SyntaxContext, DUMMY_SP};
@@ -297,17 +298,35 @@ impl TransformStyled {
           if ident.sym == atom!("styled") {
             if let MemberProp::Ident(member_ident) = member.prop {
               let member_name = member_ident.sym.as_str();
-              let mut new_ident = ident.clone();
-              new_ident.sym = Atom::new(format!("__yak_{member_name}"));
-              return (
-                Box::new(Expr::Ident(new_ident.clone())),
-                Some(new_ident.to_id()),
-              );
+              return if VALID_ELEMENTS.contains(member_name) {
+                let mut new_ident = ident.clone();
+                new_ident.sym = Atom::new(format!("__yak_{member_name}"));
+                (
+                  Box::new(Expr::Ident(new_ident.clone())),
+                  Some(new_ident.to_id()),
+                )
+              } else {
+               (Box::new(Expr::Call(CallExpr {
+                span: member.span,
+                ctxt: SyntaxContext::empty(),
+                callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
+                args: vec![ExprOrSpread::from(Box::new(Expr::Ident(Ident{
+                  sym: Atom::new(member_name),
+                  span: DUMMY_SP,
+                  ctxt:  SyntaxContext::empty(),
+                  optional: false
+                })))],
+                type_args: None,
+              })), Some(ident.to_id()))
+            }
+             
             }
           }
         }
         (expression, None)
       }
+      // styled.button.attrs({}) is a call expression and should be tranformed
+      // to __yak_button.attrs
       Expr::Call(CallExpr { callee: Callee::Expr(callee), ..}) => {
         if let Expr::Ident(ident) = *callee {
           if ident.sym == atom!("styled") {
