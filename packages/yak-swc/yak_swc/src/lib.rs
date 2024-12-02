@@ -524,7 +524,7 @@ where
                     if local.sym == atom!("styled") {
                       return false;
                     }
-                    return true;
+                    true
                   }
                   _ => true,
                 });
