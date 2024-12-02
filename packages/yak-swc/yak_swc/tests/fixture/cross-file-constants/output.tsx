@@ -1,4 +1,4 @@
-import { styled } from "next-yak/internal";
+import { __yak_button } from "next-yak/internal";
 // @ts-ignore
 import { colors } from "./colorDefinitions";
 // @ts-ignore
@@ -14,4 +14,4 @@ export const Button = /*YAK Extracted CSS:
   background-color: --yak-css-import: url("./colorDefinitions:colors:light:full%20opacity",mixin);
   height: --yak-css-import: url("./sizeDefinitions:sizes:0",mixin);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button);

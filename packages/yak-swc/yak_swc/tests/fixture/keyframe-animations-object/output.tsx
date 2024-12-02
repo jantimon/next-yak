@@ -1,4 +1,4 @@
-import { styled, css, keyframes } from "next-yak/internal";
+import { css, keyframes, __yak_button } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FadeInText = /*YAK Extracted CSS:
 .FadeInText__$reverse {
@@ -61,4 +61,4 @@ export const FancyButton = /*YAK Extracted CSS:
     animation: slides_200 1s ease-in-out, animations_fadeOut 1s ease-in;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.FancyButton);
+*/ /*#__PURE__*/ __yak_button(__styleYak.FancyButton);

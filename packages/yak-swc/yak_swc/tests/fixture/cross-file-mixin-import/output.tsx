@@ -1,4 +1,4 @@
-import { styled } from "next-yak/internal";
+import { __yak_button, __yak_button, __yak_button, __yak_button, __yak_button, __yak_button, __yak_button } from "next-yak/internal";
 // @ts-ignore
 import { fonts } from "./fonts";
 // @ts-ignore
@@ -10,32 +10,32 @@ export const Button = /*YAK Extracted CSS:
 .Button {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button);
 export const Button2 = /*YAK Extracted CSS:
 .Button2 {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button2);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button2);
 export const Button3 = /*YAK Extracted CSS:
 .Button3 {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button3);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button3);
 export const Button4 = /*YAK Extracted CSS:
 .Button4 {
   --yak-css-import: url("./fonts:fonts:h1",mixin)
 --yak-css-import: url("./fonts:fonts:underline",mixin);
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button4);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button4);
 export const Button5 = /*YAK Extracted CSS:
 .Button5 {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
   --yak-css-import: url("./fancy:fancy:mixins:specialEffect",mixin);
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button5);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button5);
 export const Button6 = /*YAK Extracted CSS:
 .Button6 {
   &:hover {
@@ -45,7 +45,7 @@ export const Button6 = /*YAK Extracted CSS:
 ;
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button6);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button6);
 export const Button7 = /*YAK Extracted CSS:
 .Button7 {
   &:hover {
@@ -55,4 +55,4 @@ export const Button7 = /*YAK Extracted CSS:
 ;
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button7);
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button7);
