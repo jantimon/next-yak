@@ -1,5 +1,5 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const colors = {
     primary: "#007bff",
     secondary: "#6c757d",
@@ -13,7 +13,8 @@ const colors = {
 const borderRadius = "4px";
 const stacking = 1;
 export const Button = /*YAK Extracted CSS:
-.Button {
+// cssmodules-pure-ignore
+:global(.ym7uBBu) {
   background-color: #007bff;
   color: #f8f9fa;
   padding: 10px 33.3333%;
@@ -28,4 +29,4 @@ export const Button = /*YAK Extracted CSS:
     background-color: #343a40;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button);
+*/ /*#__PURE__*/ styled.button("ym7uBBu");
