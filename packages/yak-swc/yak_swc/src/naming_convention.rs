@@ -215,7 +215,7 @@ mod tests {
 
   #[test]
   fn css_variable_name_empty() {
-    let mut convention = NamingConvention::new("file.css".into(), false);
+    let mut convention = NamingConvention::new("file.css".into(), false, None);
     assert_eq!(convention.get_css_variable_name(""), "yoPBkbU");
   }
 
