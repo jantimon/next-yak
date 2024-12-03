@@ -191,13 +191,18 @@ mod tests {
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU2");
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU3");
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU4");
-    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU5");
-    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU6");
-    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU7");
-    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU8");
-    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU9");
-    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbUA");
-    assert_eq!(convention.get_css_variable_name(""), "yoPBkbUB");
+    // Skip values from 4 to 103 (100 iterations)
+    for _ in 4..104 {
+      convention.get_css_variable_name("foo");
+    }
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU1f");
+    assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU1g");
+  }
+
+  #[test]
+  fn css_variable_name_empty() {
+    let mut convention = NamingConvention::new("file.css".into(), false);
+    assert_eq!(convention.get_css_variable_name(""), "yoPBkbU");
   }
 
   #[test]
@@ -206,5 +211,30 @@ mod tests {
     assert_eq!(convention.get_css_variable_name("foo"), "foo_oPBkbU");
     assert_eq!(convention.get_css_variable_name("foo"), "foo_oPBkbU-01");
     assert_eq!(convention.get_css_variable_name(""), "yak_oPBkbU");
+  }
+
+  #[test]
+  fn test_single_digit_numbers() {
+    assert_eq!(minify_number(0), "0");
+    assert_eq!(minify_number(1), "1");
+    assert_eq!(minify_number(9), "9");
+  }
+
+  #[test]
+  fn test_double_digit_numbers() {
+    assert_eq!(minify_number(10), "A");
+    assert_eq!(minify_number(35), "Z");
+    assert_eq!(minify_number(36), "a");
+    assert_eq!(minify_number(61), "z");
+    assert_eq!(minify_number(62), "-");
+    assert_eq!(minify_number(63), "_");
+  }
+
+  #[test]
+  fn test_larger_numbers() {
+    assert_eq!(minify_number(64), "10");
+    assert_eq!(minify_number(128), "20");
+    assert_eq!(minify_number(4095), "__");
+    assert_eq!(minify_number(4096), "100");
   }
 }

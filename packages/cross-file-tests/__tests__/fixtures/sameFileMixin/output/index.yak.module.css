@@ -1,16 +1,16 @@
-/* cssmodules-pure-ignore * /
+// cssmodules-pure-ignore
 :global(.Button_xEUJ1U) {
   color: black;
 }
-/* cssmodules-pure-ignore * /
+// cssmodules-pure-ignore
 :global(.Button__$disabled_xEUJ1U) {
   opacity: 0.5;
 }
-/* cssmodules-pure-ignore * /
+// cssmodules-pure-ignore
 :global(.Button__$hasIcon_xEUJ1U) {
   padding-left: 30px;
 }
-/* cssmodules-pure-ignore * /
+// cssmodules-pure-ignore
 :global(.Button__$disabled_xEUJ1U-01) {
   color: gray;
 }
