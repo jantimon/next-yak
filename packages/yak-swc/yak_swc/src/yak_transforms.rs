@@ -372,7 +372,8 @@ impl YakTransform for TransformKeyframes {
     _previous_parser_state: Option<ParserState>,
   ) -> ParserState {
     let css_identifier = if self.animation_name.is_none() {
-      let new_identifier = naming_convention.generate_unique_name_for_variable(declaration_name);
+      let new_identifier =
+        naming_convention.get_keyframe_name(&declaration_name.to_readable_string());
       self.animation_name = Some(new_identifier.clone());
       new_identifier
     } else {
@@ -380,7 +381,7 @@ impl YakTransform for TransformKeyframes {
     };
     let mut parser_state = ParserState::new();
     parser_state.current_scopes = vec![CssScope {
-      name: format!("@keyframes {}", css_identifier),
+      name: format!("// cssmodules-pure-ignore\n@keyframes :global({})", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
     parser_state

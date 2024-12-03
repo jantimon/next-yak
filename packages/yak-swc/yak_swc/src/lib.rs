@@ -306,7 +306,7 @@ where
                 // Create a unique name for the keyframe
                 let keyframe_name = self
                   .naming_convention
-                  .generate_unique_name_for_variable(&scoped_name);
+                  .get_keyframe_name(&scoped_name.to_readable_string());
                 // Store the keyframe for the later keyframe declaration
                 self
                   .variable_name_selector_mapping
@@ -751,7 +751,7 @@ where
           .unwrap_or_else(|| {
             self
               .naming_convention
-              .generate_unique_name_for_variable(&current_variable_id)
+              .get_keyframe_name(&current_variable_id.to_readable_string())
           }),
       )),
       // CSS Mixin e.g. const highlight = css`color: red;`

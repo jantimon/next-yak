@@ -1,4 +1,4 @@
-// cssmodules-pure-ignore
+/* cssmodules-pure-ignore * /
 :global(.Button_wIxfWW) {
   color: red;
   height: 10px;
@@ -6,7 +6,7 @@
   background-color: var(--color-secondary);
   z-index: -1;
 }
-// cssmodules-pure-ignore
+/* cssmodules-pure-ignore * /
 :global(.Button___wIxfWW) {
   color: var(--color-secondary);
   background-color: var(--color-primary);

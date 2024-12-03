@@ -1,4 +1,4 @@
-use crate::{utils::css_hash::hash_to_css, variable_visitor::ScopedVariableReference};
+use crate::utils::css_hash::hash_to_css;
 use rustc_hash::FxHashMap;
 
 pub struct NamingConvention {
@@ -65,15 +65,6 @@ impl NamingConvention {
     }
   }
 
-  // Generate a unique name for a variable reference
-  // e.g "foo.bar" -> "foo_bar-01"
-  pub fn generate_unique_name_for_variable(
-    &mut self,
-    variable: &ScopedVariableReference,
-  ) -> String {
-    self.generate_unique_name(&variable.to_readable_string())
-  }
-
   /// Generate a unique CSS variable name based on the file name and a base name
   pub fn get_css_variable_name(&mut self, base_name: &str) -> String {
     let name: String = if self.dev_mode {
@@ -94,18 +85,43 @@ impl NamingConvention {
     self.generate_unique_name(&css_variable_name)
   }
 
-  /// Generate a unique CSS variable name based on the file name and a base name
+  /// Generate a unique CSS class name based on the file name and a base name
   pub fn get_css_class_name(&mut self, base_name: &str) -> String {
     let name: String = if self.dev_mode {
       if base_name.is_empty() {
-        String::from("yak_")
+        String::from("var_")
       } else {
         format!("{}_", base_name)
       }
     } else {
-      String::from("y")
+      "".to_string()
     };
-    let css_variable_name = format!("{}{}", name, self.get_file_name_hash());
+    let css_variable_name = format!(
+      "{}{}{}",
+      self.prefix.clone(),
+      name,
+      self.get_file_name_hash()
+    );
+    self.generate_unique_name(&css_variable_name)
+  }
+
+  /// Generate a unique CSS keyframe name based on the file name and a base name
+  pub fn get_keyframe_name(&mut self, base_name: &str) -> String {
+    let name: String = if self.dev_mode {
+      if base_name.is_empty() {
+        String::from("animation_")
+      } else {
+        format!("{}_", base_name)
+      }
+    } else {
+      "".to_string()
+    };
+    let css_variable_name = format!(
+      "{}{}{}",
+      self.prefix.clone(),
+      name,
+      self.get_file_name_hash()
+    );
     self.generate_unique_name(&css_variable_name)
   }
 }
