@@ -1030,6 +1030,7 @@ mod tests {
           Some(tester.comments.clone()),
           "path/input.tsx".to_string(),
           false,
+          None,
         ))
       },
       &input,
