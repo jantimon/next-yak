@@ -333,9 +333,9 @@ where
               });
             }
           }
-          // A property with a dynamic value
-          // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
-          else {
+          // A property with a dynamic value in the top scope
+          // e.g. styled.button`color: ${myColor};`
+          else if is_top_level {
             HANDLER.with(|handler| {
               handler
                 .struct_span_err(
@@ -347,6 +347,23 @@ where
                 )
                 .emit();
             });
+          // A property with a dynamic value
+          // e.g. styled.button`${({$color}) => css`color: ${$color}`};`
+          } else {
+            HANDLER.with(|handler| {
+                          handler
+                            .struct_span_err(
+                              expr.span(),
+                              &format!(
+                                "The shorthand access to the variable \"{var}\" is not allowed in a nested expression.
+To be able to use the property turn it into a CSS variable by wrapping it in a function:
+
+${{() => {var}}};\n",
+                                var=scoped_name.id.0
+                              ),
+                            )
+                            .emit();
+                        });
           }
         }
         // Handle inline css literals
