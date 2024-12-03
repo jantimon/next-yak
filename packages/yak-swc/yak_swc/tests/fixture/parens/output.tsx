@@ -7,8 +7,13 @@ export const Card = /*YAK Extracted CSS:
 .Card__$active {
   backgorund: url(/card-bg-active.jpg) no-repeat;
 }
-*/ /*#__PURE__*/ styled.div(__styleYak.Card, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.Card__$active), ({ index })=>-index * 30, {
+.Card {
+  transform: translate(-50%, -50%) rotate(var(--Card__transform_m7uBBu))
+translate(0, -88px) rotate(var(--Card__transform_m7uBBu-01));
+}
+*/ /*#__PURE__*/ styled.div(__styleYak.Card, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.Card__$active), {
     "style": {
-        "--Card__transform_m7uBBu": __yak_unitPostFix(({ index })=>index * 30, "deg")
+        "--Card__transform_m7uBBu": __yak_unitPostFix(({ index })=>index * 30, "deg"),
+        "--Card__transform_m7uBBu-01": __yak_unitPostFix(({ index })=>-index * 30, "deg")
     }
 });

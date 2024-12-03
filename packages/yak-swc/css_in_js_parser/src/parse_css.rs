@@ -99,6 +99,7 @@ pub fn parse_css(
     state.current_comment_state = CommentStateType::None;
     state.is_inside_property_value = false;
     state.is_inside_at_rule = false;
+    state.paren_depth = 0;
     state.current_declaration = Declaration::new();
     state.pending_css_segment.clone() + css_string
   } else {
