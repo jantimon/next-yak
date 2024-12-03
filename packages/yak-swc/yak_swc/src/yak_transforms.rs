@@ -381,7 +381,10 @@ impl YakTransform for TransformKeyframes {
     };
     let mut parser_state = ParserState::new();
     parser_state.current_scopes = vec![CssScope {
-      name: format!("// cssmodules-pure-ignore\n@keyframes :global({})", css_identifier),
+      name: format!(
+        "// cssmodules-pure-ignore\n@keyframes :global({})",
+        css_identifier
+      ),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
