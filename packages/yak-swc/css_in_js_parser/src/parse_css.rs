@@ -521,4 +521,21 @@ mod tests {
     );
     assert_debug_snapshot!((state, declarations));
   }
+
+  #[test]
+  fn test_parse_css_with_dynamic_values() {
+    let (state1, _) = parse_css(
+      r#"
+          .foo {
+              transform: translate(-50%, -50%) rotate("#,
+      None,
+    );
+    let (state2, _) = parse_css(r#"20deg) translate(0, -88px) rotate("#, Some(state1));
+    let (_, declarations3) = parse_css(r#"90deg);"#, Some(state2));
+    assert_eq!(declarations3.len(), 1);
+    assert_eq!(
+      declarations3[0].value.trim(),
+      "translate(-50%, -50%) rotate(20deg) translate(0, -88px) rotate(90deg)"
+    );
+  }
 }
