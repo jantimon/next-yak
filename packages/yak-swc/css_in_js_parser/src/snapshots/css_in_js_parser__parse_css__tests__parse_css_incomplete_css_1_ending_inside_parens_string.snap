@@ -14,18 +14,18 @@ expression: "(state, declarations)"
                 scope_type: Selector,
             },
             CssScope {
-                name: ".fancy section",
+                name: ".fancy",
                 scope_type: Selector,
             },
         ],
         current_declaration: Declaration {
-            property: "color",
-            value: "blue\n",
+            property: "background",
+            value: "url(https://example.com\n    ",
             scope: [],
             closed: false,
         },
-        pending_css_segment: "color: blue\n",
-        paren_depth: 0,
+        pending_css_segment: "background: url(https://example.com\n    ",
+        paren_depth: 1,
     },
     [],
 )
