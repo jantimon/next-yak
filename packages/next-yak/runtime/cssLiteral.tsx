@@ -169,7 +169,7 @@ const recursivePropExecution = (
       throw new Error(
         `Dynamic CSS functions must return a string or number but returned ${JSON.stringify(
           result,
-        )}`,
+        )}\n\nDynamic CSS function: ${fn.toString()}\n`,
       );
     }
   }
