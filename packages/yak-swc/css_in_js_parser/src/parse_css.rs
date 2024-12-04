@@ -11,6 +11,7 @@ pub struct ParserState {
   pub current_scopes: Vec<CssScope>,
   pub current_declaration: Declaration,
   pub pending_css_segment: String,
+  pub paren_depth: usize,
 }
 
 impl ParserState {
@@ -23,6 +24,7 @@ impl ParserState {
       current_scopes: Vec::new(),
       current_declaration: Declaration::new(),
       pending_css_segment: String::new(),
+      paren_depth: 0,
     }
   }
 }
@@ -97,6 +99,7 @@ pub fn parse_css(
     state.current_comment_state = CommentStateType::None;
     state.is_inside_property_value = false;
     state.is_inside_at_rule = false;
+    state.paren_depth = 0;
     state.current_declaration = Declaration::new();
     state.pending_css_segment.clone() + css_string
   } else {
@@ -171,9 +174,20 @@ pub fn parse_css(
       }
     }
 
+    // Detect parens outside of strings for property values
+    // e.g.
+    // .foo { background: url('https://example.com'); }
+    if state.is_inside_string.is_none() && state.is_inside_property_value {
+      if current_character == '(' {
+        state.paren_depth += 1;
+      } else if current_character == ')' && state.paren_depth > 0 {
+        state.paren_depth -= 1;
+      }
+    }
+
     // Inside a string, just add the character to the current code no matter what
     // e.g. content: "{ ; } @ !"
-    if state.is_inside_string.is_some() {
+    if state.is_inside_string.is_some() || state.paren_depth > 0 {
       current_code.push(current_character);
       state.current_declaration.value.push(current_character);
       char_position += 1;
@@ -390,6 +404,19 @@ mod tests {
   }
 
   #[test]
+  fn test_parse_css_incomplete_css_1_ending_inside_parens_string() {
+    let (state, declarations) = parse_css(
+      r#"
+        .foo {
+                .fancy {
+                        background: url(https://example.com
+    "#,
+      None,
+    );
+    assert_debug_snapshot!((state, declarations));
+  }
+
+  #[test]
   fn test_parse_css_incomplete_css_1_ending_outside_a_comment() {
     let (state, declarations) = parse_css(
       r#"
@@ -437,7 +464,7 @@ mod tests {
           }
         }
       }
-      background: url("https://example.com");
+      background: url(https://example.com);
       body {
         padding: 0;
       }
@@ -493,5 +520,22 @@ mod tests {
       None,
     );
     assert_debug_snapshot!((state, declarations));
+  }
+
+  #[test]
+  fn test_parse_css_with_dynamic_values() {
+    let (state1, _) = parse_css(
+      r#"
+          .foo {
+              transform: translate(-50%, -50%) rotate("#,
+      None,
+    );
+    let (state2, _) = parse_css(r#"20deg) translate(0, -88px) rotate("#, Some(state1));
+    let (_, declarations3) = parse_css(r#"90deg);"#, Some(state2));
+    assert_eq!(declarations3.len(), 1);
+    assert_eq!(
+      declarations3[0].value.trim(),
+      "translate(-50%, -50%) rotate(20deg) translate(0, -88px) rotate(90deg)"
+    );
   }
 }
