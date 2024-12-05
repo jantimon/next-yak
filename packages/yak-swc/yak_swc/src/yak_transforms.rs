@@ -296,35 +296,33 @@ impl TransformStyled {
       Expr::Member(member) => {
         dbg!(format!("💩💩💩💩💩💩💩 member expression case: {expression:?}"));
         if let Expr::Ident(ident) = *member.obj {
-          if ident.sym == atom!("styled") {
-            // styled.element``usages
-            if let MemberProp::Ident(member_ident) = member.prop {
-              let member_name = member_ident.sym.as_str();
-              return if VALID_ELEMENTS.contains(member_name) {
-                let mut new_ident = ident.clone();
-                new_ident.sym = Atom::new(format!("__yak_{member_name}"));
-                (
-                  Box::new(Expr::Ident(new_ident.clone())),
-                  Some(new_ident.to_id()),
-                )
-              } else {
-                // Transform unknown elements to styled("element-name")
-                (
-                  Box::new(Expr::Call(CallExpr {
-                    span: member.span,
-                    ctxt: SyntaxContext::empty(),
-                    callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
-                    args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(Str {
-                      span: DUMMY_SP,
-                      value: Atom::new(member_name),
-                      raw: None,
-                    }))))],
-                    type_args: None,
-                  })),
-                  Some(ident.to_id()),
-                )
-              };
-            }
+          // styled.element``usages
+          if let MemberProp::Ident(member_ident) = member.prop {
+            let member_name = member_ident.sym.as_str();
+            return if VALID_ELEMENTS.contains(member_name) {
+              let mut new_ident = ident.clone();
+              new_ident.sym = Atom::new(format!("__yak_{member_name}"));
+              (
+                Box::new(Expr::Ident(new_ident.clone())),
+                Some(new_ident.to_id()),
+              )
+            } else {
+              // Transform unknown elements to styled("element-name")
+              (
+                Box::new(Expr::Call(CallExpr {
+                  span: member.span,
+                  ctxt: SyntaxContext::empty(),
+                  callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
+                  args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(Str {
+                    span: DUMMY_SP,
+                    value: Atom::new(member_name),
+                    raw: None,
+                  }))))],
+                  type_args: None,
+                })),
+                Some(ident.to_id()),
+              )
+            };
           }
         }
         (expression, None)
@@ -337,9 +335,7 @@ impl TransformStyled {
         // styled.button.attrs({}) is a call expression and should be tranformed
         // to __yak_button.attrs
         if let Expr::Ident(ident) = *callee.clone() {
-          if ident.sym == atom!("styled") {
-            return (expression, Some(ident.to_id()));
-          }
+          return (expression, Some(ident.to_id()));
         }
 
         let mut expr: Box<Expr> = callee.clone();
@@ -373,7 +369,7 @@ impl TransformStyled {
         if let Some((styled_ident, MemberProp::Ident(member_ident))) = ident {
           if let Some(prop) = outermost {
             let member_name = member_ident.sym.as_str();
-            if styled_ident.sym == atom!("styled") && VALID_ELEMENTS.contains(member_name) {
+            if VALID_ELEMENTS.contains(member_name) {
               let mut new_ident = styled_ident.clone();
                 new_ident.sym = Atom::new(format!("__yak_{member_name}"));
                 return (
