@@ -56,7 +56,7 @@ it("should forward children", () => {
   const { container } = render(
     <Component>
       <button>Click me!</button>
-    </Component>,
+    </Component>
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -172,7 +172,7 @@ it("should allow falsy values", () => {
       <Component $testProp={null} />
       <Component $testProp={false} />
       <Component $testProp={undefined} />
-    </>,
+    </>
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -191,8 +191,8 @@ it("should execute runtime styles recursively", () => {
       css(
         ({ $testProp }) =>
           $testProp &&
-          css(({ $testProp }) => $testProp && css("recursive-test-class")),
-      ),
+          css(({ $testProp }) => $testProp && css("recursive-test-class"))
+      )
   );
 
   const { container } = render(<Component $testProp />);
@@ -215,7 +215,7 @@ it("should allow using refs", () => {
       ref={(element) => {
         elementFromRef = element;
       }}
-    />,
+    />
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
@@ -231,7 +231,7 @@ it("should allow using nested refs", () => {
       ref={(element) => {
         elementFromRef = element;
       }}
-    />,
+    />
   );
 
   expect(elementFromRef).toBeInstanceOf(HTMLInputElement);
@@ -243,7 +243,7 @@ it("should remove theme if styled element", () => {
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
       <Link />
-    </YakThemeProvider>,
+    </YakThemeProvider>
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -264,7 +264,7 @@ it("should keep theme if theme is passed to element", () => {
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
       <Link theme={{ anything: "test" }} />
-    </YakThemeProvider>,
+    </YakThemeProvider>
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -285,7 +285,7 @@ it("should remove theme on wrapped element", () => {
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
       <Component />
-    </YakThemeProvider>,
+    </YakThemeProvider>
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -308,7 +308,7 @@ it("should not remove theme if theme is passed to wrapped element", () => {
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
       <Component theme={{ anything: "test" }} />
-    </YakThemeProvider>,
+    </YakThemeProvider>
   );
 
   expect(container).toMatchInlineSnapshot(`
@@ -320,4 +320,42 @@ it("should not remove theme if theme is passed to wrapped element", () => {
       </pre>
     </div>
   `);
+});
+
+describe("dev mode - error tests", () => {
+  const originalNodeEnv = process.env.NODE_ENV;
+  const originalError = console.error;
+
+  beforeEach(() => {
+    // errors are only thrown in development mode
+    process.env.NODE_ENV = "development";
+    // prevent console.error from printing the error a second time
+    console.error = () => {};
+  });
+
+  afterEach(() => {
+    process.env.NODE_ENV = originalNodeEnv;
+    console.error = originalError;
+  });
+
+  it("should show the function body in error message when dynamic css function returns invalid value", () => {
+    const Component = styled.div("cssClass", {
+      style: {
+        "--bar": ({ $groupColor }) => $groupColor && css("color-class"),
+      },
+    });
+
+    let error = null;
+    try {
+      render(<Component />);
+    } catch (e) {
+      error = e;
+    }
+    expect(error).toMatchInlineSnapshot(`
+      [Error: Dynamic CSS functions must return a string or number but returned undefined
+
+      Dynamic CSS function: ({ $groupColor }) => $groupColor && __vite_ssr_import_4__.css("color-class")
+      ]
+    `);
+  });
 });
