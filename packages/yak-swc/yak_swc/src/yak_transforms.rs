@@ -294,6 +294,7 @@ impl TransformStyled {
   fn transform_styled_usages(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
     match *expression.clone() {
       Expr::Member(member) => {
+        dbg!(format!("💩💩💩💩💩💩💩 member expression case: {expression:?}"));
         if let Expr::Ident(ident) = *member.obj {
           if ident.sym == atom!("styled") {
             // styled.element``usages
@@ -330,14 +331,68 @@ impl TransformStyled {
       }
       Expr::Call(CallExpr {
         callee: Callee::Expr(callee),
+        args,
         ..
       }) => {
         // styled.button.attrs({}) is a call expression and should be tranformed
         // to __yak_button.attrs
-        dbg!(format!("💩💩💩💩💩💩💩 call case: {expression:?}"));
-        if let Expr::Ident(ident) = *callee {
+        if let Expr::Ident(ident) = *callee.clone() {
           if ident.sym == atom!("styled") {
             return (expression, Some(ident.to_id()));
+          }
+        }
+
+        let mut expr: Box<Expr> = callee.clone();
+        let mut counter = 1;
+        let mut ident: Option<(Ident, MemberProp)> = None;
+        let mut outermost: Option<MemberProp> = None;
+        while let Expr::Member(ref member) = *expr {
+          if outermost.is_none() {
+            dbg!(format!("💩💩💩💩💩💩💩 outermost member expression {member:?}"));
+            outermost = Some(member.clone().prop);
+          }
+          counter += 1;
+          match *member.clone().obj {
+            Expr::Ident(current_ident) => if current_ident.sym == atom!("styled") {
+              ident = Some((current_ident, member.clone().prop));
+              break;
+            } else {
+            }
+            Expr::Member(inner_member) => {
+              expr = Box::new(Expr::Member(inner_member));
+            },
+            _ =>  {
+              panic!("Unepected expression");
+            }
+
+          }
+          if counter == 10 {
+            break;
+          }
+        }
+        if let Some((styled_ident, MemberProp::Ident(member_ident))) = ident {
+          if let Some(prop) = outermost {
+            let member_name = member_ident.sym.as_str();
+            if styled_ident.sym == atom!("styled") && VALID_ELEMENTS.contains(member_name) {
+              let mut new_ident = styled_ident.clone();
+                new_ident.sym = Atom::new(format!("__yak_{member_name}"));
+                return (
+                  Box::new(Expr::Call(CallExpr {
+                    span: styled_ident.span,
+                    ctxt: SyntaxContext::empty(),
+                    callee: Callee::Expr(Box::new(Expr::Member(
+                      MemberExpr {
+                        prop,
+                        span: DUMMY_SP,
+                        obj: Box::new(Expr::Ident(new_ident.clone()))
+                      }
+                    ))),
+                    args,
+                    type_args: None,
+                  })),
+                  Some(new_ident.to_id())
+                )
+          }
           }
         }
         (expression, None)
