@@ -341,7 +341,7 @@ describe("dev mode - error tests", () => {
   it("should show the function body in error message when dynamic css function returns invalid value", () => {
     const Component = styled.div("cssClass", {
       style: {
-        "--bar": ({ $groupColor }) => $groupColor && css("color-class"),
+        "--bar": ({ $groupColor }) => $groupColor,
       },
     });
 
@@ -354,7 +354,7 @@ describe("dev mode - error tests", () => {
     expect(error).toMatchInlineSnapshot(`
       [Error: Dynamic CSS functions must return a string or number but returned undefined
 
-      Dynamic CSS function: ({ $groupColor }) => $groupColor && __vite_ssr_import_4__.css("color-class")
+      Dynamic CSS function: ({ $groupColor }) => $groupColor
       ]
     `);
   });
