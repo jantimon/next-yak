@@ -319,7 +319,7 @@ impl TransformStyled {
                   }))))],
                   type_args: None,
                 })),
-                Some(ident.to_id()),
+                None,
               )
             };
           }
@@ -331,12 +331,13 @@ impl TransformStyled {
         args,
         ..
       }) => {
-        // styled.button.attrs({}) is a call expression and should be tranformed
-        // to __yak_button.attrs
-        if let Expr::Ident(ident) = *callee.clone() {
-          return (expression, Some(ident.to_id()));
+        // styled(Component)
+        if let Expr::Ident(_) = *callee.clone() {
+          return (expression, None);
         }
 
+        // styled.button.attrs({}) is a call expression and should be tranformed
+        // to __yak_button.attrs
         let mut expr: Box<Expr> = callee.clone();
         let mut counter = 1;
         let mut ident: Option<(Ident, MemberProp)> = None;

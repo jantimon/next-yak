@@ -529,7 +529,6 @@ where
                 self
                   .yak_transformed_library_imports
                   .iter()
-                  .sorted_by_key(|ident| ident.0.clone())
                   .map(|(sym, ctxt)| {
                     ImportSpecifier::Named(ImportNamedSpecifier {
                       span: DUMMY_SP,
