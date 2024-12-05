@@ -528,9 +528,10 @@ where
               import_declaration
                 .specifiers
                 .retain(|import_specifier| match import_specifier {
-                  ImportSpecifier::Named(ImportNamedSpecifier { local: Ident { sym, ..}, .. }) => {
-                    *sym != atom!("styled")
-                  }
+                  ImportSpecifier::Named(ImportNamedSpecifier {
+                    local: Ident { sym, .. },
+                    ..
+                  }) => *sym != atom!("styled"),
                   _ => true,
                 });
               //Add all transformed imports

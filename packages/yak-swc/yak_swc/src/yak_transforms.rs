@@ -308,28 +308,32 @@ impl TransformStyled {
                 )
               } else {
                 // Transform unknown elements to styled("element-name")
-               (Box::new(Expr::Call(CallExpr {
-                span: member.span,
-                ctxt: SyntaxContext::empty(),
-                callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
-                args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(
-                  Str {
-                span: DUMMY_SP,
-                value: Atom::new(member_name),
-                raw: None,
-                }))))],
-                type_args: None,
-              })), Some(ident.to_id()))
-            }
-             
+                (
+                  Box::new(Expr::Call(CallExpr {
+                    span: member.span,
+                    ctxt: SyntaxContext::empty(),
+                    callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
+                    args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(Str {
+                      span: DUMMY_SP,
+                      value: Atom::new(member_name),
+                      raw: None,
+                    }))))],
+                    type_args: None,
+                  })),
+                  Some(ident.to_id()),
+                )
+              };
             }
           }
         }
         (expression, None)
       }
-      Expr::Call(CallExpr { callee: Callee::Expr(callee), ..}) => {
+      Expr::Call(CallExpr {
+        callee: Callee::Expr(callee),
+        ..
+      }) => {
         // styled.button.attrs({}) is a call expression and should be tranformed
-      // to __yak_button.attrs
+        // to __yak_button.attrs
         dbg!(format!("💩💩💩💩💩💩💩 call case: {expression:?}"));
         if let Expr::Ident(ident) = *callee {
           if ident.sym == atom!("styled") {
