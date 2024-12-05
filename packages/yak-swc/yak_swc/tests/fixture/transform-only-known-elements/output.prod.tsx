@@ -10,3 +10,8 @@ export const CustomElement = /*YAK Extracted CSS:
   margin-bottom: 23px;
 }
 */ /*#__PURE__*/ styled("unknown")(__styleYak.CustomElement);
+export const SomeThingElse = /*YAK Extracted CSS:
+.SomeThingElse {
+  margin-bottom: 15px;
+}
+*/ /*#__PURE__*/ styled("something-else")(__styleYak.SomeThingElse);
