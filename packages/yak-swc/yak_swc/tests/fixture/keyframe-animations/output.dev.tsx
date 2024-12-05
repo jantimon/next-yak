@@ -1,4 +1,4 @@
-import { keyframes, __yak_p } from "next-yak/internal";
+import { styled, keyframes, __yak_p } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const fadeIn = /*YAK Extracted CSS:
 @keyframes fadeIn {

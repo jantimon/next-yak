@@ -1,4 +1,4 @@
-import { __yak_div } from "next-yak/internal";
+import { styled, __yak_div } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Card = /*YAK Extracted CSS:
 .Card {

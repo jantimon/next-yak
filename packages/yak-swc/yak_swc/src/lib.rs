@@ -524,16 +524,6 @@ where
           if import_declaration.src.value == "next-yak/internal" {
             if !self.yak_transformed_library_imports.is_empty() {
               // yak styled import got transformed into specific components
-              // Now we remove the generic styled import and add all explicit imports
-              import_declaration
-                .specifiers
-                .retain(|import_specifier| match import_specifier {
-                  ImportSpecifier::Named(ImportNamedSpecifier {
-                    local: Ident { sym, .. },
-                    ..
-                  }) => *sym != atom!("styled"),
-                  _ => true,
-                });
               //Add all transformed imports
               import_declaration.specifiers.extend(
                 self
@@ -864,6 +854,7 @@ where
       runtime_css_variables,
     );
     if let Some(id) = transform_result.import {
+      dbg!(format!("💩💩💩💩💩💩💩 Adding to import {id:?}"));
       self.yak_transformed_library_imports.insert(id);
     }
 

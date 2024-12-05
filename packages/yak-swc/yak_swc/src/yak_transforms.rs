@@ -294,7 +294,6 @@ impl TransformStyled {
   fn transform_styled_usages(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
     match *expression.clone() {
       Expr::Member(member) => {
-        dbg!(format!("💩💩💩💩💩💩💩 member expression case: {expression:?}"));
         if let Expr::Ident(ident) = *member.obj {
           // styled.element``usages
           if let MemberProp::Ident(member_ident) = member.prop {
@@ -344,7 +343,6 @@ impl TransformStyled {
         let mut outermost: Option<MemberProp> = None;
         while let Expr::Member(ref member) = *expr {
           if outermost.is_none() {
-            dbg!(format!("💩💩💩💩💩💩💩 outermost member expression {member:?}"));
             outermost = Some(member.clone().prop);
           }
           counter += 1;

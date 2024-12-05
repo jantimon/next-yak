@@ -1,4 +1,4 @@
-import { css, keyframes, __yak_button, __yak_p } from "next-yak/internal";
+import { styled, css, keyframes, __yak_button, __yak_p } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FadeInText = /*YAK Extracted CSS:
 .FadeInText__$reverse {

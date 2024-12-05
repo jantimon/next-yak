@@ -1,4 +1,4 @@
-import { css, __yak_button } from "next-yak/internal";
+import { css, styled, __yak_button } from "next-yak/internal";
 import { typogaphyMixin } from "./typography";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const textColor = /*#__PURE__*/ css();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { __yak_div } from "next-yak/internal";
+import { styled, __yak_div } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const ThemedComponent = /*YAK Extracted CSS:
 .ThemedComponent {

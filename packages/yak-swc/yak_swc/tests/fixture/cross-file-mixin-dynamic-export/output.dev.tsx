@@ -1,4 +1,4 @@
-import { css, __yak_button } from "next-yak/internal";
+import { css, styled, __yak_button } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const textColor = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ css(__styleYak.textColor__$active));
 const textStyles = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ css(__styleYak.textStyles__$active));
