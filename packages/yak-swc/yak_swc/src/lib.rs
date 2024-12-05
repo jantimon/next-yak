@@ -1,6 +1,6 @@
 use css_in_js_parser::{find_char, parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
@@ -23,7 +23,7 @@ use utils::encode_module_import::{encode_module_import, ImportKind};
 mod variable_visitor;
 use variable_visitor::{ScopedVariableReference, VariableVisitor};
 mod yak_imports;
-use yak_imports::YakImportVisitor;
+use yak_imports::{initialize_yak_imports, YakImports};
 mod yak_file_visitor;
 use yak_file_visitor::YakFileVisitor;
 mod math_evaluate;
@@ -84,7 +84,7 @@ where
   /// Visitor to gather all imports from the current program
   /// Used to check if the current program is using next-yak
   /// to idenftify css-in-js expressions
-  yak_library_imports: YakImportVisitor,
+  yak_library_imports: Option<YakImports>,
   /// Variable Name to Unique CSS Identifier Mapping\
   /// e.g. const Rotation = keyframes`...` -> Rotation\
   /// e.g. const Button = styled.button`...` -> Button\
@@ -114,7 +114,7 @@ where
       current_condition: vec![],
       current_exported: false,
       variables: VariableVisitor::new(),
-      yak_library_imports: YakImportVisitor::new(),
+      yak_library_imports: None,
       naming_convention: NamingConvention::new(filename.clone(), dev_mode),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
@@ -128,6 +128,10 @@ where
   /// Check if we are inside a next-yak css expression
   fn is_inside_css_expression(&self) -> bool {
     self.current_css_state.is_some()
+  }
+
+  fn yak_imports(&self) -> &YakImports {
+    self.yak_library_imports.as_ref().expect("If this is reached the imports should've been parsed already.")
   }
 
   /// Try to get the component id of the current styled component mixin or animation
@@ -286,7 +290,7 @@ where
               // constant mixins e.g.
               // const highlight = css`color: red;`
               // const Button = styled.button`&:hover { ${highlight}; }`
-              if is_valid_tagged_tpl(&tagged_tpl, &self.yak_library_imports.yak_css_idents) {
+              if is_valid_tagged_tpl(&tagged_tpl, &self.yak_imports().yak_css_idents()) {
                 let (inline_runtime_exprs, inline_runtime_css_vars) =
                   self.process_yak_literal(&mut tagged_tpl.clone(), css_state.clone());
                 runtime_expressions.extend(inline_runtime_exprs);
@@ -297,7 +301,7 @@ where
               // const highlight = keyframes`from { color: red; }`
               else if is_valid_tagged_tpl(
                 &tagged_tpl,
-                &self.yak_library_imports.yak_keyframes_idents,
+                &self.yak_imports().yak_keyframes_idents(),
               ) {
                 // Create a unique name for the keyframe
                 let keyframe_name = self
@@ -372,7 +376,7 @@ ${{() => {var}}};\n",
         // Handle inline css literals
         // e.g. styled.button`${css`color: red;`};`
         else if let Expr::TaggedTpl(tpl) = &mut **expr {
-          if is_valid_tagged_tpl(tpl, &self.yak_library_imports.yak_css_idents) {
+          if is_valid_tagged_tpl(tpl, &self.yak_imports().yak_css_idents()) {
             let (inline_runtime_exprs, inline_runtime_css_vars) =
               self.process_yak_literal(tpl, css_state.clone());
             runtime_expressions.extend(inline_runtime_exprs);
@@ -438,6 +442,8 @@ ${{() => {var}}};\n",
                 *expr.clone(),
                 self
                   .yak_library_imports
+                  .as_mut()
+                  .unwrap()
                   .get_yak_utility_ident("unitPostFix".to_string()),
                 unit.to_string(),
               )
@@ -477,12 +483,10 @@ where
   GenericComments: Comments,
 {
   fn visit_mut_program(&mut self, program: &mut Program) {
-    let mut yak_import_visitor = YakImportVisitor::new();
-    program.visit_mut_children_with(&mut yak_import_visitor);
-    self.yak_library_imports = yak_import_visitor;
+    self.yak_library_imports = Some(initialize_yak_imports(program));
 
     // Skip this program only if yak is not used at all
-    if !self.yak_library_imports.is_using_next_yak() {
+    if !self.yak_imports().is_using_next_yak() {
       return;
     }
 
@@ -515,6 +519,8 @@ where
             import_declaration.specifiers.extend(
               self
                 .yak_library_imports
+                .as_ref()
+                .unwrap()
                 .get_yak_utility_import_declaration(),
             );
             break;
@@ -570,7 +576,7 @@ where
   /// To store the current name which can be used for class names
   /// e.g. Button for const Button = styled.button`color: red;`
   fn visit_mut_var_decl(&mut self, n: &mut VarDecl) {
-    if !self.yak_library_imports.is_using_next_yak() {
+    if !self.yak_imports().is_using_next_yak() {
       return;
     }
     for decl in &mut n.decls {
@@ -590,7 +596,7 @@ where
   /// To store the current name which can be used for class names
   /// e.g. Button for const obj = { Button: styled.button`color: red;` }
   fn visit_mut_object_lit(&mut self, n: &mut ObjectLit) {
-    if !self.yak_library_imports.is_using_next_yak() {
+    if !self.yak_imports().is_using_next_yak() {
       return;
     }
     if self.current_variable_name.is_none() {
@@ -629,7 +635,7 @@ where
 
   // Visit JSX expressions for css prop support
   fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
-    if !self.yak_library_imports.is_using_next_yak() {
+    if !self.yak_imports().is_using_next_yak() {
       return;
     }
     let css_prop = n.has_css_prop();
@@ -641,7 +647,7 @@ where
       css_prop.transform(
         n,
         &self
-          .yak_library_imports
+          .yak_library_imports.as_mut().unwrap()
           .get_yak_utility_ident("mergeCssProp".into()),
       );
     }
@@ -657,7 +663,7 @@ where
       if let Some(scoped_name) = extract_ident_and_parts(n) {
         if let Some(constant_value) = self.variables.get_const_value(&scoped_name) {
           if let Expr::TaggedTpl(tpl) = *constant_value {
-            if is_valid_tagged_tpl(&tpl, &self.yak_library_imports.yak_css_idents) {
+            if is_valid_tagged_tpl(&tpl, &self.yak_imports().yak_css_idents()) {
               let replacement_before = self.expression_replacement.clone();
               let tpl = &mut tpl.clone();
               tpl.span = n.span();
@@ -732,7 +738,7 @@ where
   /// Visit tagged template literals
   /// This is where the css-in-js expressions are
   fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-    let yak_library_function_name = self.yak_library_imports.get_yak_library_function_name(n);
+    let yak_library_function_name = self.yak_library_imports.as_mut().unwrap().get_yak_library_function_name(n);
     if yak_library_function_name.is_none() {
       n.visit_mut_children_with(self);
       return;
@@ -844,6 +850,8 @@ where
             if let Expr::Ident(ident) = &**callee {
               if self
                 .yak_library_imports
+                .as_mut()
+                .unwrap()
                 .get_yak_library_name_for_ident(&ident.to_id())
                 == Some(atom!("atoms"))
               {

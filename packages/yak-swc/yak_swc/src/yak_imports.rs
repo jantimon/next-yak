@@ -1,6 +1,7 @@
 use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
 use swc_core::ecma::visit::Fold;
+use swc_core::ecma::visit::VisitMutWith;
 use swc_core::{
   common::DUMMY_SP,
   ecma::{ast::*, visit::VisitMut},
@@ -9,33 +10,63 @@ use swc_core::{
 #[derive(Debug)]
 /// Visitor implementation to gather all names imported from "next-yak"
 /// Side effect: converts the import source from "next-yak" to "next-yak/internal"
-pub struct YakImportVisitor {
-  /// Imports from "next-yak"
-  /// Local to Imported mapping
-  yak_library_imports: FxHashMap<Id, Id>,
+pub struct YakImports {
   /// Utilities used from "next-yak/internal"
   /// e.g. unitPostFix, mergeCssProp
   yak_utilities: FxHashMap<String, Ident>,
+  /// Imports from "next-yak"
+  /// Local to Imported mapping
+  yak_library_imports: FxHashMap<Id, Id>,
   /// Local Identifiers for the next-yak css function \
   /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
   /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
-  pub yak_css_idents: FxHashSet<Id>,
+  yak_css_idents: FxHashSet<Id>,
   /// Local Identifiers for the next-yak keyframes function \
   /// Most of the time it is just `keyframes#0` for `import { keyframes } from "next-yak"` \
   /// but it might also contain renamings like `import { keyframes as keyframes_ } from "next-yak"`
-  pub yak_keyframes_idents: FxHashSet<Id>,
+  yak_keyframes_idents: FxHashSet<Id>,
+}
+
+pub fn initialize_yak_imports(program: &mut Program) -> YakImports {
+  let mut yak_import_visitor = YakImportVisitor::new();
+  program.visit_mut_children_with(&mut yak_import_visitor);
+  return YakImports::new(
+    yak_import_visitor.yak_library_imports,
+    yak_import_visitor.yak_css_idents,
+    yak_import_visitor.yak_keyframes_idents,
+  );
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
 
-impl YakImportVisitor {
-  pub fn new() -> Self {
+impl YakImports {
+  pub fn new(
+    yak_library_imports: FxHashMap<Id, Id>,
+    yak_css_idents: FxHashSet<Id>,
+    yak_keyframes_idents: FxHashSet<Id>,
+  ) -> Self {
     Self {
-      yak_library_imports: FxHashMap::default(),
       yak_utilities: FxHashMap::default(),
-      yak_css_idents: FxHashSet::default(),
-      yak_keyframes_idents: FxHashSet::default(),
+      yak_library_imports,
+      yak_css_idents,
+      yak_keyframes_idents,
     }
+  }
+
+  pub fn yak_css_idents(&self) -> &FxHashSet<Id> {
+    &self.yak_css_idents
+  }
+
+  pub fn yak_library_imports(&self) -> &FxHashMap<Id, Id> {
+    &self.yak_library_imports
+  }
+
+  pub fn yak_keyframes_idents(&self) -> &FxHashSet<Id> {
+    &self.yak_keyframes_idents
+  }
+
+  pub fn yak_utilities(&self) -> &FxHashMap<String, Ident> {
+    &self.yak_utilities
   }
 
   /// Check if the current AST has imports to the next-yak library
@@ -112,6 +143,30 @@ impl YakImportVisitor {
   }
 }
 
+struct YakImportVisitor {
+  /// Imports from "next-yak"
+  /// Local to Imported mapping
+  pub yak_library_imports: FxHashMap<Id, Id>,
+  /// Local Identifiers for the next-yak css function \
+  /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
+  /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
+  pub yak_css_idents: FxHashSet<Id>,
+  /// Local Identifiers for the next-yak keyframes function \
+  /// Most of the time it is just `keyframes#0` for `import { keyframes } from "next-yak"` \
+  /// but it might also contain renamings like `import { keyframes as keyframes_ } from "next-yak"`
+  pub yak_keyframes_idents: FxHashSet<Id>,
+}
+
+impl YakImportVisitor {
+  pub fn new() -> Self {
+    Self {
+      yak_library_imports: FxHashMap::default(),
+      yak_css_idents: FxHashSet::default(),
+      yak_keyframes_idents: FxHashSet::default(),
+    }
+  }
+}
+
 impl VisitMut for YakImportVisitor {
   /// Visit the import declaration and store the imported names
   /// That way we know if `styled`, `css` is imported from "next-yak"
@@ -123,6 +178,7 @@ impl VisitMut for YakImportVisitor {
       // and how the library is called internally
       import_decl.src.value = "next-yak/internal".into();
       import_decl.src.raw = None;
+
       // Store the local name of the imported function
       for specifier in &import_decl.specifiers {
         if let ImportSpecifier::Named(named) = specifier {
