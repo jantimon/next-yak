@@ -27,20 +27,32 @@ pub struct YakImports {
   yak_keyframes_idents: FxHashSet<Id>,
 }
 
-pub fn initialize_yak_imports(program: &mut Program) -> YakImports {
+pub fn visit_program_imports(program: &mut Program) -> YakImports {
   let mut yak_import_visitor = YakImportVisitor::new();
   program.visit_mut_children_with(&mut yak_import_visitor);
-  return YakImports::new(
-    yak_import_visitor.yak_library_imports,
-    yak_import_visitor.yak_css_idents,
-    yak_import_visitor.yak_keyframes_idents,
-  );
+  yak_import_visitor.into()
+}
+
+pub fn visit_module_imports(module: &mut Module) -> YakImports {
+  let mut yak_import_visitor = YakImportVisitor::new();
+  module.visit_mut_children_with(&mut yak_import_visitor);
+  yak_import_visitor.into()
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
 
+impl From<YakImportVisitor> for YakImports {
+  fn from(value: YakImportVisitor) -> Self {
+    YakImports::new(
+      value.yak_library_imports,
+      value.yak_css_idents,
+      value.yak_keyframes_idents,
+    )
+  }
+}
+
 impl YakImports {
-  pub fn new(
+  fn new(
     yak_library_imports: FxHashMap<Id, Id>,
     yak_css_idents: FxHashSet<Id>,
     yak_keyframes_idents: FxHashSet<Id>,
@@ -227,7 +239,8 @@ mod tests {
       code,
       code,
     );
-    assert_eq!(visitor.is_using_next_yak(), false);
+    let imports: YakImports = visitor.into();
+    assert_eq!(imports.is_using_next_yak(), false);
   }
 
   #[test]
@@ -256,7 +269,8 @@ mod tests {
         }
     "#,
     );
-    assert_eq!(visitor.is_using_next_yak(), true);
+    let imports: YakImports = visitor.into();
+    assert_eq!(imports.is_using_next_yak(), true);
   }
 
   #[test]
@@ -345,10 +359,11 @@ mod tests {
 
   #[test]
   fn test_yak_import_visitor_utility_ident() {
-    let mut visitor = YakImportVisitor::new();
-    let ident = visitor.get_yak_utility_ident("unitPostFix".to_string());
+    let visitor = YakImportVisitor::new();
+    let mut imports: YakImports = visitor.into();
+    let ident = imports.get_yak_utility_ident("unitPostFix".to_string());
     assert_eq!(ident.sym, "__yak_unitPostFix");
-    let ident = visitor.get_yak_utility_ident("mergeCssProp".to_string());
+    let ident = imports.get_yak_utility_ident("mergeCssProp".to_string());
     assert_eq!(ident.sym, "__yak_mergeCssProp");
   }
 }

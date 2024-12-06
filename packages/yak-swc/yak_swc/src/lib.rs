@@ -23,7 +23,7 @@ use utils::encode_module_import::{encode_module_import, ImportKind};
 mod variable_visitor;
 use variable_visitor::{ScopedVariableReference, VariableVisitor};
 mod yak_imports;
-use yak_imports::{initialize_yak_imports, YakImports};
+use yak_imports::{visit_program_imports, YakImports};
 mod yak_file_visitor;
 use yak_file_visitor::YakFileVisitor;
 mod math_evaluate;
@@ -131,7 +131,10 @@ where
   }
 
   fn yak_imports(&self) -> &YakImports {
-    self.yak_library_imports.as_ref().expect("If this is reached the imports should've been parsed already.")
+    self
+      .yak_library_imports
+      .as_ref()
+      .expect("If this is reached the imports should've been parsed already.")
   }
 
   /// Try to get the component id of the current styled component mixin or animation
@@ -299,10 +302,8 @@ where
               // keyframes - of animations which have not been parsed yet
               // const Button = styled.button`animation: ${highlight};`
               // const highlight = keyframes`from { color: red; }`
-              else if is_valid_tagged_tpl(
-                &tagged_tpl,
-                &self.yak_imports().yak_keyframes_idents(),
-              ) {
+              else if is_valid_tagged_tpl(&tagged_tpl, &self.yak_imports().yak_keyframes_idents())
+              {
                 // Create a unique name for the keyframe
                 let keyframe_name = self
                   .naming_convention
@@ -483,7 +484,7 @@ where
   GenericComments: Comments,
 {
   fn visit_mut_program(&mut self, program: &mut Program) {
-    self.yak_library_imports = Some(initialize_yak_imports(program));
+    self.yak_library_imports = Some(visit_program_imports(program));
 
     // Skip this program only if yak is not used at all
     if !self.yak_imports().is_using_next_yak() {
@@ -647,7 +648,9 @@ where
       css_prop.transform(
         n,
         &self
-          .yak_library_imports.as_mut().unwrap()
+          .yak_library_imports
+          .as_mut()
+          .unwrap()
           .get_yak_utility_ident("mergeCssProp".into()),
       );
     }
@@ -738,7 +741,11 @@ where
   /// Visit tagged template literals
   /// This is where the css-in-js expressions are
   fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-    let yak_library_function_name = self.yak_library_imports.as_mut().unwrap().get_yak_library_function_name(n);
+    let yak_library_function_name = self
+      .yak_library_imports
+      .as_mut()
+      .unwrap()
+      .get_yak_library_function_name(n);
     if yak_library_function_name.is_none() {
       n.visit_mut_children_with(self);
       return;
