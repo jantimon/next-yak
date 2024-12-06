@@ -477,7 +477,7 @@ mod tests {
     );
     let all_declarations = declarations
       .into_iter()
-      .chain(declarations2.into_iter())
+      .chain(declarations2)
       .collect::<Vec<_>>();
     assert_debug_snapshot!((state1, state2, all_declarations));
   }
