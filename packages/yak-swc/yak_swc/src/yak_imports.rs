@@ -38,7 +38,7 @@ pub struct YakImports {
 ///
 /// Returns a `YakImports` struct containing:
 /// - Mapped imports from next-yak
-/// - CSS function identifiers 
+/// - CSS function identifiers
 /// - Keyframe function identifiers
 /// - Utility function references
 pub fn visit_module_imports(module: &mut Module) -> YakImports {
@@ -77,18 +77,8 @@ impl YakImports {
     &self.yak_css_idents
   }
 
-  #[allow(dead_code)]
-  pub fn yak_library_imports(&self) -> &FxHashMap<Id, Id> {
-    &self.yak_library_imports
-  }
-
   pub fn yak_keyframes_idents(&self) -> &FxHashSet<Id> {
     &self.yak_keyframes_idents
-  }
-
-  #[allow(dead_code)]
-  pub fn yak_utilities(&self) -> &FxHashMap<String, Ident> {
-    &self.yak_utilities
   }
 
   /// Check if the current AST has imports to the next-yak library
