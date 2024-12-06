@@ -146,17 +146,19 @@ impl YakImports {
 
   /// Returns the ident for the given component
   /// e.g. __yak_button for button
-  pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Ident {
+  pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Option<Ident> {
     if !VALID_ELEMENTS.contains(name.as_ref()) {
-      panic!("Valid yak element not found: {}", name.as_ref());
+      return None;
     }
     if let Some(id) = self.yak_component_imports.get(name.as_ref()) {
-      id.clone()
+      Some(id.clone())
     } else {
       let prefixed_name = format!("__yak_{}", name.as_ref());
       let ident = Ident::from(prefixed_name);
-      self.yak_component_imports.insert(name.as_ref().into(), ident.clone());
-      ident
+      self
+        .yak_component_imports
+        .insert(name.as_ref().into(), ident.clone());
+      Some(ident)
     }
   }
 

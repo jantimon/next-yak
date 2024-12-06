@@ -1,7 +1,7 @@
 use css_in_js_parser::{find_char, parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
 use itertools::Itertools;
-use rustc_hash::{FxHashMap, FxHashSet};
+use rustc_hash::FxHashMap;
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
@@ -530,11 +530,9 @@ where
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
             // Add all stored imports
-            import_declaration.specifiers.extend(
-              self
-                .yak_imports()
-                .get_yak_import_declarations()
-            );
+            import_declaration
+              .specifiers
+              .extend(self.yak_imports().get_yak_import_declarations());
 
             break;
           }
@@ -841,7 +839,7 @@ where
       runtime_expressions,
       &self.current_declaration,
       runtime_css_variables,
-      self.yak_library_imports.as_mut().unwrap()
+      self.yak_library_imports.as_mut().unwrap(),
     );
 
     if is_top_level {

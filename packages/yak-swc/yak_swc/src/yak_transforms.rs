@@ -8,7 +8,6 @@ use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_
 use crate::utils::encode_module_import::encode_percent;
 use crate::utils::native_elements::VALID_ELEMENTS;
 use crate::variable_visitor::ScopedVariableReference;
-use crate::yak_imports;
 use crate::yak_imports::YakImports;
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use swc_core::common::{Span, SyntaxContext, DUMMY_SP};
@@ -293,15 +292,19 @@ impl TransformStyled {
     TransformStyled { class_name: None }
   }
 
-  fn transform_styled_usages(&self, expression: Box<Expr>, yak_imports: &mut YakImports) -> Box<Expr> {
+  fn transform_styled_usages(
+    &self,
+    expression: Box<Expr>,
+    yak_imports: &mut YakImports,
+  ) -> Box<Expr> {
     match *expression.clone() {
       Expr::Member(member) => {
         if let Expr::Ident(ident) = *member.obj {
           // styled.element``usages
           if let MemberProp::Ident(member_ident) = member.prop {
             let member_name = member_ident.sym.as_str();
-            return if VALID_ELEMENTS.contains(member_name) {
-              Box::new(Expr::Ident(yak_imports.get_yak_component_import(member_name)))
+            if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
+              Box::new(Expr::Ident(ident))
             } else {
               // Transform unknown elements to styled("element-name")
               Box::new(Expr::Call(CallExpr {
@@ -342,18 +345,18 @@ impl TransformStyled {
           }
           counter += 1;
           match *member.clone().obj {
-            Expr::Ident(current_ident) => if current_ident.sym == atom!("styled") {
-              ident = Some((current_ident, member.clone().prop));
-              break;
-            } else {
+            Expr::Ident(current_ident) => {
+              if current_ident.sym == atom!("styled") {
+                ident = Some((current_ident, member.clone().prop));
+                break;
+              } 
             }
             Expr::Member(inner_member) => {
               expr = Box::new(Expr::Member(inner_member));
-            },
-            _ =>  {
+            }
+            _ => {
               panic!("Unepected expression");
             }
-
           }
           if counter == 10 {
             break;
@@ -364,21 +367,19 @@ impl TransformStyled {
             let member_name = member_ident.sym.as_str();
             if VALID_ELEMENTS.contains(member_name) {
               let mut new_ident = styled_ident.clone();
-                new_ident.sym = Atom::new(format!("__yak_{member_name}"));
-                return Box::new(Expr::Call(CallExpr {
-                    span: styled_ident.span,
-                    ctxt: SyntaxContext::empty(),
-                    callee: Callee::Expr(Box::new(Expr::Member(
-                      MemberExpr {
-                        prop,
-                        span: DUMMY_SP,
-                        obj: Box::new(Expr::Ident(new_ident.clone()))
-                      }
-                    ))),
-                    args,
-                    type_args: None,
-                  }))
-          }
+              new_ident.sym = Atom::new(format!("__yak_{member_name}"));
+              return Box::new(Expr::Call(CallExpr {
+                span: styled_ident.span,
+                ctxt: SyntaxContext::empty(),
+                callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
+                  prop,
+                  span: DUMMY_SP,
+                  obj: Box::new(Expr::Ident(new_ident.clone())),
+                }))),
+                args,
+                type_args: None,
+              }));
+            }
           }
         }
         expression
