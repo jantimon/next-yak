@@ -11,7 +11,7 @@ beforeEach(() => {
 type DataAttributes = { [key: `data-${string}`]: any };
 
 it("works fine with an empty object", () => {
-  const Comp = styled.div.attrs({})``;
+  const Comp = (styled("div") as typeof styled.div).attrs({})``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
       style={{}}
@@ -20,7 +20,7 @@ it("works fine with an empty object", () => {
 });
 
 it("works fine with a function that returns an empty object", () => {
-  const Comp = styled.div.attrs(() => ({}))``;
+  const Comp = (styled("div") as typeof styled.div).attrs(() => ({}))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
       style={{}}
@@ -29,7 +29,7 @@ it("works fine with a function that returns an empty object", () => {
 });
 
 it("pass a simple attr via object", () => {
-  const Comp = styled.button.attrs({
+  const Comp = (styled("button") as typeof styled.button).attrs({
     type: "button",
   })``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
@@ -41,7 +41,7 @@ it("pass a simple attr via object", () => {
 });
 
 it("pass a simple attr via function with object return", () => {
-  const Comp = styled.button.attrs(() => ({
+  const Comp = (styled("button") as typeof styled.button).attrs(() => ({
     type: "button",
   }))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
@@ -81,7 +81,7 @@ it("pass a React component", () => {
 it("should not call a function passed to attrs as an object value", () => {
   const stub = vi.fn(() => "div");
 
-  const Comp = styled.button.attrs<{ foo?: typeof stub }>(() => ({
+  const Comp = styled("button").attrs<{ foo?: typeof stub }>(() => ({
     foo: stub,
   }))``;
 
@@ -91,13 +91,14 @@ it("should not call a function passed to attrs as an object value", () => {
 });
 
 it("defaultProps are merged into what function attrs receives", () => {
-  const Comp = styled.button.attrs<DataAttributes>((props) => ({
+  const Comp = (styled("button") as typeof styled.button).attrs<DataAttributes>((props) => ({
     "data-color": props.color,
   }))``;
 
   Comp.defaultProps = {
     color: "red",
   };
+  //YakComponent<FastOmit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
@@ -109,7 +110,7 @@ it("defaultProps are merged into what function attrs receives", () => {
 });
 
 it("pass props to the attr function", () => {
-  const Comp = styled.button.attrs<{ $submit?: boolean }>((p) => ({
+  const Comp = (styled("button") as typeof styled.button).attrs<{ $submit?: boolean }>((p) => ({
     type: p.$submit ? "submit" : "button",
   }))``;
 
@@ -130,7 +131,7 @@ it("pass props to the attr function", () => {
 });
 
 it("should replace props with attrs", () => {
-  const Comp = styled.button.attrs<{ $submit?: boolean }>((p) => ({
+  const Comp = (styled("button") as typeof styled.button).attrs<{ $submit?: boolean }>((p) => ({
     type: p.$submit ? "submit" : "button",
     tabIndex: 0,
   }))``;
@@ -161,7 +162,7 @@ it("should replace props with attrs", () => {
 });
 
 it("should merge className", () => {
-  const Comp = styled.div.attrs(() => ({
+  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
     className: "meow nya",
   }))``;
 
@@ -174,7 +175,7 @@ it("should merge className", () => {
 });
 
 it("should merge className from folded attrs", () => {
-  const Inner = styled.div.attrs({ className: "foo" })``;
+  const Inner = (styled("div") as typeof styled.div).attrs({ className: "foo" })``;
 
   const Comp = styled(Inner).attrs(() => ({
     className: "meow nya",
@@ -190,7 +191,7 @@ it("should merge className from folded attrs", () => {
 });
 
 it("should merge className even if its a function", () => {
-  const Comp = styled.div.attrs<{ $purr?: boolean }>((p) => ({
+  const Comp = (styled("div") as typeof styled.div).attrs<{ $purr?: boolean }>((p) => ({
     className: `meow ${p.$purr ? "purr" : "nya"}`,
   }))``;
 
@@ -209,7 +210,7 @@ it("should merge className even if its a function", () => {
 });
 
 it("should merge style", () => {
-  const Comp = styled.div.attrs(() => ({
+  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
     style: { color: "red", background: "blue" },
   }))``;
 
@@ -231,7 +232,7 @@ it("should merge style", () => {
 });
 
 it("should work with data and aria attributes", () => {
-  const Comp = styled.div.attrs<DataAttributes>(() => ({
+  const Comp = (styled("div") as typeof styled.div).attrs<DataAttributes>(() => ({
     "data-foo": "bar",
     "aria-label": "A simple FooBar",
   }))``;
@@ -246,7 +247,7 @@ it("should work with data and aria attributes", () => {
 
 it("merge attrs when inheriting SC", () => {
   let attrsCallCount = 0;
-  const Parent = styled.button.attrs(() => {
+  const Parent = (styled("button") as typeof styled.button).attrs(() => {
     // Parent should be called first and only once
     // to behave exactly like styled-components
     expect(attrsCallCount).toEqual(0);
@@ -276,7 +277,7 @@ it("merge attrs when inheriting SC", () => {
 
 it("pass attrs to style block", () => {
   /* Would be a React Router Link in real life */
-  const Comp = styled.a.attrs<DataAttributes>(() => ({
+  const Comp = (styled("a") as typeof styled.a).attrs<DataAttributes>(() => ({
     href: "#",
     "data-active-class-name": "--is-active",
     // @ts-expect-error
@@ -300,7 +301,7 @@ it("pass attrs to style block", () => {
 });
 
 it("should pass through children as a normal prop", () => {
-  const Comp = styled.div.attrs(() => ({
+  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
     children: "Probably a bad idea",
   }))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
@@ -313,7 +314,7 @@ it("should pass through children as a normal prop", () => {
 });
 
 it("should pass through complex children as well", () => {
-  const Comp = styled.div.attrs(() => ({
+  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
     children: <span>Probably a bad idea</span>,
   }))``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
@@ -328,9 +329,9 @@ it("should pass through complex children as well", () => {
 });
 
 it("should override children", () => {
-  const X = styled.div``;
+  const X = (styled("div") as typeof styled.div)``;
   type XProps = React.ComponentProps<typeof X>["children"] & JSX.Element;
-  const Comp = styled.div.attrs(() => ({
+  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
     children: <span>Amazing</span>,
   }))``;
   expect(TestRenderer.create(<Comp>Something else</Comp>).toJSON())
@@ -346,7 +347,7 @@ it("should override children", () => {
 });
 
 it('should shallow merge "style" prop + attr instead of overwriting', () => {
-  const Paragraph = styled.p.attrs<{ $fontScale?: number }>((p) => ({
+  const Paragraph = (styled("p") as typeof styled.p).attrs<{ $fontScale?: number }>((p) => ({
     style: {
       ...p.style,
       fontSize: `${p.$fontScale}em`,
@@ -390,7 +391,7 @@ it('should shallow merge "style" prop + attr instead of overwriting', () => {
 it("does not pass transient props to HTML element", () => {
   type CompProps = { $textColor: string };
 
-  const Comp = styled.div<CompProps>`
+  const Comp = (styled("div") as typeof styled.div)<CompProps>`
     color: ${(props) => props.$textColor};
   `;
 
@@ -406,7 +407,7 @@ it("does not pass transient props to HTML element", () => {
 });
 
 it.skip('should apply given "as" prop to the progressive type', () => {
-  const Comp = styled.div.attrs<{ as?: any }>({ as: "video" as const })``;
+  const Comp = (styled("div") as typeof styled.div).attrs<{ as?: any }>({ as: "video" as const })``;
 
   //@ts-expect-error
   expect(TestRenderer.create(<Comp loop />).toJSON()).toMatchInlineSnapshot(`
@@ -420,7 +421,7 @@ it.skip('should apply given "as" prop to the progressive type', () => {
 
 // our own tests
 it("should remap props", () => {
-  const Comp = styled.button.attrs<{ primary?: boolean; $submit?: boolean }>(
+  const Comp = (styled("button") as typeof styled.button).attrs<{ primary?: boolean; $submit?: boolean }>(
     (p) => ({
       type: p.$submit ? "submit" : "button",
       $primary: p.primary,
@@ -450,7 +451,7 @@ it("should remap props", () => {
 });
 
 it("should have optional attrs props as component interface", () => {
-  const Comp = styled.h1.attrs<{ $primary?: boolean }>({
+  const Comp = (styled("h1") as typeof styled.h1).attrs<{ $primary?: boolean }>({
     $primary: true,
   })``;
 
@@ -515,7 +516,7 @@ it("should pass theme if theme is overwritten", () => {
 
 describe("attrs bug next-yak/issues/163", () => {
   it("should allow to delete a prop", () => {
-    const Comp = styled.h1.attrs<{ primary?: boolean }>({
+    const Comp = (styled("h1") as typeof styled.h1).attrs<{ primary?: boolean }>({
       primary: undefined,
     })``;
 
@@ -528,7 +529,7 @@ describe("attrs bug next-yak/issues/163", () => {
   });
 
   it("should allow to rename a prop", () => {
-    const Comp = styled.h1.attrs<{ primary?: boolean }>((p) => ({
+    const Comp = (styled("h1") as typeof styled.h1).attrs<{ primary?: boolean }>((p) => ({
       ...p,
       primary: undefined,
       $primary: p.primary,
@@ -543,7 +544,7 @@ describe("attrs bug next-yak/issues/163", () => {
   });
 
   it("should allow to rename a prop in overwritten attrs", () => {
-    const Parent = styled.h1.attrs<{ count: number }>((p) => {
+    const Parent = (styled("h1") as typeof styled.h1).attrs<{ count: number }>((p) => {
       expect(p.count).toBe(1);
       return {
         count: ++p.count,

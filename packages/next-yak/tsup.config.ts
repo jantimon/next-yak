@@ -26,7 +26,7 @@ export default defineConfig([
    // internal
    {
     entryPoints: ["runtime/internal.ts"],
-    format: ["esm"],
+    format: ["cjs", "esm"],
     minify: false,
     sourcemap: true,
     dts: false,
