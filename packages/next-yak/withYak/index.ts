@@ -15,6 +15,12 @@ const { resolve } = createRequire(currentDir + "/index.js");
 
 export type YakConfigOptions = {
   contextPath?: string;
+  /**
+   * Optional prefix for generated CSS identifiers.
+   * This can be used to ensure unique class names across different applications
+   * or to add organization-specific prefixes.
+   */
+  prefix?: string;
   experiments?: {
     debug?:
       | boolean
@@ -32,7 +38,11 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   nextConfig.experimental.swcPlugins ||= [];
   nextConfig.experimental.swcPlugins.push([
     resolve("yak-swc"),
-    { devMode: process.env.NODE_ENV !== "production", basePath: currentDir },
+    {
+      devMode: process.env.NODE_ENV !== "production",
+      basePath: currentDir,
+      prefix: yakOptions.prefix,
+    },
   ]);
 
   nextConfig.webpack = (webpackConfig, options) => {
@@ -104,7 +114,9 @@ function resolveYakContext(contextPath: string | undefined, cwd: string) {
  *   // your next config here
  * };
  * const yakConfig = {
- *   // your yak config
+ *   // Optional prefix for generated CSS identifiers
+ *   prefix: "my-app",
+ *   // Other yak config options...
  * };
  * module.exports = withYak(yakConfig, nextConfig);
  * ```
