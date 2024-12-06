@@ -1,4 +1,3 @@
-use std::fmt::format;
 
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
