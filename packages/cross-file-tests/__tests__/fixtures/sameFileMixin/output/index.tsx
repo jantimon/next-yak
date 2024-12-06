@@ -1,4 +1,4 @@
-import { styled, css } from "next-yak/internal";
+import { css, __yak_button } from "next-yak/internal";
 import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
 var buttonTextMixin = /*#__PURE__*/ css(function(param) {
     var $disabled = param.$disabled;
@@ -17,7 +17,7 @@ var Button = /*YAK Extracted CSS:
 .Button__$disabled-01 {
   color: gray;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button, function(param) {
+*/ /*#__PURE__*/ __yak_button(__styleYak.Button, function(param) {
     var $disabled = param.$disabled;
     return $disabled && /*#__PURE__*/ css(__styleYak.Button__$disabled);
 }, function(param) {
