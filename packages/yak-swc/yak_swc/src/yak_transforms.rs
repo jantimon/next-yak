@@ -1,3 +1,5 @@
+use std::fmt::format;
+
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
 use swc_core::atoms::atom;
@@ -302,10 +304,10 @@ impl TransformStyled {
           // styled.element``usages
           if let MemberProp::Ident(member_ident) = member.prop {
             let member_name = member_ident.sym.as_str();
-            if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
+            return if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
               Box::new(Expr::Ident(ident))
             } else {
-              // Transform unknown elements to styled("element-name")
+              // Transform elements without yakcomponent import to styled("element-name")
               Box::new(Expr::Call(CallExpr {
                 span: member.span,
                 ctxt: SyntaxContext::empty(),
