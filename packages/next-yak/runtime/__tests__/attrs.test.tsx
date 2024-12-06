@@ -91,9 +91,11 @@ it("should not call a function passed to attrs as an object value", () => {
 });
 
 it("defaultProps are merged into what function attrs receives", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<DataAttributes>((props) => ({
-    "data-color": props.color,
-  }))``;
+  const Comp = (styled("button") as typeof styled.button).attrs<DataAttributes>(
+    (props) => ({
+      "data-color": props.color,
+    }),
+  )``;
 
   Comp.defaultProps = {
     color: "red",
@@ -110,7 +112,9 @@ it("defaultProps are merged into what function attrs receives", () => {
 });
 
 it("pass props to the attr function", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<{ $submit?: boolean }>((p) => ({
+  const Comp = (styled("button") as typeof styled.button).attrs<{
+    $submit?: boolean;
+  }>((p) => ({
     type: p.$submit ? "submit" : "button",
   }))``;
 
@@ -131,7 +135,9 @@ it("pass props to the attr function", () => {
 });
 
 it("should replace props with attrs", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<{ $submit?: boolean }>((p) => ({
+  const Comp = (styled("button") as typeof styled.button).attrs<{
+    $submit?: boolean;
+  }>((p) => ({
     type: p.$submit ? "submit" : "button",
     tabIndex: 0,
   }))``;
@@ -175,7 +181,9 @@ it("should merge className", () => {
 });
 
 it("should merge className from folded attrs", () => {
-  const Inner = (styled("div") as typeof styled.div).attrs({ className: "foo" })``;
+  const Inner = (styled("div") as typeof styled.div).attrs({
+    className: "foo",
+  })``;
 
   const Comp = styled(Inner).attrs(() => ({
     className: "meow nya",
@@ -191,9 +199,11 @@ it("should merge className from folded attrs", () => {
 });
 
 it("should merge className even if its a function", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs<{ $purr?: boolean }>((p) => ({
-    className: `meow ${p.$purr ? "purr" : "nya"}`,
-  }))``;
+  const Comp = (styled("div") as typeof styled.div).attrs<{ $purr?: boolean }>(
+    (p) => ({
+      className: `meow ${p.$purr ? "purr" : "nya"}`,
+    }),
+  )``;
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
@@ -232,10 +242,12 @@ it("should merge style", () => {
 });
 
 it("should work with data and aria attributes", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs<DataAttributes>(() => ({
-    "data-foo": "bar",
-    "aria-label": "A simple FooBar",
-  }))``;
+  const Comp = (styled("div") as typeof styled.div).attrs<DataAttributes>(
+    () => ({
+      "data-foo": "bar",
+      "aria-label": "A simple FooBar",
+    }),
+  )``;
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <div
       aria-label="A simple FooBar"
@@ -347,7 +359,9 @@ it("should override children", () => {
 });
 
 it('should shallow merge "style" prop + attr instead of overwriting', () => {
-  const Paragraph = (styled("p") as typeof styled.p).attrs<{ $fontScale?: number }>((p) => ({
+  const Paragraph = (styled("p") as typeof styled.p).attrs<{
+    $fontScale?: number;
+  }>((p) => ({
     style: {
       ...p.style,
       fontSize: `${p.$fontScale}em`,
@@ -407,7 +421,9 @@ it("does not pass transient props to HTML element", () => {
 });
 
 it.skip('should apply given "as" prop to the progressive type', () => {
-  const Comp = (styled("div") as typeof styled.div).attrs<{ as?: any }>({ as: "video" as const })``;
+  const Comp = (styled("div") as typeof styled.div).attrs<{ as?: any }>({
+    as: "video" as const,
+  })``;
 
   //@ts-expect-error
   expect(TestRenderer.create(<Comp loop />).toJSON()).toMatchInlineSnapshot(`
@@ -421,12 +437,13 @@ it.skip('should apply given "as" prop to the progressive type', () => {
 
 // our own tests
 it("should remap props", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<{ primary?: boolean; $submit?: boolean }>(
-    (p) => ({
-      type: p.$submit ? "submit" : "button",
-      $primary: p.primary,
-    }),
-  )<{ $primary?: boolean }>``;
+  const Comp = (styled("button") as typeof styled.button).attrs<{
+    primary?: boolean;
+    $submit?: boolean;
+  }>((p) => ({
+    type: p.$submit ? "submit" : "button",
+    $primary: p.primary,
+  }))<{ $primary?: boolean }>``;
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <button
@@ -451,9 +468,11 @@ it("should remap props", () => {
 });
 
 it("should have optional attrs props as component interface", () => {
-  const Comp = (styled("h1") as typeof styled.h1).attrs<{ $primary?: boolean }>({
-    $primary: true,
-  })``;
+  const Comp = (styled("h1") as typeof styled.h1).attrs<{ $primary?: boolean }>(
+    {
+      $primary: true,
+    },
+  )``;
 
   expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
     <h1
@@ -516,7 +535,9 @@ it("should pass theme if theme is overwritten", () => {
 
 describe("attrs bug next-yak/issues/163", () => {
   it("should allow to delete a prop", () => {
-    const Comp = (styled("h1") as typeof styled.h1).attrs<{ primary?: boolean }>({
+    const Comp = (styled("h1") as typeof styled.h1).attrs<{
+      primary?: boolean;
+    }>({
       primary: undefined,
     })``;
 
@@ -529,7 +550,9 @@ describe("attrs bug next-yak/issues/163", () => {
   });
 
   it("should allow to rename a prop", () => {
-    const Comp = (styled("h1") as typeof styled.h1).attrs<{ primary?: boolean }>((p) => ({
+    const Comp = (styled("h1") as typeof styled.h1).attrs<{
+      primary?: boolean;
+    }>((p) => ({
       ...p,
       primary: undefined,
       $primary: p.primary,
@@ -544,12 +567,14 @@ describe("attrs bug next-yak/issues/163", () => {
   });
 
   it("should allow to rename a prop in overwritten attrs", () => {
-    const Parent = (styled("h1") as typeof styled.h1).attrs<{ count: number }>((p) => {
-      expect(p.count).toBe(1);
-      return {
-        count: ++p.count,
-      };
-    })``;
+    const Parent = (styled("h1") as typeof styled.h1).attrs<{ count: number }>(
+      (p) => {
+        expect(p.count).toBe(1);
+        return {
+          count: ++p.count,
+        };
+      },
+    )``;
     const Comp = styled(Parent).attrs<{ count: number }>((p) => {
       expect(p.count).toBe(2);
       return {

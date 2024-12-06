@@ -95,9 +95,11 @@ it("should filter out properties starting with $ when passing to custom", () => 
 });
 
 it("should forward properties to the next yak component", () => {
-  const Component = (styled("input") as typeof styled.input).attrs(({ $text }) => ({
-    "aria-label": $text,
-  }))``;
+  const Component = (styled("input") as typeof styled.input).attrs(
+    ({ $text }) => ({
+      "aria-label": $text,
+    }),
+  )``;
   const StyledComponent = styled(Component)``;
   const { container } = render(<StyledComponent $text="hello world" />);
 
@@ -139,7 +141,9 @@ it("should concatenate styles", () => {
 });
 
 it("should not add class if prop is not set", () => {
-  const Component = (styled("input") as typeof styled.input)(({ testProp }) => testProp && css("test"));
+  const Component = (styled("input") as typeof styled.input)(
+    ({ testProp }) => testProp && css("test"),
+  );
 
   const { container } = render(<Component />);
 
@@ -151,7 +155,9 @@ it("should not add class if prop is not set", () => {
 });
 
 it("should add class if prop is set", () => {
-  const Component = (styled("input") as typeof styled.input)(({ $testProp }) => $testProp && css("test"));
+  const Component = (styled("input") as typeof styled.input)(
+    ({ $testProp }) => $testProp && css("test"),
+  );
 
   const { container } = render(<Component $testProp />);
 
@@ -165,7 +171,9 @@ it("should add class if prop is set", () => {
 });
 
 it("should allow falsy values", () => {
-  const Component = (styled("input") as typeof styled.input)(({ $testProp }) => $testProp && css("test"));
+  const Component = (styled("input") as typeof styled.input)(
+    ({ $testProp }) => $testProp && css("test"),
+  );
 
   const { container } = render(
     <>
@@ -185,7 +193,9 @@ it("should allow falsy values", () => {
 });
 
 it("should execute runtime styles recursively", () => {
-  const Component = (styled("input") as typeof styled.input)<{ $testProp: boolean }>(
+  const Component = (styled("input") as typeof styled.input)<{
+    $testProp: boolean;
+  }>(
     ({ $testProp }) =>
       $testProp &&
       css(
@@ -279,7 +289,9 @@ it("should keep theme if theme is passed to element", () => {
 });
 
 it("should remove theme on wrapped element", () => {
-  const BaseComponent = (styled("input") as typeof styled.input)((p) => p && css("test"));
+  const BaseComponent = (styled("input") as typeof styled.input)(
+    (p) => p && css("test"),
+  );
   const Component = styled(BaseComponent)((p) => p && css("test-wrapper"));
 
   const { container } = render(
