@@ -8,6 +8,8 @@ use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_
 use crate::utils::encode_module_import::encode_percent;
 use crate::utils::native_elements::VALID_ELEMENTS;
 use crate::variable_visitor::ScopedVariableReference;
+use crate::yak_imports;
+use crate::yak_imports::YakImports;
 use css_in_js_parser::{CssScope, Declaration, ParserState, ScopeType};
 use swc_core::common::{Span, SyntaxContext, DUMMY_SP};
 use swc_core::ecma::ast::*;
@@ -27,7 +29,6 @@ pub struct YakCss {
 pub struct YakTransformResult {
   pub expression: Box<Expr>,
   pub css: YakCss,
-  pub import: Option<Id>,
 }
 
 pub trait YakTransform {
@@ -49,6 +50,7 @@ pub trait YakTransform {
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
+    yak_imports: &mut YakImports,
   ) -> YakTransformResult;
   /// Get animation or styled component selector name
   fn get_css_reference_name(&self) -> Option<String> {
@@ -105,6 +107,7 @@ impl YakTransform for TransformNestedCss {
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
+    _yak_imports: &mut YakImports,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -132,7 +135,6 @@ impl YakTransform for TransformNestedCss {
         comment_prefix: None,
         declarations: declarations.to_vec(),
       },
-      import: None,
       expression: (Box::new(Expr::Call(CallExpr {
         // Use a sepcial span as this expression might be cloned as part
         // of a parent expression and therefore needs a unique span to
@@ -193,6 +195,7 @@ impl YakTransform for TransformCssMixin {
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
+    _yak_imports: &mut YakImports,
   ) -> YakTransformResult {
     let has_dynamic_content = !runtime_expressions.is_empty() || !runtime_css_variables.is_empty();
 
@@ -260,7 +263,6 @@ impl YakTransform for TransformCssMixin {
           declaration
         }),
       },
-      import: None,
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         ctxt: SyntaxContext::empty(),
@@ -291,7 +293,7 @@ impl TransformStyled {
     TransformStyled { class_name: None }
   }
 
-  fn transform_styled_usages(&self, expression: Box<Expr>) -> (Box<Expr>, Option<Id>) {
+  fn transform_styled_usages(&self, expression: Box<Expr>, yak_imports: &mut YakImports) -> Box<Expr> {
     match *expression.clone() {
       Expr::Member(member) => {
         if let Expr::Ident(ident) = *member.obj {
@@ -299,32 +301,24 @@ impl TransformStyled {
           if let MemberProp::Ident(member_ident) = member.prop {
             let member_name = member_ident.sym.as_str();
             return if VALID_ELEMENTS.contains(member_name) {
-              let mut new_ident = ident.clone();
-              new_ident.sym = Atom::new(format!("__yak_{member_name}"));
-              (
-                Box::new(Expr::Ident(new_ident.clone())),
-                Some(new_ident.to_id()),
-              )
+              Box::new(Expr::Ident(yak_imports.get_yak_component_import(member_name)))
             } else {
               // Transform unknown elements to styled("element-name")
-              (
-                Box::new(Expr::Call(CallExpr {
-                  span: member.span,
-                  ctxt: SyntaxContext::empty(),
-                  callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
-                  args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(Str {
-                    span: DUMMY_SP,
-                    value: Atom::new(member_name),
-                    raw: None,
-                  }))))],
-                  type_args: None,
-                })),
-                None,
-              )
+              Box::new(Expr::Call(CallExpr {
+                span: member.span,
+                ctxt: SyntaxContext::empty(),
+                callee: Callee::Expr(Box::new(Expr::Ident(ident.clone()))),
+                args: vec![ExprOrSpread::from(Box::new(Expr::Lit(Lit::Str(Str {
+                  span: DUMMY_SP,
+                  value: Atom::new(member_name),
+                  raw: None,
+                }))))],
+                type_args: None,
+              }))
             };
           }
         }
-        (expression, None)
+        expression
       }
       Expr::Call(CallExpr {
         callee: Callee::Expr(callee),
@@ -333,7 +327,7 @@ impl TransformStyled {
       }) => {
         // styled(Component)
         if let Expr::Ident(_) = *callee.clone() {
-          return (expression, None);
+          return expression;
         }
 
         // styled.button.attrs({}) is a call expression and should be tranformed
@@ -371,8 +365,7 @@ impl TransformStyled {
             if VALID_ELEMENTS.contains(member_name) {
               let mut new_ident = styled_ident.clone();
                 new_ident.sym = Atom::new(format!("__yak_{member_name}"));
-                return (
-                  Box::new(Expr::Call(CallExpr {
+                return Box::new(Expr::Call(CallExpr {
                     span: styled_ident.span,
                     ctxt: SyntaxContext::empty(),
                     callee: Callee::Expr(Box::new(Expr::Member(
@@ -384,15 +377,13 @@ impl TransformStyled {
                     ))),
                     args,
                     type_args: None,
-                  })),
-                  Some(new_ident.to_id())
-                )
+                  }))
           }
           }
         }
-        (expression, None)
+        expression
       }
-      _ => (expression, None),
+      _ => expression,
     }
   }
 }
@@ -421,6 +412,7 @@ impl YakTransform for TransformStyled {
     runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
+    yak_imports: &mut YakImports,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -443,13 +435,12 @@ impl YakTransform for TransformStyled {
         .into(),
       );
     }
-    let (tag_expression, ident) = self.transform_styled_usages(expression.tag.clone());
+    let tag_expression = self.transform_styled_usages(expression.tag.clone(), yak_imports);
     YakTransformResult {
       css: YakCss {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
-      import: ident,
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         ctxt: SyntaxContext::empty(),
@@ -510,6 +501,7 @@ impl YakTransform for TransformKeyframes {
     _runtime_expressions: Vec<Expr>,
     declarations: &[Declaration],
     runtime_css_variables: FxHashMap<String, Expr>,
+    _yak_imports: &mut YakImports,
   ) -> YakTransformResult {
     let mut arguments: Vec<ExprOrSpread> = vec![];
     if !declarations.is_empty() {
@@ -536,7 +528,6 @@ impl YakTransform for TransformKeyframes {
         comment_prefix: Some("YAK Extracted CSS:".to_string()),
         declarations: declarations.to_vec(),
       },
-      import: None,
       expression: (Box::new(Expr::Call(CallExpr {
         span: expression.span,
         ctxt: SyntaxContext::empty(),

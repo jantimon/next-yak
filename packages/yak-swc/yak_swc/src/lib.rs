@@ -529,36 +529,11 @@ where
       for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-            if !self.yak_transformed_library_imports.is_empty() {
-              // yak styled import got transformed into specific components
-              //Add all transformed imports
-              import_declaration.specifiers.extend(
-                self
-                  .yak_transformed_library_imports
-                  .iter()
-                  .map(|(sym, ctxt)| {
-                    ImportSpecifier::Named(ImportNamedSpecifier {
-                      span: DUMMY_SP,
-                      local: Ident {
-                        span: DUMMY_SP,
-                        ctxt: *ctxt,
-                        sym: sym.clone(),
-                        optional: false,
-                      },
-                      imported: None,
-                      is_type_only: false,
-                    })
-                  }),
-              );
-            }
-
-            // Add utility functions
+            // Add all stored imports
             import_declaration.specifiers.extend(
               self
-                .yak_library_imports
-                .as_ref()
-                .unwrap()
-                .get_yak_utility_import_declaration(),
+                .yak_imports()
+                .get_yak_import_declarations()
             );
 
             break;
@@ -866,11 +841,8 @@ where
       runtime_expressions,
       &self.current_declaration,
       runtime_css_variables,
+      self.yak_library_imports.as_mut().unwrap()
     );
-    if let Some(id) = transform_result.import {
-      dbg!(format!("💩💩💩💩💩💩💩 Adding to import {id:?}"));
-      self.yak_transformed_library_imports.insert(id);
-    }
 
     if is_top_level {
       self.current_declaration = vec![];

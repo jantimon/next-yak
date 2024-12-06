@@ -7,6 +7,8 @@ use swc_core::{
   ecma::{ast::*, visit::VisitMut},
 };
 
+use crate::utils::native_elements::VALID_ELEMENTS;
+
 #[derive(Debug)]
 
 pub struct YakImports {
@@ -16,6 +18,9 @@ pub struct YakImports {
   /// Imports from "next-yak"
   /// Local to Imported mapping
   yak_library_imports: FxHashMap<Id, Id>,
+  /// Direct component imports from "next-yak/internal"
+  /// e.g. __yak_button
+  yak_component_imports: FxHashMap<String, Ident>,
   /// Local Identifiers for the next-yak css function \
   /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
   /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
@@ -67,6 +72,7 @@ impl YakImports {
   ) -> Self {
     Self {
       yak_utilities: FxHashMap::default(),
+      yak_component_imports: FxHashMap::default(),
       yak_library_imports,
       yak_css_idents,
       yak_keyframes_idents,
@@ -138,8 +144,24 @@ impl YakImports {
     }
   }
 
+  /// Returns the ident for the given component
+  /// e.g. __yak_button for button
+  pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Ident {
+    if !VALID_ELEMENTS.contains(name.as_ref()) {
+      panic!("Valid yak element not found: {}", name.as_ref());
+    }
+    if let Some(id) = self.yak_component_imports.get(name.as_ref()) {
+      id.clone()
+    } else {
+      let prefixed_name = format!("__yak_{}", name.as_ref());
+      let ident = Ident::from(prefixed_name);
+      self.yak_component_imports.insert(name.as_ref().into(), ident.clone());
+      ident
+    }
+  }
+
   /// Get the import declaration specifiers for all used utility functions
-  pub fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
+  fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
     self
       .yak_utilities
       .values()
@@ -152,6 +174,27 @@ impl YakImports {
         })
       })
       .collect()
+  }
+  /// Get the import declaration specifiers for all used utility functions
+  fn get_yak_component_import_declarations(&self) -> Vec<ImportSpecifier> {
+    self
+      .yak_component_imports
+      .values()
+      .map(|imported| {
+        ImportSpecifier::Named(ImportNamedSpecifier {
+          span: DUMMY_SP,
+          local: imported.clone(),
+          imported: None,
+          is_type_only: false,
+        })
+      })
+      .collect()
+  }
+
+  pub fn get_yak_import_declarations(&self) -> Vec<ImportSpecifier> {
+    let mut imports = self.get_yak_utility_import_declaration();
+    imports.append(&mut self.get_yak_component_import_declarations());
+    imports
   }
 }
 
