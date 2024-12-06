@@ -1,9 +1,12 @@
 
+use std::fmt::format;
+
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
 use swc_core::atoms::atom;
 use swc_core::atoms::Atom;
 use swc_core::common::util::move_map::MoveMap;
+use swc_core::common::Spanned;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use crate::utils::encode_module_import::encode_percent;
@@ -326,60 +329,33 @@ impl TransformStyled {
       Expr::Call(CallExpr {
         callee: Callee::Expr(callee),
         args,
-        ..
+        type_args,
+        ctxt,
+        span
       }) => {
-        // styled(Component)
+        // e.g. styled(Component)
         if let Expr::Ident(_) = *callee.clone() {
           return expression;
         }
 
-        // styled.button.attrs({}) is a call expression and should be tranformed
-        // to __yak_button.attrs
-        let mut expr: Box<Expr> = callee.clone();
-        let mut counter = 1;
-        let mut ident: Option<(Ident, MemberProp)> = None;
-        let mut outermost: Option<MemberProp> = None;
-        while let Expr::Member(ref member) = *expr {
-          if outermost.is_none() {
-            outermost = Some(member.clone().prop);
-          }
-          counter += 1;
-          match *member.clone().obj {
-            Expr::Ident(current_ident) => {
-              if current_ident.sym == atom!("styled") {
-                ident = Some((current_ident, member.clone().prop));
-                break;
-              }
-            }
-            Expr::Member(inner_member) => {
-              expr = Box::new(Expr::Member(inner_member));
-            }
-            _ => {
-              panic!("Unepected expression");
-            }
-          }
-          if counter == 10 {
-            break;
-          }
+        // e.g. styled.button.function(args) => __yak_button.function(args)
+        if let Expr::Member(ref member) = *callee.clone() {
+          let call_name = member.clone().prop;
+          let rest_identifier = self.transform_styled_usages(member.obj.clone(), yak_imports);
+
+          return Box::new(Expr::Call(CallExpr {
+            span,
+            ctxt,
+            callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
+              prop: call_name,
+              span: DUMMY_SP,
+              obj: rest_identifier,
+            }))),
+            args,
+            type_args,
+          }))
         }
-        if let Some((styled_ident, MemberProp::Ident(member_ident))) = ident {
-          if let Some(prop) = outermost {
-            let member_name = member_ident.sym.as_str();
-            if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
-              return Box::new(Expr::Call(CallExpr {
-                span: styled_ident.span,
-                ctxt: SyntaxContext::empty(),
-                callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
-                  prop,
-                  span: DUMMY_SP,
-                  obj: Box::new(Expr::Ident(ident)),
-                }))),
-                args,
-                type_args: None,
-              }));
-            }
-          }
-        }
+        // Anything else is left untransformed
         expression
       }
       _ => expression,
