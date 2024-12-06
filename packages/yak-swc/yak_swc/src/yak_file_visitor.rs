@@ -39,7 +39,7 @@ impl YakFileVisitor {
     self
       .yak_imports
       .as_ref()
-      .expect("If this is reached the imports should've been parsed already.")
+      .expect("Internal error: yak_library_imports is None - this should be impossible as imports are parsed in the initial program visit before any other processing")
   }
 }
 

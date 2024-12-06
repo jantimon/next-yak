@@ -8,8 +8,7 @@ use swc_core::{
 };
 
 #[derive(Debug)]
-/// Visitor implementation to gather all names imported from "next-yak"
-/// Side effect: converts the import source from "next-yak" to "next-yak/internal"
+
 pub struct YakImports {
   /// Utilities used from "next-yak/internal"
   /// e.g. unitPostFix, mergeCssProp
@@ -27,12 +26,21 @@ pub struct YakImports {
   yak_keyframes_idents: FxHashSet<Id>,
 }
 
-pub fn visit_program_imports(program: &mut Program) -> YakImports {
-  let mut yak_import_visitor = YakImportVisitor::new();
-  program.visit_mut_children_with(&mut yak_import_visitor);
-  yak_import_visitor.into()
-}
-
+/// Scans a JavaScript/TypeScript module for yak library usage and collects import information.
+///
+/// This function analyzes the entire module AST to:
+/// - Detect imports from the "next-yak" library
+/// - Track CSS-in-JS template literal identifiers
+/// - Monitor renamed imports and utility functions
+/// - Convert "next-yak" imports to "next-yak/internal"
+///
+/// # Returns
+///
+/// Returns a `YakImports` struct containing:
+/// - Mapped imports from next-yak
+/// - CSS function identifiers 
+/// - Keyframe function identifiers
+/// - Utility function references
 pub fn visit_module_imports(module: &mut Module) -> YakImports {
   let mut yak_import_visitor = YakImportVisitor::new();
   module.visit_mut_children_with(&mut yak_import_visitor);

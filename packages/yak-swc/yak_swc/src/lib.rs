@@ -23,7 +23,7 @@ use utils::encode_module_import::{encode_module_import, ImportKind};
 mod variable_visitor;
 use variable_visitor::{ScopedVariableReference, VariableVisitor};
 mod yak_imports;
-use yak_imports::{visit_program_imports, YakImports};
+use yak_imports::{visit_module_imports, YakImports};
 mod yak_file_visitor;
 use yak_file_visitor::YakFileVisitor;
 mod math_evaluate;
@@ -491,7 +491,11 @@ where
   GenericComments: Comments,
 {
   fn visit_mut_program(&mut self, program: &mut Program) {
-    self.yak_library_imports = Some(visit_program_imports(program));
+    if let Program::Module(module) = program {
+      self.yak_library_imports = Some(visit_module_imports(module));
+    } else {
+      return;
+    }
 
     // Skip this program only if yak is not used at all
     if !self.yak_imports().is_using_next_yak() {
