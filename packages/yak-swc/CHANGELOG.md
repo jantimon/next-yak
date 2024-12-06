@@ -1,5 +1,15 @@
 # yak-swc
 
+## 3.1.0
+
+### Minor Changes
+
+- fcba925: allow to define a prefix for generated css names like variables
+
+### Patch Changes
+
+- 3d6e505: fix a parsing bug for unquoted urls inside url()
+
 ## 3.0.1
 
 ### Patch Changes

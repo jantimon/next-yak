@@ -321,3 +321,41 @@ it("should not remove theme if theme is passed to wrapped element", () => {
     </div>
   `);
 });
+
+describe("dev mode - error tests", () => {
+  const originalNodeEnv = process.env.NODE_ENV;
+  const originalError = console.error;
+
+  beforeEach(() => {
+    // errors are only thrown in development mode
+    process.env.NODE_ENV = "development";
+    // prevent console.error from printing the error a second time
+    console.error = () => {};
+  });
+
+  afterEach(() => {
+    process.env.NODE_ENV = originalNodeEnv;
+    console.error = originalError;
+  });
+
+  it("should show the function body in error message when dynamic css function returns invalid value", () => {
+    const Component = styled.div("cssClass", {
+      style: {
+        "--bar": ({ $groupColor }) => $groupColor,
+      },
+    });
+
+    let error = null;
+    try {
+      render(<Component />);
+    } catch (e) {
+      error = e;
+    }
+    expect(error).toMatchInlineSnapshot(`
+      [Error: Dynamic CSS functions must return a string or number but returned undefined
+
+      Dynamic CSS function: ({ $groupColor }) => $groupColor
+      ]
+    `);
+  });
+});
