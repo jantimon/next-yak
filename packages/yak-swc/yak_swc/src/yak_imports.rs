@@ -1,4 +1,3 @@
-use lazy_static::lazy_static;
 use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
 use swc_core::ecma::visit::Fold;
@@ -48,13 +47,7 @@ pub fn visit_module_imports(module: &mut Module) -> YakImports {
   yak_import_visitor.into()
 }
 
-lazy_static! {
-  pub static ref UTILITIES: FxHashSet<String> = FxHashSet::from_iter(
-    vec!["unitPostFix", "mergeCssProp"]
-      .into_iter()
-      .map(|s| s.to_string())
-  );
-}
+const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
 
 impl From<YakImportVisitor> for YakImports {
   fn from(value: YakImportVisitor) -> Self {
@@ -132,7 +125,7 @@ impl YakImports {
 
   /// Returns the utility function identifier
   pub fn get_yak_utility_ident(&mut self, name: impl AsRef<str>) -> Ident {
-    if !UTILITIES.contains(name.as_ref()) {
+    if !UTILITIES.contains(&name.as_ref()) {
       panic!("Utility function not found: {}", name.as_ref());
     }
     if let Some(ident) = self.yak_utilities.get(name.as_ref()) {
