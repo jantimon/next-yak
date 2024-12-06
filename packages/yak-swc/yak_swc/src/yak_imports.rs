@@ -1,3 +1,4 @@
+use lazy_static::lazy_static;
 use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
 use swc_core::ecma::visit::Fold;
@@ -47,7 +48,13 @@ pub fn visit_module_imports(module: &mut Module) -> YakImports {
   yak_import_visitor.into()
 }
 
-const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
+lazy_static! {
+  pub static ref UTILITIES: FxHashSet<String> = FxHashSet::from_iter(
+    vec!["unitPostFix", "mergeCssProp"]
+      .into_iter()
+      .map(|s| s.to_string())
+  );
+}
 
 impl From<YakImportVisitor> for YakImports {
   fn from(value: YakImportVisitor) -> Self {
@@ -124,14 +131,14 @@ impl YakImports {
   }
 
   /// Returns the utility function identifier
-  pub fn get_yak_utility_ident(&mut self, name: String) -> Ident {
-    if !UTILITIES.contains(&name.as_str()) {
-      panic!("Utility function not found: {}", name);
+  pub fn get_yak_utility_ident(&mut self, name: impl AsRef<str>) -> Ident {
+    if !UTILITIES.contains(name.as_ref()) {
+      panic!("Utility function not found: {}", name.as_ref());
     }
-    if let Some(ident) = self.yak_utilities.get(&name) {
+    if let Some(ident) = self.yak_utilities.get(name.as_ref()) {
       ident.clone()
     } else {
-      let prefixed_name = format!("__yak_{}", name);
+      let prefixed_name = format!("__yak_{}", name.as_ref());
       let ident = Ident::from(prefixed_name.clone());
       self.yak_utilities.insert(prefixed_name, ident.clone());
       ident
@@ -361,9 +368,9 @@ mod tests {
   fn test_yak_import_visitor_utility_ident() {
     let visitor = YakImportVisitor::new();
     let mut imports: YakImports = visitor.into();
-    let ident = imports.get_yak_utility_ident("unitPostFix".to_string());
+    let ident = imports.get_yak_utility_ident("unitPostFix");
     assert_eq!(ident.sym, "__yak_unitPostFix");
-    let ident = imports.get_yak_utility_ident("mergeCssProp".to_string());
+    let ident = imports.get_yak_utility_ident("mergeCssProp");
     assert_eq!(ident.sym, "__yak_mergeCssProp");
   }
 }

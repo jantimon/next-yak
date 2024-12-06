@@ -452,7 +452,7 @@ ${{() => {var}}};\n",
                   .yak_library_imports
                   .as_mut()
                   .unwrap()
-                  .get_yak_utility_ident("unitPostFix".to_string()),
+                  .get_yak_utility_ident("unitPostFix"),
                 unit.to_string(),
               )
             } else {
@@ -662,7 +662,7 @@ where
           .yak_library_imports
           .as_mut()
           .unwrap()
-          .get_yak_utility_ident("mergeCssProp".into()),
+          .get_yak_utility_ident("mergeCssProp"),
       );
     }
   }
