@@ -38,10 +38,10 @@ const addYak = (yakOptions: YakConfigOptions, nextConfig: NextConfig) => {
   nextConfig.experimental.swcPlugins ||= [];
   nextConfig.experimental.swcPlugins.push([
     resolve("yak-swc"),
-    { 
-      devMode: process.env.NODE_ENV !== "production", 
+    {
+      devMode: process.env.NODE_ENV !== "production",
       basePath: currentDir,
-      prefix: yakOptions.prefix 
+      prefix: yakOptions.prefix,
     },
   ]);
 
