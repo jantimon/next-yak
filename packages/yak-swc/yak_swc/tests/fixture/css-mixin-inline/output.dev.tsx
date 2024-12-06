@@ -1,14 +1,16 @@
 import { styled, css } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const ThemedButton = /*YAK Extracted CSS:
-.ThemedButton {
+// cssmodules-pure-ignore
+:global(.ThemedButton_m7uBBu) {
   &:hover {
     color: black;
   }
 }
-.ThemedButton__$active {
+// cssmodules-pure-ignore
+:global(.ThemedButton__$active_m7uBBu) {
   &:hover {
     color: red;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.ThemedButton__$active));
+*/ /*#__PURE__*/ styled.button("ThemedButton_m7uBBu", ({ $active })=>$active && /*#__PURE__*/ css("ThemedButton__$active_m7uBBu"));

@@ -1,7 +1,8 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const ArticleCard = /*YAK Extracted CSS:
-.ArticleCard {
+// cssmodules-pure-ignore
+:global(.ArticleCard_m7uBBu) {
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
@@ -52,4 +53,4 @@ export const ArticleCard = /*YAK Extracted CSS:
     }
   }
 }
-*/ /*#__PURE__*/ styled.article(__styleYak.ArticleCard);
+*/ /*#__PURE__*/ styled.article("ArticleCard_m7uBBu");

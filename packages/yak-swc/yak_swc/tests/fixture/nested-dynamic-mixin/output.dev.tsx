@@ -1,24 +1,28 @@
 import { styled, css, __yak_unitPostFix } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 // example taken from https://github.com/jantimon/next-yak/issues/208 
 const spacing = "20px";
 const ContainerFluid = /*YAK Extracted CSS:
-.ContainerFluid {
+// cssmodules-pure-ignore
+:global(.ContainerFluid_m7uBBu) {
   position: relative;
   margin: 0 auto;
   padding-top: 20px;
   max-width: 100%;
 }
-.ContainerFluid__$isApp {
+// cssmodules-pure-ignore
+:global(.ContainerFluid__$isApp_m7uBBu) {
   margin-top: unset;
 }
-.ContainerFluid__not_$isApp {
+// cssmodules-pure-ignore
+:global(.ContainerFluid__not_$isApp_m7uBBu) {
   margin-top: px;
 }
-.ContainerFluid {
+// cssmodules-pure-ignore
+:global(.ContainerFluid_m7uBBu) {
   margin-top: var(--ContainerFluid__margin-top_m7uBBu);
 }
-*/ /*#__PURE__*/ styled.div(__styleYak.ContainerFluid, ({ $isApp, $pageHeaderHeight })=>$isApp ? /*#__PURE__*/ css(__styleYak.ContainerFluid__$isApp) : /*#__PURE__*/ css(__styleYak.ContainerFluid__not_$isApp), {
+*/ /*#__PURE__*/ styled.div("ContainerFluid_m7uBBu", ({ $isApp, $pageHeaderHeight })=>$isApp ? /*#__PURE__*/ css("ContainerFluid__$isApp_m7uBBu") : /*#__PURE__*/ css("ContainerFluid__not_$isApp_m7uBBu"), {
     "style": {
         "--ContainerFluid__margin-top_m7uBBu": __yak_unitPostFix(({ $pageHeaderHeight })=>$pageHeaderHeight, "px")
     }

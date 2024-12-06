@@ -1,8 +1,9 @@
 import { styled } from "next-yak/internal";
 import { AnyIcon, Icon } from "./icon";
-import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
+import "./index.yak.module.css!=!./index?./index.yak.module.css";
 export var Button = /*YAK Extracted CSS:
-.Button {
+// cssmodules-pure-ignore
+:global(.Button_JKqlji) {
   --yak-css-import: url("./icon:Icon",selector) {
     margin-right: 10px;
   }
@@ -10,4 +11,4 @@ export var Button = /*YAK Extracted CSS:
     margin-right: 15px;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button);
+*/ /*#__PURE__*/ styled.button("Button_JKqlji");
