@@ -349,7 +349,7 @@ impl TransformStyled {
               if current_ident.sym == atom!("styled") {
                 ident = Some((current_ident, member.clone().prop));
                 break;
-              } 
+              }
             }
             Expr::Member(inner_member) => {
               expr = Box::new(Expr::Member(inner_member));
@@ -365,16 +365,14 @@ impl TransformStyled {
         if let Some((styled_ident, MemberProp::Ident(member_ident))) = ident {
           if let Some(prop) = outermost {
             let member_name = member_ident.sym.as_str();
-            if VALID_ELEMENTS.contains(member_name) {
-              let mut new_ident = styled_ident.clone();
-              new_ident.sym = Atom::new(format!("__yak_{member_name}"));
+            if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
               return Box::new(Expr::Call(CallExpr {
                 span: styled_ident.span,
                 ctxt: SyntaxContext::empty(),
                 callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
                   prop,
                   span: DUMMY_SP,
-                  obj: Box::new(Expr::Ident(new_ident.clone())),
+                  obj: Box::new(Expr::Ident(ident)),
                 }))),
                 args,
                 type_args: None,
