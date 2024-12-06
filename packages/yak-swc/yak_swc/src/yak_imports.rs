@@ -242,7 +242,7 @@ mod tests {
       code,
     );
     let imports: YakImports = visitor.into();
-    assert_eq!(imports.is_using_next_yak(), false);
+    assert!(!imports.is_using_next_yak());
   }
 
   #[test]
@@ -272,7 +272,7 @@ mod tests {
     "#,
     );
     let imports: YakImports = visitor.into();
-    assert_eq!(imports.is_using_next_yak(), true);
+    assert!(imports.is_using_next_yak());
   }
 
   #[test]

@@ -3,23 +3,23 @@ use regex::Regex;
 
 fn main() {
   // These are a quick and dirty replacement for tests just to be sure
-  assert_eq!(true, ends_with_impl("file.yak.ts"));
-  assert_eq!(false, ends_with_impl("file.yak"));
-  assert_eq!(false, ends_with_impl("file.yak.tsx.nope"));
+  assert!(ends_with_impl("file.yak.ts"));
+  assert!(!ends_with_impl("file.yak"));
+  assert!(!ends_with_impl("file.yak.tsx.nope"));
 
-  assert_eq!(true, regex_impl("file.yak.ts"));
-  assert_eq!(false, regex_impl("file.yak"));
-  assert_eq!(false, regex_impl("file.yak.tsx.nope"));
+  assert!(regex_impl("file.yak.ts"));
+  assert!(!regex_impl("file.yak"));
+  assert!(!regex_impl("file.yak.tsx.nope"));
 
-  assert_eq!(true, last_chars_impl("file.yak.ts"));
-  assert_eq!(false, last_chars_impl("file.yak"));
-  assert_eq!(false, last_chars_impl("file.yak.tsx.nope"));
-  assert_eq!(true, last_chars_impl("file.yak.tsx"));
+  assert!(last_chars_impl("file.yak.ts"));
+  assert!(!last_chars_impl("file.yak"));
+  assert!(!last_chars_impl("file.yak.tsx.nope"));
+  assert!(last_chars_impl("file.yak.tsx"));
 
-  assert_eq!(true, last_chars_impl_macro("file.yak.ts"));
-  assert_eq!(false, last_chars_impl_macro("file.yak"));
-  assert_eq!(false, last_chars_impl_macro("file.yak.tsx.nope"));
-  assert_eq!(true, last_chars_impl_macro("file.yak.tsx"));
+  assert!(last_chars_impl_macro("file.yak.ts"));
+  assert!(!last_chars_impl_macro("file.yak"));
+  assert!(!last_chars_impl_macro("file.yak.tsx.nope"));
+  assert!(last_chars_impl_macro("file.yak.tsx"));
 
   // and that's the actual benchmark
   divan::main();
