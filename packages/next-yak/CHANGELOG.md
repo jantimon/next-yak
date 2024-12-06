@@ -1,5 +1,18 @@
 # next-yak
 
+## 3.1.0
+
+### Minor Changes
+
+- efa3009: allow to define a prefix for generated css names like variables
+
+### Patch Changes
+
+- 0b95fc1: Improve the error message for dynamic css functions when returning invalid values
+- Updated dependencies [3d6e505]
+- Updated dependencies [fcba925]
+  - yak-swc@3.1.0
+
 ## 3.0.1
 
 ### Patch Changes
