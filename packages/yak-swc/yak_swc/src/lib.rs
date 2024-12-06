@@ -1,6 +1,6 @@
 use css_in_js_parser::{find_char, parse_css, to_css, CommentStateType};
 use css_in_js_parser::{Declaration, ParserState};
-use rustc_hash::{FxHashMap, FxHashSet};
+use rustc_hash::FxHashMap;
 use serde::Deserialize;
 use std::path::Path;
 use std::vec;
@@ -293,7 +293,7 @@ where
               // constant mixins e.g.
               // const highlight = css`color: red;`
               // const Button = styled.button`&:hover { ${highlight}; }`
-              if is_valid_tagged_tpl(&tagged_tpl, &self.yak_imports().yak_css_idents()) {
+              if is_valid_tagged_tpl(&tagged_tpl, self.yak_imports().yak_css_idents()) {
                 let (inline_runtime_exprs, inline_runtime_css_vars) =
                   self.process_yak_literal(&mut tagged_tpl.clone(), css_state.clone());
                 runtime_expressions.extend(inline_runtime_exprs);
@@ -302,7 +302,7 @@ where
               // keyframes - of animations which have not been parsed yet
               // const Button = styled.button`animation: ${highlight};`
               // const highlight = keyframes`from { color: red; }`
-              else if is_valid_tagged_tpl(&tagged_tpl, &self.yak_imports().yak_keyframes_idents())
+              else if is_valid_tagged_tpl(&tagged_tpl, self.yak_imports().yak_keyframes_idents())
               {
                 // Create a unique name for the keyframe
                 let keyframe_name = self
@@ -377,7 +377,7 @@ ${{() => {var}}};\n",
         // Handle inline css literals
         // e.g. styled.button`${css`color: red;`};`
         else if let Expr::TaggedTpl(tpl) = &mut **expr {
-          if is_valid_tagged_tpl(tpl, &self.yak_imports().yak_css_idents()) {
+          if is_valid_tagged_tpl(tpl, self.yak_imports().yak_css_idents()) {
             let (inline_runtime_exprs, inline_runtime_css_vars) =
               self.process_yak_literal(tpl, css_state.clone());
             runtime_expressions.extend(inline_runtime_exprs);
@@ -666,7 +666,7 @@ where
       if let Some(scoped_name) = extract_ident_and_parts(n) {
         if let Some(constant_value) = self.variables.get_const_value(&scoped_name) {
           if let Expr::TaggedTpl(tpl) = *constant_value {
-            if is_valid_tagged_tpl(&tpl, &self.yak_imports().yak_css_idents()) {
+            if is_valid_tagged_tpl(&tpl, self.yak_imports().yak_css_idents()) {
               let replacement_before = self.expression_replacement.clone();
               let tpl = &mut tpl.clone();
               tpl.span = n.span();

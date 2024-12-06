@@ -69,6 +69,7 @@ impl YakImports {
     &self.yak_css_idents
   }
 
+  #[allow(dead_code)]
   pub fn yak_library_imports(&self) -> &FxHashMap<Id, Id> {
     &self.yak_library_imports
   }
@@ -77,6 +78,7 @@ impl YakImports {
     &self.yak_keyframes_idents
   }
 
+  #[allow(dead_code)]
   pub fn yak_utilities(&self) -> &FxHashMap<String, Ident> {
     &self.yak_utilities
   }
