@@ -193,7 +193,7 @@ impl YakImports {
       .collect()
   }
 
-  pub fn get_yak_import_declarations(&self) -> Vec<ImportSpecifier> {
+  pub fn get_generated_yak_import_declarations(&self) -> Vec<ImportSpecifier> {
     let mut imports = self.get_yak_utility_import_declaration();
     imports.append(&mut self.get_yak_component_import_declarations());
     imports

@@ -531,7 +531,7 @@ where
             // Add all stored imports
             import_declaration
               .specifiers
-              .extend(self.yak_imports().get_yak_import_declarations());
+              .extend(self.yak_imports().get_generated_yak_import_declarations());
 
             break;
           }

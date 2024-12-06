@@ -299,6 +299,7 @@ fn transform_styled_usages(expression: Box<Expr>, yak_imports: &mut YakImports) 
         if let MemberProp::Ident(member_ident) = member.prop {
           let member_name = member_ident.sym.as_str();
           return if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
+            // styled.button -> __yak_button
             Box::new(Expr::Ident(ident))
           } else {
             // Transform elements without yakcomponent import to styled("element-name")
@@ -330,11 +331,12 @@ fn transform_styled_usages(expression: Box<Expr>, yak_imports: &mut YakImports) 
         return expression;
       }
 
-      // e.g. styled.button.function(args) => __yak_button.function(args)
+      // e.g. styled.button.functionName(args) -> __yak_button.functionName(args)
       if let Expr::Member(ref member) = *callee.clone() {
+        // e.g. functionName
         let function_name = member.prop.clone();
         // transform the member expression on which the function is called, e.g. styled.button
-        let rest_identifier = transform_styled_usages(member.obj.clone(), yak_imports);
+        let transformed_identifier = transform_styled_usages(member.obj.clone(), yak_imports);
 
         // call the original function on the transformed expression
         return Box::new(Expr::Call(CallExpr {
@@ -343,7 +345,7 @@ fn transform_styled_usages(expression: Box<Expr>, yak_imports: &mut YakImports) 
           callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
             prop: function_name,
             span: DUMMY_SP,
-            obj: rest_identifier,
+            obj: transformed_identifier,
           }))),
           args,
           type_args,
