@@ -1,4 +1,4 @@
-import { styled, css, __yak_div, __yak_unitPostFix } from "next-yak/internal";
+import { styled, css, __yak_unitPostFix, __yak_div } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 // example taken from https://github.com/jantimon/next-yak/issues/208 
 const spacing = "20px";
