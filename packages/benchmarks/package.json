@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@swc/core": "1.7.42",
-    "next": "15.0.2",
+    "next": "15.0.4",
     "next-yak": "workspace:*",
     "react": "18.3.1",
     "react-dom": "18.3.1",
