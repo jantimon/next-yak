@@ -1,41 +1,84 @@
 use rustc_hash::{FxHashMap, FxHashSet};
 use swc_core::atoms::Atom;
 use swc_core::ecma::visit::Fold;
+use swc_core::ecma::visit::VisitMutWith;
 use swc_core::{
   common::DUMMY_SP,
   ecma::{ast::*, visit::VisitMut},
 };
 
 #[derive(Debug)]
-/// Visitor implementation to gather all names imported from "next-yak"
-/// Side effect: converts the import source from "next-yak" to "next-yak/internal"
-pub struct YakImportVisitor {
-  /// Imports from "next-yak"
-  /// Local to Imported mapping
-  yak_library_imports: FxHashMap<Id, Id>,
+
+pub struct YakImports {
   /// Utilities used from "next-yak/internal"
   /// e.g. unitPostFix, mergeCssProp
   yak_utilities: FxHashMap<String, Ident>,
+  /// Imports from "next-yak"
+  /// Local to Imported mapping
+  yak_library_imports: FxHashMap<Id, Id>,
   /// Local Identifiers for the next-yak css function \
   /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
   /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
-  pub yak_css_idents: FxHashSet<Id>,
+  yak_css_idents: FxHashSet<Id>,
   /// Local Identifiers for the next-yak keyframes function \
   /// Most of the time it is just `keyframes#0` for `import { keyframes } from "next-yak"` \
   /// but it might also contain renamings like `import { keyframes as keyframes_ } from "next-yak"`
-  pub yak_keyframes_idents: FxHashSet<Id>,
+  yak_keyframes_idents: FxHashSet<Id>,
+}
+
+/// Scans a JavaScript/TypeScript module for yak library usage and collects import information.
+///
+/// This function analyzes the entire module AST to:
+/// - Detect imports from the "next-yak" library
+/// - Track CSS-in-JS template literal identifiers
+/// - Monitor renamed imports and utility functions
+/// - Convert "next-yak" imports to "next-yak/internal"
+///
+/// # Returns
+///
+/// Returns a `YakImports` struct containing:
+/// - Mapped imports from next-yak
+/// - CSS function identifiers
+/// - Keyframe function identifiers
+/// - Utility function references
+pub fn visit_module_imports(module: &mut Module) -> YakImports {
+  let mut yak_import_visitor = YakImportVisitor::new();
+  module.visit_mut_children_with(&mut yak_import_visitor);
+  yak_import_visitor.into()
 }
 
 const UTILITIES: &[&str] = &["unitPostFix", "mergeCssProp"];
 
-impl YakImportVisitor {
-  pub fn new() -> Self {
+impl From<YakImportVisitor> for YakImports {
+  fn from(value: YakImportVisitor) -> Self {
+    YakImports::new(
+      value.yak_library_imports,
+      value.yak_css_idents,
+      value.yak_keyframes_idents,
+    )
+  }
+}
+
+impl YakImports {
+  fn new(
+    yak_library_imports: FxHashMap<Id, Id>,
+    yak_css_idents: FxHashSet<Id>,
+    yak_keyframes_idents: FxHashSet<Id>,
+  ) -> Self {
     Self {
-      yak_library_imports: FxHashMap::default(),
       yak_utilities: FxHashMap::default(),
-      yak_css_idents: FxHashSet::default(),
-      yak_keyframes_idents: FxHashSet::default(),
+      yak_library_imports,
+      yak_css_idents,
+      yak_keyframes_idents,
     }
+  }
+
+  pub fn yak_css_idents(&self) -> &FxHashSet<Id> {
+    &self.yak_css_idents
+  }
+
+  pub fn yak_keyframes_idents(&self) -> &FxHashSet<Id> {
+    &self.yak_keyframes_idents
   }
 
   /// Check if the current AST has imports to the next-yak library
@@ -77,7 +120,7 @@ impl YakImportVisitor {
     if !self.is_using_next_yak() {
       return None;
     }
-    return self.yak_library_imports.get(id).map(|id| id.0.clone());
+    self.yak_library_imports.get(id).map(|id| id.0.clone())
   }
 
   /// Returns the utility function identifier
@@ -112,6 +155,30 @@ impl YakImportVisitor {
   }
 }
 
+struct YakImportVisitor {
+  /// Imports from "next-yak"
+  /// Local to Imported mapping
+  pub yak_library_imports: FxHashMap<Id, Id>,
+  /// Local Identifiers for the next-yak css function \
+  /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
+  /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
+  pub yak_css_idents: FxHashSet<Id>,
+  /// Local Identifiers for the next-yak keyframes function \
+  /// Most of the time it is just `keyframes#0` for `import { keyframes } from "next-yak"` \
+  /// but it might also contain renamings like `import { keyframes as keyframes_ } from "next-yak"`
+  pub yak_keyframes_idents: FxHashSet<Id>,
+}
+
+impl YakImportVisitor {
+  pub fn new() -> Self {
+    Self {
+      yak_library_imports: FxHashMap::default(),
+      yak_css_idents: FxHashSet::default(),
+      yak_keyframes_idents: FxHashSet::default(),
+    }
+  }
+}
+
 impl VisitMut for YakImportVisitor {
   /// Visit the import declaration and store the imported names
   /// That way we know if `styled`, `css` is imported from "next-yak"
@@ -123,6 +190,7 @@ impl VisitMut for YakImportVisitor {
       // and how the library is called internally
       import_decl.src.value = "next-yak/internal".into();
       import_decl.src.raw = None;
+
       // Store the local name of the imported function
       for specifier in &import_decl.specifiers {
         if let ImportSpecifier::Named(named) = specifier {
@@ -171,7 +239,8 @@ mod tests {
       code,
       code,
     );
-    assert_eq!(visitor.is_using_next_yak(), false);
+    let imports: YakImports = visitor.into();
+    assert!(!imports.is_using_next_yak());
   }
 
   #[test]
@@ -200,7 +269,8 @@ mod tests {
         }
     "#,
     );
-    assert_eq!(visitor.is_using_next_yak(), true);
+    let imports: YakImports = visitor.into();
+    assert!(imports.is_using_next_yak());
   }
 
   #[test]
@@ -289,10 +359,11 @@ mod tests {
 
   #[test]
   fn test_yak_import_visitor_utility_ident() {
-    let mut visitor = YakImportVisitor::new();
-    let ident = visitor.get_yak_utility_ident("unitPostFix".to_string());
+    let visitor = YakImportVisitor::new();
+    let mut imports: YakImports = visitor.into();
+    let ident = imports.get_yak_utility_ident("unitPostFix".to_string());
     assert_eq!(ident.sym, "__yak_unitPostFix");
-    let ident = visitor.get_yak_utility_ident("mergeCssProp".to_string());
+    let ident = imports.get_yak_utility_ident("mergeCssProp".to_string());
     assert_eq!(ident.sym, "__yak_mergeCssProp");
   }
 }
