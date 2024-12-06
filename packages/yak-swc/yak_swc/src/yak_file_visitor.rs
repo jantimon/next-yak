@@ -1,12 +1,13 @@
-use crate::yak_imports::YakImportVisitor;
 use swc_core::atoms::atom;
 use swc_core::common::Spanned;
 use swc_core::ecma::ast::*;
 use swc_core::ecma::visit::{Fold, VisitMut, VisitMutWith};
 use swc_core::plugin::errors::HANDLER;
 
+use crate::yak_imports::{visit_module_imports, YakImports};
+
 pub struct YakFileVisitor {
-  yak_imports: YakImportVisitor,
+  yak_imports: Option<YakImports>,
   is_inside_css_tpl: bool,
 }
 
@@ -16,7 +17,7 @@ pub struct YakFileVisitor {
 impl YakFileVisitor {
   pub fn new() -> Self {
     Self {
-      yak_imports: YakImportVisitor::new(),
+      yak_imports: None,
       is_inside_css_tpl: false,
     }
   }
@@ -33,12 +34,19 @@ impl YakFileVisitor {
       true
     });
   }
+
+  fn yak_imports(&self) -> &YakImports {
+    self
+      .yak_imports
+      .as_ref()
+      .expect("Internal error: yak_library_imports is None - this should be impossible as imports are parsed in the initial program visit before any other processing")
+  }
 }
 
 impl VisitMut for YakFileVisitor {
   fn visit_mut_module(&mut self, module: &mut Module) {
-    module.visit_mut_children_with(&mut self.yak_imports);
-    if self.yak_imports.is_using_next_yak() {
+    self.yak_imports = Some(visit_module_imports(module));
+    if self.yak_imports().is_using_next_yak() {
       self.remove_next_yak_imports(module);
       module.visit_mut_children_with(self);
     }
@@ -51,7 +59,12 @@ impl VisitMut for YakFileVisitor {
     // This is necessary as the mixin is also imported at runtime and a string would be
     // interpreted as a class name
     if let Expr::TaggedTpl(n) = expr {
-      if let Some(name) = self.yak_imports.get_yak_library_function_name(n) {
+      if let Some(name) = self
+        .yak_imports
+        .as_mut()
+        .unwrap()
+        .get_yak_library_function_name(n)
+      {
         if name == atom!("css") {
           *expr = ObjectLit {
             span: n.span,
@@ -73,7 +86,12 @@ impl VisitMut for YakFileVisitor {
   }
 
   fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-    if let Some(name) = self.yak_imports.get_yak_library_function_name(n) {
+    if let Some(name) = self
+      .yak_imports
+      .as_mut()
+      .unwrap()
+      .get_yak_library_function_name(n)
+    {
       // Right now only css template literals are allowed
       if name != atom!("css") {
         HANDLER.with(|handler| {
