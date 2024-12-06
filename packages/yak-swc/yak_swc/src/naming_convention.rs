@@ -6,18 +6,27 @@ pub struct NamingConvention {
   file_name: String,
   file_name_hash: Option<String>,
   dev_mode: bool,
+  prefix: String,
 }
 
 /// A naming convention that generates safe unique names for CSS variables, classes, and other identifiers.
 /// Use the `generate_unique_name` method to generate a unique name based on a base name.
 /// e.g. `generate_unique_name("foo bar")` might return `"foo_bar-01"`, `"foo_bar-02"`, etc.
 impl NamingConvention {
-  pub fn new(file_name: String, dev_mode: bool) -> Self {
+  pub fn new(file_name: String, dev_mode: bool, prefix: Option<String>) -> Self {
     Self {
       postfix_counters: FxHashMap::default(),
       file_name,
       file_name_hash: None,
       dev_mode,
+      prefix: prefix.unwrap_or_else(|| {
+        if dev_mode {
+          // In dev mode we don't prefix by default as it already uses long unique names
+          String::from("")
+        } else {
+          String::from("y")
+        }
+      }),
     }
   }
 
@@ -69,14 +78,19 @@ impl NamingConvention {
   pub fn get_css_variable_name(&mut self, base_name: &str) -> String {
     let name: String = if self.dev_mode {
       if base_name.is_empty() {
-        String::from("yak_")
+        String::from("var_")
       } else {
         format!("{}_", base_name)
       }
     } else {
-      String::from("y")
+      "".to_string()
     };
-    let css_variable_name = format!("{}{}", name, self.get_file_name_hash());
+    let css_variable_name = format!(
+      "{}{}{}",
+      self.prefix.clone(),
+      name,
+      self.get_file_name_hash()
+    );
     self.generate_unique_name(&css_variable_name)
   }
 }
@@ -142,7 +156,7 @@ mod tests {
 
   #[test]
   fn css_naming_convention() {
-    let mut convention = NamingConvention::new("file.css".into(), true);
+    let mut convention = NamingConvention::new("file.css".into(), true, None);
     assert_eq!(convention.generate_unique_name("foo"), "foo");
     assert_eq!(convention.generate_unique_name("foo"), "foo-01");
     assert_eq!(convention.generate_unique_name("foo"), "foo-02");
@@ -150,7 +164,7 @@ mod tests {
 
   #[test]
   fn css_variable_name() {
-    let mut convention = NamingConvention::new("file.css".into(), false);
+    let mut convention = NamingConvention::new("file.css".into(), false, None);
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU");
     assert_eq!(convention.get_css_variable_name("foo"), "yoPBkbU1");
     assert_eq!(convention.get_css_variable_name(""), "yoPBkbU2");
@@ -158,9 +172,9 @@ mod tests {
 
   #[test]
   fn css_variable_name_dev_mode() {
-    let mut convention = NamingConvention::new("file.css".into(), true);
+    let mut convention = NamingConvention::new("file.css".into(), true, None);
     assert_eq!(convention.get_css_variable_name("foo"), "foo_oPBkbU");
     assert_eq!(convention.get_css_variable_name("foo"), "foo_oPBkbU-01");
-    assert_eq!(convention.get_css_variable_name(""), "yak_oPBkbU");
+    assert_eq!(convention.get_css_variable_name(""), "var_oPBkbU");
   }
 }

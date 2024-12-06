@@ -56,6 +56,8 @@ pub struct Config {
   /// To ensure that the hash is consistent accross multiple systems the relative path
   /// from the base dir to the source file is used.
   pub base_path: String,
+  /// Prefix for the generated css identifier
+  pub prefix: Option<String>,
 }
 
 pub struct TransformVisitor<GenericComments>
@@ -106,7 +108,12 @@ impl<GenericComments> TransformVisitor<GenericComments>
 where
   GenericComments: Comments,
 {
-  pub fn new(comments: Option<GenericComments>, filename: String, dev_mode: bool) -> Self {
+  pub fn new(
+    comments: Option<GenericComments>,
+    filename: String,
+    dev_mode: bool,
+    prefix: Option<String>,
+  ) -> Self {
     Self {
       current_css_state: None,
       current_declaration: vec![],
@@ -115,7 +122,7 @@ where
       current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: None,
-      naming_convention: NamingConvention::new(filename.clone(), dev_mode),
+      naming_convention: NamingConvention::new(filename.clone(), dev_mode, prefix),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
@@ -974,6 +981,7 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     metadata.comments,
     deterministic_path,
     config.dev_mode,
+    config.prefix,
   )))
 }
 
@@ -1001,7 +1009,7 @@ mod tests {
   use swc_ecma_transforms_testing::FixtureTestConfig;
 
   #[testing::fixture("tests/fixture/**/input.tsx")]
-  fn fixture(input: PathBuf) {
+  fn fixture_dev(input: PathBuf) {
     test_fixture(
       Syntax::Typescript(TsSyntax {
         tsx: true,
@@ -1012,10 +1020,11 @@ mod tests {
           Some(tester.comments.clone()),
           "path/input.tsx".to_string(),
           true,
+          None,
         ))
       },
       &input,
-      &input.with_file_name("output.tsx"),
+      &input.with_file_name("output.dev.tsx"),
       FixtureTestConfig {
         module: None,
         sourcemap: false,
@@ -1023,6 +1032,32 @@ mod tests {
       },
     )
   }
+
+  #[testing::fixture("tests/fixture/**/input.tsx")]
+  fn fixture_prod(input: PathBuf) {
+    test_fixture(
+      Syntax::Typescript(TsSyntax {
+        tsx: true,
+        ..Default::default()
+      }),
+      &|tester| {
+        visit_mut_pass(TransformVisitor::new(
+          Some(tester.comments.clone()),
+          "path/input.tsx".to_string(),
+          false,
+          None,
+        ))
+      },
+      &input,
+      &input.with_file_name("output.prod.tsx"),
+      FixtureTestConfig {
+        module: None,
+        sourcemap: false,
+        allow_error: true,
+      },
+    )
+  }
+
   #[testing::fixture("tests/fixture/**/input.yak.tsx")]
   fn fixture_yak(input: PathBuf) {
     test_fixture(
