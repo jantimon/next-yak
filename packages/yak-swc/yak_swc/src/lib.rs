@@ -141,7 +141,7 @@ where
     self
       .yak_library_imports
       .as_ref()
-      .expect("If this is reached the imports should've been parsed already.")
+      .expect("Internal error: yak_library_imports is None - this should be impossible as imports are parsed in the initial program visit before any other processing")
   }
 
   /// Try to get the component id of the current styled component mixin or animation
