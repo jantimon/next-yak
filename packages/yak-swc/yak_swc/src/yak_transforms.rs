@@ -1,12 +1,7 @@
-
-use std::fmt::format;
-
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
-use swc_core::atoms::atom;
 use swc_core::atoms::Atom;
 use swc_core::common::util::move_map::MoveMap;
-use swc_core::common::Spanned;
 
 use crate::utils::ast_helper::{create_member_prop_from_string, expr_hash_map_to_object};
 use crate::utils::encode_module_import::encode_percent;
@@ -331,7 +326,7 @@ impl TransformStyled {
         args,
         type_args,
         ctxt,
-        span
+        span,
       }) => {
         // e.g. styled(Component)
         if let Expr::Ident(_) = *callee.clone() {
@@ -340,20 +335,22 @@ impl TransformStyled {
 
         // e.g. styled.button.function(args) => __yak_button.function(args)
         if let Expr::Member(ref member) = *callee.clone() {
-          let call_name = member.clone().prop;
+          let function_name = member.prop.clone();
+          // transform the member expression on which the function is called, e.g. styled.button
           let rest_identifier = self.transform_styled_usages(member.obj.clone(), yak_imports);
 
+          // call the original function on the transformed expression
           return Box::new(Expr::Call(CallExpr {
             span,
             ctxt,
             callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
-              prop: call_name,
+              prop: function_name,
               span: DUMMY_SP,
               obj: rest_identifier,
             }))),
             args,
             type_args,
-          }))
+          }));
         }
         // Anything else is left untransformed
         expression
