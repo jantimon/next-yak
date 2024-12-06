@@ -110,7 +110,7 @@ where
 {
   pub fn new(
     comments: Option<GenericComments>,
-    filename: String,
+    filename: impl AsRef<str>,
     dev_mode: bool,
     prefix: Option<String>,
   ) -> Self {
@@ -122,12 +122,12 @@ where
       current_exported: false,
       variables: VariableVisitor::new(),
       yak_library_imports: None,
-      naming_convention: NamingConvention::new(filename.clone(), dev_mode, prefix),
+      naming_convention: NamingConvention::new(filename.as_ref(), dev_mode, prefix),
       variable_name_selector_mapping: FxHashMap::default(),
       expression_replacement: None,
       css_module_identifier: None,
       inside_element_with_css_attribute: false,
-      filename,
+      filename: filename.as_ref().into(),
       comments,
     }
   }
@@ -453,7 +453,7 @@ ${{() => {var}}};\n",
                   .as_mut()
                   .unwrap()
                   .get_yak_utility_ident("unitPostFix"),
-                unit.to_string(),
+                unit,
               )
             } else {
               *expr.clone()
@@ -1022,7 +1022,7 @@ mod tests {
       &|tester| {
         visit_mut_pass(TransformVisitor::new(
           Some(tester.comments.clone()),
-          "path/input.tsx".to_string(),
+          "path/input.tsx",
           true,
           None,
         ))
@@ -1047,7 +1047,7 @@ mod tests {
       &|tester| {
         visit_mut_pass(TransformVisitor::new(
           Some(tester.comments.clone()),
-          "path/input.tsx".to_string(),
+          "path/input.tsx",
           false,
           None,
         ))

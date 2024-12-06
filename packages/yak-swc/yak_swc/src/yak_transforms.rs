@@ -361,9 +361,9 @@ pub struct TransformKeyframes {
 }
 
 impl TransformKeyframes {
-  pub fn new(animation_name: String) -> TransformKeyframes {
+  pub fn new(animation_name: impl AsRef<str>) -> TransformKeyframes {
     TransformKeyframes {
-      animation_name: Some(animation_name),
+      animation_name: Some(animation_name.as_ref().into()),
     }
   }
 }
