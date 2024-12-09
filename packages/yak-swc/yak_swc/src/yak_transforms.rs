@@ -298,9 +298,9 @@ fn transform_styled_usages(expression: Box<Expr>, yak_imports: &mut YakImports) 
         // styled.element``usages
         if let MemberProp::Ident(member_ident) = member.prop {
           let member_name = member_ident.sym.as_str();
-          return if let Some(ident) = yak_imports.get_yak_component_import(member_name) {
+          return if let Some(member) = yak_imports.get_yak_component_import(member_name) {
             // styled.button -> __yak_button
-            Box::new(Expr::Ident(ident))
+            member
           } else {
             // Transform elements without yakcomponent import to styled("element-name")
             Box::new(Expr::Call(CallExpr {

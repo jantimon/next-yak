@@ -1,4 +1,5 @@
 use rustc_hash::{FxHashMap, FxHashSet};
+use swc_core::atoms::atom;
 use swc_core::atoms::Atom;
 use swc_core::ecma::visit::Fold;
 use swc_core::ecma::visit::VisitMutWith;
@@ -7,6 +8,7 @@ use swc_core::{
   ecma::{ast::*, visit::VisitMut},
 };
 
+use crate::utils::ast_helper::create_member_prop_from_string;
 use crate::utils::native_elements::VALID_ELEMENTS;
 
 #[derive(Debug)]
@@ -20,7 +22,7 @@ pub struct YakImports {
   yak_library_imports: FxHashMap<Id, Id>,
   /// Direct component imports from "next-yak/internal"
   /// e.g. __yak_button
-  yak_component_imports: FxHashMap<String, Ident>,
+  yak_component_import: Option<Ident>,
   /// Local Identifiers for the next-yak css function \
   /// Most of the time it is just `css#0` for `import { css } from "next-yak"` \
   /// but it might also contain renamings like `import { css as css_ } from "next-yak"`
@@ -72,7 +74,7 @@ impl YakImports {
   ) -> Self {
     Self {
       yak_utilities: FxHashMap::default(),
-      yak_component_imports: FxHashMap::default(),
+      yak_component_import: None,
       yak_library_imports,
       yak_css_idents,
       yak_keyframes_idents,
@@ -130,7 +132,7 @@ impl YakImports {
   }
 
   /// Returns the utility function identifier
-  pub fn get_yak_utility_ident(&mut self, name: impl AsRef<str>) -> Ident {
+  pub fn get_yak_utility_ident(&mut self, name: impl AsRef<str>) -> Ident { 
     if !UTILITIES.contains(&name.as_ref()) {
       panic!("Utility function not found: {}", name.as_ref());
     }
@@ -146,20 +148,19 @@ impl YakImports {
 
   /// Returns the ident for the given component
   /// e.g. __yak_button for button
-  pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Option<Ident> {
+  pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Option<Box<Expr>> {
     if !VALID_ELEMENTS.contains(name.as_ref()) {
       return None;
     }
-    if let Some(id) = self.yak_component_imports.get(name.as_ref()) {
-      Some(id.clone())
-    } else {
-      let prefixed_name = format!("__yak_{}", name.as_ref());
-      let ident = Ident::from(prefixed_name);
-      self
-        .yak_component_imports
-        .insert(name.as_ref().into(), ident.clone());
-      Some(ident)
+    if self.yak_component_import.is_none() {
+      self.yak_component_import = Some(Ident::from("__yak"));
     }
+    let yak_ident = self.yak_component_import.clone().unwrap();
+    Some(Box::new(Expr::Member(MemberExpr {
+      span: DUMMY_SP,
+      obj: Box::new(Expr::Ident(yak_ident)),
+      prop: create_member_prop_from_string(format!("__yak_{}", name.as_ref()))
+    })))
   }
 
   /// Get the import declaration specifiers for all used utility functions
@@ -179,24 +180,24 @@ impl YakImports {
   }
   /// Get the import declaration specifiers for all used utility functions
   fn get_yak_component_import_declarations(&self) -> Vec<ImportSpecifier> {
-    self
-      .yak_component_imports
-      .values()
-      .map(|imported| {
-        ImportSpecifier::Named(ImportNamedSpecifier {
-          span: DUMMY_SP,
-          local: imported.clone(),
-          imported: None,
-          is_type_only: false,
-        })
-      })
-      .collect()
+    if let Some(yak_import) = self.yak_component_import.clone() {
+      vec![ImportSpecifier::Namespace(ImportStarAsSpecifier {
+        span: DUMMY_SP,
+        local: yak_import,
+      })]
+    } else {
+    vec![]
+    }
   }
 
-  pub fn get_generated_yak_import_declarations(&self) -> Vec<ImportSpecifier> {
+  pub fn get_generated_yak_import(&self) -> Option<ModuleDecl> {
     let mut imports = self.get_yak_utility_import_declaration();
     imports.append(&mut self.get_yak_component_import_declarations());
-    imports
+    if imports.len() > 0 {
+      Some(ModuleDecl::Import(ImportDecl { span: DUMMY_SP, specifiers: imports, src: Box::new("next-yak/internal".into()), type_only: false, with: None, phase: ImportPhase::Evaluation }))
+    }  else {
+      None
+    }
   }
 }
 
