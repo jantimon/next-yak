@@ -548,12 +548,6 @@ where
         }
       }
 
-      for item in module.body.iter_mut() {
-        if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
-          if import_declaration.src.value == "next-yak/internal" {}
-        }
-      }
-
       if let Some(module_decl) = self.yak_imports().get_yak_component_import_declaration() {
         module
           .body
