@@ -17,22 +17,6 @@ import type { YakTheme } from "./context/index.d.ts";
 const noTheme: YakTheme = {};
 
 /**
- * Hack to hide {[yakComponentSymbol]:[parentComponent, parentAttributeFunction]}
- * from the type definition and to deal with ExoticComponents
- */
-const yakForwardRef: <
-  TProps,
-  TAttrsIn extends object,
-  TAttrsOut extends AttrsMerged<TProps, TAttrsIn>,
->(
-  component: ForwardRefRenderFunction<any, TProps>,
-  attrsFn?: (props: any) => any,
-) => YakComponent<TProps, TAttrsIn, TAttrsOut> = (component, attrsFn) =>
-  Object.assign(React.forwardRef(component as any), {
-    [yakComponentSymbol]: [component, attrsFn],
-  }) as any;
-
-/**
  * Minimal type for a function component that works with next-yak
  */
 type FunctionComponent<T> = (
@@ -227,7 +211,11 @@ const yakStyled = <
     // Assign the yakComponentSymbol directly without forwardRef
     return Object.assign(yak, {
       [yakComponentSymbol]: [yak, mergedAttrsFn],
-    });
+    }) as YakComponent<
+      Substitute<TCSSProps & T, TAttrsIn>,
+      object,
+      AttrsMerged<Substitute<TCSSProps & T, TAttrsIn>, object>
+    >;
   };
 };
 
