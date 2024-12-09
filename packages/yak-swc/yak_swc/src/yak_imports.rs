@@ -1,5 +1,4 @@
 use rustc_hash::{FxHashMap, FxHashSet};
-use swc_core::atoms::atom;
 use swc_core::atoms::Atom;
 use swc_core::ecma::visit::Fold;
 use swc_core::ecma::visit::VisitMutWith;
@@ -132,7 +131,7 @@ impl YakImports {
   }
 
   /// Returns the utility function identifier
-  pub fn get_yak_utility_ident(&mut self, name: impl AsRef<str>) -> Ident { 
+  pub fn get_yak_utility_ident(&mut self, name: impl AsRef<str>) -> Ident {
     if !UTILITIES.contains(&name.as_ref()) {
       panic!("Utility function not found: {}", name.as_ref());
     }
@@ -159,12 +158,12 @@ impl YakImports {
     Some(Box::new(Expr::Member(MemberExpr {
       span: DUMMY_SP,
       obj: Box::new(Expr::Ident(yak_ident)),
-      prop: create_member_prop_from_string(format!("__yak_{}", name.as_ref()))
+      prop: create_member_prop_from_string(format!("__yak_{}", name.as_ref())),
     })))
   }
 
   /// Get the import declaration specifiers for all used utility functions
-  fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
+  pub fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
     self
       .yak_utilities
       .values()
@@ -179,25 +178,20 @@ impl YakImports {
       .collect()
   }
   /// Get the import declaration specifiers for all used utility functions
-  fn get_yak_component_import_declarations(&self) -> Vec<ImportSpecifier> {
-    if let Some(yak_import) = self.yak_component_import.clone() {
-      vec![ImportSpecifier::Namespace(ImportStarAsSpecifier {
+  pub fn get_yak_component_import_declaration(&self) -> Option<ModuleDecl> {
+    self.yak_component_import.clone().map(|yak_import| {
+      ModuleDecl::Import(ImportDecl {
         span: DUMMY_SP,
-        local: yak_import,
-      })]
-    } else {
-    vec![]
-    }
-  }
-
-  pub fn get_generated_yak_import(&self) -> Option<ModuleDecl> {
-    let mut imports = self.get_yak_utility_import_declaration();
-    imports.append(&mut self.get_yak_component_import_declarations());
-    if imports.len() > 0 {
-      Some(ModuleDecl::Import(ImportDecl { span: DUMMY_SP, specifiers: imports, src: Box::new("next-yak/internal".into()), type_only: false, with: None, phase: ImportPhase::Evaluation }))
-    }  else {
-      None
-    }
+        specifiers: vec![ImportSpecifier::Namespace(ImportStarAsSpecifier {
+          span: DUMMY_SP,
+          local: yak_import,
+        })],
+        src: Box::new("next-yak/internal".into()),
+        type_only: false,
+        with: None,
+        phase: ImportPhase::Evaluation,
+      })
+    })
   }
 }
 

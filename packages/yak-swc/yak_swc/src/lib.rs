@@ -525,14 +525,13 @@ where
     // Add the css module import to the top of the file
     // if any css-in-js expressions has been used
     if !self.variable_name_selector_mapping.is_empty() {
-
       for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-            // Add all stored imports
-            let phase = import_declaration.phase;
-            dbg!(format!("💩💩💩💩💩💩💩 import face of existing import {phase:?}"));
-
+            // Add all stored utility imports
+            import_declaration
+              .specifiers
+              .extend(self.yak_imports().get_yak_utility_import_declaration());
             break;
           }
         }
@@ -555,8 +554,10 @@ where
         }
       }
 
-      if let Some(module_decl) = self.yak_imports().get_generated_yak_import() {
-        module.body.insert(last_import_index, ModuleItem::ModuleDecl(module_decl));
+      if let Some(module_decl) = self.yak_imports().get_yak_component_import_declaration() {
+        module
+          .body
+          .insert(last_import_index, ModuleItem::ModuleDecl(module_decl));
         last_import_index += 1;
       }
 
