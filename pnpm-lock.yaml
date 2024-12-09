@@ -52,8 +52,8 @@ importers:
         specifier: 19.0.1
         version: 19.0.1
       '@types/react-dom':
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.0.1
+        version: 19.0.1
       benchmark:
         specifier: 2.1.4
         version: 2.1.4
@@ -62,7 +62,7 @@ importers:
         version: 1.2.2
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(@swc/core@1.7.42(@swc/helpers@0.5.13))(postcss@8.4.47)(typescript@5.5.2)
+        version: 7.2.0(@swc/core@1.7.42)(postcss@8.4.47)(typescript@5.5.2)
       typescript:
         specifier: 5.5.2
         version: 5.5.2
@@ -290,7 +290,7 @@ importers:
         version: 19.0.1
       '@types/webpack':
         specifier: 5.28.5
-        version: 5.28.5(@swc/core@1.7.42)(esbuild@0.18.20)
+        version: 5.28.5(@swc/core@1.7.42)
       fast-glob:
         specifier: 3.3.2
         version: 3.3.2
@@ -305,7 +305,7 @@ importers:
         version: 19.0.0
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(@swc/core@1.7.42(@swc/helpers@0.5.13))(postcss@8.4.47)(typescript@5.5.2)
+        version: 7.2.0(@swc/core@1.7.42)(postcss@8.4.47)(typescript@5.5.2)
       typescript:
         specifier: 5.5.2
         version: 5.5.2
@@ -6926,11 +6926,11 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@types/webpack@5.28.5(@swc/core@1.7.42)(esbuild@0.18.20)':
+  '@types/webpack@5.28.5(@swc/core@1.7.42)':
     dependencies:
       '@types/node': 22.9.0
       tapable: 2.2.1
-      webpack: 5.92.1(@swc/core@1.7.42)(esbuild@0.18.20)
+      webpack: 5.92.1(@swc/core@1.7.42)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -10179,17 +10179,16 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.7.42(@swc/helpers@0.5.13)
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.42)(esbuild@0.18.20)(webpack@5.92.1(@swc/core@1.7.42)(esbuild@0.18.20)):
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.42)(webpack@5.92.1(@swc/core@1.7.42)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.36.0
-      webpack: 5.92.1(@swc/core@1.7.42)(esbuild@0.18.20)
+      webpack: 5.92.1(@swc/core@1.7.42)
     optionalDependencies:
       '@swc/core': 1.7.42(@swc/helpers@0.5.13)
-      esbuild: 0.18.20
 
   terser@5.36.0:
     dependencies:
@@ -10283,7 +10282,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@7.2.0(@swc/core@1.7.42(@swc/helpers@0.5.13))(postcss@8.4.47)(typescript@5.5.2):
+  tsup@7.2.0(@swc/core@1.7.42)(postcss@8.4.47)(typescript@5.5.2):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.18.20)
       cac: 6.7.14
@@ -10625,7 +10624,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.92.1(@swc/core@1.7.42)(esbuild@0.18.20):
+  webpack@5.92.1(@swc/core@1.7.42):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.6
@@ -10648,7 +10647,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.42)(esbuild@0.18.20)(webpack@5.92.1(@swc/core@1.7.42)(esbuild@0.18.20))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.42)(webpack@5.92.1(@swc/core@1.7.42))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
