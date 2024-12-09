@@ -145,8 +145,11 @@ impl YakImports {
     }
   }
 
-  /// Returns the ident for the given component
-  /// e.g. __yak_button for button
+  /// Returns the expression for the given component
+  /// e.g. __yak.__yak_button for button
+  /// Importing components as `import * as __yak from "next-yak/internal"` allows 
+  /// webpack to optimize usages
+  /// Without this webpack injects `(0, s.As)` for `__yak_button` instead of `s.As`
   pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Option<Box<Expr>> {
     if !VALID_ELEMENTS.contains(name.as_ref()) {
       return None;
@@ -163,6 +166,7 @@ impl YakImports {
   }
 
   /// Get the import declaration specifiers for all used utility functions
+  /// i.e. `import { __yak_unitPostFix } from "next-yak/internal"`
   pub fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
     self
       .yak_utilities
@@ -177,7 +181,8 @@ impl YakImports {
       })
       .collect()
   }
-  /// Get the import declaration specifiers for all used utility functions
+  /// Get the import declaration for all usages of yak components in the given file
+  /// i.e. `import * as __yak from "next-yak/internal"`
   pub fn get_yak_component_import_declaration(&self) -> Option<ModuleDecl> {
     self.yak_component_import.clone().map(|yak_import| {
       ModuleDecl::Import(ImportDecl {
