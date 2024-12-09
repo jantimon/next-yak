@@ -10,7 +10,8 @@ beforeEach(() => {
 
 type DataAttributes = { [key: `data-${string}`]: any };
 
-const getSnapshot = (element: React.ReactElement) => render(element).container.firstChild;
+const getSnapshot = (element: React.ReactElement) =>
+  render(element).container.firstChild;
 
 it("works fine with an empty object", () => {
   const Comp = styled.div.attrs({})``;
@@ -117,7 +118,8 @@ it("should replace props with attrs", () => {
       type="button"
     />
   `);
-  expect(getSnapshot(<Comp type="reset" tabIndex={-1} />)).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp type="reset" tabIndex={-1} />))
+    .toMatchInlineSnapshot(`
     <button
       tabindex="0"
       type="button"
