@@ -1,4 +1,3 @@
-import { ForwardRefRenderFunction } from "react";
 import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
 import React from "react";
 

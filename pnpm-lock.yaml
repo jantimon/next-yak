@@ -49,8 +49,8 @@ importers:
         specifier: 2.1.5
         version: 2.1.5
       '@types/react':
-        specifier: 18.3.12
-        version: 18.3.12
+        specifier: 19.0.1
+        version: 19.0.1
       '@types/react-dom':
         specifier: 18.3.1
         version: 18.3.1
@@ -6984,7 +6984,7 @@ snapshots:
 
   '@types/react-dom@18.3.1':
     dependencies:
-      '@types/react': 18.3.12
+      '@types/react': 19.0.1
 
   '@types/react-dom@19.0.1':
     dependencies:
