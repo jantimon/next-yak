@@ -157,17 +157,18 @@ impl YakImports {
     if self.yak_component_import.is_none() {
       self.yak_component_import = Some(Ident::from("__yak"));
     }
-    let yak_ident = self.yak_component_import.clone().unwrap();
-    Some(Box::new(Expr::Member(MemberExpr {
-      span: DUMMY_SP,
-      obj: Box::new(Expr::Ident(yak_ident)),
-      prop: create_member_prop_from_string(format!("__yak_{}", name.as_ref())),
-    })))
+    self.yak_component_import.clone().map(|yak_ident| {
+      Box::new(Expr::Member(MemberExpr {
+        span: DUMMY_SP,
+        obj: Box::new(Expr::Ident(yak_ident)),
+        prop: create_member_prop_from_string(format!("__yak_{}", name.as_ref())),
+      }))
+    })
   }
 
   /// Get the import declaration specifiers for all used utility functions
   /// i.e. `import { __yak_unitPostFix } from "next-yak/internal"`
-  pub fn get_yak_utility_import_declaration(&self) -> Vec<ImportSpecifier> {
+  pub fn get_yak_utility_import_specifiers(&self) -> Vec<ImportSpecifier> {
     self
       .yak_utilities
       .values()

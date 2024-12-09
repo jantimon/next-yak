@@ -531,7 +531,7 @@ where
             // Add all stored utility imports
             import_declaration
               .specifiers
-              .extend(self.yak_imports().get_yak_utility_import_declaration());
+              .extend(self.yak_imports().get_yak_utility_import_specifiers());
             break;
           }
         }
