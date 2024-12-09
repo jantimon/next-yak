@@ -147,7 +147,7 @@ impl YakImports {
 
   /// Returns the expression for the given component
   /// e.g. __yak.__yak_button for button
-  /// Importing components as `import * as __yak from "next-yak/internal"` allows 
+  /// Importing components as `import * as __yak from "next-yak/internal"` allows
   /// webpack to optimize usages
   /// Without this webpack injects `(0, s.As)` for `__yak_button` instead of `s.As`
   pub fn get_yak_component_import(&mut self, name: impl AsRef<str>) -> Option<Box<Expr>> {
