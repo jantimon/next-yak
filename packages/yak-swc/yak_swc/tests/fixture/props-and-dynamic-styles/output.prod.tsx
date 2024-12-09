@@ -1,5 +1,5 @@
-import { styled, css } from "next-yak/internal";
-import * as __yak{ __yak_unitPostFix } from "next-yak/internal";
+import { styled, css, __yak_unitPostFix } from "next-yak/internal";
+import * as __yak from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FlexContainer = /*YAK Extracted CSS:
 .FlexContainer {
