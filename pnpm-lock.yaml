@@ -62,7 +62,7 @@ importers:
         version: 1.2.2
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(@swc/core@1.7.42(@swc/helpers@0.5.13))(postcss@8.4.47)(typescript@5.5.2)
+        version: 7.2.0(@swc/core@1.7.42)(postcss@8.4.47)(typescript@5.5.2)
       typescript:
         specifier: 5.5.2
         version: 5.5.2
@@ -288,12 +288,9 @@ importers:
       '@types/react-dom':
         specifier: 19.0.1
         version: 19.0.1
-      '@types/react-test-renderer':
-        specifier: ^18.0.3
-        version: 18.0.3
       '@types/webpack':
         specifier: 5.28.5
-        version: 5.28.5(@swc/core@1.7.42)(esbuild@0.18.20)
+        version: 5.28.5(@swc/core@1.7.42)
       fast-glob:
         specifier: 3.3.2
         version: 3.3.2
@@ -306,12 +303,9 @@ importers:
       react:
         specifier: 19.0.0
         version: 19.0.0
-      react-test-renderer:
-        specifier: 19.0.0
-        version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(@swc/core@1.7.42(@swc/helpers@0.5.13))(postcss@8.4.47)(typescript@5.5.2)
+        version: 7.2.0(@swc/core@1.7.42)(postcss@8.4.47)(typescript@5.5.2)
       typescript:
         specifier: 5.5.2
         version: 5.5.2
@@ -2173,9 +2167,6 @@ packages:
 
   '@types/react-dom@19.0.1':
     resolution: {integrity: sha512-hljHij7MpWPKF6u5vojuyfV0YA4YURsQG7KT6SzV0Zs2BXAtgdTxG6A229Ub/xiWV4w/7JL8fi6aAyjshH4meA==}
-
-  '@types/react-test-renderer@18.0.3':
-    resolution: {integrity: sha512-4wcNLnY6nIT+L6g94CpzL4CXX2P18JvKPU9CDlaHr3DnbP3GiaQLhDotJqjWlVqOcE4UhLRjp0MtxqwuNKONnA==}
 
   '@types/react@18.3.12':
     resolution: {integrity: sha512-D2wOSq/d6Agt28q7rSI3jhU7G6aiuzljDGZ2hTZHIkrTLUI+AF3WMeKkEZ9nN2fkBAlcktT6vcZjDFiIhMYEQw==}
@@ -4238,9 +4229,6 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-is@19.0.0:
-    resolution: {integrity: sha512-H91OHcwjZsbq3ClIDHMzBShc1rotbfACdWENsmEf0IFvZ3FgGPtdHMcsv45bQ1hAbgdfiA8SnxTKfDS+x/8m2g==}
-
   react-medium-image-zoom@5.2.10:
     resolution: {integrity: sha512-JBYf4u0zsocezIDtrjwStD+8sX+c8XuLsdz+HxPbojRj0sCicua0XOQKysuPetoFyX+YgStfj+vEtZ+699O/pg==}
     peerDependencies:
@@ -4286,11 +4274,6 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
-
-  react-test-renderer@19.0.0:
-    resolution: {integrity: sha512-oX5u9rOQlHzqrE/64CNr0HB0uWxkCQmZNSfozlYvwE71TLVgeZxVf0IjouGEr1v7r1kcDifdAJBeOhdhxsG/DA==}
-    peerDependencies:
-      react: ^19.0.0
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -7007,10 +6990,6 @@ snapshots:
     dependencies:
       '@types/react': 19.0.1
 
-  '@types/react-test-renderer@18.0.3':
-    dependencies:
-      '@types/react': 19.0.1
-
   '@types/react@18.3.12':
     dependencies:
       '@types/prop-types': 15.7.13
@@ -7045,11 +7024,11 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@types/webpack@5.28.5(@swc/core@1.7.42)(esbuild@0.18.20)':
+  '@types/webpack@5.28.5(@swc/core@1.7.42)':
     dependencies:
       '@types/node': 22.9.0
       tapable: 2.2.1
-      webpack: 5.92.1(@swc/core@1.7.42)(esbuild@0.18.20)
+      webpack: 5.92.1(@swc/core@1.7.42)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -9781,8 +9760,6 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-is@19.0.0: {}
-
   react-medium-image-zoom@5.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -9822,12 +9799,6 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.12
-
-  react-test-renderer@19.0.0(react@19.0.0):
-    dependencies:
-      react: 19.0.0
-      react-is: 19.0.0
-      scheduler: 0.25.0
 
   react@18.3.1:
     dependencies:
@@ -10306,17 +10277,16 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.7.42(@swc/helpers@0.5.13)
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.42)(esbuild@0.18.20)(webpack@5.92.1(@swc/core@1.7.42)(esbuild@0.18.20)):
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.42)(webpack@5.92.1(@swc/core@1.7.42)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.36.0
-      webpack: 5.92.1(@swc/core@1.7.42)(esbuild@0.18.20)
+      webpack: 5.92.1(@swc/core@1.7.42)
     optionalDependencies:
       '@swc/core': 1.7.42(@swc/helpers@0.5.13)
-      esbuild: 0.18.20
 
   terser@5.36.0:
     dependencies:
@@ -10410,7 +10380,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@7.2.0(@swc/core@1.7.42(@swc/helpers@0.5.13))(postcss@8.4.47)(typescript@5.5.2):
+  tsup@7.2.0(@swc/core@1.7.42)(postcss@8.4.47)(typescript@5.5.2):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.18.20)
       cac: 6.7.14
@@ -10752,7 +10722,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.92.1(@swc/core@1.7.42)(esbuild@0.18.20):
+  webpack@5.92.1(@swc/core@1.7.42):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.6
@@ -10775,7 +10745,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.42)(esbuild@0.18.20)(webpack@5.92.1(@swc/core@1.7.42)(esbuild@0.18.20))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.42)(webpack@5.92.1(@swc/core@1.7.42))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
