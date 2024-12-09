@@ -1,4 +1,5 @@
-import { __yak_span } from "next-yak/internal";
+import { styled } from "next-yak/internal";
+import * as __yak from "next-yak/internal";
 import __styleYak from "./icon.yak.module.css!=!./icon?./icon.yak.module.css";
 export var Icon = /*YAK Extracted CSS:
 .Icon {
@@ -6,4 +7,4 @@ export var Icon = /*YAK Extracted CSS:
   width: 20px;
   height: 20px;
 }
-*/ /*#__PURE__*/ __yak_span(__styleYak.Icon);
+*/ /*#__PURE__*/ __yak.__yak_span(__styleYak.Icon);
