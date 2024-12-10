@@ -5,15 +5,15 @@ import { YakThemeProvider } from "../context";
 import { styled as styledFn } from "../styled";
 
 // This transform is usually done by the SWC plugin.
-// However this `attrs.test.tsx` does not compile 
+// However this `attrs.test.tsx` does not compile
 // the code before testing
 const styled = Object.assign(styledFn, {
   div: styledFn("div"),
-  h1: styledFn("h1"), 
-  button: styledFn("button"), 
-  a: styledFn("a"), 
-  p: styledFn("p"), 
-  span: styledFn("span"), 
+  h1: styledFn("h1"),
+  button: styledFn("button"),
+  a: styledFn("a"),
+  p: styledFn("p"),
+  span: styledFn("span"),
 }) as typeof styledFn;
 
 beforeEach(() => {
