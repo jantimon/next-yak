@@ -293,6 +293,9 @@ Thanks for merging our prs fixes in next.js, webpack and postcss ❤️
 - https://github.com/vercel/next.js/pull/72622
 - https://github.com/webpack/webpack/pull/19012
 
+[![nexrt-yak-yak-shaving](https://github.com/user-attachments/assets/720ffc22-d61a-45de-a689-5536160ef079)](https://en.wiktionary.org/wiki/yak_shaving)
+
+
 </details>
 
 <details>
