@@ -1,5 +1,12 @@
 # next-yak
 
+## 4.0.0
+
+### Major Changes
+
+- d77a860: Upgrade to React 19
+- f204637: Add support for Next.js 15.0.4 (SWC 5.x)
+
 ## 3.1.0
 
 ### Minor Changes
