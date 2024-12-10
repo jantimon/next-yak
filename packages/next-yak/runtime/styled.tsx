@@ -1,4 +1,3 @@
-import { ForwardRefRenderFunction } from "react";
 import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
 import React from "react";
 
@@ -17,22 +16,6 @@ import type { YakTheme } from "./context/index.d.ts";
 const noTheme: YakTheme = {};
 
 /**
- * Hack to hide {[yakComponentSymbol]:[parentComponent, parentAttributeFunction]}
- * from the type definition and to deal with ExoticComponents
- */
-const yakForwardRef: <
-  TProps,
-  TAttrsIn extends object,
-  TAttrsOut extends AttrsMerged<TProps, TAttrsIn>,
->(
-  component: ForwardRefRenderFunction<any, TProps>,
-  attrsFn?: (props: any) => any,
-) => YakComponent<TProps, TAttrsIn, TAttrsOut> = (component, attrsFn) =>
-  Object.assign(React.forwardRef(component as any), {
-    [yakComponentSymbol]: [component, attrsFn],
-  }) as any;
-
-/**
  * Minimal type for a function component that works with next-yak
  */
 type FunctionComponent<T> = (
@@ -43,7 +26,7 @@ type FunctionComponent<T> = (
 /**
  * All valid html tags
  */
-type HtmlTags = keyof JSX.IntrinsicElements;
+type HtmlTags = keyof React.JSX.IntrinsicElements;
 
 /**
  * Return type of the provided props merged with the initial props
@@ -138,7 +121,7 @@ const yakStyled = <
     >
   ) => {
     const getRuntimeStyles = css(styles, ...(values as any));
-    const yak = (props: Substitute<TCSSProps & T, TAttrsIn>, ref: unknown) => {
+    const yak = (props: Substitute<TCSSProps & T, TAttrsIn>) => {
       // if the css component does not require arguments
       // it can be called without arguments and we skip calling useTheme()
       //
@@ -159,12 +142,7 @@ const yakStyled = <
       // starting from the innermost yak component to the outermost yak component (itself)
       const combinedProps =
         "$__attrs" in props
-          ? // if the props already contain the $__attrs key, we assume that the props have already been processed
-            // and skip processing the attrs again.
-            // e.g. const Child = styled(Parent)`color: red;`
-            // We process the attrs once in the child (with all attrs functions merged (including the one from the child))
-            // and in the subsequent call in the parent we skip processing the attrs again
-            {
+          ? {
               theme,
               ...props,
             }
@@ -192,39 +170,51 @@ const yakStyled = <
       // this must happen after the runtimeStyles are calculated
       // prevents passing the theme prop to the DOM element of a styled component
       const { theme: themeAfterAttr, ...combinedPropsWithoutTheme } =
-        combinedProps as { theme?: unknown };
+        combinedProps;
       const propsBeforeFiltering =
         themeAfterAttr === theme ? combinedPropsWithoutTheme : combinedProps;
 
       // remove all props that start with a $ sign for string components e.g. "button" or "div"
       // so that they are not passed to the DOM element
-      const filteredProps = !isYakComponent
-        ? removeNonDomProperties(propsBeforeFiltering)
-        : propsBeforeFiltering;
+      const filteredProps = (
+        !isYakComponent
+          ? removeNonDomProperties(propsBeforeFiltering)
+          : propsBeforeFiltering
+      ) as T & {
+        className?: string;
+        style?: React.CSSProperties;
+      };
 
-      // yak provides a className and style prop that needs to be merged with the
-      // user provided className and style prop
-      (filteredProps as { className?: string }).className = mergeClassNames(
-        (filteredProps as { className?: string }).className,
+      filteredProps.className = mergeClassNames(
+        filteredProps.className,
         runtimeStyles.className,
       );
-      (filteredProps as { style?: React.CSSProperties }).style =
+      filteredProps.style =
         "style" in filteredProps
           ? {
-              ...(filteredProps as { style?: React.CSSProperties }).style,
+              ...filteredProps.style,
               ...runtimeStyles.style,
             }
           : runtimeStyles.style;
-      // if the styled(Component) syntax is used and the component is a yak component
-      // we can call the yak function directly to avoid an unnecessary wrapper with an additional
-      // forwardRef call
-      if (parentYakComponent) {
-        return parentYakComponent(filteredProps as T, ref);
-      }
-      (filteredProps as { ref?: unknown }).ref = ref;
-      return <Component {...(filteredProps as any)} />;
+
+      return parentYakComponent ? (
+        // if the styled(Component) syntax is used and the component is a yak component
+        // we can call the yak function directly without running through react createElement
+        parentYakComponent(filteredProps)
+      ) : (
+        // if the final component is a string component e.g. styled("div") or a custom non yak fn e.g. styled(MyComponent)
+        <Component {...filteredProps} />
+      );
     };
-    return yakForwardRef(yak, mergedAttrsFn);
+
+    // Assign the yakComponentSymbol directly without forwardRef
+    return Object.assign(yak, {
+      [yakComponentSymbol]: [yak, mergedAttrsFn],
+    }) as YakComponent<
+      Substitute<TCSSProps & T, TAttrsIn>,
+      object,
+      AttrsMerged<Substitute<TCSSProps & T, TAttrsIn>, object>
+    >;
   };
 };
 
@@ -260,16 +250,18 @@ type StyledLiteral<T> = <TCSSProps>(
 export const styled =
   // this type is wrong - but it will work correctly with compiled code
   StyledFactory as typeof StyledFactory & {
-    [Tag in HtmlTags]: StyledLiteral<JSX.IntrinsicElements[Tag]> & {
+    [Tag in HtmlTags]: StyledLiteral<React.JSX.IntrinsicElements[Tag]> & {
       attrs: <
         TAttrsIn extends object = {},
         TAttrsOut extends AttrsMerged<
-          JSX.IntrinsicElements[Tag],
+          React.JSX.IntrinsicElements[Tag],
           TAttrsIn
-        > = AttrsMerged<JSX.IntrinsicElements[Tag], TAttrsIn>,
+        > = AttrsMerged<React.JSX.IntrinsicElements[Tag], TAttrsIn>,
       >(
-        attrs: Attrs<JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
-      ) => StyledLiteral<Substitute<JSX.IntrinsicElements[Tag], TAttrsIn>>;
+        attrs: Attrs<React.JSX.IntrinsicElements[Tag], TAttrsIn, TAttrsOut>,
+      ) => StyledLiteral<
+        Substitute<React.JSX.IntrinsicElements[Tag], TAttrsIn>
+      >;
     };
   };
 
@@ -279,7 +271,9 @@ export const styled =
  * This allows to have props that are used for internal stylingen purposes
  * but are not be passed to the DOM element
  */
-const removeNonDomProperties = <T extends Record<string, unknown>>(obj: T) => {
+const removeNonDomProperties = <T extends Record<string, unknown>>(
+  obj: T,
+): T => {
   const result = {} as T;
   for (const key in obj) {
     if (!key.startsWith("$") && obj[key] !== undefined) {

@@ -1,8 +1,20 @@
 import React, { FunctionComponent } from "react";
-import TestRenderer from "react-test-renderer";
+import { render } from "@testing-library/react";
 import { beforeEach, expect, describe, it, vi } from "vitest";
 import { YakThemeProvider } from "../context";
-import { styled } from "../styled";
+import { styled as styledFn } from "../styled";
+
+// This transform is usually done by the SWC plugin.
+// However this `attrs.test.tsx` does not compile 
+// the code before testing
+const styled = Object.assign(styledFn, {
+  div: styledFn("div"),
+  h1: styledFn("h1"), 
+  button: styledFn("button"), 
+  a: styledFn("a"), 
+  p: styledFn("p"), 
+  span: styledFn("span"), 
+}) as typeof styledFn;
 
 beforeEach(() => {
   vi.spyOn(console, "warn");
@@ -10,43 +22,36 @@ beforeEach(() => {
 
 type DataAttributes = { [key: `data-${string}`]: any };
 
+const getSnapshot = (element: React.ReactElement) =>
+  render(element).container.firstChild;
+
 it("works fine with an empty object", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs({})``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-    <div
-      style={{}}
-    />
-  `);
+  const Comp = styled.div.attrs({})``;
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`<div />`);
 });
 
 it("works fine with a function that returns an empty object", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs(() => ({}))``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-    <div
-      style={{}}
-    />
-  `);
+  const Comp = styled.div.attrs(() => ({}))``;
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`<div />`);
 });
 
 it("pass a simple attr via object", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs({
+  const Comp = styled.button.attrs({
     type: "button",
   })``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
       type="button"
     />
   `);
 });
 
 it("pass a simple attr via function with object return", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs(() => ({
+  const Comp = styled.button.attrs(() => ({
     type: "button",
   }))``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
       type="button"
     />
   `);
@@ -69,7 +74,7 @@ it("pass a React component", () => {
     component: ReactComponent,
   }))``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <button>
       <p>
         React Component
@@ -81,185 +86,132 @@ it("pass a React component", () => {
 it("should not call a function passed to attrs as an object value", () => {
   const stub = vi.fn(() => "div");
 
-  const Comp = styled("button").attrs<{ foo?: typeof stub }>(() => ({
+  const Comp = styled.button.attrs<{ foo?: typeof stub }>(() => ({
     foo: stub,
   }))``;
 
-  TestRenderer.create(<Comp />);
+  render(<Comp />);
 
   expect(stub).not.toHaveBeenCalled();
 });
 
-it("defaultProps are merged into what function attrs receives", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<DataAttributes>(
-    (props) => ({
-      "data-color": props.color,
-    }),
-  )``;
-
-  Comp.defaultProps = {
-    color: "red",
-  };
-  //YakComponent<FastOmit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-    <button
-      color="red"
-      data-color="red"
-      style={{}}
-    />
-  `);
-});
-
 it("pass props to the attr function", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<{
-    $submit?: boolean;
-  }>((p) => ({
+  const Comp = styled.button.attrs<{ $submit?: boolean }>((p) => ({
     type: p.$submit ? "submit" : "button",
   }))``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
       type="button"
     />
   `);
-  expect(TestRenderer.create(<Comp $submit />).toJSON()).toMatchInlineSnapshot(
-    `
+  expect(getSnapshot(<Comp $submit />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
       type="submit"
     />
-  `,
-  );
+  `);
 });
 
 it("should replace props with attrs", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<{
-    $submit?: boolean;
-  }>((p) => ({
+  const Comp = styled.button.attrs<{ $submit?: boolean }>((p) => ({
     type: p.$submit ? "submit" : "button",
     tabIndex: 0,
   }))``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
-      tabIndex={0}
+      tabindex="0"
       type="button"
     />
   `);
-  expect(TestRenderer.create(<Comp type="reset" />).toJSON())
+  expect(getSnapshot(<Comp type="reset" />)).toMatchInlineSnapshot(`
+    <button
+      tabindex="0"
+      type="button"
+    />
+  `);
+  expect(getSnapshot(<Comp type="reset" tabIndex={-1} />))
     .toMatchInlineSnapshot(`
-      <button
-        style={{}}
-        tabIndex={0}
-        type="button"
-      />
-    `);
-  expect(TestRenderer.create(<Comp type="reset" tabIndex={-1} />).toJSON())
-    .toMatchInlineSnapshot(`
-      <button
-        style={{}}
-        tabIndex={0}
-        type="button"
-      />
-    `);
+    <button
+      tabindex="0"
+      type="button"
+    />
+  `);
 });
 
 it("should merge className", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
+  const Comp = styled.div.attrs(() => ({
     className: "meow nya",
   }))``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <div
-      className="meow nya"
-      style={{}}
+      class="meow nya"
     />
   `);
 });
 
 it("should merge className from folded attrs", () => {
-  const Inner = (styled("div") as typeof styled.div).attrs({
-    className: "foo",
-  })``;
+  const Inner = styled.div.attrs({ className: "foo" })``;
 
   const Comp = styled(Inner).attrs(() => ({
     className: "meow nya",
   }))``;
 
-  expect(TestRenderer.create(<Comp className="something" />).toJSON())
-    .toMatchInlineSnapshot(`
-      <div
-        className="something foo meow nya"
-        style={{}}
-      />
-    `);
+  expect(getSnapshot(<Comp className="something" />)).toMatchInlineSnapshot(`
+    <div
+      class="something foo meow nya"
+    />
+  `);
 });
 
 it("should merge className even if its a function", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs<{ $purr?: boolean }>(
-    (p) => ({
-      className: `meow ${p.$purr ? "purr" : "nya"}`,
-    }),
-  )``;
+  const Comp = styled.div.attrs<{ $purr?: boolean }>((p) => ({
+    className: `meow ${p.$purr ? "purr" : "nya"}`,
+  }))``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <div
-      className="meow nya"
-      style={{}}
+      class="meow nya"
     />
   `);
-  expect(TestRenderer.create(<Comp $purr />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp $purr />)).toMatchInlineSnapshot(`
     <div
-      className="meow purr"
-      style={{}}
+      class="meow purr"
     />
   `);
 });
 
 it("should merge style", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
+  const Comp = styled.div.attrs(() => ({
     style: { color: "red", background: "blue" },
   }))``;
 
   expect(
-    TestRenderer.create(
-      <Comp style={{ color: "green", borderStyle: "dotted" }} />,
-    ).toJSON(),
+    getSnapshot(<Comp style={{ color: "green", borderStyle: "dotted" }} />),
   ).toMatchInlineSnapshot(`
     <div
-      style={
-        {
-          "background": "blue",
-          "borderStyle": "dotted",
-          "color": "red",
-        }
-      }
+      style="color: red; border-style: dotted; background: blue;"
     />
   `);
 });
 
 it("should work with data and aria attributes", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs<DataAttributes>(
-    () => ({
-      "data-foo": "bar",
-      "aria-label": "A simple FooBar",
-    }),
-  )``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  const Comp = styled.div.attrs<DataAttributes>(() => ({
+    "data-foo": "bar",
+    "aria-label": "A simple FooBar",
+  }))``;
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <div
       aria-label="A simple FooBar"
       data-foo="bar"
-      style={{}}
     />
   `);
 });
 
 it("merge attrs when inheriting SC", () => {
   let attrsCallCount = 0;
-  const Parent = (styled("button") as typeof styled.button).attrs(() => {
+  const Parent = styled.button.attrs(() => {
     // Parent should be called first and only once
     // to behave exactly like styled-components
     expect(attrsCallCount).toEqual(0);
@@ -278,10 +230,9 @@ it("merge attrs when inheriting SC", () => {
       type: "submit",
     };
   })``;
-  expect(TestRenderer.create(<Child />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Child />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
-      tabIndex={0}
+      tabindex="0"
       type="submit"
     />
   `);
@@ -289,7 +240,7 @@ it("merge attrs when inheriting SC", () => {
 
 it("pass attrs to style block", () => {
   /* Would be a React Router Link in real life */
-  const Comp = (styled("a") as typeof styled.a).attrs<DataAttributes>(() => ({
+  const Comp = styled.a.attrs<DataAttributes>(() => ({
     href: "#",
     "data-active-class-name": "--is-active",
     // @ts-expect-error
@@ -298,41 +249,33 @@ it("pass attrs to style block", () => {
       "--testVar": (props: any) => props["data-active-class-name"] && "c2",
     },
   });
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <a
-      className="c1"
+      class="c1"
       data-active-class-name="--is-active"
       href="#"
-      style={
-        {
-          "--testVar": "c2",
-        }
-      }
+      style="--testVar: c2;"
     />
   `);
 });
 
 it("should pass through children as a normal prop", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
+  const Comp = styled.div.attrs(() => ({
     children: "Probably a bad idea",
   }))``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-    <div
-      style={{}}
-    >
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
+    <div>
       Probably a bad idea
     </div>
   `);
 });
 
 it("should pass through complex children as well", () => {
-  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
+  const Comp = styled.div.attrs(() => ({
     children: <span>Probably a bad idea</span>,
   }))``;
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-    <div
-      style={{}}
-    >
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
+    <div>
       <span>
         Probably a bad idea
       </span>
@@ -341,27 +284,22 @@ it("should pass through complex children as well", () => {
 });
 
 it("should override children", () => {
-  const X = (styled("div") as typeof styled.div)``;
-  type XProps = React.ComponentProps<typeof X>["children"] & JSX.Element;
-  const Comp = (styled("div") as typeof styled.div).attrs(() => ({
+  const X = styled.div``;
+  type XProps = React.ComponentProps<typeof X>["children"] & React.JSX.Element;
+  const Comp = styled.div.attrs(() => ({
     children: <span>Amazing</span>,
   }))``;
-  expect(TestRenderer.create(<Comp>Something else</Comp>).toJSON())
-    .toMatchInlineSnapshot(`
-      <div
-        style={{}}
-      >
-        <span>
-          Amazing
-        </span>
-      </div>
-    `);
+  expect(getSnapshot(<Comp>Something else</Comp>)).toMatchInlineSnapshot(`
+    <div>
+      <span>
+        Amazing
+      </span>
+    </div>
+  `);
 });
 
 it('should shallow merge "style" prop + attr instead of overwriting', () => {
-  const Paragraph = (styled("p") as typeof styled.p).attrs<{
-    $fontScale?: number;
-  }>((p) => ({
+  const Paragraph = styled.p.attrs<{ $fontScale?: number }>((p) => ({
     style: {
       ...p.style,
       fontSize: `${p.$fontScale}em`,
@@ -386,16 +324,9 @@ it('should shallow merge "style" prop + attr instead of overwriting', () => {
     },
   }))``;
 
-  const rendered = TestRenderer.create(<BlueText>Hello</BlueText>);
-
-  expect(rendered.toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<BlueText>Hello</BlueText>)).toMatchInlineSnapshot(`
     <p
-      style={
-        {
-          "color": "blue",
-          "fontSize": "4em",
-        }
-      }
+      style="color: blue; font-size: 4em;"
     >
       Hello
     </p>
@@ -405,7 +336,7 @@ it('should shallow merge "style" prop + attr instead of overwriting', () => {
 it("does not pass transient props to HTML element", () => {
   type CompProps = { $textColor: string };
 
-  const Comp = (styled("div") as typeof styled.div)<CompProps>`
+  const Comp = styled.div<CompProps>`
     color: ${(props) => props.$textColor};
   `;
 
@@ -413,79 +344,49 @@ it("does not pass transient props to HTML element", () => {
     $textColor: "red",
   }))``;
 
-  expect(TestRenderer.create(<StyledComp />).toJSON()).toMatchInlineSnapshot(`
-    <div
-      style={{}}
-    />
-  `);
+  expect(getSnapshot(<StyledComp />)).toMatchInlineSnapshot(`<div />`);
 });
 
 it.skip('should apply given "as" prop to the progressive type', () => {
-  const Comp = (styled("div") as typeof styled.div).attrs<{ as?: any }>({
-    as: "video" as const,
-  })``;
+  const Comp = styled.div.attrs<{ as?: any }>({ as: "video" as const })``;
 
   //@ts-expect-error
-  expect(TestRenderer.create(<Comp loop />).toJSON()).toMatchInlineSnapshot(`
-    <video
-      className=""
-      loop={true}
-      style={{}}
-    />
-  `);
+  expect(getSnapshot(<Comp loop />)).toMatchInlineSnapshot();
 });
 
 // our own tests
 it("should remap props", () => {
-  const Comp = (styled("button") as typeof styled.button).attrs<{
-    primary?: boolean;
-    $submit?: boolean;
-  }>((p) => ({
-    type: p.$submit ? "submit" : "button",
-    $primary: p.primary,
-  }))<{ $primary?: boolean }>``;
+  const Comp = styled.button.attrs<{ primary?: boolean; $submit?: boolean }>(
+    (p) => ({
+      type: p.$submit ? "submit" : "button",
+      $primary: p.primary,
+    }),
+  )<{ $primary?: boolean }>``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
       type="button"
     />
   `);
-  expect(TestRenderer.create(<Comp primary />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp primary />)).toMatchInlineSnapshot(`
     <button
-      primary={true}
-      style={{}}
       type="button"
     />
   `);
-
-  expect(TestRenderer.create(<Comp $submit />).toJSON()).toMatchInlineSnapshot(`
+  expect(getSnapshot(<Comp $submit />)).toMatchInlineSnapshot(`
     <button
-      style={{}}
       type="submit"
     />
   `);
 });
 
 it("should have optional attrs props as component interface", () => {
-  const Comp = (styled("h1") as typeof styled.h1).attrs<{ $primary?: boolean }>(
-    {
-      $primary: true,
-    },
-  )``;
+  const Comp = styled.h1.attrs<{ $primary?: boolean }>({
+    $primary: true,
+  })``;
 
-  expect(TestRenderer.create(<Comp />).toJSON()).toMatchInlineSnapshot(`
-    <h1
-      style={{}}
-    />
-  `);
-
-  expect(TestRenderer.create(<Comp $primary />).toJSON())
-    .toMatchInlineSnapshot(`
-      <h1
-        style={{}}
-      />
-    `);
+  expect(getSnapshot(<Comp />)).toMatchInlineSnapshot(`<h1 />`);
+  expect(getSnapshot(<Comp $primary />)).toMatchInlineSnapshot(`<h1 />`);
 });
 
 it("should have access to theme", () => {
@@ -497,15 +398,14 @@ it("should have access to theme", () => {
   }))``;
 
   expect(
-    TestRenderer.create(
+    getSnapshot(
       <YakThemeProvider theme={{ color: "red" }}>
         <Comp />
       </YakThemeProvider>,
-    ).toJSON(),
+    ),
   ).toMatchInlineSnapshot(`
     <pre
       data-color="red"
-      style={{}}
     />
   `);
 });
@@ -519,15 +419,13 @@ it("should pass theme if theme is overwritten", () => {
   })``;
 
   expect(
-    TestRenderer.create(
+    getSnapshot(
       <YakThemeProvider theme={{ color: "red" }}>
         <Comp />
       </YakThemeProvider>,
-    ).toJSON(),
+    ),
   ).toMatchInlineSnapshot(`
-    <pre
-      style={{}}
-    >
+    <pre>
       {"color":"blue"}
     </pre>
   `);
@@ -535,46 +433,30 @@ it("should pass theme if theme is overwritten", () => {
 
 describe("attrs bug next-yak/issues/163", () => {
   it("should allow to delete a prop", () => {
-    const Comp = (styled("h1") as typeof styled.h1).attrs<{
-      primary?: boolean;
-    }>({
+    const Comp = styled.h1.attrs<{ primary?: boolean }>({
       primary: undefined,
     })``;
 
-    expect(TestRenderer.create(<Comp primary />).toJSON())
-      .toMatchInlineSnapshot(`
-    <h1
-      style={{}}
-    />
-  `);
+    expect(getSnapshot(<Comp primary />)).toMatchInlineSnapshot(`<h1 />`);
   });
 
   it("should allow to rename a prop", () => {
-    const Comp = (styled("h1") as typeof styled.h1).attrs<{
-      primary?: boolean;
-    }>((p) => ({
+    const Comp = styled.h1.attrs<{ primary?: boolean }>((p) => ({
       ...p,
       primary: undefined,
       $primary: p.primary,
     }))``;
 
-    expect(TestRenderer.create(<Comp primary />).toJSON())
-      .toMatchInlineSnapshot(`
-    <h1
-      style={{}}
-    />
-  `);
+    expect(getSnapshot(<Comp primary />)).toMatchInlineSnapshot(`<h1 />`);
   });
 
   it("should allow to rename a prop in overwritten attrs", () => {
-    const Parent = (styled("h1") as typeof styled.h1).attrs<{ count: number }>(
-      (p) => {
-        expect(p.count).toBe(1);
-        return {
-          count: ++p.count,
-        };
-      },
-    )``;
+    const Parent = styled.h1.attrs<{ count: number }>((p) => {
+      expect(p.count).toBe(1);
+      return {
+        count: ++p.count,
+      };
+    })``;
     const Comp = styled(Parent).attrs<{ count: number }>((p) => {
       expect(p.count).toBe(2);
       return {
@@ -582,12 +464,10 @@ describe("attrs bug next-yak/issues/163", () => {
       };
     })``;
 
-    expect(TestRenderer.create(<Comp count={1} />).toJSON())
-      .toMatchInlineSnapshot(`
-        <h1
-          count={3}
-          style={{}}
-        />
-      `);
+    expect(getSnapshot(<Comp count={1} />)).toMatchInlineSnapshot(`
+      <h1
+        count="3"
+      />
+    `);
   });
 });
