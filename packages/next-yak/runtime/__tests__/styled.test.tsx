@@ -7,10 +7,19 @@ import React from "react";
 import { expect, it } from "vitest";
 import { YakThemeProvider } from "../context";
 import { css } from "../cssLiteral";
-import { styled } from "../styled";
+import { styled as styledFn } from "../styled";
+
+// This transform is usually done by the SWC plugin.
+// However this `styled.test.tsx` does not compile
+// the code before testing
+const styled = Object.assign(styledFn, {
+  div: styledFn("div"),
+  input: styledFn("input"),
+  a: styledFn("a"),
+}) as typeof styledFn;
 
 it("should render a literal element", () => {
-  const Component = (styled("input") as typeof styled.input)``;
+  const Component = styled.input``;
 
   const { container } = render(<Component />);
 
@@ -22,7 +31,7 @@ it("should render a literal element", () => {
 });
 
 it("should render a literal element with styles", () => {
-  const Component = (styled("input") as typeof styled.input)("cssClass");
+  const Component = styled.input("cssClass");
 
   const { container } = render(<Component />);
 
@@ -36,7 +45,7 @@ it("should render a literal element with styles", () => {
 });
 
 it("should forward properties", () => {
-  const Component = (styled("input") as typeof styled.input)("cssClass");
+  const Component = styled.input("cssClass");
 
   const { container } = render(<Component defaultValue="forwarded" />);
 
@@ -51,7 +60,7 @@ it("should forward properties", () => {
 });
 
 it("should forward children", () => {
-  const Component = (styled("div") as typeof styled.div)``;
+  const Component = styled.div``;
 
   const { container } = render(
     <Component>
@@ -71,7 +80,7 @@ it("should forward children", () => {
 });
 
 it("should filter out properties starting with $", () => {
-  const Component = (styled("input") as typeof styled.input)``;
+  const Component = styled.input``;
 
   const { container } = render(<Component $forwardedProp="notForwarded" />);
 
@@ -95,7 +104,7 @@ it("should filter out properties starting with $ when passing to custom", () => 
 });
 
 it("should forward properties to the next yak component", () => {
-  const Component = (styled("input") as typeof styled.input).attrs(
+  const Component = styled.input.attrs(
     ({ $text }) => ({
       "aria-label": $text,
     }),
@@ -113,7 +122,7 @@ it("should forward properties to the next yak component", () => {
 });
 
 it("should concatenate classNames", () => {
-  const Component = (styled("input") as typeof styled.input)("className1");
+  const Component = styled.input("className1");
 
   const { container } = render(<Component className="className2" />);
 
@@ -127,7 +136,7 @@ it("should concatenate classNames", () => {
 });
 
 it("should concatenate styles", () => {
-  const Component = (styled("input") as typeof styled.input)``;
+  const Component = styled.input``;
 
   const { container } = render(<Component style={{ color: "red" }} />);
 
@@ -141,7 +150,7 @@ it("should concatenate styles", () => {
 });
 
 it("should not add class if prop is not set", () => {
-  const Component = (styled("input") as typeof styled.input)(
+  const Component = styled.input(
     ({ testProp }) => testProp && css("test"),
   );
 
@@ -155,7 +164,7 @@ it("should not add class if prop is not set", () => {
 });
 
 it("should add class if prop is set", () => {
-  const Component = (styled("input") as typeof styled.input)(
+  const Component = styled.input(
     ({ $testProp }) => $testProp && css("test"),
   );
 
@@ -171,7 +180,7 @@ it("should add class if prop is set", () => {
 });
 
 it("should allow falsy values", () => {
-  const Component = (styled("input") as typeof styled.input)(
+  const Component = styled.input(
     ({ $testProp }) => $testProp && css("test"),
   );
 
@@ -193,7 +202,7 @@ it("should allow falsy values", () => {
 });
 
 it("should execute runtime styles recursively", () => {
-  const Component = (styled("input") as typeof styled.input)<{
+  const Component = styled.input<{
     $testProp: boolean;
   }>(
     ({ $testProp }) =>
@@ -217,7 +226,7 @@ it("should execute runtime styles recursively", () => {
 });
 
 it("should allow using refs", () => {
-  const Component = (styled("input") as typeof styled.input)();
+  const Component = styled.input();
 
   let elementFromRef: HTMLInputElement | null = null;
   render(
@@ -232,7 +241,7 @@ it("should allow using refs", () => {
 });
 
 it("should allow using nested refs", () => {
-  const BaseComponent = (styled("input") as typeof styled.input)();
+  const BaseComponent = styled.input();
   const Component = styled(BaseComponent)();
 
   let elementFromRef: HTMLInputElement | null = null;
@@ -248,7 +257,7 @@ it("should allow using nested refs", () => {
 });
 
 it("should remove theme if styled element", () => {
-  const Link = (styled("a") as typeof styled.a)((p) => p && css("test"));
+  const Link = styled.a((p) => p && css("test"));
 
   const { container } = render(
     <YakThemeProvider theme={{ color: "red" }}>
@@ -289,7 +298,7 @@ it("should keep theme if theme is passed to element", () => {
 });
 
 it("should remove theme on wrapped element", () => {
-  const BaseComponent = (styled("input") as typeof styled.input)(
+  const BaseComponent = styled.input(
     (p) => p && css("test"),
   );
   const Component = styled(BaseComponent)((p) => p && css("test-wrapper"));
@@ -351,7 +360,7 @@ describe("dev mode - error tests", () => {
   });
 
   it("should show the function body in error message when dynamic css function returns invalid value", () => {
-    const Component = (styled("div") as typeof styled.div)("cssClass", {
+    const Component = styled.div("cssClass", {
       style: {
         "--bar": ({ $groupColor }) => $groupColor,
       },
