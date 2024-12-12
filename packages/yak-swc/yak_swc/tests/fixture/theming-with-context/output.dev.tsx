@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const ThemedComponent = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ThemedComponent_m7uBBu) {
   background-color: var(--ThemedComponent__background-color_m7uBBu);
   color: var(--ThemedComponent__color_m7uBBu);

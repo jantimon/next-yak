@@ -7,7 +7,6 @@ import { fonts } from "./fontDefinitions";
 import { sizes } from "./sizeDefinitions";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Button_m7uBBu) {
   font-size: --yak-css-import: url("./fontDefinitions:fonts:sm",mixin);
   color: --yak-css-import: url("./colorDefinitions:colors:dark:primary",mixin);

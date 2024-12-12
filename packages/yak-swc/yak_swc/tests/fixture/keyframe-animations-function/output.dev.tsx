@@ -1,22 +1,18 @@
 import { styled, css, keyframes } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FadeInText = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.FadeInText__$reverse_m7uBBu) {
   animation: fadeOut_m7uBBu 1s ease-in;
 }
-// cssmodules-pure-ignore
 :global(.FadeInText__not_$reverse_m7uBBu) {
   animation: fadeIn_m7uBBu 1s ease-in;
 }
-// cssmodules-pure-ignore
 :global(.FadeInText_m7uBBu) {
   font-size: 18px;
   color: #333;
 }
 */ /*#__PURE__*/ styled.p("FadeInText_m7uBBu", ({ $reverse })=>$reverse ? /*#__PURE__*/ css("FadeInText__$reverse_m7uBBu") : /*#__PURE__*/ css("FadeInText__not_$reverse_m7uBBu"));
 const fadeIn = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 @keyframes :global(fadeIn_m7uBBu) {
   from {
     opacity: 0;
@@ -27,7 +23,6 @@ const fadeIn = /*YAK Extracted CSS:
 }
 */ /*#__PURE__*/ keyframes("fadeIn_m7uBBu");
 const fadeOut = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 @keyframes :global(fadeOut_m7uBBu) {
   from {
     opacity: 1;

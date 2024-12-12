@@ -5,7 +5,6 @@ import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const textColor = "red";
 // Should be transformed as it is yak
 export const CustomThemedButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.CustomThemedButton_m7uBBu) {
   color: blue;
 }

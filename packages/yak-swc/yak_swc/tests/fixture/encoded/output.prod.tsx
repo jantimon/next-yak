@@ -2,7 +2,6 @@ import { styled } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const before = "\\2022";
 export const Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu) {
   background-color: #007bff;
   &::before {

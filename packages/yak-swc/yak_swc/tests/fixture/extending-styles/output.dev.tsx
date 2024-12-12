@@ -1,7 +1,6 @@
 import { styled } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const BaseButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.BaseButton_m7uBBu) {
   padding: 10px 20px;
   border: none;
@@ -11,7 +10,6 @@ const BaseButton = /*YAK Extracted CSS:
 }
 */ /*#__PURE__*/ styled.button("BaseButton_m7uBBu");
 export const PrimaryButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.PrimaryButton_m7uBBu) {
   background-color: #007bff;
   color: #fff;
@@ -21,7 +19,6 @@ export const PrimaryButton = /*YAK Extracted CSS:
 }
 */ /*#__PURE__*/ styled(BaseButton)("PrimaryButton_m7uBBu");
 export const SecondaryButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.SecondaryButton_m7uBBu) {
   background-color: #6c757d;
   color: #fff;

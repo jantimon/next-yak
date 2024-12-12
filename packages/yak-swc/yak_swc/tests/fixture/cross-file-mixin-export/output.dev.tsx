@@ -13,21 +13,18 @@ color: black;
 --yak-css-import: url("./typography:typogaphyMixin",mixin);
 */ /*#__PURE__*/ css();
 export const Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Button_m7uBBu) {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-// cssmodules-pure-ignore
 :global(.Button___m7uBBu) {
   &:hover {
     font-size: 16px;
     color: black;
   }
 }
-// cssmodules-pure-ignore
 :global(.Button_m7uBBu) {
   &:focus {
     font-size: 16px;

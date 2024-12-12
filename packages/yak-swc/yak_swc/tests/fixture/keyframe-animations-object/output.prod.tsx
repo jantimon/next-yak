@@ -1,15 +1,12 @@
 import { styled, css, keyframes } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FadeInText = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu1) {
   animation: ym7uBBu2 1s ease-in;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu3) {
   animation: ym7uBBu4 1s ease-in;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu) {
   font-size: 18px;
   color: #333;
@@ -17,7 +14,6 @@ export const FadeInText = /*YAK Extracted CSS:
 */ /*#__PURE__*/ styled.p("ym7uBBu", ({ $reverse })=>$reverse ? /*#__PURE__*/ css("ym7uBBu1") : /*#__PURE__*/ css("ym7uBBu3"));
 const animations = {
     fadeIn: /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 @keyframes :global(ym7uBBu4) {
   from {
     opacity: 0;
@@ -28,7 +24,6 @@ const animations = {
 }
 */ /*#__PURE__*/ keyframes("ym7uBBu4"),
     fadeOut: /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 @keyframes :global(ym7uBBu2) {
   from {
     opacity: 1;
@@ -41,7 +36,6 @@ const animations = {
 };
 const slides = {
     200: /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 @keyframes :global(ym7uBBu5) {
   to {
     transform: translate(200px, 200px);
@@ -49,7 +43,6 @@ const slides = {
 }
 */ /*#__PURE__*/ keyframes("ym7uBBu5"),
     "x400": /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 @keyframes :global(ym7uBBu6) {
   from {
     transform: translateX(0);
@@ -61,7 +54,6 @@ const slides = {
 */ /*#__PURE__*/ keyframes("ym7uBBu6")
 };
 export const FancyButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu7) {
   background-color: #f00;
   animation: global(ym7uBBu6) 1s ease-in-out, global(ym7uBBu4) 1s ease-in;

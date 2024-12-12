@@ -1,7 +1,6 @@
 import { styled } from "next-yak/internal";
 import "./icon.yak.module.css!=!./icon?./icon.yak.module.css";
 export var Icon = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Icon_je4Wtv) {
   display: inline-block;
   width: 20px;

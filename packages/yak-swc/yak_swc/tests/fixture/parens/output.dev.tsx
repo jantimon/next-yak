@@ -1,15 +1,12 @@
 import { styled, css, __yak_unitPostFix } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Card = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Card_m7uBBu) {
   background: url("/card-bg.jpg") no-repeat;
 }
-// cssmodules-pure-ignore
 :global(.Card__$active_m7uBBu) {
   backgorund: url(/card-bg-active.jpg) no-repeat;
 }
-// cssmodules-pure-ignore
 :global(.Card_m7uBBu) {
   transform: translate(-50%, -50%) rotate(var(--Card__transform_m7uBBu))
 translate(0, -88px) rotate(var(--Card__transform_m7uBBu-01));

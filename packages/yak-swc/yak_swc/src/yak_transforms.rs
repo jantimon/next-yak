@@ -87,7 +87,7 @@ impl YakTransform for TransformNestedCss {
     let mut parser_state = previous_parser_state.clone().unwrap();
     // The first scope is the class name which gets attached to the element
     parser_state.current_scopes[0] = CssScope {
-      name: format!("// cssmodules-pure-ignore\n:global(.{})", css_identifier),
+      name: format!(":global(.{})", css_identifier),
       scope_type: ScopeType::Selector,
     };
     parser_state
@@ -174,7 +174,7 @@ impl YakTransform for TransformCssMixin {
       naming_convention.get_css_class_name(&declaration_name.to_readable_string());
     self.class_name = Some(css_identifier.clone());
     parser_state.current_scopes = vec![CssScope {
-      name: format!("// cssmodules-pure-ignore\n:global(.{})", css_identifier),
+      name: format!(":global(.{})", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
@@ -294,7 +294,7 @@ impl YakTransform for TransformStyled {
     self.class_name = Some(css_identifier.clone());
     let mut parser_state = ParserState::new();
     parser_state.current_scopes = vec![CssScope {
-      name: format!("// cssmodules-pure-ignore\n:global(.{})", css_identifier),
+      name: format!(":global(.{})", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
     parser_state
@@ -381,10 +381,7 @@ impl YakTransform for TransformKeyframes {
     };
     let mut parser_state = ParserState::new();
     parser_state.current_scopes = vec![CssScope {
-      name: format!(
-        "// cssmodules-pure-ignore\n@keyframes :global({})",
-        css_identifier
-      ),
+      name: format!("@keyframes :global({})", css_identifier),
       scope_type: ScopeType::AtRule,
     }];
     parser_state

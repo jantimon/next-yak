@@ -1,4 +1,4 @@
-/* cssmodules-pure-ignore * /
+/* cssmodules-pure-no-check * /
 :global(.Button_oPtJMe) {
   color: black;
 :global(.icon_Icon__vdEsc) {
@@ -6,7 +6,6 @@
 }
 
 }
-/* cssmodules-pure-ignore * /
 :global(.PrimaryButton_oPtJMe) {
   color: black;
 :global(.icon_Icon__vdEsc) {

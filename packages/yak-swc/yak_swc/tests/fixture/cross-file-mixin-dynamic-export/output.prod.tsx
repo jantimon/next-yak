@@ -12,47 +12,40 @@ color: black;
 color: red;
 */ /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ css("ym7uBBu5"));
 export const Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu6) {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu7) {
   &:hover {
     font-size: 16px;
     color: black;
   }
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu8) {
   &:hover {
     color: red;
   }
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu6) {
   &:focus {
     font-size: 16px;
     color: black;
   }
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu9) {
   &:focus {
     color: red;
   }
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu6) {
   &:focus {
     font-size: 16px;
     color: black;
   }
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBuA) {
   &:focus {
     color: red;

@@ -1,7 +1,6 @@
 import { styled, css, __yak_unitPostFix } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FlexContainer = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu) {
   display: flex;
   align-items: var(--ym7uBBu1);
@@ -12,7 +11,6 @@ export const FlexContainer = /*YAK Extracted CSS:
   top: var(--ym7uBBu5);
   background-color: #f0f0f0;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu6) {
   bottom: var(--ym7uBBu7);
 }

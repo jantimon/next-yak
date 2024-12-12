@@ -13,7 +13,6 @@ const colors = {
 const borderRadius = "4px";
 const stacking = 1;
 export const Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Button_m7uBBu) {
   background-color: #007bff;
   color: #f8f9fa;

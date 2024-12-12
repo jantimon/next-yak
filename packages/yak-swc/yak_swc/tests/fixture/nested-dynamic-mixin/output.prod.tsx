@@ -3,22 +3,18 @@ import "./input.yak.module.css!=!./input?./input.yak.module.css";
 // example taken from https://github.com/jantimon/next-yak/issues/208 
 const spacing = "20px";
 const ContainerFluid = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu) {
   position: relative;
   margin: 0 auto;
   padding-top: 20px;
   max-width: 100%;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu1) {
   margin-top: unset;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu2) {
   margin-top: px;
 }
-// cssmodules-pure-ignore
 :global(.ym7uBBu) {
   margin-top: var(--ym7uBBu3);
 }

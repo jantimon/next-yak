@@ -5,19 +5,15 @@ var buttonTextMixin = /*#__PURE__*/ css(function(param) {
     return $disabled && /*#__PURE__*/ css("buttonTextMixin__$disabled_xEUJ1U");
 });
 var Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Button_xEUJ1U) {
   color: black;
 }
-// cssmodules-pure-ignore
 :global(.Button__$disabled_xEUJ1U) {
   opacity: 0.5;
 }
-// cssmodules-pure-ignore
 :global(.Button__$hasIcon_xEUJ1U) {
   padding-left: 30px;
 }
-// cssmodules-pure-ignore
 :global(.Button__$disabled_xEUJ1U-01) {
   color: gray;
 }

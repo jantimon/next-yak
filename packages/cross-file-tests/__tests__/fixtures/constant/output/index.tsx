@@ -2,7 +2,6 @@ import { styled, css } from "next-yak/internal";
 import { colors, negative, siteMaxWidth } from "./constants";
 import "./index.yak.module.css!=!./index?./index.yak.module.css";
 export var Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Button_wIxfWW) {
   color: red;
   height: --yak-css-import: url("./constants:siteMaxWidth",mixin)px;
@@ -10,7 +9,6 @@ export var Button = /*YAK Extracted CSS:
   background-color: --yak-css-import: url("./constants:colors:secondary",mixin);
   z-index: --yak-css-import: url("./constants:negative",mixin);
 }
-// cssmodules-pure-ignore
 :global(.Button___wIxfWW) {
   color: --yak-css-import: url("./constants:colors:secondary",mixin);
   background-color: --yak-css-import: url("./constants:colors:primary",mixin);

@@ -1,7 +1,6 @@
 import { css, __yak_mergeCssProp } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const Elem = ()=><div {.../*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Elem_m7uBBu) {
   color: red;
 }
@@ -9,7 +8,6 @@ const Elem = ()=><div {.../*YAK Extracted CSS:
 const Elem2 = ()=><div {...__yak_mergeCssProp({
         className: "test-class"
     }, /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Elem2_m7uBBu) {
   color: blue;
 }
@@ -19,7 +17,6 @@ const Elem3 = ()=><div {...__yak_mergeCssProp({
             padding: "5px"
         }
     }, /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Elem3_m7uBBu) {
   padding: 10px;
 }
@@ -27,7 +24,6 @@ const Elem3 = ()=><div {...__yak_mergeCssProp({
 const Elem4 = (props: any)=><div {...__yak_mergeCssProp({
         ...props
     }, /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Elem4_m7uBBu) {
   color: green;
 }
@@ -36,7 +32,6 @@ const Elem5 = (props: any)=><div {...__yak_mergeCssProp({
         ...props.a,
         ...props.b
     }, /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Elem5_m7uBBu) {
   color: purple;
 }
@@ -47,7 +42,6 @@ const Elem6 = ()=><div {...__yak_mergeCssProp({
             fontWeight: "bold"
         }
     }, /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Elem6_m7uBBu) {
   font-size: 16px;
 }

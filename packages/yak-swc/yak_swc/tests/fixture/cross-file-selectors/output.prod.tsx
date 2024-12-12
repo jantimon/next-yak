@@ -4,7 +4,6 @@ import { Icon } from "./Icon";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const primary = "green";
 export const Button = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ym7uBBu) {
   font-size: 1rem;
   color: green;

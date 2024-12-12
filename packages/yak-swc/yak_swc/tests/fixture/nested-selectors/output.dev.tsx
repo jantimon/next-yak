@@ -1,7 +1,6 @@
 import { styled } from "next-yak/internal";
 import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Card = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.Card_m7uBBu) {
   background-color: #fff;
   border-radius: 8px;

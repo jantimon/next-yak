@@ -10,21 +10,18 @@ const buttonStyles = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ c
     }
 });
 export const ThemedButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.ThemedButton_m7uBBu) {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-// cssmodules-pure-ignore
 :global(.ThemedButton__$active_m7uBBu) {
   @media (max-width: 600px) {
     background-color: #f0f0f0;
     max-width: var(--ThemedButton__max-width_m7uBBu);
   }
 }
-// cssmodules-pure-ignore
 :global(.ThemedButton_m7uBBu) {
   width: var(--ThemedButton__width_m7uBBu);
 }
@@ -38,7 +35,6 @@ export const ThemedButton = /*YAK Extracted CSS:
     }
 });
 export const CustomThemedButton = /*YAK Extracted CSS:
-// cssmodules-pure-ignore
 :global(.CustomThemedButton_m7uBBu) {
   color: red;
   &:not([disabled]) {
@@ -48,7 +44,6 @@ export const CustomThemedButton = /*YAK Extracted CSS:
     cursor: pointer;
   }
 }
-// cssmodules-pure-ignore
 :global(.CustomThemedButton__$active_m7uBBu) {
   &:not([disabled]) {
     @media (max-width: 600px) {
@@ -57,7 +52,6 @@ export const CustomThemedButton = /*YAK Extracted CSS:
     }
   }
 }
-// cssmodules-pure-ignore
 :global(.CustomThemedButton_m7uBBu) {
   &:not([disabled]) {
     width: var(--CustomThemedButton__width_m7uBBu);
