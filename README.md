@@ -21,25 +21,20 @@
 
 ## Compatibility
 
-| next-yak version | Next.js version | swc_core version |
-|------------------|-----------------|------------------|
-| 3.x              | 15.x            | 3.0.2            |
-| 2.x              | 14.x            | 0.279.0          |
-
-Make sure to use a compatible version when installing:
-
+| next-yak         | Next.js         | react            | swc_core         | 
+|------------------|-----------------|------------------|------------------|
+| 4.x              | >= 15.0.4       | 19.x             | 5.0.1            |
+| 3.x              | 15.x            | 18.x / 19.x      | 3.0.2            |
+| 2.x              | 14.x            | 18.x / 19.x      | 0.279.0          |
 
 ## Installation
 
 ```bash
-# For Next.js 15.x
-npm install next-yak@3
+# For Next.js >= 15.0.4
+npm install next-yak@4
 
 # For Next.js 14.x 
 npm install next-yak@2
-
-# For Next.js 13.x
-npm install next-yak@1
 ```
 
 ## Getting Started
@@ -295,6 +290,11 @@ Thanks for merging our prs fixes in next.js, webpack and postcss ❤️
 - https://github.com/webpack-contrib/mini-css-extract-plugin/pull/1084
 - https://github.com/vercel/next.js/pull/62733
 - https://github.com/vercel/next.js/pull/64551
+- https://github.com/vercel/next.js/pull/72622
+- https://github.com/webpack/webpack/pull/19012
+
+[![nexrt-yak-yak-shaving](https://github.com/user-attachments/assets/720ffc22-d61a-45de-a689-5536160ef079)](https://en.wiktionary.org/wiki/yak_shaving)
+
 
 </details>
 
