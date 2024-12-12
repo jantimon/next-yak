@@ -1,19 +1,19 @@
 import { styled, css, keyframes } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const FadeInText = /*YAK Extracted CSS:
-.FadeInText__$reverse {
-  animation: fadeOut 1s ease-in;
+:global(.ym7uBBu1) {
+  animation: ym7uBBu2 1s ease-in;
 }
-.FadeInText__not_$reverse {
-  animation: fadeIn 1s ease-in;
+:global(.ym7uBBu3) {
+  animation: ym7uBBu4 1s ease-in;
 }
-.FadeInText {
+:global(.ym7uBBu) {
   font-size: 18px;
   color: #333;
 }
-*/ /*#__PURE__*/ styled.p(__styleYak.FadeInText, ({ $reverse })=>$reverse ? /*#__PURE__*/ css(__styleYak.FadeInText__$reverse) : /*#__PURE__*/ css(__styleYak.FadeInText__not_$reverse));
+*/ /*#__PURE__*/ styled.p("ym7uBBu", ({ $reverse })=>$reverse ? /*#__PURE__*/ css("ym7uBBu1") : /*#__PURE__*/ css("ym7uBBu3"));
 const fadeIn = /*YAK Extracted CSS:
-@keyframes fadeIn {
+@keyframes :global(ym7uBBu4) {
   from {
     opacity: 0;
   }
@@ -21,9 +21,9 @@ const fadeIn = /*YAK Extracted CSS:
     opacity: 1;
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.fadeIn);
+*/ /*#__PURE__*/ keyframes("ym7uBBu4");
 const fadeOut = /*YAK Extracted CSS:
-@keyframes fadeOut {
+@keyframes :global(ym7uBBu2) {
   from {
     opacity: 1;
   }
@@ -31,4 +31,4 @@ const fadeOut = /*YAK Extracted CSS:
     opacity: 0;
   }
 }
-*/ /*#__PURE__*/ keyframes(__styleYak.fadeOut);
+*/ /*#__PURE__*/ keyframes("ym7uBBu2");

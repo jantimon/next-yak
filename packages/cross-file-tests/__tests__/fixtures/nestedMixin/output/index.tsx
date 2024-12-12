@@ -1,14 +1,14 @@
 import { styled } from "next-yak/internal";
 import { buttonMixin } from './mixin';
 import { primaryButtonMixin } from './helper/anotherMixin';
-import __styleYak from "./index.yak.module.css!=!./index?./index.yak.module.css";
+import "./index.yak.module.css!=!./index?./index.yak.module.css";
 export var Button = /*YAK Extracted CSS:
-.Button {
+:global(.Button_oPtJMe) {
   --yak-css-import: url("./mixin:buttonMixin",mixin);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button);
+*/ /*#__PURE__*/ styled.button("Button_oPtJMe");
 export var PrimaryButton = /*YAK Extracted CSS:
-.PrimaryButton {
+:global(.PrimaryButton_oPtJMe) {
   --yak-css-import: url("./helper/anotherMixin:primaryButtonMixin",mixin);
 }
-*/ /*#__PURE__*/ styled(Button)(__styleYak.PrimaryButton);
+*/ /*#__PURE__*/ styled(Button)("PrimaryButton_oPtJMe");

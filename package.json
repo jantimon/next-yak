@@ -25,13 +25,16 @@
   "pnpm": {
     "overrides": {
       "yak-swc": "workspace:*"
+    },
+    "patchedDependencies": {
+      "next@15.0.4": "patches/next@15.0.4.patch"
     }
   },
   "packageManager": "pnpm@9.12.3",
   "author": "Jan Nicklas",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^3.0.3",
-    "@changesets/cli": "^2.27.9"
+    "@changesets/cli": "^2.27.9",
+    "prettier": "^3.0.3"
   }
 }
