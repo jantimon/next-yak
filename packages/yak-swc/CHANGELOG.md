@@ -1,5 +1,11 @@
 # yak-swc
 
+## 4.0.1
+
+### Patch Changes
+
+- 859db1c: Improve cross-os hashes to be more consistent.
+
 ## 4.0.0
 
 ### Major Changes
