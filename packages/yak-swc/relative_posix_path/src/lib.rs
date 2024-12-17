@@ -58,10 +58,10 @@ mod tests {
 
   #[test]
   fn test_relative_path_windows_forward_slash() {
-      assert_eq!(
-          relative_posix_path(r"E:\foo", "E:/foo/bar/file.tsx"),
-          "bar/file.tsx"
-      );
+    assert_eq!(
+      relative_posix_path(r"E:\foo", "E:/foo/bar/file.tsx"),
+      "bar/file.tsx"
+    );
   }
 
   #[test]
