@@ -1,5 +1,11 @@
 # yak-swc
 
+## 0.8.2
+
+### Patch Changes
+
+- cbf7ca6: Improve cross-os hashes to be more consistent.
+
 ## 0.8.1
 
 ### Patch Changes

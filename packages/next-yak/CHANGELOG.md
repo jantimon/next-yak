@@ -1,5 +1,12 @@
 # next-yak
 
+## 2.4.2
+
+### Patch Changes
+
+- Updated dependencies [cbf7ca6]
+  - yak-swc@0.8.2
+
 ## 2.4.1
 
 ### Patch Changes
