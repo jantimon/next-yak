@@ -128,3 +128,62 @@ const StyledComponentWithCSSProp = () => {
     </Text>
   </div>;
 };
+
+const ComponentWithDynamicCSSButWithoutOwnProps = () => {
+  const x = Math.random() > 0.5;
+  return (
+    <div
+      css={css`
+        ${() =>
+          x &&
+          css`
+            padding: 20px;
+          `}
+      `}
+    />
+  );
+};
+
+const ComponentWithDynamicCSSVarsButWithoutOwnProps = () => {
+  const x = Math.random() > 0.5;
+  return (
+    <div
+      css={css`
+        padding: ${() => x && "20px"};
+      `}
+    />
+  );
+};
+
+const ComponentWithDynamicCSSWithOwnPropsShouldGenerateTypeError = () => {
+  return (
+    <div
+      // @ts-expect-error - properties not supported
+      css={css<{ $primary: boolean }>`
+        padding: ${({ $primary }) => $primary && "20px"};
+      `}
+    />
+  );
+};
+
+const dynamicMixin = css<{ $primary: boolean }>`
+  ${({ $primary }) =>
+    $primary &&
+    css`
+      font-size: 1.7rem;
+    `}
+`;
+
+const ComponentWithCSSThatUsesDynamicMixinWithOwnPropsShouldGenerateTypeError =
+  () => {
+    return (
+      <div
+        css={css`
+          ${
+            // @ts-expect-error - properties not supported
+            dynamicMixin
+          }
+        `}
+      />
+    );
+  };
