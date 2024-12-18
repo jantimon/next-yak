@@ -1,7 +1,7 @@
 import { styled } from "next-yak/internal";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const ResponsiveGrid = /*YAK Extracted CSS:
-.ResponsiveGrid {
+:global(.ResponsiveGrid_m7uBBu) {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
@@ -13,4 +13,4 @@ export const ResponsiveGrid = /*YAK Extracted CSS:
     grid-template-columns: repeat(3, 1fr);
   }
 }
-*/ /*#__PURE__*/ styled.div(__styleYak.ResponsiveGrid);
+*/ /*#__PURE__*/ styled.div("ResponsiveGrid_m7uBBu");

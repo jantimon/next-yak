@@ -43,6 +43,10 @@ function extractCss(code: string): string {
     const codeUntilEnd = codeParts[i].split("*/")[0];
     result += codeUntilEnd;
   }
+  if (result) {
+    result = "/* cssmodules-pure-no-check */\n" + result;
+  }
+
   return result;
 }
 

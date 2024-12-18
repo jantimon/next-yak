@@ -1,6 +1,6 @@
 import { css, styled } from "next-yak/internal";
 import { typogaphyMixin } from "./typography";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 const textColor = /*#__PURE__*/ css();
 const textStyles = /*#__PURE__*/ css();
 export const buttonStyles = /*YAK EXPORTED MIXIN:buttonStyles
@@ -13,19 +13,19 @@ color: black;
 --yak-css-import: url("./typography:typogaphyMixin",mixin);
 */ /*#__PURE__*/ css();
 export const Button = /*YAK Extracted CSS:
-.Button {
+:global(.Button_m7uBBu) {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-.Button__ {
+:global(.Button___m7uBBu) {
   &:hover {
     font-size: 16px;
     color: black;
   }
 }
-.Button {
+:global(.Button_m7uBBu) {
   &:focus {
     font-size: 16px;
     color: black;
@@ -33,7 +33,7 @@ export const Button = /*YAK Extracted CSS:
     color: black;
   }
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button, ({ $isSet })=>$isSet && true && true && true && /*#__PURE__*/ css(__styleYak.Button__));
+*/ /*#__PURE__*/ styled.button("Button_m7uBBu", ({ $isSet })=>$isSet && true && true && true && /*#__PURE__*/ css("Button___m7uBBu"));
 export const aspectRatios = {
     base: /*YAK EXPORTED MIXIN:aspectRatios:base
 padding-top: 100%;

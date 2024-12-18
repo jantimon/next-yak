@@ -5,39 +5,39 @@ import { fonts } from "./fonts";
 import { fancy } from "./fancy";
 // @ts-ignore
 import { yakMixin } from "./constants.yak";
-import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
+import "./input.yak.module.css!=!./input?./input.yak.module.css";
 export const Button = /*YAK Extracted CSS:
-.Button {
+:global(.Button_m7uBBu) {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button);
+*/ /*#__PURE__*/ styled.button("Button_m7uBBu");
 export const Button2 = /*YAK Extracted CSS:
-.Button2 {
+:global(.Button2_m7uBBu) {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button2);
+*/ /*#__PURE__*/ styled.button("Button2_m7uBBu");
 export const Button3 = /*YAK Extracted CSS:
-.Button3 {
+:global(.Button3_m7uBBu) {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button3);
+*/ /*#__PURE__*/ styled.button("Button3_m7uBBu");
 export const Button4 = /*YAK Extracted CSS:
-.Button4 {
+:global(.Button4_m7uBBu) {
   --yak-css-import: url("./fonts:fonts:h1",mixin)
 --yak-css-import: url("./fonts:fonts:underline",mixin);
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button4);
+*/ /*#__PURE__*/ styled.button("Button4_m7uBBu");
 export const Button5 = /*YAK Extracted CSS:
-.Button5 {
+:global(.Button5_m7uBBu) {
   --yak-css-import: url("./fonts:fonts:h1",mixin);
   --yak-css-import: url("./fancy:fancy:mixins:specialEffect",mixin);
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button5);
+*/ /*#__PURE__*/ styled.button("Button5_m7uBBu");
 export const Button6 = /*YAK Extracted CSS:
-.Button6 {
+:global(.Button6_m7uBBu) {
   &:hover {
     --yak-css-import: url("./constants.yak:yakMixin",mixin);
   }
@@ -45,9 +45,9 @@ export const Button6 = /*YAK Extracted CSS:
 ;
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button6);
+*/ /*#__PURE__*/ styled.button("Button6_m7uBBu");
 export const Button7 = /*YAK Extracted CSS:
-.Button7 {
+:global(.Button7_m7uBBu) {
   &:hover {
     --yak-css-import: url("./constants.yak:yakMixin",mixin);
   }
@@ -55,4 +55,4 @@ export const Button7 = /*YAK Extracted CSS:
 ;
   color: green;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.Button7);
+*/ /*#__PURE__*/ styled.button("Button7_m7uBBu");
