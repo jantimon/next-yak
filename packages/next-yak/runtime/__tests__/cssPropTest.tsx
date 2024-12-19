@@ -1,7 +1,7 @@
 /** @jsxImportSource next-yak */
 // this is only a type check file and should not be executed
 
-import { css } from "next-yak";
+import { css, styled } from "next-yak";
 import { CSSProperties } from "react";
 
 declare module "next-yak" {
@@ -109,4 +109,22 @@ const ComponentWithInterpolatedCSS = () => {
       `}
     />
   );
+};
+
+const Text = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Inter";
+`;
+
+const StyledComponentWithCSSProp = () => {
+  <div>
+    <Text
+      css={css`
+        color: red;
+      `}
+    >
+      test
+    </Text>
+  </div>;
 };

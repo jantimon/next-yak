@@ -1,4 +1,9 @@
-import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
+import {
+  CSSInterpolation,
+  StaticCSSProp,
+  css,
+  yakComponentSymbol,
+} from "./cssLiteral.js";
 import React from "react";
 
 // the following export is not relative as "next-yak/context"
@@ -84,7 +89,11 @@ type YakComponent<
   T,
   TAttrsIn extends object = {},
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
-> = FunctionComponent<T> & {
+> = FunctionComponent<
+  T & {
+    css?: StaticCSSProp;
+  }
+> & {
   [yakComponentSymbol]: [
     FunctionComponent<T>,
     AttrsFunction<T, TAttrsIn, TAttrsOut>,
