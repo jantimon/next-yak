@@ -111,7 +111,6 @@ const ComponentWithInterpolatedCSS = () => {
   );
 };
 
-<<<<<<< HEAD
 const Text = styled.p`
   font-size: 20px;
   font-weight: bold;
