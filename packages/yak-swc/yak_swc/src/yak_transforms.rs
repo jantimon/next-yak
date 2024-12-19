@@ -191,17 +191,16 @@ impl YakTransform for TransformCssMixin {
   ) -> YakTransformResult {
     let has_dynamic_content = !runtime_expressions.is_empty() || !runtime_css_variables.is_empty();
 
-    if (self.is_exported || self.is_within_jsx_attribute) && has_dynamic_content {
+    if self.is_exported && has_dynamic_content && !self.is_within_jsx_attribute {
       // For now dynamic mixins are not supported cross file
       // as the scope handling is quite complicated
-      let error_msg = if self.is_exported {
-        "Dynamic mixins must not be exported. Please ensure that this mixin requires no props."
-      } else {
-        "Dynamic mixins must not be used within JSX attributes. Please ensure that this mixin requires no props."
-      };
-
       HANDLER.with(|handler| {
-        handler.struct_span_err(expression.span, error_msg).emit();
+        handler
+          .struct_span_err(
+            expression.span,
+            "Dynamic mixins must not be exported. Please ensure that this mixin requires no props.",
+          )
+          .emit();
       });
     }
 

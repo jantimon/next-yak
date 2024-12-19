@@ -129,7 +129,7 @@ const yakStyled = <
       CSSInterpolation<T & NoInfer<TCSSProps> & { theme: YakTheme }>
     >
   ) => {
-    const getRuntimeStyles = css(styles, ...(values as any));
+    const getRuntimeStyles = css<object>(styles, ...(values as any));
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>) => {
       // if the css component does not require arguments
       // it can be called without arguments and we skip calling useTheme()
