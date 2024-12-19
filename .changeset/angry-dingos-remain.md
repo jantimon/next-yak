@@ -3,4 +3,4 @@
 "yak-swc": patch
 ---
 
-Fix types to enable css prop on styled components
+Enable css prop support for styled components, not just native HTML elements by fixing a bug in the types
