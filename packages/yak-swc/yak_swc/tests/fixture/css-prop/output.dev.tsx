@@ -1,4 +1,4 @@
-import { css, __yak_mergeCssProp } from "next-yak/internal";
+import { css, styled, __yak_mergeCssProp } from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const Elem = ()=><div {.../*YAK Extracted CSS:
 .Elem {
@@ -50,3 +50,15 @@ const Elem7 = ()=><div className="no-css"/>;
 const Elem8 = ()=><div {...__yak_mergeCssProp({
         className: "empty-css"
     }, /*#__PURE__*/ css(__styleYak.Elem8)({}))}/>;
+const Text = /*YAK Extracted CSS:
+.Text {
+  font-size: 20px;
+}
+*/ /*#__PURE__*/ styled.p(__styleYak.Text);
+const StyledComponentWithCSSProp = ()=><Text {.../*YAK Extracted CSS:
+.StyledComponentWithCSSProp {
+  color: red;
+}
+*/ /*#__PURE__*/ css(__styleYak.StyledComponentWithCSSProp)({})}>
+    test
+  </Text>;
