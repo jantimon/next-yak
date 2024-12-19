@@ -111,6 +111,7 @@ const ComponentWithInterpolatedCSS = () => {
   );
 };
 
+<<<<<<< HEAD
 const Text = styled.p`
   font-size: 20px;
   font-weight: bold;
@@ -129,7 +130,7 @@ const StyledComponentWithCSSProp = () => {
   </div>;
 };
 
-const ComponentWithDynamicCSSButWithoutOwnProps = () => {
+const ComponentWithConditionalCSSButWithoutOwnProps = () => {
   const x = Math.random() > 0.5;
   return (
     <div
@@ -144,7 +145,7 @@ const ComponentWithDynamicCSSButWithoutOwnProps = () => {
   );
 };
 
-const ComponentWithDynamicCSSVarsButWithoutOwnProps = () => {
+const ComponentWithConditionalCSSVarsButWithoutOwnProps = () => {
   const x = Math.random() > 0.5;
   return (
     <div
@@ -155,7 +156,7 @@ const ComponentWithDynamicCSSVarsButWithoutOwnProps = () => {
   );
 };
 
-const ComponentWithDynamicCSSWithOwnPropsShouldGenerateTypeError = () => {
+const ComponentWithDynamicCSSShouldGenerateTypeError = () => {
   return (
     <div
       // @ts-expect-error - properties not supported
@@ -174,16 +175,15 @@ const dynamicMixin = css<{ $primary: boolean }>`
     `}
 `;
 
-const ComponentWithCSSThatUsesDynamicMixinWithOwnPropsShouldGenerateTypeError =
-  () => {
-    return (
-      <div
-        css={css`
-          ${
-            // @ts-expect-error - properties not supported
-            dynamicMixin
-          }
-        `}
-      />
-    );
-  };
+const ComponentWithCSSThatUsesDynamicMixinShouldGenerateTypeError = () => {
+  return (
+    <div
+      css={css`
+        ${
+          // @ts-expect-error - properties not supported
+          dynamicMixin
+        }
+      `}
+    />
+  );
+};

@@ -3,4 +3,4 @@
 "yak-swc": patch
 ---
 
-Allow dynamic props in css prop
+Enable conditional styling for the css prop

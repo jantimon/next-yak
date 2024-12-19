@@ -152,7 +152,7 @@ export default function Home() {
               `}
           `}
         >
-          Dynamic CSS Prop works if this is green
+          Conditional CSS Prop works if this is green
         </p>
         <Inputs />
       </main>
