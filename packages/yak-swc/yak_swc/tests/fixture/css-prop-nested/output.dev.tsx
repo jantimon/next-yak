@@ -9,12 +9,12 @@ import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css"
 .yak-01 {
   color: blue;
 }
-*/ /*#__PURE__*/ css(__styleYak.yak)({})}>
+*/ /*#__PURE__*/ css(__styleYak["yak-01"])({})}>
     <span {.../*YAK Extracted CSS:
 .yak-02 {
   color: green;
 }
-*/ /*#__PURE__*/ css(__styleYak.yak)({})}>
+*/ /*#__PURE__*/ css(__styleYak["yak-02"])({})}>
       hello
     </span>
     world
