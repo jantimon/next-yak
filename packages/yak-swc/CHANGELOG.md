@@ -1,5 +1,12 @@
 # yak-swc
 
+## 4.0.2
+
+### Patch Changes
+
+- 5ce7f16: Enable css prop support for styled components, not just native HTML elements by fixing a bug in the types
+- 2f0ba89: Enable conditional styling for the css prop
+
 ## 4.0.1
 
 ### Patch Changes
