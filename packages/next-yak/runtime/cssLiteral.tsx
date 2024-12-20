@@ -58,14 +58,13 @@ export type PropsToClassNameFn = (props: unknown) =>
  * Therefore this is only an internal function only and it must be cast to any
  * before exported to the user.
  */
-export function css(styles: TemplateStringsArray, ...values: []): StaticCSSProp;
-export function css<TProps = {}>(
+export function css<TProps>(
   styles: TemplateStringsArray,
   ...values: CSSInterpolation<NoInfer<TProps> & { theme: YakTheme }>[]
-): ComponentStyles<TProps>;
+): TProps extends object ? ComponentStyles<TProps> : StaticCSSProp;
 export function css<TProps>(
   ...args: Array<any>
-): StaticCSSProp | ComponentStyles<TProps> {
+): TProps extends object ? ComponentStyles<TProps> : StaticCSSProp {
   const classNames: string[] = [];
   const dynamicCssFunctions: PropsToClassNameFn[] = [];
   const style: Record<string, string> = {};
@@ -110,9 +109,11 @@ export function css<TProps>(
   // Non Dynamic CSS
   if (dynamicCssFunctions.length === 0) {
     const className = classNames.join(" ");
+    // @ts-expect-error - Conditional return types are tricky in the implementation and generate false positives
     return () => ({ className, style });
   }
 
+  // @ts-expect-error - Conditional return types are tricky in the implementation and generate false positives
   return (props: unknown) => {
     const allClassNames: string[] = [...classNames];
     const allStyles: Record<string, string> = { ...style };

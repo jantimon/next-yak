@@ -142,7 +142,18 @@ export default function Home() {
         >
           CSS Prop works if this is green
         </p>
-
+        <p
+          css={css`
+            color: red;
+            ${() =>
+              true &&
+              css`
+                color: green;
+              `}
+          `}
+        >
+          Conditional CSS Prop works if this is green
+        </p>
         <p
           css={css`
             color: violet;
