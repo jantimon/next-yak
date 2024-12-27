@@ -1,5 +1,13 @@
 # next-yak
 
+## 4.0.3
+
+### Patch Changes
+
+- 154da2f: fix css prop class name access in nested jsx
+- Updated dependencies [154da2f]
+  - yak-swc@4.0.3
+
 ## 4.0.2
 
 ### Patch Changes
