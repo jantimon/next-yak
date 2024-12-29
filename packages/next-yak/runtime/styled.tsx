@@ -21,14 +21,6 @@ import type { YakTheme } from "./context/index.d.ts";
 const noTheme: YakTheme = {};
 
 /**
- * Minimal type for a function component that works with next-yak
- */
-type FunctionComponent<T> = (
-  props: T,
-  context?: any,
-) => React.ReactNode | React.ReactElement;
-
-/**
  * All valid html tags
  */
 type HtmlTags = keyof React.JSX.IntrinsicElements;
@@ -70,7 +62,7 @@ type Attrs<
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/constructors/styled.tsx
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
-const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
+const StyledFactory = <T,>(Component: HtmlTags | React.FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
     attrs: <
       TAttrsIn extends object = {},
@@ -89,13 +81,13 @@ type YakComponent<
   T,
   TAttrsIn extends object = {},
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
-> = FunctionComponent<
+> = React.FunctionComponent<
   T & {
     css?: StaticCSSProp;
   }
 > & {
   [yakComponentSymbol]: [
-    FunctionComponent<T>,
+    React.FunctionComponent<T>,
     AttrsFunction<T, TAttrsIn, TAttrsOut>,
   ];
 };
@@ -106,7 +98,7 @@ const yakStyled = <
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 >(
   Component:
-    | FunctionComponent<T>
+    | React.FunctionComponent<T>
     | YakComponent<T, TAttrsIn, TAttrsOut>
     | HtmlTags,
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
