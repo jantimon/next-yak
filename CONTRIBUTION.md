@@ -24,7 +24,7 @@ Thank you for your interest in contributing to next-yak! This document provides 
 Before you begin
 
 - Install [Node.js](https://nodejs.org/en) v20.x or later
-- Install [pnpm](https://pnpm.io/) v8.6.1 or later
+- Install [pnpm](https://pnpm.io/) v9.7.0 or later
 - Install [Rust](https://www.rust-lang.org/) toolchain <br />
   **⚠️ Important**<br />
   Do _not_ use brew or other package managers to install Rust, as this can lead to permission issues<br />

@@ -29,7 +29,7 @@
   "files": [],
   "preferUnplugged": true,
   "dependencies": {
-    "@swc/counter": "0.1.3"
+    "@swc/counter": "catalog:"
   },
   "publishConfig": {
     "access": "public"
