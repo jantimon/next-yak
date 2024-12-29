@@ -20,7 +20,7 @@
   },
   "engines": {
     "node": ">=20",
-    "pnpm": ">=9"
+    "pnpm": ">=9.7.0"
   },
   "pnpm": {
     "overrides": {
@@ -31,7 +31,7 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^3.0.3",
-    "@changesets/cli": "^2.27.9"
+    "prettier": "catalog:",
+    "@changesets/cli": "catalog:"
   }
 }
