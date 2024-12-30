@@ -21,7 +21,6 @@
     "@swc/core": "catalog:",
     "fumadocs-core": "catalog:",
     "fumadocs-mdx": "catalog:",
-    "fumadocs-openapi": "catalog:",
     "fumadocs-twoslash": "catalog:",
     "fumadocs-ui": "catalog:",
     "next": "catalog:",
