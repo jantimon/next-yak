@@ -218,17 +218,6 @@ impl YakTransform for TransformCssMixin {
       );
     }
     let css_prefix = match (self.is_exported, self.is_within_jsx_attribute) {
-      (true, _) => Some(format!(
-        "YAK EXPORTED MIXIN:{}",
-        self
-          .export_name
-          .as_ref()
-          .unwrap()
-          .parts
-          .iter()
-          .map(|atom| encode_percent(atom.as_str()))
-          .join(":")
-      )),
       (_, true) => {
         // Add the class name to the arguments, to be created by the CSS loader
         arguments.push(
@@ -241,6 +230,17 @@ impl YakTransform for TransformCssMixin {
         );
         Some("YAK Extracted CSS:".to_string())
       }
+      (true, _) => Some(format!(
+        "YAK EXPORTED MIXIN:{}",
+        self
+          .export_name
+          .as_ref()
+          .unwrap()
+          .parts
+          .iter()
+          .map(|atom| encode_percent(atom.as_str()))
+          .join(":")
+      )),
       _ => None,
     };
     YakTransformResult {
