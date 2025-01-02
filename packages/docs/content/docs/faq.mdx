@@ -21,7 +21,7 @@ Yes, you can use next-yak with other CSS-in-JS libraries.
 
 You can use it with styled-components, emotion, tailwind or any other library that adds css classes to your components.
 
-```tsx
+```tsx title="my-component.tsx"
 import { styled, atoms } from 'next-yak';
 
 const Button = styled.button`
@@ -48,7 +48,7 @@ If it's not this issue, please read it carefully as it should indicate how to fi
 
 Yes, you can reference it in the tagged template literal the same way you would to it with styled-components.
 
-```jsx
+```jsx title="my-component.tsx"
 import { styled } from 'next-yak';
 
 const Button = styled.button`
@@ -82,21 +82,40 @@ We are happy about every contribution. Just write an issue or a pull request [he
 
 If you get an error like this:
 
-```
+<Callout type="error">
 Error: The selector "div" is not pure. It is not allowed to use a selector that is not pure.
-```
+</Callout>
 
 You are using the outdated version of postcss-nested, that is automatically bundled with next.js.
 
 You can update the dependency yourself by adding the package to your `package.json`:
 
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+<Tab value="npm">
+```bash
+npm i postcss-nested
+```
+</Tab>
+<Tab value="pnpm">
+```bash
+pnpm i postcss-nested
+```
+</Tab>
+<Tab value="yarn">
 ```bash
 yarn add postcss-nested
 ```
+</Tab>
+<Tab value="bun">
+```bash
+bun add postcss-nested
+```
+</Tab>
+</Tabs>
 
-and create a `postcss.config.js` file in your project root with the following content:
+and create a `postcss.config.cjs` file in your project root with the following content:
 
-```js
+```js title="postcss.config.cjs"
 module.exports = {
   plugins: {
     'postcss-nested': {},
@@ -106,7 +125,7 @@ module.exports = {
 
 Or you can add an ampersand to the selector:
 
-```jsx
+```jsx title="my-component.tsx"
 import { styled } from 'next-yak';
 
 const Button = styled.button`
@@ -126,7 +145,9 @@ For further information see the [issue on next-yak](https://github.com/jantimon/
 If your styles are not applied, the first thing you should check is the transformed output of your component.
 In order to do that, you can enable the `debug` option in the `withYak` function.
 
-```tsx title="next.config.js"
+<Tabs items={['next.config.ts',, 'next.config.js', 'next.config.mjs']}>
+<Tab value="next.config.ts">
+```ts
 export default withYak({
   experiments: {
     debug: {
@@ -134,8 +155,34 @@ export default withYak({
       type: "all", // or "css" or "js"
     },
   },
-},nextConfig);
+}nextConfig);
 ```
+</Tab>
+<Tab value="next.config.js">
+```js
+module.exports = withYak({
+  experiments: {
+    debug: {
+      filter: (path: string) => path.includes("myPage"),
+      type: "all", // or "css" or "js"
+    },
+  },
+}nextConfig);
+```
+</Tab>
+<Tab value="next.config.mjs">
+```js
+export default withYak({
+  experiments: {
+    debug: {
+      filter: (path: string) => path.includes("myPage"),
+      type: "all", // or "css" or "js"
+    },
+  },
+}nextConfig);
+```
+</Tab>
+</Tabs>
 
 This will log the transformed output of your component to the console.
 
