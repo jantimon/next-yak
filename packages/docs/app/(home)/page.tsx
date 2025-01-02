@@ -33,7 +33,7 @@ export default function HomePage() {
       <LinkArea>
         <PrimaryLink href={"/docs/getting-started"}>
           Get started
-          <svg
+          <Svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -43,20 +43,17 @@ export default function HomePage() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            style={{
-              height: ".7lh",
-            }}
           >
             <path d="M14 4.1 12 6" />
             <path d="m5.1 8-2.9-.8" />
             <path d="m6 12-1.9 2" />
             <path d="M7.2 2.2 8 5.1" />
             <path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z" />
-          </svg>
+          </Svg>
         </PrimaryLink>
         <SecondaryLink href={"https://github.com/jantimon/next-yak"}>
           Github
-          <svg
+          <Svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -66,13 +63,9 @@ export default function HomePage() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            style={{
-              height: ".7lh",
-            }}
-            // class="lucide lucide-chevron-right"
           >
             <path d="m9 18 6-6-6-6" />
-          </svg>
+          </Svg>
         </SecondaryLink>
       </LinkArea>
 
@@ -116,19 +109,6 @@ export default function HomePage() {
   );
 }
 
-const Image = styled.img`
-  ${breakpoints.md} {
-    transform: scaleX(-1);
-  }
-`;
-
-const Description = styled.p`
-  margin-block-end: 2rem;
-  ${breakpoints.md} {
-    margin-block: 1.5rem;
-  }
-`;
-
 const Article = styled.article`
   display: flex;
   flex-direction: column;
@@ -141,7 +121,6 @@ const Article = styled.article`
 const Title = styled.h1`
   font-size: 5rem;
   font-weight: 400;
-  // margin: 1rem 0;
 
   background: #000;
   background: radial-gradient(
@@ -161,6 +140,19 @@ const Title = styled.h1`
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+`;
+
+const Image = styled.img`
+  ${breakpoints.md} {
+    transform: scaleX(-1);
+  }
+`;
+
+const Description = styled.p`
+  margin-block-end: 2rem;
+  ${breakpoints.md} {
+    margin-block: 1.5rem;
   }
 `;
 
@@ -240,4 +232,8 @@ const List = styled.ul`
 
 const EnumTitle = styled.div`
   font-weight: 600;
+`;
+
+const Svg = styled.svg`
+  height: 0.7lh;
 `;
