@@ -67,7 +67,7 @@ While most selectors work out of the box, you might encounter the error: `Select
 1. Update your Next.js PostCSS version
 2. Add an ampersand (&) before the selector
 
-For more detailed information, refer to the [FAQ](/docs/faq#selector-is-not-pure).
+For more detailed information, refer to the [FAQ](/docs/faq#i-get-an-error-about-selector-that-are-not-pure).
 </Callout>
 
 For components with dynamic styles based on props:
@@ -558,6 +558,18 @@ And you should see the transformed files and styles. This can help you to unders
 ### My styles are not applied
 
 If you see that your styles are not applied, you should check if the styles are transformed correctly. Debugging can help you with that.
+
+If you wrap a styled-component component with a next-yak component, you need to add `&&` before the styles to increase the specificity as otherwise styled-components would always win.
+
+```tsx title="component.tsx"
+const Button = styled(StyledComponentsButton)`
+  && { // [!code ++]
+    color: red;
+  } // [!code ++]
+`;
+```
+
+This is only needed if you simultaneously use styled-components and next-yak. If you fully migrated to next-yak, you don't need to do that.
 
 ### I get a compile error
 
