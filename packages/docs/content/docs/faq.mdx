@@ -35,6 +35,15 @@ const Button = styled.button`
 `;
 ```
 
+## I get a compile time error in my app router page
+
+At the moment, there is an issue with styles in files that use the [metadata api](https://nextjs.org/docs/app/building-your-application/optimizing/metadata) of next.js.
+
+We have an open issue for this problem and are working on a solution.
+See the [open next.js issue here](https://github.com/vercel/next.js/issues/67591)
+
+If it's not this issue, please read it carefully as it should indicate how to fix the problem.
+
 ## Can I reference a component in another component?
 
 Yes, you can reference it in the tagged template literal the same way you would to it with styled-components.
