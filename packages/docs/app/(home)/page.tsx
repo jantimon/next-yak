@@ -101,6 +101,12 @@ export default function HomePage() {
           Easily combines with atomic CSS frameworks like Tailwind CSS for more
           design options
         </li>
+        <li>
+          <EnumTitle>No significant build-time overhead</EnumTitle>
+          Doesn't increase the build time significantly, by only transforming
+          statically as much as possible without the need to evaluate arbitrary
+          JavaScript.
+        </li>
       </List>
       <video
         src="https://github.com/jantimon/next-yak/assets/4113649/f5a220fc-2a0f-46be-a8e7-c855f7faa337"
