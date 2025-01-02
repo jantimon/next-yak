@@ -534,10 +534,37 @@ const Button = styled.button<{ $color: string }>`
 
 ## Troubleshooting
 
+This section covers common issues you might encounter during the migration process and how to resolve them.
+
 ### Debugging
+
+If you encounter issues during the migration process, you can enable debug mode to get more information about what's going wrong.
+
+Just enable it in the next config file.
+
+```js title="next.config.js"
+export default withYak({
+  experiments: {
+    debug: {
+      filter: (path: string) => path.includes("myPage"),
+      type: "all", // or "css" or "js"
+    },
+  },
+},nextConfig);
+```
+
+And you should see the transformed files and styles. This can help you to understand what's going wrong.
 
 ### My styles are not applied
 
+If you see that your styles are not applied, you should check if the styles are transformed correctly. Debugging can help you with that.
+
 ### I get a compile error
 
+Please read the error message carefully. It should give you a hint on what's going wrong.
+
+If you can't figure it out, please open an issue on [GitHub](https://github.com/jantimon/next-yak/issues/new/choose)
+
 ### I think I found a bug
+
+Please open an issue on [GitHub](https://github.com/jantimon/next-yak/issues/new/choose)
