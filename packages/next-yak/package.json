@@ -64,7 +64,7 @@
     }
   },
   "scripts": {
-    "prepublishOnly": "npm run build && npm run test && npm run test:types:code && npm run test:types:test",
+    "prepublishOnly": "node ../../scripts/check-pnpm.js && npm run build && npm run test && npm run test:types:code && npm run test:types:test",
     "build": "tsup",
     "watch": "tsup --watch",
     "test": "vitest run",
