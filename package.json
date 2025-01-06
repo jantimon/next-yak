@@ -31,7 +31,7 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "catalog:",
-    "@changesets/cli": "catalog:"
+    "prettier": "catalog:dev",
+    "@changesets/cli": "catalog:dev"
   }
 }

@@ -15,22 +15,22 @@
     "codspeed:run": "NODE_ENV=production node ./codspeed/dist/index.bench.mjs"
   },
   "dependencies": {
-    "@swc/core": "catalog:",
-    "next": "catalog:",
+    "@swc/core": "catalog:dev",
+    "next": "catalog:dev",
     "next-yak": "workspace:*",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "styled-components": "catalog:",
-    "yak-swc": "catalog:"
+    "react": "catalog:dev",
+    "react-dom": "catalog:dev",
+    "styled-components": "catalog:dev",
+    "yak-swc": "workspace:*"
   },
   "devDependencies": {
-    "@codspeed/benchmark.js-plugin": "catalog:",
-    "@types/benchmark": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "benchmark": "catalog:",
-    "tree-kill": "catalog:",
-    "tsup": "catalog:",
-    "typescript": "catalog:"
+    "@codspeed/benchmark.js-plugin": "catalog:dev",
+    "@types/benchmark": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
+    "benchmark": "catalog:dev",
+    "tree-kill": "catalog:dev",
+    "tsup": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }

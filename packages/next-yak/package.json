@@ -75,28 +75,28 @@
     "prettier": "npx prettier --write \"./{loaders,runtime,withYak}/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
-    "@babel/core": "catalog:",
-    "@babel/plugin-syntax-typescript": "catalog:",
-    "yak-swc": "catalog:"
+    "@babel/core": "catalog:core",
+    "@babel/plugin-syntax-typescript": "catalog:core",
+    "yak-swc": "4.0.3"
   },
   "devDependencies": {
-    "@types/babel__core": "catalog:",
-    "@types/webpack": "catalog:",
-    "@babel/types": "catalog:",
-    "@testing-library/jest-dom": "catalog:",
-    "@testing-library/react": "catalog:",
-    "@types/jest": "catalog:",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "fast-glob": "catalog:",
-    "jsdom": "catalog:",
-    "next": "catalog:",
-    "react": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vitest": "catalog:",
-    "tsup": "catalog:"
+    "@types/babel__core": "catalog:dev",
+    "@types/webpack": "catalog:dev",
+    "@babel/types": "catalog:dev",
+    "@testing-library/jest-dom": "catalog:dev",
+    "@testing-library/react": "catalog:dev",
+    "@types/jest": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
+    "fast-glob": "catalog:dev",
+    "jsdom": "catalog:dev",
+    "next": "catalog:dev",
+    "react": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev",
+    "tsup": "catalog:dev"
   },
   "files": [
     "dist",

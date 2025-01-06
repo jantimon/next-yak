@@ -17,27 +17,27 @@
     "test:watch": "jest --watch -u"
   },
   "dependencies": {
-    "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "next": "catalog:",
+    "@types/node": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
+    "next": "catalog:dev",
     "next-yak": "workspace:*",
-    "postcss-nested": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "typescript": "catalog:",
-    "yak-swc": "catalog:"
+    "postcss-nested": "catalog:dev",
+    "react": "catalog:dev",
+    "react-dom": "catalog:dev",
+    "typescript": "catalog:dev",
+    "yak-swc": "workspace:*"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "catalog:",
-    "@testing-library/dom": "catalog:",
-    "@testing-library/react": "catalog:",
-    "@types/jest": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
-    "jest": "catalog:",
-    "jest-environment-jsdom": "catalog:",
-    "jsdom": "catalog:",
-    "vite": "catalog:",
-    "vitest": "catalog:"
+    "@testing-library/jest-dom": "catalog:dev",
+    "@testing-library/dom": "catalog:dev",
+    "@testing-library/react": "catalog:dev",
+    "@types/jest": "catalog:dev",
+    "@vitejs/plugin-react": "catalog:dev",
+    "jest": "catalog:dev",
+    "jest-environment-jsdom": "catalog:dev",
+    "jsdom": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }
