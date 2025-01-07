@@ -21,7 +21,7 @@
   "main": "target/wasm32-wasi/release/yak_swc.wasm",
   "scripts": {
     "build": "cargo build --release --target=wasm32-wasi",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "node ../../scripts/check-pnpm.js && npm run build",
     "prettier": "cargo fmt --all",
     "test": "cargo test",
     "test:snapshots": "cd yak_swc && UPDATE=1 cargo test"
@@ -29,7 +29,7 @@
   "files": [],
   "preferUnplugged": true,
   "dependencies": {
-    "@swc/counter": "0.1.3"
+    "@swc/counter": "catalog:core"
   },
   "publishConfig": {
     "access": "public"
