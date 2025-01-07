@@ -217,20 +217,19 @@ impl YakTransform for TransformCssMixin {
         .into(),
       );
     }
-    let css_prefix = match (self.is_exported, self.is_within_jsx_attribute) {
-      (_, true) => {
-        // Add the class name to the arguments, to be created by the CSS loader
-        arguments.push(
-          Expr::Member(MemberExpr {
-            span: DUMMY_SP,
-            obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-            prop: create_member_prop_from_string(self.generated_class_name.clone().unwrap()),
-          })
-          .into(),
-        );
-        Some("YAK Extracted CSS:".to_string())
-      }
-      (true, _) => Some(format!(
+    let css_prefix = if self.is_within_jsx_attribute {
+      // Add the class name to the arguments, to be created by the CSS loader
+      arguments.push(
+        Expr::Member(MemberExpr {
+          span: DUMMY_SP,
+          obj: Box::new(Expr::Ident(css_module_identifier.clone())),
+          prop: create_member_prop_from_string(self.generated_class_name.clone().unwrap()),
+        })
+        .into(),
+      );
+      Some("YAK Extracted CSS:".to_string())
+    } else if self.is_exported {
+      Some(format!(
         "YAK EXPORTED MIXIN:{}",
         self
           .export_name
@@ -240,9 +239,11 @@ impl YakTransform for TransformCssMixin {
           .iter()
           .map(|atom| encode_percent(atom.as_str()))
           .join(":")
-      )),
-      _ => None,
+      ))
+    } else {
+      None
     };
+
     YakTransformResult {
       css: YakCss {
         comment_prefix: css_prefix,
