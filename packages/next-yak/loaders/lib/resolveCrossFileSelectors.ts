@@ -1,9 +1,9 @@
-import path from "path";
 import babel from "@babel/core";
+import path from "path";
 // @ts-expect-error - this is used by babel directly so we ignore that it is not typed
 import babelPlugin from "@babel/plugin-syntax-typescript";
-import type { Compilation, LoaderContext } from "webpack";
 import { getCssModuleLocalIdent } from "next/dist/build/webpack/config/blocks/css/loaders/getCssModuleLocalIdent.js";
+import type { Compilation, LoaderContext } from "webpack";
 
 const yakCssImportRegex =
   // Make mixin and selector non optional once we dropped support for the babel plugin
@@ -227,7 +227,19 @@ async function parseFile(
     const tranformedSource = new Promise<string>((resolve, reject) => {
       loader.loadModule(filePath, (err, source) => {
         if (err) return reject(err);
-        resolve(source || "");
+        let sourceString: string;
+        if (typeof source === "string") {
+          sourceString = source;
+        } else if (source instanceof Buffer) {
+          sourceString = source.toString("utf-8");
+        } else if (source instanceof ArrayBuffer) {
+          sourceString = new TextDecoder("utf-8").decode(source);
+        } else {
+          throw new Error(
+            "Invalid input type: code must be string, Buffer, or ArrayBuffer",
+          );
+        }
+        resolve(sourceString || "");
       });
     });
 

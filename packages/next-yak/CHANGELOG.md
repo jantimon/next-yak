@@ -1,5 +1,29 @@
 # next-yak
 
+## 4.0.3
+
+### Patch Changes
+
+- 154da2f: fix css prop class name access in nested jsx
+- Updated dependencies [154da2f]
+  - yak-swc@4.0.3
+
+## 4.0.2
+
+### Patch Changes
+
+- 5ce7f16: Enable css prop support for styled components, not just native HTML elements by fixing a bug in the types
+- 2f0ba89: Enable conditional styling for the css prop
+- Updated dependencies [2f0ba89][5ce7f16]
+  - yak-swc@4.0.2
+
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies [859db1c]
+  - yak-swc@4.0.1
+
 ## 4.0.0
 
 ### Major Changes

@@ -153,6 +153,7 @@ pub struct TransformCssMixin {
   export_name: Option<ScopedVariableReference>,
   is_exported: bool,
   is_within_jsx_attribute: bool,
+  generated_class_name: Option<String>,
 }
 
 impl TransformCssMixin {
@@ -161,6 +162,7 @@ impl TransformCssMixin {
       export_name: None,
       is_exported,
       is_within_jsx_attribute,
+      generated_class_name: None,
     }
   }
 }
@@ -174,14 +176,14 @@ impl YakTransform for TransformCssMixin {
   ) -> ParserState {
     self.export_name = Some(declaration_name.clone());
     let mut parser_state = ParserState::new();
+    let generated_class_name =
+      naming_convention.generate_unique_name_for_variable(declaration_name);
     // TODO: Remove the unused scope once nested mixins work again
     parser_state.current_scopes = vec![CssScope {
-      name: format!(
-        ".{}",
-        naming_convention.generate_unique_name_for_variable(declaration_name)
-      ),
+      name: format!(".{}", generated_class_name),
       scope_type: ScopeType::AtRule,
     }];
+    self.generated_class_name = Some(generated_class_name);
     parser_state
   }
 
@@ -196,17 +198,16 @@ impl YakTransform for TransformCssMixin {
   ) -> YakTransformResult {
     let has_dynamic_content = !runtime_expressions.is_empty() || !runtime_css_variables.is_empty();
 
-    if (self.is_exported || self.is_within_jsx_attribute) && has_dynamic_content {
+    if self.is_exported && has_dynamic_content && !self.is_within_jsx_attribute {
       // For now dynamic mixins are not supported cross file
       // as the scope handling is quite complicated
-      let error_msg = if self.is_exported {
-        "Dynamic mixins must not be exported. Please ensure that this mixin requires no props."
-      } else {
-        "Dynamic mixins must not be used within JSX attributes. Please ensure that this mixin requires no props."
-      };
-
       HANDLER.with(|handler| {
-        handler.struct_span_err(expression.span, error_msg).emit();
+        handler
+          .struct_span_err(
+            expression.span,
+            "Dynamic mixins must not be exported. Please ensure that this mixin requires no props.",
+          )
+          .emit();
       });
     }
 
@@ -239,9 +240,7 @@ impl YakTransform for TransformCssMixin {
           Expr::Member(MemberExpr {
             span: DUMMY_SP,
             obj: Box::new(Expr::Ident(css_module_identifier.clone())),
-            prop: create_member_prop_from_string(
-              self.export_name.clone().unwrap().to_readable_string(),
-            ),
+            prop: create_member_prop_from_string(self.generated_class_name.clone().unwrap()),
           })
           .into(),
         );
@@ -272,7 +271,7 @@ impl YakTransform for TransformCssMixin {
 
   fn get_css_reference_name(&self) -> Option<String> {
     if self.is_within_jsx_attribute {
-      return Some(self.export_name.as_ref().unwrap().to_readable_string());
+      return Some(self.generated_class_name.clone().unwrap());
     }
     None
   }

@@ -1,4 +1,9 @@
-import { CSSInterpolation, css, yakComponentSymbol } from "./cssLiteral.js";
+import {
+  CSSInterpolation,
+  StaticCSSProp,
+  css,
+  yakComponentSymbol,
+} from "./cssLiteral.js";
 import React from "react";
 
 // the following export is not relative as "next-yak/context"
@@ -14,14 +19,6 @@ import type { YakTheme } from "./context/index.d.ts";
  * to speed up rendering
  */
 const noTheme: YakTheme = {};
-
-/**
- * Minimal type for a function component that works with next-yak
- */
-type FunctionComponent<T> = (
-  props: T,
-  context?: any,
-) => React.ReactNode | React.ReactElement;
 
 /**
  * All valid html tags
@@ -65,7 +62,7 @@ type Attrs<
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/constructors/styled.tsx
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/models/StyledComponent.ts
 //
-const StyledFactory = <T,>(Component: HtmlTags | FunctionComponent<T>) =>
+const StyledFactory = <T,>(Component: HtmlTags | React.FunctionComponent<T>) =>
   Object.assign(yakStyled(Component), {
     attrs: <
       TAttrsIn extends object = {},
@@ -84,9 +81,13 @@ type YakComponent<
   T,
   TAttrsIn extends object = {},
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
-> = FunctionComponent<T> & {
+> = React.FunctionComponent<
+  T & {
+    css?: StaticCSSProp;
+  }
+> & {
   [yakComponentSymbol]: [
-    FunctionComponent<T>,
+    React.FunctionComponent<T>,
     AttrsFunction<T, TAttrsIn, TAttrsOut>,
   ];
 };
@@ -97,7 +98,7 @@ const yakStyled = <
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 >(
   Component:
-    | FunctionComponent<T>
+    | React.FunctionComponent<T>
     | YakComponent<T, TAttrsIn, TAttrsOut>
     | HtmlTags,
   attrs?: Attrs<T, TAttrsIn, TAttrsOut>,
@@ -120,7 +121,7 @@ const yakStyled = <
       CSSInterpolation<T & NoInfer<TCSSProps> & { theme: YakTheme }>
     >
   ) => {
-    const getRuntimeStyles = css(styles, ...(values as any));
+    const getRuntimeStyles = css<object>(styles, ...(values as any));
     const yak = (props: Substitute<TCSSProps & T, TAttrsIn>) => {
       // if the css component does not require arguments
       // it can be called without arguments and we skip calling useTheme()
