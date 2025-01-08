@@ -3,4 +3,4 @@
 "yak-swc": minor
 ---
 
-compile styled.TAG_NAME for better runtime performance
+improve bundle size by compiling styled.TAG_NAME
