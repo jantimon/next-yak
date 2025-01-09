@@ -1,5 +1,12 @@
 # yak-swc
 
+## 4.0.4
+
+### Patch Changes
+
+- 171898f: Fix issue with the css prop where it wouldn't be generated when used inside an exported component
+- d4379a2: Updated all dependencies
+
 ## 4.0.3
 
 ### Patch Changes
