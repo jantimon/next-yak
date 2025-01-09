@@ -8,14 +8,8 @@
 - d4379a2: Updated all dependencies
 - 7f90169: Updated @types/react to 19.0.2
 - 145c621: Refactor CSS prop types to improve type inference and consistency
-
   - Added new type `CSSProp` to be used by custom components to receive the `css` prop in a somewhat typesafe way
   - Updated `css` function to return `ComponentStyle` only
-
-- Updated dependencies [171898f]
-- Updated dependencies [d4379a2]
-- Updated dependencies [7f90169]
-  - yak-swc@4.0.4
 
 ## 4.0.3
 

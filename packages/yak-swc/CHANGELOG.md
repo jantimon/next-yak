@@ -6,7 +6,6 @@
 
 - 171898f: Fix issue with the css prop where it wouldn't be generated when used inside an exported component
 - d4379a2: Updated all dependencies
-- 7f90169: Updated @types/react to 19.0.2
 
 ## 4.0.3
 
