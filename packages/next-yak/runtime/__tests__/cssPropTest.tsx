@@ -1,7 +1,7 @@
 /** @jsxImportSource next-yak */
 // this is only a type check file and should not be executed
 
-import { css, styled } from "next-yak";
+import { css, CSSProp, styled } from "next-yak";
 import { CSSProperties } from "react";
 
 declare module "next-yak" {
@@ -28,9 +28,7 @@ const NestedComponentWithCssProp = () => (
   </div>
 );
 
-const ComponentThatTakesCssProp = (p: {
-  css: { className: string; style?: CSSProperties };
-}) => <div {...p}>anything</div>;
+const ComponentThatTakesCssProp = (p: CSSProp) => <div {...p}>anything</div>;
 
 const ComponentWithCssPropAsProp = () => {
   return <ComponentThatTakesCssProp css={css``} />;
