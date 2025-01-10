@@ -6,10 +6,6 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  // TODO remove ignoreBuildErrors once docs was upgraded to react 19
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   experimental: {
     optimizePackageImports: ["shiki", "@shikijs/monaco", "yak-swc"],
     // serverComponentsExternalPackages: ["next-yak"],
