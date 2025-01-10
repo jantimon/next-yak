@@ -1,5 +1,15 @@
 # yak-swc
 
+## 4.1.0
+
+### Minor Changes
+
+- 0eac2b4: improve bundle size by compiling styled.TAG_NAME
+
+### Patch Changes
+
+- ea744ac: Update wasm target to wasm-wasip1
+
 ## 4.0.4
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # next-yak
 
+## 4.1.0
+
+### Minor Changes
+
+- 0eac2b4: improve bundle size by compiling styled.TAG_NAME
+
+### Patch Changes
+
+- Updated dependencies [ea744ac]
+- Updated dependencies [0eac2b4]
+  - yak-swc@4.1.0
+
 ## 4.0.4
 
 ### Patch Changes
