@@ -18,9 +18,9 @@
     "react",
     "typescript"
   ],
-  "main": "target/wasm32-wasi/release/yak_swc.wasm",
+  "main": "target/wasm32-wasip1/release/yak_swc.wasm",
   "scripts": {
-    "build": "cargo build --release --target=wasm32-wasi",
+    "build": "cargo build --release --target=wasm32-wasip1",
     "prepublishOnly": "node ../../scripts/check-pnpm.js && npm run build",
     "prettier": "cargo fmt --all",
     "test": "cargo test",
