@@ -1,6 +1,6 @@
 import {
   CSSInterpolation,
-  StaticCSSProp,
+  ComponentStyles,
   css,
   yakComponentSymbol,
 } from "./cssLiteral.js";
@@ -83,7 +83,7 @@ type YakComponent<
   TAttrsOut extends AttrsMerged<T, TAttrsIn> = AttrsMerged<T, TAttrsIn>,
 > = React.FunctionComponent<
   T & {
-    css?: StaticCSSProp;
+    css?: ComponentStyles<Record<keyof any, never>>;
   }
 > & {
   [yakComponentSymbol]: [

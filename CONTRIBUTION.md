@@ -31,7 +31,7 @@ Before you begin
   Install Rust from [rust-lang.org](https://www.rust-lang.org/tools/install), following the official instructions for your platform
 - Add the Rust WebAssembly target, execute
   ```bash
-  rustup target add wasm32-wasi
+  rustup target add wasm32-wasip1
   ```
 
 ### Initial setup
@@ -183,7 +183,7 @@ export default withYak({
 ### Rust setup issues
 
 - **Permission problems with Rust**: Make sure to install Rust from [rust-lang.org](https://www.rust-lang.org/tools/install) and not through package managers
-- **Missing wasm32-wasi target**: Run `rustup target add wasm32-wasi`
+- **Missing wasm32-wasip1 target**: Run `rustup target add wasm32-wasip1`
 - **Cargo build failures**: Ensure you have the latest stable Rust toolchain with `rustup update stable`
 
 ### Build issues
