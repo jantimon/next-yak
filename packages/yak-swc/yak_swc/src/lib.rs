@@ -35,6 +35,7 @@ mod utils {
   pub(crate) mod css_hash;
   pub(crate) mod css_prop;
   pub(crate) mod encode_module_import;
+  pub(crate) mod native_elements;
 }
 mod naming_convention;
 use naming_convention::NamingConvention;
@@ -527,14 +528,10 @@ where
       for item in module.body.iter_mut() {
         if let ModuleItem::ModuleDecl(ModuleDecl::Import(import_declaration)) = item {
           if import_declaration.src.value == "next-yak/internal" {
-            // Add utility functions
-            import_declaration.specifiers.extend(
-              self
-                .yak_library_imports
-                .as_ref()
-                .unwrap()
-                .get_yak_utility_import_declaration(),
-            );
+            // Add all stored utility imports
+            import_declaration
+              .specifiers
+              .extend(self.yak_imports().get_yak_utility_import_specifiers());
             break;
           }
         }
@@ -550,6 +547,14 @@ where
           last_import_index = i + 1;
         }
       }
+
+      if let Some(module_decl) = self.yak_imports().get_yak_component_import_declaration() {
+        module
+          .body
+          .insert(last_import_index, ModuleItem::ModuleDecl(module_decl));
+        last_import_index += 1;
+      }
+
       module.body.insert(
         last_import_index,
         ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
@@ -833,6 +838,7 @@ where
       runtime_expressions,
       &self.current_declaration,
       runtime_css_variables,
+      self.yak_library_imports.as_mut().unwrap(),
     );
 
     if is_top_level {

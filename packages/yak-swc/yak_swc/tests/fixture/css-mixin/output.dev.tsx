@@ -1,4 +1,5 @@
 import { styled, css, __yak_unitPostFix } from "next-yak/internal";
+import * as __yak from "next-yak/internal";
 import __styleYak from "./input.yak.module.css!=!./input?./input.yak.module.css";
 const buttonStyles = /*#__PURE__*/ css(({ $active })=>$active && /*#__PURE__*/ css(__styleYak.buttonStyles__$active, {
         "style": {
@@ -28,7 +29,7 @@ export const ThemedButton = /*YAK Extracted CSS:
 .ThemedButton__ {
   color: red;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.ThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.ThemedButton__$active, {
+*/ /*#__PURE__*/ __yak.__yak_button(__styleYak.ThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.ThemedButton__$active, {
         "style": {
             "--ThemedButton__max-width_m7uBBu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }
@@ -57,7 +58,7 @@ export const CustomThemedButton = /*YAK Extracted CSS:
 .CustomThemedButton__ {
   color: red;
 }
-*/ /*#__PURE__*/ styled.button(__styleYak.CustomThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.CustomThemedButton__$active, {
+*/ /*#__PURE__*/ __yak.__yak_button(__styleYak.CustomThemedButton, ({ $active })=>$active && /*#__PURE__*/ css(__styleYak.CustomThemedButton__$active, {
         "style": {
             "--CustomThemedButton__max-width_m7uBBu": __yak_unitPostFix(({ $letters })=>$letters * 15, "px")
         }

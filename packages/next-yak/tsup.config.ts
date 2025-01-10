@@ -27,7 +27,7 @@ export default defineConfig([
    {
     entryPoints: ["runtime/internal.ts"],
     format: ["cjs", "esm"],
-    minify: true,
+    minify: false,
     sourcemap: true,
     dts: false,
     external: ["react", "next-yak/context"],

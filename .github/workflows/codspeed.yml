@@ -76,7 +76,7 @@ jobs:
         run: cd packages/benchmarks && pnpm run codspeed
 
       - name: Run benchmarks
-        uses: CodSpeedHQ/action@v2
+        uses: CodSpeedHQ/action@v3
         with:
           working-directory: "packages/benchmarks"
           run: NODE_ENV=production node --enable-source-maps ./codspeed/dist/index.bench.mjs

@@ -56,7 +56,7 @@ type Attrs<
 > = Partial<TOut> | AttrsFunction<TBaseProps, TIn, TOut>;
 
 //
-// The `styled()` and `styled.` API
+// The `styled()` API without `styled.` syntax
 //
 // The API design is inspired by styled-components:
 // https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/constructors/styled.tsx
@@ -248,7 +248,8 @@ type StyledLiteral<T> = <TCSSProps>(
  * `;
  * ```
  */
-export const styled = new Proxy(
+export const styled =
+  // this type is wrong - but it will work correctly with compiled code
   StyledFactory as typeof StyledFactory & {
     [Tag in HtmlTags]: StyledLiteral<React.JSX.IntrinsicElements[Tag]> & {
       attrs: <
@@ -263,13 +264,7 @@ export const styled = new Proxy(
         Substitute<React.JSX.IntrinsicElements[Tag], TAttrsIn>
       >;
     };
-  },
-  {
-    get(target, TagName: keyof React.JSX.IntrinsicElements) {
-      return target(TagName);
-    },
-  },
-);
+  };
 
 /**
  * Remove all entries that start with a $ sign
