@@ -26,7 +26,8 @@ export default function HomePage() {
         />
       </div>
       <Description>
-        🦀 Zero-runtime CSS-in-JS powered by Rust. Write styled-components syntax, get build-time CSS extraction and full RSC compatibility
+        🦀 Zero-runtime CSS-in-JS powered by Rust. Write styled-components
+        syntax, get build-time CSS extraction and full RSC compatibility
       </Description>
       <LinkArea>
         <PrimaryLink href={"/docs/getting-started"}>
