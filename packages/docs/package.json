@@ -32,6 +32,7 @@
     "react-dom": "catalog:dev",
     "react-resizable-panels": "catalog:dev",
     "shiki": "catalog:dev",
+    "shiki-magic-move": "catalog:dev",
     "yak-swc": "workspace:*"
   },
   "devDependencies": {
