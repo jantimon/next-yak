@@ -16,18 +16,16 @@ export const PlaygroundPage = () => {
       </ImageWrapper>
       <Callout>Sorry</Callout>
       <p>
-        We're currently working on getting the playground to work, but we're
-        having some issues with running SWC in a serverless function.
+        Currently, the playground cannot run in the browser due to a technical limitation in SWC's WebAssembly support. 
       </p>
       <p>
-        If you have some ideas or insights on how to get this to work, please
-        let us know!
+        SWC plugins (which next-yak uses for CSS extraction) are not yet compatible with browser environments. You can track this limitation in the SWC issue tracker:
       </p>
       <Link
-        href="
-				https://www.github.com/jantimon/next-yak/issues"
+        href="https://github.com/swc-project/swc/issues/3934"
+        target="_blank"
       >
-        On Github
+        Support plugins in @swc/wasm-* #3934
       </Link>
     </Wrapper>
   );
