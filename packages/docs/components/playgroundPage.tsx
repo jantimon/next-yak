@@ -16,10 +16,13 @@ export const PlaygroundPage = () => {
       </ImageWrapper>
       <Callout>Sorry</Callout>
       <p>
-        Currently, the playground cannot run in the browser due to a technical limitation in SWC's WebAssembly support. 
+        Currently, the playground cannot run in the browser due to a technical
+        limitation in SWC's WebAssembly support.
       </p>
       <p>
-        SWC plugins (which next-yak uses for CSS extraction) are not yet compatible with browser environments. You can track this limitation in the SWC issue tracker:
+        SWC plugins (which next-yak uses for CSS extraction) are not yet
+        compatible with browser environments. You can track this limitation in
+        the SWC issue tracker:
       </p>
       <Link
         href="https://github.com/swc-project/swc/issues/3934"
