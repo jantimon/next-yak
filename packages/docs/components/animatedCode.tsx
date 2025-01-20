@@ -47,7 +47,7 @@ const App = () => (
     Hello World
   </Title>
 );`,
-  compiledCss: "/* no static css */"
+  compiledCss: "/* no static css */",
 };
 
 const finalCodeExample: CodeExample = {
@@ -85,7 +85,7 @@ const App = () => (
   &:hover {
     color: red;
   }
-}`
+}`,
 };
 
 const codeExamples: Array<CodeExample> = [
