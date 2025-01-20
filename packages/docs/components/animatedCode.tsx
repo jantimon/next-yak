@@ -3,22 +3,136 @@ import { use, useEffect, useState } from "react";
 import { ShikiMagicMove } from "shiki-magic-move/react";
 import { highlighterPromise } from "@/lib/shiki";
 import { useTheme } from "next-themes";
-
 import "shiki-magic-move/dist/style.css";
 import { styled } from "next-yak";
 import { breakpoints, colors, theme } from "@/lib/utils/constants";
 
+// Define the structure for code examples
+type CodeExample = {
+  tsxInput: string;
+  compiledJs: string;
+  compiledCss: string;
+};
+
+const initialCodeExample: CodeExample = {
+  tsxInput: `import styled from "styled-components";
+
+const Title = styled.h1\`
+  font-size: 1.5em;
+  color: palevioletred;
+  &:hover {
+    color: red;
+  }
+\`;
+
+const App = () => (
+  <Title>
+    Hello World
+  </Title>
+);`,
+  compiledJs: `// JS output (auto-generated)
+
+const Title = styled.h1.withConfig({
+  componentId: "sc-1289dod-0"
+})\`
+  font-size: 1.5em;
+  color: palevioletred;
+  &:hover {
+    color: red;
+  }
+\`;
+
+const App = () => (
+  <Title>
+    Hello World
+  </Title>
+);`,
+  compiledCss: "/* no static css */"
+};
+
+const finalCodeExample: CodeExample = {
+  tsxInput: `// change import to next-yak
+import { styled } from "next-yak";
+
+const Title = styled.h1\`
+  font-size: 1.5em;
+  color: palevioletred;
+  &:hover {
+    color: red;
+  }
+\`;
+
+const App = () => (
+  <Title>
+    Hello World
+  </Title>
+);`,
+  compiledJs: `// JS output (auto-generated)
+
+const Title = styled('h1',
+  "Title-1289do1");
+
+const App = () => (
+  <Title>
+    Hello World
+  </Title>
+);`,
+  compiledCss: `/* CSS output (auto-generated) */
+
+.Title-1289do1 {
+  font-size: 1.5em;
+  color: palevioletred;
+  &:hover {
+    color: red;
+  }
+}`
+};
+
+const codeExamples: Array<CodeExample> = [
+  // Initial state
+  initialCodeExample,
+  // Step 1: Add comment
+  {
+    ...initialCodeExample,
+    tsxInput: `// change import to next-yak
+${initialCodeExample.tsxInput}`,
+  },
+  // Step 2: Change import
+  {
+    ...initialCodeExample,
+    tsxInput: finalCodeExample.tsxInput,
+  },
+  // Step 3: Update JS output
+  {
+    ...finalCodeExample,
+    compiledCss: initialCodeExample.compiledCss,
+  },
+  // Step 4: Update CSS comment
+  {
+    ...finalCodeExample,
+    compiledCss: "/* CSS output (auto-generated) */",
+  },
+  // Step 5: Update CSS output
+  finalCodeExample,
+  // Step 6: Keep yak for another "frame"
+  finalCodeExample,
+  // Step 7: Empty
+  {
+    tsxInput: "",
+    compiledJs: "",
+    compiledCss: "",
+  },
+  // Step 7: Go back to initial state
+  initialCodeExample,
+];
+
 export const AnimatedCode = () => {
-  const [code, setCode] = useState({
-    start: true,
-    input: inputStart,
-    output: outputStart,
-    css: cssStart,
-  });
+  const [currentStep, setCurrentStep] = useState(0);
   const highlighter = use(highlighterPromise);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [playing, setPlaying] = useState(true);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -27,28 +141,8 @@ export const AnimatedCode = () => {
     let interval: NodeJS.Timeout | null = null;
     if (playing) {
       interval = setInterval(() => {
-        setCode((prev) => {
-          if (prev.start) {
-            return {
-              start: false,
-              input: inputEnd,
-              output: outputEnd,
-              css: cssEnd,
-            };
-          } else {
-            return {
-              start: true,
-              input: inputStart,
-              output: outputStart,
-              css: cssStart,
-            };
-          }
-        });
-      }, 5000);
-    } else {
-      if (interval) {
-        clearInterval(interval);
-      }
+        setCurrentStep((prev) => (prev + 1) % codeExamples.length);
+      }, 3000);
     }
     return () => {
       if (interval) {
@@ -63,6 +157,8 @@ export const AnimatedCode = () => {
     shikiTheme = theme === "dark" ? "vitesse-dark" : "vitesse-light";
   }
 
+  const currentCode = codeExamples[currentStep];
+
   return (
     <ResponsiveCode>
       <AnimationWrapper>
@@ -72,7 +168,7 @@ export const AnimatedCode = () => {
             lang="tsx"
             theme={shikiTheme}
             highlighter={highlighter}
-            code={code.input}
+            code={currentCode.tsxInput}
             options={{ duration: 800, stagger: 1, lineNumbers: false }}
           />
           <OutputWrapper>
@@ -81,7 +177,7 @@ export const AnimatedCode = () => {
               lang="tsx"
               theme={shikiTheme}
               highlighter={highlighter}
-              code={code.output}
+              code={currentCode.compiledJs}
               options={{ duration: 800, stagger: 1, lineNumbers: false }}
             />
             <ShikiMagicMove
@@ -89,7 +185,7 @@ export const AnimatedCode = () => {
               lang="css"
               theme={shikiTheme}
               highlighter={highlighter}
-              code={code.css}
+              code={currentCode.compiledCss}
               options={{ duration: 800, stagger: 1, lineNumbers: false }}
             />
           </OutputWrapper>
@@ -135,6 +231,7 @@ export const AnimatedCode = () => {
   );
 };
 
+// Styled components remain the same
 const CodeWrapper = styled.div`
   display: grid;
   grid-autoflow: column;
@@ -190,75 +287,3 @@ const ResponsiveCode = styled.div`
     }
   }
 `;
-
-const inputStart = `import styled from "styled-components";
-
-const Title = styled.h1\`
-  font-size: 1.5em;
-  color: palevioletred;
-  &:hover {
-    color: red;
-  }
-\`;
-
-const App = () => (
-  <Title>
-    Hello World
-  </Title>
-);`;
-
-const inputEnd = `import {styled} from "next-yak"
-
-const Title = styled.h1\`
-  font-size: 1.5em;
-  color: palevioletred;
-  &:hover {
-    color: red;
-  }
-\`;
-
-const App = () => (
-  <Title>
-    Hello World
-  </Title>
-);`;
-
-const outputStart = `//JS output
-
-const Title = styled.h1.withConfig({
-  componentId: "sc-1289dod-0"
-})\`
-  font-size: 1.5em;
-  color: palevioletred;
-  &:hover {
-    color: red;
-  }
-\`;
-
-const App = () => (
-  <Title>
-    Hello World
-  </Title>
-);`;
-
-const outputEnd = `//JS output
-
-const Title = styled('h1',
-  "Title-1289do1");
-
-const App = () => (
-  <Title>
-    Hello World
-  </Title>
-);`;
-
-const cssStart = `/*CSS output*/`;
-const cssEnd = `/*CSS output*/
-
-.Title-1289do1 {
-  font-size: 1.5em;
-  color: palevioletred;
-  &:hover {
-    color: red;
-  }
-}`;
