@@ -40,6 +40,16 @@ export const colors = {
       }
     }
   `,
+  secondaryStatic: css`
+    border-width: 1px;
+    border-style: solid;
+    ${theme.light} {
+      border-color: hsl(200 2.4% 0% / 0.3);
+    }
+    ${theme.dark} {
+      border-color: hsl(0 0% 100% / 0.3);
+    }
+  `,
 };
 
 export const breakpoints = {
