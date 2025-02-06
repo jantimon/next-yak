@@ -210,7 +210,7 @@ If you use dynamic css properties, you need to use the `css` tag to define the c
 
 ```tsx title="component.tsx"
 import styled, { css } from 'styled-components'; // [!code --]
-import { styled } from 'next-yak'; // [!code ++]
+import { css, styled } from 'next-yak'; // [!code ++]
 
 const Button = styled.button<{ $primary: boolean }>`
   background: #BF4F74;
