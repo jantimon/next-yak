@@ -1,6 +1,6 @@
 # next-yak
 
-[Documentation](https://yak.js.org/getting-started) and [Playground](https://yak.js.org/playground), hosted at [yak.js.org](https://yak.js.org/)
+[Documentation](https://yak.js.org/docs/getting-started) and [Playground](https://yak.js.org/playground), hosted at [yak.js.org](https://yak.js.org/)
 
 ![A yak Riding on a rusty SWC Rocket](https://github.com/user-attachments/assets/72494b1c-db1a-4ff7-bd6f-2ed3535fb126)
 
