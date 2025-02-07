@@ -251,7 +251,7 @@ If you use dynamic mixins in your styled components, you need to change it the s
 
 ```tsx title="component.tsx"
 import styled, { css } from 'styled-components'; // [!code --]
-import { styled } from 'next-yak'; // [!code ++]
+import { css, styled } from 'next-yak'; // [!code ++]
 
 const mixin = css<{ $primary: boolean }>`
   color: green;
@@ -276,7 +276,7 @@ Dynamic mixins work differently in next-yak than in styled-components. With next
 As we transform the styles on a per-file basis, we can't share dynamic values between files. If you need to use a dynamic mixin in multiple components, you unfortunately need to duplicate the mixin in each file or move the components to the same file.
 ```tsx title="component.tsx"
 import styled from 'styled-components'; // [!code --]
-import { styled } from 'next-yak'; // [!code ++]
+import { css, styled } from 'next-yak'; // [!code ++]
 
 import { mixin } from './mixin'; // [!code --]
 const mixin = css<{ $primary: boolean }>` // [!code ++]
