@@ -390,7 +390,7 @@ Or if you want to use the css prop in a single file, you can just add the follow
 And afterwards you can just change the import and you're done.
 
 ```tsx title="component.tsx"
-import styled from 'styled-components'; // [!code --]
+import styled, { css } from 'styled-components'; // [!code --]
 import { css, styled } from 'next-yak'; // [!code ++]
 
 const MyComponent = () => {
